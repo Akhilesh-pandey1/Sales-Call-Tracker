@@ -1286,7 +1286,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system",
-      "community": 53,
+      "community": 59,
       "community_name": "design_system.py",
       "norm_label": "design_system.py"
     },
@@ -1341,8 +1341,8 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_style_is_dark_primary",
-      "community": 53,
-      "community_name": "design_system.py",
+      "community": 64,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_style_is_dark_primary()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_query_wants_dark",
-      "community": 53,
-      "community_name": "design_system.py",
+      "community": 64,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_query_wants_dark()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_resolve_color_mode",
-      "community": 53,
-      "community_name": "design_system.py",
+      "community": 64,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_resolve_color_mode()"
     },
     {
@@ -1551,7 +1551,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_hex_to_ansi",
       "community": 53,
-      "community_name": "design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "hex_to_ansi()"
     },
     {
@@ -1562,7 +1562,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_ansi_ljust",
       "community": 53,
-      "community_name": "design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "ansi_ljust()"
     },
     {
@@ -1573,7 +1573,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_section_header",
       "community": 53,
-      "community_name": "design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "section_header()"
     },
     {
@@ -1584,7 +1584,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_ascii_box",
       "community": 53,
-      "community_name": "design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "format_ascii_box()"
     },
     {
@@ -1594,7 +1594,7 @@
       "source_location": "L791",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_markdown",
-      "community": 64,
+      "community": 53,
       "community_name": "generate_design_system",
       "norm_label": "format_markdown()"
     },
@@ -1605,7 +1605,7 @@
       "source_location": "L919",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_design_system",
-      "community": 64,
+      "community": 53,
       "community_name": "generate_design_system",
       "norm_label": "generate_design_system()"
     },
@@ -1617,7 +1617,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_safe_slug",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "safe_slug()"
     },
     {
@@ -1628,7 +1628,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_write_persisted_file",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "_write_persisted_file()"
     },
     {
@@ -1639,7 +1639,7 @@
       "_origin": "ast",
       "id": "path",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "path"
     },
     {
@@ -1650,7 +1650,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_persist_design_system",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "persist_design_system()"
     },
     {
@@ -1661,7 +1661,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_master_md",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "format_master_md()"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L1381",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_page_override_md",
-      "community": 63,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 59,
+      "community_name": "design_system.py",
       "norm_label": "format_page_override_md()"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L1490",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_intelligent_overrides",
-      "community": 63,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 59,
+      "community_name": "design_system.py",
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L1596",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_detect_page_type",
-      "community": 63,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 59,
+      "community_name": "design_system.py",
       "norm_label": "_detect_page_type()"
     },
     {
@@ -1748,8 +1748,8 @@
       "source_location": "L165",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_165",
-      "community": 53,
-      "community_name": "design_system.py",
+      "community": 64,
+      "community_name": "_resolve_color_mode",
       "norm_label": "true when a styles.csv row describes itself as dark-first."
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L181",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_181",
-      "community": 53,
-      "community_name": "design_system.py",
+      "community": 64,
+      "community_name": "_resolve_color_mode",
       "norm_label": "true when the query explicitly asks for a dark theme."
     },
     {
@@ -1770,8 +1770,8 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_187",
-      "community": 53,
-      "community_name": "design_system.py",
+      "community": 64,
+      "community_name": "_resolve_color_mode",
       "norm_label": "resolve the mode the rest of the output has to agree with."
     },
     {
@@ -1903,7 +1903,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_612",
       "community": 53,
-      "community_name": "design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "convert hex color to ansi true color swatch (\u2588\u2588) with fallback."
     },
     {
@@ -1914,7 +1914,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_626",
       "community": 53,
-      "community_name": "design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "like str.ljust but accounts for zero-width ansi escape sequences."
     },
     {
@@ -1925,7 +1925,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_634",
       "community": 53,
-      "community_name": "design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "create a unicode section separator: \u251c\u2500\u2500\u2500 name \u2500\u2500\u2500...\u2524"
     },
     {
@@ -1936,7 +1936,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_641",
       "community": 53,
-      "community_name": "design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "format design system as unicode box with ansi color swatches."
     },
     {
@@ -1946,7 +1946,7 @@
       "source_location": "L792",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_792",
-      "community": 64,
+      "community": 53,
       "community_name": "generate_design_system",
       "norm_label": "format design system as markdown."
     },
@@ -1957,7 +1957,7 @@
       "source_location": "L923",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_923",
-      "community": 64,
+      "community": 53,
       "community_name": "generate_design_system",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
@@ -1969,7 +1969,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_962",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "slugify a name into a single safe path segment. only [a-z0-9_-] survives; every..."
     },
     {
@@ -1980,7 +1980,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_973",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "write fully to a temp file, then publish atomically."
     },
     {
@@ -1991,7 +1991,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_997",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "persist design system to design-system/<project>/ folder using master +..."
     },
     {
@@ -2002,7 +2002,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1077",
       "community": 59,
-      "community_name": "persist_design_system",
+      "community_name": "design_system.py",
       "norm_label": "format design system as master.md with hierarchical override logic."
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L1382",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1382",
-      "community": 63,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 59,
+      "community_name": "design_system.py",
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -2023,8 +2023,8 @@
       "source_location": "L1491",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1491",
-      "community": 63,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 59,
+      "community_name": "design_system.py",
       "norm_label": "generate intelligent overrides based on page type using layered search. uses..."
     },
     {
@@ -2034,8 +2034,8 @@
       "source_location": "L1597",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1597",
-      "community": 63,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 59,
+      "community_name": "design_system.py",
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -6642,6 +6642,138 @@
       "community": 60,
       "community_name": "Sales Call Tracker \u2014 Proposal",
       "norm_label": "impact"
+    },
+    {
+      "label": "screen.md",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agent_doc_screen",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen.md"
+    },
+    {
+      "label": "Screens - Sales Call Tracker",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screens_sales_call_tracker",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screens - sales call tracker"
+    },
+    {
+      "label": "Manager View (web)",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "agent_doc_screen_manager_view_web",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "manager view (web)"
+    },
+    {
+      "label": "Screen 1: Login",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screen_1_login",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen 1: login"
+    },
+    {
+      "label": "Screen 2: Team Dashboard - home after login",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screen_2_team_dashboard_home_after_login",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen 2: team dashboard - home after login"
+    },
+    {
+      "label": "Screen 3: Person View",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screen_3_person_view",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen 3: person view"
+    },
+    {
+      "label": "Screen 4: Accounts",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screen_4_accounts",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen 4: accounts"
+    },
+    {
+      "label": "Salesperson View (Android app \"Apex Sales Call\")",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L76",
+      "_origin": "ast",
+      "id": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "salesperson view (android app \"apex sales call\")"
+    },
+    {
+      "label": "Screen 5: Login",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L78",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screen_5_login",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen 5: login"
+    },
+    {
+      "label": "Screen 6: Dialer - home tab",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L83",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screen_6_dialer_home_tab",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen 6: dialer - home tab"
+    },
+    {
+      "label": "Screen 7: My Stats - second tab",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L102",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screen_7_my_stats_second_tab",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen 7: my stats - second tab"
+    },
+    {
+      "label": "Screen 8: Settings",
+      "file_type": "document",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L114",
+      "_origin": "ast",
+      "id": "agent_doc_screen_screen_8_settings",
+      "community": 63,
+      "community_name": "Manager View (web)",
+      "norm_label": "screen 8: settings"
     },
     {
       "label": "account-management.md",
@@ -16770,6 +16902,127 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen",
+      "target": "agent_doc_screen_screens_sales_call_tracker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_screens_sales_call_tracker",
+      "target": "agent_doc_screen_manager_view_web",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_screens_sales_call_tracker",
+      "target": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_manager_view_web",
+      "target": "agent_doc_screen_screen_1_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_manager_view_web",
+      "target": "agent_doc_screen_screen_2_team_dashboard_home_after_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_manager_view_web",
+      "target": "agent_doc_screen_screen_3_person_view",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_manager_view_web",
+      "target": "agent_doc_screen_screen_4_accounts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
+      "target": "agent_doc_screen_screen_5_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
+      "target": "agent_doc_screen_screen_6_dialer_home_tab",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
+      "target": "agent_doc_screen_screen_7_my_stats_second_tab",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agent-doc/screen.md",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
+      "target": "agent_doc_screen_screen_8_settings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "agent-doc/specs/account-management.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -18606,5 +18859,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "abb8f5f7d59955f89d8ea8a2557a1908a2dac955"
+  "built_at_commit": "0d4e5b6404cb03987864d5fb39db523eec84ca32"
 }

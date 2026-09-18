@@ -52,16 +52,16 @@
   "50": "Requirements",
   "51": "Requirement: The eight-case checklist",
   "52": "Requirements",
-  "53": "design_system.py",
+  "53": "generate_design_system",
   "54": "Sales Call Tracker — Task List",
   "55": "DesignSystemGenerator",
   "56": "._apply_reasoning",
   "57": "_select_palette_for_mode",
   "58": ".generate",
-  "59": "persist_design_system",
+  "59": "design_system.py",
   "60": "Sales Call Tracker — Proposal",
   "61": "Design Screens",
   "62": "Write Screens",
-  "63": "_generate_intelligent_overrides",
-  "64": "generate_design_system"
+  "63": "Manager View (web)",
+  "64": "_resolve_color_mode"
 }

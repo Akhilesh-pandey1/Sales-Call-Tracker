@@ -1,16 +1,16 @@
-# Graph Report - sales-call-tracker  (2026-09-18)
+# Graph Report - sales-call-tracker  (2026-09-19)
 
 ## Corpus Check
-- 65 files · ~170,650 words
+- 66 files · ~176,280 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 775 nodes · 892 edges · 65 communities (58 shown, 7 thin omitted)
+- 787 nodes · 903 edges · 65 communities (58 shown, 7 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `abb8f5f7`
+- Built from commit: `0d4e5b64`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -61,18 +61,18 @@
 - Requirements
 - Requirement: The eight-case checklist
 - Requirements
-- design_system.py
+- generate_design_system
 - Sales Call Tracker — Task List
 - DesignSystemGenerator
 - ._apply_reasoning
 - _select_palette_for_mode
 - .generate
-- persist_design_system
+- design_system.py
 - Sales Call Tracker — Proposal
 - Design Screens
 - Write Screens
-- _generate_intelligent_overrides
-- generate_design_system
+- Manager View (web)
+- _resolve_color_mode
 
 ## God Nodes (most connected - your core abstractions)
 1. `allow` - 24 edges
@@ -251,9 +251,9 @@ Nodes (18): Purpose, Requirement: One phone is enough, Requirement: The eight-ca
 Cohesion: 0.11
 Nodes (17): Purpose, Requirement: My Stats fetches fresh on every tab open, Requirement: Same display contract, Requirement: Three periods with numbers, Requirement: Top 5 numbers, Requirement: Who may see whom, Requirements, Scenario: A normal person (+9 more)
 
-### Community 53 - "design_system.py"
-Cohesion: 0.18
-Nodes (14): ansi_ljust(), format_ascii_box(), hex_to_ansi(), _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., Convert hex color to ANSI True Color swatch (██) with fallback. (+6 more)
+### Community 53 - "generate_design_system"
+Cohesion: 0.17
+Nodes (12): ansi_ljust(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤ (+4 more)
 
 ### Community 54 - "Sales Call Tracker — Task List"
 Cohesion: 0.17
@@ -275,9 +275,9 @@ Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG 
 Cohesion: 0.20
 Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
 
-### Community 59 - "persist_design_system"
-Cohesion: 0.25
-Nodes (9): format_master_md(), persist_design_system(), Format design system as MASTER.md with hierarchical override logic., Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every…, Write fully to a temp file, then publish atomically., Persist design system to design-system/<project>/ folder using Master +…, safe_slug(), _write_persisted_file() (+1 more)
+### Community 59 - "design_system.py"
+Cohesion: 0.18
+Nodes (15): _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), persist_design_system(), Format design system as MASTER.md with hierarchical override logic., Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses… (+7 more)
 
 ### Community 60 - "Sales Call Tracker — Proposal"
 Cohesion: 0.25
@@ -291,30 +291,30 @@ Nodes (7): Checklist before reporting done, Design Screens, Guardrails, Screen f
 Cohesion: 0.25
 Nodes (7): Guardrails, Input, Steps, Template, The balance (most important rule), Write Screens, Writing rules
 
-### Community 63 - "_generate_intelligent_overrides"
-Cohesion: 0.33
-Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
+### Community 63 - "Manager View (web)"
+Cohesion: 0.17
+Nodes (11): Manager View (web), Salesperson View (Android app "Apex Sales Call"), Screen 1: Login, Screen 2: Team Dashboard - home after login, Screen 3: Person View, Screen 4: Accounts, Screen 5: Login, Screen 6: Dialer - home tab (+3 more)
 
-### Community 64 - "generate_design_system"
-Cohesion: 0.50
-Nodes (4): format_markdown(), generate_design_system(), Format design system as markdown., Main entry point for design system generation. Args: query: Search query (e.g.,…
+### Community 64 - "_resolve_color_mode"
+Cohesion: 0.33
+Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
 
 ## Knowledge Gaps
-- **415 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+410 more)
+- **423 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+418 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `search()` connect `core.py` to `.generate`, `design_system.py`, `_generate_intelligent_overrides`?**
+- **Why does `search()` connect `core.py` to `.generate`, `design_system.py`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `generate_design_system`, `design_system.py`?**
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `design_system.py`, `generate_design_system`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Why does `allow` connect `allow` to `deny`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
-  _415 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _423 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._
 - **Should `deny` be split into smaller, more focused modules?**

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Dashboard — Apex Sales Call</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #1E293B;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #334155;
+      --color-on-secondary: #FFFFFF;
+      --color-accent: #22C55E;
+      --color-on-accent: #0F172A;
+      --color-background: #0F172A;
+      --color-foreground: #F8FAFC;
+      --color-card: #1B2336;
+      --color-card-foreground: #F8FAFC;
+      --color-muted: #272F42;
+      --color-muted-foreground: #94A3B8;
+      --color-border: #475569;
+      --color-destructive: #EF4444;
+      --color-on-destructive: #000000;
+      --color-ring: #FFFFFF;
+    }
+    body {
+      font-family: 'Fira Sans', system-ui, sans-serif;
+    }
+    .font-heading {
+      font-family: 'Fira Code', monospace;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+
+  <h1 class="sr-only">Team Dashboard</h1>
+
+  <!-- Top bar -->
+  <header class="border-b border-[var(--color-border)] bg-[var(--color-card)]">
+    <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div class="flex items-center gap-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-accent)] text-[var(--color-on-accent)]">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </span>
+        <span class="font-heading text-base font-semibold tracking-tight sm:text-lg">Apex Sales Call</span>
+      </div>
+      <button type="button" class="flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--color-border)] px-3.5 py-2 text-sm font-medium transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]">
+        Log out
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-6xl flex-1 px-4 pb-12 pt-6 sm:px-6">
+
+    <!-- Software sold: fixed placeholder -->
+    <div class="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-1.5 font-heading text-sm text-[var(--color-muted-foreground)]">
+      Software sold: <span class="font-semibold text-[var(--color-foreground)]">--</span>
+    </div>
+
+    <!-- Today + Yesterday team totals -->
+    <section aria-label="Team totals" class="mt-5 overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]">
+      <div class="flex items-center justify-between gap-3 px-5 pt-5 sm:px-6">
+        <h2 class="font-heading text-lg font-semibold">Today</h2>
+        <span class="text-sm text-[var(--color-muted-foreground)]">Thursday, Sep 18</span>
+      </div>
+      <div class="grid grid-cols-3 gap-3 px-5 pb-5 pt-4 sm:gap-6 sm:px-6">
+        <div>
+          <div class="flex items-center gap-2 text-[var(--color-muted-foreground)]">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 11 18-5v12L3 14v-3z"/>
+              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+            </svg>
+            <span class="text-xs font-medium uppercase tracking-wider">Dials</span>
+          </div>
+          <div class="mt-2 font-heading text-2xl font-semibold sm:text-4xl">210</div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 text-[var(--color-muted-foreground)]">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              <path d="m14.05 2 1.18 4.38L19.6 7.5"/>
+            </svg>
+            <span class="text-xs font-medium uppercase tracking-wider">Connected</span>
+          </div>
+          <div class="mt-2 font-heading text-2xl font-semibold text-[var(--color-accent)] sm:text-4xl">67</div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 text-[var(--color-muted-foreground)]">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span class="text-xs font-medium uppercase tracking-wider">Minutes</span>
+          </div>
+          <div class="mt-2 font-heading text-2xl font-semibold sm:text-4xl">304</div>
+        </div>
+      </div>
+      <div class="border-t border-[var(--color-border)] bg-[var(--color-muted)] px-5 py-4 sm:px-6">
+        <div class="flex items-center justify-between gap-3">
+          <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Yesterday</span>
+          <span class="text-xs text-[var(--color-muted-foreground)]">Sep 17</span>
+        </div>
+        <div class="mt-2 grid grid-cols-3 gap-3 sm:gap-6">
+          <div>
+            <div class="font-heading text-lg font-medium sm:text-xl">219</div>
+            <div class="text-xs text-[var(--color-muted-foreground)]">Dials</div>
+          </div>
+          <div>
+            <div class="font-heading text-lg font-medium sm:text-xl">72</div>
+            <div class="text-xs text-[var(--color-muted-foreground)]">Connected</div>
+          </div>
+          <div>
+            <div class="font-heading text-lg font-medium sm:text-xl">342</div>
+            <div class="text-xs text-[var(--color-muted-foreground)]">Minutes</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team table -->
+    <section aria-label="Team" class="mt-5 overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]">
+      <div class="flex items-center justify-between gap-3 px-5 pt-5 sm:px-6">
+        <h2 class="font-heading text-lg font-semibold">Team</h2>
+        <span class="text-sm text-[var(--color-muted-foreground)]">6 people · sorted by today's dials</span>
+      </div>
+
+      <!-- Desktop / tablet table -->
+      <div class="hidden px-5 pb-4 sm:px-6 md:block">
+        <div class="mt-4 grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] pb-2 text-xs font-medium uppercase tracking-wider text-[var(--color-muted-foreground)]">
+          <div>Salesperson</div>
+          <div class="col-span-3 border-l border-[var(--color-border)] pl-3 font-heading normal-case tracking-normal text-sm text-[var(--color-foreground)]">Today</div>
+          <div class="col-span-3 border-l border-[var(--color-border)] pl-3 font-heading normal-case tracking-normal text-sm text-[var(--color-muted-foreground)]">Yesterday</div>
+        </div>
+        <div class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] py-2 text-xs text-[var(--color-muted-foreground)]">
+          <div></div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right">Dials</div>
+          <div class="text-right">Connected</div>
+          <div class="text-right">Min</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right">Dials</div>
+          <div class="text-right">Connected</div>
+          <div class="text-right">Min</div>
+        </div>
+
+        <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <div class="font-medium">Priya Sharma</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading">58</div>
+          <div class="text-right font-heading text-[var(--color-accent)]">21</div>
+          <div class="text-right font-heading">96</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading text-[var(--color-muted-foreground)]">47</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">15</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">74</div>
+        </a>
+        <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <div class="font-medium">Arjun Mehta</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading">52</div>
+          <div class="text-right font-heading text-[var(--color-accent)]">18</div>
+          <div class="text-right font-heading">88</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading text-[var(--color-muted-foreground)]">55</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">20</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">102</div>
+        </a>
+        <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <div class="font-medium">Sneha Iyer</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading">41</div>
+          <div class="text-right font-heading text-[var(--color-accent)]">12</div>
+          <div class="text-right font-heading">55</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading text-[var(--color-muted-foreground)]">38</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">11</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">49</div>
+        </a>
+        <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <div class="font-medium">Rahul Verma</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading">33</div>
+          <div class="text-right font-heading text-[var(--color-accent)]">9</div>
+          <div class="text-right font-heading">41</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading text-[var(--color-muted-foreground)]">40</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">14</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">66</div>
+        </a>
+        <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <div class="font-medium">Ananya Gupta</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading">18</div>
+          <div class="text-right font-heading text-[var(--color-accent)]">4</div>
+          <div class="text-right font-heading">17</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading text-[var(--color-muted-foreground)]">22</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">6</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">28</div>
+        </a>
+        <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <div class="font-medium">Vikram Singh</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading text-[var(--color-muted-foreground)]">0</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">0</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">0</div>
+          <div class="border-l border-[var(--color-border)] pl-3 text-right font-heading text-[var(--color-muted-foreground)]">12</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">3</div>
+          <div class="text-right font-heading text-[var(--color-muted-foreground)]">15</div>
+        </a>
+      </div>
+
+      <!-- Mobile cards -->
+      <div class="px-4 pb-4 sm:px-6 md:hidden">
+        <p class="mt-3 text-xs text-[var(--color-muted-foreground)]">dials / connected / minutes</p>
+        <div class="mt-2 space-y-2">
+          <a href="#" class="block cursor-pointer rounded-lg border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-medium">Priya Sharma</span>
+              <svg class="h-6 w-6 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+            <div class="mt-2 grid grid-cols-[6.5rem_1fr] gap-y-1 text-sm">
+              <span class="text-[var(--color-muted-foreground)]">Today</span>
+              <span class="font-heading"><span class="text-[var(--color-accent)]">21</span> / 58 / 96</span>
+              <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
+              <span class="font-heading text-[var(--color-muted-foreground)]">15 / 47 / 74</span>
+            </div>
+          </a>
+          <a href="#" class="block cursor-pointer rounded-lg border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-medium">Arjun Mehta</span>
+              <svg class="h-6 w-6 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+            <div class="mt-2 grid grid-cols-[6.5rem_1fr] gap-y-1 text-sm">
+              <span class="text-[var(--color-muted-foreground)]">Today</span>
+              <span class="font-heading"><span class="text-[var(--color-accent)]">18</span> / 52 / 88</span>
+              <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
+              <span class="font-heading text-[var(--color-muted-foreground)]">20 / 55 / 102</span>
+            </div>
+          </a>
+          <a href="#" class="block cursor-pointer rounded-lg border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-medium">Sneha Iyer</span>
+              <svg class="h-6 w-6 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+            <div class="mt-2 grid grid-cols-[6.5rem_1fr] gap-y-1 text-sm">
+              <span class="text-[var(--color-muted-foreground)]">Today</span>
+              <span class="font-heading"><span class="text-[var(--color-accent)]">12</span> / 41 / 55</span>
+              <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
+              <span class="font-heading text-[var(--color-muted-foreground)]">11 / 38 / 49</span>
+            </div>
+          </a>
+          <a href="#" class="block cursor-pointer rounded-lg border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-medium">Rahul Verma</span>
+              <svg class="h-6 w-6 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+            <div class="mt-2 grid grid-cols-[6.5rem_1fr] gap-y-1 text-sm">
+              <span class="text-[var(--color-muted-foreground)]">Today</span>
+              <span class="font-heading"><span class="text-[var(--color-accent)]">9</span> / 33 / 41</span>
+              <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
+              <span class="font-heading text-[var(--color-muted-foreground)]">14 / 40 / 66</span>
+            </div>
+          </a>
+          <a href="#" class="block cursor-pointer rounded-lg border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-medium">Ananya Gupta</span>
+              <svg class="h-6 w-6 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+            <div class="mt-2 grid grid-cols-[6.5rem_1fr] gap-y-1 text-sm">
+              <span class="text-[var(--color-muted-foreground)]">Today</span>
+              <span class="font-heading"><span class="text-[var(--color-accent)]">4</span> / 18 / 17</span>
+              <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
+              <span class="font-heading text-[var(--color-muted-foreground)]">6 / 22 / 28</span>
+            </div>
+          </a>
+          <a href="#" class="block cursor-pointer rounded-lg border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-medium">Vikram Singh</span>
+              <svg class="h-6 w-6 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+            <div class="mt-2 grid grid-cols-[6.5rem_1fr] gap-y-1 text-sm">
+              <span class="text-[var(--color-muted-foreground)]">Today</span>
+              <span class="font-heading text-[var(--color-muted-foreground)]">0 / 0 / 0</span>
+              <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
+              <span class="font-heading text-[var(--color-muted-foreground)]">3 / 12 / 15</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <p class="mt-4 text-sm leading-relaxed text-[var(--color-muted-foreground)]">
+      Totals include past calls from people who are no longer active, so a total can be higher than the sum of the rows. Numbers update when the page opens or refreshes.
+    </p>
+
+  </main>
+
+</body>
+</html>

@@ -353,5 +353,25 @@
     "mtime": 1789748383.204827,
     "ast_hash": "a7a8d47064de1f0ff0b0c90191e8784c",
     "semantic_hash": ""
+  },
+  "agent-doc/index.html": {
+    "mtime": 1789770503.3121898,
+    "ast_hash": "be79aa307c133fe755f9fc8e989bc065",
+    "semantic_hash": ""
+  },
+  "agent-doc/screen.md": {
+    "mtime": 1789754237.316391,
+    "ast_hash": "ffc59a2138c921ab6e8cb79cfef97942",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/02-dashboard.html": {
+    "mtime": 1789771209.7352412,
+    "ast_hash": "461e7038b187b5d2cdcd3b4311366046",
+    "semantic_hash": ""
+  },
+  "agent-doc/variations/02-dashboard--v1-dark.html": {
+    "mtime": 1789755118.2401805,
+    "ast_hash": "fe4bf3187e0c3f162b99704df59dca44",
+    "semantic_hash": ""
   }
 }

@@ -248,5 +248,110 @@
     "mtime": 1789745301.7871122,
     "ast_hash": "c878659fee305e9e29c17364e518e98a",
     "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/uiux/data/catalog-summary.json": {
+    "mtime": 1789643590.3991568,
+    "ast_hash": "fec976f3137ba3c46fde3bfd6bc05f66",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/uiux/data/data-provenance.json": {
+    "mtime": 1789643590.4162571,
+    "ast_hash": "41746a212544275a499cf33d658767d9",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/uiux/data/google-font-licenses.json": {
+    "mtime": 1789643590.3399687,
+    "ast_hash": "b5306352a8f70990df4a5c78356d35f0",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/uiux/data/phosphor-icons-upstream.json": {
+    "mtime": 1789643590.3856544,
+    "ast_hash": "4b14f80c98453cd4b8361ffab7c49bbf",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/uiux/scripts/core.py": {
+    "mtime": 1789643590.224035,
+    "ast_hash": "a1ec0e82db8146ba46a6941f6017c8a1",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/uiux/scripts/design_system.py": {
+    "mtime": 1789643590.2362666,
+    "ast_hash": "70692061482010156ab94bb1cb24ed61",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/uiux/scripts/reasoning_contract.py": {
+    "mtime": 1789643590.2527552,
+    "ast_hash": "653e45c1072a3662322d66a81c89d548",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/uiux/scripts/search.py": {
+    "mtime": 1789643590.2552352,
+    "ast_hash": "0998767ebe8de2d056a9cdfa91e68b71",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/SKILL.md": {
+    "mtime": 1789643865.9150152,
+    "ast_hash": "fc47d88f46b1d7295ac5f723bdec151c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/templates/runner.html": {
+    "mtime": 1789643896.5432422,
+    "ast_hash": "61a33228144cedbb2b3a567383a5aeb9",
+    "semantic_hash": ""
+  },
+  ".claude/skills/design-screens/templates/screen.html": {
+    "mtime": 1789643902.6490972,
+    "ast_hash": "c11ef8f5ab4ae6c5773100c749266dd6",
+    "semantic_hash": ""
+  },
+  ".claude/skills/write-screens/SKILL.md": {
+    "mtime": 1789640992.9083753,
+    "ast_hash": "aed99c0ce8dd6810d7ceaced78250084",
+    "semantic_hash": ""
+  },
+  "agent-doc/proposal.md": {
+    "mtime": 1789748065.7650328,
+    "ast_hash": "be92ab5372cd3d2302e7f80db82b579e",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/account-management.md": {
+    "mtime": 1789748306.9970748,
+    "ast_hash": "3f6544992955602077f8b6d1a909a23a",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/call-dialer.md": {
+    "mtime": 1789748207.7972577,
+    "ast_hash": "800be8fad8f273247b44e7e660d5e8eb",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/call-sync.md": {
+    "mtime": 1789748234.099758,
+    "ast_hash": "0d328b3deacd9948d97086aca3a4a9ac",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/login-auth.md": {
+    "mtime": 1789748149.6469507,
+    "ast_hash": "bd23a7a80a2dffd4714b9c567d7c816b",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/person-stats.md": {
+    "mtime": 1789748286.200087,
+    "ast_hash": "87e4016bf6c2fdb3362d7b35f1454136",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/team-dashboard.md": {
+    "mtime": 1789748271.9202416,
+    "ast_hash": "d58478fb00d85376eee39f791dc8160c",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/tracking-spike.md": {
+    "mtime": 1789748127.395477,
+    "ast_hash": "239cbe5359808f34d4045029611cfb3b",
+    "semantic_hash": ""
+  },
+  "agent-doc/tasks.md": {
+    "mtime": 1789748383.204827,
+    "ast_hash": "a7a8d47064de1f0ff0b0c90191e8784c",
+    "semantic_hash": ""
   }
 }

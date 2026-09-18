@@ -1,13 +1,18 @@
 # Graph Report - sales-call-tracker  (2026-09-18)
 
 ## Corpus Check
-- 46 files · ~44,588 words
+- 65 files · ~170,650 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 433 nodes · 441 edges · 45 communities (38 shown, 7 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 6 edges (avg confidence: 0.5)
+- 775 nodes · 892 edges · 65 communities (58 shown, 7 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `abb8f5f7`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - server.cjs
@@ -48,26 +53,47 @@
 - decisions.md
 - extraction-spec.md
 - write-tickets/SKILL.md
+- core.py
+- Requirements
+- Requirements
+- Requirements
+- Requirements
+- Requirements
+- Requirement: The eight-case checklist
+- Requirements
+- design_system.py
+- Sales Call Tracker — Task List
+- DesignSystemGenerator
+- ._apply_reasoning
+- _select_palette_for_mode
+- .generate
+- persist_design_system
+- Sales Call Tracker — Proposal
+- Design Screens
+- Write Screens
+- _generate_intelligent_overrides
+- generate_design_system
 
 ## God Nodes (most connected - your core abstractions)
 1. `allow` - 24 edges
-2. `deny` - 19 edges
-3. `handleRequest()` - 14 edges
-4. `What You Must Do When Invoked` - 12 edges
-5. `Visual Companion Guide` - 12 edges
-6. `/graphify` - 11 edges
-7. `Dimensions` - 10 edges
-8. `Before Grill — the problem gate` - 10 edges
-9. `Python Code Style & Standards` - 9 edges
-10. `After Grill — the technical sweep` - 9 edges
+2. `search()` - 23 edges
+3. `deny` - 19 edges
+4. `DesignSystemGenerator` - 15 edges
+5. `handleRequest()` - 14 edges
+6. `_normalize()` - 12 edges
+7. `search_stack()` - 12 edges
+8. `What You Must Do When Invoked` - 12 edges
+9. `Visual Companion Guide` - 12 edges
+10. `_search_csv_detailed()` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
-- None detected - all connections are within the same source files.
+- `_generate_intelligent_overrides()` --calls--> `search()`  [EXTRACTED]
+  .claude/skills/design-screens/uiux/scripts/design_system.py → .claude/skills/design-screens/uiux/scripts/core.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (45 total, 7 thin omitted)
+## Communities (65 total, 7 thin omitted)
 
 ### Community 0 - "server.cjs"
 Cohesion: 0.06
@@ -193,25 +219,105 @@ Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphif
 Cohesion: 0.50
 Nodes (3): Grill — style router, Step 1 — Ask which style, Step 2 — Load and run the chosen skill
 
+### Community 45 - "core.py"
+Cohesion: 0.06
+Nodes (60): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _exact_stack_identifier(), _file_signature() (+52 more)
+
+### Community 46 - "Requirements"
+Cohesion: 0.06
+Nodes (32): Purpose, Requirement: Complete missed rows on app open (Path 2 — the janitor), Requirement: Dialing works offline, Requirement: Fallback without the call permission, Requirement: Fill the row from the real call (Path 1 — real time), Requirement: Number entry by keypad or paste, Requirement: One tap creates exactly one intent row, Requirement: The Call button only dials valid numbers (+24 more)
+
+### Community 47 - "Requirements"
+Cohesion: 0.08
+Nodes (25): Purpose, Requirement: Guess limit on passwords, Requirement: Login with name and password, Requirement: No logout endpoint, Requirement: No manager mode in the app, Requirement: Password rule, Requirement: The web is manager-only, Requirement: Token sessions (+17 more)
+
+### Community 48 - "Requirements"
+Cohesion: 0.08
+Nodes (23): Purpose, Requirement: Create a salesperson, Requirement: Deactivate and activate, Requirement: Edit without losing history, Requirement: Permanent delete, Requirement: The full account list, Requirement: The manager protects themself, Requirements (+15 more)
+
+### Community 49 - "Requirements"
+Cohesion: 0.09
+Nodes (22): Purpose, Requirement: Clear local data, Requirement: Every call belongs to whoever's token sent it, Requirement: One batch of filled rows only, Requirement: Sync runs on exactly two triggers, Requirement: The queue lives only on the phone, Requirement: The server keeps every row exactly once, Requirements (+14 more)
+
+### Community 50 - "Requirements"
+Cohesion: 0.10
+Nodes (19): Purpose, Requirement: All day math on the server, Requirement: Display contract for minutes, Requirement: One row per active salesperson, zeros included, Requirement: Software sold placeholder, Requirement: Team totals on open, Requirement: Totals count everyone's calls, Requirements (+11 more)
+
+### Community 51 - "Requirement: The eight-case checklist"
+Cohesion: 0.11
+Nodes (18): Purpose, Requirement: One phone is enough, Requirement: The eight-case checklist, Requirement: The spike comes first and proves the full chain, Requirement: The spike's code ships, Requirements, Scenario: Case 1 — answered call, Scenario: Case 2 — unanswered dial (+10 more)
+
+### Community 52 - "Requirements"
+Cohesion: 0.11
+Nodes (17): Purpose, Requirement: My Stats fetches fresh on every tab open, Requirement: Same display contract, Requirement: Three periods with numbers, Requirement: Top 5 numbers, Requirement: Who may see whom, Requirements, Scenario: A normal person (+9 more)
+
+### Community 53 - "design_system.py"
+Cohesion: 0.18
+Nodes (14): ansi_ljust(), format_ascii_box(), hex_to_ansi(), _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., Convert hex color to ANSI True Color swatch (██) with fallback. (+6 more)
+
+### Community 54 - "Sales Call Tracker — Task List"
+Cohesion: 0.17
+Nodes (11): 10. Deploy and end-to-end pass, 1. Manual setup — human steps before code starts, 2. Tracking spike — prove the chain on the oldest phone, 3. API foundation, 4. Login and auth, 5. Call sync, 6. Dashboard endpoints, 7. Account endpoints (+3 more)
+
+### Community 55 - "DesignSystemGenerator"
+Cohesion: 0.27
+Nodes (4): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Select best matching result based on priority keywords.
+
+### Community 56 - "._apply_reasoning"
+Cohesion: 0.24
+Nodes (8): Find matching reasoning rule for a category., Apply reasoning rules to search results., apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Parse the canonical condition -> action-array representation., _validate_action()
+
+### Community 57 - "_select_palette_for_mode"
+Cohesion: 0.22
+Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
+
+### Community 58 - ".generate"
+Cohesion: 0.20
+Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
+
+### Community 59 - "persist_design_system"
+Cohesion: 0.25
+Nodes (9): format_master_md(), persist_design_system(), Format design system as MASTER.md with hierarchical override logic., Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every…, Write fully to a temp file, then publish atomically., Persist design system to design-system/<project>/ folder using Master +…, safe_slug(), _write_persisted_file() (+1 more)
+
+### Community 60 - "Sales Call Tracker — Proposal"
+Cohesion: 0.25
+Nodes (7): Capabilities, Impact, Modified Capabilities, New Capabilities, Sales Call Tracker — Proposal, What Changes, Why
+
+### Community 61 - "Design Screens"
+Cohesion: 0.25
+Nodes (7): Checklist before reporting done, Design Screens, Guardrails, Screen file rules, Steps, The design brain, Thinking rules (apply while designing)
+
+### Community 62 - "Write Screens"
+Cohesion: 0.25
+Nodes (7): Guardrails, Input, Steps, Template, The balance (most important rule), Write Screens, Writing rules
+
+### Community 63 - "_generate_intelligent_overrides"
+Cohesion: 0.33
+Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
+
+### Community 64 - "generate_design_system"
+Cohesion: 0.50
+Nodes (4): format_markdown(), generate_design_system(), Format design system as markdown., Main entry point for design system generation. Args: query: Search query (e.g.,…
+
 ## Knowledge Gaps
-- **288 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+283 more)
+- **415 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+410 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `search()` connect `core.py` to `.generate`, `design_system.py`, `_generate_intelligent_overrides`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `generate_design_system`, `design_system.py`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Why does `allow` connect `allow` to `deny`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Why does `permissions` connect `deny` to `allow`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
-  _288 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _415 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._
 - **Should `deny` be split into smaller, more focused modules?**
   _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
 - **Should `What You Must Do When Invoked` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
-- **Should `4. Screens — exact contents` be split into smaller, more focused modules?**
-  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._

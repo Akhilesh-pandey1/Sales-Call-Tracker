@@ -138,6 +138,7 @@
 // ============================================================
 const SCREENS = [
   { file: "screens/02-dashboard.html", title: "Team Dashboard", view: "Manager View" },
+  { file: "screens/03-teams.html", title: "Teams", view: "Manager View" },
 ];
 
 const frame = document.getElementById("frame");
@@ -146,9 +147,16 @@ const counterEl = document.getElementById("counter");
 const deviceEl = document.getElementById("device");
 const listPanel = document.getElementById("list-panel");
 const listItems = document.getElementById("list-items");
+const DEVICE_KEY = "screens-runner-device";
 let current = 0;
 
-function show(index) {
+function readScreenFromHash() {
+  const number = parseInt(window.location.hash.slice(1), 10);
+  if (isNaN(number) || number < 1 || number > SCREENS.length) return 0;
+  return number - 1;
+}
+
+function show(index, options) {
   if (index < 0 || index >= SCREENS.length) return;
   current = index;
   const screen = SCREENS[index];
@@ -156,6 +164,9 @@ function show(index) {
   titleEl.textContent = screen.view ? screen.view + " — " + screen.title : screen.title;
   counterEl.textContent = (index + 1) + " / " + SCREENS.length;
   renderList();
+  if (!(options && options.fromHash)) {
+    window.location.hash = String(index + 1);
+  }
 }
 
 function renderList() {
@@ -187,11 +198,18 @@ document.getElementById("next").addEventListener("click", function () { show(cur
 document.getElementById("toggle-list").addEventListener("click", function () { listPanel.classList.toggle("open"); });
 document.getElementById("close-list").addEventListener("click", function () { listPanel.classList.remove("open"); });
 
+function applyDevice(name) {
+  const device = (name === "mobile" || name === "ipad") ? name : "desktop";
+  document.querySelectorAll(".device-btn").forEach(function (b) { b.classList.remove("active"); });
+  const button = document.querySelector('.device-btn[data-device="' + device + '"]');
+  if (button) button.classList.add("active");
+  deviceEl.className = "device" + (device === "desktop" ? "" : " " + device);
+}
+
 document.querySelectorAll(".device-btn").forEach(function (button) {
   button.addEventListener("click", function () {
-    document.querySelectorAll(".device-btn").forEach(function (b) { b.classList.remove("active"); });
-    button.classList.add("active");
-    deviceEl.className = "device" + (button.dataset.device === "desktop" ? "" : " " + button.dataset.device);
+    applyDevice(button.dataset.device);
+    try { localStorage.setItem(DEVICE_KEY, button.dataset.device); } catch (error) {}
   });
 });
 
@@ -201,7 +219,14 @@ window.addEventListener("keydown", function (event) {
   if (event.key === "Escape") listPanel.classList.remove("open");
 });
 
-show(0);
+window.addEventListener("hashchange", function () {
+  show(readScreenFromHash(), { fromHash: true });
+});
+
+let savedDevice = null;
+try { savedDevice = localStorage.getItem(DEVICE_KEY); } catch (error) {}
+applyDevice(savedDevice || "desktop");
+show(readScreenFromHash(), { fromHash: true });
 </script>
 </body>
 </html>

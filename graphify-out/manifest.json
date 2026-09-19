@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/templates/runner.html": {
-    "mtime": 1789643896.5432422,
-    "ast_hash": "61a33228144cedbb2b3a567383a5aeb9",
+    "mtime": 1789807615.9033358,
+    "ast_hash": "17054a30b0ed1edfe72ed3e7dfbd766f",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/templates/screen.html": {
@@ -355,23 +355,28 @@
     "semantic_hash": ""
   },
   "agent-doc/index.html": {
-    "mtime": 1789770503.3121898,
-    "ast_hash": "be79aa307c133fe755f9fc8e989bc065",
+    "mtime": 1789811694.0671332,
+    "ast_hash": "32c2f791810da6525d597d6db465ddc7",
     "semantic_hash": ""
   },
   "agent-doc/screen.md": {
-    "mtime": 1789754237.316391,
-    "ast_hash": "ffc59a2138c921ab6e8cb79cfef97942",
+    "mtime": 1789813580.7501907,
+    "ast_hash": "0d8378d7f312b0ee10a5b269f8c458d5",
     "semantic_hash": ""
   },
   "agent-doc/screens/02-dashboard.html": {
-    "mtime": 1789771209.7352412,
-    "ast_hash": "461e7038b187b5d2cdcd3b4311366046",
+    "mtime": 1789811703.7029662,
+    "ast_hash": "921b3fef3621f90df3e89a3d610219ac",
     "semantic_hash": ""
   },
   "agent-doc/variations/02-dashboard--v1-dark.html": {
     "mtime": 1789755118.2401805,
     "ast_hash": "fe4bf3187e0c3f162b99704df59dca44",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/03-teams.html": {
+    "mtime": 1789813808.839282,
+    "ast_hash": "c151fecf2ee03958e011e524828f211a",
     "semantic_hash": ""
   }
 }

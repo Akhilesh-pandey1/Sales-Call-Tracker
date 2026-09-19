@@ -22,11 +22,13 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 → Next: Screen 2 Team Dashboard
 
 ### Screen 2: Team Dashboard - home after login
-- Top bar - product name, Logout button
-- "Software sold: --" - fixed placeholder text, always the same
-- Today's team totals - one line: dials, connected calls, total minutes
-- Yesterday's team totals - the same three numbers for yesterday
-- Team table - one row per active salesperson: name, today dials / connected / minutes, yesterday dials / connected / minutes
+- Sidebar - product name, Dashboard, Teams, Accounts links, Logout at the bottom (icon rail on mobile, labeled bar on PC)
+- Top bar - page title "Team Dashboard" and today's date
+- Period switch - Today | Yesterday | Last 30 days; drives the KPI cards, Calls by hour, and Top 5 (one switch, not separate dropdowns)
+- KPI cards (4) - Dials, Connected calls, Not connected, Talk minutes. Sub-line shows per-active-person per-day average; the Today card sub-line compares with yesterday instead (a partial day has no honest average)
+- Calls by hour - dials per hour for the selected period; 30 days shows the daily average per hour; best hour highlighted
+- Top 5 by minutes - the 5 people with the most talk time in the selected period
+- Team table - one row per active salesperson: name, today dials / connected / minutes, yesterday dials / connected / minutes (not affected by the switch)
 - Zeros included - a person with no calls still shows a row of zeros (seeing who is NOT calling is the point)
 - Sorted by today's dials, highest first
 - Tap a row - opens that person's Screen 3
@@ -37,6 +39,23 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - No calls yet at all: totals show 0 and every active person still lists with zeros
 - Backend does not load: "Could not load data." with a Retry button
 - Login ended (signed in on another device): back to Screen 1 Login
+
+→ Next: Screen 2b Teams
+
+### Screen 2b: Teams - every active person, all three periods
+- Sidebar item "Teams" opens this page
+- One row per active salesperson: name, then Today / Yesterday / Last 30 days, each with dials, connected, minutes
+- Same people and same order as the Screen 2 team table
+- Zeros included - a person with no calls still lists
+- Sorted by today's dials, highest first
+- Tap a row - opens that person's Screen 3 for connected %, top numbers, and more
+- View only - nothing is edited here
+
+**Edge cases:**
+- No salespeople created yet: "No salespeople yet. Add them in Accounts."
+- No calls yet: every person lists with zeros
+- Backend does not load: "Could not load data." with a Retry button
+- Login ended: back to Screen 1 Login
 
 → Next: Screen 3 Person View
 

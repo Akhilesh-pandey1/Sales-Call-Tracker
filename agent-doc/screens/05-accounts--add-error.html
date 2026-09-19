@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accounts — add form error — Apex Sales Call</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #6366F1;
+      --color-on-primary: #000000;
+      --color-secondary: #818CF8;
+      --color-on-secondary: #0F172A;
+      --color-accent: #059669;
+      --color-on-accent: #000000;
+      --color-background: #F5F3FF;
+      --color-foreground: #1E1B4B;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #1E1B4B;
+      --color-muted: #EBEFF9;
+      --color-muted-foreground: #475569;
+      --color-border: #E0E7FF;
+      --color-destructive: #DC2626;
+      --color-on-destructive: #FFFFFF;
+      --color-ring: #6366F1;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+
+  <h1 class="sr-only">Accounts</h1>
+
+  <!-- Sidebar: icon rail on mobile, open with labels on PC -->
+  <aside class="fixed inset-y-0 left-0 z-10 flex w-16 flex-col border-r border-[var(--color-border)] bg-[var(--color-card)] px-2 py-4 md:w-60 md:px-3" aria-label="Main navigation">
+    <div class="flex items-center gap-3 px-1.5 md:px-2">
+      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)] text-[var(--color-on-primary)]">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </span>
+      <span class="hidden text-base font-bold tracking-tight md:block">Apex Sales Call</span>
+    </div>
+
+    <p class="mt-7 mb-2 hidden px-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)] md:block">Menu</p>
+
+    <nav class="flex flex-col gap-1">
+      <a href="#" title="Team Dashboard" class="flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="9" rx="1"/>
+          <rect x="14" y="3" width="7" height="5" rx="1"/>
+          <rect x="14" y="12" width="7" height="9" rx="1"/>
+          <rect x="3" y="16" width="7" height="5" rx="1"/>
+        </svg>
+        <span class="hidden md:inline">Team Dashboard</span>
+      </a>
+      <a href="#" title="Teams" class="flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="hidden md:inline">Teams</span>
+      </a>
+      <a href="#" title="Accounts" aria-current="page" class="flex cursor-pointer items-center justify-center gap-3 rounded-xl bg-[var(--color-primary)] px-3 py-2.5 text-sm font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span class="hidden md:inline">Accounts</span>
+      </a>
+    </nav>
+
+    <a href="#" title="Log out" class="mt-auto flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-destructive)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+      <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+      <span class="hidden md:inline">Log out</span>
+    </a>
+  </aside>
+
+  <div class="pl-16 md:pl-60">
+
+    <!-- Top bar -->
+    <header class="sticky top-0 z-20 border-b border-[var(--color-border)] bg-[var(--color-card)]">
+      <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:px-6">
+        <span class="text-lg font-bold tracking-tight">Accounts</span>
+        <span class="text-sm text-[var(--color-muted-foreground)]">Thursday, September 18</span>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-6xl px-4 pb-12 pt-6 sm:px-6">
+
+      <!-- Back on the left, Add person on the right - the list keeps its own box -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <a href="#" title="Back" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Back
+        </a>
+        <button type="button" class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">
+          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 21a8 8 0 0 1 13.292-6"/>
+            <circle cx="10" cy="8" r="5"/>
+            <path d="M19 16v6"/>
+            <path d="M22 19h-6"/>
+          </svg>
+          Add person
+        </button>
+      </div>
+
+      <!-- Account list: every account, deactivated included, no call counts -->
+      <section aria-label="All accounts" class="mt-4 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm">
+        <div class="flex items-center justify-between gap-3 px-5 pt-5 sm:px-6">
+          <h2 class="text-base font-bold tracking-tight">All accounts</h2>
+          <span class="text-sm text-[var(--color-muted-foreground)]">8 accounts · 7 active</span>
+        </div>
+
+        <!-- Desktop / tablet table -->
+        <div class="hidden px-5 pb-4 sm:px-6 md:block">
+          <div class="mt-4 grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 px-2 border-b border-[var(--color-border)] pb-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">
+            <div>Name</div>
+            <div>Role</div>
+            <div>Country</div>
+            <div class="text-right">Actions</div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3">
+            <a href="#" title="Open Akhilesh Pandey" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              Akhilesh Pandey
+              <span class="rounded-full bg-[var(--color-muted)] px-2 py-0.5 text-[11px] font-semibold text-[var(--color-muted-foreground)]">You</span>
+            </a>
+            <div class="text-sm text-[var(--color-muted-foreground)]">Manager</div>
+            <div class="text-sm tabular-nums text-[var(--color-muted-foreground)]">IN</div>
+            <div></div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3 transition-colors duration-200 hover:bg-[var(--color-muted)]">
+            <a href="#" title="Open Ananya Gupta" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              Ananya Gupta
+              <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+            <div class="text-sm text-[var(--color-muted-foreground)]">Salesperson</div>
+            <div class="text-sm tabular-nums text-[var(--color-muted-foreground)]">IN</div>
+            <div class="flex items-center justify-end gap-1">
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3 transition-colors duration-200 hover:bg-[var(--color-muted)]">
+            <a href="#" title="Open Arjun Mehta" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              Arjun Mehta
+              <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+            <div class="text-sm text-[var(--color-muted-foreground)]">Salesperson</div>
+            <div class="text-sm tabular-nums text-[var(--color-muted-foreground)]">IN</div>
+            <div class="flex items-center justify-end gap-1">
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3 transition-colors duration-200 hover:bg-[var(--color-muted)]">
+            <a href="#" title="Open Priya Sharma" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              Priya Sharma
+              <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+            <div class="text-sm text-[var(--color-muted-foreground)]">Salesperson</div>
+            <div class="text-sm tabular-nums text-[var(--color-muted-foreground)]">IN</div>
+            <div class="flex items-center justify-end gap-1">
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3 transition-colors duration-200 hover:bg-[var(--color-muted)]">
+            <a href="#" title="Open Rahul Verma" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              Rahul Verma
+              <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+            <div class="text-sm text-[var(--color-muted-foreground)]">Salesperson</div>
+            <div class="text-sm tabular-nums text-[var(--color-muted-foreground)]">AE</div>
+            <div class="flex items-center justify-end gap-1">
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3 transition-colors duration-200 hover:bg-[var(--color-muted)]">
+            <a href="#" title="Open Sneha Iyer" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              Sneha Iyer
+              <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+            <div class="text-sm text-[var(--color-muted-foreground)]">Salesperson</div>
+            <div class="text-sm tabular-nums text-[var(--color-muted-foreground)]">IN</div>
+            <div class="flex items-center justify-end gap-1">
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3 transition-colors duration-200 hover:bg-[var(--color-muted)]">
+            <a href="#" title="Open Vikram Singh" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              Vikram Singh
+              <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+            <div class="text-sm text-[var(--color-muted-foreground)]">Salesperson</div>
+            <div class="text-sm tabular-nums text-[var(--color-muted-foreground)]">IN</div>
+            <div class="flex items-center justify-end gap-1">
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,1.8fr)_8rem_6rem_minmax(0,1fr)] items-center gap-x-3 px-2 py-3">
+            <a href="#" title="Open Suresh Kumar" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              Suresh Kumar
+              <span class="rounded-full border border-[var(--color-border)] px-2 py-0.5 text-[11px] font-semibold text-[var(--color-muted-foreground)]">Deactivated</span>
+            </a>
+            <div class="text-sm text-[var(--color-muted-foreground)]">Salesperson</div>
+            <div class="text-sm tabular-nums text-[var(--color-muted-foreground)]">IN</div>
+            <div class="flex items-center justify-end gap-1">
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg bg-[var(--color-muted)] px-2.5 py-1 text-sm font-semibold text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-border)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Activate</button>
+              <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile cards -->
+        <div class="px-4 pb-4 sm:px-6 md:hidden">
+          <div class="mt-3 space-y-2">
+            <div class="rounded-xl border border-[var(--color-border)] px-4 py-3.5">
+              <div class="flex items-center justify-between gap-2">
+                <a href="#" title="Open Akhilesh Pandey" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  Akhilesh Pandey
+                  <span class="rounded-full bg-[var(--color-muted)] px-2 py-0.5 text-[11px] font-semibold text-[var(--color-muted-foreground)]">You</span>
+                </a>
+              </div>
+              <div class="mt-1 flex items-center justify-between gap-2">
+                <span class="text-sm text-[var(--color-muted-foreground)]">Manager · IN</span>
+              </div>
+            </div>
+            <div class="rounded-xl border border-[var(--color-border)] px-4 py-3.5">
+              <div class="flex items-center justify-between gap-2">
+                <a href="#" title="Open Ananya Gupta" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  Ananya Gupta
+                  <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="mt-1 flex items-center justify-between gap-2">
+                <span class="text-sm text-[var(--color-muted-foreground)]">Salesperson · IN</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-[var(--color-border)] px-4 py-3.5">
+              <div class="flex items-center justify-between gap-2">
+                <a href="#" title="Open Arjun Mehta" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  Arjun Mehta
+                  <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="mt-1 flex items-center justify-between gap-2">
+                <span class="text-sm text-[var(--color-muted-foreground)]">Salesperson · IN</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-[var(--color-border)] px-4 py-3.5">
+              <div class="flex items-center justify-between gap-2">
+                <a href="#" title="Open Priya Sharma" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  Priya Sharma
+                  <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="mt-1 flex items-center justify-between gap-2">
+                <span class="text-sm text-[var(--color-muted-foreground)]">Salesperson · IN</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-[var(--color-border)] px-4 py-3.5">
+              <div class="flex items-center justify-between gap-2">
+                <a href="#" title="Open Rahul Verma" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  Rahul Verma
+                  <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="mt-1 flex items-center justify-between gap-2">
+                <span class="text-sm text-[var(--color-muted-foreground)]">Salesperson · AE</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-[var(--color-border)] px-4 py-3.5">
+              <div class="flex items-center justify-between gap-2">
+                <a href="#" title="Open Sneha Iyer" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  Sneha Iyer
+                  <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="mt-1 flex items-center justify-between gap-2">
+                <span class="text-sm text-[var(--color-muted-foreground)]">Salesperson · IN</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-[var(--color-border)] px-4 py-3.5">
+              <div class="flex items-center justify-between gap-2">
+                <a href="#" title="Open Vikram Singh" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  Vikram Singh
+                  <svg class="h-4 w-4 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="mt-1 flex items-center justify-between gap-2">
+                <span class="text-sm text-[var(--color-muted-foreground)]">Salesperson · IN</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Deactivate</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-muted)] px-4 py-3.5">
+              <div class="flex items-center justify-between gap-2">
+                <a href="#" title="Open Suresh Kumar" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  Suresh Kumar
+                  <span class="rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-2 py-0.5 text-[11px] font-semibold text-[var(--color-muted-foreground)]">Deactivated</span>
+                </a>
+              </div>
+              <div class="mt-1 flex items-center justify-between gap-2">
+                <span class="text-sm text-[var(--color-muted-foreground)]">Salesperson · IN</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Edit</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg bg-[var(--color-card)] px-2.5 py-1 text-sm font-semibold text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-border)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Activate</button>
+                  <button type="button" class="inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-[var(--color-destructive)] transition-colors duration-200 hover:bg-[var(--color-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Add person dialog: the exact weak-password message from the spec -->
+  <div class="fixed inset-0 z-30 flex items-center justify-center bg-black/50 p-4">
+    <div role="dialog" aria-modal="true" aria-labelledby="add-title" class="w-full max-w-md rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-xl">
+      <h2 id="add-title" class="text-lg font-bold tracking-tight">Add person</h2>
+      <p class="mt-1 text-sm text-[var(--color-muted-foreground)]">New accounts are always Salesperson. The name is their login ID.</p>
+      <form class="mt-4 grid gap-3">
+        <div>
+          <label for="add-name" class="text-sm font-medium">Name</label>
+          <input id="add-name" type="text" value="Meera Joshi" class="mt-1 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2 text-sm transition-colors duration-200 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ring)]">
+        </div>
+        <div>
+          <label for="add-password" class="text-sm font-medium">Starting password</label>
+          <input id="add-password" type="password" value="weakpass" aria-invalid="true" aria-describedby="add-password-error" class="mt-1 w-full rounded-xl border border-[var(--color-destructive)] bg-[var(--color-card)] px-3 py-2 text-sm transition-colors duration-200 focus:border-[var(--color-destructive)] focus:outline-none focus:ring-2 focus:ring-[var(--color-destructive)]">
+          <p id="add-password-error" class="mt-1 text-xs font-medium text-[var(--color-destructive)]">Password needs 8+ characters with an uppercase and a lowercase letter.</p>
+        </div>
+        <div>
+          <label for="add-country" class="text-sm font-medium">Country</label>
+          <select id="add-country" class="mt-1 w-full cursor-pointer rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2 text-sm transition-colors duration-200 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ring)]">
+            <option value="IN" selected>IN</option>
+            <option value="AE">AE</option>
+            <option value="US">US</option>
+          </select>
+        </div>
+      </form>
+      <div class="mt-6 flex justify-end gap-3">
+        <button type="button" class="cursor-pointer rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-2 text-sm font-semibold text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">Cancel</button>
+        <button type="button" class="cursor-pointer rounded-xl bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">Add person</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -79,8 +79,9 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Account list - every account: name, role, country, active or inactive; deactivated included
 - Deactivated rows - greyed out, with an Activate button, so they can always be found again
 - Tap an account row - opens that person's Screen 3 (deactivated people too - their call history stays reachable)
-- Add person form - name, starting password, country dropdown (IN, AE, US); role is always Salesperson
+- Add person button, top right of the page above the list - opens a dialog with the form: name, starting password, country dropdown (IN, AE, US); role is always Salesperson
 - Per-row actions - Edit (name, password, country) · Deactivate or Activate · Delete
+- The manager's own row shows no actions at all - no edit, no deactivate, no delete
 - Delete confirmation dialog - "This permanently removes NAME and all their calls. Cannot be undone."
 - The list carries no call counts
 
@@ -88,7 +89,6 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Name already exists, on create or edit: "That name is already taken."
 - Weak password (under 8 characters, or no uppercase or lowercase letter): "Password needs 8+ characters with an uppercase and a lowercase letter."
 - Deactivate or delete aimed at the manager's own account: refused - "You cannot do this to your own account."
-- Editing the manager's own name, password, or country: allowed like anyone else's
 - No salespeople created yet: the list shows only the manager's own row
 
 → Next: Screen 5 Login (app)

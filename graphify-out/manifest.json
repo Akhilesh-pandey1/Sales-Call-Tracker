@@ -355,13 +355,13 @@
     "semantic_hash": ""
   },
   "agent-doc/index.html": {
-    "mtime": 1789814482.9902396,
-    "ast_hash": "07bccf090fa3303d4259f3884c726f8e",
+    "mtime": 1789820192.9344845,
+    "ast_hash": "335528b024bc0b60bd913c3fe54fc63e",
     "semantic_hash": ""
   },
   "agent-doc/screen.md": {
-    "mtime": 1789815928.0373623,
-    "ast_hash": "060574b40068904efdfcc01a39b272da",
+    "mtime": 1789818068.2062416,
+    "ast_hash": "5a24acf86b285e486bfed2e42a8ff0d2",
     "semantic_hash": ""
   },
   "agent-doc/screens/02-dashboard.html": {
@@ -392,6 +392,26 @@
   "agent-doc/screens/04-person-view.html": {
     "mtime": 1789815892.707714,
     "ast_hash": "1bae5d70701d3a24604fbcb64865353e",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--add-dialog.html": {
+    "mtime": 1789820871.1921725,
+    "ast_hash": "f4848c319aa5e12dd3cbb9c79904bc59",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--add-error.html": {
+    "mtime": 1789820873.9749956,
+    "ast_hash": "dc3357db8882892b5321a5e160435c83",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--delete-dialog.html": {
+    "mtime": 1789820852.1984613,
+    "ast_hash": "83c801dafaa85a64fea2984acdb57a0e",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts.html": {
+    "mtime": 1789820849.62439,
+    "ast_hash": "7a3cf8cc0b99102eee3291a1fc8e2d80",
     "semantic_hash": ""
   }
 }

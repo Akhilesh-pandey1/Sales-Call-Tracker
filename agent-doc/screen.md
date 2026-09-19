@@ -48,7 +48,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Same people and same order as the Screen 2 team table
 - Zeros included - a person with no calls still lists
 - Sorted by today's dials, highest first
-- Tap a row - opens that person's Screen 3 for connected %, top numbers, and more
+- Tap a row - opens that person's Screen 3 for connected %, most contacted numbers, and more
 - View only - nothing is edited here
 
 **Edge cases:**
@@ -61,9 +61,10 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 
 ### Screen 3: Person View
 - Person's name as the heading
+- KPI cards (4, last 30 days) - Active days (of 30), Avg dials, Avg connected, Avg minutes; averages per active day, not per calendar day
 - Stats block - three rows (Today, Yesterday, Last 30 days), each with: Dials, Connected, Minutes, Connected %
 - Connected % - connected ÷ dials for that period; "—" means the period has no dials yet, not 0%
-- Top 5 numbers table (last 30 days) - number, minutes, calls; sorted by talk time
+- Most contacted numbers table (last 30 days) - number, minutes, calls; sorted by talk time
 - No graphs - red flags (one number with huge minutes, the same number dialed daily) are read by eye from the table
 
 **Edge cases:**

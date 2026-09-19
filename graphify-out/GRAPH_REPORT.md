@@ -1,7 +1,7 @@
 # Graph Report - sales-call-tracker  (2026-09-19)
 
 ## Corpus Check
-- 66 files · ~179,146 words
+- 66 files · ~183,198 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `368d431b`
+- Built from commit: `79f2136c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

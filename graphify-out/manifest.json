@@ -355,18 +355,18 @@
     "semantic_hash": ""
   },
   "agent-doc/index.html": {
-    "mtime": 1789811694.0671332,
-    "ast_hash": "32c2f791810da6525d597d6db465ddc7",
+    "mtime": 1789814482.9902396,
+    "ast_hash": "07bccf090fa3303d4259f3884c726f8e",
     "semantic_hash": ""
   },
   "agent-doc/screen.md": {
-    "mtime": 1789813580.7501907,
-    "ast_hash": "0d8378d7f312b0ee10a5b269f8c458d5",
+    "mtime": 1789815928.0373623,
+    "ast_hash": "060574b40068904efdfcc01a39b272da",
     "semantic_hash": ""
   },
   "agent-doc/screens/02-dashboard.html": {
-    "mtime": 1789811703.7029662,
-    "ast_hash": "921b3fef3621f90df3e89a3d610219ac",
+    "mtime": 1789815051.921583,
+    "ast_hash": "b1774712b17e16e7d65136e1a5c37cfb",
     "semantic_hash": ""
   },
   "agent-doc/variations/02-dashboard--v1-dark.html": {
@@ -375,8 +375,23 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/03-teams.html": {
-    "mtime": 1789813808.839282,
-    "ast_hash": "c151fecf2ee03958e011e524828f211a",
+    "mtime": 1789815053.8400917,
+    "ast_hash": "f7829fdc8a316c3acc0893ec904aaaa5",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view--error.html": {
+    "mtime": 1789815057.6136935,
+    "ast_hash": "3e8ddc96983dde00a6ee7fa9b1dd68cf",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view--no-calls.html": {
+    "mtime": 1789815911.1354,
+    "ast_hash": "3dbaa7c2db2904f5b3fbec0f69c0b3b7",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view.html": {
+    "mtime": 1789815892.707714,
+    "ast_hash": "1bae5d70701d3a24604fbcb64865353e",
     "semantic_hash": ""
   }
 }

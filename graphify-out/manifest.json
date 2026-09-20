@@ -309,56 +309,6 @@
     "ast_hash": "aed99c0ce8dd6810d7ceaced78250084",
     "semantic_hash": ""
   },
-  "agent-doc/proposal.md": {
-    "mtime": 1789748065.7650328,
-    "ast_hash": "be92ab5372cd3d2302e7f80db82b579e",
-    "semantic_hash": ""
-  },
-  "agent-doc/specs/account-management.md": {
-    "mtime": 1789748306.9970748,
-    "ast_hash": "3f6544992955602077f8b6d1a909a23a",
-    "semantic_hash": ""
-  },
-  "agent-doc/specs/call-dialer.md": {
-    "mtime": 1789748207.7972577,
-    "ast_hash": "800be8fad8f273247b44e7e660d5e8eb",
-    "semantic_hash": ""
-  },
-  "agent-doc/specs/call-sync.md": {
-    "mtime": 1789748234.099758,
-    "ast_hash": "0d328b3deacd9948d97086aca3a4a9ac",
-    "semantic_hash": ""
-  },
-  "agent-doc/specs/login-auth.md": {
-    "mtime": 1789748149.6469507,
-    "ast_hash": "bd23a7a80a2dffd4714b9c567d7c816b",
-    "semantic_hash": ""
-  },
-  "agent-doc/specs/person-stats.md": {
-    "mtime": 1789748286.200087,
-    "ast_hash": "87e4016bf6c2fdb3362d7b35f1454136",
-    "semantic_hash": ""
-  },
-  "agent-doc/specs/team-dashboard.md": {
-    "mtime": 1789748271.9202416,
-    "ast_hash": "d58478fb00d85376eee39f791dc8160c",
-    "semantic_hash": ""
-  },
-  "agent-doc/specs/tracking-spike.md": {
-    "mtime": 1789748127.395477,
-    "ast_hash": "239cbe5359808f34d4045029611cfb3b",
-    "semantic_hash": ""
-  },
-  "agent-doc/tasks.md": {
-    "mtime": 1789748383.204827,
-    "ast_hash": "a7a8d47064de1f0ff0b0c90191e8784c",
-    "semantic_hash": ""
-  },
-  "agent-doc/index.html": {
-    "mtime": 1789820192.9344845,
-    "ast_hash": "335528b024bc0b60bd913c3fe54fc63e",
-    "semantic_hash": ""
-  },
   "agent-doc/screen.md": {
     "mtime": 1789818068.2062416,
     "ast_hash": "5a24acf86b285e486bfed2e42a8ff0d2",
@@ -367,11 +317,6 @@
   "agent-doc/screens/02-dashboard.html": {
     "mtime": 1789815051.921583,
     "ast_hash": "b1774712b17e16e7d65136e1a5c37cfb",
-    "semantic_hash": ""
-  },
-  "agent-doc/variations/02-dashboard--v1-dark.html": {
-    "mtime": 1789755118.2401805,
-    "ast_hash": "fe4bf3187e0c3f162b99704df59dca44",
     "semantic_hash": ""
   },
   "agent-doc/screens/03-teams.html": {
@@ -412,6 +357,66 @@
   "agent-doc/screens/05-accounts.html": {
     "mtime": 1789820849.62439,
     "ast_hash": "7a3cf8cc0b99102eee3291a1fc8e2d80",
+    "semantic_hash": ""
+  },
+  "Readme.md": {
+    "mtime": 1789825836.3365614,
+    "ast_hash": "40dcfee4144e6e2453ddc77840c9204f",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login--error.html": {
+    "mtime": 1789821995.7778995,
+    "ast_hash": "f7c882e9d3b891e59c9529ae8c1680f2",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login--locked.html": {
+    "mtime": 1789822006.906716,
+    "ast_hash": "35835c91d454e6b7d618a5c9dfa8ced1",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login.html": {
+    "mtime": 1789821973.9690013,
+    "ast_hash": "62cda51e83c25a94c9df2294f2a9683f",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--empty.html": {
+    "mtime": 1789822787.2732153,
+    "ast_hash": "a3a805ac70160c4bec99ebd3b1b75b18",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--permissions-off.html": {
+    "mtime": 1789822805.5278697,
+    "ast_hash": "dd970db09a37a9ec9966723124651bac",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer.html": {
+    "mtime": 1789822768.4337015,
+    "ast_hash": "cd3c796ad87014ebae67a58116caba58",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/08-my-stats--offline.html": {
+    "mtime": 1789823653.7760127,
+    "ast_hash": "f645d4e6f19ab75cbdb15f5873a8cb06",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/08-my-stats.html": {
+    "mtime": 1789823352.3532805,
+    "ast_hash": "0fff3d578cade0090b2ff337321f5af2",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/09-settings--confirm-dialog.html": {
+    "mtime": 1789823039.3393192,
+    "ast_hash": "fc968022b9b9d4d99dec62081ba25103",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/09-settings.html": {
+    "mtime": 1789823011.9558568,
+    "ast_hash": "3dace6ee792519b8d6babd28cbb7945e",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/index.html": {
+    "mtime": 1789894099.4781845,
+    "ast_hash": "28a5ef6b740c6bf0b0f19213ae1a0c14",
     "semantic_hash": ""
   }
 }

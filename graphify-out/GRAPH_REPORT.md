@@ -1,16 +1,16 @@
-# Graph Report - sales-call-tracker  (2026-09-19)
+# Graph Report - sales-call-tracker  (2026-09-20)
 
 ## Corpus Check
-- 66 files · ~183,198 words
+- 58 files · ~193,269 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 788 nodes · 904 edges · 66 communities (59 shown, 7 thin omitted)
+- 606 nodes · 730 edges · 58 communities (51 shown, 7 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `79f2136c`
+- Built from commit: `468c33dd`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -54,21 +54,12 @@
 - extraction-spec.md
 - write-tickets/SKILL.md
 - core.py
-- Requirements
-- Requirements
-- Requirements
-- Requirements
-- Requirements
-- Requirement: The eight-case checklist
-- Requirements
 - design_system.py
-- Sales Call Tracker — Task List
 - DesignSystemGenerator
 - ._apply_reasoning
 - _select_palette_for_mode
 - .generate
 - persist_design_system
-- Sales Call Tracker — Proposal
 - Design Screens
 - Write Screens
 - Manager View (web)
@@ -94,7 +85,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (66 total, 7 thin omitted)
+## Communities (58 total, 7 thin omitted)
 
 ### Community 0 - "server.cjs"
 Cohesion: 0.06
@@ -224,41 +215,9 @@ Nodes (3): Grill — style router, Step 1 — Ask which style, Step 2 — Load a
 Cohesion: 0.06
 Nodes (60): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _exact_stack_identifier(), _file_signature() (+52 more)
 
-### Community 46 - "Requirements"
-Cohesion: 0.06
-Nodes (32): Purpose, Requirement: Complete missed rows on app open (Path 2 — the janitor), Requirement: Dialing works offline, Requirement: Fallback without the call permission, Requirement: Fill the row from the real call (Path 1 — real time), Requirement: Number entry by keypad or paste, Requirement: One tap creates exactly one intent row, Requirement: The Call button only dials valid numbers (+24 more)
-
-### Community 47 - "Requirements"
-Cohesion: 0.08
-Nodes (25): Purpose, Requirement: Guess limit on passwords, Requirement: Login with name and password, Requirement: No logout endpoint, Requirement: No manager mode in the app, Requirement: Password rule, Requirement: The web is manager-only, Requirement: Token sessions (+17 more)
-
-### Community 48 - "Requirements"
-Cohesion: 0.08
-Nodes (23): Purpose, Requirement: Create a salesperson, Requirement: Deactivate and activate, Requirement: Edit without losing history, Requirement: Permanent delete, Requirement: The full account list, Requirement: The manager protects themself, Requirements (+15 more)
-
-### Community 49 - "Requirements"
-Cohesion: 0.09
-Nodes (22): Purpose, Requirement: Clear local data, Requirement: Every call belongs to whoever's token sent it, Requirement: One batch of filled rows only, Requirement: Sync runs on exactly two triggers, Requirement: The queue lives only on the phone, Requirement: The server keeps every row exactly once, Requirements (+14 more)
-
-### Community 50 - "Requirements"
-Cohesion: 0.10
-Nodes (19): Purpose, Requirement: All day math on the server, Requirement: Display contract for minutes, Requirement: One row per active salesperson, zeros included, Requirement: Software sold placeholder, Requirement: Team totals on open, Requirement: Totals count everyone's calls, Requirements (+11 more)
-
-### Community 51 - "Requirement: The eight-case checklist"
-Cohesion: 0.11
-Nodes (18): Purpose, Requirement: One phone is enough, Requirement: The eight-case checklist, Requirement: The spike comes first and proves the full chain, Requirement: The spike's code ships, Requirements, Scenario: Case 1 — answered call, Scenario: Case 2 — unanswered dial (+10 more)
-
-### Community 52 - "Requirements"
-Cohesion: 0.11
-Nodes (17): Purpose, Requirement: My Stats fetches fresh on every tab open, Requirement: Same display contract, Requirement: Three periods with numbers, Requirement: Top 5 numbers, Requirement: Who may see whom, Requirements, Scenario: A normal person (+9 more)
-
 ### Community 53 - "design_system.py"
 Cohesion: 0.22
 Nodes (12): ansi_ljust(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤ (+4 more)
-
-### Community 54 - "Sales Call Tracker — Task List"
-Cohesion: 0.17
-Nodes (11): 10. Deploy and end-to-end pass, 1. Manual setup — human steps before code starts, 2. Tracking spike — prove the chain on the oldest phone, 3. API foundation, 4. Login and auth, 5. Call sync, 6. Dashboard endpoints, 7. Account endpoints (+3 more)
 
 ### Community 55 - "DesignSystemGenerator"
 Cohesion: 0.27
@@ -279,10 +238,6 @@ Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once 
 ### Community 59 - "persist_design_system"
 Cohesion: 0.25
 Nodes (9): format_master_md(), persist_design_system(), Format design system as MASTER.md with hierarchical override logic., Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every…, Write fully to a temp file, then publish atomically., Persist design system to design-system/<project>/ folder using Master +…, safe_slug(), _write_persisted_file() (+1 more)
-
-### Community 60 - "Sales Call Tracker — Proposal"
-Cohesion: 0.25
-Nodes (7): Capabilities, Impact, Modified Capabilities, New Capabilities, Sales Call Tracker — Proposal, What Changes, Why
 
 ### Community 61 - "Design Screens"
 Cohesion: 0.25
@@ -305,7 +260,7 @@ Cohesion: 0.33
 Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
 
 ## Knowledge Gaps
-- **424 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+419 more)
+- **309 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+304 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -313,13 +268,13 @@ Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `search()` connect `core.py` to `_generate_intelligent_overrides`, `.generate`, `design_system.py`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `design_system.py`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Why does `allow` connect `allow` to `deny`?**
-  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
-  _424 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _309 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._
 - **Should `deny` be split into smaller, more focused modules?**

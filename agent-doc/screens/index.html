@@ -137,15 +137,25 @@
 // One entry per HTML file. Order = user-flow order.
 // ============================================================
 const SCREENS = [
-  { file: "screens/02-dashboard.html", title: "Team Dashboard", view: "Manager View" },
-  { file: "screens/03-teams.html", title: "Teams", view: "Manager View" },
-  { file: "screens/04-person-view.html", title: "Person View — Priya Sharma", view: "Manager View" },
-  { file: "screens/04-person-view--no-calls.html", title: "Person View — no calls", view: "Manager View" },
-  { file: "screens/04-person-view--error.html", title: "Person View — load failed", view: "Manager View" },
-  { file: "screens/05-accounts.html", title: "Accounts", view: "Manager View" },
-  { file: "screens/05-accounts--add-dialog.html", title: "Accounts — add dialog", view: "Manager View" },
-  { file: "screens/05-accounts--add-error.html", title: "Accounts — add form error", view: "Manager View" },
-  { file: "screens/05-accounts--delete-dialog.html", title: "Accounts — delete dialog", view: "Manager View" },
+  { file: "02-dashboard.html", title: "Team Dashboard", view: "Manager View" },
+  { file: "03-teams.html", title: "Teams", view: "Manager View" },
+  { file: "04-person-view.html", title: "Person View — Priya Sharma", view: "Manager View" },
+  { file: "04-person-view--no-calls.html", title: "Person View — no calls", view: "Manager View" },
+  { file: "04-person-view--error.html", title: "Person View — load failed", view: "Manager View" },
+  { file: "05-accounts.html", title: "Accounts", view: "Manager View" },
+  { file: "05-accounts--add-dialog.html", title: "Accounts — add dialog", view: "Manager View" },
+  { file: "05-accounts--add-error.html", title: "Accounts — add form error", view: "Manager View" },
+  { file: "05-accounts--delete-dialog.html", title: "Accounts — delete dialog", view: "Manager View" },
+  { file: "06-login.html", title: "Login", view: "Salesperson App (Android)" },
+  { file: "06-login--error.html", title: "Login — wrong details", view: "Salesperson App (Android)" },
+  { file: "06-login--locked.html", title: "Login — too many tries", view: "Salesperson App (Android)" },
+  { file: "07-dialer.html", title: "Dialer", view: "Salesperson App (Android)" },
+  { file: "07-dialer--empty.html", title: "Dialer — empty", view: "Salesperson App (Android)" },
+  { file: "07-dialer--permissions-off.html", title: "Dialer — permissions off", view: "Salesperson App (Android)" },
+  { file: "08-my-stats.html", title: "My Stats", view: "Salesperson App (Android)" },
+  { file: "08-my-stats--offline.html", title: "My Stats — server unreachable", view: "Salesperson App (Android)" },
+  { file: "09-settings.html", title: "Settings", view: "Salesperson App (Android)" },
+  { file: "09-settings--confirm-dialog.html", title: "Settings — clear data dialog", view: "Salesperson App (Android)" },
 ];
 
 const frame = document.getElementById("frame");

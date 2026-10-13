@@ -1,0 +1,12 @@
+{
+  "agent": "claude-code",
+  "model": "gemini-3.6-flash-high",
+  "timeoutSeconds": 600,
+  "ticketsPath": "agent-doc/tickets.json",
+  "dangerouslySkipPermissions": true,
+  "effort": "high",
+  "soundAlarm": true,
+  "alarmDurationMinutes": 5,
+  "verboseOutput": false,
+  "logFilePath": "app.txt"
+}

@@ -1,10 +1,10 @@
 # When to Mock
 
-Mock at **system boundaries** only:
+Mock at **system boundaries** only — sociable testing, internal code always runs for real:
 
 - External APIs (payment, email, etc.)
 - Databases (sometimes - prefer test DB)
-- Time/randomness
+- Time/randomness/UUID
 - File system (sometimes)
 
 Don't mock:

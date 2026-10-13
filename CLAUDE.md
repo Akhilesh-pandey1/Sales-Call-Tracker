@@ -50,3 +50,9 @@ Use graphify for any codebase question — how code works, what calls what, or w
 
 - Never touch or read `.env` files.
 - To add something new to the env, add it to `.env.example` instead.
+
+## Private Folder
+
+- Never read, open, search, or list files inside `not_to_be_pushed/`.
+- The only exception: the user explicitly gives you a specific file from that folder. Then you may read only that file.
+- Never use anything from that folder on your own — not for context, not for answers, not for tasks.

@@ -23,7 +23,7 @@ def create_argument_parser(default_settings):
     parser.add_argument("--alarm-duration", type=int, default=default_settings.get("alarmDurationMinutes", 5), help="How long to sound the alarm in minutes before auto-stopping (default: 5)")
     parser.add_argument("--dangerously-skip-permissions", action="store_true", default=default_settings.get("dangerouslySkipPermissions", False), help="Auto-approve all tool permission requests without prompting")
     parser.add_argument("--verbose-output", action="store_true", default=default_settings.get("verboseOutput", False), help="Print one summary line per agent event on the console (default: off, console shows only task and phase progress)")
-    parser.add_argument("--log-file", default=default_settings.get("logFilePath", "app.txt"), help="Path to the orchestrator log file. Must be a .txt file (default: app.txt)")
+    parser.add_argument("--log-file", default=default_settings.get("logFilePath", "coding-agent.log"), help="Path to the orchestrator log file. Must be a .log file (default: coding-agent.log)")
     return parser
 
 
@@ -47,8 +47,8 @@ def load_configuration():
             tickets_file_path = "agent-doc/tickets.json"
 
     log_file_path = parsed_arguments.log_file
-    if not log_file_path.endswith(".txt"):
-        invalid_log_file_error = ValueError(f"Log file must be a .txt file, got: {log_file_path}")
+    if not log_file_path.endswith(".log"):
+        invalid_log_file_error = ValueError(f"Log file must be a .log file, got: {log_file_path}")
         raise invalid_log_file_error
 
     resolved_configuration = {

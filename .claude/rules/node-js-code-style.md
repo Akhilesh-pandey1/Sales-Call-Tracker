@@ -26,6 +26,9 @@
   let them confirm.
 
 ## Error & Exception Handling
-- Never write try/except blocks directly in code. Always use the exception handler decorator defined in the `utils` directory.
-- To surface an error to the user, raise `AppException` available in `utils/exceptionHandler.py`.
+- Never write try/catch blocks directly in code.
+- To surface an error to the user, throw `AppException` available in `utils` — with a short message and a status code, from any function in any file.
+- Handle them in one place only: one Express error middleware registered last — `app.use((err, req, res, next) => { ... })` — it logs the error and returns the JSON error response.
+- Import `express-async-errors` once at the entry file, so errors thrown inside async functions reach that middleware.
+- Rule: throw anywhere, handle once, log once. No try/catch decorators on functions — never log the same error twice.
 - Only generate a raw exception for purely technical errors that are not user-facing.

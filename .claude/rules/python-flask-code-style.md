@@ -24,8 +24,10 @@
 - Never return a value directly from a function call or an inline expression. Always assign the result to a named variable first, then return that variable.
 
 ## Error & Exception Handling
-- Never write try/except blocks directly in code. Always use the exception handler decorator defined in the `utils` directory.
-- To surface an error to the user, raise `AppException` available in `utils/exception_handler.py`.
+- Never write try/except blocks directly in code.
+- To surface an error to the user, raise `AppException` available in `utils/exception_handler.py` — with a short message and a status code, from any function in any file.
+- Handle them in one place only: register `@app.errorhandler(AppException)` once at app startup — it logs the error and returns the JSON error response. Register `@app.errorhandler(Exception)` the same way for unexpected errors (the 500 fallback).
+- Rule: raise anywhere, handle once, log once. No try/except decorators on functions — never log the same error twice.
 - Only generate a raw exception for purely technical errors that are not user-facing.
 
 ## Libraries & Dependencies

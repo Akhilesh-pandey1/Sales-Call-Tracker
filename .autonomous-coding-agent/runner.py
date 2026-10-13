@@ -91,7 +91,7 @@ def record_stream_event(parsed_event, verbose_output, log_file_path):
             print(description_line, flush=True)
 
 
-def execute_claude_process(model, effort, dangerously_skip_permissions, prompt_text, timeout_seconds, resume_session_id=None, verbose_output=False, log_file_path="app.txt"):
+def execute_claude_process(model, effort, dangerously_skip_permissions, prompt_text, timeout_seconds, resume_session_id=None, verbose_output=False, log_file_path="coding-agent.log"):
     command = ["claude", "--print", "--verbose", "--output-format", "stream-json", "--model", model]
     if dangerously_skip_permissions:
         command.append("--dangerously-skip-permissions")
@@ -143,7 +143,7 @@ def execute_claude_process(model, effort, dangerously_skip_permissions, prompt_t
     return {"success": success, "session_id": session_id, "final_output": final_output_text, "error": error}
 
 
-def execute_agy_process(model, effort, dangerously_skip_permissions, prompt_text, timeout_seconds, resume_session_id=None, verbose_output=False, log_file_path="app.txt"):
+def execute_agy_process(model, effort, dangerously_skip_permissions, prompt_text, timeout_seconds, resume_session_id=None, verbose_output=False, log_file_path="coding-agent.log"):
     command = ["agy", "--print", "--output-format", "stream-json", "--model", model]
     if dangerously_skip_permissions:
         command.append("--dangerously-skip-permissions")

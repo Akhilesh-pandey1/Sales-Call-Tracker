@@ -34,15 +34,13 @@ def get_next_uncompleted_task(tickets_data):
     return no_task_available
 
 
-def build_execution_prompt(task, specs_path, coding_rules_path, ui_design_path, additional_prompt):
+def build_execution_prompt(task, ui_design_path, additional_prompt):
     task_id = task.get("id")
     task_title = task.get("title", "Untitled Task")
     task_points = task.get("points", [])
 
     system_prompt_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "resources", "execute.md")
     system_prompt_content = read_text_file(system_prompt_path)
-    specs_content = read_text_file(specs_path)
-    coding_rules_content = read_text_file(coding_rules_path)
 
     points_text_lines = []
 
@@ -60,8 +58,6 @@ def build_execution_prompt(task, specs_path, coding_rules_path, ui_design_path, 
     ui_design_available = bool(ui_design_path) and os.path.exists(ui_design_path)
     optional_sections = [
         ("additional_prompt", additional_prompt),
-        ("specs", specs_content),
-        ("coding_rules", coding_rules_content),
         ("ui_design", ui_design_path if ui_design_available else None),
     ]
 
@@ -72,12 +68,6 @@ def build_execution_prompt(task, specs_path, coding_rules_path, ui_design_path, 
         match section_kind:
             case "additional_prompt":
                 prompt_sections.append(f"Additional Instructions:\n{section_value.strip()}")
-            case "specs":
-                specs_introduction = "Project Specifications:\nRead the spec below properly line by line before writing any code. Do not assume anything on your own. Every decision from the brainstorming and grilling sessions is already written in this spec, so if something is not written in it, do not invent it."
-                prompt_sections.append(f"{specs_introduction}\n\n{section_value.strip()}")
-            case "coding_rules":
-                coding_rules_introduction = "Coding Rules:\nWe are big believers of clean code. Before writing any code, read the rules below properly and follow them in every file you create or modify."
-                prompt_sections.append(f"{coding_rules_introduction}\n\n{section_value.strip()}")
             case "ui_design":
                 ui_design_introduction = "UI Designs:\nIf anything you build in this task is related to the UI, our UI design team has already sent us the designs. They are placed in this folder:"
                 ui_design_instructions = "Look at the file names in that folder, for example login.png or signup.png. Whatever screen or component you are making, first find the matching design image, look at it properly, and then build exactly what the design shows. Do not imagine the UI on your own."
@@ -108,8 +98,6 @@ def extract_promise_verdict(final_output_text):
 
 def execute_task_run(task, configuration, tickets_data, tickets_file_path):
     task_id = task.get("id")
-    specs_path = tickets_data.get("specs")
-    coding_rules_path = tickets_data.get("codingRules")
     ui_design_path = tickets_data.get("uiDesign")
     additional_prompt = tickets_data.get("additionalPrompt")
     log_file_path = configuration["log_file_path"]
@@ -118,7 +106,7 @@ def execute_task_run(task, configuration, tickets_data, tickets_file_path):
     save_tickets_data(tickets_file_path, tickets_data)
 
     write_log_line(log_file_path, f"TASK #{task_id} RUN START")
-    execution_prompt = build_execution_prompt(task, specs_path, coding_rules_path, ui_design_path, additional_prompt)
+    execution_prompt = build_execution_prompt(task, ui_design_path, additional_prompt)
     run_agent = get_agent_runner(configuration["agent"])
     task_result = run_agent(
         model=configuration["model"],

@@ -8,7 +8,7 @@
 - Follow DRY — Do Not Repeat Yourself.
 - Delete all dead code, unused variables, and unused imports.
 - Never write comments in code.
-- Import statements always go at twhe top of the file, never inside functions or conditions.
+- Import statements always go at top of the file, never inside functions or conditions.
 
 ## Parameters, Returns & Data Flow
 
@@ -22,7 +22,9 @@
 ## Naming & Constants
 
 - Variable and function names must be readable and describe exactly what they hold or do. No abbreviations or vague names.
-- Never use magic numbers or raw hardcoded values inline. Always assign them to a named constant that clearly describes what the value represents.
+- Never use magic numbers or raw hardcoded values inline. Assign the value to a clearly named local variable inside the function and use that variable.
+- Avoid constants at the top of the file. Target zero. A module-level constant is allowed only when truly unavoidable — a fixed value genuinely needed by many functions in the same file.
+- Anything that can change in the future — pricing, rates, limits, timeouts, retry counts, URLs, thresholds, anything time- or money-related — never goes in code. Put it in `config.json` and read it from there.
 
 ## Function Length & Structure
 

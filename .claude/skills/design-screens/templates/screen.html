@@ -38,6 +38,10 @@
   <!-- SCREEN-CONTENT: build the screen from agent-doc/screen.md, sections top to bottom.
        Use theme tokens everywhere (bg-[var(--color-card)] etc).
        Icons: inline SVG, stroke="currentColor", 24px, stroke-width="2".
-       No JavaScript. Ever. -->
+       Inline JavaScript only for same-page interactions. Never link to or load another screen. -->
+  <script>
+    // Same-page interactions only: tabs, toggles, date ranges, dropdowns, modals.
+    // Never navigate to or load another screen file - the runner flips screens.
+  </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 ---
 name: design-screens
-description: Turn agent-doc/screen.md into real designed HTML screens - one HTML file per screen, Tailwind CDN, zero JavaScript in screens. Includes a runner (index.html) to flip left/right through screens and preview Mobile / iPad / Desktop. Designs ONE screen first for approval, makes variations on request, then generates all screens in the locked theme. Use when the user asks to design screens, make HTML designs, or build designs from screen.md.
+description: Turn agent-doc/screen.md into real designed HTML screens - one HTML file per screen, Tailwind CDN, inline JavaScript only for same-page interactions, screens never link to each other. Includes a runner (index.html) to flip left/right through screens and preview Mobile / iPad / Desktop. Designs ONE screen first for approval, makes variations on request, then generates all screens in the locked theme. Use when the user asks to design screens, make HTML designs, or build designs from screen.md.
 ---
 
 # Design Screens
@@ -19,7 +19,7 @@ Turn `agent-doc/screen.md` into designed HTML screens in the user's chosen folde
   variations/           <- losing variations live here, never in the runner
 ```
 
-Screens are pure HTML + Tailwind (CDN). Zero JavaScript in screens - the runner is the only file with script.
+Screens are HTML + Tailwind (CDN) plus small inline JavaScript for same-page interactions only - tabs, toggles, date ranges, dropdowns, modals. A screen never opens, links to, or loads another screen file - the runner is the only way to move between screens.
 
 ## The design brain
 
@@ -50,7 +50,7 @@ python "<this skill's folder>/uiux/scripts/search.py" "<product type> <industry>
 - Build from `templates/screen.html` - theme colors go in `:root` CSS variables, fonts from THEME.md.
 - Use tokens everywhere: `bg-[var(--color-card)]`, `text-[var(--color-muted-foreground)]`, `border-[var(--color-border)]`. No raw hex in classes.
 - Icons: inline SVG only, `stroke="currentColor"`, 24px, `stroke-width="2"` (Lucide style). Never emoji, never icon fonts.
-- `<script>` tags: the Tailwind CDN line only. Nothing else, ever.
+- `<script>` tags: the Tailwind CDN line plus one inline script for same-page interactions only. Never navigate to, link to, or load another screen file.
 - Responsive with Tailwind breakpoints - correct at 375, 768, 1024, 1440. Mobile app screens (screen.md says "Mobile app") design at 375 only.
 - Realistic sample content in the product's own language - never "Lorem ipsum".
 
@@ -65,7 +65,7 @@ python "<this skill's folder>/uiux/scripts/search.py" "<product type> <industry>
 
 - [ ] Every screen.md screen has its HTML; every edge case has its file
 - [ ] Runner list matches the files, flow order matches screen.md
-- [ ] Zero `<script>` in screens except the Tailwind CDN line
+- [ ] Inline `<script>` in screens only for same-page interactions; zero cross-screen links or navigation
 - [ ] No emoji icons; cursor-pointer on clickables; hover transitions 150-300ms
 - [ ] Contrast 4.5:1; visible focus states
 - [ ] Checked in the runner at Mobile, iPad, Desktop
@@ -73,7 +73,7 @@ python "<this skill's folder>/uiux/scripts/search.py" "<product type> <industry>
 ## Guardrails
 
 - Never ask the user design questions. Allowed questions only: folder name, "good or variations", "which one".
-- Never put JavaScript in a screen.
+- Never let a screen move to another screen - no links, no redirects, no loading another screen's HTML. The runner flips screens.
 - Never redesign a locked theme mid-run - THEME.md is final once approved.
 - One file per screen; never bundle screens into one HTML.
 - If the theme search fails twice, design from general defaults and say so.

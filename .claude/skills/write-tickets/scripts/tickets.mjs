@@ -113,10 +113,10 @@ for (const t of tasks) {
   if (c) fail(`circular block: ${c.join(' → ')}`);
 }
 
+const fixedAdditionalPrompt = 'Look at the `agent-doc` folder at the project root. Fetch the names of all its files. Whatever file you require for this task, read it from that folder.';
+
 const out = {
-  specs: arg('--specs') || join(ROOT, 'proposal.md'),
-  codingRules: arg('--coding-rules') || null,
-  additionalPrompt: arg('--prompt') || '',
+  additionalPrompt: fixedAdditionalPrompt,
   tasks,
 };
 writeFileSync(TICKETS, JSON.stringify(out, null, 2) + '\n');

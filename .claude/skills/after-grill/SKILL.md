@@ -1,6 +1,6 @@
 ---
 name: after-grill
-description: "Post-grill technical sweep. After any grilling skill (grill-with-pocock, grill-with-superpower, grill-with-openspec, grill-for-business) reached shared understanding, settle the engineering surface it never covered: greenfield or brownfield file structure, database schema changes, API contracts, failure and edge cases, user flow and experience, config, rollback, and testing scope. Talks in easy English — the user may be a learner, not a senior developer. Use right after a grill session ends, before writing any spec."
+description: "Technical sweep after grilling ends — file structure, database, API, failure and edge cases, user flow, config, rollback, testing scope, and the tech stack: one known library per piece, chosen one by one from the stacks catalog. Use right after grilling reached shared understanding, before writing any spec."
 disable-model-invocation: true
 ---
 
@@ -42,6 +42,7 @@ Read before asking anything:
 - The full grill conversation — everything already decided is settled. Never ask about it again.
 - If `agent-doc/` exists, read it completely — `proposal.md`, every `specs/<feature>.md`, `design.md`, `tasks.md`. Anything recorded there is decided. Never re-ask it. Also skip anything in it that is not important for this change — no extras.
 - `.claude/rules/*` — the repo's folder structure rules (MVC mapping, pages/hooks/components/services, file and function limits, naming rules). Every file-placement recommendation must comply with these.
+- `stacks.md` — in this skill's folder. The library catalog: known JS and Python libraries, each with what it is for. Dimension 10 proposes from it.
 - The actual file tree in the affected area — existing files, existing structure.
 - Existing routes, models, and schemas the change touches.
 - If `graphify-out/` exists, query the graph for impact — what calls what, which files touch the area being changed. Run `graphify` directly — never with `python` in front, and assume it is already installed.
@@ -71,11 +72,18 @@ If every dimension is NOT-TOUCHED, say the sweep found nothing technical to cove
 
 ### 5. Grill each TOUCHED dimension
 
-One round per dimension (or one compact round for small changes). Use the question format below. Work from facts: propose the exact file list, the exact endpoint table, the exact schema delta — and let the user approve or correct each.
+Work dimension by dimension. Inside a dimension, go piece by piece — never a whole dimension in one message:
+
+- **API contracts** — one API module at a time: first the authentication API, then the dashboard API, then the next. Within a module, one endpoint per question when it has more than a couple.
+- **Database changes** — one table or collection at a time: its schema, then its migration, then its rollback.
+- **File structure** — one module or feature area at a time: its files first, then the next area.
+- **Failure & edge cases** — one case at a time: propose the handling, get the yes, move to the next case.
+
+Use the question format below. Work from facts — propose the exact file list, the exact endpoint contract, or the exact schema delta for the piece in front of you, and let the user approve or correct it. When the last piece of a dimension is settled, say that dimension is done, then move to the next TOUCHED one. Small changes go the same way — they just have fewer questions.
 
 ## Question format
 
-Same as the pocock grilling — numbered questions with your recommended answer, one round at a time. Ask in easy English; explain any technical word the user may not know:
+Same as grill-with-superpower — numbered questions with your recommended answer, and only ONE question per message. Never bundle several questions together, never list a whole dimension's questions in one go. Ask in easy English; explain any technical word the user may not know:
 
 ```
 ❓ **Q1** - **<question title>**: <question body>
@@ -84,6 +92,8 @@ Same as the pocock grilling — numbered questions with your recommended answer,
 ```
 
 Recommendations must be concrete: real paths, real endpoint names, real field names — never "TBD".
+
+Wait for the user's answer before asking the next question. Number questions Q1, Q2, Q3 and so on across the whole sweep — one question, one message, every time.
 
 ## Dimensions
 
@@ -154,6 +164,16 @@ Walk the feature as the user — open the app or website, reach this feature, us
 - Which scenarios from this change get tests — including the failure and edge cases agreed in Dimension 4?
 - Which existing tests break and need updating?
 
+### 10. Tech stack — one library per piece
+
+The stack is settled by now — grilling decided it, or this sweep does. For every piece this change needs (login, file upload, PDF, dates, emails, payments — anything named in the dimensions above), a library is chosen. Go piece by piece — one question per piece, never the whole stack in one message:
+
+- Read `stacks.md` first — the catalog in this skill's folder. Known JS and Python libraries, each with what it is for.
+- The catalog has a match → propose that library for the piece.
+- No match → search for a well-made, well-maintained library and propose it, with why it is trusted. After the user agrees, the user adds it to `stacks.md` so the next piece starts from it.
+- Building by hand is chosen only when no good library exists — and the reason is said out loud.
+- The user confirms or corrects each choice. Never "TBD" — always a real library name.
+
 ## Terminal state
 
 When every TOUCHED dimension is settled, present the **change surface** — the agreed summary the spec will be built from:
@@ -169,6 +189,7 @@ User flow: <steps made easier, what got automated — or "no change">
 Config: <new env vars, keys, services — or "none">
 Integration: <consumers updated in this change, breaking changes if any>
 Tests: <scenarios that get tests>
+Libraries: <existing library chosen for each piece — or "none, all custom">
 Undo: <how to roll back>
 ```
 
@@ -181,6 +202,7 @@ No files, no spec, no follow-on skill, no instructions for what to do next. What
 ## Rules
 
 - **Technical only.** The concept was settled in grilling — never re-open it. If a technical question exposes a broken concept decision, name it in one sentence and let the user decide; do not silently re-grill it here.
+- **One question at a time.** One question per message, piece by piece — one API module, one table, one file area, one edge case. Never dump a whole dimension in one message.
 - **Nothing re-asked.** The grill conversation and `agent-doc/` are the settled truth. Read them fully; never ask about a settled thing again.
 - **Nothing silently assumed.** Every dimension appears in the checklist with its mark; every TOUCHED dimension ends with an explicit agreement; every deferred failure or edge case is written down.
 - **Facts first.** Read the rules, the tree, the code, the graph before asking. The decisions are the user's; the findings are yours.

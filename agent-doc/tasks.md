@@ -26,10 +26,11 @@
 
 > Spec refs: `specs/authentication.md` — all scenarios
 
-- [ ] 3.1 Implement `POST /api/login`: validate body, verify password hash, check `is_active`, generate and store new token, return token + id + role + name + country (scenarios: Successful login, Deactivated account, Wrong password, Missing fields)
-- [ ] 3.2 Implement in-memory lockout: after 10 consecutive wrong-password attempts for a name, return 429 for 5 minutes; reset counter on success (scenarios: Lockout triggered, Lockout expires, Counter reset on success)
-- [ ] 3.3 Implement `require_auth` decorator that reads `Authorization: Bearer <token>`, looks up the user, checks `is_active`, and attaches `g.user` — attach to all protected routes (scenarios: Valid token, Invalid/missing token, Deactivated user with valid token)
-- [ ] 3.4 Write `tests/modules/test_auth.py` covering all scenarios in `specs/authentication.md`
+- [x] 3.1 Implement `POST /api/login`: validate body, verify password hash, check `is_active`, generate and store new token, return token + id + role + name + country (scenarios: Successful login, Deactivated account, Wrong password, Missing fields)
+- [x] 3.2 Implement in-memory lockout: after 10 consecutive wrong-password attempts for a name, return 429 for 5 minutes; reset counter on success (scenarios: Lockout triggered, Lockout expires, Counter reset on success)
+- [x] 3.3 Implement `require_auth` decorator that reads `Authorization: Bearer <token>`, looks up the user, checks `is_active`, and attaches `g.user` — attach to all protected routes (scenarios: Valid token, Invalid/missing token, Deactivated user with valid token)
+- [x] 3.4 Write `tests/modules/test_auth.py` covering all scenarios in `specs/authentication.md`
+
 
 ---
 

@@ -925,8 +925,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tickets.json": {
-    "mtime": 1792002974.1608157,
-    "ast_hash": "a2adaa0b42492406efa39ff37cf854eb",
+    "mtime": 1792005392.7436032,
+    "ast_hash": "2fed7e7a97b074d23675f9afacce7c52",
     "semantic_hash": ""
   },
   "agent-doc/design.md": {
@@ -965,8 +965,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792004320.6159346,
-    "ast_hash": "a0cbd0c875425dba1d41348972c55701",
+    "mtime": 1792005384.0600808,
+    "ast_hash": "70f502d136f4e21c6e0fa82b11f48f2e",
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {
@@ -975,8 +975,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/__init__.py": {
-    "mtime": 1792004201.5051284,
-    "ast_hash": "3b8da9e98e4ec38e06e36c39b7107db9",
+    "mtime": 1792004753.939979,
+    "ast_hash": "8493d1b036a1674664caff58f6fae230",
     "semantic_hash": ""
   },
   "backend/app/commands.py": {
@@ -1042,6 +1042,36 @@
   "pyproject.toml": {
     "mtime": 1792004294.1755455,
     "ast_hash": "0a91f59fb9fcc87e92dc21ae0cca95b8",
+    "semantic_hash": ""
+  },
+  "backend/app/core/permissions.py": {
+    "mtime": 1792005296.9406335,
+    "ast_hash": "6152c669730d6b1173f110a15cfe6965",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/auth/__init__.py": {
+    "mtime": 1792004750.1960347,
+    "ast_hash": "944c9a12935d7f4fa727948fce062e8a",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/auth/routes.py": {
+    "mtime": 1792005291.10235,
+    "ast_hash": "18e945d7fd0d75f6d29b9cfef53a284f",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/auth/schemas.py": {
+    "mtime": 1792005269.072985,
+    "ast_hash": "e4b3d8c37e9f0a4f9a701cddeaa3a0e9",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/auth/services.py": {
+    "mtime": 1792005279.09628,
+    "ast_hash": "6c083d0198a25a995d9773ca0ecbc6a6",
+    "semantic_hash": ""
+  },
+  "backend/tests/modules/test_auth.py": {
+    "mtime": 1792005349.037071,
+    "ast_hash": "916a3a722229f01be1f5e8827b612da5",
     "semantic_hash": ""
   }
 }

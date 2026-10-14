@@ -36,7 +36,7 @@
         "3.3 Implement `require_auth` decorator that reads `Authorization: Bearer <token>`, looks up the user, checks `is_active`, and attaches `g.user` — attach to all protected routes (scenarios: Valid token, Invalid/missing token, Deactivated user with valid token)",
         "3.4 Write `tests/modules/test_auth.py` covering all scenarios in `specs/authentication.md`\n---"
       ],
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         2
       ]

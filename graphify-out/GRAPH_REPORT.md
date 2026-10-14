@@ -1,16 +1,16 @@
-# Graph Report - sales-call-tracker  (2026-10-14)
+# Graph Report - sales-call-tracker  (2026-10-15)
 
 ## Corpus Check
-- 147 files · ~383,728 words
+- 156 files · ~394,219 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1421 nodes · 1680 edges · 143 communities (127 shown, 16 thin omitted)
+- 1607 nodes · 1863 edges · 160 communities (144 shown, 16 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 17 edges (avg confidence: 0.54)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c73c6383`
+- Built from commit: `020b624e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -18,6 +18,7 @@
 - .claude/skills/grill-with-superpower/scripts/server.cjs
 - .claude/settings.json
 - What You Must Do When Invoked
+- Requirements
 - allow
 - Dimensions
 - grill-for-business/SKILL.md
@@ -60,18 +61,19 @@
 - our_agent.py
 - What You Must Do When Invoked
 - Dimensions
-- generate_design_system
+- .claude/skills/design-screens/uiux/scripts/design_system.py
 - allow
 - DesignSystemGenerator
 - ._apply_reasoning
 - _select_palette_for_mode
 - .generate
-- .claude/skills/design-screens/uiux/scripts/design_system.py
+- persist_design_system
 - .agents/skills/grill-for-business/SKILL.md
 - Design Screens
 - Write Screens
 - Manager View (web)
 - _resolve_color_mode
+- Requirements
 - 4. User Account Management (Manager Only)
 - Visual Companion Guide
 - deny
@@ -90,6 +92,7 @@
 - _select_palette_for_mode
 - .generate
 - 1. Backend Automated Tests (`backend/tests/`)
+- Requirements
 - Node.js + TypeScript Code Style & Standards
 - .agents/settings.json
 - persist_design_system
@@ -134,17 +137,31 @@
 - .claude/skills/write-spec-greenfield/templates/tasks.md
 - .agents/skills/graphify/references/extraction-spec.md
 - .agents/skills/write-tickets/SKILL.md
+- Tasks: Sales Call Tracker v1
+- Decisions
+- Requirements
+- Requirements
+- agent-doc/proposal.md
+- Requirement: Name-and-password login
+- _generate_intelligent_overrides
+- Requirement: Batch sync to server
+- Requirement: Call-log matching — Path 1 (real-time)
+- Requirement: Login brute-force lockout
+- Requirement: Call-log matching — Path 2 (janitor)
+- Requirement: Clear local data recovery
+- Requirement: Phone number normalization
+- Requirement: Server-side call ingestion
 
 ## God Nodes (most connected - your core abstractions)
 1. `allow` - 24 edges
 2. `allow` - 24 edges
 3. `search()` - 23 edges
 4. `search()` - 23 edges
-5. `deny` - 19 edges
+5. `Tasks: Sales Call Tracker v1` - 20 edges
 6. `deny` - 19 edges
-7. `DesignSystemGenerator` - 15 edges
+7. `deny` - 19 edges
 8. `DesignSystemGenerator` - 15 edges
-9. `handleRequest()` - 14 edges
+9. `DesignSystemGenerator` - 15 edges
 10. `handleRequest()` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -162,7 +179,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (143 total, 16 thin omitted)
+## Communities (160 total, 16 thin omitted)
 
 ### Community 0 - ".claude/skills/grill-with-superpower/scripts/server.cjs"
 Cohesion: 0.06
@@ -175,6 +192,10 @@ Nodes (8): autoMemoryEnabled, disableArtifact, disableBundledSkills, disableClau
 ### Community 2 - "What You Must Do When Invoked"
 Cohesion: 0.07
 Nodes (26): For /graphify add and --watch, For /graphify query, For the commit hook and native CLAUDE.md integration, For --update and --cluster-only, /graphify, Honesty Rules, Interpreter guard for subcommands, Part A - Structural extraction for code files (+18 more)
+
+### Community 3 - "Requirements"
+Cohesion: 0.06
+Nodes (32): Purpose, Requirement: CSV upload into lead pool, Requirement: Lead claim window, Requirement: Lead pool manager summary, Requirement: Lead resolution via call sync, Requirement: Lead scheduling, Requirement: Lead state is authoritative and server-stored, Requirement: Next-lead serving — priority order (+24 more)
 
 ### Community 4 - "allow"
 Cohesion: 0.08
@@ -316,8 +337,8 @@ Nodes (26): For /graphify add and --watch, For /graphify query, For the commit h
 Cohesion: 0.08
 Nodes (24): 10. Tech stack — one library per piece, 1. File structure & changes, 1. Gather facts — never ask the user for what you can find, 2. API contracts, 2. Say if this is greenfield or brownfield, 3. Classify the blast radius, 3. Database changes, 4. Build the coverage checklist (+16 more)
 
-### Community 53 - "generate_design_system"
-Cohesion: 0.17
+### Community 53 - ".claude/skills/design-screens/uiux/scripts/design_system.py"
+Cohesion: 0.22
 Nodes (12): ansi_ljust(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤ (+4 more)
 
 ### Community 54 - "allow"
@@ -340,9 +361,9 @@ Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG 
 Cohesion: 0.20
 Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
 
-### Community 59 - ".claude/skills/design-screens/uiux/scripts/design_system.py"
-Cohesion: 0.18
-Nodes (15): _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Format a page-specific override file with intelligent AI-generated content. (+7 more)
+### Community 59 - "persist_design_system"
+Cohesion: 0.25
+Nodes (9): format_master_md(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every…, Write fully to a temp file, then publish atomically., Persist design system to design-system/<project>/ folder using Master +…, safe_slug() (+1 more)
 
 ### Community 60 - ".agents/skills/grill-for-business/SKILL.md"
 Cohesion: 0.08
@@ -363,6 +384,10 @@ Nodes (12): Manager View (web), Salesperson View (Android app "Apex Sales Call")
 ### Community 64 - "_resolve_color_mode"
 Cohesion: 0.33
 Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
+
+### Community 65 - "Requirements"
+Cohesion: 0.08
+Nodes (25): Purpose, Requirement: Manager-only team dashboard access, Requirement: Per-person stats (today / yesterday / last 30 days), Requirement: Server-side time calculations, Requirement: Team dashboard — per-person active salesperson list, Requirement: Team dashboard — today and yesterday totals, Requirement: Top 5 numbers by talk time, Requirements (+17 more)
 
 ### Community 66 - "4. User Account Management (Manager Only)"
 Cohesion: 0.10
@@ -435,6 +460,10 @@ Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once 
 ### Community 83 - "1. Backend Automated Tests (`backend/tests/`)"
 Cohesion: 0.22
 Nodes (8): 1. Backend Automated Tests (`backend/tests/`), 2. Mobile Android Spike Checklist, Testing Specifications, `tests/modules/test_auth.py`, `tests/modules/test_calls.py`, `tests/modules/test_dashboard.py`, `tests/modules/test_leads.py`, `tests/modules/test_users.py`
+
+### Community 84 - "Requirements"
+Cohesion: 0.09
+Nodes (23): Requirement: Activate (re-enable) account, Requirement: Create salesperson account, Requirement: Deactivate account, Requirement: Delete account permanently, Requirement: Edit account (name, password, country), Requirement: List all accounts, Requirements, Scenario: All accounts returned (+15 more)
 
 ### Community 85 - "Node.js + TypeScript Code Style & Standards"
 Cohesion: 0.22
@@ -576,25 +605,81 @@ Nodes (3): How to break a slice into tasks, One group per build slice, Task qual
 Cohesion: 0.50
 Nodes (3): How to break a slice into tasks, One group per build slice, Task quality
 
+### Community 146 - "Tasks: Sales Call Tracker v1"
+Cohesion: 0.10
+Nodes (20): 10. Web Dashboard — Auth Page, 11. Web Dashboard — Team Dashboard, 12. Web Dashboard — Leads Page, 13. Web Dashboard — Accounts Page, 14. Android App — Tracking Spike (Do This First), 15. Android App — Foundation and Auth, 16. Android App — Dialer Screen, 17. Android App — Sync (+12 more)
+
+### Community 147 - "Decisions"
+Cohesion: 0.11
+Nodes (17): 10. Web dashboard token in localStorage, 1. Single-repo, three-part monorepo, 2. Flask modular monolith with Flask-SQLAlchemy, 3. Auth: token in `users` table, no separate tokens table, 4. IST day boundaries computed server-side, 5. Android: bare React Native CLI, no Expo, 6. Call tracking: two-path fill, janitor runs before sync, 7. Lead pool: server-side state, claim window prevents double-dial (+9 more)
+
+### Community 148 - "Requirements"
+Cohesion: 0.20
+Nodes (9): Purpose, Requirement: Single active session per user, Requirement: Token-gated API access, Requirements, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token, Scenario: Re-login replaces old token, Scenario: Token used after password reset (+1 more)
+
+### Community 149 - "Requirements"
+Cohesion: 0.20
+Nodes (9): Purpose, Requirement: Dialer intent row created on tap, Requirement: Three Android permissions required, Requirements, Scenario: All permissions granted, Scenario: Any permission denied, Scenario: Call button double-tap, Scenario: Call button tapped once (+1 more)
+
+### Community 150 - "agent-doc/proposal.md"
+Cohesion: 0.22
+Nodes (7): Capabilities, Impact, New Capabilities, Proposal: Sales Call Tracker — v1, What Changes, Why, Purpose
+
+### Community 151 - "Requirement: Name-and-password login"
+Cohesion: 0.33
+Nodes (6): Requirement: Name-and-password login, Scenario: Deactivated account, Scenario: Missing fields, Scenario: Name not found, Scenario: Successful login, Scenario: Wrong password
+
+### Community 152 - "_generate_intelligent_overrides"
+Cohesion: 0.33
+Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
+
+### Community 153 - "Requirement: Batch sync to server"
+Cohesion: 0.40
+Nodes (5): Requirement: Batch sync to server, Scenario: Failed sync retains rows, Scenario: Server deduplicates retried rows, Scenario: Successful sync clears sent rows, Scenario: Sync sends only filled rows
+
+### Community 154 - "Requirement: Call-log matching — Path 1 (real-time)"
+Cohesion: 0.40
+Nodes (5): Requirement: Call-log matching — Path 1 (real-time), Scenario: Incoming call from the same number ignored, Scenario: Normal answered call, Scenario: Two quick calls to the same number, Scenario: Unanswered dial
+
+### Community 155 - "Requirement: Login brute-force lockout"
+Cohesion: 0.50
+Nodes (4): Requirement: Login brute-force lockout, Scenario: Counter reset on success, Scenario: Lockout expires, Scenario: Lockout triggered
+
+### Community 156 - "Requirement: Call-log matching — Path 2 (janitor)"
+Cohesion: 0.50
+Nodes (4): Requirement: Call-log matching — Path 2 (janitor), Scenario: App killed mid-call — row completed at first open, Scenario: Row give-up after 5 janitor strikes, Scenario: Young rows untouched by janitor
+
+### Community 157 - "Requirement: Clear local data recovery"
+Cohesion: 0.50
+Nodes (4): Requirement: Clear local data recovery, Scenario: Clear cancelled, Scenario: Clear confirmed, Scenario: Count shown in confirmation
+
+### Community 158 - "Requirement: Phone number normalization"
+Cohesion: 0.50
+Nodes (4): Requirement: Phone number normalization, Scenario: International number passes through, Scenario: Local-format number normalized, Scenario: Unparseable number stored raw
+
+### Community 159 - "Requirement: Server-side call ingestion"
+Cohesion: 0.50
+Nodes (4): Requirement: Server-side call ingestion, Scenario: Malformed row in batch, Scenario: Old call dropped, Scenario: Valid batch saved
+
 ## Knowledge Gaps
-- **739 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+734 more)
+- **876 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+871 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **Why does `search()` connect `.agents/skills/design-screens/uiux/scripts/core.py` to `.agents/skills/design-screens/uiux/scripts/design_system.py`, `.generate`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`, `generate_design_system`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `search()` connect `core.py` to `_generate_intelligent_overrides`, `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
-  _739 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _876 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `.claude/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._
 - **Should `What You Must Do When Invoked` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
+- **Should `Requirements` be split into smaller, more focused modules?**
+  _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
 - **Should `allow` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._

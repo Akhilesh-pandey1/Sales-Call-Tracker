@@ -475,8 +475,8 @@
     "semantic_hash": ""
   },
   ".autonomous-coding-agent/config.json": {
-    "mtime": 1790705977.3523414,
-    "ast_hash": "01f8430615aef9e41eed65a802a88134",
+    "mtime": 1792003316.47343,
+    "ast_hash": "a7de709b3c2c7daf1646d9da6d0132eb",
     "semantic_hash": ""
   },
   ".autonomous-coding-agent/config.py": {
@@ -922,6 +922,51 @@
   "agent-doc/testing.md": {
     "mtime": 1791975413.6376557,
     "ast_hash": "e9c76a4bc94e4f313f962df71af6db1b",
+    "semantic_hash": ""
+  },
+  "agent-doc/tickets.json": {
+    "mtime": 1792002974.1608157,
+    "ast_hash": "a2adaa0b42492406efa39ff37cf854eb",
+    "semantic_hash": ""
+  },
+  "agent-doc/design.md": {
+    "mtime": 1792000724.0098236,
+    "ast_hash": "5a82185f974c54123dce604d2d5b04da",
+    "semantic_hash": ""
+  },
+  "agent-doc/proposal.md": {
+    "mtime": 1792000544.9541292,
+    "ast_hash": "3bcd07e72c1519b27a7ca010f371fabd",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/authentication.md": {
+    "mtime": 1792000675.4573932,
+    "ast_hash": "bc545052032f01d1011d127847baa115",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/call-tracking.md": {
+    "mtime": 1792000675.6906111,
+    "ast_hash": "74b370a6fcf1a7afde72ce4a7542af0c",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/dashboard.md": {
+    "mtime": 1792000676.1360137,
+    "ast_hash": "ad075d336644276f0d9ab5c2d87596a8",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/lead-management.md": {
+    "mtime": 1792000678.1972437,
+    "ast_hash": "ec365306cac44bc578ee7659f83447d7",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/user-management.md": {
+    "mtime": 1792000677.6777816,
+    "ast_hash": "3f48e0c8fd4a717f82d49e8fa0ec8719",
+    "semantic_hash": ""
+  },
+  "agent-doc/tasks.md": {
+    "mtime": 1792000830.7788563,
+    "ast_hash": "0d1777b089ac7aeb02c2d74519753c3f",
     "semantic_hash": ""
   }
 }

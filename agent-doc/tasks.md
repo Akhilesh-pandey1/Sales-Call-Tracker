@@ -38,13 +38,14 @@
 
 > Spec refs: `specs/user-management.md` — all scenarios
 
-- [ ] 4.1 Implement `GET /api/users` (manager only): return all accounts (active + inactive) with id, name, role, country, is_active; no call counts (scenarios: All accounts returned, Non-manager access refused)
-- [ ] 4.2 Implement `POST /api/users`: validate name uniqueness, password strength, country code; create account (scenarios: Successful creation, Duplicate name, Weak password, Invalid country)
-- [ ] 4.3 Implement `POST /api/users/<id>/update`: accept name, password, country (any subset); enforce name uniqueness; on password change, regenerate token (scenarios: Name updated, Password changed invalidates token, Manager edits own account)
-- [ ] 4.4 Implement `POST /api/users/<id>/deactivate`: set `is_active = false`, clear token; guard against self-deactivation (scenarios: Deactivated account cannot log in, Self-deactivation refused)
-- [ ] 4.5 Implement `POST /api/users/<id>/activate`: set `is_active = true` (scenarios: Reactivated account can log in)
-- [ ] 4.6 Implement `DELETE /api/users/<id>`: cascade delete user + calls; release any lead claims; guard against self-deletion (scenarios: Delete removes user and all calls, Self-deletion refused, Delete releases lead claims)
-- [ ] 4.7 Write `tests/modules/test_users.py` covering all scenarios in `specs/user-management.md`
+- [x] 4.1 Implement `GET /api/users` (manager only): return all accounts (active + inactive) with id, name, role, country, is_active; no call counts (scenarios: All accounts returned, Non-manager access refused)
+- [x] 4.2 Implement `POST /api/users`: validate name uniqueness, password strength, country code; create account (scenarios: Successful creation, Duplicate name, Weak password, Invalid country)
+- [x] 4.3 Implement `POST /api/users/<id>/update`: accept name, password, country (any subset); enforce name uniqueness; on password change, regenerate token (scenarios: Name updated, Password changed invalidates token, Manager edits own account)
+- [x] 4.4 Implement `POST /api/users/<id>/deactivate`: set `is_active = false`, clear token; guard against self-deactivation (scenarios: Deactivated account cannot log in, Self-deactivation refused)
+- [x] 4.5 Implement `POST /api/users/<id>/activate`: set `is_active = true` (scenarios: Reactivated account can log in)
+- [x] 4.6 Implement `DELETE /api/users/<id>`: cascade delete user + calls; release any lead claims; guard against self-deletion (scenarios: Delete removes user and all calls, Self-deletion refused, Delete releases lead claims)
+- [x] 4.7 Write `tests/modules/test_users.py` covering all scenarios in `specs/user-management.md`
+
 
 ---
 

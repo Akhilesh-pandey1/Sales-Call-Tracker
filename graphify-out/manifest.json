@@ -965,8 +965,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792005384.0600808,
-    "ast_hash": "70f502d136f4e21c6e0fa82b11f48f2e",
+    "mtime": 1792006936.2779024,
+    "ast_hash": "15ba782822df9a06b213bb90a1827b34",
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {
@@ -975,8 +975,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/__init__.py": {
-    "mtime": 1792004753.939979,
-    "ast_hash": "8493d1b036a1674664caff58f6fae230",
+    "mtime": 1792006027.5162215,
+    "ast_hash": "7933722c9d4bb5023d3ed832c79dcf4c",
     "semantic_hash": ""
   },
   "backend/app/commands.py": {
@@ -1020,8 +1020,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/users/__init__.py": {
-    "mtime": 1792004196.730047,
-    "ast_hash": "99cd85b34142ac2b97b690d02f753776",
+    "mtime": 1792006018.6177254,
+    "ast_hash": "30aa06104abeee4eb25214d213e9cf32",
     "semantic_hash": ""
   },
   "backend/app/modules/users/models.py": {
@@ -1045,8 +1045,8 @@
     "semantic_hash": ""
   },
   "backend/app/core/permissions.py": {
-    "mtime": 1792005296.9406335,
-    "ast_hash": "6152c669730d6b1173f110a15cfe6965",
+    "mtime": 1792005968.893087,
+    "ast_hash": "d1bae5fd74004232ff0e408ba89a54f7",
     "semantic_hash": ""
   },
   "backend/app/modules/auth/__init__.py": {
@@ -1072,6 +1072,26 @@
   "backend/tests/modules/test_auth.py": {
     "mtime": 1792005349.037071,
     "ast_hash": "916a3a722229f01be1f5e8827b612da5",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/users/routes.py": {
+    "mtime": 1792006850.5050354,
+    "ast_hash": "86fe2fa646ed978295411123737f7700",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/users/schemas.py": {
+    "mtime": 1792006824.8866646,
+    "ast_hash": "fc67e6c5b6bcce1fa29f06e06cc7ca03",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/users/services.py": {
+    "mtime": 1792006837.3440008,
+    "ast_hash": "807d3135cc1abcafc2e91172f3275134",
+    "semantic_hash": ""
+  },
+  "backend/tests/modules/test_users.py": {
+    "mtime": 1792006889.9846413,
+    "ast_hash": "5f98b5a4b548ef94467cdf0f3ae58d03",
     "semantic_hash": ""
   }
 }

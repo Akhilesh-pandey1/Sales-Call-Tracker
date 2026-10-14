@@ -38,3 +38,21 @@ def require_auth(endpoint_handler: Callable[..., Any]) -> Callable[..., Any]:
 
     result_function: Callable[..., Any] = decorated_function
     return result_function
+
+
+def require_manager(endpoint_handler: Callable[..., Any]) -> Callable[..., Any]:
+    @wraps(endpoint_handler)
+    @require_auth
+    def decorated_function(*args: Any, **kwargs: Any) -> Any:
+        forbidden_code: int = 403
+        current_user: User = g.user
+        manager_role: str = "manager"
+        if current_user.role != manager_role:
+            raise AppException("Manager access required.", forbidden_code)
+
+        handler_result: Any = endpoint_handler(*args, **kwargs)
+        return handler_result
+
+    result_function: Callable[..., Any] = decorated_function
+    return result_function
+

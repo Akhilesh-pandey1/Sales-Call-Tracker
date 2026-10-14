@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-15)
 
 ## Corpus Check
-- 177 files · ~396,925 words
+- 181 files · ~399,930 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1695 nodes · 2108 edges · 158 communities (142 shown, 16 thin omitted)
+- 1753 nodes · 2331 edges · 161 communities (145 shown, 16 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.53)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `27986f1c`
+- Built from commit: `409a5e3c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -144,23 +144,26 @@
 - agent-doc/proposal.md
 - Requirement: Name-and-password login
 - test_auth.py
-- Requirement: Per-person stats (today / yesterday / last 30 days)
+- test_users.py
 - _generate_intelligent_overrides
-- Requirement: Team dashboard — per-person active salesperson list
-- Requirement: Delete account permanently
+- Requirement: CSV upload into lead pool
+- Requirement: Lead resolution via call sync
 - Requirement: Edit account (name, password, country)
+- Requirement: Lead scheduling
+- Requirement: Next-lead serving — priority order
+- Requirement: Deactivate account
 
 ## God Nodes (most connected - your core abstractions)
-1. `allow` - 24 edges
-2. `allow` - 24 edges
-3. `search()` - 23 edges
-4. `search()` - 23 edges
-5. `User` - 21 edges
-6. `Tasks: Sales Call Tracker v1` - 20 edges
-7. `deny` - 19 edges
-8. `deny` - 19 edges
-9. `hash_password()` - 18 edges
-10. `DesignSystemGenerator` - 15 edges
+1. `create_user_record()` - 31 edges
+2. `User` - 25 edges
+3. `allow` - 24 edges
+4. `allow` - 24 edges
+5. `search()` - 23 edges
+6. `search()` - 23 edges
+7. `AppException` - 23 edges
+8. `hash_password()` - 23 edges
+9. `Tasks: Sales Call Tracker v1` - 20 edges
+10. `deny` - 19 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `TestConfig` --uses--> `BaseConfig`  [INFERRED]
@@ -177,7 +180,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (158 total, 16 thin omitted)
+## Communities (161 total, 16 thin omitted)
 
 ### Community 0 - ".claude/skills/grill-with-superpower/scripts/server.cjs"
 Cohesion: 0.06
@@ -192,8 +195,8 @@ Cohesion: 0.07
 Nodes (26): For /graphify add and --watch, For /graphify query, For the commit hook and native CLAUDE.md integration, For --update and --cluster-only, /graphify, Honesty Rules, Interpreter guard for subcommands, Part A - Structural extraction for code files (+18 more)
 
 ### Community 3 - "Requirements"
-Cohesion: 0.06
-Nodes (32): Purpose, Requirement: CSV upload into lead pool, Requirement: Lead claim window, Requirement: Lead pool manager summary, Requirement: Lead resolution via call sync, Requirement: Lead scheduling, Requirement: Lead state is authoritative and server-stored, Requirement: Next-lead serving — priority order (+24 more)
+Cohesion: 0.17
+Nodes (11): Purpose, Requirement: Lead claim window, Requirement: Lead pool manager summary, Requirement: Lead state is authoritative and server-stored, Requirements, Scenario: Expired claim releases lead, Scenario: Lead claimed on serve, Scenario: Lead state is never computed from calls table (+3 more)
 
 ### Community 4 - "allow"
 Cohesion: 0.08
@@ -384,8 +387,8 @@ Cohesion: 0.33
 Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
 
 ### Community 65 - "Requirements"
-Cohesion: 0.13
-Nodes (14): Purpose, Requirement: Manager-only team dashboard access, Requirement: Server-side time calculations, Requirement: Team dashboard — today and yesterday totals, Requirement: Top 5 numbers by talk time, Requirements, Scenario: API returns seconds, Scenario: Connected is derived, not stored (+6 more)
+Cohesion: 0.08
+Nodes (25): Purpose, Requirement: Manager-only team dashboard access, Requirement: Per-person stats (today / yesterday / last 30 days), Requirement: Server-side time calculations, Requirement: Team dashboard — per-person active salesperson list, Requirement: Team dashboard — today and yesterday totals, Requirement: Top 5 numbers by talk time, Requirements (+17 more)
 
 ### Community 66 - "4. User Account Management (Manager Only)"
 Cohesion: 0.10
@@ -461,7 +464,7 @@ Nodes (8): 1. Backend Automated Tests (`backend/tests/`), 2. Mobile Android Spik
 
 ### Community 84 - "Requirements"
 Cohesion: 0.13
-Nodes (15): Requirement: Activate (re-enable) account, Requirement: Create salesperson account, Requirement: Deactivate account, Requirement: List all accounts, Requirements, Scenario: All accounts returned, Scenario: Deactivated account cannot log in, Scenario: Deactivated account's calls kept (+7 more)
+Nodes (15): Requirement: Activate (re-enable) account, Requirement: Create salesperson account, Requirement: Delete account permanently, Requirement: List all accounts, Requirements, Scenario: All accounts returned, Scenario: Delete releases lead claims, Scenario: Delete removes user and all calls (+7 more)
 
 ### Community 85 - "Node.js + TypeScript Code Style & Standards"
 Cohesion: 0.22
@@ -612,44 +615,56 @@ Cohesion: 0.11
 Nodes (17): 10. Web dashboard token in localStorage, 1. Single-repo, three-part monorepo, 2. Flask modular monolith with Flask-SQLAlchemy, 3. Auth: token in `users` table, no separate tokens table, 4. IST day boundaries computed server-side, 5. Android: bare React Native CLI, no Expo, 6. Call tracking: two-path fill, janitor runs before sync, 7. Lead pool: server-side state, claim window prevents double-dial (+9 more)
 
 ### Community 148 - "Requirements"
-Cohesion: 0.14
-Nodes (13): Purpose, Requirement: Login brute-force lockout, Requirement: Single active session per user, Requirement: Token-gated API access, Requirements, Scenario: Counter reset on success, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token (+5 more)
+Cohesion: 0.17
+Nodes (12): Requirement: Login brute-force lockout, Requirement: Single active session per user, Requirement: Token-gated API access, Requirements, Scenario: Counter reset on success, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token, Scenario: Lockout expires (+4 more)
 
 ### Community 149 - "Requirements"
 Cohesion: 0.06
 Nodes (35): Purpose, Requirement: Batch sync to server, Requirement: Call-log matching — Path 1 (real-time), Requirement: Call-log matching — Path 2 (janitor), Requirement: Clear local data recovery, Requirement: Dialer intent row created on tap, Requirement: Phone number normalization, Requirement: Server-side call ingestion (+27 more)
 
 ### Community 150 - "agent-doc/proposal.md"
-Cohesion: 0.22
-Nodes (7): Capabilities, Impact, New Capabilities, Proposal: Sales Call Tracker — v1, What Changes, Why, Purpose
+Cohesion: 0.18
+Nodes (8): Capabilities, Impact, New Capabilities, Proposal: Sales Call Tracker — v1, What Changes, Why, Purpose, Purpose
 
 ### Community 151 - "Requirement: Name-and-password login"
 Cohesion: 0.33
 Nodes (6): Requirement: Name-and-password login, Scenario: Deactivated account, Scenario: Missing fields, Scenario: Name not found, Scenario: Successful login, Scenario: Wrong password
 
 ### Community 152 - "test_auth.py"
-Cohesion: 0.06
-Nodes (63): Any, Flask, register_commands(), seed_command(), BaseConfig, DevConfig, ProdConfig, AppException (+55 more)
+Cohesion: 0.05
+Nodes (84): Any, Flask, register_commands(), seed_command(), BaseConfig, DevConfig, ProdConfig, AppException (+76 more)
 
-### Community 153 - "Requirement: Per-person stats (today / yesterday / last 30 days)"
-Cohesion: 0.33
-Nodes (6): Requirement: Per-person stats (today / yesterday / last 30 days), Scenario: Normal stats, Scenario: Salesperson accessing another person's stats, Scenario: Salesperson accessing own stats, Scenario: User not found, Scenario: Zero dials in a period
+### Community 153 - "test_users.py"
+Cohesion: 0.21
+Nodes (33): create_user_record(), ensure_auxiliary_tables(), Flask, FlaskClient, test_activate_user_non_manager_refused(), test_activate_user_not_found(), test_activate_user_success(), test_create_user_duplicate_name_rejected() (+25 more)
 
 ### Community 154 - "_generate_intelligent_overrides"
 Cohesion: 0.33
 Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
 
-### Community 155 - "Requirement: Team dashboard — per-person active salesperson list"
-Cohesion: 0.40
-Nodes (5): Requirement: Team dashboard — per-person active salesperson list, Scenario: Deactivated salesperson excluded from people list, Scenario: Sorted by today's dials, Scenario: Team total can exceed sum of person rows, Scenario: Zero-call salesperson always listed
+### Community 155 - "Requirement: CSV upload into lead pool"
+Cohesion: 0.33
+Nodes (6): Requirement: CSV upload into lead pool, Scenario: Duplicate in file skipped, Scenario: File too large, Scenario: Number already in pool skipped, Scenario: Successful upload, Scenario: Unparseable number skipped
 
-### Community 156 - "Requirement: Delete account permanently"
-Cohesion: 0.50
-Nodes (4): Requirement: Delete account permanently, Scenario: Delete releases lead claims, Scenario: Delete removes user and all calls, Scenario: Self-deletion refused
+### Community 156 - "Requirement: Lead resolution via call sync"
+Cohesion: 0.40
+Nodes (5): Requirement: Lead resolution via call sync, Scenario: Connected call finishes lead, Scenario: Lead stopped at attempt cap, Scenario: Manual keypad call resolves matching lead, Scenario: Unconnected call increments attempt and locks
 
 ### Community 157 - "Requirement: Edit account (name, password, country)"
 Cohesion: 0.50
 Nodes (4): Requirement: Edit account (name, password, country), Scenario: Manager can edit own account, Scenario: Name updated, Scenario: Password changed invalidates old token
+
+### Community 158 - "Requirement: Lead scheduling"
+Cohesion: 0.40
+Nodes (5): Requirement: Lead scheduling, Scenario: Done or stopped lead cannot be scheduled, Scenario: Schedule accepted, Scenario: Schedule combined with next-lead fetch, Scenario: Schedule in the past rejected
+
+### Community 159 - "Requirement: Next-lead serving — priority order"
+Cohesion: 0.40
+Nodes (5): Requirement: Next-lead serving — priority order, Scenario: Due scheduled lead served before pool, Scenario: Newest waiting lead served, Scenario: Pool empty, Scenario: Unexpired claim returned first
+
+### Community 160 - "Requirement: Deactivate account"
+Cohesion: 0.50
+Nodes (4): Requirement: Deactivate account, Scenario: Deactivated account cannot log in, Scenario: Deactivated account's calls kept, Scenario: Self-deactivation refused
 
 ## Knowledge Gaps
 - **876 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+871 more)
@@ -660,16 +675,16 @@ Nodes (4): Requirement: Edit account (name, password, country), Scenario: Manage
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `search()` connect `.agents/skills/design-screens/uiux/scripts/core.py` to `.agents/skills/design-screens/uiux/scripts/design_system.py`, `.generate`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
   _876 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `.claude/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._
 - **Should `What You Must Do When Invoked` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
-- **Should `Requirements` be split into smaller, more focused modules?**
-  _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
+- **Should `allow` be split into smaller, more focused modules?**
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._

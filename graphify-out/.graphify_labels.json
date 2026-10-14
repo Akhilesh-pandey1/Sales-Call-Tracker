@@ -152,9 +152,12 @@
   "150": "agent-doc/proposal.md",
   "151": "Requirement: Name-and-password login",
   "152": "test_auth.py",
-  "153": "Requirement: Per-person stats (today / yesterday / last 30 days)",
+  "153": "test_users.py",
   "154": "_generate_intelligent_overrides",
-  "155": "Requirement: Team dashboard — per-person active salesperson list",
-  "156": "Requirement: Delete account permanently",
-  "157": "Requirement: Edit account (name, password, country)"
+  "155": "Requirement: CSV upload into lead pool",
+  "156": "Requirement: Lead resolution via call sync",
+  "157": "Requirement: Edit account (name, password, country)",
+  "158": "Requirement: Lead scheduling",
+  "159": "Requirement: Next-lead serving — priority order",
+  "160": "Requirement: Deactivate account"
 }

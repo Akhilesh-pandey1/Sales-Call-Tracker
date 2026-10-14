@@ -4,9 +4,9 @@
 
 ## 1. Project Setup
 
-- [ ] 1.1 Create the GitHub repo (private), initialise with a root `.gitignore` covering Python, Node, and Android, connect it to Render for auto-deploy on push to `main`
+- [ ] 1.1 Create the GitHub repo (private), initialise with a root `.gitignore` covering Python, Node, and Android, connect it to Render for auto-deploy on push to `main` (Render connection deferred to future by user)
 - [x] 1.2 Create the three top-level folders: `backend/`, `web/`, `app/` as described in `structure.md`
-- [ ] 1.3 Create and store the Android release signing keystore (`app/android/`) — one-time manual step; record the alias and store the `.jks` safely (never commit it)
+- [ ] 1.3 Create and store the Android release signing keystore (`app/android/`) — one-time manual step; record the alias and store the `.jks` safely (never commit it) (user will do in future)
 
 ---
 
@@ -14,11 +14,11 @@
 
 > Spec refs: `specs/authentication.md`, `specs/user-management.md`, `design.md §2-3`
 
-- [ ] 2.1 Initialise the Flask app factory (`backend/app/__init__.py`), register blueprints, configure Flask-SQLAlchemy, and wire `db.create_all()` on startup
-- [ ] 2.2 Add `backend/app/config/base.py` with all named constants: `MAX_CALL_AGE_DAYS=3`, `MAX_LEAD_ATTEMPTS=3`, `RETRY_LOCK_HOURS=2`, `CLAIM_MINUTES=10`, `MAX_SCHEDULE_AHEAD_DAYS=30`, `MAX_LEAD_UPLOAD_MB=2`, lockout (10 tries / 5 min), password rule (8+ chars, upper + lower), country shortlist, IST timezone name
-- [ ] 2.3 Create `User` SQLAlchemy model (`backend/app/modules/users/models.py`) with all columns from `database.md`; add `backend/app/core/security.py` (password hashing and random token generation)
-- [ ] 2.4 Add `flask seed` CLI command that creates the initial manager account (name + password from env vars)
-- [ ] 2.5 Add `backend/app/core/errors.py` with `AppException` and a global error handler that returns `{"message": "..."}` JSON on all expected errors
+- [x] 2.1 Initialise the Flask app factory (`backend/app/__init__.py`), register blueprints, configure Flask-SQLAlchemy, and wire `db.create_all()` on startup
+- [x] 2.2 Add `backend/app/config/base.py` with all named constants: `MAX_CALL_AGE_DAYS=3`, `MAX_LEAD_ATTEMPTS=3`, `RETRY_LOCK_HOURS=2`, `CLAIM_MINUTES=10`, `MAX_SCHEDULE_AHEAD_DAYS=30`, `MAX_LEAD_UPLOAD_MB=2`, lockout (10 tries / 5 min), password rule (8+ chars, upper + lower), country shortlist, IST timezone name
+- [x] 2.3 Create `User` SQLAlchemy model (`backend/app/modules/users/models.py`) with all columns from `database.md`; add `backend/app/core/security.py` (password hashing and random token generation)
+- [x] 2.4 Add `flask seed` CLI command that creates the initial manager account (name + password from env vars)
+- [x] 2.5 Add `backend/app/core/errors.py` with `AppException` and a global error handler that returns `{"message": "..."}` JSON on all expected errors
 
 ---
 

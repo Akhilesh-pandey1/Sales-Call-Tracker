@@ -965,8 +965,83 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792003841.145243,
-    "ast_hash": "5cab07a2141936e9ca07f8ed2832889b",
+    "mtime": 1792004320.6159346,
+    "ast_hash": "a0cbd0c875425dba1d41348972c55701",
+    "semantic_hash": ""
+  },
+  "backend/app/__init__.py": {
+    "mtime": 1792004217.7275817,
+    "ast_hash": "de8e3bd48dacd364a16bccc6635db290",
+    "semantic_hash": ""
+  },
+  "backend/app/api/__init__.py": {
+    "mtime": 1792004201.5051284,
+    "ast_hash": "3b8da9e98e4ec38e06e36c39b7107db9",
+    "semantic_hash": ""
+  },
+  "backend/app/commands.py": {
+    "mtime": 1792004210.5243814,
+    "ast_hash": "5c248a8ecd20a4de60ed9648af6ea37c",
+    "semantic_hash": ""
+  },
+  "backend/app/config/__init__.py": {
+    "mtime": 1792004168.6193182,
+    "ast_hash": "754beb50bfc88d3ed6353eada71603f4",
+    "semantic_hash": ""
+  },
+  "backend/app/config/base.py": {
+    "mtime": 1792004146.9968593,
+    "ast_hash": "7d26a95e0be34b1cb2debcc450036467",
+    "semantic_hash": ""
+  },
+  "backend/app/config/dev.py": {
+    "mtime": 1792004151.3811188,
+    "ast_hash": "698b9738c9e93e6283021ef79d2c2dde",
+    "semantic_hash": ""
+  },
+  "backend/app/config/prod.py": {
+    "mtime": 1792004162.982883,
+    "ast_hash": "d7b577668f94bdfed8cc9eaae8739202",
+    "semantic_hash": ""
+  },
+  "backend/app/core/errors.py": {
+    "mtime": 1792004176.121957,
+    "ast_hash": "405472fa1e1dce54ce0d95c66ab069d2",
+    "semantic_hash": ""
+  },
+  "backend/app/core/security.py": {
+    "mtime": 1792004184.3897038,
+    "ast_hash": "e615a1db0ac85d425ca2a81805b12048",
+    "semantic_hash": ""
+  },
+  "backend/app/extensions.py": {
+    "mtime": 1792004137.8121285,
+    "ast_hash": "dd37da08fefbdfc1d50fc11910b9c857",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/users/__init__.py": {
+    "mtime": 1792004196.730047,
+    "ast_hash": "99cd85b34142ac2b97b690d02f753776",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/users/models.py": {
+    "mtime": 1792004191.9222286,
+    "ast_hash": "d7cb27223febda6bc22ab06ad7fa15cb",
+    "semantic_hash": ""
+  },
+  "backend/tests/conftest.py": {
+    "mtime": 1792004266.760892,
+    "ast_hash": "d753083608fcc291c092de41044a9c2d",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_foundation.py": {
+    "mtime": 1792004274.7584178,
+    "ast_hash": "f54b4399ca4af4f284a1a7873c6aea29",
+    "semantic_hash": ""
+  },
+  "pyproject.toml": {
+    "mtime": 1792004294.1755455,
+    "ast_hash": "0a91f59fb9fcc87e92dc21ae0cca95b8",
     "semantic_hash": ""
   }
 }

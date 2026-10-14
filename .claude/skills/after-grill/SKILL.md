@@ -1,6 +1,6 @@
 ---
 name: after-grill
-description: "Technical sweep after grilling ends — file structure, database, API, failure and edge cases, user flow, config, rollback, testing scope, and the tech stack: one known library per piece, chosen one by one from the stacks catalog. Use right after grilling reached shared understanding, before writing any spec."
+description: "Technical sweep after grilling ends — file structure, database, API, failure and edge cases, user flow, config, rollback, testing scope, and the tech stack: one known library per piece, chosen one by one from the stacks catalog. Use right after grilling reached shared understanding, or in a fresh session by reading agent-doc/ as the settled truth, before writing any spec."
 disable-model-invocation: true
 ---
 
@@ -27,11 +27,14 @@ This skill asks questions and produces a summary — nothing else. Do NOT write 
 
 ## Precondition
 
-A grilling session just ended in this conversation — a grill skill declared shared understanding, or the user says grilling is done. The grill conversation in this session's history is the input. Do not re-open it.
+The input is the settled truth, found in this order:
 
-If no grilling happened in this conversation, say so and stop.
+1. **Grill conversation in this session** — a grill skill declared shared understanding, or the user says grilling is done. The conversation is the input. Do not re-open it.
+2. **`agent-doc/`** — when this conversation holds no grill (fresh session, cleared with `/clear`, new day). Read `agent-doc/` completely — `proposal.md`, every `specs/<feature>.md`, `design.md`, `tasks.md`, `decisions.md`. Anything recorded there is decided. Never re-ask it. Run the sweep from it. Do NOT ask the user to re-grill, and do NOT stop.
 
-If the grilled topic involves no change to the codebase (pure business or pure discussion), say the sweep found nothing technical to cover and stop — the grilling was already complete.
+If neither exists — no grill conversation and no `agent-doc/` — say so and stop; nothing is settled, so there is nothing to sweep.
+
+If the settled topic involves no change to the codebase (pure business or pure discussion), say the sweep found nothing technical to cover and stop — the grilling was already complete.
 
 ## Steps
 
@@ -74,8 +77,8 @@ If every dimension is NOT-TOUCHED, say the sweep found nothing technical to cove
 
 Work dimension by dimension. Inside a dimension, go piece by piece — never a whole dimension in one message:
 
-- **API contracts** — one API module at a time: first the authentication API, then the dashboard API, then the next. Within a module, one endpoint per question when it has more than a couple.
-- **Database changes** — one table or collection at a time: its schema, then its migration, then its rollback.
+- **API contracts** — one endpoint at a time, always: within a module, first the create endpoint, get the yes, then the delete endpoint, then the next. Never two endpoints in one question. Move to the next module only when the current one is fully settled.
+- **Database changes** — one table or collection at a time, and each step is its own question: first the table's schema, then how existing data migrates, then the rollback. Never two tables, and never two steps, in one question.
 - **File structure** — one module or feature area at a time: its files first, then the next area.
 - **Failure & edge cases** — one case at a time: propose the handling, get the yes, move to the next case.
 
@@ -83,17 +86,16 @@ Use the question format below. Work from facts — propose the exact file list, 
 
 ## Question format
 
-Same as grill-with-superpower — numbered questions with your recommended answer, and only ONE question per message. Never bundle several questions together, never list a whole dimension's questions in one go. Ask in easy English; explain any technical word the user may not know:
+Ask every question with the AskUserQuestion feature — the tool that shows clickable options. Never ask a decision question as plain text. Rules:
 
-```
-❓ **Q1** - **<question title>**: <question body>
+- One question per call. Never bundle several questions together, never list a whole dimension's questions in one go.
+- 2–4 short options. Exactly one option is marked (Recommended) and listed first. "Other" stays available so the user can always type their own answer.
+- Before the call, write 1–2 lines in the message: what you understood, and your honest view — is this a good idea, or do you have a concern. The user decides after reading it.
+- Bigger details — a full endpoint contract, a table schema — go in the message before the question. Keep option descriptions short.
+- Recommendations must be concrete: real paths, real endpoint names, real field names — never "TBD".
+- Ask in easy English; explain any technical word the user may not know.
 
-➡️ <your recommended answer>
-```
-
-Recommendations must be concrete: real paths, real endpoint names, real field names — never "TBD".
-
-Wait for the user's answer before asking the next question. Number questions Q1, Q2, Q3 and so on across the whole sweep — one question, one message, every time.
+Wait for the user's answer before asking the next question. Number questions Q1, Q2, Q3 and so on across the whole sweep — the number goes in the question title. One question, one message, every time.
 
 ## Dimensions
 
@@ -202,7 +204,7 @@ No files, no spec, no follow-on skill, no instructions for what to do next. What
 ## Rules
 
 - **Technical only.** The concept was settled in grilling — never re-open it. If a technical question exposes a broken concept decision, name it in one sentence and let the user decide; do not silently re-grill it here.
-- **One question at a time.** One question per message, piece by piece — one API module, one table, one file area, one edge case. Never dump a whole dimension in one message.
+- **One question at a time.** One question per message, piece by piece — one API endpoint, one table, one file area, one edge case. Never dump a whole dimension in one message.
 - **Nothing re-asked.** The grill conversation and `agent-doc/` are the settled truth. Read them fully; never ask about a settled thing again.
 - **Nothing silently assumed.** Every dimension appears in the checklist with its mark; every TOUCHED dimension ends with an explicit agreement; every deferred failure or edge case is written down.
 - **Facts first.** Read the rules, the tree, the code, the graph before asking. The decisions are the user's; the findings are yours.

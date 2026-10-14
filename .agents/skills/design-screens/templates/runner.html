@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Screens Runner</title>
+<style>
+  :root {
+    --chrome-bg: #101216;
+    --chrome-panel: #171a20;
+    --chrome-fg: #e5e7eb;
+    --chrome-muted: #9ca3af;
+    --chrome-border: #2a2f3a;
+    --chrome-accent: #3b82f6;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--chrome-bg);
+    color: var(--chrome-fg);
+    font: 14px/1.4 system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--chrome-panel);
+    border-bottom: 1px solid var(--chrome-border);
+    flex-wrap: wrap;
+  }
+  header .title { font-weight: 600; font-size: 13px; }
+  header .counter { color: var(--chrome-muted); font-size: 12px; }
+  .btn {
+    background: transparent;
+    color: inherit;
+    border: 1px solid var(--chrome-border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: border-color 150ms ease, background 150ms ease;
+  }
+  .btn:hover { border-color: var(--chrome-accent); }
+  .btn.active { background: var(--chrome-accent); border-color: var(--chrome-accent); color: #fff; }
+  .spacer { flex: 1; }
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    overflow: auto;
+  }
+  .device {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .device.mobile { width: 375px; }
+  .device.ipad { width: 768px; }
+  iframe { width: 100%; height: 100%; border: 0; display: block; }
+  aside {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100%;
+    background: var(--chrome-panel);
+    border-left: 1px solid var(--chrome-border);
+    transition: right 200ms ease;
+    overflow-y: auto;
+    padding: 12px;
+    z-index: 10;
+  }
+  aside.open { right: 0; }
+  aside h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--chrome-muted);
+    margin: 14px 0 6px;
+  }
+  aside .item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: inherit;
+    border: 0;
+    border-radius: 6px;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  aside .item:hover { background: rgba(255, 255, 255, 0.06); }
+  aside .item.current { background: var(--chrome-accent); color: #fff; }
+  @media (prefers-reduced-motion: reduce) {
+    aside, .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <button class="btn" id="toggle-list">All screens</button>
+  <span class="title" id="screen-title">—</span>
+  <span class="counter" id="counter"></span>
+  <span class="spacer"></span>
+  <button class="btn device-btn" data-device="mobile">Mobile 375</button>
+  <button class="btn device-btn" data-device="ipad">iPad 768</button>
+  <button class="btn device-btn active" data-device="desktop">Desktop</button>
+  <span class="spacer"></span>
+  <button class="btn" id="prev">← Prev</button>
+  <button class="btn" id="next">Next →</button>
+</header>
+
+<main>
+  <div class="device" id="device">
+    <iframe id="frame" src="about:blank" title="Screen preview"></iframe>
+  </div>
+</main>
+
+<aside id="list-panel">
+  <button class="btn" id="close-list">Close</button>
+  <div id="list-items"></div>
+</aside>
+
+<script>
+// ============================================================
+// SCREENS-LIST - the design-screens skill keeps this updated.
+// One entry per HTML file. Order = user-flow order.
+// ============================================================
+const SCREENS = [
+  { file: "screens/01-login.html", title: "Login", view: "Manager View" },
+];
+
+const frame = document.getElementById("frame");
+const titleEl = document.getElementById("screen-title");
+const counterEl = document.getElementById("counter");
+const deviceEl = document.getElementById("device");
+const listPanel = document.getElementById("list-panel");
+const listItems = document.getElementById("list-items");
+let current = 0;
+
+function readScreenFromHash() {
+  const numberFromHash = parseInt(window.location.hash.slice(1), 10);
+  const isInsideList = !isNaN(numberFromHash) && numberFromHash >= 1 && numberFromHash <= SCREENS.length;
+  return isInsideList ? numberFromHash - 1 : 0;
+}
+
+function show(index) {
+  if (index < 0 || index >= SCREENS.length) return;
+  current = index;
+  const screen = SCREENS[index];
+  const hashNumber = String(index + 1);
+  frame.src = screen.file;
+  titleEl.textContent = screen.view ? screen.view + " — " + screen.title : screen.title;
+  counterEl.textContent = (index + 1) + " / " + SCREENS.length;
+  if (window.location.hash.slice(1) !== hashNumber) window.location.hash = hashNumber;
+  renderList();
+}
+
+function renderList() {
+  listItems.textContent = "";
+  const views = new Map();
+  SCREENS.forEach(function (screen, i) {
+    if (!views.has(screen.view)) views.set(screen.view, []);
+    views.get(screen.view).push({ screen: screen, i: i });
+  });
+  views.forEach(function (screens, view) {
+    const heading = document.createElement("h2");
+    heading.textContent = view || "Screens";
+    listItems.appendChild(heading);
+    screens.forEach(function (entry) {
+      const button = document.createElement("button");
+      button.className = "item" + (entry.i === current ? " current" : "");
+      button.textContent = (entry.i + 1) + ". " + entry.screen.title;
+      button.addEventListener("click", function () {
+        show(entry.i);
+        listPanel.classList.remove("open");
+      });
+      listItems.appendChild(button);
+    });
+  });
+}
+
+document.getElementById("prev").addEventListener("click", function () { show(current - 1); });
+document.getElementById("next").addEventListener("click", function () { show(current + 1); });
+document.getElementById("toggle-list").addEventListener("click", function () { listPanel.classList.toggle("open"); });
+document.getElementById("close-list").addEventListener("click", function () { listPanel.classList.remove("open"); });
+
+function applyDevice(deviceName) {
+  document.querySelectorAll(".device-btn").forEach(function (b) { b.classList.toggle("active", b.dataset.device === deviceName); });
+  deviceEl.className = "device" + (deviceName === "desktop" ? "" : " " + deviceName);
+}
+
+document.querySelectorAll(".device-btn").forEach(function (button) {
+  button.addEventListener("click", function () {
+    const deviceName = button.dataset.device;
+    applyDevice(deviceName);
+    try { localStorage.setItem("screensRunnerDevice", deviceName); } catch (error) {}
+  });
+});
+
+window.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowRight") show(current + 1);
+  if (event.key === "ArrowLeft") show(current - 1);
+  if (event.key === "Escape") listPanel.classList.remove("open");
+});
+
+window.addEventListener("hashchange", function () {
+  const indexFromHash = readScreenFromHash();
+  if (indexFromHash !== current) show(indexFromHash);
+});
+
+let savedDeviceName = null;
+try { savedDeviceName = localStorage.getItem("screensRunnerDevice"); } catch (error) {}
+applyDevice(savedDeviceName || "desktop");
+show(readScreenFromHash());
+</script>
+</body>
+</html>

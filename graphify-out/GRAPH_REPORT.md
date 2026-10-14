@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-15)
 
 ## Corpus Check
-- 181 files · ~399,930 words
+- 191 files · ~402,462 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1753 nodes · 2331 edges · 161 communities (145 shown, 16 thin omitted)
+- 1805 nodes · 2503 edges · 161 communities (145 shown, 16 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.53)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `409a5e3c`
+- Built from commit: `6132171f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -143,27 +143,27 @@
 - Requirements
 - agent-doc/proposal.md
 - Requirement: Name-and-password login
-- test_auth.py
+- User
 - test_users.py
 - _generate_intelligent_overrides
 - Requirement: CSV upload into lead pool
 - Requirement: Lead resolution via call sync
-- Requirement: Edit account (name, password, country)
+- test_calls.py
 - Requirement: Lead scheduling
 - Requirement: Next-lead serving — priority order
-- Requirement: Deactivate account
+- Requirement: Token-gated API access
 
 ## God Nodes (most connected - your core abstractions)
 1. `create_user_record()` - 31 edges
-2. `User` - 25 edges
-3. `allow` - 24 edges
-4. `allow` - 24 edges
-5. `search()` - 23 edges
-6. `search()` - 23 edges
-7. `AppException` - 23 edges
-8. `hash_password()` - 23 edges
-9. `Tasks: Sales Call Tracker v1` - 20 edges
-10. `deny` - 19 edges
+2. `User` - 27 edges
+3. `AppException` - 25 edges
+4. `hash_password()` - 25 edges
+5. `allow` - 24 edges
+6. `allow` - 24 edges
+7. `search()` - 23 edges
+8. `search()` - 23 edges
+9. `now_utc()` - 20 edges
+10. `Tasks: Sales Call Tracker v1` - 20 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `TestConfig` --uses--> `BaseConfig`  [INFERRED]
@@ -463,8 +463,8 @@ Cohesion: 0.22
 Nodes (8): 1. Backend Automated Tests (`backend/tests/`), 2. Mobile Android Spike Checklist, Testing Specifications, `tests/modules/test_auth.py`, `tests/modules/test_calls.py`, `tests/modules/test_dashboard.py`, `tests/modules/test_leads.py`, `tests/modules/test_users.py`
 
 ### Community 84 - "Requirements"
-Cohesion: 0.13
-Nodes (15): Requirement: Activate (re-enable) account, Requirement: Create salesperson account, Requirement: Delete account permanently, Requirement: List all accounts, Requirements, Scenario: All accounts returned, Scenario: Delete releases lead claims, Scenario: Delete removes user and all calls (+7 more)
+Cohesion: 0.09
+Nodes (23): Requirement: Activate (re-enable) account, Requirement: Create salesperson account, Requirement: Deactivate account, Requirement: Delete account permanently, Requirement: Edit account (name, password, country), Requirement: List all accounts, Requirements, Scenario: All accounts returned (+15 more)
 
 ### Community 85 - "Node.js + TypeScript Code Style & Standards"
 Cohesion: 0.22
@@ -615,24 +615,24 @@ Cohesion: 0.11
 Nodes (17): 10. Web dashboard token in localStorage, 1. Single-repo, three-part monorepo, 2. Flask modular monolith with Flask-SQLAlchemy, 3. Auth: token in `users` table, no separate tokens table, 4. IST day boundaries computed server-side, 5. Android: bare React Native CLI, no Expo, 6. Call tracking: two-path fill, janitor runs before sync, 7. Lead pool: server-side state, claim window prevents double-dial (+9 more)
 
 ### Community 148 - "Requirements"
-Cohesion: 0.17
-Nodes (12): Requirement: Login brute-force lockout, Requirement: Single active session per user, Requirement: Token-gated API access, Requirements, Scenario: Counter reset on success, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token, Scenario: Lockout expires (+4 more)
+Cohesion: 0.20
+Nodes (9): Purpose, Requirement: Login brute-force lockout, Requirement: Single active session per user, Requirements, Scenario: Counter reset on success, Scenario: Lockout expires, Scenario: Lockout triggered, Scenario: Re-login replaces old token (+1 more)
 
 ### Community 149 - "Requirements"
 Cohesion: 0.06
 Nodes (35): Purpose, Requirement: Batch sync to server, Requirement: Call-log matching — Path 1 (real-time), Requirement: Call-log matching — Path 2 (janitor), Requirement: Clear local data recovery, Requirement: Dialer intent row created on tap, Requirement: Phone number normalization, Requirement: Server-side call ingestion (+27 more)
 
 ### Community 150 - "agent-doc/proposal.md"
-Cohesion: 0.18
-Nodes (8): Capabilities, Impact, New Capabilities, Proposal: Sales Call Tracker — v1, What Changes, Why, Purpose, Purpose
+Cohesion: 0.22
+Nodes (7): Capabilities, Impact, New Capabilities, Proposal: Sales Call Tracker — v1, What Changes, Why, Purpose
 
 ### Community 151 - "Requirement: Name-and-password login"
 Cohesion: 0.33
 Nodes (6): Requirement: Name-and-password login, Scenario: Deactivated account, Scenario: Missing fields, Scenario: Name not found, Scenario: Successful login, Scenario: Wrong password
 
-### Community 152 - "test_auth.py"
+### Community 152 - "User"
 Cohesion: 0.05
-Nodes (84): Any, Flask, register_commands(), seed_command(), BaseConfig, DevConfig, ProdConfig, AppException (+76 more)
+Nodes (86): Flask, register_commands(), seed_command(), BaseConfig, DevConfig, ProdConfig, AppException, Flask (+78 more)
 
 ### Community 153 - "test_users.py"
 Cohesion: 0.21
@@ -650,9 +650,9 @@ Nodes (6): Requirement: CSV upload into lead pool, Scenario: Duplicate in file s
 Cohesion: 0.40
 Nodes (5): Requirement: Lead resolution via call sync, Scenario: Connected call finishes lead, Scenario: Lead stopped at attempt cap, Scenario: Manual keypad call resolves matching lead, Scenario: Unconnected call increments attempt and locks
 
-### Community 157 - "Requirement: Edit account (name, password, country)"
-Cohesion: 0.50
-Nodes (4): Requirement: Edit account (name, password, country), Scenario: Manager can edit own account, Scenario: Name updated, Scenario: Password changed invalidates old token
+### Community 157 - "test_calls.py"
+Cohesion: 0.13
+Nodes (40): get_ist_timezone(), normalize_phone_number(), now_ist(), now_utc(), parse_utc_datetime(), datetime, to_ist(), Call (+32 more)
 
 ### Community 158 - "Requirement: Lead scheduling"
 Cohesion: 0.40
@@ -662,9 +662,9 @@ Nodes (5): Requirement: Lead scheduling, Scenario: Done or stopped lead cannot b
 Cohesion: 0.40
 Nodes (5): Requirement: Next-lead serving — priority order, Scenario: Due scheduled lead served before pool, Scenario: Newest waiting lead served, Scenario: Pool empty, Scenario: Unexpired claim returned first
 
-### Community 160 - "Requirement: Deactivate account"
+### Community 160 - "Requirement: Token-gated API access"
 Cohesion: 0.50
-Nodes (4): Requirement: Deactivate account, Scenario: Deactivated account cannot log in, Scenario: Deactivated account's calls kept, Scenario: Self-deactivation refused
+Nodes (4): Requirement: Token-gated API access, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token, Scenario: Valid token on protected endpoint
 
 ## Knowledge Gaps
 - **876 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+871 more)
@@ -675,11 +675,9 @@ Nodes (4): Requirement: Deactivate account, Scenario: Deactivated account cannot
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `search()` connect `.agents/skills/design-screens/uiux/scripts/core.py` to `.agents/skills/design-screens/uiux/scripts/design_system.py`, `.generate`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
   _876 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `.claude/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**
@@ -688,3 +686,5 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `allow` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+- **Should `Dimensions` be split into smaller, more focused modules?**
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._

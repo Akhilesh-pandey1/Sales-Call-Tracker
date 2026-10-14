@@ -53,11 +53,12 @@
 
 > Spec refs: `specs/call-tracking.md §Server-side call ingestion`, `design.md §6`
 
-- [ ] 5.1 Create `Call` SQLAlchemy model (`backend/app/modules/calls/models.py`) from `database.md`; add indexes on `(user_id, dialed_at)`
-- [ ] 5.2 Implement `POST /api/calls/sync`: accept `{"calls": [...]}`, iterate rows, skip calls older than `MAX_CALL_AGE_DAYS`, skip duplicate `call_id` (unique index), save valid rows under `g.user.id`, log and skip malformed rows, return `{"status": true}` (scenarios: Valid batch saved, Old call dropped, Malformed row in batch, Server deduplicates retried rows)
-- [ ] 5.3 Add lead resolution logic inside the sync handler: for each saved call, look up matching lead by normalized phone number; connected → `status='done'`; unconnected → increment attempt + retry lock; at cap → `status='stopped'`; clear claims and schedules on any resolution (scenarios from `specs/lead-management.md §Lead resolution via call sync`)
-- [ ] 5.4 Add `backend/app/core/utils.py` with IST timezone helper and E.164 normalization using `phonenumbers`
-- [ ] 5.5 Write `tests/modules/test_calls.py` covering all scenarios in `specs/call-tracking.md §Server-side call ingestion`
+- [x] 5.1 Create `Call` SQLAlchemy model (`backend/app/modules/calls/models.py`) from `database.md`; add indexes on `(user_id, dialed_at)`
+- [x] 5.2 Implement `POST /api/calls/sync`: accept `{"calls": [...]}`, iterate rows, skip calls older than `MAX_CALL_AGE_DAYS`, skip duplicate `call_id` (unique index), save valid rows under `g.user.id`, log and skip malformed rows, return `{"status": true}` (scenarios: Valid batch saved, Old call dropped, Malformed row in batch, Server deduplicates retried rows)
+- [x] 5.3 Add lead resolution logic inside the sync handler: for each saved call, look up matching lead by normalized phone number; connected → `status='done'`; unconnected → increment attempt + retry lock; at cap → `status='stopped'`; clear claims and schedules on any resolution (scenarios from `specs/lead-management.md §Lead resolution via call sync`)
+- [x] 5.4 Add `backend/app/core/utils.py` with IST timezone helper and E.164 normalization using `phonenumbers`
+- [x] 5.5 Write `tests/modules/test_calls.py` covering all scenarios in `specs/call-tracking.md §Server-side call ingestion`
+
 
 ---
 

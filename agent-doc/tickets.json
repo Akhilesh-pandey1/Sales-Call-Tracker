@@ -68,7 +68,7 @@
         "5.4 Add `backend/app/core/utils.py` with IST timezone helper and E.164 normalization using `phonenumbers`",
         "5.5 Write `tests/modules/test_calls.py` covering all scenarios in `specs/call-tracking.md §Server-side call ingestion`\n---"
       ],
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         3,
         7

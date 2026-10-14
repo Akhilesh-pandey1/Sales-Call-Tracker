@@ -3476,7 +3476,7 @@
       "norm_label": "execute_agy_process()"
     },
     {
-      "label": "utils.py",
+      "label": ".autonomous-coding-agent/utils.py",
       "file_type": "code",
       "source_file": ".autonomous-coding-agent/utils.py",
       "source_location": "L1",
@@ -3484,7 +3484,7 @@
       "id": "autonomous_coding_agent_utils",
       "community": 50,
       "community_name": "our_agent.py",
-      "norm_label": "utils.py"
+      "norm_label": ".autonomous-coding-agent/utils.py"
     },
     {
       "label": "read_text_file()",
@@ -6757,7 +6757,7 @@
       "_origin": "ast",
       "id": "backend_app_init",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "app/__init__.py"
     },
     {
@@ -6768,7 +6768,7 @@
       "_origin": "ast",
       "id": "backend_app_init_create_app",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "create_app()"
     },
     {
@@ -6779,7 +6779,7 @@
       "_origin": "ast",
       "id": "backend_app_init_py_flask",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "flask"
     },
     {
@@ -6790,7 +6790,7 @@
       "_origin": "ast",
       "id": "backend_app_api_init",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "api/__init__.py"
     },
     {
@@ -6801,7 +6801,7 @@
       "_origin": "ast",
       "id": "backend_app_commands",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "commands.py"
     },
     {
@@ -6812,7 +6812,7 @@
       "_origin": "ast",
       "id": "command",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "command"
     },
     {
@@ -6823,7 +6823,7 @@
       "_origin": "ast",
       "id": "backend_app_commands_seed_command",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "seed_command()"
     },
     {
@@ -6834,7 +6834,7 @@
       "_origin": "ast",
       "id": "backend_app_commands_register_commands",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "register_commands()"
     },
     {
@@ -6845,7 +6845,7 @@
       "_origin": "ast",
       "id": "backend_app_commands_py_flask",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "flask"
     },
     {
@@ -6856,7 +6856,7 @@
       "_origin": "ast",
       "id": "backend_app_config_init",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "config/__init__.py"
     },
     {
@@ -6867,7 +6867,7 @@
       "_origin": "ast",
       "id": "backend_app_config_base",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "base.py"
     },
     {
@@ -6878,7 +6878,7 @@
       "_origin": "ast",
       "id": "backend_app_config_base_baseconfig",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "baseconfig"
     },
     {
@@ -6889,7 +6889,7 @@
       "_origin": "ast",
       "id": "backend_app_config_dev",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "dev.py"
     },
     {
@@ -6900,7 +6900,7 @@
       "_origin": "ast",
       "id": "backend_app_config_dev_devconfig",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "devconfig"
     },
     {
@@ -6911,7 +6911,7 @@
       "_origin": "ast",
       "id": "backend_app_config_prod",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "prod.py"
     },
     {
@@ -6922,7 +6922,7 @@
       "_origin": "ast",
       "id": "backend_app_config_prod_prodconfig",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "prodconfig"
     },
     {
@@ -6933,7 +6933,7 @@
       "_origin": "ast",
       "id": "backend_app_core_errors",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "errors.py"
     },
     {
@@ -6944,7 +6944,7 @@
       "_origin": "ast",
       "id": "backend_app_core_errors_appexception",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "appexception"
     },
     {
@@ -6955,7 +6955,7 @@
       "_origin": "ast",
       "id": "exception",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "exception"
     },
     {
@@ -6966,7 +6966,7 @@
       "_origin": "ast",
       "id": "backend_app_core_errors_appexception_init",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": ".__init__()"
     },
     {
@@ -6977,7 +6977,7 @@
       "_origin": "ast",
       "id": "backend_app_core_errors_appexception_to_dict",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": ".to_dict()"
     },
     {
@@ -6988,7 +6988,7 @@
       "_origin": "ast",
       "id": "backend_app_core_errors_register_error_handlers",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "register_error_handlers()"
     },
     {
@@ -6999,7 +6999,7 @@
       "_origin": "ast",
       "id": "backend_app_core_errors_py_flask",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "flask"
     },
     {
@@ -7010,7 +7010,7 @@
       "_origin": "ast",
       "id": "backend_app_core_permissions",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "permissions.py"
     },
     {
@@ -7021,7 +7021,7 @@
       "_origin": "ast",
       "id": "backend_app_core_permissions_require_auth",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "require_auth()"
     },
     {
@@ -7030,9 +7030,9 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "id": "any",
+      "id": "backend_app_core_permissions_py_any",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "any"
     },
     {
@@ -7043,7 +7043,7 @@
       "_origin": "ast",
       "id": "backend_app_core_permissions_require_manager",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "require_manager()"
     },
     {
@@ -7054,7 +7054,7 @@
       "_origin": "ast",
       "id": "backend_app_core_security",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "security.py"
     },
     {
@@ -7065,7 +7065,7 @@
       "_origin": "ast",
       "id": "backend_app_core_security_hash_password",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "hash_password()"
     },
     {
@@ -7076,7 +7076,7 @@
       "_origin": "ast",
       "id": "backend_app_core_security_verify_password",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "verify_password()"
     },
     {
@@ -7087,7 +7087,7 @@
       "_origin": "ast",
       "id": "backend_app_core_security_generate_auth_token",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "generate_auth_token()"
     },
     {
@@ -7098,8 +7098,107 @@
       "_origin": "ast",
       "id": "backend_app_core_security_validate_password_strength",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "validate_password_strength()"
+    },
+    {
+      "label": "core/utils.py",
+      "file_type": "code",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_core_utils",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "core/utils.py"
+    },
+    {
+      "label": "get_ist_timezone()",
+      "file_type": "code",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "backend_app_core_utils_get_ist_timezone",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "get_ist_timezone()"
+    },
+    {
+      "label": "ZoneInfo",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "zoneinfo",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "zoneinfo"
+    },
+    {
+      "label": "now_ist()",
+      "file_type": "code",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "backend_app_core_utils_now_ist",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "now_ist()"
+    },
+    {
+      "label": "datetime",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_core_utils_py_datetime",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "datetime"
+    },
+    {
+      "label": "now_utc()",
+      "file_type": "code",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "backend_app_core_utils_now_utc",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "now_utc()"
+    },
+    {
+      "label": "to_ist()",
+      "file_type": "code",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "backend_app_core_utils_to_ist",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "to_ist()"
+    },
+    {
+      "label": "normalize_phone_number()",
+      "file_type": "code",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "backend_app_core_utils_normalize_phone_number",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "normalize_phone_number()"
+    },
+    {
+      "label": "parse_utc_datetime()",
+      "file_type": "code",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "backend_app_core_utils_parse_utc_datetime",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "parse_utc_datetime()"
     },
     {
       "label": "extensions.py",
@@ -7109,7 +7208,7 @@
       "_origin": "ast",
       "id": "backend_app_extensions",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "extensions.py"
     },
     {
@@ -7120,7 +7219,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_init",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "auth/__init__.py"
     },
     {
@@ -7131,7 +7230,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_routes",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "auth/routes.py"
     },
     {
@@ -7142,7 +7241,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_routes_py_post",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "post"
     },
     {
@@ -7153,7 +7252,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_routes_login",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "login()"
     },
     {
@@ -7164,7 +7263,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_routes_py_response",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "response"
     },
     {
@@ -7175,7 +7274,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_schemas",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "auth/schemas.py"
     },
     {
@@ -7186,7 +7285,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_schemas_loginrequest",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "loginrequest"
     },
     {
@@ -7197,7 +7296,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_schemas_py_basemodel",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "basemodel"
     },
     {
@@ -7208,7 +7307,7 @@
       "_origin": "ast",
       "id": "field_validator",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "field_validator"
     },
     {
@@ -7219,7 +7318,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_schemas_loginrequest_validate_name",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": ".validate_name()"
     },
     {
@@ -7230,7 +7329,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_schemas_loginrequest_validate_password",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": ".validate_password()"
     },
     {
@@ -7241,7 +7340,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_schemas_loginresponse",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "loginresponse"
     },
     {
@@ -7252,7 +7351,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_services",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "auth/services.py"
     },
     {
@@ -7263,7 +7362,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_services_check_lockout",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "check_lockout()"
     },
     {
@@ -7274,7 +7373,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_services_record_failure",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "record_failure()"
     },
     {
@@ -7285,7 +7384,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_services_record_success",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "record_success()"
     },
     {
@@ -7296,7 +7395,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_services_reset_lockout_state",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "reset_lockout_state()"
     },
     {
@@ -7307,7 +7406,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_services_set_lockout_expiry",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "set_lockout_expiry()"
     },
     {
@@ -7316,9 +7415,9 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "id": "datetime",
+      "id": "backend_app_modules_auth_services_py_datetime",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "datetime"
     },
     {
@@ -7329,8 +7428,250 @@
       "_origin": "ast",
       "id": "backend_app_modules_auth_services_authenticate_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "authenticate_user()"
+    },
+    {
+      "label": "calls/__init__.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_init",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "calls/__init__.py"
+    },
+    {
+      "label": "calls/models.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/models.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_models",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "calls/models.py"
+    },
+    {
+      "label": "Call",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/models.py",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_models_call",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "call"
+    },
+    {
+      "label": "calls/routes.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_routes",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "calls/routes.py"
+    },
+    {
+      "label": "route",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "route",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "route"
+    },
+    {
+      "label": "sync_calls()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_routes_sync_calls",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "sync_calls()"
+    },
+    {
+      "label": "Response",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_routes_py_response",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "response"
+    },
+    {
+      "label": "calls/schemas.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/schemas.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_schemas",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "calls/schemas.py"
+    },
+    {
+      "label": "SyncCallsRequest",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/schemas.py",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_schemas_synccallsrequest",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "synccallsrequest"
+    },
+    {
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_schemas_py_basemodel",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "basemodel"
+    },
+    {
+      "label": "SyncCallsResponse",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/schemas.py",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_schemas_synccallsresponse",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "synccallsresponse"
+    },
+    {
+      "label": "calls/services.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_services",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "calls/services.py"
+    },
+    {
+      "label": "extract_valid_call()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_services_extract_valid_call",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "extract_valid_call()"
+    },
+    {
+      "label": "Any",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_services_py_any",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "any"
+    },
+    {
+      "label": "datetime",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_services_py_datetime",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "datetime"
+    },
+    {
+      "label": "sync_calls_batch()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "backend_app_modules_calls_services_sync_calls_batch",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "sync_calls_batch()"
+    },
+    {
+      "label": "leads/__init__.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/leads/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_leads_init",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "leads/__init__.py"
+    },
+    {
+      "label": "leads/models.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/leads/models.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_leads_models",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "leads/models.py"
+    },
+    {
+      "label": "Lead",
+      "file_type": "code",
+      "source_file": "backend/app/modules/leads/models.py",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "backend_app_modules_leads_models_lead",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "lead"
+    },
+    {
+      "label": "leads/services.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_leads_services",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "leads/services.py"
+    },
+    {
+      "label": "resolve_lead_for_call()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "backend_app_modules_leads_services_resolve_lead_for_call",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "resolve_lead_for_call()"
+    },
+    {
+      "label": "datetime",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_leads_services_py_datetime",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "datetime"
     },
     {
       "label": "users/__init__.py",
@@ -7340,19 +7681,19 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_init",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "users/__init__.py"
     },
     {
-      "label": "models.py",
+      "label": "users/models.py",
       "file_type": "code",
       "source_file": "backend/app/modules/users/models.py",
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_users_models",
       "community": 152,
-      "community_name": "test_auth.py",
-      "norm_label": "models.py"
+      "community_name": "User",
+      "norm_label": "users/models.py"
     },
     {
       "label": "User",
@@ -7362,7 +7703,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_models_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "user"
     },
     {
@@ -7373,7 +7714,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_models_user_to_dict",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": ".to_dict()"
     },
     {
@@ -7384,7 +7725,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "users/routes.py"
     },
     {
@@ -7395,7 +7736,7 @@
       "_origin": "ast",
       "id": "get",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "get"
     },
     {
@@ -7406,7 +7747,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes_get_users",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "get_users()"
     },
     {
@@ -7417,7 +7758,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes_py_response",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "response"
     },
     {
@@ -7428,7 +7769,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes_py_post",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "post"
     },
     {
@@ -7439,7 +7780,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes_create_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "create_user()"
     },
     {
@@ -7450,7 +7791,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes_update_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "update_user()"
     },
     {
@@ -7461,7 +7802,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes_deactivate_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "deactivate_user()"
     },
     {
@@ -7472,7 +7813,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes_activate_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "activate_user()"
     },
     {
@@ -7483,7 +7824,7 @@
       "_origin": "ast",
       "id": "delete",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "delete"
     },
     {
@@ -7494,7 +7835,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_routes_delete_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "delete_user()"
     },
     {
@@ -7505,7 +7846,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_schemas",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "users/schemas.py"
     },
     {
@@ -7516,7 +7857,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_schemas_userresponse",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "userresponse"
     },
     {
@@ -7527,7 +7868,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_schemas_py_basemodel",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "basemodel"
     },
     {
@@ -7538,7 +7879,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_schemas_createuserrequest",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "createuserrequest"
     },
     {
@@ -7549,7 +7890,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_schemas_updateuserrequest",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "updateuserrequest"
     },
     {
@@ -7560,7 +7901,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_services",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "users/services.py"
     },
     {
@@ -7571,7 +7912,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_services_list_all_users",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "list_all_users()"
     },
     {
@@ -7582,7 +7923,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_services_create_new_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "create_new_user()"
     },
     {
@@ -7593,7 +7934,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_services_update_user_account",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "update_user_account()"
     },
     {
@@ -7604,7 +7945,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_services_deactivate_user_account",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "deactivate_user_account()"
     },
     {
@@ -7615,7 +7956,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_services_activate_user_account",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "activate_user_account()"
     },
     {
@@ -7626,7 +7967,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_users_services_delete_user_account",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "delete_user_account()"
     },
     {
@@ -7637,7 +7978,7 @@
       "_origin": "ast",
       "id": "backend_tests_conftest",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "conftest.py"
     },
     {
@@ -7648,7 +7989,7 @@
       "_origin": "ast",
       "id": "backend_tests_conftest_testconfig",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "testconfig"
     },
     {
@@ -7659,7 +8000,7 @@
       "_origin": "ast",
       "id": "backend_tests_conftest_py_fixture",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "fixture"
     },
     {
@@ -7670,7 +8011,7 @@
       "_origin": "ast",
       "id": "backend_tests_conftest_app",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "app()"
     },
     {
@@ -7681,7 +8022,7 @@
       "_origin": "ast",
       "id": "backend_tests_conftest_py_flask",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "flask"
     },
     {
@@ -7692,7 +8033,7 @@
       "_origin": "ast",
       "id": "backend_tests_conftest_client",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "client()"
     },
     {
@@ -7703,7 +8044,7 @@
       "_origin": "ast",
       "id": "backend_tests_conftest_py_flaskclient",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "flaskclient"
     },
     {
@@ -7714,7 +8055,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_auth.py"
     },
     {
@@ -7725,7 +8066,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_py_fixture",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "fixture"
     },
     {
@@ -7736,7 +8077,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_clean_lockout_state",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "clean_lockout_state()"
     },
     {
@@ -7747,7 +8088,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_login_missing_fields",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_login_missing_fields()"
     },
     {
@@ -7758,7 +8099,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_py_flaskclient",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "flaskclient"
     },
     {
@@ -7769,7 +8110,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_login_wrong_credentials",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_login_wrong_credentials()"
     },
     {
@@ -7780,7 +8121,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_py_flask",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "flask"
     },
     {
@@ -7791,7 +8132,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_login_deactivated_account",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_login_deactivated_account()"
     },
     {
@@ -7802,7 +8143,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_login_success",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_login_success()"
     },
     {
@@ -7813,7 +8154,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_login_lockout_triggered",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_login_lockout_triggered()"
     },
     {
@@ -7824,7 +8165,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_login_lockout_expires",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_login_lockout_expires()"
     },
     {
@@ -7835,7 +8176,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_login_counter_reset_on_success",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_login_counter_reset_on_success()"
     },
     {
@@ -7846,7 +8187,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_require_auth_valid_token",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_require_auth_valid_token()"
     },
     {
@@ -7857,7 +8198,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_require_auth_missing_or_invalid_token",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_require_auth_missing_or_invalid_token()"
     },
     {
@@ -7868,7 +8209,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_require_auth_deactivated_user",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_require_auth_deactivated_user()"
     },
     {
@@ -7879,7 +8220,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_relogin_replaces_old_token",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_relogin_replaces_old_token()"
     },
     {
@@ -7890,7 +8231,7 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_token_invalid_after_password_reset",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_token_invalid_after_password_reset()"
     },
     {
@@ -7901,8 +8242,228 @@
       "_origin": "ast",
       "id": "backend_tests_modules_test_auth_test_login_preserves_password_whitespace",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_login_preserves_password_whitespace()"
+    },
+    {
+      "label": "test_calls.py",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_calls.py"
+    },
+    {
+      "label": "create_user_fixture()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_create_user_fixture",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "create_user_fixture()"
+    },
+    {
+      "label": "create_lead_fixture()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_create_lead_fixture",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "create_lead_fixture()"
+    },
+    {
+      "label": "test_sync_valid_batch_saved()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_valid_batch_saved",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_valid_batch_saved()"
+    },
+    {
+      "label": "Flask",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_py_flask",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "flask"
+    },
+    {
+      "label": "FlaskClient",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_py_flaskclient",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "flaskclient"
+    },
+    {
+      "label": "test_sync_old_call_dropped()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L105",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_old_call_dropped",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_old_call_dropped()"
+    },
+    {
+      "label": "test_sync_malformed_row_skipped_while_valid_saved()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L147",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_malformed_row_skipped_while_valid_saved",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_malformed_row_skipped_while_valid_saved()"
+    },
+    {
+      "label": "test_sync_server_deduplicates_retried_rows()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L201",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_server_deduplicates_retried_rows()"
+    },
+    {
+      "label": "test_phone_number_normalization_local_format()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L260",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_phone_number_normalization_local_format",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_phone_number_normalization_local_format()"
+    },
+    {
+      "label": "test_phone_number_normalization_international_format()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L287",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_phone_number_normalization_international_format",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_phone_number_normalization_international_format()"
+    },
+    {
+      "label": "test_phone_number_normalization_unparseable_stored_raw()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L314",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_phone_number_normalization_unparseable_stored_raw",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_phone_number_normalization_unparseable_stored_raw()"
+    },
+    {
+      "label": "test_lead_resolution_connected_call_finishes_lead()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L341",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_lead_resolution_connected_call_finishes_lead",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_lead_resolution_connected_call_finishes_lead()"
+    },
+    {
+      "label": "test_lead_resolution_unconnected_call_increments_and_locks()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L381",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_lead_resolution_unconnected_call_increments_and_locks",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_lead_resolution_unconnected_call_increments_and_locks()"
+    },
+    {
+      "label": "test_lead_resolution_stopped_at_attempt_cap()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L433",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_lead_resolution_stopped_at_attempt_cap",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_lead_resolution_stopped_at_attempt_cap()"
+    },
+    {
+      "label": "test_lead_resolution_manual_keypad_call_resolves_lead()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L468",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_lead_resolution_manual_keypad_call_resolves_lead",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_lead_resolution_manual_keypad_call_resolves_lead()"
+    },
+    {
+      "label": "test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L501",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls()"
+    },
+    {
+      "label": "test_sync_requires_authentication()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L553",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_requires_authentication",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_requires_authentication()"
+    },
+    {
+      "label": "test_sync_refuses_deactivated_user()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L561",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_refuses_deactivated_user()"
+    },
+    {
+      "label": "test_sync_missing_calls_payload()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L578",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_missing_calls_payload()"
     },
     {
       "label": "test_users.py",
@@ -8285,19 +8846,19 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_tests_test_foundation",
-      "community": 152,
-      "community_name": "test_auth.py",
+      "community": 157,
+      "community_name": "test_calls.py",
       "norm_label": "test_foundation.py"
     },
     {
       "label": "test_app_creation()",
       "file_type": "code",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L14",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_app_creation",
-      "community": 152,
-      "community_name": "test_auth.py",
+      "community": 157,
+      "community_name": "test_calls.py",
       "norm_label": "test_app_creation()"
     },
     {
@@ -8307,41 +8868,41 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_flask",
-      "community": 152,
-      "community_name": "test_auth.py",
+      "community": 157,
+      "community_name": "test_calls.py",
       "norm_label": "flask"
     },
     {
       "label": "test_user_model()",
       "file_type": "code",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L19",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_user_model",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_user_model()"
     },
     {
       "label": "test_security_helpers()",
       "file_type": "code",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L38",
+      "source_location": "L46",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_security_helpers",
       "community": 152,
-      "community_name": "test_auth.py",
+      "community_name": "User",
       "norm_label": "test_security_helpers()"
     },
     {
       "label": "test_error_handler()",
       "file_type": "code",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L56",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_error_handler",
-      "community": 152,
-      "community_name": "test_auth.py",
+      "community": 157,
+      "community_name": "test_calls.py",
       "norm_label": "test_error_handler()"
     },
     {
@@ -8351,9 +8912,20 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_flaskclient",
-      "community": 152,
-      "community_name": "test_auth.py",
+      "community": 157,
+      "community_name": "test_calls.py",
       "norm_label": "flaskclient"
+    },
+    {
+      "label": "test_utils_helpers()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "backend_tests_test_foundation_test_utils_helpers",
+      "community": 157,
+      "community_name": "test_calls.py",
+      "norm_label": "test_utils_helpers()"
     },
     {
       "label": ".agents/rules/code-style.md",
@@ -17393,8 +17965,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "agent_doc_specs_authentication",
-      "community": 150,
-      "community_name": "agent-doc/proposal.md",
+      "community": 148,
+      "community_name": "Requirements",
       "norm_label": "authentication.md"
     },
     {
@@ -17404,8 +17976,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "agent_doc_specs_authentication_purpose",
-      "community": 150,
-      "community_name": "agent-doc/proposal.md",
+      "community": 148,
+      "community_name": "Requirements",
       "norm_label": "purpose"
     },
     {
@@ -17525,8 +18097,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "agent_doc_specs_authentication_requirement_token_gated_api_access",
-      "community": 148,
-      "community_name": "Requirements",
+      "community": 160,
+      "community_name": "Requirement: Token-gated API access",
       "norm_label": "requirement: token-gated api access"
     },
     {
@@ -17536,8 +18108,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "agent_doc_specs_authentication_scenario_valid_token_on_protected_endpoint",
-      "community": 148,
-      "community_name": "Requirements",
+      "community": 160,
+      "community_name": "Requirement: Token-gated API access",
       "norm_label": "scenario: valid token on protected endpoint"
     },
     {
@@ -17547,8 +18119,8 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "agent_doc_specs_authentication_scenario_invalid_or_missing_token",
-      "community": 148,
-      "community_name": "Requirements",
+      "community": 160,
+      "community_name": "Requirement: Token-gated API access",
       "norm_label": "scenario: invalid or missing token"
     },
     {
@@ -17558,8 +18130,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "agent_doc_specs_authentication_scenario_deactivated_user_with_valid_token",
-      "community": 148,
-      "community_name": "Requirements",
+      "community": 160,
+      "community_name": "Requirement: Token-gated API access",
       "norm_label": "scenario: deactivated user with valid token"
     },
     {
@@ -18746,8 +19318,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "agent_doc_specs_user_management_requirement_edit_account_name_password_country",
-      "community": 157,
-      "community_name": "Requirement: Edit account (name, password, country)",
+      "community": 84,
+      "community_name": "Requirements",
       "norm_label": "requirement: edit account (name, password, country)"
     },
     {
@@ -18757,8 +19329,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "agent_doc_specs_user_management_scenario_name_updated",
-      "community": 157,
-      "community_name": "Requirement: Edit account (name, password, country)",
+      "community": 84,
+      "community_name": "Requirements",
       "norm_label": "scenario: name updated"
     },
     {
@@ -18768,8 +19340,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "agent_doc_specs_user_management_scenario_password_changed_invalidates_old_token",
-      "community": 157,
-      "community_name": "Requirement: Edit account (name, password, country)",
+      "community": 84,
+      "community_name": "Requirements",
       "norm_label": "scenario: password changed invalidates old token"
     },
     {
@@ -18779,8 +19351,8 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "agent_doc_specs_user_management_scenario_manager_can_edit_own_account",
-      "community": 157,
-      "community_name": "Requirement: Edit account (name, password, country)",
+      "community": 84,
+      "community_name": "Requirements",
       "norm_label": "scenario: manager can edit own account"
     },
     {
@@ -18790,8 +19362,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "agent_doc_specs_user_management_requirement_deactivate_account",
-      "community": 160,
-      "community_name": "Requirement: Deactivate account",
+      "community": 84,
+      "community_name": "Requirements",
       "norm_label": "requirement: deactivate account"
     },
     {
@@ -18801,8 +19373,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "agent_doc_specs_user_management_scenario_deactivated_account_cannot_log_in",
-      "community": 160,
-      "community_name": "Requirement: Deactivate account",
+      "community": 84,
+      "community_name": "Requirements",
       "norm_label": "scenario: deactivated account cannot log in"
     },
     {
@@ -18812,8 +19384,8 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "agent_doc_specs_user_management_scenario_deactivated_account_s_calls_kept",
-      "community": 160,
-      "community_name": "Requirement: Deactivate account",
+      "community": 84,
+      "community_name": "Requirements",
       "norm_label": "scenario: deactivated account's calls kept"
     },
     {
@@ -18823,8 +19395,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "agent_doc_specs_user_management_scenario_self_deactivation_refused",
-      "community": 160,
-      "community_name": "Requirement: Deactivate account",
+      "community": 84,
+      "community_name": "Requirements",
       "norm_label": "scenario: self-deactivation refused"
     },
     {
@@ -19117,7 +19689,7 @@
       "label": "6. Backend \u2014 Dashboards",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L64",
+      "source_location": "L65",
       "_origin": "ast",
       "id": "agent_doc_tasks_6_backend_dashboards",
       "community": 146,
@@ -19128,7 +19700,7 @@
       "label": "7. Backend \u2014 Lead Management",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L74",
+      "source_location": "L75",
       "_origin": "ast",
       "id": "agent_doc_tasks_7_backend_lead_management",
       "community": 146,
@@ -19139,7 +19711,7 @@
       "label": "8. Backend \u2014 Production Wiring",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L86",
+      "source_location": "L87",
       "_origin": "ast",
       "id": "agent_doc_tasks_8_backend_production_wiring",
       "community": 146,
@@ -19150,7 +19722,7 @@
       "label": "9. Web Dashboard \u2014 Foundation",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L94",
+      "source_location": "L95",
       "_origin": "ast",
       "id": "agent_doc_tasks_9_web_dashboard_foundation",
       "community": 146,
@@ -19161,7 +19733,7 @@
       "label": "10. Web Dashboard \u2014 Auth Page",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L105",
+      "source_location": "L106",
       "_origin": "ast",
       "id": "agent_doc_tasks_10_web_dashboard_auth_page",
       "community": 146,
@@ -19172,7 +19744,7 @@
       "label": "11. Web Dashboard \u2014 Team Dashboard",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L114",
+      "source_location": "L115",
       "_origin": "ast",
       "id": "agent_doc_tasks_11_web_dashboard_team_dashboard",
       "community": 146,
@@ -19183,7 +19755,7 @@
       "label": "12. Web Dashboard \u2014 Leads Page",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L125",
+      "source_location": "L126",
       "_origin": "ast",
       "id": "agent_doc_tasks_12_web_dashboard_leads_page",
       "community": 146,
@@ -19194,7 +19766,7 @@
       "label": "13. Web Dashboard \u2014 Accounts Page",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L135",
+      "source_location": "L136",
       "_origin": "ast",
       "id": "agent_doc_tasks_13_web_dashboard_accounts_page",
       "community": 146,
@@ -19205,7 +19777,7 @@
       "label": "14. Android App \u2014 Tracking Spike (Do This First)",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L146",
+      "source_location": "L147",
       "_origin": "ast",
       "id": "agent_doc_tasks_14_android_app_tracking_spike_do_this_first",
       "community": 146,
@@ -19216,7 +19788,7 @@
       "label": "15. Android App \u2014 Foundation and Auth",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L160",
+      "source_location": "L161",
       "_origin": "ast",
       "id": "agent_doc_tasks_15_android_app_foundation_and_auth",
       "community": 146,
@@ -19227,7 +19799,7 @@
       "label": "16. Android App \u2014 Dialer Screen",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L170",
+      "source_location": "L171",
       "_origin": "ast",
       "id": "agent_doc_tasks_16_android_app_dialer_screen",
       "community": 146,
@@ -19238,7 +19810,7 @@
       "label": "17. Android App \u2014 Sync",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L182",
+      "source_location": "L183",
       "_origin": "ast",
       "id": "agent_doc_tasks_17_android_app_sync",
       "community": 146,
@@ -19249,7 +19821,7 @@
       "label": "18. Android App \u2014 My Stats and Settings",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L191",
+      "source_location": "L192",
       "_origin": "ast",
       "id": "agent_doc_tasks_18_android_app_my_stats_and_settings",
       "community": 146,
@@ -19260,7 +19832,7 @@
       "label": "19. End-to-End Verification",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L200",
+      "source_location": "L201",
       "_origin": "ast",
       "id": "agent_doc_tasks_19_end_to_end_verification",
       "community": 146,
@@ -21861,18 +22433,6 @@
       "_origin": "ast",
       "source": "agents_skills_design_screens_uiux_scripts_design_system",
       "target": "agents_skills_design_screens_uiux_scripts_reasoning_contract_parse_decision_rules",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": ".agents/skills/design-screens/uiux/scripts/design_system.py",
-      "source_location": "L25",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agents_skills_design_screens_uiux_scripts_design_system",
-      "target": "datetime",
       "confidence_score": 1.0
     },
     {
@@ -24814,18 +25374,6 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": ".autonomous-coding-agent/our_agent.py",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "autonomous_coding_agent_our_agent",
-      "target": "datetime",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -24835,18 +25383,6 @@
       "_origin": "ast",
       "source": "autonomous_coding_agent_our_agent",
       "target": "autonomous_coding_agent_runner",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": ".autonomous-coding-agent/our_agent.py",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "autonomous_coding_agent_our_agent",
-      "target": "autonomous_coding_agent_utils",
       "confidence_score": 1.0
     },
     {
@@ -25176,18 +25712,6 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": ".autonomous-coding-agent/runner.py",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "autonomous_coding_agent_runner",
-      "target": "autonomous_coding_agent_utils",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -25419,18 +25943,6 @@
       "_origin": "ast",
       "source": "autonomous_coding_agent_utils",
       "target": "autonomous_coding_agent_utils_write_log_line",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": ".autonomous-coding-agent/utils.py",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "autonomous_coding_agent_utils",
-      "target": "datetime",
       "confidence_score": 1.0
     },
     {
@@ -27938,18 +28450,6 @@
       "_origin": "ast",
       "source": "claude_skills_design_screens_uiux_scripts_design_system",
       "target": "claude_skills_design_screens_uiux_scripts_reasoning_contract_parse_decision_rules",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/skills/design-screens/uiux/scripts/design_system.py",
-      "source_location": "L25",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "claude_skills_design_screens_uiux_scripts_design_system",
-      "target": "datetime",
       "confidence_score": 1.0
     },
     {
@@ -30874,6 +31374,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_api_init",
+      "target": "backend_app_modules_calls_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/__init__.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_api_init",
       "target": "backend_app_modules_users_init",
       "confidence_score": 1.0
     },
@@ -31154,11 +31666,47 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "backend_app_config_base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/auth/services.py",
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_auth_services",
+      "target": "backend_app_config_base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_config_base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services",
       "target": "backend_app_config_base",
       "confidence_score": 1.0
     },
@@ -31195,6 +31743,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_conftest",
+      "target": "backend_app_config_base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
       "target": "backend_app_config_base",
       "confidence_score": 1.0
     },
@@ -31363,6 +31923,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_core_errors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/users/routes.py",
       "source_location": "L4",
       "weight": 1.0,
@@ -31388,7 +31960,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -31528,6 +32100,30 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_core_errors_appexception",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes_sync_calls",
+      "target": "backend_app_core_errors_appexception"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/users/routes.py",
       "source_location": "L4",
       "weight": 1.0,
@@ -31637,7 +32233,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -31649,7 +32245,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L59",
+      "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_error_handler",
@@ -31706,6 +32302,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_core_permissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/users/routes.py",
       "source_location": "L5",
       "weight": 1.0,
@@ -31735,7 +32343,31 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_core_permissions_require_auth",
-      "target": "any",
+      "target": "backend_app_core_permissions_py_any",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_core_permissions_require_auth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes_sync_calls",
+      "target": "backend_app_core_permissions_require_auth",
       "confidence_score": 1.0
     },
     {
@@ -31759,7 +32391,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_core_permissions_require_manager",
-      "target": "any",
+      "target": "backend_app_core_permissions_py_any",
       "confidence_score": 1.0
     },
     {
@@ -31930,6 +32562,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_core_security",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_users.py",
       "source_location": "L4",
       "weight": 1.0,
@@ -31943,7 +32587,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -32134,6 +32778,30 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_core_security_hash_password",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_create_user_fixture",
+      "target": "backend_app_core_security_hash_password",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_users.py",
       "source_location": "L4",
       "weight": 1.0,
@@ -32159,7 +32827,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -32171,7 +32839,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L40",
+      "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_security_helpers",
@@ -32183,7 +32851,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L20",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_user_model",
@@ -32219,7 +32887,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -32231,7 +32899,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L41",
+      "source_location": "L49",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_security_helpers",
@@ -32339,7 +33007,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -32351,7 +33019,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L47",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_security_helpers",
@@ -32399,7 +33067,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -32411,11 +33079,605 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L50",
+      "source_location": "L58",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_security_helpers",
       "target": "backend_app_core_security_validate_password_strength",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "backend_app_core_utils_get_ist_timezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "backend_app_core_utils_normalize_phone_number",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "backend_app_core_utils_now_ist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "backend_app_core_utils_parse_utc_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "backend_app_core_utils_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "backend_app_core_utils_to_ist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils",
+      "target": "zoneinfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_core_utils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_core_utils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation",
+      "target": "backend_app_core_utils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils_get_ist_timezone",
+      "target": "zoneinfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils_now_ist",
+      "target": "backend_app_core_utils_get_ist_timezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils_to_ist",
+      "target": "backend_app_core_utils_get_ist_timezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation",
+      "target": "backend_app_core_utils_get_ist_timezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation_test_utils_helpers",
+      "target": "backend_app_core_utils_get_ist_timezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation",
+      "target": "zoneinfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils_now_ist",
+      "target": "backend_app_core_utils_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation",
+      "target": "backend_app_core_utils_now_ist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation_test_utils_helpers",
+      "target": "backend_app_core_utils_now_ist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils_now_utc",
+      "target": "backend_app_core_utils_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils_parse_utc_datetime",
+      "target": "backend_app_core_utils_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/utils.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_core_utils_to_ist",
+      "target": "backend_app_core_utils_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_sync_calls_batch",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_create_lead_fixture",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L347",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_connected_call_finishes_lead",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L507",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L474",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_manual_keypad_call_resolves_lead",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L439",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_stopped_at_attempt_cap",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L387",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_unconnected_call_increments_and_locks",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L293",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_international_format",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L266",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_local_format",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L320",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_unparseable_stored_raw",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L153",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_malformed_row_skipped_while_valid_saved",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_old_call_dropped",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L207",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_valid_batch_saved",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation_test_utils_helpers",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation",
+      "target": "backend_app_core_utils_to_ist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation_test_utils_helpers",
+      "target": "backend_app_core_utils_to_ist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_core_utils_normalize_phone_number",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_extract_valid_call",
+      "target": "backend_app_core_utils_normalize_phone_number",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_core_utils_normalize_phone_number",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation",
+      "target": "backend_app_core_utils_normalize_phone_number",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation_test_utils_helpers",
+      "target": "backend_app_core_utils_normalize_phone_number",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_core_utils_parse_utc_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_extract_valid_call",
+      "target": "backend_app_core_utils_parse_utc_datetime",
       "confidence_score": 1.0
     },
     {
@@ -32427,6 +33689,42 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_auth_services",
+      "target": "backend_app_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/models.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_models",
+      "target": "backend_app_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/models.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_models",
       "target": "backend_app_extensions",
       "confidence_score": 1.0
     },
@@ -32482,6 +33780,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_users.py",
       "source_location": "L5",
       "weight": 1.0,
@@ -32495,7 +33805,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L10",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -32806,6 +34116,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/auth/services.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_auth_services",
+      "target": "backend_app_modules_auth_services_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/auth/services.py",
@@ -32859,18 +34181,6 @@
       "_origin": "ast",
       "source": "backend_app_modules_auth_services",
       "target": "backend_app_modules_users_models_user",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/modules/auth/services.py",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "backend_app_modules_auth_services",
-      "target": "datetime",
       "confidence_score": 1.0
     },
     {
@@ -32954,7 +34264,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_auth_services_set_lockout_expiry",
-      "target": "datetime",
+      "target": "backend_app_modules_auth_services_py_datetime",
       "confidence_score": 1.0
     },
     {
@@ -32982,27 +34292,509 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports_from",
-      "context": "import",
+      "relation": "re_exports",
+      "context": "export",
       "confidence": "EXTRACTED",
-      "source_file": "backend/app/modules/users/models.py",
+      "source_file": "backend/app/modules/calls/__init__.py",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "backend_app_modules_users_models",
-      "target": "datetime",
+      "source": "backend_app_modules_calls_init",
+      "target": "backend_app_modules_calls_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_init",
+      "target": "backend_app_modules_calls_models_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/__init__.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_init",
+      "target": "backend_app_modules_calls_routes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/models.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_models",
+      "target": "backend_app_modules_calls_models_call",
       "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "backend/tests/modules/test_auth.py",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_modules_calls_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_modules_calls_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_modules_calls_models_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_sync_calls_batch",
+      "target": "backend_app_modules_calls_models_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_modules_calls_models_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_modules_calls_routes_sync_calls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_modules_calls_schemas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_modules_calls_schemas_synccallsrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_modules_calls_services",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes",
+      "target": "backend_app_modules_calls_services_sync_calls_batch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes_sync_calls",
+      "target": "route",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes_sync_calls",
+      "target": "backend_app_modules_calls_routes_py_response",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes_sync_calls",
+      "target": "backend_app_modules_calls_schemas_synccallsrequest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/modules/calls/routes.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_routes_sync_calls",
+      "target": "backend_app_modules_calls_services_sync_calls_batch"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/schemas.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_schemas",
+      "target": "backend_app_modules_calls_schemas_synccallsrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/schemas.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_schemas",
+      "target": "backend_app_modules_calls_schemas_synccallsresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/schemas.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_schemas_synccallsrequest",
+      "target": "backend_app_modules_calls_schemas_py_basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/schemas.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_schemas_synccallsresponse",
+      "target": "backend_app_modules_calls_schemas_py_basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_modules_calls_services_extract_valid_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "backend_tests_modules_test_auth",
-      "target": "datetime",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_modules_calls_services_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_modules_calls_services_sync_calls_batch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services",
+      "target": "backend_app_modules_leads_services_resolve_lead_for_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_extract_valid_call",
+      "target": "backend_app_modules_calls_services_py_any",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_extract_valid_call",
+      "target": "backend_app_modules_calls_services_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_sync_calls_batch",
+      "target": "backend_app_modules_calls_services_extract_valid_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_sync_calls_batch",
+      "target": "backend_app_modules_calls_services_py_any",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/calls/services.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_calls_services_sync_calls_batch",
+      "target": "backend_app_modules_leads_services_resolve_lead_for_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_init",
+      "target": "backend_app_modules_leads_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_init",
+      "target": "backend_app_modules_leads_models_lead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/__init__.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_init",
+      "target": "backend_app_modules_leads_services",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/__init__.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_init",
+      "target": "backend_app_modules_leads_services_resolve_lead_for_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/models.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_models",
+      "target": "backend_app_modules_leads_models_lead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services",
+      "target": "backend_app_modules_leads_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services",
+      "target": "backend_app_modules_leads_models_lead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_modules_leads_models_lead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_create_lead_fixture",
+      "target": "backend_app_modules_leads_models_lead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services",
+      "target": "backend_app_modules_leads_services_py_datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services",
+      "target": "backend_app_modules_leads_services_resolve_lead_for_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services_resolve_lead_for_call",
+      "target": "backend_app_modules_leads_services_py_datetime",
       "confidence_score": 1.0
     },
     {
@@ -33069,7 +34861,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L11",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -33259,6 +35051,30 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_app_modules_users_models_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_create_user_fixture",
+      "target": "backend_app_modules_users_models_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_users.py",
       "source_location": "L6",
       "weight": 1.0,
@@ -33284,7 +35100,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L11",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -33296,7 +35112,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L21",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_user_model",
@@ -34562,6 +36378,781 @@
       "_origin": "ast",
       "source": "backend_tests_modules_test_auth_test_token_invalid_after_password_reset",
       "target": "backend_tests_modules_test_auth_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_create_lead_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L341",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_lead_resolution_connected_call_finishes_lead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L501",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L468",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_lead_resolution_manual_keypad_call_resolves_lead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L433",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_lead_resolution_stopped_at_attempt_cap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L381",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_lead_resolution_unconnected_call_increments_and_locks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L287",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_phone_number_normalization_international_format",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L260",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_phone_number_normalization_local_format",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L314",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_phone_number_normalization_unparseable_stored_raw",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_malformed_row_skipped_while_valid_saved",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L578",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_old_call_dropped",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L561",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L553",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_requires_authentication",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L201",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_valid_batch_saved",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L345",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_connected_call_finishes_lead",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L505",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L472",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_manual_keypad_call_resolves_lead",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L437",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_stopped_at_attempt_cap",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L385",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_unconnected_call_increments_and_locks",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L291",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_international_format",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L264",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_local_format",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L318",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_unparseable_stored_raw",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L151",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_malformed_row_skipped_while_valid_saved",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L580",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_old_call_dropped",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L563",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L205",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_valid_batch_saved",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L349",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_connected_call_finishes_lead",
+      "target": "backend_tests_modules_test_calls_create_lead_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L509",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls",
+      "target": "backend_tests_modules_test_calls_create_lead_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L476",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_manual_keypad_call_resolves_lead",
+      "target": "backend_tests_modules_test_calls_create_lead_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L442",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_stopped_at_attempt_cap",
+      "target": "backend_tests_modules_test_calls_create_lead_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L389",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_unconnected_call_increments_and_locks",
+      "target": "backend_tests_modules_test_calls_create_lead_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_valid_batch_saved",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_valid_batch_saved",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L341",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_connected_call_finishes_lead",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L501",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L468",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_manual_keypad_call_resolves_lead",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L433",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_stopped_at_attempt_cap",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L381",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_unconnected_call_increments_and_locks",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L287",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_international_format",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L260",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_local_format",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L314",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_unparseable_stored_raw",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_malformed_row_skipped_while_valid_saved",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L578",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_old_call_dropped",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L561",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L201",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L341",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_connected_call_finishes_lead",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L501",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L468",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_manual_keypad_call_resolves_lead",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L433",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_stopped_at_attempt_cap",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L381",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_lead_resolution_unconnected_call_increments_and_locks",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L287",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_international_format",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L260",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_local_format",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L314",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_phone_number_normalization_unparseable_stored_raw",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_malformed_row_skipped_while_valid_saved",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L578",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_old_call_dropped",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L561",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L553",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_requires_authentication",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L201",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
       "confidence_score": 1.0
     },
     {
@@ -35989,7 +38580,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L14",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -36000,7 +38591,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L56",
+      "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -36011,7 +38602,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L38",
+      "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -36022,7 +38613,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L19",
+      "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation",
@@ -36030,11 +38621,22 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_foundation.py",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_foundation",
+      "target": "backend_tests_test_foundation_test_utils_helpers",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L14",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_app_creation",
@@ -36046,7 +38648,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L56",
+      "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_error_handler",
@@ -36058,7 +38660,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L19",
+      "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_user_model",
@@ -36070,7 +38672,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_foundation.py",
-      "source_location": "L56",
+      "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_error_handler",
@@ -45563,7 +48165,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L105",
+      "source_location": "L106",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45574,7 +48176,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L114",
+      "source_location": "L115",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45585,7 +48187,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L125",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45596,7 +48198,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L135",
+      "source_location": "L136",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45607,7 +48209,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L146",
+      "source_location": "L147",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45618,7 +48220,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L160",
+      "source_location": "L161",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45629,7 +48231,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L170",
+      "source_location": "L171",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45640,7 +48242,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L182",
+      "source_location": "L183",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45651,7 +48253,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L191",
+      "source_location": "L192",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45662,7 +48264,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L200",
+      "source_location": "L201",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45728,7 +48330,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L64",
+      "source_location": "L65",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45739,7 +48341,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L74",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45750,7 +48352,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L86",
+      "source_location": "L87",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45761,7 +48363,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L94",
+      "source_location": "L95",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks_tasks_sales_call_tracker_v1",
@@ -45858,5 +48460,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "409a5e3c0c47fae0cffeb52de102a7e621de3d5e"
+  "built_at_commit": "6132171feb293569f45f042665b3965b2aa80c88"
 }

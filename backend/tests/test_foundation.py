@@ -1,11 +1,19 @@
 from flask import Flask, Response
 from flask.testing import FlaskClient
+from zoneinfo import ZoneInfo
 from backend.app.core.errors import AppException
 from backend.app.core.security import (
     generate_auth_token,
     hash_password,
     validate_password_strength,
     verify_password,
+)
+from backend.app.core.utils import (
+    get_ist_timezone,
+    normalize_phone_number,
+    now_ist,
+    now_utc,
+    to_ist,
 )
 from backend.app.extensions import db
 from backend.app.modules.users.models import User
@@ -62,3 +70,21 @@ def test_error_handler(app: Flask, client: FlaskClient) -> None:
     assert response.status_code == 400
     json_data: dict[str, str] = response.get_json()
     assert json_data["message"] == "Custom error message"
+
+
+def test_utils_helpers() -> None:
+    tz: ZoneInfo = get_ist_timezone()
+    assert tz.key == "Asia/Kolkata"
+
+    current_ist = now_ist()
+    assert current_ist.tzinfo is not None
+
+    current_utc = now_utc()
+    assert current_utc.tzinfo is not None
+
+    converted = to_ist(current_utc)
+    assert converted.tzinfo is not None
+
+    normalized_in = normalize_phone_number("9876543210", "IN")
+    assert normalized_in == "+919876543210"
+

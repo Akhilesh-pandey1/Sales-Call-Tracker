@@ -240,13 +240,8 @@
     "semantic_hash": ""
   },
   "agent-doc/decisions.md": {
-    "mtime": 1791977328.060787,
-    "ast_hash": "9d1180f9711d75bd83e6ca50ab9e745a",
-    "semantic_hash": ""
-  },
-  "agent-doc/design.md": {
-    "mtime": 1791982142.80232,
-    "ast_hash": "fc7067df8ec3347c56c7f0cdc48bae19",
+    "mtime": 1791984684.4611833,
+    "ast_hash": "3f697c8b676300990966d3dff55b06c3",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/uiux/data/catalog-summary.json": {
@@ -919,29 +914,9 @@
     "ast_hash": "43ebf4b644a428d58f5847ab8b11b561",
     "semantic_hash": ""
   },
-  "agent-doc/screens/variations/01-login--salesperson-gate.html": {
-    "mtime": 1791978205.9087071,
-    "ast_hash": "272671523a91e54df47a435b58415be4",
-    "semantic_hash": ""
-  },
-  "agent-doc/screens/variations/03-teams.html": {
-    "mtime": 1789815053.8400917,
-    "ast_hash": "f7829fdc8a316c3acc0893ec904aaaa5",
-    "semantic_hash": ""
-  },
-  "agent-doc/screens/variations/07-dialer--no-leads.html": {
-    "mtime": 1791978535.8500168,
-    "ast_hash": "291a7adc25ba3d3d9584980c968783e8",
-    "semantic_hash": ""
-  },
-  "agent-doc/screens/variations/07-dialer--schedule-dialog.html": {
-    "mtime": 1791978521.166474,
-    "ast_hash": "cd25fdfcd69400d8b4ce18c585c8e3f0",
-    "semantic_hash": ""
-  },
   "agent-doc/structure.md": {
-    "mtime": 1791975357.3481934,
-    "ast_hash": "01376780fd8a22a97135f83b677b7526",
+    "mtime": 1791984271.726042,
+    "ast_hash": "77504903e13c601288bbb35d7b03906b",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {

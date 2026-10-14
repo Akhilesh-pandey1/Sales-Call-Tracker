@@ -113,9 +113,6 @@
 - **Decision 115:** Salespeople do not have a lead pool overview screen or a schedule cancellation endpoint. The automated calling loop handles all lead serving and scheduling directly.
 - **Decision 116:** Database initialization uses Flask-SQLAlchemy `db.create_all()` on startup, with a small CLI seed command to create the initial manager account. Because the database is greenfield with no prior data, no data migration steps are required.
 - **Decision 117:** Emergency rollback for the database drops tables using CASCADE (`DROP TABLE IF EXISTS leads, calls, users CASCADE;`), cleanly removing tables and foreign key constraints without residual locks.
-- **Decision 118:** The core Python backend library stack is Flask, Flask-SQLAlchemy, psycopg2-binary, gunicorn, pytest, and phonenumbers.
-- **Decision 119:** The manager web dashboard library stack is React Router (`react-router-dom`), TanStack Query (`@tanstack/react-query`), Axios (`axios`), Tailwind CSS, shadcn/ui components, and Lucide React (`lucide-react`).
-- **Decision 120:** The mobile app telephony and runtime library stack is bare React Native CLI, React Navigation (`@react-navigation/bottom-tabs`), react-native-permissions, react-native-call-detection-android, react-native-call-log, react-native-sqlite-storage, `@react-native-async-storage/async-storage`, `@react-native-clipboard/clipboard`, `libphonenumber-js`, and Axios.
 
 
 

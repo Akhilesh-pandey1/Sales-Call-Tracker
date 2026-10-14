@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-14)
 
 ## Corpus Check
-- 148 files · ~389,228 words
+- 147 files · ~383,728 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1452 nodes · 1709 edges · 146 communities (130 shown, 16 thin omitted)
+- 1421 nodes · 1680 edges · 143 communities (127 shown, 16 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 17 edges (avg confidence: 0.54)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `29b476e9`
+- Built from commit: `c73c6383`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -18,7 +18,6 @@
 - .claude/skills/grill-with-superpower/scripts/server.cjs
 - .claude/settings.json
 - What You Must Do When Invoked
-- 4. Screens — exact contents
 - allow
 - Dimensions
 - grill-for-business/SKILL.md
@@ -61,19 +60,18 @@
 - our_agent.py
 - What You Must Do When Invoked
 - Dimensions
-- design_system.py
+- generate_design_system
 - allow
 - DesignSystemGenerator
 - ._apply_reasoning
 - _select_palette_for_mode
 - .generate
-- persist_design_system
+- .claude/skills/design-screens/uiux/scripts/design_system.py
 - .agents/skills/grill-for-business/SKILL.md
 - Design Screens
 - Write Screens
 - Manager View (web)
 - _resolve_color_mode
-- _generate_intelligent_overrides
 - 4. User Account Management (Manager Only)
 - Visual Companion Guide
 - deny
@@ -92,7 +90,6 @@
 - _select_palette_for_mode
 - .generate
 - 1. Backend Automated Tests (`backend/tests/`)
-- AGENTS.md
 - Node.js + TypeScript Code Style & Standards
 - .agents/settings.json
 - persist_design_system
@@ -165,7 +162,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (146 total, 16 thin omitted)
+## Communities (143 total, 16 thin omitted)
 
 ### Community 0 - ".claude/skills/grill-with-superpower/scripts/server.cjs"
 Cohesion: 0.06
@@ -178,10 +175,6 @@ Nodes (8): autoMemoryEnabled, disableArtifact, disableBundledSkills, disableClau
 ### Community 2 - "What You Must Do When Invoked"
 Cohesion: 0.07
 Nodes (26): For /graphify add and --watch, For /graphify query, For the commit hook and native CLAUDE.md integration, For --update and --cluster-only, /graphify, Honesty Rules, Interpreter guard for subcommands, Part A - Structural extraction for code files (+18 more)
-
-### Community 3 - "4. Screens — exact contents"
-Cohesion: 0.08
-Nodes (25): 1. The system in one look, 2. Database structure, 3. API — Flask, 4. Screens — exact contents, 5. Setup, 6. File structure — every file we build, Account management — manager only, api/ — Flask, strict MVC (+17 more)
 
 ### Community 4 - "allow"
 Cohesion: 0.08
@@ -323,8 +316,8 @@ Nodes (26): For /graphify add and --watch, For /graphify query, For the commit h
 Cohesion: 0.08
 Nodes (24): 10. Tech stack — one library per piece, 1. File structure & changes, 1. Gather facts — never ask the user for what you can find, 2. API contracts, 2. Say if this is greenfield or brownfield, 3. Classify the blast radius, 3. Database changes, 4. Build the coverage checklist (+16 more)
 
-### Community 53 - "design_system.py"
-Cohesion: 0.22
+### Community 53 - "generate_design_system"
+Cohesion: 0.17
 Nodes (12): ansi_ljust(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤ (+4 more)
 
 ### Community 54 - "allow"
@@ -347,9 +340,9 @@ Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG 
 Cohesion: 0.20
 Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
 
-### Community 59 - "persist_design_system"
-Cohesion: 0.25
-Nodes (9): format_master_md(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every…, Write fully to a temp file, then publish atomically., Persist design system to design-system/<project>/ folder using Master +…, safe_slug() (+1 more)
+### Community 59 - ".claude/skills/design-screens/uiux/scripts/design_system.py"
+Cohesion: 0.18
+Nodes (15): _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Format a page-specific override file with intelligent AI-generated content. (+7 more)
 
 ### Community 60 - ".agents/skills/grill-for-business/SKILL.md"
 Cohesion: 0.08
@@ -370,10 +363,6 @@ Nodes (12): Manager View (web), Salesperson View (Android app "Apex Sales Call")
 ### Community 64 - "_resolve_color_mode"
 Cohesion: 0.33
 Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
-
-### Community 65 - "_generate_intelligent_overrides"
-Cohesion: 0.33
-Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
 
 ### Community 66 - "4. User Account Management (Manager Only)"
 Cohesion: 0.10
@@ -447,10 +436,6 @@ Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once 
 Cohesion: 0.22
 Nodes (8): 1. Backend Automated Tests (`backend/tests/`), 2. Mobile Android Spike Checklist, Testing Specifications, `tests/modules/test_auth.py`, `tests/modules/test_calls.py`, `tests/modules/test_dashboard.py`, `tests/modules/test_leads.py`, `tests/modules/test_users.py`
 
-### Community 84 - "AGENTS.md"
-Cohesion: 0.22
-Nodes (8): Env Files, Language, Private Folder, Rules, Search, Tasks, Timelines, Working Directory
-
 ### Community 85 - "Node.js + TypeScript Code Style & Standards"
 Cohesion: 0.22
 Nodes (8): Architecture — Modular Monolith, Error & Exception Handling, Folder Structure, Function Composition & Layout, Language & File Structure, Libraries & Dependencies, Module Rules, Node.js + TypeScript Code Style & Standards
@@ -520,8 +505,8 @@ Cohesion: 0.29
 Nodes (6): Build Slices, Capabilities, Impact, New Capabilities, What Changes, Why
 
 ### Community 102 - "Project File Structure"
-Cohesion: 0.33
-Nodes (5): 1. Backend (`backend/`) — Python / Flask Modular Monolith, 2. Manager Web Dashboard (`web/`) — React + TypeScript, 3. Salesperson Mobile App (`app/`) — React Native (Bare CLI) + TypeScript, Architecture Overview, Project File Structure
+Cohesion: 0.20
+Nodes (9): 1. Backend (`backend/`) — Python / Flask Modular Monolith, 1. Mobile App (`app/`) — Android Sideloaded APK, 2. Manager Web Dashboard (`web/`) — React + TypeScript, 2. Web Dashboard (`web/`) — Manager Web App, 3. Backend (`backend/`) — Python Flask API, 3. Salesperson Mobile App (`app/`) — React Native (Bare CLI) + TypeScript, Architecture Overview, Project File Structure (+1 more)
 
 ### Community 103 - "_generate_intelligent_overrides"
 Cohesion: 0.33
@@ -592,24 +577,24 @@ Cohesion: 0.50
 Nodes (3): How to break a slice into tasks, One group per build slice, Task quality
 
 ## Knowledge Gaps
-- **764 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+759 more)
+- **739 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+734 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **Why does `search()` connect `.agents/skills/design-screens/uiux/scripts/core.py` to `.agents/skills/design-screens/uiux/scripts/design_system.py`, `.generate`, `_generate_intelligent_overrides`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Why does `search()` connect `core.py` to `_generate_intelligent_overrides`, `.generate`, `design_system.py`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `design_system.py`?**
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `._apply_reasoning`, `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`, `generate_design_system`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
-  _764 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _739 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `.claude/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._
 - **Should `What You Must Do When Invoked` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
-- **Should `4. Screens — exact contents` be split into smaller, more focused modules?**
-  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
+- **Should `allow` be split into smaller, more focused modules?**
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._

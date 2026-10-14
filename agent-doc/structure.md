@@ -4,7 +4,38 @@
 The system consists of three parts in a single repository:
 - `backend/`: Python Flask modular monolith API served on Render.
 - `web/`: React + TypeScript manager dashboard built with Vite and served by the Flask backend.
-- `app/`: React Native (bare CLI) + TypeScript Android app ("Apex Sales Call") distributed via APK sideloading.
+- `app/`: React Native (bare CLI) + TypeScript Android app ("Apex Sales Call") with NativeWind + React Native Reusables, distributed via APK sideloading.
+
+---
+
+## Technology Stack & Tools
+
+### 1. Mobile App (`app/`) — Android Sideloaded APK
+- **Runtime & Language**: Bare React Native CLI + TypeScript
+- **Styling**: NativeWind (Tailwind CSS for React Native)
+- **UI Components**: React Native Reusables (`react-native-reusables` — shadcn/ui for React Native in `components/ui/`)
+- **Navigation**: React Navigation (`@react-navigation/bottom-tabs`)
+- **Local Storage**: `react-native-sqlite-storage` (pending call queue) + `@react-native-async-storage/async-storage`
+- **Telephony & Permissions**:
+  - `react-native-permissions`
+  - `react-native-call-detection-android`
+  - `react-native-call-log`
+- **Utilities**: `libphonenumber-js` (E.164 phone normalization), `axios` (API requests), `@react-native-clipboard/clipboard`
+
+### 2. Web Dashboard (`web/`) — Manager Web App
+- **Build Tool & Language**: Vite + React + TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui (Button, Dialog, Input, Table, Badge in `components/ui/`) + Lucide React (`lucide-react`)
+- **Routing**: React Router (`react-router-dom`)
+- **Server State & Data Fetching**: TanStack Query (`@tanstack/react-query`) + `axios`
+
+### 3. Backend (`backend/`) — Python Flask API
+- **Framework & Language**: Python + Flask (Modular Monolith)
+- **ORM & Database Client**: Flask-SQLAlchemy + `psycopg2-binary`
+- **Database**: PostgreSQL (hosted on Neon)
+- **WSGI Production Server**: Gunicorn
+- **Validation & Tools**: `phonenumbers` (Python phone parsing), `pytest` (automated tests)
+- **Hosting & Serving**: Render (Flask also serves the built `web/dist` static assets)
 
 ---
 
@@ -123,6 +154,8 @@ web/
 ```text
 app/
 ├── package.json
+├── tailwind.config.js               # NativeWind Tailwind configuration
+├── global.css                       # NativeWind CSS theme and styles
 ├── App.tsx                          # Root container: Auth check → Tab navigation
 ├── index.js                         # React Native app registry entry point
 ├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE)
@@ -131,6 +164,8 @@ app/
     │   └── navigation/
     │       ├── app-navigator.tsx    # Bottom tabs: Dialer (with Dialer & Automated tabs) and My Stats
     │       └── root-navigator.tsx   # Login vs Main App screen switch
+    ├── components/
+    │   └── ui/                      # React Native Reusables (shadcn for mobile): button, input, card, dialog, text
     ├── features/
     │   ├── auth/
     │   │   ├── api/auth.api.ts

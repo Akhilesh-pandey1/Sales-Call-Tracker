@@ -11,11 +11,11 @@
   <style>
     :root {
       --color-primary: #6366F1;
-      --color-on-primary: #000000;
+      --color-on-primary: #FFFFFF;
       --color-secondary: #818CF8;
       --color-on-secondary: #0F172A;
       --color-accent: #059669;
-      --color-on-accent: #000000;
+      --color-on-accent: #FFFFFF;
       --color-background: #F5F3FF;
       --color-foreground: #1E1B4B;
       --color-card: #FFFFFF;
@@ -36,98 +36,225 @@
 
   <div class="mx-auto flex min-h-screen w-full max-w-md flex-col">
 
-    <!-- Compact one-screen layout: content centers when the phone is tall, stays whole when it is short -->
-    <main class="flex flex-1 flex-col px-5 pb-4 pt-4">
-      <div class="my-auto">
-
-        <!-- Number display: the number being typed, with backspace -->
-        <div class="flex items-center justify-center gap-3 py-2.5" aria-live="polite">
-          <p class="flex-1 text-right text-3xl font-bold tracking-[0.08em] tabular-nums">98765 43210</p>
-          <button type="button" title="Backspace" aria-label="Backspace" class="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/>
-              <line x1="18" y1="9" x2="12" y2="15"/>
-              <line x1="12" y1="9" x2="18" y2="15"/>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Paste: fills the number from anything copied anywhere on the phone -->
-        <button type="button" class="mx-auto mt-1 flex cursor-pointer items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-5 py-2 text-sm font-semibold text-[var(--color-primary)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
-            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-            <line x1="12" y1="11" x2="12" y2="17"/>
-            <line x1="9" y1="14" x2="15" y2="14"/>
-          </svg>
-          Paste
+    <!-- Header: Compact & Sleek Sub-Tab Switch -->
+    <header class="sticky top-0 z-20 flex items-center justify-center border-b border-[var(--color-border)] bg-[var(--color-card)] py-2 px-4 shadow-xs">
+      <div class="inline-flex items-center rounded-full bg-[var(--color-muted)] p-0.5 border border-[var(--color-border)] text-xs font-semibold">
+        <button type="button" id="tab-keypad-btn" onclick="showSubTab('keypad')" class="rounded-full px-4 py-1 text-xs transition-all bg-[var(--color-primary)] text-white shadow-xs">
+          Keypad
         </button>
+        <button type="button" id="tab-automated-btn" onclick="showSubTab('automated')" class="rounded-full px-4 py-1 text-xs transition-all text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]">
+          Automated
+        </button>
+      </div>
+    </header>
 
-        <!-- Keypad -->
-        <div class="mx-auto mt-5 grid w-full max-w-[14rem] grid-cols-3 gap-x-4 gap-y-3" aria-label="Keypad">
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">1</span>
+    <!-- MAIN BODY -->
+    <main class="flex flex-1 flex-col px-5 pb-4 pt-2">
+
+      <!-- ================= KEYPAD VIEW ================= -->
+      <div id="view-keypad" class="flex flex-1 flex-col">
+        <div class="my-auto py-2">
+
+          <!-- Number display -->
+          <div class="flex items-center justify-center gap-3 py-2" aria-live="polite">
+            <p id="dial-number" class="flex-1 text-right text-3xl font-bold tracking-[0.08em] tabular-nums">98765 43210</p>
+            <button type="button" onclick="backspace()" title="Backspace" aria-label="Backspace" class="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--color-muted-foreground)] transition-colors hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/>
+                <line x1="18" y1="9" x2="12" y2="15"/>
+                <line x1="12" y1="9" x2="18" y2="15"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Paste button -->
+          <button type="button" onclick="pasteNumber()" class="mx-auto mt-1 flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-1.5 text-xs font-semibold text-[var(--color-primary)] transition-colors hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <line x1="12" y1="11" x2="12" y2="17"/>
+              <line x1="9" y1="14" x2="15" y2="14"/>
+            </svg>
+            Paste
           </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">2</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">3</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">4</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">5</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">6</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">7</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">8</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">9</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">*</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">0</span>
-          </button>
-          <button type="button" class="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
-            <span class="text-2xl font-semibold">#</span>
-          </button>
+
+          <!-- Keypad grid -->
+          <div class="mx-auto mt-4 grid w-full max-w-[14rem] grid-cols-3 gap-x-4 gap-y-2.5" aria-label="Keypad">
+            <button type="button" onclick="appendDigit('1')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">1</span></button>
+            <button type="button" onclick="appendDigit('2')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">2</span></button>
+            <button type="button" onclick="appendDigit('3')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">3</span></button>
+            <button type="button" onclick="appendDigit('4')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">4</span></button>
+            <button type="button" onclick="appendDigit('5')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">5</span></button>
+            <button type="button" onclick="appendDigit('6')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">6</span></button>
+            <button type="button" onclick="appendDigit('7')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">7</span></button>
+            <button type="button" onclick="appendDigit('8')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">8</span></button>
+            <button type="button" onclick="appendDigit('9')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">9</span></button>
+            <button type="button" onclick="appendDigit('*')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">*</span></button>
+            <button type="button" onclick="appendDigit('0')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">0</span></button>
+            <button type="button" onclick="appendDigit('#')" class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card)] shadow-xs transition-colors hover:bg-[var(--color-muted)]"><span class="text-2xl font-semibold">#</span></button>
+          </div>
+
+          <!-- Call button -->
+          <div class="mt-4">
+            <button type="button" id="call-btn" class="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-accent)] py-3 text-lg font-bold text-[var(--color-on-accent)] shadow-xs transition-opacity hover:opacity-90">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              Call
+            </button>
+            <p class="mt-2 text-center text-[11px] text-[var(--color-muted-foreground)]">Calls are logged and sent to your manager automatically.</p>
+          </div>
+
         </div>
+      </div>
 
-        <!-- Call: grey until the number is valid, green when valid. After the call ends nothing is tapped - it records itself -->
-        <div class="mt-5">
-          <button type="button" class="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-accent)] py-3.5 text-lg font-bold text-[var(--color-on-accent)] shadow-sm transition-opacity duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <!-- ================= AUTOMATED VIEW ================= -->
+      <div id="view-automated" class="hidden flex-1 flex-col">
+
+        <!-- SCREEN 1: START CALLING VIEW -->
+        <div id="auto-screen-start" class="my-auto py-8 text-center">
+          <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-primary)] text-white shadow-sm">
+            <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
-            Call
+          </div>
+
+          <h2 class="mt-4 text-xl font-bold tracking-tight">Automated Calling</h2>
+          <p class="mt-1.5 text-xs text-[var(--color-muted-foreground)] px-6">Clicking Start Calling immediately dials the next lead. When call ends, record the outcome and auto-dial next.</p>
+
+          <!-- Start Calling Button -->
+          <button type="button" onclick="startAutomatedCall()" class="mt-8 inline-flex w-full max-w-xs cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-accent)] py-4 text-base font-bold text-white shadow-sm transition-opacity hover:opacity-95">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            Start Calling
           </button>
-          <p class="mt-2 text-center text-[11px] text-[var(--color-muted-foreground)]">Calls are logged and sent to your manager by themselves.</p>
+        </div>
+
+        <!-- CALL IN PROGRESS SIMULATION (Transitions quickly to outcome dialog) -->
+        <div id="auto-calling-progress" class="hidden my-auto py-10 text-center">
+          <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-[var(--color-accent)] animate-pulse">
+            <svg class="h-10 w-10 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-emerald-700">Call in progress...</p>
+          <p id="calling-number-display" class="mt-1 text-2xl font-extrabold tabular-nums">+91 98765 43210</p>
+          <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">Dialing via telephony service...</p>
+          <button type="button" onclick="endCallAndShowOutcome()" class="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-xl bg-[var(--color-destructive)] px-6 py-2.5 text-xs font-bold text-white shadow-xs">
+            End Call & Record Outcome
+          </button>
         </div>
 
       </div>
+
     </main>
 
-    <!-- Bottom tab bar -->
+    <!-- SCREEN 2: POST-CALL OUTCOME POP-UP MODAL (User Requested) -->
+    <div id="outcome-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-4 backdrop-blur-xs">
+      <div class="w-full max-w-sm rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
+        
+        <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+          <div>
+            <h3 class="text-base font-bold tracking-tight">Call Outcome</h3>
+            <p id="modal-phone-num" class="text-xs text-[var(--color-muted-foreground)] tabular-nums">+91 98765 43210</p>
+          </div>
+          <span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
+        </div>
+
+        <!-- 3 Required Options: Connected | Did not connect | Schedule -->
+        <div class="mt-4 space-y-2.5">
+          <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Select Call Result</p>
+          
+          <!-- Option 1: Connected -->
+          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-[var(--color-accent)] has-checked:bg-emerald-50/50">
+            <div class="flex items-center gap-3">
+              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-100 text-[var(--color-accent)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-[var(--color-foreground)]">Connected</p>
+                <p class="text-[11px] text-[var(--color-muted-foreground)]">Spoke with client / Lead completed</p>
+              </div>
+            </div>
+            <input type="radio" name="call-outcome" value="connected" checked class="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-accent)]" onchange="toggleScheduleFields(false)">
+          </label>
+
+          <!-- Option 2: Did not connect -->
+          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-red-400 has-checked:bg-red-50/50">
+            <div class="flex items-center gap-3">
+              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-red-100 text-[var(--color-destructive)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-[var(--color-foreground)]">Did not connect</p>
+                <p class="text-[11px] text-[var(--color-muted-foreground)]">No answer, busy, or unreachable</p>
+              </div>
+            </div>
+            <input type="radio" name="call-outcome" value="not_connected" class="h-4 w-4 text-[var(--color-destructive)] focus:ring-[var(--color-destructive)]" onchange="toggleScheduleFields(false)">
+          </label>
+
+          <!-- Option 3: Schedule -->
+          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/50">
+            <div class="flex items-center gap-3">
+              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-100 text-[var(--color-primary)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-[var(--color-foreground)]">Schedule</p>
+                <p class="text-[11px] text-[var(--color-muted-foreground)]">Reserve callback date & time</p>
+              </div>
+            </div>
+            <input type="radio" name="call-outcome" value="schedule" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-primary)]" onchange="toggleScheduleFields(true)">
+          </label>
+        </div>
+
+        <!-- Schedule Date/Time input (shown if Schedule selected) -->
+        <div id="schedule-input-box" class="hidden mt-3 rounded-xl border border-indigo-200 bg-indigo-50/40 p-3">
+          <label for="sched-dt" class="block text-[11px] font-semibold uppercase tracking-wider text-indigo-900">Follow-up Time (IST)</label>
+          <input type="datetime-local" id="sched-dt" value="2026-10-15T11:00" class="mt-1 w-full rounded-lg border border-indigo-200 bg-white px-2.5 py-1.5 text-xs font-medium text-[var(--color-foreground)]">
+        </div>
+
+        <!-- Next Call Checkbox: check or uncheck whether to do the next call or pause -->
+        <div class="mt-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-3">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="auto-next-checkbox" checked class="h-4 w-4 rounded text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            <span class="text-xs font-bold text-[var(--color-foreground)]">Auto-dial next lead immediately</span>
+          </label>
+          <p class="mt-1 pl-7 text-[10px] text-[var(--color-muted-foreground)]">Uncheck to pause and review before placing next call.</p>
+        </div>
+
+        <!-- Submit & Advance Action -->
+        <div class="mt-5 flex gap-2">
+          <button type="button" onclick="submitOutcomeAndProceed()" class="flex-1 cursor-pointer rounded-xl bg-[var(--color-primary)] py-3 text-xs font-bold text-white shadow-xs transition-colors hover:bg-[var(--color-secondary)] text-center">
+            Save & Continue →
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom tab bar: 2 tabs - Dialer | My Stats -->
     <nav class="sticky bottom-0 z-20 border-t border-[var(--color-border)] bg-[var(--color-card)]" aria-label="App tabs">
-      <div class="grid grid-cols-3">
-        <a href="#" aria-current="page" class="flex flex-col items-center gap-1 py-2 text-xs font-semibold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-ring)]">
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <div class="grid grid-cols-2">
+        <a href="#" aria-current="page" class="flex flex-col items-center gap-1 py-2 text-xs font-semibold text-[var(--color-primary)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
           </svg>
           Dialer
         </a>
-        <a href="#" class="flex cursor-pointer flex-col items-center gap-1 py-2 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-ring)]">
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <a href="#" class="flex cursor-pointer flex-col items-center gap-1 py-2 text-xs font-medium text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M3 3v18h18"/>
             <path d="M18 17V9"/>
             <path d="M13 17V5"/>
@@ -135,17 +262,96 @@
           </svg>
           My Stats
         </a>
-        <a href="#" class="flex cursor-pointer flex-col items-center gap-1 py-2 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-ring)]">
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-            <circle cx="12" cy="12" r="3"/>
-          </svg>
-          Settings
-        </a>
       </div>
     </nav>
 
   </div>
+
+  <script>
+    // Sub-tab switching: sleek compact toggle
+    function showSubTab(tab) {
+      const keypadBtn = document.getElementById('tab-keypad-btn');
+      const autoBtn = document.getElementById('tab-automated-btn');
+      const viewKeypad = document.getElementById('view-keypad');
+      const viewAuto = document.getElementById('view-automated');
+
+      if (tab === 'keypad') {
+        keypadBtn.className = 'rounded-full px-4 py-1 text-xs transition-all bg-[var(--color-primary)] text-white shadow-xs';
+        autoBtn.className = 'rounded-full px-4 py-1 text-xs transition-all text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]';
+        viewKeypad.classList.remove('hidden');
+        viewAuto.classList.add('hidden');
+      } else {
+        autoBtn.className = 'rounded-full px-4 py-1 text-xs transition-all bg-[var(--color-primary)] text-white shadow-xs';
+        keypadBtn.className = 'rounded-full px-4 py-1 text-xs transition-all text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]';
+        viewAuto.classList.remove('hidden');
+        viewKeypad.classList.add('hidden');
+      }
+    }
+
+    // Keypad functions
+    function appendDigit(d) {
+      const el = document.getElementById('dial-number');
+      if (el.textContent === '0' || el.textContent === '98765 43210') el.textContent = '';
+      el.textContent += d;
+    }
+    function backspace() {
+      const el = document.getElementById('dial-number');
+      el.textContent = el.textContent.slice(0, -1);
+      if (el.textContent === '') el.textContent = '0';
+    }
+    function pasteNumber() {
+      document.getElementById('dial-number').textContent = '+91 91234 56789';
+    }
+
+    // Automated flow queue
+    const leadsList = [
+      "+91 98765 43210",
+      "+91 98123 45678",
+      "+91 97234 56789",
+      "+91 96345 67890"
+    ];
+    let currentIdx = 0;
+
+    function startAutomatedCall() {
+      const currentNumber = leadsList[currentIdx % leadsList.length];
+      document.getElementById('calling-number-display').textContent = currentNumber;
+      document.getElementById('auto-screen-start').classList.add('hidden');
+      document.getElementById('auto-calling-progress').classList.remove('hidden');
+      
+      // Auto-simulate call connected / prompt after 1.8s
+      setTimeout(function() {
+        endCallAndShowOutcome();
+      }, 1800);
+    }
+
+    function endCallAndShowOutcome() {
+      const currentNumber = leadsList[currentIdx % leadsList.length];
+      document.getElementById('modal-phone-num').textContent = currentNumber;
+      document.getElementById('outcome-modal').classList.remove('hidden');
+    }
+
+    function toggleScheduleFields(show) {
+      const box = document.getElementById('schedule-input-box');
+      if (show) box.classList.remove('hidden');
+      else box.classList.add('hidden');
+    }
+
+    function submitOutcomeAndProceed() {
+      const isAutoNext = document.getElementById('auto-next-checkbox').checked;
+      document.getElementById('outcome-modal').classList.add('hidden');
+      document.getElementById('auto-calling-progress').classList.add('hidden');
+      
+      currentIdx++;
+      const nextNumber = leadsList[currentIdx % leadsList.length];
+      document.getElementById('next-lead-preview').textContent = nextNumber;
+
+      if (isAutoNext) {
+        startAutomatedCall();
+      } else {
+        document.getElementById('auto-screen-start').classList.remove('hidden');
+      }
+    }
+  </script>
 
 </body>
 </html>

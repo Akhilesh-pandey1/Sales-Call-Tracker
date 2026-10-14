@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manager Gate — Apex Sales Call</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #6366F1;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #818CF8;
+      --color-on-secondary: #0F172A;
+      --color-accent: #059669;
+      --color-on-accent: #FFFFFF;
+      --color-background: #F5F3FF;
+      --color-foreground: #1E1B4B;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #1E1B4B;
+      --color-muted: #EBEFF9;
+      --color-muted-foreground: #475569;
+      --color-border: #E0E7FF;
+      --color-destructive: #DC2626;
+      --color-on-destructive: #FFFFFF;
+      --color-ring: #6366F1;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+
+  <div class="mx-auto flex min-h-screen w-full max-w-md flex-col px-6">
+    <div class="my-auto py-12">
+
+      <div class="flex flex-col items-center text-center">
+        <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-muted)] text-[var(--color-destructive)] shadow-sm">
+          <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+          </svg>
+        </span>
+        <h1 class="mt-4 text-2xl font-bold tracking-tight">Access Restricted</h1>
+        <p class="mt-2 text-base font-medium text-[var(--color-destructive)]">This dashboard is for managers.</p>
+        <p class="mt-2 text-sm text-[var(--color-muted-foreground)]">Salespeople make calls and track stats exclusively using the Apex Sales Call mobile app.</p>
+      </div>
+
+      <div class="mt-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-sm text-center">
+        <p class="text-sm font-semibold">Signed in as Priya Sharma (Salesperson)</p>
+        <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">No management permissions are assigned to this account.</p>
+        <button type="button" class="mt-6 w-full cursor-pointer rounded-xl border border-[var(--color-border)] bg-[var(--color-muted)] py-3 text-sm font-bold text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-border)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Sign Out</button>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

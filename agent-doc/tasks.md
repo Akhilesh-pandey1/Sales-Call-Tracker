@@ -5,7 +5,7 @@
 ## 1. Project Setup
 
 - [ ] 1.1 Create the GitHub repo (private), initialise with a root `.gitignore` covering Python, Node, and Android, connect it to Render for auto-deploy on push to `main`
-- [ ] 1.2 Create the three top-level folders: `backend/`, `web/`, `app/` as described in `structure.md`
+- [x] 1.2 Create the three top-level folders: `backend/`, `web/`, `app/` as described in `structure.md`
 - [ ] 1.3 Create and store the Android release signing keystore (`app/android/`) — one-time manual step; record the alias and store the `.jks` safely (never commit it)
 
 ---

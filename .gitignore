@@ -1,29 +1,76 @@
-# enviorment and big things
-node_modules
+# Environments and Secrets
+.env
+.env.*
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 venv/
-logs.txt
-
-# Other files
-dist
-.DS_Store
-package-lock.json
-.idea
-*.pyc
+.venv/
+env/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
 *.db
+*.sqlite3
 
-# Files
+# Node & Web
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+dist-ssr/
+package-lock.json
+
+# Android
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+.gradle/
+build/
+*/build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+output-metadata.json
+
+# Android Signing / Keystores
+*.keystore
+*.jks
+*.pepk
+
+# React Native & Metro
+.metro/
+.metro-health-check*
+
+# Operating System & IDEs
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project & File artifacts
+logs.txt
 *.pdf
 *.docx
 *.log
 *.doc
 *.xlsx
 *.xls
-*.db
-*.env
-*.pyc
 *.exe
 *.psd
-*.zip 
+*.zip
 *.csv
 
 # Graphify related files
@@ -34,5 +81,5 @@ package-lock.json
 !/graphify-out/.graphify_labels.json
 !/graphify-out/.graphify_labels.json.sig
 
-# Extra folder for your project, for local work
+# Extra folder for local work
 not_to_be_pushed

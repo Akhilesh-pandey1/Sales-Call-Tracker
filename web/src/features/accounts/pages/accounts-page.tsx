@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { AddUserModal } from "../components/add-user-modal";
 import { AccountsErrorState } from "../components/accounts-error-state";
 import { AccountsTable } from "../components/accounts-table";
 import { useAccounts } from "../hooks/use-accounts";
@@ -21,7 +22,10 @@ export function AccountsPage() {
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-6">
-      <h2 className="text-2xl font-bold tracking-tight">Accounts</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-2xl font-bold tracking-tight">Accounts</h2>
+        <AddUserModal />
+      </div>
       {isLoading && <p className="text-sm text-muted-foreground">Loading accounts…</p>}
       {!isLoading && (
         <AccountsTable

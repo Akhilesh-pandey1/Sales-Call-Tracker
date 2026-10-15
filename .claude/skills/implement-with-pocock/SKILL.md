@@ -3,12 +3,27 @@ name: implement-with-pocock
 description: "Implement a piece of work based on a spec or set of tickets."
 ---
 
-Implement the work described by the user in the spec or tickets.
+# Implement with Pocock
 
-Use /tdd-with-pocock where possible, at pre-agreed seams.
+Implement the work described in the spec or ticket with zero guessing.
 
-Run typechecking regularly, single test files regularly, and the full test suite once at the end.
+## 1. Single Source of Truth (No Guessing / No Assumptions)
+Do NOT invent architecture, folder structures, database schemas, API routes, or UI components. All decisions have already been planned, grilled, and designed:
 
-Once done, use /code-review-with-pocock to review the work.
+- **Specs & Scenarios**: `agent-doc/specs/`
+- **Database schemas & tables**: `agent-doc/database.md`
+- **API contracts & endpoints**: `agent-doc/api.md`
+- **Architectural & tech stack decisions**: `agent-doc/decisions.md`
+- **Screens & UI designs**: `agent-doc/screens/` (or generated HTML/CSS mockups)
 
-Commit your work to the current branch.
+Strictly mirror the exact types, naming, and layouts defined in these files.
+
+## 2. Implementation Loop
+1. Use `/tdd-with-pocock` where possible: write tests at pre-agreed public seams first, then write minimal code to pass.
+2. Run typechecking regularly and single test files regularly.
+3. Run the full test suite once at the end.
+
+## 3. Review & Commit
+1. Once code passes all tests, use `/code-review-with-pocock` to review against the original spec and coding standards.
+2. Fix any review issues.
+3. Commit your work to the current branch.

@@ -14,6 +14,11 @@ Always follow `code-style.md`. Then also follow the one file that matches your p
 - Use very easy, short, and complete English.
 - Explain technical things in a simple way, so anyone can understand.
 
+## Source of Truth (No Guessing)
+
+- Never guess, invent, or assume architecture, schemas, API routes, or UI components.
+- Strictly follow contracts in `agent-doc/` (`specs/`, `database.md`, `api.md`, `decisions.md`, and screen mockups). Everything was already planned and designed.
+
 ## Tasks
 
 Tasks come from `agent-doc/tasks.md`

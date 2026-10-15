@@ -94,6 +94,7 @@ backend/
 ## Type Hints & Validation
 - Every function declares type hints for its parameters and its return type.
 - The signature is the contract — a human or an agent reads it and knows the shapes without reading the body.
+- Type the signature, not the body. Do not add type hints to local variables inside a function — Python infers them. Typing every variable is over-engineering.
 - `schemas.py` files define request and response validation with Pydantic models.
 
 ## Return Values

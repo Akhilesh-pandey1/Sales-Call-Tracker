@@ -23,13 +23,13 @@ Via AskUserQuestion, with the recommendation matched to what the user brought:
 > 2. Superpower — idea → design** (`.claude/skills/grill-with-superpower/SKILL.md`)
 >   Turns a raw software/feature idea into a concrete approved design: clarifying questions one at a time, 2-3 approaches with trade-offs, design presented section by section. **Use when the topic is "I want to build X feature/component" and the output is a design.**
 >
-> 3. OpenSpec — explore** (`.claude/skills/grill-with-openspec/SKILL.md`)
->   A free-flow thinking partner for exploring a vague idea or messy problem: asks questions that emerge naturally, challenges assumptions, maps the actual codebase, draws ASCII diagrams. **Use when the topic is still fuzzy and the user wants to think it through before committing to anything.**
+> 3. Osmani — intent interview** (`.claude/skills/grill-with-osmani/SKILL.md`)
+>   One question at a time, each with the agent's guessed answer attached, until it can predict your reactions (~95% confidence). Extracts what you actually want — not what you think you should want — and ends with a confirmed Statement of Intent, optionally saved to `agent-doc/intent.md`. **Use when you can't yet say who it's for, why you want it, or what success looks like.**
 
 Recommendation heuristic:
 - Existing plan/decision to tear apart → **1**
 - Feature/software to design before building → **2**
-- Vague idea, messy problem, want to think it through freely first → **3**
+- Vague idea; can't yet say who it's for, why, or what success looks like → **3**
 
 ## Step 2 — Load and run the chosen skill
 

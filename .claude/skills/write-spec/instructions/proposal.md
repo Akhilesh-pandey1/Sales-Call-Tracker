@@ -1,19 +1,28 @@
-Create the proposal document that establishes WHY this change is needed.
+Create the proposal document (`agent-doc/proposal.md`) that serves as the master entry point and modular capability map.
 
-Sections:
-- **Why**: 1-2 sentences on the problem or opportunity. What problem does this solve? Why now?
-- **What Changes**: Bullet list of changes. Be specific about new capabilities, modifications, or removals. Mark breaking changes with **BREAKING**.
-- **Capabilities**: Identify which specs will be created:
-  - **New Capabilities**: List capabilities (features) being introduced. Each becomes a new `specs/<feature>.md`. Use kebab-case names (e.g., `user-auth`, `task-workflow`).
-- **Impact**: Affected code, APIs, dependencies, or systems.
+## Core Rules
 
-IMPORTANT: The Capabilities section is critical. It creates the contract between
-proposal and specs phases. Each capability listed here will need a corresponding
-spec file. Every change must declare at least one capability - do not invent
-requirements just to fill the list, but a change with no capabilities at all
-means nothing spec-worthy is being built.
+1. **Read Existing `agent-doc/` Files First:**
+   Before writing `proposal.md`, inspect all existing files in `agent-doc/`:
+   - `agent-doc/decisions.md` (Product & design decisions)
+   - `agent-doc/database.md` (Database models & tables)
+   - `agent-doc/api.md` (API contracts & schemas)
+   - `agent-doc/structure.md` (Directory structure)
+   - `agent-doc/testing.md` (Testing guidelines)
+   These files represent settled technical truth. The proposal must align with them, not contradict them.
 
-Keep it concise (1-2 pages). Focus on the "why" not the "how" -
-implementation details belong in design.md.
+2. **Mandatory Downstream Agent Banner:**
+   `proposal.md` is the first file downstream agents and human reviewers read. You MUST include the callout banner at the top directing agents to inspect the files in `agent-doc/` (`decisions.md`, `database.md`, `api.md`, `structure.md`, `testing.md`) whenever they need schemas, endpoints, or constraints.
 
-This is the foundation - specs, design, and tasks all build on this.
+3. **Phase 0 Capability Map (Force Small Modules):**
+   Decompose the work into small, single-responsibility modules:
+   - **One module = one responsibility:** Never bundle unrelated capabilities into one module. E.g., `user-auth` and `billing-checkout` must be separate modules.
+   - **Stable Kebab-Case IDs:** `auth`, `lead-intake`, `csv-export`.
+   - **Strict Dependency Direction:** Arrows point only one way. Cycles are forbidden. If Module A and Module B depend on each other, they are a single module.
+   - **1:1 Mapping to Specs:** Every row in the Capability Map table maps to exactly one spec file: `specs/<module-id>.md`.
+
+4. **Pure Scope & Direction (No Code, No Tasks):**
+   - Keep the proposal concise (1-2 pages).
+   - Define clear In Scope and Out of Scope boundaries.
+   - Do NOT include code snippets.
+   - Do NOT write implementation tasks here (tasks belong to the dedicated ticketing phase).

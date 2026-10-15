@@ -1,51 +1,29 @@
-Create specification files that define WHAT the system should do.
+Create specification files that define WHAT the module must do as a testable behavior contract.
 
-A spec is a behavior contract, not an implementation plan.
+## Principles
 
-Good spec content:
-- Observable behavior users or downstream systems rely on
-- Inputs, outputs, and error conditions
-- External constraints (security, privacy, reliability, compatibility)
-- Scenarios that can be tested or explicitly validated
+1. **Behavior Contract, Not Code:**
+   A spec defines externally observable behavior, business logic, constraints, and error modes. 
+   - DO NOT include programming language code, internal class/function bodies, or step-by-step code execution.
+   - Database tables belong in `agent-doc/database.md`. API payloads belong in `agent-doc/api.md`. Cross-reference them when needed, do not duplicate them here.
 
-Avoid in specs:
-- Internal class/function names
-- Library or framework choices
-- Step-by-step implementation details
-- Detailed execution plans (those belong in design.md or tasks.md)
+2. **1:1 Mapping to Capability Map:**
+   Create exactly one spec file per module listed in `agent-doc/proposal.md` under the Capability Map:
+   `agent-doc/specs/<module-id>.md` (kebab-case name matching the table).
 
-Quick test: if the implementation can change without changing externally
-visible behavior, it likely does not belong in the spec.
+3. **Normative Requirements (RFC 2119):**
+   - Each requirement header: `### Requirement: <Name>`
+   - State requirements using **SHALL** or **MUST** (avoid ambiguous "should" or "may").
+   - Keep requirements focused on one specific behavior.
 
-Create one spec file per capability listed in the proposal's Capabilities section,
-at `agent-doc/specs/<feature>.md` (kebab-case name, e.g. `task-workflow.md`).
-Use the exact name from the proposal.
+4. **Scenario Formatting (Acceptance Criteria):**
+   - Every requirement MUST have at least one scenario.
+   - Header: `#### Scenario: <Name>` (**CRITICAL:** MUST use exactly four hashtags `####` so parsers recognize it).
+   - Use structured Given/When/Then:
+     - `- **GIVEN** [precondition]`
+     - `- **WHEN** [trigger/action]`
+     - `- **THEN** [expected result/observable state]`
+   - Cover both the happy path and critical edge/error cases.
 
-Format requirements:
-- Each requirement: `### Requirement: <name>` followed by description
-- Use SHALL/MUST for normative requirements (avoid should/may)
-- Each scenario: `#### Scenario: <name>` with WHEN/THEN format
-- **CRITICAL**: Scenarios MUST use exactly 4 hashtags (`####`). Using 3 hashtags or bullets will fail silently.
-- Every requirement MUST have at least one scenario.
-
-Start each spec with a `## Purpose` section - one or two sentences (50+ characters)
-describing what the capability is for. Follow it with `## Requirements` containing
-the requirement blocks.
-
-Example:
-```
-## Purpose
-
-Lets users take their data out of the product in a portable format.
-
-## Requirements
-
-### Requirement: User can export data
-The system SHALL allow users to export their data in CSV format.
-
-#### Scenario: Successful export
-- **WHEN** user clicks "Export" button
-- **THEN** system downloads a CSV file with all user data
-```
-
-Specs should be testable - each scenario is a potential test case.
+5. **Quick Verification Test:**
+   If the internal implementation can change completely without altering the externally visible behavior or test assertions, the spec is well-written.

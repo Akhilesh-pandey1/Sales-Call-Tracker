@@ -1,7 +1,7 @@
 import { useMemo, type ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
 import { Clock, PhoneIncoming, PhoneOutgoing } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { DashboardErrorState } from "../components/dashboard-error-state";
 import { TeamTable } from "../components/team-table";
 import { useTeamDashboard } from "../hooks/use-team-dashboard";
 import type { TeamPeriodStats } from "../types";
@@ -42,23 +42,6 @@ function PeriodKpiSection({ label, stats }: PeriodKpiSectionProps) {
         <KpiCard label="Talk minutes" value={talkMinutes} icon={Clock} />
       </div>
     </section>
-  );
-}
-
-interface DashboardErrorStateProps {
-  onRetry: () => void;
-}
-
-function DashboardErrorState({ onRetry }: DashboardErrorStateProps) {
-  return (
-    <div className="flex flex-col items-center rounded-2xl border bg-card px-6 py-10 text-center shadow-sm">
-      <p role="alert" className="text-sm font-medium text-destructive">
-        Could not load data.
-      </p>
-      <Button variant="outline" onClick={onRetry} className="mt-4 rounded-xl">
-        Retry
-      </Button>
-    </div>
   );
 }
 

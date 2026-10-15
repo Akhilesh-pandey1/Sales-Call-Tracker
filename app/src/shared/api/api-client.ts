@@ -8,7 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import appConfig from '../../../config.json';
 
 const tokenStorageKey = 'token';
-const unauthorizedStatusCode = 401;
 
 type UnauthorizedHandler = () => void;
 
@@ -64,6 +63,7 @@ apiClient.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
+    const unauthorizedStatusCode = 401;
     const responseStatus: number | undefined = error.response?.status;
     if (responseStatus === unauthorizedStatusCode) {
       await clearStoredToken();

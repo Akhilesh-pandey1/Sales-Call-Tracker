@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DialerScreen } from '@/features/dialer/screens/dialer-screen';
-import { MyStatsScreen } from '@/features/stats/screens/my-stats-screen';
+import { DialerScreen } from '@/features/dialer';
+import { MyStatsScreen } from '@/features/stats';
 
 type MainTabsParamList = {
   Dialer: undefined;

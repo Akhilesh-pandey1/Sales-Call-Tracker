@@ -1,7 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { ActivityIndicator, View } from 'react-native';
-import { useAuth } from '@/features/auth/hooks/use-auth';
-import { LoginScreen } from '@/features/auth/screens/login-screen';
+import { LoginScreen, useAuth } from '@/features/auth';
 import { AppNavigator } from './app-navigator';
 
 export function RootNavigator() {

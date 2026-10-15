@@ -27,6 +27,7 @@ yarn-error.log*
 dist/
 dist-ssr/
 package-lock.json
+*.tsbuildinfo
 
 # Android
 *.apk

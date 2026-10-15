@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-15)
 
 ## Corpus Check
-- 202 files · ~408,375 words
+- 229 files · ~410,801 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1924 nodes · 2937 edges · 166 communities (150 shown, 16 thin omitted)
+- 2068 nodes · 3108 edges · 187 communities (166 shown, 21 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 22 edges (avg confidence: 0.53)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c1db8e2e`
+- Built from commit: `d10b3865`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -145,18 +145,36 @@
 - Requirement: Name-and-password login
 - User
 - test_users.py
-- Requirement: Batch sync to server
-- Requirement: Call-log matching — Path 1 (real-time)
-- Requirement: Login brute-force lockout
-- test_leads.py
-- Requirement: Call-log matching — Path 2 (janitor)
-- Requirement: Clear local data recovery
-- Requirement: Phone number normalization
-- test_dashboard.py
 - AppException
-- Requirement: Server-side call ingestion
-- test_production.py
+- users/routes.py
+- compilerOptions
+- test_leads.py
+- auth/services.py
+- router.tsx
+- devDependencies
+- test_dashboard.py
+- leads/services.py
+- dependencies
+- base.py
 - _generate_intelligent_overrides
+- cn
+- providers.tsx
+- commands.py
+- package.json
+- navbar.tsx
+- table.tsx
+- dashboard/schemas.py
+- Requirement: CSV upload into lead pool
+- Requirement: Team dashboard — per-person active salesperson list
+- Requirement: Lead resolution via call sync
+- Requirement: Lead scheduling
+- Requirement: Next-lead serving — priority order
+- Requirement: Top 5 numbers by talk time
+- clsx
+- lucide-react
+- react-dom
+- @types/react-dom
+- api-client.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `AppException` - 37 edges
@@ -185,7 +203,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (166 total, 16 thin omitted)
+## Communities (187 total, 21 thin omitted)
 
 ### Community 0 - ".claude/skills/grill-with-superpower/scripts/server.cjs"
 Cohesion: 0.06
@@ -200,8 +218,8 @@ Cohesion: 0.07
 Nodes (26): For /graphify add and --watch, For /graphify query, For the commit hook and native CLAUDE.md integration, For --update and --cluster-only, /graphify, Honesty Rules, Interpreter guard for subcommands, Part A - Structural extraction for code files (+18 more)
 
 ### Community 3 - "Requirements"
-Cohesion: 0.06
-Nodes (32): Purpose, Requirement: CSV upload into lead pool, Requirement: Lead claim window, Requirement: Lead pool manager summary, Requirement: Lead resolution via call sync, Requirement: Lead scheduling, Requirement: Lead state is authoritative and server-stored, Requirement: Next-lead serving — priority order (+24 more)
+Cohesion: 0.17
+Nodes (11): Purpose, Requirement: Lead claim window, Requirement: Lead pool manager summary, Requirement: Lead state is authoritative and server-stored, Requirements, Scenario: Expired claim releases lead, Scenario: Lead claimed on serve, Scenario: Lead state is never computed from calls table (+3 more)
 
 ### Community 4 - "allow"
 Cohesion: 0.08
@@ -344,8 +362,8 @@ Cohesion: 0.08
 Nodes (24): 10. Tech stack — one library per piece, 1. File structure & changes, 1. Gather facts — never ask the user for what you can find, 2. API contracts, 2. Say if this is greenfield or brownfield, 3. Classify the blast radius, 3. Database changes, 4. Build the coverage checklist (+16 more)
 
 ### Community 53 - ".claude/skills/design-screens/uiux/scripts/design_system.py"
-Cohesion: 0.18
-Nodes (14): ansi_ljust(), _filter_anti_patterns_for_mode(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Convert hex color to ANSI True Color swatch (██) with fallback. (+6 more)
+Cohesion: 0.22
+Nodes (12): ansi_ljust(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤ (+4 more)
 
 ### Community 54 - "allow"
 Cohesion: 0.08
@@ -364,8 +382,8 @@ Cohesion: 0.22
 Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
 
 ### Community 58 - ".generate"
-Cohesion: 0.25
-Nodes (5): Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
+Cohesion: 0.20
+Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
 
 ### Community 59 - "persist_design_system"
 Cohesion: 0.25
@@ -392,8 +410,8 @@ Cohesion: 0.33
 Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
 
 ### Community 65 - "Requirements"
-Cohesion: 0.08
-Nodes (25): Purpose, Requirement: Manager-only team dashboard access, Requirement: Per-person stats (today / yesterday / last 30 days), Requirement: Server-side time calculations, Requirement: Team dashboard — per-person active salesperson list, Requirement: Team dashboard — today and yesterday totals, Requirement: Top 5 numbers by talk time, Requirements (+17 more)
+Cohesion: 0.11
+Nodes (17): Purpose, Requirement: Manager-only team dashboard access, Requirement: Per-person stats (today / yesterday / last 30 days), Requirement: Server-side time calculations, Requirement: Team dashboard — today and yesterday totals, Requirements, Scenario: API returns seconds, Scenario: Connected is derived, not stored (+9 more)
 
 ### Community 66 - "4. User Account Management (Manager Only)"
 Cohesion: 0.10
@@ -620,12 +638,12 @@ Cohesion: 0.11
 Nodes (17): 10. Web dashboard token in localStorage, 1. Single-repo, three-part monorepo, 2. Flask modular monolith with Flask-SQLAlchemy, 3. Auth: token in `users` table, no separate tokens table, 4. IST day boundaries computed server-side, 5. Android: bare React Native CLI, no Expo, 6. Call tracking: two-path fill, janitor runs before sync, 7. Lead pool: server-side state, claim window prevents double-dial (+9 more)
 
 ### Community 148 - "Requirements"
-Cohesion: 0.20
-Nodes (9): Purpose, Requirement: Single active session per user, Requirement: Token-gated API access, Requirements, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token, Scenario: Re-login replaces old token, Scenario: Token used after password reset (+1 more)
+Cohesion: 0.14
+Nodes (13): Purpose, Requirement: Login brute-force lockout, Requirement: Single active session per user, Requirement: Token-gated API access, Requirements, Scenario: Counter reset on success, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token (+5 more)
 
 ### Community 149 - "Requirements"
-Cohesion: 0.20
-Nodes (9): Purpose, Requirement: Dialer intent row created on tap, Requirement: Three Android permissions required, Requirements, Scenario: All permissions granted, Scenario: Any permission denied, Scenario: Call button double-tap, Scenario: Call button tapped once (+1 more)
+Cohesion: 0.06
+Nodes (35): Purpose, Requirement: Batch sync to server, Requirement: Call-log matching — Path 1 (real-time), Requirement: Call-log matching — Path 2 (janitor), Requirement: Clear local data recovery, Requirement: Dialer intent row created on tap, Requirement: Phone number normalization, Requirement: Server-side call ingestion (+27 more)
 
 ### Community 150 - "agent-doc/proposal.md"
 Cohesion: 0.22
@@ -636,80 +654,132 @@ Cohesion: 0.33
 Nodes (6): Requirement: Name-and-password login, Scenario: Deactivated account, Scenario: Missing fields, Scenario: Name not found, Scenario: Successful login, Scenario: Wrong password
 
 ### Community 152 - "User"
-Cohesion: 0.07
-Nodes (56): Flask, register_commands(), seed_command(), BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers() (+48 more)
+Cohesion: 0.25
+Nodes (23): generate_auth_token(), hash_password(), reset_lockout_state(), User, clean_lockout_state(), fixture, Flask, FlaskClient (+15 more)
 
 ### Community 153 - "test_users.py"
 Cohesion: 0.21
 Nodes (33): create_user_record(), ensure_auxiliary_tables(), Flask, FlaskClient, test_activate_user_non_manager_refused(), test_activate_user_not_found(), test_activate_user_success(), test_create_user_duplicate_name_rejected() (+25 more)
 
-### Community 154 - "Requirement: Batch sync to server"
-Cohesion: 0.40
-Nodes (5): Requirement: Batch sync to server, Scenario: Failed sync retains rows, Scenario: Server deduplicates retried rows, Scenario: Successful sync clears sent rows, Scenario: Sync sends only filled rows
+### Community 154 - "AppException"
+Cohesion: 0.14
+Nodes (25): AppException, require_auth(), parse_utc_datetime(), Response, sync_calls(), BaseModel, SyncCallsRequest, SyncCallsResponse (+17 more)
 
-### Community 155 - "Requirement: Call-log matching — Path 1 (real-time)"
-Cohesion: 0.40
-Nodes (5): Requirement: Call-log matching — Path 1 (real-time), Scenario: Incoming call from the same number ignored, Scenario: Normal answered call, Scenario: Two quick calls to the same number, Scenario: Unanswered dial
+### Community 155 - "users/routes.py"
+Cohesion: 0.21
+Nodes (23): Any, require_manager(), validate_password_strength(), activate_user(), create_user(), deactivate_user(), delete_user(), get_users() (+15 more)
 
-### Community 156 - "Requirement: Login brute-force lockout"
-Cohesion: 0.50
-Nodes (4): Requirement: Login brute-force lockout, Scenario: Counter reset on success, Scenario: Lockout expires, Scenario: Lockout triggered
+### Community 156 - "compilerOptions"
+Cohesion: 0.08
+Nodes (24): DOM, DOM.Iterable, ES2020, src, vite.config.ts, compilerOptions, allowImportingTsExtensions, baseUrl (+16 more)
 
 ### Community 157 - "test_leads.py"
 Cohesion: 0.17
 Nodes (45): now_utc(), create_lead_fixture(), create_user_fixture(), Flask, FlaskClient, test_lead_resolution_connected_call_finishes_lead(), test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls(), test_lead_resolution_manual_keypad_call_resolves_lead() (+37 more)
 
-### Community 158 - "Requirement: Call-log matching — Path 2 (janitor)"
-Cohesion: 0.50
-Nodes (4): Requirement: Call-log matching — Path 2 (janitor), Scenario: App killed mid-call — row completed at first open, Scenario: Row give-up after 5 janitor strikes, Scenario: Young rows untouched by janitor
+### Community 158 - "auth/services.py"
+Cohesion: 0.19
+Nodes (14): verify_password(), login(), post, Response, LoginRequest, LoginResponse, BaseModel, authenticate_user() (+6 more)
 
-### Community 159 - "Requirement: Clear local data recovery"
-Cohesion: 0.50
-Nodes (4): Requirement: Clear local data recovery, Scenario: Clear cancelled, Scenario: Clear confirmed, Scenario: Count shown in confirmation
+### Community 159 - "router.tsx"
+Cohesion: 0.15
+Nodes (7): DashboardLayout(), NavItem, AccountsPage(), LoginPage(), PersonPage(), TeamPage(), LeadsPage()
 
-### Community 160 - "Requirement: Phone number normalization"
-Cohesion: 0.50
-Nodes (4): Requirement: Phone number normalization, Scenario: International number passes through, Scenario: Local-format number normalized, Scenario: Unparseable number stored raw
+### Community 160 - "devDependencies"
+Cohesion: 0.12
+Nodes (17): autoprefixer, postcss, tailwindcss, @types/node, @types/react, typescript, vite, @vitejs/plugin-react (+9 more)
 
 ### Community 161 - "test_dashboard.py"
 Cohesion: 0.17
 Nodes (35): get_ist_timezone(), normalize_phone_number(), now_ist(), datetime, to_ist(), create_call_record(), create_user_fixture(), datetime (+27 more)
 
-### Community 162 - "AppException"
-Cohesion: 0.05
-Nodes (88): AppException, Any, require_auth(), require_manager(), validate_password_strength(), parse_utc_datetime(), Call, Response (+80 more)
+### Community 162 - "leads/services.py"
+Cohesion: 0.12
+Nodes (33): Call, extract_valid_call(), Any, datetime, sync_calls_batch(), Lead, get_next_lead(), get_summary() (+25 more)
 
-### Community 163 - "Requirement: Server-side call ingestion"
-Cohesion: 0.50
-Nodes (4): Requirement: Server-side call ingestion, Scenario: Malformed row in batch, Scenario: Old call dropped, Scenario: Valid batch saved
+### Community 163 - "dependencies"
+Cohesion: 0.12
+Nodes (17): axios, class-variance-authority, @radix-ui/react-dialog, @radix-ui/react-slot, react, react-router-dom, tailwind-merge, @tanstack/react-query (+9 more)
 
-### Community 164 - "test_production.py"
-Cohesion: 0.41
-Nodes (9): Flask, FlaskClient, Path, test_api_route_not_found_returns_json(), test_missing_dist_returns_404(), test_missing_static_asset_returns_404(), test_serve_index_html_on_root(), test_serve_spa_client_route() (+1 more)
+### Community 164 - "base.py"
+Cohesion: 0.14
+Nodes (24): BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers(), create_app(), Flask, Flask (+16 more)
 
 ### Community 165 - "_generate_intelligent_overrides"
 Cohesion: 0.33
 Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
 
+### Community 166 - "cn"
+Cohesion: 0.18
+Nodes (12): Badge(), BadgeProps, badgeVariants, DialogContent, DialogDescription, DialogFooter(), DialogHeader(), DialogOverlay (+4 more)
+
+### Community 167 - "providers.tsx"
+Cohesion: 0.22
+Nodes (9): AppProviders(), AuthContext, AuthContextType, AuthProvider(), getInitialUser(), queryClient, UserData, router (+1 more)
+
+### Community 168 - "commands.py"
+Cohesion: 0.24
+Nodes (4): Flask, register_commands(), seed_command(), command
+
+### Community 169 - "package.json"
+Cohesion: 0.22
+Nodes (8): name, private, scripts, build, dev, preview, type, version
+
+### Community 170 - "navbar.tsx"
+Cohesion: 0.36
+Nodes (6): ManagerGuard(), useAuth(), Button, ButtonProps, buttonVariants, Navbar()
+
+### Community 171 - "table.tsx"
+Cohesion: 0.22
+Nodes (8): Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow
+
+### Community 172 - "dashboard/schemas.py"
+Cohesion: 0.43
+Nodes (7): PeriodStats, PersonDashboardResponse, PersonDashboardSummary, PersonPeriodStats, BaseModel, TeamDashboardResponse, TopNumberItem
+
+### Community 173 - "Requirement: CSV upload into lead pool"
+Cohesion: 0.33
+Nodes (6): Requirement: CSV upload into lead pool, Scenario: Duplicate in file skipped, Scenario: File too large, Scenario: Number already in pool skipped, Scenario: Successful upload, Scenario: Unparseable number skipped
+
+### Community 174 - "Requirement: Team dashboard — per-person active salesperson list"
+Cohesion: 0.40
+Nodes (5): Requirement: Team dashboard — per-person active salesperson list, Scenario: Deactivated salesperson excluded from people list, Scenario: Sorted by today's dials, Scenario: Team total can exceed sum of person rows, Scenario: Zero-call salesperson always listed
+
+### Community 175 - "Requirement: Lead resolution via call sync"
+Cohesion: 0.40
+Nodes (5): Requirement: Lead resolution via call sync, Scenario: Connected call finishes lead, Scenario: Lead stopped at attempt cap, Scenario: Manual keypad call resolves matching lead, Scenario: Unconnected call increments attempt and locks
+
+### Community 176 - "Requirement: Lead scheduling"
+Cohesion: 0.40
+Nodes (5): Requirement: Lead scheduling, Scenario: Done or stopped lead cannot be scheduled, Scenario: Schedule accepted, Scenario: Schedule combined with next-lead fetch, Scenario: Schedule in the past rejected
+
+### Community 177 - "Requirement: Next-lead serving — priority order"
+Cohesion: 0.40
+Nodes (5): Requirement: Next-lead serving — priority order, Scenario: Due scheduled lead served before pool, Scenario: Newest waiting lead served, Scenario: Pool empty, Scenario: Unexpired claim returned first
+
+### Community 178 - "Requirement: Top 5 numbers by talk time"
+Cohesion: 0.67
+Nodes (3): Requirement: Top 5 numbers by talk time, Scenario: Fewer than 5 numbers, Scenario: Top 5 returned
+
 ## Knowledge Gaps
-- **876 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+871 more)
+- **948 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+943 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `AppException` connect `AppException` to `User`, `test_dashboard.py`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `search()` connect `.agents/skills/design-screens/uiux/scripts/core.py` to `.agents/skills/design-screens/uiux/scripts/design_system.py`, `.generate`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `User` connect `User` to `test_dashboard.py`, `leads/services.py`, `commands.py`, `test_users.py`, `AppException`, `users/routes.py`, `test_leads.py`, `auth/services.py`?**
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`, `_generate_intelligent_overrides`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `AppException` connect `AppException` to `test_dashboard.py`, `leads/services.py`, `users/routes.py`, `auth/services.py`?**
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
-  _876 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _948 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `.claude/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._
 - **Should `What You Must Do When Invoked` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
-- **Should `Requirements` be split into smaller, more focused modules?**
-  _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
+- **Should `allow` be split into smaller, more focused modules?**
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._

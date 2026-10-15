@@ -96,10 +96,10 @@
 
 > Spec refs: `design.md §10`, `structure.md §web`
 
-- [ ] 9.1 Scaffold `web/` with Vite + React + TypeScript; install Tailwind CSS, shadcn/ui (Button, Dialog, Input, Table, Badge), TanStack Query, React Router, Lucide React, Axios
-- [ ] 9.2 Create `src/shared/api/api-client.ts`: Axios instance with `Authorization: Bearer <token>` interceptor and 401 → clear localStorage → redirect to login
-- [ ] 9.3 Create `src/app/router.tsx` with a manager auth guard; create `src/app/layouts/dashboard-layout.tsx` with the sidebar (Dashboard, Leads, Accounts) and top bar; add `src/shared/components/navbar.tsx` with Logout (clear localStorage, show login page — no API call)
-- [ ] 9.4 Create `src/app/providers.tsx` wrapping the app in TanStack Query provider and Auth context (token in localStorage)
+- [x] 9.1 Scaffold `web/` with Vite + React + TypeScript; install Tailwind CSS, shadcn/ui (Button, Dialog, Input, Table, Badge), TanStack Query, React Router, Lucide React, Axios
+- [x] 9.2 Create `src/shared/api/api-client.ts`: Axios instance with `Authorization: Bearer <token>` interceptor and 401 → clear localStorage → redirect to login
+- [x] 9.3 Create `src/app/router.tsx` with a manager auth guard; create `src/app/layouts/dashboard-layout.tsx` with the sidebar (Dashboard, Leads, Accounts) and top bar; add `src/shared/components/navbar.tsx` with Logout (clear localStorage, show login page — no API call)
+- [x] 9.4 Create `src/app/providers.tsx` wrapping the app in TanStack Query provider and Auth context (token in localStorage)
 
 ---
 

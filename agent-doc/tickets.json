@@ -125,7 +125,7 @@
         "9.3 Create `src/app/router.tsx` with a manager auth guard; create `src/app/layouts/dashboard-layout.tsx` with the sidebar (Dashboard, Leads, Accounts) and top bar; add `src/shared/components/navbar.tsx` with Logout (clear localStorage, show login page — no API call)",
         "9.4 Create `src/app/providers.tsx` wrapping the app in TanStack Query provider and Auth context (token in localStorage)\n---"
       ],
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         1
       ]

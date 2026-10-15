@@ -84,3 +84,6 @@ logs.txt
 
 # Extra folder for local work
 not_to_be_pushed
+
+# Chief-of-staff worktrees
+.worktrees/

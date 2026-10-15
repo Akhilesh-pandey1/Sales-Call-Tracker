@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/shared/utils/cn";
+import { UserStatusButton } from "./user-status-button";
 import type { AccountSummary } from "../types";
 
 interface AccountsTableProps {
@@ -46,7 +47,7 @@ function DeleteAccountButton({
   };
 
   const deleteButtonClassName: string =
-    "inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-destructive hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+    "inline-flex h-8 w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-destructive hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
   return (
     <button
@@ -93,6 +94,24 @@ function AccountStatusTags({ account, isOwnAccount }: AccountStatusTagsProps) {
   );
 }
 
+interface AccountRowActionsProps {
+  account: AccountSummary;
+  onDelete: (accountId: number) => void;
+}
+
+function AccountRowActions({ account, onDelete }: AccountRowActionsProps) {
+  return (
+    <span className="inline-flex items-center justify-end gap-1">
+      <UserStatusButton userId={account.id} isActive={account.is_active} />
+      <DeleteAccountButton
+        accountId={account.id}
+        accountName={account.name}
+        onDelete={onDelete}
+      />
+    </span>
+  );
+}
+
 function DesktopAccountRow({ account, isOwnAccount, onOpen, onDelete }: AccountRowProps) {
   const enterKey: string = "Enter";
   const spaceKey: string = " ";
@@ -135,13 +154,7 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen, onDelete }: AccountR
         {account.country}
       </TableCell>
       <TableCell className="p-4 text-right">
-        {!isOwnAccount && (
-          <DeleteAccountButton
-            accountId={account.id}
-            accountName={account.name}
-            onDelete={onDelete}
-          />
-        )}
+        {!isOwnAccount && <AccountRowActions account={account} onDelete={onDelete} />}
       </TableCell>
     </TableRow>
   );
@@ -188,50 +201,54 @@ function DesktopAccountsTable({
 }
 
 function AccountCard({ account, isOwnAccount, onOpen, onDelete }: AccountRowProps) {
+  const enterKey: string = "Enter";
+  const spaceKey: string = " ";
   const isInactive: boolean = !account.is_active;
 
   const handleCardClick = (): void => {
     onOpen(account.id);
   };
 
-  const cardClassName: string = cn("rounded-xl border px-4 py-3.5", isInactive && "bg-muted/50");
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
+    const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
+    if (!isActivationKey) {
+      return;
+    }
+    event.preventDefault();
+    onOpen(account.id);
+  };
+
+  const cardClassName: string = cn(
+    "block w-full cursor-pointer rounded-xl border px-4 py-3.5 text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    isInactive && "bg-muted/50"
+  );
   const cardNameClassName: string = cn(
     "flex items-center gap-2 font-medium",
     isInactive && "text-muted-foreground"
   );
-  const cardButtonClassName: string =
-    "block w-full cursor-pointer rounded-lg text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
   return (
-    <div className={cardClassName}>
-      <button
-        type="button"
-        onClick={handleCardClick}
-        aria-label={`Open stats for ${account.name}`}
-        className={cardButtonClassName}
-      >
-        <span className="flex items-center justify-between gap-2">
-          <span className={cardNameClassName}>
-            {account.name}
-            <AccountStatusTags account={account} isOwnAccount={isOwnAccount} />
-          </span>
-          {!isOwnAccount && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      aria-label={`Open stats for ${account.name}`}
+      className={cardClassName}
+    >
+      <span className="flex items-center justify-between gap-2">
+        <span className={cardNameClassName}>
+          {account.name}
+          <AccountStatusTags account={account} isOwnAccount={isOwnAccount} />
         </span>
-      </button>
-      <div className="mt-1 flex items-center justify-between gap-2 text-sm text-muted-foreground">
+        {!isOwnAccount && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+      </span>
+      <span className="mt-1 flex items-center justify-between gap-2 text-sm text-muted-foreground">
         <span className="capitalize">
           {account.role} · {account.country}
         </span>
-        {!isOwnAccount && (
-          <div className="flex items-center gap-1">
-            <DeleteAccountButton
-              accountId={account.id}
-              accountName={account.name}
-              onDelete={onDelete}
-            />
-          </div>
-        )}
-      </div>
+        {!isOwnAccount && <AccountRowActions account={account} onDelete={onDelete} />}
+      </span>
     </div>
   );
 }

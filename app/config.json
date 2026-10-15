@@ -1,3 +1,5 @@
 {
-  "apiBaseUrl": "https://sales-call-tracker.onrender.com/api"
+  "apiBaseUrl": "https://sales-call-tracker.onrender.com/api",
+  "maxLeadAttempts": 3,
+  "maxScheduleAheadDays": 30
 }

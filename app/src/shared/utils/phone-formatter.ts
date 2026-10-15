@@ -28,3 +28,14 @@ export function normalizePhoneNumber(phoneNumber: string, countryCode: string): 
   const e164Number = parsedNumber.number;
   return e164Number;
 }
+
+export function formatInternationalPhoneNumber(phoneNumber: string): string {
+  const parsedNumber = parsePhoneNumberFromString(phoneNumber);
+
+  if (!parsedNumber) {
+    return phoneNumber;
+  }
+
+  const formattedNumber = parsedNumber.formatInternational();
+  return formattedNumber;
+}

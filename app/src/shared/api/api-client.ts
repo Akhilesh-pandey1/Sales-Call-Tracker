@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import appConfig from '../../../config.json';
 
 const tokenStorageKey = 'token';
+const userIdStorageKey = 'user_id';
 
 type UnauthorizedHandler = () => void;
 
@@ -24,6 +25,22 @@ async function writeStoredToken(token: string): Promise<void> {
 
 async function clearStoredToken(): Promise<void> {
   await AsyncStorage.removeItem(tokenStorageKey);
+}
+
+async function readStoredUserId(): Promise<number | null> {
+  const storedValue: string | null = await AsyncStorage.getItem(userIdStorageKey);
+  if (!storedValue) {
+    return null;
+  }
+  const parsedUserId: number = Number(storedValue);
+  if (!Number.isFinite(parsedUserId)) {
+    return null;
+  }
+  return parsedUserId;
+}
+
+async function writeStoredUserId(userId: number): Promise<void> {
+  await AsyncStorage.setItem(userIdStorageKey, String(userId));
 }
 
 function notifyUnauthorizedHandlers(): void {
@@ -77,4 +94,11 @@ apiClient.interceptors.response.use(
   },
 );
 
-export { apiClient, readStoredToken, writeStoredToken, registerUnauthorizedHandler };
+export {
+  apiClient,
+  readStoredToken,
+  writeStoredToken,
+  readStoredUserId,
+  writeStoredUserId,
+  registerUnauthorizedHandler,
+};

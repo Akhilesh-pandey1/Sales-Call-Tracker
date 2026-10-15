@@ -15,6 +15,11 @@ const SELECT_ALL_PENDING_CALLS = `SELECT call_id, phone_number, intent_at, diale
   FROM pending_calls
   ORDER BY intent_at ASC`;
 
+const SELECT_UNFILLED_PENDING_CALLS = `SELECT call_id, phone_number, intent_at
+  FROM pending_calls
+  WHERE dialed_at IS NULL
+  ORDER BY intent_at ASC`;
+
 const SELECT_PENDING_CALL_COUNT = `SELECT COUNT(*) AS pending_call_count FROM pending_calls`;
 
 const MARK_PENDING_CALL_FILLED = `UPDATE pending_calls
@@ -45,6 +50,18 @@ interface PendingCallTableRow {
   dialed_at: string | null;
   duration_seconds: number | null;
   attempts: number;
+}
+
+export interface UnfilledPendingCall {
+  callId: string;
+  phoneNumber: string;
+  intentAt: string;
+}
+
+interface UnfilledPendingCallTableRow {
+  call_id: string;
+  phone_number: string;
+  intent_at: string;
 }
 
 let openDatabasePromise: Promise<SQLiteDatabase> | null = null;
@@ -84,12 +101,25 @@ function toPendingCall(row: PendingCallTableRow): PendingCall {
   return pendingCall;
 }
 
-function readRowList(result: ResultSet): PendingCall[] {
-  const pendingCalls: PendingCall[] = [];
+function toUnfilledPendingCall(row: UnfilledPendingCallTableRow): UnfilledPendingCall {
+  const unfilledPendingCall: UnfilledPendingCall = {
+    callId: row.call_id,
+    phoneNumber: row.phone_number,
+    intentAt: row.intent_at,
+  };
+  return unfilledPendingCall;
+}
+
+function readRowList<RowItemType, ResultItemType>(
+  result: ResultSet,
+  toRowItem: (row: RowItemType) => ResultItemType,
+): ResultItemType[] {
+  const rowItems: ResultItemType[] = [];
   for (let rowIndex = 0; rowIndex < result.rows.length; rowIndex += 1) {
-    pendingCalls.push(toPendingCall(result.rows.item(rowIndex) as PendingCallTableRow));
+    const row = result.rows.item(rowIndex) as RowItemType;
+    rowItems.push(toRowItem(row));
   }
-  return pendingCalls;
+  return rowItems;
 }
 
 export async function insertPendingCall(
@@ -102,8 +132,17 @@ export async function insertPendingCall(
 
 export async function getAllPendingCalls(): Promise<PendingCall[]> {
   const result = await runQuery(SELECT_ALL_PENDING_CALLS, []);
-  const pendingCalls = readRowList(result);
+  const pendingCalls = readRowList<PendingCallTableRow, PendingCall>(result, toPendingCall);
   return pendingCalls;
+}
+
+export async function getUnfilledPendingCalls(): Promise<UnfilledPendingCall[]> {
+  const result = await runQuery(SELECT_UNFILLED_PENDING_CALLS, []);
+  const unfilledPendingCalls = readRowList<UnfilledPendingCallTableRow, UnfilledPendingCall>(
+    result,
+    toUnfilledPendingCall,
+  );
+  return unfilledPendingCalls;
 }
 
 export async function markPendingCallFilled(

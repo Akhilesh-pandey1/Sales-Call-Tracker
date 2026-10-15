@@ -1,21 +1,21 @@
 # Graph Report - sales-call-tracker  (2026-10-15)
 
 ## Corpus Check
-- 229 files · ~410,801 words
+- 143 files · ~237,357 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2068 nodes · 3108 edges · 187 communities (166 shown, 21 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 22 edges (avg confidence: 0.53)
+- 1370 nodes · 2273 edges · 100 communities (88 shown, 12 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 12 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d10b3865`
+- Built from commit: `97d5ec0a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- .claude/skills/grill-with-superpower/scripts/server.cjs
+- server.cjs
 - .claude/settings.json
 - What You Must Do When Invoked
 - Requirements
@@ -24,7 +24,7 @@
 - grill-for-business/SKILL.md
 - Visual Companion Guide
 - Before Grill — the problem gate
-- tickets.mjs
+- now_utc
 - Test-Driven Development
 - Python / Flask Code Style & Standards
 - graphify reference: extra exports and benchmark
@@ -34,13 +34,13 @@
 - React + TypeScript Code Style & Standards
 - Process
 - Brainstorming Ideas Into Designs
-- grill-with-openspec/SKILL.md
+- Chief of Staff
 - stop-server.sh
-- templates/proposal.md
+- Proposal: [Initiative Name]
 - Node.js + TypeScript Code Style & Standards
 - graphify reference: query, path, explain
-- templates/design.md
-- templates/spec.md
+- test_production.py
+- Requirement: [Clear Name of Requirement]
 - Commit Story
 - graphify reference: add a URL and watch a folder
 - graphify reference: commit hook and native CLAUDE.md integration
@@ -49,96 +49,42 @@
 - graphify reference: GitHub clone and cross-repo merge
 - graphify reference: transcribe video and audio
 - start-server.sh
-- templates/tasks.md
+- Grill with Osmani — the intent interview
 - decisions.md
 - extraction-spec.md
-- write-tickets/SKILL.md
+- Write Tickets — Planning and Task Breakdown
+- Implement with Pocock
+- Requirement: Create salesperson account
+- instructions/proposal.md
+- instructions/spec.md
+- Requirement: Token-gated API access
+- Execution Steps
 - core.py
-- .agents/skills/design-screens/uiux/scripts/core.py
-- .agents/skills/grill-with-superpower/scripts/server.cjs
+- Requirement: Deactivate account
+- Requirement: Delete account permanently
+- Security & Performance Baseline
 - Humanizer: remove AI writing patterns
-- Humanizer: remove AI writing patterns
-- our_agent.py
-- What You Must Do When Invoked
-- Dimensions
-- .claude/skills/design-screens/uiux/scripts/design_system.py
-- allow
+- generate_design_system
 - DesignSystemGenerator
 - ._apply_reasoning
 - _select_palette_for_mode
 - .generate
-- persist_design_system
-- .agents/skills/grill-for-business/SKILL.md
+- design_system.py
 - Design Screens
 - Write Screens
 - Manager View (web)
 - _resolve_color_mode
 - Requirements
 - 4. User Account Management (Manager Only)
-- Visual Companion Guide
 - deny
-- deny
-- Before Grill — the problem gate
-- .agents/skills/write-tickets/scripts/tickets.mjs
-- Python / Flask Code Style & Standards
-- .agents/skills/design-screens/uiux/scripts/design_system.py
 - Steps
-- Test-Driven Development
-- Steps
-- DesignSystemGenerator
-- ._apply_reasoning
 - Database Schema & Design
-- React + TypeScript Code Style & Standards
-- _select_palette_for_mode
-- .generate
 - 1. Backend Automated Tests (`backend/tests/`)
 - Requirements
-- Node.js + TypeScript Code Style & Standards
-- .agents/settings.json
-- persist_design_system
-- graphify reference: extra exports and benchmark
-- .agents/skills/grill-with-superpower/scripts/helper.js
-- Code Style & Standards
-- Process
-- Design Screens
-- Brainstorming Ideas Into Designs
-- Write Screens
 - Stacks — Library Catalog
-- .agents/skills/grill-with-openspec/SKILL.md
-- .agents/skills/grill-with-superpower/scripts/stop-server.sh
-- .agents/skills/write-spec-greenfield/templates/proposal.md
-- .agents/skills/write-spec/templates/proposal.md
-- Stacks — Library Catalog
-- .claude/skills/write-spec-greenfield/templates/proposal.md
 - Project File Structure
-- _generate_intelligent_overrides
-- _resolve_color_mode
-- graphify reference: query, path, explain
 - Design System — Apex Sales Call
-- .agents/skills/write-spec-greenfield/templates/design.md
-- .agents/skills/write-spec-greenfield/templates/spec.md
-- .agents/skills/write-spec/templates/design.md
-- .agents/skills/write-spec/templates/spec.md
-- .claude/skills/write-spec-greenfield/templates/design.md
-- .claude/skills/write-spec-greenfield/templates/spec.md
-- Commit Story
-- graphify reference: add a URL and watch a folder
-- graphify reference: commit hook and native CLAUDE.md integration
-- graphify reference: incremental update and cluster-only
-- Grill — style router
-- .agents/skills/write-spec-greenfield/instructions/tasks.md
-- .claude/skills/write-spec-greenfield/instructions/tasks.md
-- graphify reference: GitHub clone and cross-repo merge
-- graphify reference: transcribe video and audio
-- .agents/skills/grill-with-superpower/scripts/start-server.sh
-- .agents/skills/write-spec-greenfield/templates/tasks.md
-- .agents/skills/write-spec/templates/tasks.md
-- execute.md
-- .claude/skills/write-spec-greenfield/templates/tasks.md
-- .agents/skills/graphify/references/extraction-spec.md
-- .agents/skills/write-tickets/SKILL.md
-- Tasks: Sales Call Tracker v1
-- Decisions
+- Tasks: Sales Call Tracker v1 — Remaining Work
 - Requirements
 - Requirements
 - agent-doc/proposal.md
@@ -146,30 +92,19 @@
 - User
 - test_users.py
 - AppException
-- users/routes.py
 - compilerOptions
 - test_leads.py
-- auth/services.py
 - router.tsx
 - devDependencies
 - test_dashboard.py
 - leads/services.py
 - dependencies
 - base.py
-- _generate_intelligent_overrides
 - cn
 - providers.tsx
-- commands.py
 - package.json
 - navbar.tsx
 - table.tsx
-- dashboard/schemas.py
-- Requirement: CSV upload into lead pool
-- Requirement: Team dashboard — per-person active salesperson list
-- Requirement: Lead resolution via call sync
-- Requirement: Lead scheduling
-- Requirement: Next-lead serving — priority order
-- Requirement: Top 5 numbers by talk time
 - clsx
 - lucide-react
 - react-dom
@@ -183,31 +118,31 @@
 4. `create_user_record()` - 31 edges
 5. `hash_password()` - 29 edges
 6. `allow` - 24 edges
-7. `allow` - 24 edges
-8. `search()` - 23 edges
-9. `search()` - 23 edges
-10. `create_user_fixture()` - 23 edges
+7. `search()` - 23 edges
+8. `create_user_fixture()` - 23 edges
+9. `Tasks: Sales Call Tracker v1 — Remaining Work` - 22 edges
+10. `create_user_fixture()` - 20 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `TestConfig` --uses--> `BaseConfig`  [INFERRED]
   backend/tests/conftest.py → backend/app/config/base.py
 - `_generate_intelligent_overrides()` --calls--> `search()`  [EXTRACTED]
-  .agents/skills/design-screens/uiux/scripts/design_system.py → .agents/skills/design-screens/uiux/scripts/core.py
-- `get_agent_runner()` --indirect_call--> `execute_agy_process()`  [INFERRED]
-  .autonomous-coding-agent/our_agent.py → .autonomous-coding-agent/runner.py
-- `get_agent_runner()` --indirect_call--> `execute_claude_process()`  [INFERRED]
-  .autonomous-coding-agent/our_agent.py → .autonomous-coding-agent/runner.py
-- `_generate_intelligent_overrides()` --calls--> `search()`  [EXTRACTED]
   .claude/skills/design-screens/uiux/scripts/design_system.py → .claude/skills/design-screens/uiux/scripts/core.py
+- `create_app()` --calls--> `register_commands()`  [EXTRACTED]
+  backend/app/__init__.py → backend/app/commands.py
+- `DevConfig` --uses--> `BaseConfig`  [INFERRED]
+  backend/app/config/dev.py → backend/app/config/base.py
+- `ProdConfig` --uses--> `BaseConfig`  [INFERRED]
+  backend/app/config/prod.py → backend/app/config/base.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (187 total, 21 thin omitted)
+## Communities (100 total, 12 thin omitted)
 
-### Community 0 - ".claude/skills/grill-with-superpower/scripts/server.cjs"
+### Community 0 - "server.cjs"
 Cohesion: 0.06
-Nodes (55): bootstrapPage(), brandMarkup(), broadcast(), browserLauncherForPlatform(), chmodOwnerOnly(), RFC-6455, clients, companionUrl() (+47 more)
+Nodes (55): bootstrapPage(), brandMarkup(), broadcast(), browserLauncherForPlatform(), chmodOwnerOnly(), clients, companionUrl(), computeAcceptKey() (+47 more)
 
 ### Community 1 - ".claude/settings.json"
 Cohesion: 0.22
@@ -218,12 +153,12 @@ Cohesion: 0.07
 Nodes (26): For /graphify add and --watch, For /graphify query, For the commit hook and native CLAUDE.md integration, For --update and --cluster-only, /graphify, Honesty Rules, Interpreter guard for subcommands, Part A - Structural extraction for code files (+18 more)
 
 ### Community 3 - "Requirements"
-Cohesion: 0.17
-Nodes (11): Purpose, Requirement: Lead claim window, Requirement: Lead pool manager summary, Requirement: Lead state is authoritative and server-stored, Requirements, Scenario: Expired claim releases lead, Scenario: Lead claimed on serve, Scenario: Lead state is never computed from calls table (+3 more)
+Cohesion: 0.06
+Nodes (32): Purpose, Requirement: CSV upload into lead pool, Requirement: Lead claim window, Requirement: Lead pool manager summary, Requirement: Lead resolution via call sync, Requirement: Lead scheduling, Requirement: Lead state is authoritative and server-stored, Requirement: Next-lead serving — priority order (+24 more)
 
 ### Community 4 - "allow"
 Cohesion: 0.08
-Nodes (24): Agent, Bash(git add:*), Bash(git commit:*), Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(git status:*), Bash(graphify:*) (+16 more)
+Nodes (24): allow, Agent, Bash(git add:*), Bash(git commit:*), Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(git status:*) (+16 more)
 
 ### Community 5 - "Dimensions"
 Cohesion: 0.08
@@ -241,9 +176,9 @@ Nodes (19): Browser Events Format, Cards (visual designs), Cleaning Up, CSS Clas
 Cohesion: 0.11
 Nodes (17): 1. Who has what problem?, 2. What should become easier after this exists?, 3. Who is the user who actually uses it?, 4. What is the outcome?, 5. Define the boundaries, 6. Identify the unknowns, 7. Design the simplest architecture, Before Grill — the problem gate (+9 more)
 
-### Community 9 - "tickets.mjs"
-Cohesion: 0.14
-Nodes (11): args, blockedArg, byId, flushPoint(), flushTask(), ids, ok, out (+3 more)
+### Community 9 - "now_utc"
+Cohesion: 0.15
+Nodes (36): get_ist_timezone(), normalize_phone_number(), now_utc(), datetime, to_ist(), Call, extract_valid_call(), Any (+28 more)
 
 ### Community 10 - "Test-Driven Development"
 Cohesion: 0.15
@@ -262,8 +197,8 @@ Cohesion: 0.42
 Nodes (7): connect(), nextReconnectDelay(), reloadAfterRecovery(), sessionKey(), setStatus(), showTombstone(), websocketUrl()
 
 ### Community 14 - "CLAUDE.md"
-Cohesion: 0.22
-Nodes (8): Env Files, Language, Private Folder, Rules, Search, Tasks, Timelines, Working Directory
+Cohesion: 0.20
+Nodes (9): Env Files, Language, Private Folder, Rules, Search, Source of Truth (No Guessing), Tasks, Timelines (+1 more)
 
 ### Community 15 - "Code Style & Standards"
 Cohesion: 0.25
@@ -281,17 +216,17 @@ Nodes (7): 1. Pin the fixed point, 2. Identify the spec source, 3. Identify the 
 Cohesion: 0.25
 Nodes (7): Anti-Pattern: "This Is Too Simple To Need A Design", Brainstorming Ideas Into Designs, Checklist, Ending the Session, Process Flow, The Process, Visual Companion
 
-### Community 19 - "grill-with-openspec/SKILL.md"
-Cohesion: 0.29
-Nodes (6): Ending Discovery, Guardrails, Handling Different Entry Points, The Stance, What You Don't Have To Do, What You Might Do
+### Community 19 - "Chief of Staff"
+Cohesion: 0.12
+Nodes (16): A. Find the Frontier, B. For Each Frontier Task — Create Worktree + Dispatch Subagent, C. Wait for Subagents to Report, Checkpoints, Chief of Staff, D. Merge Completed Worktree → Integration Branch, Final Phase, Quick Reference (+8 more)
 
 ### Community 20 - "stop-server.sh"
 Cohesion: 0.43
 Nodes (4): command_has_server_id(), is_brainstorm_server(), mark_stopped(), stop-server.sh script
 
-### Community 21 - "templates/proposal.md"
-Cohesion: 0.29
-Nodes (6): Capabilities, Impact, Modified Capabilities, New Capabilities, What Changes, Why
+### Community 21 - "Proposal: [Initiative Name]"
+Cohesion: 0.22
+Nodes (8): Build Order, Capability Map (Modular Breakdown), Impact & Systems Affected, In Scope, Out of Scope (Non-Goals), Proposal: [Initiative Name], Scope, Why
 
 ### Community 22 - "Node.js + TypeScript Code Style & Standards"
 Cohesion: 0.22
@@ -301,13 +236,13 @@ Nodes (8): Architecture — Modular Monolith, Error & Exception Handling, Folder
 Cohesion: 0.33
 Nodes (5): For /graphify explain, For /graphify path, graphify reference: query, path, explain, Step 0 — Constrained query expansion (REQUIRED before traversal), Step 1 — Traversal
 
-### Community 24 - "templates/design.md"
-Cohesion: 0.40
-Nodes (4): Context, Decisions, Goals / Non-Goals, Risks / Trade-offs
+### Community 24 - "test_production.py"
+Cohesion: 0.47
+Nodes (9): Flask, FlaskClient, Path, test_api_route_not_found_returns_json(), test_missing_dist_returns_404(), test_missing_static_asset_returns_404(), test_serve_index_html_on_root(), test_serve_spa_client_route() (+1 more)
 
-### Community 25 - "templates/spec.md"
-Cohesion: 0.40
-Nodes (4): ADDED Requirements, Purpose, Requirement: <!-- requirement name -->, Scenario: <!-- scenario name -->
+### Community 25 - "Requirement: [Clear Name of Requirement]"
+Cohesion: 0.33
+Nodes (5): Purpose, Requirement: [Clear Name of Requirement], Requirements, Scenario: [Error or Boundary Condition], Scenario: [Specific Happy Path or Edge Case]
 
 ### Community 26 - "Commit Story"
 Cohesion: 0.50
@@ -329,45 +264,53 @@ Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphif
 Cohesion: 0.50
 Nodes (3): Grill — style router, Step 1 — Ask which style, Step 2 — Load and run the chosen skill
 
+### Community 34 - "Grill with Osmani — the intent interview"
+Cohesion: 0.18
+Nodes (10): Grill with Osmani — the intent interview, Red flags, Rules, Step 1 — Hypothesize, with a confidence number, Step 2 — One question at a time, each with a guess attached, Step 3 — Listen for "want vs. should want", Step 4 — Restate intent in the user's own words, Step 5 — Confirm: explicit yes, not "whatever you think" (+2 more)
+
+### Community 37 - "Write Tickets — Planning and Task Breakdown"
+Cohesion: 0.10
+Nodes (19): Common Rationalizations (Banned Shortcuts), Never Overwrite an Incomplete Plan, No Manual or Deployment Work in Tickets, Output File & Protection Rules, Output Summary, Overview, Parallelization Opportunities (Parallel vs Sequential Guidance), Pre-Handoff Verification (+11 more)
+
+### Community 39 - "Implement with Pocock"
+Cohesion: 0.40
+Nodes (4): 1. Single Source of Truth (No Guessing / No Assumptions), 2. Implementation Loop, 3. Review & Commit, Implement with Pocock
+
+### Community 40 - "Requirement: Create salesperson account"
+Cohesion: 0.40
+Nodes (5): Requirement: Create salesperson account, Scenario: Duplicate name rejected, Scenario: Invalid country code rejected, Scenario: Successful creation, Scenario: Weak password rejected
+
+### Community 43 - "Requirement: Token-gated API access"
+Cohesion: 0.50
+Nodes (4): Requirement: Token-gated API access, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token, Scenario: Valid token on protected endpoint
+
+### Community 44 - "Execution Steps"
+Cohesion: 0.25
+Nodes (7): 1. Read Existing `agent-doc/` Ground Truth, 2. Phase 0: Decompose via Capability Map, 3. Generate Artifacts in Dependency Order, Artifacts Produced in `agent-doc/`, Execution Steps, Output Summary, Write Spec — The Specification Engine
+
 ### Community 45 - "core.py"
 Cohesion: 0.06
 Nodes (60): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _exact_stack_identifier(), _file_signature() (+52 more)
 
-### Community 46 - ".agents/skills/design-screens/uiux/scripts/core.py"
-Cohesion: 0.06
-Nodes (60): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _exact_stack_identifier(), _file_signature() (+52 more)
+### Community 46 - "Requirement: Deactivate account"
+Cohesion: 0.50
+Nodes (4): Requirement: Deactivate account, Scenario: Deactivated account cannot log in, Scenario: Deactivated account's calls kept, Scenario: Self-deactivation refused
 
-### Community 47 - ".agents/skills/grill-with-superpower/scripts/server.cjs"
-Cohesion: 0.06
-Nodes (55): bootstrapPage(), brandMarkup(), broadcast(), browserLauncherForPlatform(), chmodOwnerOnly(), RFC-6455, clients, companionUrl() (+47 more)
+### Community 47 - "Requirement: Delete account permanently"
+Cohesion: 0.50
+Nodes (4): Requirement: Delete account permanently, Scenario: Delete releases lead claims, Scenario: Delete removes user and all calls, Scenario: Self-deletion refused
 
-### Community 48 - "Humanizer: remove AI writing patterns"
-Cohesion: 0.05
-Nodes (39): 10. Hyphenated pairs everywhere, 11. Passive voice and missing subjects, 12. Overused AI words, 13. Inflated significance, 14. Vague connection or association, 15. Shallow -ing riders, 16. Sales language, 17. Borrowed authority (+31 more)
+### Community 48 - "Security & Performance Baseline"
+Cohesion: 0.50
+Nodes (3): Performance, Security, Security & Performance Baseline
 
 ### Community 49 - "Humanizer: remove AI writing patterns"
 Cohesion: 0.05
 Nodes (39): 10. Hyphenated pairs everywhere, 11. Passive voice and missing subjects, 12. Overused AI words, 13. Inflated significance, 14. Vague connection or association, 15. Shallow -ing riders, 16. Sales language, 17. Borrowed authority (+31 more)
 
-### Community 50 - "our_agent.py"
-Cohesion: 0.15
-Nodes (28): create_argument_parser(), get_default_settings(), load_configuration(), build_execution_prompt(), execute_task_run(), extract_promise_verdict(), get_agent_runner(), get_next_uncompleted_task() (+20 more)
-
-### Community 51 - "What You Must Do When Invoked"
-Cohesion: 0.07
-Nodes (26): For /graphify add and --watch, For /graphify query, For the commit hook and native CLAUDE.md integration, For --update and --cluster-only, /graphify, Honesty Rules, Interpreter guard for subcommands, Part A - Structural extraction for code files (+18 more)
-
-### Community 52 - "Dimensions"
-Cohesion: 0.08
-Nodes (24): 10. Tech stack — one library per piece, 1. File structure & changes, 1. Gather facts — never ask the user for what you can find, 2. API contracts, 2. Say if this is greenfield or brownfield, 3. Classify the blast radius, 3. Database changes, 4. Build the coverage checklist (+16 more)
-
-### Community 53 - ".claude/skills/design-screens/uiux/scripts/design_system.py"
-Cohesion: 0.22
+### Community 53 - "generate_design_system"
+Cohesion: 0.17
 Nodes (12): ansi_ljust(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤ (+4 more)
-
-### Community 54 - "allow"
-Cohesion: 0.08
-Nodes (24): Agent, Bash(git add:*), Bash(git commit:*), Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(git status:*), Bash(graphify:*) (+16 more)
 
 ### Community 55 - "DesignSystemGenerator"
 Cohesion: 0.27
@@ -385,13 +328,9 @@ Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG 
 Cohesion: 0.20
 Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
 
-### Community 59 - "persist_design_system"
-Cohesion: 0.25
-Nodes (9): format_master_md(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every…, Write fully to a temp file, then publish atomically., Persist design system to design-system/<project>/ folder using Master +…, safe_slug() (+1 more)
-
-### Community 60 - ".agents/skills/grill-for-business/SKILL.md"
-Cohesion: 0.08
-Nodes (23): Anti-Sycophancy Rules, Done — End of Grilling, Important Rules, Operating Principles, Operating Principles, Phase 1: Context Gathering, Phase 2.75: Landscape Awareness, Phase 2A: Startup Mode — YC Product Diagnostic (+15 more)
+### Community 59 - "design_system.py"
+Cohesion: 0.18
+Nodes (15): _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Format a page-specific override file with intelligent AI-generated content. (+7 more)
 
 ### Community 61 - "Design Screens"
 Cohesion: 0.25
@@ -410,276 +349,84 @@ Cohesion: 0.33
 Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
 
 ### Community 65 - "Requirements"
-Cohesion: 0.11
-Nodes (17): Purpose, Requirement: Manager-only team dashboard access, Requirement: Per-person stats (today / yesterday / last 30 days), Requirement: Server-side time calculations, Requirement: Team dashboard — today and yesterday totals, Requirements, Scenario: API returns seconds, Scenario: Connected is derived, not stored (+9 more)
+Cohesion: 0.08
+Nodes (25): Purpose, Requirement: Manager-only team dashboard access, Requirement: Per-person stats (today / yesterday / last 30 days), Requirement: Server-side time calculations, Requirement: Team dashboard — per-person active salesperson list, Requirement: Team dashboard — today and yesterday totals, Requirement: Top 5 numbers by talk time, Requirements (+17 more)
 
 ### Community 66 - "4. User Account Management (Manager Only)"
 Cohesion: 0.10
 Nodes (19): 1. Authentication, 2. Call Sync, 3. Dashboards, 4. User Account Management (Manager Only), 5. Leads, API Specifications, `DELETE /api/users/<id>`, `GET /api/dashboard/person/<id>` (+11 more)
 
-### Community 67 - "Visual Companion Guide"
-Cohesion: 0.10
-Nodes (19): Browser Events Format, Cards (visual designs), Cleaning Up, CSS Classes Available, Design Tips, File Naming, How It Works, Mock elements (wireframe building blocks) (+11 more)
-
-### Community 68 - "deny"
-Cohesion: 0.11
-Nodes (19): Bash(git push:*), CronCreate, CronDelete, CronList, EnterPlanMode, EnterWorktree, ExitPlanMode, ExitWorktree (+11 more)
-
 ### Community 69 - "deny"
 Cohesion: 0.11
-Nodes (19): Bash(git push:*), CronCreate, CronDelete, CronList, EnterPlanMode, EnterWorktree, ExitPlanMode, ExitWorktree (+11 more)
-
-### Community 70 - "Before Grill — the problem gate"
-Cohesion: 0.11
-Nodes (17): 1. Who has what problem?, 2. What should become easier after this exists?, 3. Who is the user who actually uses it?, 4. What is the outcome?, 5. Define the boundaries, 6. Identify the unknowns, 7. Design the simplest architecture, Before Grill — the problem gate (+9 more)
-
-### Community 71 - ".agents/skills/write-tickets/scripts/tickets.mjs"
-Cohesion: 0.14
-Nodes (11): args, blockedArg, byId, flushPoint(), flushTask(), ids, ok, out (+3 more)
-
-### Community 72 - "Python / Flask Code Style & Standards"
-Cohesion: 0.15
-Nodes (12): Architecture — Modular Monolith, Code Quality, Error & Exception Handling, File Structure, Folder Structure, Imports, Libraries & Dependencies, Module Rules (+4 more)
-
-### Community 73 - ".agents/skills/design-screens/uiux/scripts/design_system.py"
-Cohesion: 0.22
-Nodes (12): ansi_ljust(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤ (+4 more)
-
-### Community 74 - "Steps"
-Cohesion: 0.15
-Nodes (12): 1. Gather — never re-ask what is already settled, 2. Sort — each fact goes to exactly one file, 3. Write — by the rules below, Current truth, not history, Independent entries, Log Decisions — the recorder, One fact, one place, Precondition (+4 more)
-
-### Community 75 - "Test-Driven Development"
-Cohesion: 0.15
-Nodes (10): Designing for Mockability, When to Mock, Anti-patterns, Rules of the loop, Seams — where tests go, Test-Driven Development, What a good test is, Bad Tests (+2 more)
+Nodes (19): deny, Bash(git push:*), CronCreate, CronDelete, CronList, EnterPlanMode, EnterWorktree, ExitPlanMode (+11 more)
 
 ### Community 76 - "Steps"
 Cohesion: 0.15
 Nodes (12): 1. Gather — never re-ask what is already settled, 2. Sort — each fact goes to exactly one file, 3. Write — by the rules below, Current truth, not history, Independent entries, Log Decisions — the recorder, One fact, one place, Precondition (+4 more)
 
-### Community 77 - "DesignSystemGenerator"
-Cohesion: 0.27
-Nodes (4): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Select best matching result based on priority keywords.
-
-### Community 78 - "._apply_reasoning"
-Cohesion: 0.24
-Nodes (8): Find matching reasoning rule for a category., Apply reasoning rules to search results., apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Parse the canonical condition -> action-array representation., _validate_action()
-
 ### Community 79 - "Database Schema & Design"
 Cohesion: 0.20
 Nodes (9): 1. PostgreSQL Tables, 2. Android Local Phone Database (SQLite), 3. Migrations & Rollback, `calls`, Database Schema & Design, `leads`, Overview, `pending_calls` (+1 more)
-
-### Community 80 - "React + TypeScript Code Style & Standards"
-Cohesion: 0.20
-Nodes (9): File & Component Structure, Folder Rules, Folder Structure, Language, Naming Conventions, React + TypeScript Code Style & Standards, Responsive Design, State & Logic Separation (+1 more)
-
-### Community 81 - "_select_palette_for_mode"
-Cohesion: 0.22
-Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
-
-### Community 82 - ".generate"
-Cohesion: 0.20
-Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
 
 ### Community 83 - "1. Backend Automated Tests (`backend/tests/`)"
 Cohesion: 0.22
 Nodes (8): 1. Backend Automated Tests (`backend/tests/`), 2. Mobile Android Spike Checklist, Testing Specifications, `tests/modules/test_auth.py`, `tests/modules/test_calls.py`, `tests/modules/test_dashboard.py`, `tests/modules/test_leads.py`, `tests/modules/test_users.py`
 
 ### Community 84 - "Requirements"
-Cohesion: 0.09
-Nodes (23): Requirement: Activate (re-enable) account, Requirement: Create salesperson account, Requirement: Deactivate account, Requirement: Delete account permanently, Requirement: Edit account (name, password, country), Requirement: List all accounts, Requirements, Scenario: All accounts returned (+15 more)
-
-### Community 85 - "Node.js + TypeScript Code Style & Standards"
-Cohesion: 0.22
-Nodes (8): Architecture — Modular Monolith, Error & Exception Handling, Folder Structure, Function Composition & Layout, Language & File Structure, Libraries & Dependencies, Module Rules, Node.js + TypeScript Code Style & Standards
-
-### Community 86 - ".agents/settings.json"
-Cohesion: 0.22
-Nodes (8): autoMemoryEnabled, disableArtifact, disableBundledSkills, disableClaudeAiConnectors, disableRemoteControl, disableWorkflows, permissions, $schema
-
-### Community 87 - "persist_design_system"
-Cohesion: 0.25
-Nodes (9): format_master_md(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every…, Write fully to a temp file, then publish atomically., Persist design system to design-system/<project>/ folder using Master +…, safe_slug() (+1 more)
-
-### Community 88 - "graphify reference: extra exports and benchmark"
-Cohesion: 0.22
-Nodes (8): graphify reference: extra exports and benchmark, Step 6b - Wiki (only if --wiki flag), Step 7 - Neo4j export (only if --neo4j or --neo4j-push flag), Step 7a - FalkorDB export (only if --falkordb or --falkordb-push flag), Step 7b - SVG export (only if --svg flag), Step 7c - GraphML export (only if --graphml flag), Step 7d - MCP server (only if --mcp flag), Step 8 - Token reduction benchmark (only if total_words > 5000)
-
-### Community 89 - ".agents/skills/grill-with-superpower/scripts/helper.js"
-Cohesion: 0.42
-Nodes (7): connect(), nextReconnectDelay(), reloadAfterRecovery(), sessionKey(), setStatus(), showTombstone(), websocketUrl()
-
-### Community 90 - "Code Style & Standards"
-Cohesion: 0.25
-Nodes (7): Bug Fixes & Refactoring, Code Quality, Code Style & Standards, Function Length & Structure, Naming & Constants, Parameters, Returns & Data Flow, Starting a New Feature
-
-### Community 91 - "Process"
-Cohesion: 0.25
-Nodes (7): 1. Pin the fixed point, 2. Identify the spec source, 3. Identify the standards sources, 4. Spawn both sub-agents in parallel, 5. Aggregate, Process, Why two axes
-
-### Community 92 - "Design Screens"
-Cohesion: 0.25
-Nodes (7): Checklist before reporting done, Design Screens, Guardrails, Screen file rules, Steps, The design brain, Thinking rules (apply while designing)
-
-### Community 93 - "Brainstorming Ideas Into Designs"
-Cohesion: 0.25
-Nodes (7): Anti-Pattern: "This Is Too Simple To Need A Design", Brainstorming Ideas Into Designs, Checklist, Ending the Session, Process Flow, The Process, Visual Companion
-
-### Community 94 - "Write Screens"
-Cohesion: 0.25
-Nodes (7): Guardrails, Input, Steps, Template, The balance (most important rule), Write Screens, Writing rules
-
-### Community 95 - "Stacks — Library Catalog"
-Cohesion: 0.29
-Nodes (6): How this file is used, JS libraries, Python libraries, React Native (native CLI) libraries, Services & Tools, Stacks — Library Catalog
-
-### Community 96 - ".agents/skills/grill-with-openspec/SKILL.md"
-Cohesion: 0.29
-Nodes (6): Ending Discovery, Guardrails, Handling Different Entry Points, The Stance, What You Don't Have To Do, What You Might Do
-
-### Community 97 - ".agents/skills/grill-with-superpower/scripts/stop-server.sh"
-Cohesion: 0.43
-Nodes (4): command_has_server_id(), is_brainstorm_server(), mark_stopped(), stop-server.sh script
-
-### Community 98 - ".agents/skills/write-spec-greenfield/templates/proposal.md"
-Cohesion: 0.29
-Nodes (6): Build Slices, Capabilities, Impact, New Capabilities, What Changes, Why
-
-### Community 99 - ".agents/skills/write-spec/templates/proposal.md"
-Cohesion: 0.29
-Nodes (6): Capabilities, Impact, Modified Capabilities, New Capabilities, What Changes, Why
+Cohesion: 0.20
+Nodes (10): Requirement: Activate (re-enable) account, Requirement: Edit account (name, password, country), Requirement: List all accounts, Requirements, Scenario: All accounts returned, Scenario: Manager can edit own account, Scenario: Name updated, Scenario: Non-manager access refused (+2 more)
 
 ### Community 100 - "Stacks — Library Catalog"
 Cohesion: 0.29
 Nodes (6): How this file is used, JS libraries, Python libraries, React Native (native CLI) libraries, Services & Tools, Stacks — Library Catalog
 
-### Community 101 - ".claude/skills/write-spec-greenfield/templates/proposal.md"
-Cohesion: 0.29
-Nodes (6): Build Slices, Capabilities, Impact, New Capabilities, What Changes, Why
-
 ### Community 102 - "Project File Structure"
 Cohesion: 0.20
 Nodes (9): 1. Backend (`backend/`) — Python / Flask Modular Monolith, 1. Mobile App (`app/`) — Android Sideloaded APK, 2. Manager Web Dashboard (`web/`) — React + TypeScript, 2. Web Dashboard (`web/`) — Manager Web App, 3. Backend (`backend/`) — Python Flask API, 3. Salesperson Mobile App (`app/`) — React Native (Bare CLI) + TypeScript, Architecture Overview, Project File Structure (+1 more)
-
-### Community 103 - "_generate_intelligent_overrides"
-Cohesion: 0.33
-Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
-
-### Community 104 - "_resolve_color_mode"
-Cohesion: 0.33
-Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
-
-### Community 105 - "graphify reference: query, path, explain"
-Cohesion: 0.33
-Nodes (5): For /graphify explain, For /graphify path, graphify reference: query, path, explain, Step 0 — Constrained query expansion (REQUIRED before traversal), Step 1 — Traversal
 
 ### Community 106 - "Design System — Apex Sales Call"
 Cohesion: 0.40
 Nodes (4): Colors, Design System — Apex Sales Call, Rules & Components, Typography
 
-### Community 107 - ".agents/skills/write-spec-greenfield/templates/design.md"
-Cohesion: 0.40
-Nodes (4): Context, Decisions, Goals / Non-Goals, Risks / Trade-offs
-
-### Community 108 - ".agents/skills/write-spec-greenfield/templates/spec.md"
-Cohesion: 0.40
-Nodes (4): ADDED Requirements, Purpose, Requirement: <!-- requirement name -->, Scenario: <!-- scenario name -->
-
-### Community 109 - ".agents/skills/write-spec/templates/design.md"
-Cohesion: 0.40
-Nodes (4): Context, Decisions, Goals / Non-Goals, Risks / Trade-offs
-
-### Community 110 - ".agents/skills/write-spec/templates/spec.md"
-Cohesion: 0.40
-Nodes (4): ADDED Requirements, Purpose, Requirement: <!-- requirement name -->, Scenario: <!-- scenario name -->
-
-### Community 111 - ".claude/skills/write-spec-greenfield/templates/design.md"
-Cohesion: 0.40
-Nodes (4): Context, Decisions, Goals / Non-Goals, Risks / Trade-offs
-
-### Community 112 - ".claude/skills/write-spec-greenfield/templates/spec.md"
-Cohesion: 0.40
-Nodes (4): ADDED Requirements, Purpose, Requirement: <!-- requirement name -->, Scenario: <!-- scenario name -->
-
-### Community 113 - "Commit Story"
-Cohesion: 0.50
-Nodes (3): Commit Story, Git rules, Steps
-
-### Community 114 - "graphify reference: add a URL and watch a folder"
-Cohesion: 0.50
-Nodes (3): For /graphify add, For --watch, graphify reference: add a URL and watch a folder
-
-### Community 115 - "graphify reference: commit hook and native CLAUDE.md integration"
-Cohesion: 0.50
-Nodes (3): For git commit hook, For native CLAUDE.md integration, graphify reference: commit hook and native CLAUDE.md integration
-
-### Community 116 - "graphify reference: incremental update and cluster-only"
-Cohesion: 0.50
-Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphify reference: incremental update and cluster-only
-
-### Community 117 - "Grill — style router"
-Cohesion: 0.50
-Nodes (3): Grill — style router, Step 1 — Ask which style, Step 2 — Load and run the chosen skill
-
-### Community 118 - ".agents/skills/write-spec-greenfield/instructions/tasks.md"
-Cohesion: 0.50
-Nodes (3): How to break a slice into tasks, One group per build slice, Task quality
-
-### Community 119 - ".claude/skills/write-spec-greenfield/instructions/tasks.md"
-Cohesion: 0.50
-Nodes (3): How to break a slice into tasks, One group per build slice, Task quality
-
-### Community 146 - "Tasks: Sales Call Tracker v1"
-Cohesion: 0.10
-Nodes (20): 10. Web Dashboard — Auth Page, 11. Web Dashboard — Team Dashboard, 12. Web Dashboard — Leads Page, 13. Web Dashboard — Accounts Page, 14. Android App — Tracking Spike (Do This First), 15. Android App — Foundation and Auth, 16. Android App — Dialer Screen, 17. Android App — Sync (+12 more)
-
-### Community 147 - "Decisions"
-Cohesion: 0.11
-Nodes (17): 10. Web dashboard token in localStorage, 1. Single-repo, three-part monorepo, 2. Flask modular monolith with Flask-SQLAlchemy, 3. Auth: token in `users` table, no separate tokens table, 4. IST day boundaries computed server-side, 5. Android: bare React Native CLI, no Expo, 6. Call tracking: two-path fill, janitor runs before sync, 7. Lead pool: server-side state, claim window prevents double-dial (+9 more)
+### Community 146 - "Tasks: Sales Call Tracker v1 — Remaining Work"
+Cohesion: 0.09
+Nodes (22): Task 10: Manager can delete a salesperson account, Task 11: Android app shell runs on a device, Task 12: Salesperson can log in on the app, Task 13: The app asks for call permissions, Task 14: Dial intents are queued locally in SQLite, Task 15: Real dials are captured from the call log (Path 1), Task 16: Stale queued dials are completed by the janitor (Path 2), Task 17: Queued calls sync to the server (+14 more)
 
 ### Community 148 - "Requirements"
-Cohesion: 0.14
-Nodes (13): Purpose, Requirement: Login brute-force lockout, Requirement: Single active session per user, Requirement: Token-gated API access, Requirements, Scenario: Counter reset on success, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token (+5 more)
+Cohesion: 0.20
+Nodes (9): Purpose, Requirement: Login brute-force lockout, Requirement: Single active session per user, Requirements, Scenario: Counter reset on success, Scenario: Lockout expires, Scenario: Lockout triggered, Scenario: Re-login replaces old token (+1 more)
 
 ### Community 149 - "Requirements"
 Cohesion: 0.06
-Nodes (35): Purpose, Requirement: Batch sync to server, Requirement: Call-log matching — Path 1 (real-time), Requirement: Call-log matching — Path 2 (janitor), Requirement: Clear local data recovery, Requirement: Dialer intent row created on tap, Requirement: Phone number normalization, Requirement: Server-side call ingestion (+27 more)
+Nodes (34): Requirement: Batch sync to server, Requirement: Call-log matching — Path 1 (real-time), Requirement: Call-log matching — Path 2 (janitor), Requirement: Clear local data recovery, Requirement: Dialer intent row created on tap, Requirement: Phone number normalization, Requirement: Server-side call ingestion, Requirement: Three Android permissions required (+26 more)
 
 ### Community 150 - "agent-doc/proposal.md"
-Cohesion: 0.22
-Nodes (7): Capabilities, Impact, New Capabilities, Proposal: Sales Call Tracker — v1, What Changes, Why, Purpose
+Cohesion: 0.18
+Nodes (8): Capabilities, Impact, New Capabilities, Proposal: Sales Call Tracker — v1, What Changes, Why, Purpose, Purpose
 
 ### Community 151 - "Requirement: Name-and-password login"
 Cohesion: 0.33
 Nodes (6): Requirement: Name-and-password login, Scenario: Deactivated account, Scenario: Missing fields, Scenario: Name not found, Scenario: Successful login, Scenario: Wrong password
 
 ### Community 152 - "User"
-Cohesion: 0.25
-Nodes (23): generate_auth_token(), hash_password(), reset_lockout_state(), User, clean_lockout_state(), fixture, Flask, FlaskClient (+15 more)
+Cohesion: 0.10
+Nodes (41): Flask, register_commands(), seed_command(), generate_auth_token(), hash_password(), verify_password(), login(), post (+33 more)
 
 ### Community 153 - "test_users.py"
 Cohesion: 0.21
 Nodes (33): create_user_record(), ensure_auxiliary_tables(), Flask, FlaskClient, test_activate_user_non_manager_refused(), test_activate_user_not_found(), test_activate_user_success(), test_create_user_duplicate_name_rejected() (+25 more)
 
 ### Community 154 - "AppException"
-Cohesion: 0.14
-Nodes (25): AppException, require_auth(), parse_utc_datetime(), Response, sync_calls(), BaseModel, SyncCallsRequest, SyncCallsResponse (+17 more)
-
-### Community 155 - "users/routes.py"
-Cohesion: 0.21
-Nodes (23): Any, require_manager(), validate_password_strength(), activate_user(), create_user(), deactivate_user(), delete_user(), get_users() (+15 more)
+Cohesion: 0.08
+Nodes (55): AppException, Any, require_auth(), require_manager(), validate_password_strength(), parse_utc_datetime(), Response, sync_calls() (+47 more)
 
 ### Community 156 - "compilerOptions"
 Cohesion: 0.08
 Nodes (24): DOM, DOM.Iterable, ES2020, src, vite.config.ts, compilerOptions, allowImportingTsExtensions, baseUrl (+16 more)
 
 ### Community 157 - "test_leads.py"
-Cohesion: 0.17
-Nodes (45): now_utc(), create_lead_fixture(), create_user_fixture(), Flask, FlaskClient, test_lead_resolution_connected_call_finishes_lead(), test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls(), test_lead_resolution_manual_keypad_call_resolves_lead() (+37 more)
-
-### Community 158 - "auth/services.py"
-Cohesion: 0.19
-Nodes (14): verify_password(), login(), post, Response, LoginRequest, LoginResponse, BaseModel, authenticate_user() (+6 more)
+Cohesion: 0.30
+Nodes (25): create_lead_fixture(), create_user_fixture(), datetime, Flask, FlaskClient, test_next_lead_claimed_on_serve_and_expires(), test_next_lead_done_or_stopped_cannot_be_scheduled(), test_next_lead_due_scheduled_served_before_pool() (+17 more)
 
 ### Community 159 - "router.tsx"
 Cohesion: 0.15
@@ -690,24 +437,20 @@ Cohesion: 0.12
 Nodes (17): autoprefixer, postcss, tailwindcss, @types/node, @types/react, typescript, vite, @vitejs/plugin-react (+9 more)
 
 ### Community 161 - "test_dashboard.py"
-Cohesion: 0.17
-Nodes (35): get_ist_timezone(), normalize_phone_number(), now_ist(), datetime, to_ist(), create_call_record(), create_user_fixture(), datetime (+27 more)
+Cohesion: 0.29
+Nodes (25): now_ist(), create_call_record(), create_user_fixture(), datetime, Flask, FlaskClient, test_person_dashboard_connected_derived_from_duration(), test_person_dashboard_fewer_than_five_numbers() (+17 more)
 
 ### Community 162 - "leads/services.py"
-Cohesion: 0.12
-Nodes (33): Call, extract_valid_call(), Any, datetime, sync_calls_batch(), Lead, get_next_lead(), get_summary() (+25 more)
+Cohesion: 0.16
+Nodes (27): Lead, get_next_lead(), get_summary(), get, post, Response, upload_leads(), LeadPoolBucketCounts (+19 more)
 
 ### Community 163 - "dependencies"
 Cohesion: 0.12
 Nodes (17): axios, class-variance-authority, @radix-ui/react-dialog, @radix-ui/react-slot, react, react-router-dom, tailwind-merge, @tanstack/react-query (+9 more)
 
 ### Community 164 - "base.py"
-Cohesion: 0.14
-Nodes (24): BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers(), create_app(), Flask, Flask (+16 more)
-
-### Community 165 - "_generate_intelligent_overrides"
-Cohesion: 0.33
-Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
+Cohesion: 0.20
+Nodes (15): BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers(), create_app(), Flask, Flask (+7 more)
 
 ### Community 166 - "cn"
 Cohesion: 0.18
@@ -716,10 +459,6 @@ Nodes (12): Badge(), BadgeProps, badgeVariants, DialogContent, DialogDescription
 ### Community 167 - "providers.tsx"
 Cohesion: 0.22
 Nodes (9): AppProviders(), AuthContext, AuthContextType, AuthProvider(), getInitialUser(), queryClient, UserData, router (+1 more)
-
-### Community 168 - "commands.py"
-Cohesion: 0.24
-Nodes (4): Flask, register_commands(), seed_command(), command
 
 ### Community 169 - "package.json"
 Cohesion: 0.22
@@ -733,53 +472,25 @@ Nodes (6): ManagerGuard(), useAuth(), Button, ButtonProps, buttonVariants, Navba
 Cohesion: 0.22
 Nodes (8): Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow
 
-### Community 172 - "dashboard/schemas.py"
-Cohesion: 0.43
-Nodes (7): PeriodStats, PersonDashboardResponse, PersonDashboardSummary, PersonPeriodStats, BaseModel, TeamDashboardResponse, TopNumberItem
-
-### Community 173 - "Requirement: CSV upload into lead pool"
-Cohesion: 0.33
-Nodes (6): Requirement: CSV upload into lead pool, Scenario: Duplicate in file skipped, Scenario: File too large, Scenario: Number already in pool skipped, Scenario: Successful upload, Scenario: Unparseable number skipped
-
-### Community 174 - "Requirement: Team dashboard — per-person active salesperson list"
-Cohesion: 0.40
-Nodes (5): Requirement: Team dashboard — per-person active salesperson list, Scenario: Deactivated salesperson excluded from people list, Scenario: Sorted by today's dials, Scenario: Team total can exceed sum of person rows, Scenario: Zero-call salesperson always listed
-
-### Community 175 - "Requirement: Lead resolution via call sync"
-Cohesion: 0.40
-Nodes (5): Requirement: Lead resolution via call sync, Scenario: Connected call finishes lead, Scenario: Lead stopped at attempt cap, Scenario: Manual keypad call resolves matching lead, Scenario: Unconnected call increments attempt and locks
-
-### Community 176 - "Requirement: Lead scheduling"
-Cohesion: 0.40
-Nodes (5): Requirement: Lead scheduling, Scenario: Done or stopped lead cannot be scheduled, Scenario: Schedule accepted, Scenario: Schedule combined with next-lead fetch, Scenario: Schedule in the past rejected
-
-### Community 177 - "Requirement: Next-lead serving — priority order"
-Cohesion: 0.40
-Nodes (5): Requirement: Next-lead serving — priority order, Scenario: Due scheduled lead served before pool, Scenario: Newest waiting lead served, Scenario: Pool empty, Scenario: Unexpired claim returned first
-
-### Community 178 - "Requirement: Top 5 numbers by talk time"
-Cohesion: 0.67
-Nodes (3): Requirement: Top 5 numbers by talk time, Scenario: Fewer than 5 numbers, Scenario: Top 5 returned
-
 ## Knowledge Gaps
-- **948 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+943 more)
+- **604 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+599 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `User` connect `User` to `test_dashboard.py`, `leads/services.py`, `commands.py`, `test_users.py`, `AppException`, `users/routes.py`, `test_leads.py`, `auth/services.py`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `AppException` connect `AppException` to `test_dashboard.py`, `leads/services.py`, `users/routes.py`, `auth/services.py`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `User` connect `User` to `test_dashboard.py`, `leads/services.py`, `now_utc`, `test_users.py`, `AppException`, `test_leads.py`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Why does `AppException` connect `AppException` to `User`, `now_utc`, `leads/services.py`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `hash_password()` connect `User` to `test_dashboard.py`, `now_utc`, `test_users.py`, `AppException`, `test_leads.py`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
-  _948 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `.claude/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**
+  _604 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._
 - **Should `What You Must Do When Invoked` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
-- **Should `allow` be split into smaller, more focused modules?**
-  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+- **Should `Requirements` be split into smaller, more focused modules?**
+  _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._

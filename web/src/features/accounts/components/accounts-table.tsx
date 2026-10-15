@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/shared/utils/cn";
+import { UserStatusButton } from "./user-status-button";
 import type { AccountSummary } from "../types";
 
 function handleRowActivationKeyDown(
@@ -138,6 +139,7 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen, onEdit }: AccountRow
       <TableCell className="p-4 text-right">
         <div className="flex items-center justify-end gap-1">
           <EditAccountButton account={account} onEdit={onEdit} />
+          {!isOwnAccount && <UserStatusButton userId={account.id} isActive={account.is_active} />}
         </div>
       </TableCell>
     </TableRow>
@@ -219,7 +221,12 @@ function AccountCard({ account, isOwnAccount, onOpen, onEdit }: AccountRowProps)
         <span className="capitalize">
           {account.role} · {account.country}
         </span>
-        <EditAccountButton account={account} onEdit={onEdit} />
+        <span className="flex items-center gap-1">
+          <EditAccountButton account={account} onEdit={onEdit} />
+          {!isOwnAccount && (
+            <UserStatusButton userId={account.id} isActive={account.is_active} />
+          )}
+        </span>
       </span>
     </div>
   );

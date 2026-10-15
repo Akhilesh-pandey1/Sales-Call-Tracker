@@ -1,7 +1,7 @@
 import { useEffect, useState, type ChangeEvent } from "react";
 import { useUpdateUser } from "./use-update-user";
 import {
-  ACCOUNT_COUNTRY_OPTIONS,
+  accountCountries,
   type AccountCountry,
   type AccountSummary,
   type UpdateUserRequest,
@@ -23,7 +23,7 @@ interface UseEditAccountFormResult {
 }
 
 function isAccountCountry(value: string): value is AccountCountry {
-  const allowedCountries: readonly string[] = ACCOUNT_COUNTRY_OPTIONS;
+  const allowedCountries: readonly string[] = accountCountries;
   return allowedCountries.includes(value);
 }
 

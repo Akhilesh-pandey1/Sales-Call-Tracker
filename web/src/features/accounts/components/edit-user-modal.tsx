@@ -9,7 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useEditAccountForm } from "../hooks/use-edit-account-form";
 import {
-  ACCOUNT_COUNTRY_OPTIONS,
+  accountCountries,
   type AccountCountry,
   type AccountSummary,
 } from "../types";
@@ -111,7 +111,7 @@ export function EditUserModal({
               onChange={handleCountryChange}
               className="mt-1 w-full cursor-pointer rounded-xl border border-border bg-card px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring"
             >
-              {ACCOUNT_COUNTRY_OPTIONS.map((countryOption: AccountCountry) => (
+              {accountCountries.map((countryOption: AccountCountry) => (
                 <option key={countryOption} value={countryOption}>
                   {countryOption}
                 </option>

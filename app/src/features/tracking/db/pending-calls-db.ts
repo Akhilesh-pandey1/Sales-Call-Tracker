@@ -1,7 +1,5 @@
 import SQLite, { type ResultSet, type SQLiteDatabase } from 'react-native-sqlite-storage';
 
-const DATABASE_NAME = 'pending_calls.db';
-
 const CREATE_PENDING_CALLS_TABLE = `CREATE TABLE IF NOT EXISTS pending_calls (
   call_id TEXT PRIMARY KEY,
   phone_number TEXT NOT NULL,
@@ -55,10 +53,16 @@ function openDatabase(): Promise<SQLiteDatabase> {
   if (openDatabasePromise !== null) {
     return openDatabasePromise;
   }
+  const databaseName = 'pending_calls.db';
   SQLite.enablePromise(true);
-  openDatabasePromise = SQLite.openDatabase({ name: DATABASE_NAME }).then((database) =>
-    database.executeSql(CREATE_PENDING_CALLS_TABLE).then(() => database),
-  );
+  openDatabasePromise = SQLite.openDatabase({ name: databaseName })
+    .then((database) =>
+      database.executeSql(CREATE_PENDING_CALLS_TABLE).then(() => database),
+    )
+    .catch((error: unknown) => {
+      openDatabasePromise = null;
+      throw error;
+    });
   return openDatabasePromise;
 }
 
@@ -111,9 +115,8 @@ export async function markPendingCallFilled(
 }
 
 export async function addPendingCallAttempt(callId: string): Promise<number> {
-  const database = await openDatabase();
-  await database.executeSql(INCREMENT_PENDING_CALL_ATTEMPTS, [callId]);
-  const [selectResult] = await database.executeSql(SELECT_PENDING_CALL_ATTEMPTS, [callId]);
+  await runQuery(INCREMENT_PENDING_CALL_ATTEMPTS, [callId]);
+  const selectResult = await runQuery(SELECT_PENDING_CALL_ATTEMPTS, [callId]);
 
   if (selectResult.rows.length === 0) {
     throw new Error(`Pending call not found for call_id ${callId}`);

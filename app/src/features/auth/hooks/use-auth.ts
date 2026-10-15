@@ -5,16 +5,16 @@ import {
   readStoredToken,
   registerUnauthorizedHandler,
   writeStoredToken,
+  writeStoredUserId,
 } from '@/shared/api/api-client';
+import { serverUnreachableMessage } from '@/shared/constants/messages';
 import { requestLogin, type LoginResponse } from '../api/auth.api';
 
 export type AuthStatus = 'checking' | 'logged-in' | 'logged-out';
 
 export type LoginResult = { success: true } | { success: false; errorMessage: string };
 
-const storedUserIdKey = 'user_id';
 const storedCountryKey = 'country';
-const serverUnreachableMessage = "Can't reach the server. Check your internet.";
 const unexpectedLoginMessage = 'Login failed. Please try again.';
 
 export async function readStoredCountry(): Promise<string | null> {
@@ -78,7 +78,7 @@ export function useAuth(): {
     try {
       const loginResponse: LoginResponse = await requestLogin(userName, userPassword);
       await Promise.all([
-        AsyncStorage.setItem(storedUserIdKey, String(loginResponse.id)),
+        writeStoredUserId(loginResponse.id),
         AsyncStorage.setItem(storedCountryKey, loginResponse.country),
       ]);
       await writeStoredToken(loginResponse.token);

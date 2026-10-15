@@ -16,3 +16,24 @@ export interface TeamDashboard {
   yesterday: TeamPeriodStats;
   people: TeamMemberStats[];
 }
+
+export interface PersonPeriodStats {
+  dials: number;
+  connected: number;
+  seconds: number;
+  connected_percent: number | null;
+}
+
+export interface TopCalledNumber {
+  phone_number: string;
+  seconds: number;
+  calls: number;
+}
+
+export interface PersonDashboard {
+  name: string;
+  today: PersonPeriodStats;
+  yesterday: PersonPeriodStats;
+  last_30_days: PersonPeriodStats;
+  top_numbers: TopCalledNumber[];
+}

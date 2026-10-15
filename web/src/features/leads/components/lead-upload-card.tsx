@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ErrorAlert } from "@/shared/components/error-alert";
 import { cn } from "@/shared/utils/cn";
 import {
   getCsvFileValidationError,
@@ -258,14 +259,7 @@ export function LeadUploadCard() {
               </select>
             </div>
 
-            {uploadErrorMessage ? (
-              <p
-                role="alert"
-                className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
-              >
-                {uploadErrorMessage}
-              </p>
-            ) : null}
+            {uploadErrorMessage ? <ErrorAlert message={uploadErrorMessage} /> : null}
 
             <div className="flex items-center justify-end gap-2 border-t pt-4">
               <Button

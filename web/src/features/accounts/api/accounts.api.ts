@@ -34,3 +34,7 @@ export async function deactivateUser(userId: number): Promise<void> {
 export async function activateUser(userId: number): Promise<void> {
   await apiClient.post(`/users/${userId}/activate`);
 }
+
+export async function deleteUser(userId: number): Promise<void> {
+  await apiClient.delete(`/users/${userId}`);
+}

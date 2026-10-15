@@ -15,6 +15,14 @@ cd app/android
 gradlew.bat assembleDebug
 ```
 
+On this Windows machine, build only the phone ABIs. Reanimated's 32-bit (`armeabi-v7a`) CMake build fails here with a Ninja "manifest still dirty" loop (long paths are disabled). Use:
+
+```sh
+gradlew.bat assembleDebug "-PreactNativeArchitectures=arm64-v8a"
+```
+
+That produces an APK for 64-bit phones (every phone from the last ~8 years). For a 32-bit-only phone, run the same command with `armeabi-v7a` on a machine where long paths or antivirus exclusions are set up.
+
 The APK lands at `app/android/app/build/outputs/apk/debug/app-debug.apk`.
 
 ## Install on a phone

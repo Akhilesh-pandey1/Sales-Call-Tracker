@@ -39,14 +39,6 @@ function getLoginErrorMessage(loginError: unknown): string {
   return serverMessage ?? unexpectedLoginMessage;
 }
 
-async function saveStoredUserId(userId: number): Promise<void> {
-  await AsyncStorage.setItem(storedUserIdKey, String(userId));
-}
-
-async function saveStoredCountry(country: string): Promise<void> {
-  await AsyncStorage.setItem(storedCountryKey, country);
-}
-
 export function useAuth(): {
   authStatus: AuthStatus;
   loginUser: (userName: string, userPassword: string) => Promise<LoginResult>;
@@ -80,9 +72,11 @@ export function useAuth(): {
   async function loginUser(userName: string, userPassword: string): Promise<LoginResult> {
     try {
       const loginResponse: LoginResponse = await requestLogin(userName, userPassword);
+      await Promise.all([
+        AsyncStorage.setItem(storedUserIdKey, String(loginResponse.id)),
+        AsyncStorage.setItem(storedCountryKey, loginResponse.country),
+      ]);
       await writeStoredToken(loginResponse.token);
-      await saveStoredUserId(loginResponse.id);
-      await saveStoredCountry(loginResponse.country);
       setAuthStatus('logged-in');
       return { success: true };
     } catch (requestError) {

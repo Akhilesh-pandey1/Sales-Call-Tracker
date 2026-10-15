@@ -17,6 +17,11 @@ export type LoginResult = { success: true } | { success: false; errorMessage: st
 const storedCountryKey = 'country';
 const unexpectedLoginMessage = 'Login failed. Please try again.';
 
+export async function readStoredCountry(): Promise<string | null> {
+  const storedCountry: string | null = await AsyncStorage.getItem(storedCountryKey);
+  return storedCountry;
+}
+
 function extractResponseMessage(error: AxiosError): string | null {
   const responseData: unknown = error.response?.data;
   if (responseData && typeof responseData === 'object' && 'message' in responseData) {
@@ -37,11 +42,6 @@ function getLoginErrorMessage(loginError: unknown): string {
   }
   const serverMessage = extractResponseMessage(loginError);
   return serverMessage ?? unexpectedLoginMessage;
-}
-
-export async function readStoredCountry(): Promise<string | null> {
-  const storedCountry: string | null = await AsyncStorage.getItem(storedCountryKey);
-  return storedCountry;
 }
 
 export function useAuth(): {

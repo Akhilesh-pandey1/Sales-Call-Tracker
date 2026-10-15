@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from "react";
+import type { KeyboardEvent, MouseEvent } from "react";
 import { ChevronRight } from "lucide-react";
 import {
   Table,
@@ -15,12 +15,50 @@ interface AccountsTableProps {
   accounts: AccountSummary[];
   currentUserId: number | null;
   onOpenAccount: (accountId: number) => void;
+  onDeleteAccount: (accountId: number) => void;
 }
 
 interface AccountRowProps {
   account: AccountSummary;
   isOwnAccount: boolean;
   onOpen: (accountId: number) => void;
+  onDelete: (accountId: number) => void;
+}
+
+interface DeleteAccountButtonProps {
+  accountId: number;
+  accountName: string;
+  onDelete: (accountId: number) => void;
+}
+
+function DeleteAccountButton({
+  accountId,
+  accountName,
+  onDelete,
+}: DeleteAccountButtonProps) {
+  const handleDeleteClick = (event: MouseEvent<HTMLButtonElement>): void => {
+    event.stopPropagation();
+    onDelete(accountId);
+  };
+
+  const handleDeleteKeyDown = (event: KeyboardEvent<HTMLButtonElement>): void => {
+    event.stopPropagation();
+  };
+
+  const deleteButtonClassName: string =
+    "inline-flex w-24 cursor-pointer items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-destructive hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
+  return (
+    <button
+      type="button"
+      onClick={handleDeleteClick}
+      onKeyDown={handleDeleteKeyDown}
+      aria-label={`Delete ${accountName}`}
+      className={deleteButtonClassName}
+    >
+      Delete
+    </button>
+  );
 }
 
 function OwnAccountTag() {
@@ -55,7 +93,7 @@ function AccountStatusTags({ account, isOwnAccount }: AccountStatusTagsProps) {
   );
 }
 
-function DesktopAccountRow({ account, isOwnAccount, onOpen }: AccountRowProps) {
+function DesktopAccountRow({ account, isOwnAccount, onOpen, onDelete }: AccountRowProps) {
   const enterKey: string = "Enter";
   const spaceKey: string = " ";
   const isInactive: boolean = !account.is_active;
@@ -96,6 +134,15 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen }: AccountRowProps) {
       <TableCell className="p-4 text-sm tabular-nums text-muted-foreground">
         {account.country}
       </TableCell>
+      <TableCell className="p-4 text-right">
+        {!isOwnAccount && (
+          <DeleteAccountButton
+            accountId={account.id}
+            accountName={account.name}
+            onDelete={onDelete}
+          />
+        )}
+      </TableCell>
     </TableRow>
   );
 }
@@ -104,9 +151,15 @@ interface DesktopAccountsTableProps {
   accounts: AccountSummary[];
   currentUserId: number | null;
   onOpen: (accountId: number) => void;
+  onDelete: (accountId: number) => void;
 }
 
-function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccountsTableProps) {
+function DesktopAccountsTable({
+  accounts,
+  currentUserId,
+  onOpen,
+  onDelete,
+}: DesktopAccountsTableProps) {
   return (
     <div className="hidden px-5 pb-4 sm:px-6 md:block">
       <Table>
@@ -115,6 +168,7 @@ function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccoun
             <TableHead>Name</TableHead>
             <TableHead>Role</TableHead>
             <TableHead>Country</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -124,6 +178,7 @@ function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccoun
               account={account}
               isOwnAccount={account.id === currentUserId}
               onOpen={onOpen}
+              onDelete={onDelete}
             />
           ))}
         </TableBody>
@@ -132,46 +187,61 @@ function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccoun
   );
 }
 
-function AccountCard({ account, isOwnAccount, onOpen }: AccountRowProps) {
+function AccountCard({ account, isOwnAccount, onOpen, onDelete }: AccountRowProps) {
   const isInactive: boolean = !account.is_active;
 
   const handleCardClick = (): void => {
     onOpen(account.id);
   };
 
-  const cardClassName: string = cn(
-    "block w-full cursor-pointer rounded-xl border px-4 py-3.5 text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-    isInactive && "bg-muted/50"
-  );
+  const cardClassName: string = cn("rounded-xl border px-4 py-3.5", isInactive && "bg-muted/50");
   const cardNameClassName: string = cn(
     "flex items-center gap-2 font-medium",
     isInactive && "text-muted-foreground"
   );
+  const cardButtonClassName: string =
+    "block w-full cursor-pointer rounded-lg text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
   return (
-    <button
-      type="button"
-      onClick={handleCardClick}
-      aria-label={`Open stats for ${account.name}`}
-      className={cardClassName}
-    >
-      <span className="flex items-center justify-between gap-2">
-        <span className={cardNameClassName}>
-          {account.name}
-          <AccountStatusTags account={account} isOwnAccount={isOwnAccount} />
+    <div className={cardClassName}>
+      <button
+        type="button"
+        onClick={handleCardClick}
+        aria-label={`Open stats for ${account.name}`}
+        className={cardButtonClassName}
+      >
+        <span className="flex items-center justify-between gap-2">
+          <span className={cardNameClassName}>
+            {account.name}
+            <AccountStatusTags account={account} isOwnAccount={isOwnAccount} />
+          </span>
+          {!isOwnAccount && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
         </span>
-        {!isOwnAccount && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
-      </span>
-      <span className="mt-1 flex items-center justify-between gap-2 text-sm text-muted-foreground">
+      </button>
+      <div className="mt-1 flex items-center justify-between gap-2 text-sm text-muted-foreground">
         <span className="capitalize">
           {account.role} · {account.country}
         </span>
-      </span>
-    </button>
+        {!isOwnAccount && (
+          <div className="flex items-center gap-1">
+            <DeleteAccountButton
+              accountId={account.id}
+              accountName={account.name}
+              onDelete={onDelete}
+            />
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
-export function AccountsTable({ accounts, currentUserId, onOpenAccount }: AccountsTableProps) {
+export function AccountsTable({
+  accounts,
+  currentUserId,
+  onOpenAccount,
+  onDeleteAccount,
+}: AccountsTableProps) {
   const activeAccounts: AccountSummary[] = accounts.filter(
     (account: AccountSummary) => account.is_active
   );
@@ -185,7 +255,12 @@ export function AccountsTable({ accounts, currentUserId, onOpenAccount }: Accoun
         <span className="text-sm text-muted-foreground">{accountCountLabel}</span>
       </div>
 
-      <DesktopAccountsTable accounts={accounts} currentUserId={currentUserId} onOpen={onOpenAccount} />
+      <DesktopAccountsTable
+        accounts={accounts}
+        currentUserId={currentUserId}
+        onOpen={onOpenAccount}
+        onDelete={onDeleteAccount}
+      />
 
       <div className="px-4 pb-4 sm:px-6 md:hidden">
         <div className="mt-3 space-y-2">
@@ -195,6 +270,7 @@ export function AccountsTable({ accounts, currentUserId, onOpenAccount }: Accoun
               account={account}
               isOwnAccount={account.id === currentUserId}
               onOpen={onOpenAccount}
+              onDelete={onDeleteAccount}
             />
           ))}
         </div>

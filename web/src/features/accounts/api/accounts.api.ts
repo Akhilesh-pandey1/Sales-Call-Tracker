@@ -6,3 +6,7 @@ export async function getAccounts(): Promise<AccountSummary[]> {
   const accounts: AccountSummary[] = response.data;
   return accounts;
 }
+
+export async function deleteUser(userId: number): Promise<void> {
+  await apiClient.delete(`/users/${userId}`);
+}

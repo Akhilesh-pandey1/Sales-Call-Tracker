@@ -8,14 +8,12 @@ export interface AccountSummary {
   is_active: boolean;
 }
 
-export type AccountCountry = "IN" | "AE" | "US";
+export const ACCOUNT_COUNTRY_OPTIONS = ["IN", "AE", "US"] as const;
+
+export type AccountCountry = (typeof ACCOUNT_COUNTRY_OPTIONS)[number];
 
 export interface UpdateUserRequest {
   name?: string;
   password?: string;
   country?: AccountCountry;
-}
-
-export interface UpdateUserApiResponse {
-  status: boolean;
 }

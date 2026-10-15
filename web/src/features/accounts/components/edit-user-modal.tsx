@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,8 +7,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { useUpdateUser } from "../hooks/use-update-user";
-import type { AccountCountry, AccountSummary, UpdateUserRequest } from "../types";
+import { useEditAccountForm } from "../hooks/use-edit-account-form";
+import {
+  ACCOUNT_COUNTRY_OPTIONS,
+  type AccountCountry,
+  type AccountSummary,
+} from "../types";
 
 interface EditUserModalProps {
   editedAccount: AccountSummary | null;
@@ -16,49 +20,30 @@ interface EditUserModalProps {
   onModalOpenChange: (isOpen: boolean) => void;
 }
 
-function isAccountCountry(value: string): value is AccountCountry {
-  return value === "IN" || value === "AE" || value === "US";
-}
-
-function getAccountCountry(account: AccountSummary): AccountCountry {
-  const fallbackCountry: AccountCountry = "IN";
-  if (isAccountCountry(account.country)) {
-    return account.country;
-  }
-  return fallbackCountry;
-}
-
 export function EditUserModal({
   editedAccount,
   isModalOpen,
   onModalOpenChange,
 }: EditUserModalProps) {
-  const [nameValue, setNameValue] = useState<string>("");
-  const [passwordValue, setPasswordValue] = useState<string>("");
-  const [countryValue, setCountryValue] = useState<AccountCountry>("IN");
   const {
-    submitUserUpdate,
+    nameValue,
+    passwordValue,
+    countryValue,
+    canSaveAccount,
     isUpdatePending,
     isUpdateSuccess,
     updateErrorMessage,
-    resetUpdateState,
-  } = useUpdateUser();
-
-  const accountCountryOptions: AccountCountry[] = ["IN", "AE", "US"];
+    handleNameChange,
+    handlePasswordChange,
+    handleCountryChange,
+    submitAccountUpdate,
+    resetFormState,
+  } = useEditAccountForm(editedAccount, isModalOpen);
 
   const handleModalOpenChange = (isOpen: boolean): void => {
-    resetUpdateState();
+    resetFormState();
     onModalOpenChange(isOpen);
   };
-
-  useEffect(() => {
-    if (!isModalOpen || editedAccount === null) {
-      return;
-    }
-    setNameValue(editedAccount.name);
-    setPasswordValue("");
-    setCountryValue(getAccountCountry(editedAccount));
-  }, [isModalOpen, editedAccount]);
 
   useEffect(() => {
     if (!isUpdateSuccess) {
@@ -67,48 +52,9 @@ export function EditUserModal({
     handleModalOpenChange(false);
   }, [isUpdateSuccess]);
 
-  const trimmedNameValue: string = nameValue.trim();
-  const hasNameChanged: boolean =
-    editedAccount !== null && trimmedNameValue !== editedAccount.name;
-  const hasPasswordChanged: boolean = passwordValue.length > 0;
-  const hasCountryChanged: boolean =
-    editedAccount !== null && countryValue !== editedAccount.country;
-  const isNameBlank: boolean = hasNameChanged && trimmedNameValue.length === 0;
-  const hasNoChanges: boolean =
-    !hasNameChanged && !hasPasswordChanged && !hasCountryChanged;
-  const canSaveAccount: boolean = !hasNoChanges && !isNameBlank && !isUpdatePending;
-
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setNameValue(event.target.value);
-  };
-
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPasswordValue(event.target.value);
-  };
-
-  const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-    const pickedCountry: string = event.target.value;
-    if (isAccountCountry(pickedCountry)) {
-      setCountryValue(pickedCountry);
-    }
-  };
-
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (!canSaveAccount || editedAccount === null) {
-      return;
-    }
-    const updateRequest: UpdateUserRequest = {};
-    if (hasNameChanged) {
-      updateRequest.name = trimmedNameValue;
-    }
-    if (hasPasswordChanged) {
-      updateRequest.password = passwordValue;
-    }
-    if (hasCountryChanged) {
-      updateRequest.country = countryValue;
-    }
-    submitUserUpdate({ userId: editedAccount.id, updateRequest });
+    submitAccountUpdate();
   };
 
   const handleCancelClick = (): void => {
@@ -165,7 +111,7 @@ export function EditUserModal({
               onChange={handleCountryChange}
               className="mt-1 w-full cursor-pointer rounded-xl border border-border bg-card px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring"
             >
-              {accountCountryOptions.map((countryOption: AccountCountry) => (
+              {ACCOUNT_COUNTRY_OPTIONS.map((countryOption: AccountCountry) => (
                 <option key={countryOption} value={countryOption}>
                   {countryOption}
                 </option>

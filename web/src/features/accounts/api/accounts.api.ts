@@ -1,5 +1,5 @@
 import { apiClient } from "@/shared/api/api-client";
-import type { AccountSummary, UpdateUserApiResponse, UpdateUserRequest } from "../types";
+import type { AccountSummary, UpdateUserRequest } from "../types";
 
 export async function getAccounts(): Promise<AccountSummary[]> {
   const response = await apiClient.get<AccountSummary[]>("/users");
@@ -11,5 +11,5 @@ export async function updateUser(
   userId: number,
   updateRequest: UpdateUserRequest
 ): Promise<void> {
-  await apiClient.post<UpdateUserApiResponse>(`/users/${userId}/update`, updateRequest);
+  await apiClient.post(`/users/${userId}/update`, updateRequest);
 }

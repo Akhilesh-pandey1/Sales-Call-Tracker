@@ -9,21 +9,23 @@ import type { AccountSummary } from "../types";
 export function AccountsPage() {
   const { accounts, currentUserId, isLoading, hasError, refetch } = useAccounts();
   const navigate = useNavigate();
-  const [editedAccount, setEditedAccount] = useState<AccountSummary | null>(null);
+  const [editedAccountId, setEditedAccountId] = useState<number | null>(null);
 
+  const editedAccount: AccountSummary | null =
+    accounts.find((account: AccountSummary) => account.id === editedAccountId) ?? null;
   const isEditModalOpen: boolean = editedAccount !== null;
 
   const handleOpenAccount = (accountId: number): void => {
     navigate(`/person/${accountId}`);
   };
 
-  const handleEditAccount = (account: AccountSummary): void => {
-    setEditedAccount(account);
+  const handleEditAccount = (accountId: number): void => {
+    setEditedAccountId(accountId);
   };
 
   const handleEditModalOpenChange = (isOpen: boolean): void => {
     if (!isOpen) {
-      setEditedAccount(null);
+      setEditedAccountId(null);
     }
   };
 

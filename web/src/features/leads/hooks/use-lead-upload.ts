@@ -1,6 +1,6 @@
-import { isAxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadLeads } from "../api/leads.api";
+import { getApiErrorMessage } from "@/shared/api/api-error-message";
 import { LEADS_SUMMARY_QUERY_KEY } from "./use-leads";
 import type { LeadCountry, LeadUploadResult } from "../types";
 
@@ -9,10 +9,6 @@ export const MAX_LEAD_UPLOAD_MB: number = 2;
 interface LeadUploadRequest {
   file: File;
   country: LeadCountry;
-}
-
-interface LeadUploadApiErrorBody {
-  message?: string;
 }
 
 interface UseLeadUploadResult {
@@ -41,21 +37,6 @@ export function getCsvFileValidationError(file: File): string | null {
   return null;
 }
 
-function getUploadErrorMessage(error: unknown): string {
-  const fallbackErrorMessage: string = "Something went wrong. Please try again.";
-  const serverUnreachableMessage: string = "Can't reach the server. Check your internet.";
-  if (!isAxiosError(error)) {
-    return fallbackErrorMessage;
-  }
-  if (!error.response) {
-    return serverUnreachableMessage;
-  }
-  const errorBody = error.response.data as LeadUploadApiErrorBody | undefined;
-  const serverMessage: string | undefined = errorBody?.message;
-  const resolvedMessage: string = serverMessage || fallbackErrorMessage;
-  return resolvedMessage;
-}
-
 export function useLeadUpload(): UseLeadUploadResult {
   const queryClient = useQueryClient();
 
@@ -79,7 +60,7 @@ export function useLeadUpload(): UseLeadUploadResult {
 
   const hasUploadFailed: boolean = uploadMutation.isError;
   const uploadErrorMessage: string | null = hasUploadFailed
-    ? getUploadErrorMessage(uploadMutation.error)
+    ? getApiErrorMessage(uploadMutation.error)
     : null;
 
   const result: UseLeadUploadResult = {

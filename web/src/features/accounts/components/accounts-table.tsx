@@ -11,21 +11,36 @@ import {
 import { cn } from "@/shared/utils/cn";
 import type { AccountSummary } from "../types";
 
-const enterKey: string = "Enter";
-const spaceKey: string = " ";
+function handleRowActivationKeyDown(
+  event: KeyboardEvent<HTMLElement>,
+  onActivate: () => void
+): void {
+  const enterKey: string = "Enter";
+  const spaceKey: string = " ";
+  const isEventFromElementItself: boolean = event.target === event.currentTarget;
+  if (!isEventFromElementItself) {
+    return;
+  }
+  const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
+  if (!isActivationKey) {
+    return;
+  }
+  event.preventDefault();
+  onActivate();
+}
 
 interface AccountsTableProps {
   accounts: AccountSummary[];
   currentUserId: number | null;
   onOpenAccount: (accountId: number) => void;
-  onEditAccount: (account: AccountSummary) => void;
+  onEditAccount: (accountId: number) => void;
 }
 
 interface AccountRowProps {
   account: AccountSummary;
   isOwnAccount: boolean;
   onOpen: (accountId: number) => void;
-  onEdit: (account: AccountSummary) => void;
+  onEdit: (accountId: number) => void;
 }
 
 function OwnAccountTag() {
@@ -62,7 +77,7 @@ function AccountStatusTags({ account, isOwnAccount }: AccountStatusTagsProps) {
 
 interface EditAccountButtonProps {
   account: AccountSummary;
-  onEdit: (account: AccountSummary) => void;
+  onEdit: (accountId: number) => void;
 }
 
 function EditAccountButton({ account, onEdit }: EditAccountButtonProps) {
@@ -71,7 +86,7 @@ function EditAccountButton({ account, onEdit }: EditAccountButtonProps) {
 
   const handleEditClick = (event: MouseEvent<HTMLButtonElement>): void => {
     event.stopPropagation();
-    onEdit(account);
+    onEdit(account.id);
   };
 
   return (
@@ -94,16 +109,7 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen, onEdit }: AccountRow
   };
 
   const handleRowKeyDown = (event: KeyboardEvent<HTMLTableRowElement>): void => {
-    const isEventFromRowItself: boolean = event.target === event.currentTarget;
-    if (!isEventFromRowItself) {
-      return;
-    }
-    const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
-    if (!isActivationKey) {
-      return;
-    }
-    event.preventDefault();
-    onOpen(account.id);
+    handleRowActivationKeyDown(event, handleRowClick);
   };
 
   const rowClassName: string = cn("cursor-pointer", isInactive && "text-muted-foreground");
@@ -142,7 +148,7 @@ interface DesktopAccountsTableProps {
   accounts: AccountSummary[];
   currentUserId: number | null;
   onOpen: (accountId: number) => void;
-  onEdit: (account: AccountSummary) => void;
+  onEdit: (accountId: number) => void;
 }
 
 function DesktopAccountsTable({ accounts, currentUserId, onOpen, onEdit }: DesktopAccountsTableProps) {
@@ -181,16 +187,7 @@ function AccountCard({ account, isOwnAccount, onOpen, onEdit }: AccountRowProps)
   };
 
   const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
-    const isEventFromCardItself: boolean = event.target === event.currentTarget;
-    if (!isEventFromCardItself) {
-      return;
-    }
-    const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
-    if (!isActivationKey) {
-      return;
-    }
-    event.preventDefault();
-    onOpen(account.id);
+    handleRowActivationKeyDown(event, handleCardClick);
   };
 
   const cardClassName: string = cn(

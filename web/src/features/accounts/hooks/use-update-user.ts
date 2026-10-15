@@ -1,6 +1,6 @@
-import { isAxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUser } from "../api/accounts.api";
+import { getApiErrorMessage } from "@/shared/api/api-error-message";
 import { ACCOUNTS_QUERY_KEY } from "./use-accounts";
 import type { UpdateUserRequest } from "../types";
 
@@ -9,31 +9,12 @@ interface UpdateUserArgs {
   updateRequest: UpdateUserRequest;
 }
 
-interface UpdateUserApiErrorBody {
-  message?: string;
-}
-
 interface UseUpdateUserResult {
   submitUserUpdate: (updateArgs: UpdateUserArgs) => void;
   isUpdatePending: boolean;
   isUpdateSuccess: boolean;
   updateErrorMessage: string | null;
   resetUpdateState: () => void;
-}
-
-function getUpdateErrorMessage(error: unknown): string {
-  const fallbackErrorMessage: string = "Something went wrong. Please try again.";
-  const serverUnreachableMessage: string = "Can't reach the server. Check your internet.";
-  if (!isAxiosError(error)) {
-    return fallbackErrorMessage;
-  }
-  if (!error.response) {
-    return serverUnreachableMessage;
-  }
-  const errorBody = error.response.data as UpdateUserApiErrorBody | undefined;
-  const serverMessage: string | undefined = errorBody?.message;
-  const resolvedMessage: string = serverMessage || fallbackErrorMessage;
-  return resolvedMessage;
 }
 
 export function useUpdateUser(): UseUpdateUserResult {
@@ -59,7 +40,7 @@ export function useUpdateUser(): UseUpdateUserResult {
 
   const hasUpdateFailed: boolean = updateMutation.isError;
   const updateErrorMessage: string | null = hasUpdateFailed
-    ? getUpdateErrorMessage(updateMutation.error)
+    ? getApiErrorMessage(updateMutation.error)
     : null;
 
   const result: UseUpdateUserResult = {

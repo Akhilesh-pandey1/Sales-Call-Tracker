@@ -4,7 +4,7 @@ import { LoginScreen, useAuth } from '@/features/auth';
 import { AppNavigator } from './app-navigator';
 
 export function RootNavigator() {
-  const authStatus = useAuth();
+  const { authStatus, loginUser } = useAuth();
 
   if (authStatus === 'checking') {
     return (
@@ -16,7 +16,11 @@ export function RootNavigator() {
 
   return (
     <NavigationContainer>
-      {authStatus === 'logged-in' ? <AppNavigator /> : <LoginScreen />}
+      {authStatus === 'logged-in' ? (
+        <AppNavigator />
+      ) : (
+        <LoginScreen onLogin={loginUser} />
+      )}
     </NavigationContainer>
   );
 }

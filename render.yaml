@@ -14,3 +14,7 @@ services:
         sync: false
       - key: SECRET_KEY
         generateValue: true
+      - key: MANAGER_NAME
+        sync: false
+      - key: MANAGER_PASSWORD
+        sync: false

@@ -1,3 +1,10 @@
+import os
+import sys
+
+project_root: str = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from collections.abc import Generator
 from flask import Flask
 from flask.testing import FlaskClient

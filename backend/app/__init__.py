@@ -1,13 +1,45 @@
 import os
+
+from dotenv import load_dotenv
 from flask import Flask
+
+load_dotenv()
+
 from backend.app.api import api_blueprint
-from backend.app.commands import register_commands
 from backend.app.config.base import BaseConfig
 from backend.app.config.dev import DevConfig
 from backend.app.config.prod import ProdConfig
 from backend.app.core.errors import register_error_handlers
+from backend.app.core.security import hash_password
 from backend.app.extensions import db
+from backend.app.modules.users.models import User
 from backend.app.static_routes import register_static_routes
+
+
+def create_initial_manager(app: Flask) -> None:
+    if app.config.get("TESTING"):
+        return
+
+    manager_name: str = os.getenv("MANAGER_NAME", "")
+    manager_password: str = os.getenv("MANAGER_PASSWORD", "")
+
+    if not manager_name or not manager_password:
+        raise RuntimeError("Set MANAGER_NAME and MANAGER_PASSWORD in the .env file so the manager account can be created.")
+
+    existing_manager: User | None = User.query.filter_by(name=manager_name).first()
+    if existing_manager is not None:
+        return
+
+    password_hash: str = hash_password(manager_password)
+    new_manager: User = User(
+        name=manager_name,
+        password_hash=password_hash,
+        role="manager",
+        is_active=True,
+        country="IN",
+    )
+    db.session.add(new_manager)
+    db.session.commit()
 
 
 def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
@@ -26,10 +58,10 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
     db.init_app(app)
     register_error_handlers(app)
     app.register_blueprint(api_blueprint)
-    register_commands(app)
     register_static_routes(app)
 
     with app.app_context():
         db.create_all()
+        create_initial_manager(app)
 
     return app

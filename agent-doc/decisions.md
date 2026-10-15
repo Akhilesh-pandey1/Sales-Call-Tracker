@@ -113,6 +113,7 @@
 - **Decision 115:** Salespeople do not have a lead pool overview screen or a schedule cancellation endpoint. The automated calling loop handles all lead serving and scheduling directly.
 - **Decision 116:** Database initialization uses Flask-SQLAlchemy `db.create_all()` on startup, with a small CLI seed command to create the initial manager account. Because the database is greenfield with no prior data, no data migration steps are required.
 - **Decision 117:** Emergency rollback for the database drops tables using CASCADE (`DROP TABLE IF EXISTS leads, calls, users CASCADE;`), cleanly removing tables and foreign key constraints without residual locks.
+- **Decision 118:** The initial manager account is created automatically when the server starts: the server reads `MANAGER_NAME` and `MANAGER_PASSWORD` from the environment (loaded from the root `.env` via python-dotenv) and creates the manager if no user with that name exists. If either value is missing, the server refuses to start with one clear message — no hardcoded fallback password exists anywhere. The old `flask seed` CLI command is removed. Bootstrap is skipped under the test config so tests keep building their own users.
 
 
 

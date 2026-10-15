@@ -6,7 +6,7 @@ import {
   type Permission,
 } from 'react-native';
 
-const findMissingPermissions = async (): Promise<Permission[]> => {
+export const findMissingPermissions = async (): Promise<Permission[]> => {
   const requiredCallPermissions: Permission[] = [
     PermissionsAndroid.PERMISSIONS.CALL_PHONE,
     PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,

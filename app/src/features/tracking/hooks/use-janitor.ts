@@ -3,7 +3,6 @@ import {
   AppState,
   PermissionsAndroid,
   type AppStateStatus,
-  type Permission,
 } from 'react-native';
 import CallLogs, { type CallLog } from 'react-native-call-log';
 import {
@@ -19,14 +18,13 @@ import {
 
 const STALE_ROW_AGE_MS = 60 * 60 * 1000;
 const MAX_JANITOR_ATTEMPTS = 5;
-const GIVE_UP_DURATION_SECONDS = 0;
-const READ_CALL_LOG_PERMISSION: Permission =
-  PermissionsAndroid.PERMISSIONS.READ_CALL_LOG;
+const MIN_MS_BETWEEN_SWEEPS = 5_000;
 
 let isJanitorSweepRunning = false;
+let lastSweepStartedAtMs = 0;
 
-function getIntentTimeMs(pendingCall: PendingCall): number {
-  const intentTimeMs = new Date(pendingCall.intentAt).getTime();
+function getIntentTimeMs(intentAt: string): number {
+  const intentTimeMs = new Date(intentAt).getTime();
   return intentTimeMs;
 }
 
@@ -37,7 +35,7 @@ function isStaleUnfilledPendingCall(
   if (pendingCall.durationSeconds !== null) {
     return false;
   }
-  const intentTimeMs = getIntentTimeMs(pendingCall);
+  const intentTimeMs = getIntentTimeMs(pendingCall.intentAt);
   if (Number.isNaN(intentTimeMs)) {
     return true;
   }
@@ -46,7 +44,7 @@ function isStaleUnfilledPendingCall(
 
 function getOldestIntentTimeMs(stalePendingCalls: PendingCall[]): number {
   const validIntentTimes = stalePendingCalls
-    .map(pendingCall => getIntentTimeMs(pendingCall))
+    .map(pendingCall => getIntentTimeMs(pendingCall.intentAt))
     .filter(intentTimeMs => !Number.isNaN(intentTimeMs));
   if (validIntentTimes.length === 0) {
     return Date.now();
@@ -71,8 +69,12 @@ async function loadCallLogEntriesWithinWindow(
   }
 }
 
-function toDialedAtIso(entryTimestampMs: string): string {
-  const dialedAtIso = new Date(Number(entryTimestampMs)).toISOString();
+function toDialedAtIso(entryTimestampMs: string): string | null {
+  const dialedAtMs = Number(entryTimestampMs);
+  if (!Number.isFinite(dialedAtMs)) {
+    return null;
+  }
+  const dialedAtIso = new Date(dialedAtMs).toISOString();
   return dialedAtIso;
 }
 
@@ -92,33 +94,37 @@ async function processStalePendingCall(
 ): Promise<void> {
   const matchedEntry = findMatchingOutgoingCall(
     stalePendingCall.phoneNumber,
-    getIntentTimeMs(stalePendingCall),
+    getIntentTimeMs(stalePendingCall.intentAt),
     remainingEntries,
   );
 
   if (matchedEntry !== null) {
-    removeMatchedEntry(remainingEntries, matchedEntry);
-    await markPendingCallFilled(
-      stalePendingCall.callId,
-      toDialedAtIso(matchedEntry.timestamp),
-      matchedEntry.duration,
-    );
-    return;
+    const dialedAtIso = toDialedAtIso(matchedEntry.timestamp);
+    if (dialedAtIso !== null) {
+      removeMatchedEntry(remainingEntries, matchedEntry);
+      await markPendingCallFilled(
+        stalePendingCall.callId,
+        dialedAtIso,
+        matchedEntry.duration,
+      );
+      return;
+    }
   }
 
   const attemptCount = await addPendingCallAttempt(stalePendingCall.callId);
   if (attemptCount >= MAX_JANITOR_ATTEMPTS) {
+    const giveUpDurationSeconds = 0;
     await markPendingCallFilled(
       stalePendingCall.callId,
       stalePendingCall.intentAt,
-      GIVE_UP_DURATION_SECONDS,
+      giveUpDurationSeconds,
     );
   }
 }
 
 async function sweepStalePendingCalls(): Promise<void> {
   const isCallLogReadable = await PermissionsAndroid.check(
-    READ_CALL_LOG_PERMISSION,
+    PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
   );
   if (!isCallLogReadable) {
     return;
@@ -144,14 +150,22 @@ async function sweepStalePendingCalls(): Promise<void> {
 
   const remainingEntries = [...callLogEntries];
   for (const stalePendingCall of stalePendingCalls) {
-    await processStalePendingCall(stalePendingCall, remainingEntries);
+    try {
+      await processStalePendingCall(stalePendingCall, remainingEntries);
+    } catch (processingError: unknown) {
+      console.warn('Could not complete a stale queued call.', processingError);
+    }
   }
 }
 
 export async function runJanitorSweep(): Promise<void> {
-  if (isJanitorSweepRunning) {
+  const nowMs = Date.now();
+  const isTooSoonAfterLastSweep =
+    nowMs - lastSweepStartedAtMs < MIN_MS_BETWEEN_SWEEPS;
+  if (isJanitorSweepRunning || isTooSoonAfterLastSweep) {
     return;
   }
+  lastSweepStartedAtMs = nowMs;
   isJanitorSweepRunning = true;
   try {
     await sweepStalePendingCalls();

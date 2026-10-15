@@ -25,10 +25,6 @@ function haveEqualTailDigits(
   return intentDigits === entryDigits;
 }
 
-function isOutgoingEntry(callLogEntry: CallLog): boolean {
-  return callLogEntry.type === CallType.OUTGOING;
-}
-
 function isWithinMatchWindow(intentAtMs: number, entryTimestampMs: number): boolean {
   const timeDifferenceMs = Math.abs(intentAtMs - entryTimestampMs);
   return timeDifferenceMs <= CALL_MATCH_WINDOW_MS;
@@ -48,7 +44,7 @@ export function findMatchingOutgoingCall(
   );
   const matchedEntry = entriesOldestFirst.find(
     callLogEntry =>
-      isOutgoingEntry(callLogEntry) &&
+      callLogEntry.type === CallType.OUTGOING &&
       haveEqualTailDigits(intentPhoneNumber, callLogEntry.phoneNumber) &&
       isWithinMatchWindow(intentAtMs, Number(callLogEntry.timestamp)),
   );

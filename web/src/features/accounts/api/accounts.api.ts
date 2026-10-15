@@ -26,3 +26,11 @@ export async function createUser(userInput: CreateUserInput): Promise<void> {
   };
   await apiClient.post<CreateUserApiResponse>("/users", requestBody);
 }
+
+export async function deactivateUser(userId: number): Promise<void> {
+  await apiClient.post(`/users/${userId}/deactivate`);
+}
+
+export async function activateUser(userId: number): Promise<void> {
+  await apiClient.post(`/users/${userId}/activate`);
+}

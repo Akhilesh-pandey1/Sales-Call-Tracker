@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/shared/utils/cn";
+import { UserStatusButton } from "./user-status-button";
 import type { AccountSummary } from "../types";
 
 interface AccountsTableProps {
@@ -96,6 +97,9 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen }: AccountRowProps) {
       <TableCell className="p-4 text-sm tabular-nums text-muted-foreground">
         {account.country}
       </TableCell>
+      <TableCell className="p-4 text-right">
+        {!isOwnAccount && <UserStatusButton userId={account.id} isActive={account.is_active} />}
+      </TableCell>
     </TableRow>
   );
 }
@@ -115,6 +119,7 @@ function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccoun
             <TableHead>Name</TableHead>
             <TableHead>Role</TableHead>
             <TableHead>Country</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -133,9 +138,20 @@ function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccoun
 }
 
 function AccountCard({ account, isOwnAccount, onOpen }: AccountRowProps) {
+  const enterKey: string = "Enter";
+  const spaceKey: string = " ";
   const isInactive: boolean = !account.is_active;
 
   const handleCardClick = (): void => {
+    onOpen(account.id);
+  };
+
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
+    const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
+    if (!isActivationKey) {
+      return;
+    }
+    event.preventDefault();
     onOpen(account.id);
   };
 
@@ -149,9 +165,11 @@ function AccountCard({ account, isOwnAccount, onOpen }: AccountRowProps) {
   );
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
       aria-label={`Open stats for ${account.name}`}
       className={cardClassName}
     >
@@ -166,8 +184,9 @@ function AccountCard({ account, isOwnAccount, onOpen }: AccountRowProps) {
         <span className="capitalize">
           {account.role} · {account.country}
         </span>
+        {!isOwnAccount && <UserStatusButton userId={account.id} isActive={account.is_active} />}
       </span>
-    </button>
+    </div>
   );
 }
 

@@ -18,6 +18,10 @@ async function readStoredToken(): Promise<string | null> {
   return storedToken;
 }
 
+async function writeStoredToken(token: string): Promise<void> {
+  await AsyncStorage.setItem(tokenStorageKey, token);
+}
+
 async function clearStoredToken(): Promise<void> {
   await AsyncStorage.removeItem(tokenStorageKey);
 }
@@ -73,4 +77,4 @@ apiClient.interceptors.response.use(
   },
 );
 
-export { apiClient, readStoredToken, registerUnauthorizedHandler };
+export { apiClient, readStoredToken, writeStoredToken, registerUnauthorizedHandler };

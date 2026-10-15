@@ -1,0 +1,194 @@
+import { useEffect } from 'react';
+import {
+  AppState,
+  PermissionsAndroid,
+  type AppStateStatus,
+} from 'react-native';
+import CallLogs, { type CallLog } from 'react-native-call-log';
+import { readStoredCountry } from '@/features/auth';
+import {
+  addPendingCallAttempt,
+  getAllPendingCalls,
+  markPendingCallFilled,
+  type PendingCall,
+} from '@/features/tracking/db';
+import {
+  matchPendingCallsToLogEntries,
+  type MatchedPendingCall,
+} from '@/features/tracking/lib/call-log-matcher';
+
+const STALE_ROW_AGE_MS = 60 * 60 * 1000;
+const MAX_JANITOR_ATTEMPTS = 5;
+const MIN_MS_BETWEEN_SWEEPS = 5_000;
+const NO_LOAD_LIMIT = -1;
+
+let isJanitorSweepRunning = false;
+let lastSweepStartedAtMs = 0;
+
+function getIntentTimeMs(intentAt: string): number {
+  const intentTimeMs = new Date(intentAt).getTime();
+  return intentTimeMs;
+}
+
+function isStaleUnfilledPendingCall(
+  pendingCall: PendingCall,
+  nowMs: number,
+): boolean {
+  if (pendingCall.durationSeconds !== null) {
+    return false;
+  }
+  const intentTimeMs = getIntentTimeMs(pendingCall.intentAt);
+  if (Number.isNaN(intentTimeMs)) {
+    return true;
+  }
+  return nowMs - intentTimeMs >= STALE_ROW_AGE_MS;
+}
+
+function getOldestIntentTimeMs(stalePendingCalls: PendingCall[]): number {
+  const validIntentTimes = stalePendingCalls
+    .map(pendingCall => getIntentTimeMs(pendingCall.intentAt))
+    .filter(intentTimeMs => !Number.isNaN(intentTimeMs));
+  if (validIntentTimes.length === 0) {
+    return Date.now();
+  }
+  const oldestIntentTimeMs = Math.min(...validIntentTimes);
+  return oldestIntentTimeMs;
+}
+
+async function loadCallLogEntriesSince(
+  oldestIntentAtMs: number,
+  nowMs: number,
+): Promise<CallLog[] | null> {
+  try {
+    const callLogEntries = await CallLogs.load(NO_LOAD_LIMIT, {
+      minTimestamp: oldestIntentAtMs,
+      maxTimestamp: nowMs,
+    });
+    return callLogEntries;
+  } catch (loadError: unknown) {
+    console.warn('Could not read the call log for the janitor.', loadError);
+    return null;
+  }
+}
+
+async function fillMatchedPendingCalls(
+  matches: MatchedPendingCall[],
+): Promise<void> {
+  for (const match of matches) {
+    await markPendingCallFilled(match.callId, match.dialedAt, match.durationSeconds);
+  }
+}
+
+async function strikeUnmatchedPendingCalls(
+  stalePendingCalls: PendingCall[],
+  matchedCallIds: Set<string>,
+): Promise<void> {
+  for (const stalePendingCall of stalePendingCalls) {
+    if (matchedCallIds.has(stalePendingCall.callId)) {
+      continue;
+    }
+    const attemptCount = await addPendingCallAttempt(stalePendingCall.callId);
+    if (attemptCount >= MAX_JANITOR_ATTEMPTS) {
+      const giveUpDurationSeconds = 0;
+      await markPendingCallFilled(
+        stalePendingCall.callId,
+        stalePendingCall.intentAt,
+        giveUpDurationSeconds,
+      );
+    }
+  }
+}
+
+async function completeStalePendingCalls(
+  stalePendingCalls: PendingCall[],
+  callLogEntries: CallLog[],
+  countryCode: string,
+): Promise<void> {
+  const matches = matchPendingCallsToLogEntries(
+    stalePendingCalls,
+    callLogEntries,
+    countryCode,
+  );
+  const matchedCallIds = new Set(
+    matches.map(match => match.callId),
+  );
+  await fillMatchedPendingCalls(matches);
+  await strikeUnmatchedPendingCalls(stalePendingCalls, matchedCallIds);
+}
+
+async function sweepStalePendingCalls(): Promise<void> {
+  const isCallLogReadable = await PermissionsAndroid.check(
+    PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
+  );
+  if (!isCallLogReadable) {
+    return;
+  }
+
+  const nowMs = Date.now();
+  const pendingCalls = await getAllPendingCalls();
+  const stalePendingCalls = pendingCalls.filter(pendingCall =>
+    isStaleUnfilledPendingCall(pendingCall, nowMs),
+  );
+  if (stalePendingCalls.length === 0) {
+    return;
+  }
+
+  const countryCode = await readStoredCountry();
+  if (countryCode === null) {
+    return;
+  }
+
+  const oldestIntentAtMs = getOldestIntentTimeMs(stalePendingCalls);
+  const callLogEntries = await loadCallLogEntriesSince(
+    oldestIntentAtMs,
+    nowMs,
+  );
+  if (callLogEntries === null) {
+    return;
+  }
+
+  try {
+    await completeStalePendingCalls(
+      stalePendingCalls,
+      callLogEntries,
+      countryCode,
+    );
+  } catch (sweepError: unknown) {
+    console.warn('Could not complete the stale queued calls.', sweepError);
+  }
+}
+
+export async function runJanitorSweep(): Promise<void> {
+  const nowMs = Date.now();
+  const isTooSoonAfterLastSweep =
+    nowMs - lastSweepStartedAtMs < MIN_MS_BETWEEN_SWEEPS;
+  if (isJanitorSweepRunning || isTooSoonAfterLastSweep) {
+    return;
+  }
+  lastSweepStartedAtMs = nowMs;
+  isJanitorSweepRunning = true;
+  try {
+    await sweepStalePendingCalls();
+  } finally {
+    isJanitorSweepRunning = false;
+  }
+}
+
+export function useJanitor(): void {
+  useEffect(() => {
+    runJanitorSweep();
+  }, []);
+
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState: AppStateStatus): void => {
+      if (nextAppState === 'active') {
+        runJanitorSweep();
+      }
+    };
+    const stateSubscription = AppState.addEventListener(
+      'change',
+      handleAppStateChange,
+    );
+    return () => stateSubscription.remove();
+  }, []);
+}

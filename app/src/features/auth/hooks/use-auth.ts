@@ -17,6 +17,11 @@ const storedCountryKey = 'country';
 const serverUnreachableMessage = "Can't reach the server. Check your internet.";
 const unexpectedLoginMessage = 'Login failed. Please try again.';
 
+export async function readStoredCountry(): Promise<string | null> {
+  const storedCountry: string | null = await AsyncStorage.getItem(storedCountryKey);
+  return storedCountry;
+}
+
 function extractResponseMessage(error: AxiosError): string | null {
   const responseData: unknown = error.response?.data;
   if (responseData && typeof responseData === 'object' && 'message' in responseData) {

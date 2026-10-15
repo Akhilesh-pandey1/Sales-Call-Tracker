@@ -39,6 +39,11 @@ function getLoginErrorMessage(loginError: unknown): string {
   return serverMessage ?? unexpectedLoginMessage;
 }
 
+export async function readStoredCountry(): Promise<string | null> {
+  const storedCountry: string | null = await AsyncStorage.getItem(storedCountryKey);
+  return storedCountry;
+}
+
 export function useAuth(): {
   authStatus: AuthStatus;
   loginUser: (userName: string, userPassword: string) => Promise<LoginResult>;

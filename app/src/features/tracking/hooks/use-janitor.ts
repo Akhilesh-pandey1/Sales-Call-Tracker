@@ -5,6 +5,7 @@ import {
   type AppStateStatus,
 } from 'react-native';
 import CallLogs, { type CallLog } from 'react-native-call-log';
+import { readStoredCountry } from '@/features/auth';
 import {
   addPendingCallAttempt,
   getAllPendingCalls,
@@ -12,13 +13,14 @@ import {
   type PendingCall,
 } from '@/features/tracking/db';
 import {
-  CALL_MATCH_WINDOW_MS,
-  findMatchingOutgoingCall,
+  matchPendingCallsToLogEntries,
+  type MatchedPendingCall,
 } from '@/features/tracking/lib/call-log-matcher';
 
 const STALE_ROW_AGE_MS = 60 * 60 * 1000;
 const MAX_JANITOR_ATTEMPTS = 5;
 const MIN_MS_BETWEEN_SWEEPS = 5_000;
+const NO_LOAD_LIMIT = -1;
 
 let isJanitorSweepRunning = false;
 let lastSweepStartedAtMs = 0;
@@ -53,13 +55,13 @@ function getOldestIntentTimeMs(stalePendingCalls: PendingCall[]): number {
   return oldestIntentTimeMs;
 }
 
-async function loadCallLogEntriesWithinWindow(
+async function loadCallLogEntriesSince(
   oldestIntentAtMs: number,
   nowMs: number,
 ): Promise<CallLog[] | null> {
   try {
-    const callLogEntries = await CallLogs.load(-1, {
-      minTimestamp: oldestIntentAtMs - CALL_MATCH_WINDOW_MS,
+    const callLogEntries = await CallLogs.load(NO_LOAD_LIMIT, {
+      minTimestamp: oldestIntentAtMs,
       maxTimestamp: nowMs,
     });
     return callLogEntries;
@@ -69,57 +71,49 @@ async function loadCallLogEntriesWithinWindow(
   }
 }
 
-function toDialedAtIso(entryTimestampMs: string): string | null {
-  const dialedAtMs = Number(entryTimestampMs);
-  if (!Number.isFinite(dialedAtMs)) {
-    return null;
-  }
-  const dialedAtIso = new Date(dialedAtMs).toISOString();
-  return dialedAtIso;
-}
-
-function removeMatchedEntry(
-  remainingEntries: CallLog[],
-  matchedEntry: CallLog,
-): void {
-  const matchedEntryIndex = remainingEntries.indexOf(matchedEntry);
-  if (matchedEntryIndex !== -1) {
-    remainingEntries.splice(matchedEntryIndex, 1);
-  }
-}
-
-async function processStalePendingCall(
-  stalePendingCall: PendingCall,
-  remainingEntries: CallLog[],
+async function fillMatchedPendingCalls(
+  matches: MatchedPendingCall[],
 ): Promise<void> {
-  const matchedEntry = findMatchingOutgoingCall(
-    stalePendingCall.phoneNumber,
-    getIntentTimeMs(stalePendingCall.intentAt),
-    remainingEntries,
-  );
+  for (const match of matches) {
+    await markPendingCallFilled(match.callId, match.dialedAt, match.durationSeconds);
+  }
+}
 
-  if (matchedEntry !== null) {
-    const dialedAtIso = toDialedAtIso(matchedEntry.timestamp);
-    if (dialedAtIso !== null) {
-      removeMatchedEntry(remainingEntries, matchedEntry);
+async function strikeUnmatchedPendingCalls(
+  stalePendingCalls: PendingCall[],
+  matchedCallIds: Set<string>,
+): Promise<void> {
+  for (const stalePendingCall of stalePendingCalls) {
+    if (matchedCallIds.has(stalePendingCall.callId)) {
+      continue;
+    }
+    const attemptCount = await addPendingCallAttempt(stalePendingCall.callId);
+    if (attemptCount >= MAX_JANITOR_ATTEMPTS) {
+      const giveUpDurationSeconds = 0;
       await markPendingCallFilled(
         stalePendingCall.callId,
-        dialedAtIso,
-        matchedEntry.duration,
+        stalePendingCall.intentAt,
+        giveUpDurationSeconds,
       );
-      return;
     }
   }
+}
 
-  const attemptCount = await addPendingCallAttempt(stalePendingCall.callId);
-  if (attemptCount >= MAX_JANITOR_ATTEMPTS) {
-    const giveUpDurationSeconds = 0;
-    await markPendingCallFilled(
-      stalePendingCall.callId,
-      stalePendingCall.intentAt,
-      giveUpDurationSeconds,
-    );
-  }
+async function completeStalePendingCalls(
+  stalePendingCalls: PendingCall[],
+  callLogEntries: CallLog[],
+  countryCode: string,
+): Promise<void> {
+  const matches = matchPendingCallsToLogEntries(
+    stalePendingCalls,
+    callLogEntries,
+    countryCode,
+  );
+  const matchedCallIds = new Set(
+    matches.map(match => match.callId),
+  );
+  await fillMatchedPendingCalls(matches);
+  await strikeUnmatchedPendingCalls(stalePendingCalls, matchedCallIds);
 }
 
 async function sweepStalePendingCalls(): Promise<void> {
@@ -139,8 +133,13 @@ async function sweepStalePendingCalls(): Promise<void> {
     return;
   }
 
+  const countryCode = await readStoredCountry();
+  if (countryCode === null) {
+    return;
+  }
+
   const oldestIntentAtMs = getOldestIntentTimeMs(stalePendingCalls);
-  const callLogEntries = await loadCallLogEntriesWithinWindow(
+  const callLogEntries = await loadCallLogEntriesSince(
     oldestIntentAtMs,
     nowMs,
   );
@@ -148,13 +147,14 @@ async function sweepStalePendingCalls(): Promise<void> {
     return;
   }
 
-  const remainingEntries = [...callLogEntries];
-  for (const stalePendingCall of stalePendingCalls) {
-    try {
-      await processStalePendingCall(stalePendingCall, remainingEntries);
-    } catch (processingError: unknown) {
-      console.warn('Could not complete a stale queued call.', processingError);
-    }
+  try {
+    await completeStalePendingCalls(
+      stalePendingCalls,
+      callLogEntries,
+      countryCode,
+    );
+  } catch (sweepError: unknown) {
+    console.warn('Could not complete the stale queued calls.', sweepError);
   }
 }
 

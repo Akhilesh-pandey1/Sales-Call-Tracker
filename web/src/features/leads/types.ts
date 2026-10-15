@@ -23,3 +23,14 @@ export interface LeadsSummaryApiResponse {
   pool: LeadPoolCounts;
   people: LeadPersonActivity[];
 }
+
+export type LeadCountry = "IN" | "AE" | "US";
+
+export interface LeadUploadApiResponse {
+  status: boolean;
+  added: number;
+  duplicates: number;
+  invalid: number;
+}
+
+export type LeadUploadResult = Omit<LeadUploadApiResponse, "status">;

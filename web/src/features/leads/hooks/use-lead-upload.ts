@@ -1,0 +1,93 @@
+import { isAxiosError } from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { uploadLeads } from "../api/leads.api";
+import { LEADS_SUMMARY_QUERY_KEY } from "./use-leads";
+import type { LeadCountry, LeadUploadResult } from "../types";
+
+export const MAX_LEAD_UPLOAD_MB: number = 2;
+
+interface LeadUploadRequest {
+  file: File;
+  country: LeadCountry;
+}
+
+interface LeadUploadApiErrorBody {
+  message?: string;
+}
+
+interface UseLeadUploadResult {
+  submitUpload: (file: File, country: LeadCountry) => void;
+  isUploadPending: boolean;
+  uploadErrorMessage: string | null;
+  uploadResult: LeadUploadResult | null;
+  clearUploadState: () => void;
+}
+
+export function getCsvFileValidationError(file: File): string | null {
+  const bytesPerMb: number = 1024 * 1024;
+  const maxLeadUploadBytes: number = MAX_LEAD_UPLOAD_MB * bytesPerMb;
+  const csvMimeType: string = "text/csv";
+  const csvFileExtension: string = ".csv";
+  const hasCsvMimeType: boolean = file.type === csvMimeType;
+  const hasCsvExtension: boolean = file.name.toLowerCase().endsWith(csvFileExtension);
+  if (!hasCsvMimeType && !hasCsvExtension) {
+    const invalidCsvFileMessage: string = "Please select a valid CSV file.";
+    return invalidCsvFileMessage;
+  }
+  if (file.size > maxLeadUploadBytes) {
+    const fileTooLargeMessage: string = "File is too large.";
+    return fileTooLargeMessage;
+  }
+  return null;
+}
+
+function getUploadErrorMessage(error: unknown): string {
+  const fallbackErrorMessage: string = "Something went wrong. Please try again.";
+  const serverUnreachableMessage: string = "Can't reach the server. Check your internet.";
+  if (!isAxiosError(error)) {
+    return fallbackErrorMessage;
+  }
+  if (!error.response) {
+    return serverUnreachableMessage;
+  }
+  const errorBody = error.response.data as LeadUploadApiErrorBody | undefined;
+  const serverMessage: string | undefined = errorBody?.message;
+  const resolvedMessage: string = serverMessage || fallbackErrorMessage;
+  return resolvedMessage;
+}
+
+export function useLeadUpload(): UseLeadUploadResult {
+  const queryClient = useQueryClient();
+
+  const refreshPoolSummary = (): void => {
+    queryClient.invalidateQueries({ queryKey: LEADS_SUMMARY_QUERY_KEY });
+  };
+
+  const uploadMutation = useMutation({
+    mutationFn: (uploadRequest: LeadUploadRequest) =>
+      uploadLeads(uploadRequest.file, uploadRequest.country),
+    onSuccess: refreshPoolSummary,
+  });
+
+  const submitUpload = (file: File, country: LeadCountry): void => {
+    uploadMutation.mutate({ file, country });
+  };
+
+  const clearUploadState = (): void => {
+    uploadMutation.reset();
+  };
+
+  const hasUploadFailed: boolean = uploadMutation.isError;
+  const uploadErrorMessage: string | null = hasUploadFailed
+    ? getUploadErrorMessage(uploadMutation.error)
+    : null;
+
+  const result: UseLeadUploadResult = {
+    submitUpload,
+    isUploadPending: uploadMutation.isPending,
+    uploadErrorMessage,
+    uploadResult: uploadMutation.data ?? null,
+    clearUploadState,
+  };
+  return result;
+}

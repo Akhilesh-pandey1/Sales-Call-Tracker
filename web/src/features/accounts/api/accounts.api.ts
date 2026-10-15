@@ -6,3 +6,11 @@ export async function getAccounts(): Promise<AccountSummary[]> {
   const accounts: AccountSummary[] = response.data;
   return accounts;
 }
+
+export async function deactivateUser(userId: number): Promise<void> {
+  await apiClient.post(`/users/${userId}/deactivate`);
+}
+
+export async function activateUser(userId: number): Promise<void> {
+  await apiClient.post(`/users/${userId}/activate`);
+}

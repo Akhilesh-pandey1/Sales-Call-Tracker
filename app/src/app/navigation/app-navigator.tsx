@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
 import { DialerScreen } from '@/features/dialer';
 import { MyStatsScreen } from '@/features/stats';
-import { useJanitor } from '@/features/tracking';
+import { useJanitor, useSync } from '@/features/tracking';
 import type { MainTabsParamList } from './main-tabs-param-list';
 
 function SettingsPlaceholderScreen() {
@@ -17,6 +17,7 @@ const MainTabs = createBottomTabNavigator<MainTabsParamList>();
 
 export function AppNavigator() {
   useJanitor();
+  useSync();
 
   return (
     <MainTabs.Navigator screenOptions={{ headerShown: false }}>

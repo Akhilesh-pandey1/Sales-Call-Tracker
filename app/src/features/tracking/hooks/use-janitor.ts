@@ -22,7 +22,7 @@ const MAX_JANITOR_ATTEMPTS = 5;
 const MIN_MS_BETWEEN_SWEEPS = 5_000;
 const NO_LOAD_LIMIT = -1;
 
-let isJanitorSweepRunning = false;
+let janitorSweepPromise: Promise<void> | null = null;
 let lastSweepStartedAtMs = 0;
 
 function getIntentTimeMs(intentAt: string): number {
@@ -158,20 +158,29 @@ async function sweepStalePendingCalls(): Promise<void> {
   }
 }
 
-export async function runJanitorSweep(): Promise<void> {
-  const nowMs = Date.now();
-  const isTooSoonAfterLastSweep =
-    nowMs - lastSweepStartedAtMs < MIN_MS_BETWEEN_SWEEPS;
-  if (isJanitorSweepRunning || isTooSoonAfterLastSweep) {
-    return;
-  }
-  lastSweepStartedAtMs = nowMs;
-  isJanitorSweepRunning = true;
+async function startJanitorSweep(): Promise<void> {
+  lastSweepStartedAtMs = Date.now();
   try {
     await sweepStalePendingCalls();
   } finally {
-    isJanitorSweepRunning = false;
+    janitorSweepPromise = null;
   }
+}
+
+export async function runJanitorSweep(): Promise<void> {
+  if (janitorSweepPromise !== null) {
+    await janitorSweepPromise;
+    return;
+  }
+  const nowMs = Date.now();
+  const isTooSoonAfterLastSweep =
+    nowMs - lastSweepStartedAtMs < MIN_MS_BETWEEN_SWEEPS;
+  if (isTooSoonAfterLastSweep) {
+    return;
+  }
+  const activeSweepPromise = startJanitorSweep();
+  janitorSweepPromise = activeSweepPromise;
+  await activeSweepPromise;
 }
 
 export function useJanitor(): void {

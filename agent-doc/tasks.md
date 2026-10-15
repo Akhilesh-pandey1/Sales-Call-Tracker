@@ -76,11 +76,11 @@
 
 > Spec refs: `specs/lead-management.md` — all scenarios
 
-- [ ] 7.1 Create `Lead` SQLAlchemy model (`backend/app/modules/leads/models.py`) from `database.md` with all status, attempt, lock, claim, and schedule columns
-- [ ] 7.2 Implement `POST /api/leads/upload` (manager only): parse multipart CSV, enforce 2 MB limit, normalise numbers to E.164 with `phonenumbers` for chosen country, skip duplicates (within file and existing pool), insert new rows, return `{"status": true, "added": N, "duplicates": N, "invalid": N}` (all scenarios in `specs/lead-management.md §CSV upload`)
-- [ ] 7.3 Implement `GET /api/leads/summary` (manager only): return pool bucket counts (waiting, scheduled, done, stopped) and today's per-active-salesperson attempted/connected/not-connected counts (scenarios: Pool bucket counts returned, Per-person activity returned)
-- [ ] 7.4 Implement `POST /api/leads/next` (salesperson): handle optional `schedule` body field — validate and save schedule first; then apply priority order (unexpired claim → due schedule → newest waiting); claim the served lead for `CLAIM_MINUTES`; return lead or null (all scenarios in `specs/lead-management.md §Next-lead serving`, `§Claim window`, `§Scheduling`)
-- [ ] 7.5 Write `tests/modules/test_leads.py` covering all scenarios in `specs/lead-management.md`
+- [x] 7.1 Create `Lead` SQLAlchemy model (`backend/app/modules/leads/models.py`) from `database.md` with all status, attempt, lock, claim, and schedule columns
+- [x] 7.2 Implement `POST /api/leads/upload` (manager only): parse multipart CSV, enforce 2 MB limit, normalise numbers to E.164 with `phonenumbers` for chosen country, skip duplicates (within file and existing pool), insert new rows, return `{"status": true, "added": N, "duplicates": N, "invalid": N}` (all scenarios in `specs/lead-management.md §CSV upload`)
+- [x] 7.3 Implement `GET /api/leads/summary` (manager only): return pool bucket counts (waiting, scheduled, done, stopped) and today's per-active-salesperson attempted/connected/not-connected counts (scenarios: Pool bucket counts returned, Per-person activity returned)
+- [x] 7.4 Implement `POST /api/leads/next` (salesperson): handle optional `schedule` body field — validate and save schedule first; then apply priority order (unexpired claim → due schedule → newest waiting); claim the served lead for `CLAIM_MINUTES`; return lead or null (all scenarios in `specs/lead-management.md §Next-lead serving`, `§Claim window`, `§Scheduling`)
+- [x] 7.5 Write `tests/modules/test_leads.py` covering all scenarios in `specs/lead-management.md`
 
 ---
 

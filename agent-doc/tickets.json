@@ -97,7 +97,7 @@
         "7.4 Implement `POST /api/leads/next` (salesperson): handle optional `schedule` body field — validate and save schedule first; then apply priority order (unexpired claim → due schedule → newest waiting); claim the served lead for `CLAIM_MINUTES`; return lead or null (all scenarios in `specs/lead-management.md §Next-lead serving`, `§Claim window`, `§Scheduling`)",
         "7.5 Write `tests/modules/test_leads.py` covering all scenarios in `specs/lead-management.md`\n---"
       ],
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         3
       ]

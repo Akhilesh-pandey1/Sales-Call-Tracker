@@ -1,0 +1,50 @@
+from pydantic import BaseModel
+
+
+class UploadLeadsResponse(BaseModel):
+    status: bool
+    added: int
+    duplicates: int
+    invalid: int
+
+
+class LeadPoolBucketCounts(BaseModel):
+    waiting: int
+    scheduled: int
+    connected: int
+    stopped: int
+
+
+class SalespersonLeadActivity(BaseModel):
+    id: int
+    name: str
+    attempted: int
+    connected: int
+    not_connected: int
+
+
+class LeadsSummaryResponse(BaseModel):
+    status: bool
+    pool: LeadPoolBucketCounts
+    people: list[SalespersonLeadActivity]
+
+
+class ScheduleLeadRequest(BaseModel):
+    lead_id: int
+    scheduled_at: str
+
+
+class NextLeadRequest(BaseModel):
+    schedule: ScheduleLeadRequest | None = None
+
+
+class ServedLead(BaseModel):
+    id: int
+    phone_number: str
+    attempt_count: int
+    is_scheduled: bool
+
+
+class NextLeadResponse(BaseModel):
+    status: bool
+    lead: ServedLead | None = None

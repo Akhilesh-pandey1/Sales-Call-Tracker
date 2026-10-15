@@ -23,6 +23,12 @@ def register_error_handlers(app: Flask) -> None:
 
     @app.errorhandler(HTTPException)
     def handle_http_exception(error: HTTPException) -> tuple[Response, int]:
+        bad_request_code: int = 400
+        entity_too_large_code: int = 413
+        if error.code == entity_too_large_code:
+            large_file_response: Response = jsonify({"message": "File is too large."})
+            return large_file_response, bad_request_code
+
         error_code: int = error.code if error.code is not None else 500
         error_message: str = str(error.description)
         response: Response = jsonify({"message": error_message})

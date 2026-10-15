@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-15)
 
 ## Corpus Check
-- 199 files · ~407,911 words
+- 202 files · ~408,375 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1909 nodes · 2901 edges · 164 communities (148 shown, 16 thin omitted)
+- 1924 nodes · 2937 edges · 166 communities (150 shown, 16 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 22 edges (avg confidence: 0.53)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `83e47770`
+- Built from commit: `c1db8e2e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -61,13 +61,13 @@
 - our_agent.py
 - What You Must Do When Invoked
 - Dimensions
-- generate_design_system
+- .claude/skills/design-screens/uiux/scripts/design_system.py
 - allow
 - DesignSystemGenerator
 - ._apply_reasoning
 - _select_palette_for_mode
 - .generate
-- .claude/skills/design-screens/uiux/scripts/design_system.py
+- persist_design_system
 - .agents/skills/grill-for-business/SKILL.md
 - Design Screens
 - Write Screens
@@ -155,6 +155,8 @@
 - test_dashboard.py
 - AppException
 - Requirement: Server-side call ingestion
+- test_production.py
+- _generate_intelligent_overrides
 
 ## God Nodes (most connected - your core abstractions)
 1. `AppException` - 37 edges
@@ -183,7 +185,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (164 total, 16 thin omitted)
+## Communities (166 total, 16 thin omitted)
 
 ### Community 0 - ".claude/skills/grill-with-superpower/scripts/server.cjs"
 Cohesion: 0.06
@@ -341,9 +343,9 @@ Nodes (26): For /graphify add and --watch, For /graphify query, For the commit h
 Cohesion: 0.08
 Nodes (24): 10. Tech stack — one library per piece, 1. File structure & changes, 1. Gather facts — never ask the user for what you can find, 2. API contracts, 2. Say if this is greenfield or brownfield, 3. Classify the blast radius, 3. Database changes, 4. Build the coverage checklist (+16 more)
 
-### Community 53 - "generate_design_system"
-Cohesion: 0.17
-Nodes (12): ansi_ljust(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤ (+4 more)
+### Community 53 - ".claude/skills/design-screens/uiux/scripts/design_system.py"
+Cohesion: 0.18
+Nodes (14): ansi_ljust(), _filter_anti_patterns_for_mode(), format_ascii_box(), format_markdown(), generate_design_system(), hex_to_ansi(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Convert hex color to ANSI True Color swatch (██) with fallback. (+6 more)
 
 ### Community 54 - "allow"
 Cohesion: 0.08
@@ -362,12 +364,12 @@ Cohesion: 0.22
 Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
 
 ### Community 58 - ".generate"
-Cohesion: 0.20
-Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
+Cohesion: 0.25
+Nodes (5): Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
 
-### Community 59 - ".claude/skills/design-screens/uiux/scripts/design_system.py"
-Cohesion: 0.18
-Nodes (15): _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Format a page-specific override file with intelligent AI-generated content. (+7 more)
+### Community 59 - "persist_design_system"
+Cohesion: 0.25
+Nodes (9): format_master_md(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every…, Write fully to a temp file, then publish atomically., Persist design system to design-system/<project>/ folder using Master +…, safe_slug() (+1 more)
 
 ### Community 60 - ".agents/skills/grill-for-business/SKILL.md"
 Cohesion: 0.08
@@ -635,7 +637,7 @@ Nodes (6): Requirement: Name-and-password login, Scenario: Deactivated account, 
 
 ### Community 152 - "User"
 Cohesion: 0.07
-Nodes (54): Flask, register_commands(), seed_command(), BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers() (+46 more)
+Nodes (56): Flask, register_commands(), seed_command(), BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers() (+48 more)
 
 ### Community 153 - "test_users.py"
 Cohesion: 0.21
@@ -670,16 +672,24 @@ Cohesion: 0.50
 Nodes (4): Requirement: Phone number normalization, Scenario: International number passes through, Scenario: Local-format number normalized, Scenario: Unparseable number stored raw
 
 ### Community 161 - "test_dashboard.py"
-Cohesion: 0.14
-Nodes (40): get_ist_timezone(), normalize_phone_number(), now_ist(), datetime, to_ist(), Call, extract_valid_call(), Any (+32 more)
+Cohesion: 0.17
+Nodes (35): get_ist_timezone(), normalize_phone_number(), now_ist(), datetime, to_ist(), create_call_record(), create_user_fixture(), datetime (+27 more)
 
 ### Community 162 - "AppException"
-Cohesion: 0.06
-Nodes (83): AppException, Any, require_auth(), require_manager(), validate_password_strength(), parse_utc_datetime(), Response, sync_calls() (+75 more)
+Cohesion: 0.05
+Nodes (88): AppException, Any, require_auth(), require_manager(), validate_password_strength(), parse_utc_datetime(), Call, Response (+80 more)
 
 ### Community 163 - "Requirement: Server-side call ingestion"
 Cohesion: 0.50
 Nodes (4): Requirement: Server-side call ingestion, Scenario: Malformed row in batch, Scenario: Old call dropped, Scenario: Valid batch saved
+
+### Community 164 - "test_production.py"
+Cohesion: 0.41
+Nodes (9): Flask, FlaskClient, Path, test_api_route_not_found_returns_json(), test_missing_dist_returns_404(), test_missing_static_asset_returns_404(), test_serve_index_html_on_root(), test_serve_spa_client_route() (+1 more)
+
+### Community 165 - "_generate_intelligent_overrides"
+Cohesion: 0.33
+Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. Uses…, Detect page type from context and search results.
 
 ## Knowledge Gaps
 - **876 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+871 more)
@@ -689,11 +699,11 @@ Nodes (4): Requirement: Server-side call ingestion, Scenario: Malformed row in b
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `search()` connect `.agents/skills/design-screens/uiux/scripts/core.py` to `.agents/skills/design-screens/uiux/scripts/design_system.py`, `.generate`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Why does `AppException` connect `AppException` to `User`, `test_dashboard.py`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`?**
+- **Why does `search()` connect `.agents/skills/design-screens/uiux/scripts/core.py` to `.agents/skills/design-screens/uiux/scripts/design_system.py`, `.generate`, `_generate_intelligent_overrides`?**
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`, `_generate_intelligent_overrides`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
   _876 weakly-connected nodes found - possible documentation gaps or missing edges._

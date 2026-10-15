@@ -23,3 +23,4 @@ class BaseConfig:
     
     SQLALCHEMY_DATABASE_URI: str = raw_database_url
     MAX_CONTENT_LENGTH: int = MAX_LEAD_UPLOAD_MB * 1024 * 1024
+    DIST_DIR: str = os.getenv("DIST_DIR", os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "web", "dist")))

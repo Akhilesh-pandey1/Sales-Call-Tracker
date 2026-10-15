@@ -4835,7 +4835,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system",
-      "community": 59,
+      "community": 53,
       "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": ".claude/skills/design-screens/uiux/scripts/design_system.py"
     },
@@ -4945,8 +4945,8 @@
       "source_location": "L246",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_filter_anti_patterns_for_mode",
-      "community": 58,
-      "community_name": ".generate",
+      "community": 53,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_filter_anti_patterns_for_mode()"
     },
     {
@@ -5100,7 +5100,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_hex_to_ansi",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "hex_to_ansi()"
     },
     {
@@ -5111,7 +5111,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_ansi_ljust",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "ansi_ljust()"
     },
     {
@@ -5122,7 +5122,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_section_header",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "section_header()"
     },
     {
@@ -5133,7 +5133,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_ascii_box",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format_ascii_box()"
     },
     {
@@ -5144,7 +5144,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_markdown",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format_markdown()"
     },
     {
@@ -5155,7 +5155,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_design_system",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "generate_design_system()"
     },
     {
@@ -5166,7 +5166,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_safe_slug",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "safe_slug()"
     },
     {
@@ -5177,7 +5177,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_write_persisted_file",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "_write_persisted_file()"
     },
     {
@@ -5188,7 +5188,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_py_path",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "path"
     },
     {
@@ -5199,7 +5199,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_persist_design_system",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "persist_design_system()"
     },
     {
@@ -5210,7 +5210,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_master_md",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "format_master_md()"
     },
     {
@@ -5220,8 +5220,8 @@
       "source_location": "L1381",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_page_override_md",
-      "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 165,
+      "community_name": "_generate_intelligent_overrides",
       "norm_label": "format_page_override_md()"
     },
     {
@@ -5231,8 +5231,8 @@
       "source_location": "L1490",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_intelligent_overrides",
-      "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 165,
+      "community_name": "_generate_intelligent_overrides",
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -5242,8 +5242,8 @@
       "source_location": "L1596",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_detect_page_type",
-      "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 165,
+      "community_name": "_generate_intelligent_overrides",
       "norm_label": "_detect_page_type()"
     },
     {
@@ -5352,8 +5352,8 @@
       "source_location": "L247",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_247",
-      "community": 58,
-      "community_name": ".generate",
+      "community": 53,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "drop \"avoid dark mode\" advice once dark mode is the resolved answer."
     },
     {
@@ -5452,7 +5452,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_612",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "convert hex color to ansi true color swatch (\u2588\u2588) with fallback."
     },
     {
@@ -5463,7 +5463,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_626",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "like str.ljust but accounts for zero-width ansi escape sequences."
     },
     {
@@ -5474,7 +5474,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_634",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "create a unicode section separator: \u251c\u2500\u2500\u2500 name \u2500\u2500\u2500...\u2524"
     },
     {
@@ -5485,7 +5485,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_641",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format design system as unicode box with ansi color swatches."
     },
     {
@@ -5496,7 +5496,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_792",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format design system as markdown."
     },
     {
@@ -5507,7 +5507,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_923",
       "community": 53,
-      "community_name": "generate_design_system",
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
     {
@@ -5518,7 +5518,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_962",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "slugify a name into a single safe path segment. only [a-z0-9_-] survives; every..."
     },
     {
@@ -5529,7 +5529,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_973",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "write fully to a temp file, then publish atomically."
     },
     {
@@ -5540,7 +5540,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_997",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "persist design system to design-system/<project>/ folder using master +..."
     },
     {
@@ -5551,7 +5551,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1077",
       "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "persist_design_system",
       "norm_label": "format design system as master.md with hierarchical override logic."
     },
     {
@@ -5561,8 +5561,8 @@
       "source_location": "L1382",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1382",
-      "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 165,
+      "community_name": "_generate_intelligent_overrides",
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -5572,8 +5572,8 @@
       "source_location": "L1491",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1491",
-      "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 165,
+      "community_name": "_generate_intelligent_overrides",
       "norm_label": "generate intelligent overrides based on page type using layered search. uses..."
     },
     {
@@ -5583,8 +5583,8 @@
       "source_location": "L1597",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1597",
-      "community": 59,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 165,
+      "community_name": "_generate_intelligent_overrides",
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -6764,7 +6764,7 @@
       "label": "create_app()",
       "file_type": "code",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L12",
+      "source_location": "L13",
       "_origin": "ast",
       "id": "backend_app_init_create_app",
       "community": 152,
@@ -7438,8 +7438,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_init",
-      "community": 161,
-      "community_name": "test_dashboard.py",
+      "community": 162,
+      "community_name": "AppException",
       "norm_label": "calls/__init__.py"
     },
     {
@@ -7449,8 +7449,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_models",
-      "community": 161,
-      "community_name": "test_dashboard.py",
+      "community": 162,
+      "community_name": "AppException",
       "norm_label": "calls/models.py"
     },
     {
@@ -7460,8 +7460,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "backend_app_modules_calls_models_call",
-      "community": 161,
-      "community_name": "test_dashboard.py",
+      "community": 162,
+      "community_name": "AppException",
       "norm_label": "call"
     },
     {
@@ -7559,8 +7559,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services",
-      "community": 161,
-      "community_name": "test_dashboard.py",
+      "community": 162,
+      "community_name": "AppException",
       "norm_label": "calls/services.py"
     },
     {
@@ -7570,8 +7570,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_extract_valid_call",
-      "community": 161,
-      "community_name": "test_dashboard.py",
+      "community": 162,
+      "community_name": "AppException",
       "norm_label": "extract_valid_call()"
     },
     {
@@ -7581,8 +7581,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_any",
-      "community": 161,
-      "community_name": "test_dashboard.py",
+      "community": 162,
+      "community_name": "AppException",
       "norm_label": "any"
     },
     {
@@ -7592,8 +7592,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_datetime",
-      "community": 161,
-      "community_name": "test_dashboard.py",
+      "community": 162,
+      "community_name": "AppException",
       "norm_label": "datetime"
     },
     {
@@ -7603,8 +7603,8 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_sync_calls_batch",
-      "community": 161,
-      "community_name": "test_dashboard.py",
+      "community": 162,
+      "community_name": "AppException",
       "norm_label": "sync_calls_batch()"
     },
     {
@@ -8552,6 +8552,39 @@
       "community": 162,
       "community_name": "AppException",
       "norm_label": "delete_user_account()"
+    },
+    {
+      "label": "static_routes.py",
+      "file_type": "code",
+      "source_file": "backend/app/static_routes.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_static_routes",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "static_routes.py"
+    },
+    {
+      "label": "register_static_routes()",
+      "file_type": "code",
+      "source_file": "backend/app/static_routes.py",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "backend_app_static_routes_register_static_routes",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "register_static_routes()"
+    },
+    {
+      "label": "Flask",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_static_routes_py_flask",
+      "community": 152,
+      "community_name": "User",
+      "norm_label": "flask"
     },
     {
       "label": "conftest.py",
@@ -10070,6 +10103,138 @@
       "community": 161,
       "community_name": "test_dashboard.py",
       "norm_label": "test_utils_helpers()"
+    },
+    {
+      "label": "test_production.py",
+      "file_type": "code",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_tests_test_production",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "test_production.py"
+    },
+    {
+      "label": "test_serve_index_html_on_root()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_test_serve_index_html_on_root",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "test_serve_index_html_on_root()"
+    },
+    {
+      "label": "Flask",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_py_flask",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "flask"
+    },
+    {
+      "label": "FlaskClient",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_py_flaskclient",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "flaskclient"
+    },
+    {
+      "label": "Path",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_py_path",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "path"
+    },
+    {
+      "label": "test_serve_static_asset()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_test_serve_static_asset",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "test_serve_static_asset()"
+    },
+    {
+      "label": "test_missing_static_asset_returns_404()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_test_missing_static_asset_returns_404",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "test_missing_static_asset_returns_404()"
+    },
+    {
+      "label": "test_serve_spa_client_route()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_test_serve_spa_client_route",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "test_serve_spa_client_route()"
+    },
+    {
+      "label": "test_api_route_not_found_returns_json()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_test_api_route_not_found_returns_json",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "test_api_route_not_found_returns_json()"
+    },
+    {
+      "label": "test_missing_dist_returns_404()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L84",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_test_missing_dist_returns_404",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "test_missing_dist_returns_404()"
+    },
+    {
+      "label": "test_wsgi_entrypoint()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "backend_tests_test_production_test_wsgi_entrypoint",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "test_wsgi_entrypoint()"
+    },
+    {
+      "label": "wsgi.py",
+      "file_type": "code",
+      "source_file": "backend/wsgi.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_wsgi",
+      "community": 164,
+      "community_name": "test_production.py",
+      "norm_label": "wsgi.py"
     },
     {
       "label": ".agents/rules/code-style.md",
@@ -32406,7 +32571,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init",
@@ -32426,11 +32591,35 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/__init__.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_init",
+      "target": "backend_app_static_routes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/__init__.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_init",
+      "target": "backend_app_static_routes_register_static_routes",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
@@ -32442,7 +32631,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
@@ -32454,7 +32643,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
@@ -32466,11 +32655,23 @@
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
       "target": "backend_app_init_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/__init__.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_init_create_app",
+      "target": "backend_app_static_routes_register_static_routes",
       "confidence_score": 1.0
     },
     {
@@ -32496,6 +32697,18 @@
       "_origin": "ast",
       "source": "backend_tests_conftest_app",
       "target": "backend_app_init_create_app"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/wsgi.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_wsgi",
+      "target": "backend_app_init_create_app",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -32918,6 +33131,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/static_routes.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_static_routes",
+      "target": "backend_app_config_base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/tests/conftest.py",
       "source_location": "L6",
       "weight": 1.0,
@@ -32995,6 +33220,18 @@
       "source": "backend_app_config_prod_prodconfig",
       "target": "backend_app_config_base_baseconfig",
       "confidence_score": 0.5
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/static_routes.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_static_routes",
+      "target": "backend_app_config_base_baseconfig",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -39494,6 +39731,41 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/static_routes.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_static_routes",
+      "target": "backend_app_static_routes_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/static_routes.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_static_routes",
+      "target": "backend_app_static_routes_register_static_routes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/static_routes.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_static_routes_register_static_routes",
+      "target": "backend_app_static_routes_py_flask",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/conftest.py",
@@ -44502,6 +44774,323 @@
       "_origin": "ast",
       "source": "backend_tests_test_foundation_test_error_handler",
       "target": "backend_tests_test_foundation_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_tests_test_production_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_tests_test_production_test_api_route_not_found_returns_json",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_tests_test_production_test_missing_dist_returns_404",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_tests_test_production_test_missing_static_asset_returns_404",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_tests_test_production_test_serve_index_html_on_root",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_tests_test_production_test_serve_spa_client_route",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_tests_test_production_test_serve_static_asset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_tests_test_production_test_wsgi_entrypoint",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production",
+      "target": "backend_wsgi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_index_html_on_root",
+      "target": "backend_tests_test_production_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_index_html_on_root",
+      "target": "backend_tests_test_production_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_index_html_on_root",
+      "target": "backend_tests_test_production_py_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_api_route_not_found_returns_json",
+      "target": "backend_tests_test_production_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_missing_dist_returns_404",
+      "target": "backend_tests_test_production_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_missing_static_asset_returns_404",
+      "target": "backend_tests_test_production_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_spa_client_route",
+      "target": "backend_tests_test_production_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_static_asset",
+      "target": "backend_tests_test_production_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_api_route_not_found_returns_json",
+      "target": "backend_tests_test_production_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_missing_dist_returns_404",
+      "target": "backend_tests_test_production_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_missing_static_asset_returns_404",
+      "target": "backend_tests_test_production_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_spa_client_route",
+      "target": "backend_tests_test_production_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_static_asset",
+      "target": "backend_tests_test_production_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_api_route_not_found_returns_json",
+      "target": "backend_tests_test_production_py_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_missing_dist_returns_404",
+      "target": "backend_tests_test_production_py_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_missing_static_asset_returns_404",
+      "target": "backend_tests_test_production_py_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_spa_client_route",
+      "target": "backend_tests_test_production_py_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_production.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_test_production_test_serve_static_asset",
+      "target": "backend_tests_test_production_py_path",
       "confidence_score": 1.0
     },
     {
@@ -54285,5 +54874,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "83e477707a481baabdbaffdb1db51595be780194"
+  "built_at_commit": "c1db8e2e97f6875c27acfc172d881699c81373a1"
 }

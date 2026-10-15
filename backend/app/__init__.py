@@ -7,6 +7,7 @@ from backend.app.config.dev import DevConfig
 from backend.app.config.prod import ProdConfig
 from backend.app.core.errors import register_error_handlers
 from backend.app.extensions import db
+from backend.app.static_routes import register_static_routes
 
 
 def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
@@ -26,6 +27,7 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
     register_error_handlers(app)
     app.register_blueprint(api_blueprint)
     register_commands(app)
+    register_static_routes(app)
 
     with app.app_context():
         db.create_all()

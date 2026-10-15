@@ -86,8 +86,8 @@
 
 ## 8. Backend — Production Wiring
 
-- [ ] 8.1 Add `wsgi.py` (Gunicorn entry point), `requirements.txt` (flask, flask-sqlalchemy, gunicorn, psycopg2-binary, phonenumbers, pytest), and the Render `start` command (`gunicorn wsgi:app`)
-- [ ] 8.2 Configure Flask to serve `web/dist` static assets from the catch-all route so the web dashboard shares the same origin as the API
+- [x] 8.1 Add `wsgi.py` (Gunicorn entry point), `requirements.txt` (flask, flask-sqlalchemy, gunicorn, psycopg2-binary, phonenumbers, pytest), and the Render `start` command (`gunicorn wsgi:app`)
+- [x] 8.2 Configure Flask to serve `web/dist` static assets from the catch-all route so the web dashboard shares the same origin as the API
 - [ ] 8.3 Set `DATABASE_URL` and `SECRET_KEY` environment variables on Render; verify `db.create_all()` runs cleanly against Neon on first deploy
 
 ---

@@ -255,13 +255,13 @@
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/SKILL.md": {
-    "mtime": 1789815268.7601788,
-    "ast_hash": "2d655de359de9a4fb742f9456a741bf1",
+    "mtime": 1792099170.0502381,
+    "ast_hash": "4e794b2bee37e1cdfa9deb57e6a73919",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/templates/runner.html": {
-    "mtime": 1789802317.405044,
-    "ast_hash": "1974f9d23c517ad367e035591ab24e66",
+    "mtime": 1792099034.292792,
+    "ast_hash": "195024b71f1f55341618c86bb2ef459a",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/templates/screen.html": {
@@ -1579,9 +1579,139 @@
     "ast_hash": "3bd4afffabd2f9a3bcf13fe4eab7a694",
     "semantic_hash": ""
   },
-  "agent-doc/screens/login.png": {
-    "mtime": 1792096704.4916365,
-    "ast_hash": "15db8528cd64ddfd87cc56b855be4af5",
+  ".claude/skills/snap-screens/scripts/screenshot.py": {
+    "mtime": 1792099052.9526284,
+    "ast_hash": "639e9b18b9bfd9e81a63f3014a64d7ea",
+    "semantic_hash": ""
+  },
+  ".claude/skills/snap-screens/SKILL.md": {
+    "mtime": 1792099171.3905764,
+    "ast_hash": "4df363bf324e6c7c5dc86f0e0e5a3565",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/01-login--P.png": {
+    "mtime": 1792099689.9523785,
+    "ast_hash": "efba631c996f286cb4a9c558408b3096",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/02-dashboard--P.png": {
+    "mtime": 1792099691.4056976,
+    "ast_hash": "6cf6534691ec47c1d34466e5e26f7ae1",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-leads--P.png": {
+    "mtime": 1792099694.2548528,
+    "ast_hash": "be8a079ad1ddddf8a242d626b26a8313",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-leads--empty--P.png": {
+    "mtime": 1792099692.820968,
+    "ast_hash": "d676e6feaae179c4677874173a1fb18e",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-leads--upload-dialog--P.png": {
+    "mtime": 1792099695.6230018,
+    "ast_hash": "f0ff2f42cd77da8da19cde9aa8d9dfee",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-leads--upload-error--P.png": {
+    "mtime": 1792099697.0637372,
+    "ast_hash": "848ec4144bad51d517bce3a1a43974ad",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view--P.png": {
+    "mtime": 1792099701.2790613,
+    "ast_hash": "ba66e1871c5c352b4d2db82f8cc84cf1",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view--error--P.png": {
+    "mtime": 1792099698.4825249,
+    "ast_hash": "4b3f4418f3a1cea5dcb6fbd561cbf03f",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view--no-calls--P.png": {
+    "mtime": 1792099699.8698092,
+    "ast_hash": "1d71065dbd4cceaf672448526d89db2c",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--P.png": {
+    "mtime": 1792099706.9689763,
+    "ast_hash": "babfbafb68904187a5dd365f0669ff12",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--add-dialog--P.png": {
+    "mtime": 1792099702.7304382,
+    "ast_hash": "870814ac83d8bcb6ef7a79d813d9ca7e",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--add-error--P.png": {
+    "mtime": 1792099704.1452537,
+    "ast_hash": "50ca7048db2b9c876ef9f57133ab3f60",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--delete-dialog--P.png": {
+    "mtime": 1792099705.544629,
+    "ast_hash": "b207ca34d7ad241460a71013c5086207",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login--M.png": {
+    "mtime": 1792099711.0345514,
+    "ast_hash": "841ffcdab6ee1a5faada31553ac66343",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login--error--M.png": {
+    "mtime": 1792099708.3343177,
+    "ast_hash": "47850d5f18f6ca7f0bb8596e4052c8c8",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login--locked--M.png": {
+    "mtime": 1792099709.6826813,
+    "ast_hash": "df87100ba5a9e417318aec4ec3f63830",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--M.png": {
+    "mtime": 1792099715.1001987,
+    "ast_hash": "f46745f1c946efeb4e154a8bdcada42d",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--automated--M.png": {
+    "mtime": 1792099712.3657978,
+    "ast_hash": "5f6fed3cdee15668c2e71f045d8f9110",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--empty--M.png": {
+    "mtime": 1792099713.7171926,
+    "ast_hash": "ee69b8bf10f3d38d5609de6bf3895b7f",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--outcome-dialog--M.png": {
+    "mtime": 1792099716.5053306,
+    "ast_hash": "22f6e91d8a55c0ed83c1481ca85fea22",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--permissions-off--M.png": {
+    "mtime": 1792099717.8508122,
+    "ast_hash": "bfc81c78c7cb81c8f79392587ac147e2",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/08-my-stats--M.png": {
+    "mtime": 1792099719.2268121,
+    "ast_hash": "18d96e8858bc0c36048da3a3af440f61",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/08-my-stats--offline--M.png": {
+    "mtime": 1792099720.5854726,
+    "ast_hash": "019ba1ed68e76d362ac034c21ffff1c4",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/09-settings--M.png": {
+    "mtime": 1792099723.318116,
+    "ast_hash": "3246f98645c67655804a1bb00d613e5d",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/09-settings--confirm-dialog--M.png": {
+    "mtime": 1792099721.933418,
+    "ast_hash": "721fa2dfb69beab5c245193f63581a8d",
     "semantic_hash": ""
   }
 }

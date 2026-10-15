@@ -1,15 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { Linking, PermissionsAndroid, ToastAndroid } from 'react-native';
+import { ToastAndroid } from 'react-native';
 import { readStoredCountry } from '@/features/auth';
-import { insertPendingCall } from '@/features/tracking/db';
 import {
   isValidPhoneNumber,
   normalizePhoneNumber,
 } from '@/shared/utils/phone-formatter';
+import { callFailedMessage, launchTrackedCall } from '../lib/call-launcher';
 
 const emptyClipboardMessage = 'Nothing copied.';
-const callFailedMessage = 'Could not start the call. Please try again.';
 
 export type UseDialerResult = {
   dialedNumberInput: string;
@@ -20,11 +19,6 @@ export type UseDialerResult = {
   pasteNumberFromClipboard: () => Promise<void>;
   startCall: () => Promise<void>;
 };
-
-function createCallId(): string {
-  const callId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  return callId;
-}
 
 function useStoredCountry(): string | null {
   const [countryCode, setCountryCode] = useState<string | null>(null);
@@ -88,15 +82,7 @@ export function useDialer(): UseDialerResult {
         dialedNumberInput,
         countryCode,
       );
-      const telUrl = `tel:${normalizedPhoneNumber}`;
-      const isCallPermissionGranted = await PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.CALL_PHONE,
-      );
-      if (isCallPermissionGranted) {
-        const intentAt = new Date().toISOString();
-        await insertPendingCall(createCallId(), normalizedPhoneNumber, intentAt);
-      }
-      await Linking.openURL(telUrl);
+      await launchTrackedCall(normalizedPhoneNumber);
     } catch {
       ToastAndroid.show(callFailedMessage, ToastAndroid.SHORT);
     } finally {

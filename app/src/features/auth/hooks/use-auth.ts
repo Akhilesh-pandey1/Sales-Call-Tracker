@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { isAxiosError, type AxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 import {
+  readResponseErrorMessage,
   readStoredToken,
   registerUnauthorizedHandler,
   writeStoredToken,
@@ -22,17 +23,6 @@ export async function readStoredCountry(): Promise<string | null> {
   return storedCountry;
 }
 
-function extractResponseMessage(error: AxiosError): string | null {
-  const responseData: unknown = error.response?.data;
-  if (responseData && typeof responseData === 'object' && 'message' in responseData) {
-    const responseMessage = (responseData as { message: unknown }).message;
-    if (typeof responseMessage === 'string') {
-      return responseMessage;
-    }
-  }
-  return null;
-}
-
 function getLoginErrorMessage(loginError: unknown): string {
   if (!isAxiosError(loginError)) {
     return unexpectedLoginMessage;
@@ -40,7 +30,7 @@ function getLoginErrorMessage(loginError: unknown): string {
   if (!loginError.response) {
     return serverUnreachableMessage;
   }
-  const serverMessage = extractResponseMessage(loginError);
+  const serverMessage = readResponseErrorMessage(loginError);
   return serverMessage ?? unexpectedLoginMessage;
 }
 

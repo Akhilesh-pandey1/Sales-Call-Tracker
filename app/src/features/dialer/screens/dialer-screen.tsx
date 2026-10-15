@@ -1,13 +1,18 @@
 import { useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { usePermissions } from '@/features/tracking';
 import { cn } from '@/lib/utils';
-import { ClipboardPaste, Delete, Phone } from 'lucide-react-native';
+import { ClipboardPaste, Delete, Inbox, Phone } from 'lucide-react-native';
+import { LeadCallCard } from '../components/lead-call-card';
 import { Keypad } from '../components/keypad';
 import { PermissionBanner } from '../components/permission-banner';
+import {
+  useAutomatedCalling,
+  type UseAutomatedCallingResult,
+} from '../hooks/use-automated-calling';
 import { useDialer, type UseDialerResult } from '../hooks/use-dialer';
 
 type DialerSubTab = 'keypad' | 'automated';
@@ -129,7 +134,15 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
   );
 }
 
-function AutomatedViewPlaceholder() {
+function AutomatedStartView({
+  startErrorMessage,
+  onStartCalling,
+}: {
+  startErrorMessage: string | null;
+  onStartCalling: () => void;
+}) {
+  const handleStartPress = () => onStartCalling();
+
   return (
     <View className="flex-1 items-center justify-center px-6">
       <View className="h-16 w-16 items-center justify-center rounded-2xl bg-primary">
@@ -137,9 +150,98 @@ function AutomatedViewPlaceholder() {
       </View>
       <Text className="mt-4 text-xl font-bold tracking-tight">Automated Calling</Text>
       <Text className="mt-1.5 text-center text-xs text-muted-foreground">
-        Start Calling will dial your next lead automatically.
+        Click Start Calling to automatically dial the next available lead in queue.
       </Text>
+      {startErrorMessage ? (
+        <Text
+          role="alert"
+          className="mt-3 text-center text-xs font-semibold text-destructive"
+        >
+          {startErrorMessage}
+        </Text>
+      ) : null}
+      <Button
+        onPress={handleStartPress}
+        className="mt-6 h-14 w-full rounded-2xl"
+      >
+        <Icon as={Phone} size={22} className="text-primary-foreground" />
+        <Text className="text-base font-bold text-primary-foreground">
+          Start Calling
+        </Text>
+      </Button>
     </View>
+  );
+}
+
+function AutomatedLoadingView({ loadingLabel }: { loadingLabel: string }) {
+  return (
+    <View className="flex-1 items-center justify-center gap-3 px-6">
+      <ActivityIndicator size="large" className="text-primary" />
+      <Text className="text-xs font-semibold text-muted-foreground">{loadingLabel}</Text>
+    </View>
+  );
+}
+
+function AutomatedEmptyView({ onTryAgain }: { onTryAgain: () => void }) {
+  const handleTryAgainPress = () => onTryAgain();
+
+  return (
+    <View className="flex-1 items-center justify-center px-6">
+      <View className="h-16 w-16 items-center justify-center rounded-2xl bg-muted">
+        <Icon as={Inbox} size={32} className="text-muted-foreground" />
+      </View>
+      <Text className="mt-4 text-xl font-bold tracking-tight">No leads to call</Text>
+      <Text className="mt-1.5 text-center text-xs text-muted-foreground">
+        The calling pool is empty right now. Your manager can upload more numbers.
+      </Text>
+      <Button
+        variant="outline"
+        onPress={handleTryAgainPress}
+        className="mt-6 h-12 w-full rounded-2xl"
+      >
+        <Text className="text-xs font-bold">Try again</Text>
+      </Button>
+    </View>
+  );
+}
+
+function AutomatedView({
+  automatedCalling,
+}: {
+  automatedCalling: UseAutomatedCallingResult;
+}) {
+  const { viewState } = automatedCalling;
+
+  if (viewState.kind === 'loading') {
+    return <AutomatedLoadingView loadingLabel={viewState.loadingLabel} />;
+  }
+  if (viewState.kind === 'empty') {
+    return <AutomatedEmptyView onTryAgain={automatedCalling.startCalling} />;
+  }
+  if (viewState.kind === 'start') {
+    return (
+      <AutomatedStartView
+        startErrorMessage={automatedCalling.startErrorMessage}
+        onStartCalling={automatedCalling.startCalling}
+      />
+    );
+  }
+
+  return (
+    <LeadCallCard
+      variant={viewState.kind}
+      phoneNumber={viewState.lead.phone_number}
+      attemptCount={viewState.lead.attempt_count}
+      isOutcomeDialogOpen={automatedCalling.isOutcomeDialogOpen}
+      isSubmittingOutcome={automatedCalling.isSubmittingOutcome}
+      outcomeErrorMessage={automatedCalling.outcomeErrorMessage}
+      autoDialNextEnabled={automatedCalling.autoDialNextEnabled}
+      onDialCurrentLead={automatedCalling.dialCurrentLead}
+      onOpenOutcomeDialog={automatedCalling.openOutcomeDialog}
+      onCloseOutcomeDialog={automatedCalling.closeOutcomeDialog}
+      onToggleAutoDialNext={automatedCalling.setAutoDialNextEnabled}
+      onSubmitOutcome={automatedCalling.submitOutcome}
+    />
   );
 }
 
@@ -147,6 +249,7 @@ export function DialerScreen() {
   const missingPermissions = usePermissions();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
   const dialer = useDialer();
+  const automatedCalling = useAutomatedCalling();
 
   return (
     <View className="flex-1 bg-background">
@@ -157,7 +260,7 @@ export function DialerScreen() {
       {activeSubTab === 'keypad' ? (
         <KeypadView dialer={dialer} />
       ) : (
-        <AutomatedViewPlaceholder />
+        <AutomatedView automatedCalling={automatedCalling} />
       )}
     </View>
   );

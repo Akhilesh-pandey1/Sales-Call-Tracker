@@ -6,15 +6,14 @@ import {
   type Permission,
 } from 'react-native';
 
-const REQUIRED_CALL_PERMISSIONS: Permission[] = [
-  PermissionsAndroid.PERMISSIONS.CALL_PHONE,
-  PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
-  PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE,
-];
-
 const findMissingPermissions = async (): Promise<Permission[]> => {
+  const requiredCallPermissions: Permission[] = [
+    PermissionsAndroid.PERMISSIONS.CALL_PHONE,
+    PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
+    PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE,
+  ];
   const checkResults = await Promise.all(
-    REQUIRED_CALL_PERMISSIONS.map(async permission => ({
+    requiredCallPermissions.map(async permission => ({
       permission,
       isGranted: await PermissionsAndroid.check(permission),
     })),
@@ -35,8 +34,8 @@ export function usePermissions(): Permission[] {
 
   const requestMissingPermissions = useCallback(async (): Promise<void> => {
     const missing = await findMissingPermissions();
+    setMissingPermissions(missing);
     if (missing.length === 0) {
-      setMissingPermissions([]);
       return;
     }
     const requestResults = await PermissionsAndroid.requestMultiple(missing);

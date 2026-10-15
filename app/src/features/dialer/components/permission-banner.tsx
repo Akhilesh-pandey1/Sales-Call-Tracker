@@ -13,7 +13,7 @@ export function PermissionBanner({ missingPermissions }: PermissionBannerProps) 
     return null;
   }
 
-  const handleFixPress = () => {
+  const handleOpenSettingsPress = () => {
     Linking.openSettings();
   };
 
@@ -32,7 +32,7 @@ export function PermissionBanner({ missingPermissions }: PermissionBannerProps) 
         </Text>
       </View>
       <Button
-        onPress={handleFixPress}
+        onPress={handleOpenSettingsPress}
         className="h-8 rounded-xl bg-white/20 px-3.5 shadow-none active:bg-white/30"
       >
         <Text className="text-xs font-bold text-white">Fix</Text>

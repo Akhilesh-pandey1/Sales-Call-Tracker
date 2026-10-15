@@ -21,3 +21,9 @@ export interface CreateUserInput {
 export interface CreateUserApiResponse {
   status: boolean;
 }
+
+export interface UpdateUserRequest {
+  name?: string;
+  password?: string;
+  country?: AccountCountry;
+}

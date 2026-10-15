@@ -12,11 +12,30 @@ import { cn } from "@/shared/utils/cn";
 import { UserStatusButton } from "./user-status-button";
 import type { AccountSummary } from "../types";
 
+function handleRowActivationKeyDown(
+  event: KeyboardEvent<HTMLElement>,
+  onActivate: () => void
+): void {
+  const enterKey: string = "Enter";
+  const spaceKey: string = " ";
+  const isEventFromElementItself: boolean = event.target === event.currentTarget;
+  if (!isEventFromElementItself) {
+    return;
+  }
+  const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
+  if (!isActivationKey) {
+    return;
+  }
+  event.preventDefault();
+  onActivate();
+}
+
 interface AccountsTableProps {
   accounts: AccountSummary[];
   currentUserId: number | null;
   onOpenAccount: (accountId: number) => void;
   onDeleteAccount: (accountId: number) => void;
+  onEditAccount: (accountId: number) => void;
 }
 
 interface AccountRowProps {
@@ -24,6 +43,7 @@ interface AccountRowProps {
   isOwnAccount: boolean;
   onOpen: (accountId: number) => void;
   onDelete: (accountId: number) => void;
+  onEdit: (accountId: number) => void;
 }
 
 interface DeleteAccountButtonProps {
@@ -58,6 +78,32 @@ function DeleteAccountButton({
       className={deleteButtonClassName}
     >
       Delete
+    </button>
+  );
+}
+
+interface EditAccountButtonProps {
+  account: AccountSummary;
+  onEdit: (accountId: number) => void;
+}
+
+function EditAccountButton({ account, onEdit }: EditAccountButtonProps) {
+  const editButtonClassName: string =
+    "inline-flex w-24 items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-primary transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
+  const handleEditClick = (event: MouseEvent<HTMLButtonElement>): void => {
+    event.stopPropagation();
+    onEdit(account.id);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleEditClick}
+      aria-label={`Edit ${account.name}`}
+      className={editButtonClassName}
+    >
+      Edit
     </button>
   );
 }
@@ -112,9 +158,13 @@ function AccountRowActions({ account, onDelete }: AccountRowActionsProps) {
   );
 }
 
-function DesktopAccountRow({ account, isOwnAccount, onOpen, onDelete }: AccountRowProps) {
-  const enterKey: string = "Enter";
-  const spaceKey: string = " ";
+function DesktopAccountRow({
+  account,
+  isOwnAccount,
+  onOpen,
+  onDelete,
+  onEdit,
+}: AccountRowProps) {
   const isInactive: boolean = !account.is_active;
 
   const handleRowClick = (): void => {
@@ -122,12 +172,7 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen, onDelete }: AccountR
   };
 
   const handleRowKeyDown = (event: KeyboardEvent<HTMLTableRowElement>): void => {
-    const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
-    if (!isActivationKey) {
-      return;
-    }
-    event.preventDefault();
-    onOpen(account.id);
+    handleRowActivationKeyDown(event, handleRowClick);
   };
 
   const rowClassName: string = cn("cursor-pointer", isInactive && "text-muted-foreground");
@@ -154,7 +199,10 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen, onDelete }: AccountR
         {account.country}
       </TableCell>
       <TableCell className="p-4 text-right">
-        {!isOwnAccount && <AccountRowActions account={account} onDelete={onDelete} />}
+        <div className="flex items-center justify-end gap-1">
+          <EditAccountButton account={account} onEdit={onEdit} />
+          {!isOwnAccount && <AccountRowActions account={account} onDelete={onDelete} />}
+        </div>
       </TableCell>
     </TableRow>
   );
@@ -165,6 +213,7 @@ interface DesktopAccountsTableProps {
   currentUserId: number | null;
   onOpen: (accountId: number) => void;
   onDelete: (accountId: number) => void;
+  onEdit: (accountId: number) => void;
 }
 
 function DesktopAccountsTable({
@@ -172,6 +221,7 @@ function DesktopAccountsTable({
   currentUserId,
   onOpen,
   onDelete,
+  onEdit,
 }: DesktopAccountsTableProps) {
   return (
     <div className="hidden px-5 pb-4 sm:px-6 md:block">
@@ -192,6 +242,7 @@ function DesktopAccountsTable({
               isOwnAccount={account.id === currentUserId}
               onOpen={onOpen}
               onDelete={onDelete}
+              onEdit={onEdit}
             />
           ))}
         </TableBody>
@@ -200,9 +251,7 @@ function DesktopAccountsTable({
   );
 }
 
-function AccountCard({ account, isOwnAccount, onOpen, onDelete }: AccountRowProps) {
-  const enterKey: string = "Enter";
-  const spaceKey: string = " ";
+function AccountCard({ account, isOwnAccount, onOpen, onDelete, onEdit }: AccountRowProps) {
   const isInactive: boolean = !account.is_active;
 
   const handleCardClick = (): void => {
@@ -210,12 +259,7 @@ function AccountCard({ account, isOwnAccount, onOpen, onDelete }: AccountRowProp
   };
 
   const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
-    const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
-    if (!isActivationKey) {
-      return;
-    }
-    event.preventDefault();
-    onOpen(account.id);
+    handleRowActivationKeyDown(event, handleCardClick);
   };
 
   const cardClassName: string = cn(
@@ -247,7 +291,10 @@ function AccountCard({ account, isOwnAccount, onOpen, onDelete }: AccountRowProp
         <span className="capitalize">
           {account.role} · {account.country}
         </span>
-        {!isOwnAccount && <AccountRowActions account={account} onDelete={onDelete} />}
+        <span className="flex items-center gap-1">
+          <EditAccountButton account={account} onEdit={onEdit} />
+          {!isOwnAccount && <AccountRowActions account={account} onDelete={onDelete} />}
+        </span>
       </span>
     </div>
   );
@@ -258,6 +305,7 @@ export function AccountsTable({
   currentUserId,
   onOpenAccount,
   onDeleteAccount,
+  onEditAccount,
 }: AccountsTableProps) {
   const activeAccounts: AccountSummary[] = accounts.filter(
     (account: AccountSummary) => account.is_active
@@ -277,6 +325,7 @@ export function AccountsTable({
         currentUserId={currentUserId}
         onOpen={onOpenAccount}
         onDelete={onDeleteAccount}
+        onEdit={onEditAccount}
       />
 
       <div className="px-4 pb-4 sm:px-6 md:hidden">
@@ -288,6 +337,7 @@ export function AccountsTable({
               isOwnAccount={account.id === currentUserId}
               onOpen={onOpenAccount}
               onDelete={onDeleteAccount}
+              onEdit={onEditAccount}
             />
           ))}
         </div>

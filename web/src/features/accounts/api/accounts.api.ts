@@ -4,6 +4,7 @@ import type {
   AccountSummary,
   CreateUserApiResponse,
   CreateUserInput,
+  UpdateUserRequest,
 } from "../types";
 
 export async function getAccounts(): Promise<AccountSummary[]> {
@@ -25,6 +26,13 @@ export async function createUser(userInput: CreateUserInput): Promise<void> {
     role: salespersonRole,
   };
   await apiClient.post<CreateUserApiResponse>("/users", requestBody);
+}
+
+export async function updateUser(
+  userId: number,
+  updateRequest: UpdateUserRequest
+): Promise<void> {
+  await apiClient.post(`/users/${userId}/update`, updateRequest);
 }
 
 export async function deactivateUser(userId: number): Promise<void> {

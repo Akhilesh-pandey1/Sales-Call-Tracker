@@ -1,34 +1,14 @@
-import { isAxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useAuth, type UserData } from "@/app/providers";
+import { getApiErrorMessage } from "@/shared/api/api-error-message";
 import { loginUser } from "../api/auth.api";
 import type { LoginApiResponse, LoginCredentials } from "../types";
-
-interface LoginApiErrorBody {
-  message?: string;
-}
 
 interface UseAuthLoginResult {
   login: (credentials: LoginCredentials) => void;
   isPending: boolean;
   errorMessage: string | null;
-}
-
-function getLoginErrorMessage(error: unknown): string {
-  const fallbackMessage: string = "Something went wrong. Please try again.";
-  if (!isAxiosError(error)) {
-    return fallbackMessage;
-  }
-  if (!error.response) {
-    const serverUnreachableMessage: string = "Can't reach the server. Check your internet.";
-    return serverUnreachableMessage;
-  }
-  const errorBody: LoginApiErrorBody | undefined = error.response
-    .data as LoginApiErrorBody | undefined;
-  const serverMessage: string | undefined = errorBody?.message;
-  const resolvedMessage: string = serverMessage || fallbackMessage;
-  return resolvedMessage;
 }
 
 export function useAuthLogin(): UseAuthLoginResult {
@@ -57,7 +37,7 @@ export function useAuthLogin(): UseAuthLoginResult {
 
   const hasLoginFailed: boolean = loginMutation.isError;
   const errorMessage: string | null = hasLoginFailed
-    ? getLoginErrorMessage(loginMutation.error)
+    ? getApiErrorMessage(loginMutation.error)
     : null;
 
   const result: UseAuthLoginResult = {

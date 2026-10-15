@@ -1,14 +1,30 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AccountsErrorState } from "../components/accounts-error-state";
 import { AccountsTable } from "../components/accounts-table";
+import { EditUserModal } from "../components/edit-user-modal";
 import { useAccounts } from "../hooks/use-accounts";
+import type { AccountSummary } from "../types";
 
 export function AccountsPage() {
   const { accounts, currentUserId, isLoading, hasError, refetch } = useAccounts();
   const navigate = useNavigate();
+  const [editedAccount, setEditedAccount] = useState<AccountSummary | null>(null);
+
+  const isEditModalOpen: boolean = editedAccount !== null;
 
   const handleOpenAccount = (accountId: number): void => {
     navigate(`/person/${accountId}`);
+  };
+
+  const handleEditAccount = (account: AccountSummary): void => {
+    setEditedAccount(account);
+  };
+
+  const handleEditModalOpenChange = (isOpen: boolean): void => {
+    if (!isOpen) {
+      setEditedAccount(null);
+    }
   };
 
   if (hasError) {
@@ -28,8 +44,14 @@ export function AccountsPage() {
           accounts={accounts}
           currentUserId={currentUserId}
           onOpenAccount={handleOpenAccount}
+          onEditAccount={handleEditAccount}
         />
       )}
+      <EditUserModal
+        editedAccount={editedAccount}
+        isModalOpen={isEditModalOpen}
+        onModalOpenChange={handleEditModalOpenChange}
+      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from "react";
+import type { KeyboardEvent, MouseEvent } from "react";
 import { ChevronRight } from "lucide-react";
 import {
   Table,
@@ -11,16 +11,21 @@ import {
 import { cn } from "@/shared/utils/cn";
 import type { AccountSummary } from "../types";
 
+const enterKey: string = "Enter";
+const spaceKey: string = " ";
+
 interface AccountsTableProps {
   accounts: AccountSummary[];
   currentUserId: number | null;
   onOpenAccount: (accountId: number) => void;
+  onEditAccount: (account: AccountSummary) => void;
 }
 
 interface AccountRowProps {
   account: AccountSummary;
   isOwnAccount: boolean;
   onOpen: (accountId: number) => void;
+  onEdit: (account: AccountSummary) => void;
 }
 
 function OwnAccountTag() {
@@ -55,9 +60,33 @@ function AccountStatusTags({ account, isOwnAccount }: AccountStatusTagsProps) {
   );
 }
 
-function DesktopAccountRow({ account, isOwnAccount, onOpen }: AccountRowProps) {
-  const enterKey: string = "Enter";
-  const spaceKey: string = " ";
+interface EditAccountButtonProps {
+  account: AccountSummary;
+  onEdit: (account: AccountSummary) => void;
+}
+
+function EditAccountButton({ account, onEdit }: EditAccountButtonProps) {
+  const editButtonClassName: string =
+    "inline-flex w-24 items-center justify-center rounded-lg px-2 py-1 text-sm font-medium text-primary transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
+  const handleEditClick = (event: MouseEvent<HTMLButtonElement>): void => {
+    event.stopPropagation();
+    onEdit(account);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleEditClick}
+      aria-label={`Edit ${account.name}`}
+      className={editButtonClassName}
+    >
+      Edit
+    </button>
+  );
+}
+
+function DesktopAccountRow({ account, isOwnAccount, onOpen, onEdit }: AccountRowProps) {
   const isInactive: boolean = !account.is_active;
 
   const handleRowClick = (): void => {
@@ -65,6 +94,10 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen }: AccountRowProps) {
   };
 
   const handleRowKeyDown = (event: KeyboardEvent<HTMLTableRowElement>): void => {
+    const isEventFromRowItself: boolean = event.target === event.currentTarget;
+    if (!isEventFromRowItself) {
+      return;
+    }
     const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
     if (!isActivationKey) {
       return;
@@ -96,6 +129,11 @@ function DesktopAccountRow({ account, isOwnAccount, onOpen }: AccountRowProps) {
       <TableCell className="p-4 text-sm tabular-nums text-muted-foreground">
         {account.country}
       </TableCell>
+      <TableCell className="p-4 text-right">
+        <div className="flex items-center justify-end gap-1">
+          <EditAccountButton account={account} onEdit={onEdit} />
+        </div>
+      </TableCell>
     </TableRow>
   );
 }
@@ -104,9 +142,10 @@ interface DesktopAccountsTableProps {
   accounts: AccountSummary[];
   currentUserId: number | null;
   onOpen: (accountId: number) => void;
+  onEdit: (account: AccountSummary) => void;
 }
 
-function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccountsTableProps) {
+function DesktopAccountsTable({ accounts, currentUserId, onOpen, onEdit }: DesktopAccountsTableProps) {
   return (
     <div className="hidden px-5 pb-4 sm:px-6 md:block">
       <Table>
@@ -115,6 +154,7 @@ function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccoun
             <TableHead>Name</TableHead>
             <TableHead>Role</TableHead>
             <TableHead>Country</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -124,6 +164,7 @@ function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccoun
               account={account}
               isOwnAccount={account.id === currentUserId}
               onOpen={onOpen}
+              onEdit={onEdit}
             />
           ))}
         </TableBody>
@@ -132,10 +173,23 @@ function DesktopAccountsTable({ accounts, currentUserId, onOpen }: DesktopAccoun
   );
 }
 
-function AccountCard({ account, isOwnAccount, onOpen }: AccountRowProps) {
+function AccountCard({ account, isOwnAccount, onOpen, onEdit }: AccountRowProps) {
   const isInactive: boolean = !account.is_active;
 
   const handleCardClick = (): void => {
+    onOpen(account.id);
+  };
+
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
+    const isEventFromCardItself: boolean = event.target === event.currentTarget;
+    if (!isEventFromCardItself) {
+      return;
+    }
+    const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
+    if (!isActivationKey) {
+      return;
+    }
+    event.preventDefault();
     onOpen(account.id);
   };
 
@@ -149,9 +203,11 @@ function AccountCard({ account, isOwnAccount, onOpen }: AccountRowProps) {
   );
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
       aria-label={`Open stats for ${account.name}`}
       className={cardClassName}
     >
@@ -166,12 +222,13 @@ function AccountCard({ account, isOwnAccount, onOpen }: AccountRowProps) {
         <span className="capitalize">
           {account.role} · {account.country}
         </span>
+        <EditAccountButton account={account} onEdit={onEdit} />
       </span>
-    </button>
+    </div>
   );
 }
 
-export function AccountsTable({ accounts, currentUserId, onOpenAccount }: AccountsTableProps) {
+export function AccountsTable({ accounts, currentUserId, onOpenAccount, onEditAccount }: AccountsTableProps) {
   const activeAccounts: AccountSummary[] = accounts.filter(
     (account: AccountSummary) => account.is_active
   );
@@ -185,7 +242,12 @@ export function AccountsTable({ accounts, currentUserId, onOpenAccount }: Accoun
         <span className="text-sm text-muted-foreground">{accountCountLabel}</span>
       </div>
 
-      <DesktopAccountsTable accounts={accounts} currentUserId={currentUserId} onOpen={onOpenAccount} />
+      <DesktopAccountsTable
+        accounts={accounts}
+        currentUserId={currentUserId}
+        onOpen={onOpenAccount}
+        onEdit={onEditAccount}
+      />
 
       <div className="px-4 pb-4 sm:px-6 md:hidden">
         <div className="mt-3 space-y-2">
@@ -195,6 +257,7 @@ export function AccountsTable({ accounts, currentUserId, onOpenAccount }: Accoun
               account={account}
               isOwnAccount={account.id === currentUserId}
               onOpen={onOpenAccount}
+              onEdit={onEditAccount}
             />
           ))}
         </div>

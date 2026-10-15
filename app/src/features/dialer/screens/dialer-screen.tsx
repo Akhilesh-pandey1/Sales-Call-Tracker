@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PermissionsAndroid, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
@@ -75,6 +75,13 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
     ? 'text-accent-foreground'
     : 'text-slate-400';
   const emptyNumberMessage = 'Enter number';
+  const callHintMessage = dialer.isNumberValid
+    ? 'Calls are logged and sent to your manager automatically.'
+    : 'Type a valid number to enable calling.';
+
+  const handleBackspacePress = () => dialer.removeLastCharacter();
+  const handlePastePress = () => dialer.pasteNumberFromClipboard();
+  const handleCallPress = () => dialer.startCall();
 
   return (
     <View className="flex-1 justify-center px-5 pb-4 pt-2">
@@ -91,7 +98,7 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
         <Pressable
           accessibilityLabel="Backspace"
           accessibilityRole="button"
-          onPress={dialer.removeLastCharacter}
+          onPress={handleBackspacePress}
           className="h-11 w-11 shrink-0 items-center justify-center rounded-full active:bg-muted"
         >
           <Icon as={Delete} size={24} className="text-muted-foreground" />
@@ -100,7 +107,7 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
 
       <Pressable
         accessibilityRole="button"
-        onPress={dialer.pasteNumberFromClipboard}
+        onPress={handlePastePress}
         className="mx-auto mt-1 flex-row items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 active:bg-muted"
       >
         <Icon as={ClipboardPaste} size={14} className="text-primary" />
@@ -110,16 +117,12 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
       <Keypad onCharacterPress={dialer.appendKeypadCharacter} />
 
       <View className="mt-4">
-        <Button
-          onPress={dialer.startCall}
-          disabled={!isCallEnabled}
-          className={callButtonClasses}
-        >
+        <Button onPress={handleCallPress} disabled={!isCallEnabled} className={callButtonClasses}>
           <Icon as={Phone} size={24} className={callContentClasses} />
           <Text className={cn('text-lg font-bold', callContentClasses)}>Call</Text>
         </Button>
         <Text className="mt-2 text-center text-[11px] text-muted-foreground">
-          Calls are logged and sent to your manager automatically.
+          {callHintMessage}
         </Text>
       </View>
     </View>
@@ -143,10 +146,7 @@ function AutomatedViewPlaceholder() {
 export function DialerScreen() {
   const missingPermissions = usePermissions();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
-  const isCallPermissionDenied = missingPermissions.includes(
-    PermissionsAndroid.PERMISSIONS.CALL_PHONE,
-  );
-  const dialer = useDialer(isCallPermissionDenied);
+  const dialer = useDialer();
 
   return (
     <View className="flex-1 bg-background">

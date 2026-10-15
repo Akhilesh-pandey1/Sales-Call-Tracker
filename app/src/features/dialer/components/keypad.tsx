@@ -3,9 +3,6 @@ import { Pressable, View } from 'react-native';
 
 const keypadCharacters = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
 
-const keypadGridClasses =
-  'mx-auto mt-4 w-full max-w-[14rem] flex-row flex-wrap justify-center gap-x-4 gap-y-2.5';
-
 type KeypadProps = {
   onCharacterPress: (character: string) => void;
 };
@@ -27,7 +24,10 @@ export function Keypad({ onCharacterPress }: KeypadProps) {
   });
 
   return (
-    <View accessibilityLabel="Keypad" className={keypadGridClasses}>
+    <View
+      accessibilityLabel="Keypad"
+      className="mx-auto mt-4 w-full max-w-[14rem] flex-row flex-wrap justify-center gap-x-4 gap-y-2.5"
+    >
       {keypadKeys}
     </View>
   );

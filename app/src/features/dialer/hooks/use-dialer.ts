@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { Linking, ToastAndroid } from 'react-native';
+import { Linking, PermissionsAndroid, ToastAndroid } from 'react-native';
 import { readStoredCountry } from '@/features/auth';
 import { insertPendingCall } from '@/features/tracking/db';
 import {
@@ -9,6 +9,7 @@ import {
 } from '@/shared/utils/phone-formatter';
 
 const emptyClipboardMessage = 'Nothing copied.';
+const callFailedMessage = 'Could not start the call. Please try again.';
 
 export type UseDialerResult = {
   dialedNumberInput: string;
@@ -48,9 +49,10 @@ function useStoredCountry(): string | null {
   return countryCode;
 }
 
-export function useDialer(isCallPermissionDenied: boolean): UseDialerResult {
+export function useDialer(): UseDialerResult {
   const [dialedNumberInput, setDialedNumberInput] = useState('');
   const [isDialLocked, setIsDialLocked] = useState(false);
+  const isDialLockHeld = useRef(false);
   const countryCode = useStoredCountry();
 
   const appendKeypadCharacter = useCallback((character: string): void => {
@@ -73,12 +75,13 @@ export function useDialer(isCallPermissionDenied: boolean): UseDialerResult {
 
   const startCall = useCallback(async (): Promise<void> => {
     if (
-      isDialLocked ||
+      isDialLockHeld.current ||
       countryCode === null ||
       !isValidPhoneNumber(dialedNumberInput, countryCode)
     ) {
       return;
     }
+    isDialLockHeld.current = true;
     setIsDialLocked(true);
     try {
       const normalizedPhoneNumber = normalizePhoneNumber(
@@ -86,15 +89,21 @@ export function useDialer(isCallPermissionDenied: boolean): UseDialerResult {
         countryCode,
       );
       const telUrl = `tel:${normalizedPhoneNumber}`;
-      if (!isCallPermissionDenied) {
+      const isCallPermissionGranted = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.CALL_PHONE,
+      );
+      if (isCallPermissionGranted) {
         const intentAt = new Date().toISOString();
         await insertPendingCall(createCallId(), normalizedPhoneNumber, intentAt);
       }
       await Linking.openURL(telUrl);
+    } catch {
+      ToastAndroid.show(callFailedMessage, ToastAndroid.SHORT);
     } finally {
+      isDialLockHeld.current = false;
       setIsDialLocked(false);
     }
-  }, [dialedNumberInput, countryCode, isDialLocked, isCallPermissionDenied]);
+  }, [dialedNumberInput, countryCode]);
 
   const isNumberValid =
     countryCode !== null && isValidPhoneNumber(dialedNumberInput, countryCode);

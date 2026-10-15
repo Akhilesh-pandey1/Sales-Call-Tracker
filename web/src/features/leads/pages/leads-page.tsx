@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { LeadUploadCard } from "../components/lead-upload-card";
 import { LeadPoolStats } from "../components/lead-pool-stats";
 import { LeadAgentTable } from "../components/lead-agent-table";
 import { useLeads } from "../hooks/use-leads";
@@ -49,6 +50,7 @@ export function LeadsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-bold tracking-tight">Leads</h1>
+        <LeadUploadCard />
       </div>
       <LeadPoolStats pool={leadsSummary.pool} />
       {isPoolEmpty ? (

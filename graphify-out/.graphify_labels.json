@@ -151,7 +151,7 @@
   "149": "Requirements",
   "150": "agent-doc/proposal.md",
   "151": "Requirement: Name-and-password login",
-  "152": "User",
+  "152": "AppException",
   "153": "test_users.py",
   "154": "_generate_intelligent_overrides",
   "155": "Requirement: CSV upload into lead pool",
@@ -159,5 +159,8 @@
   "157": "test_calls.py",
   "158": "Requirement: Lead scheduling",
   "159": "Requirement: Next-lead serving — priority order",
-  "160": "Requirement: Token-gated API access"
+  "160": "Requirement: Token-gated API access",
+  "161": "test_dashboard.py",
+  "162": "dashboard/services.py",
+  "163": "base.py"
 }

@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-15)
 
 ## Corpus Check
-- 191 files · ~402,462 words
+- 196 files · ~404,949 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1805 nodes · 2503 edges · 161 communities (145 shown, 16 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.53)
+- 1856 nodes · 2683 edges · 164 communities (148 shown, 16 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 22 edges (avg confidence: 0.53)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6132171f`
+- Built from commit: `30d8a39b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -143,7 +143,7 @@
 - Requirements
 - agent-doc/proposal.md
 - Requirement: Name-and-password login
-- User
+- AppException
 - test_users.py
 - _generate_intelligent_overrides
 - Requirement: CSV upload into lead pool
@@ -152,35 +152,38 @@
 - Requirement: Lead scheduling
 - Requirement: Next-lead serving — priority order
 - Requirement: Token-gated API access
+- test_dashboard.py
+- dashboard/services.py
+- base.py
 
 ## God Nodes (most connected - your core abstractions)
-1. `create_user_record()` - 31 edges
-2. `User` - 27 edges
-3. `AppException` - 25 edges
-4. `hash_password()` - 25 edges
+1. `AppException` - 31 edges
+2. `create_user_record()` - 31 edges
+3. `User` - 30 edges
+4. `hash_password()` - 27 edges
 5. `allow` - 24 edges
 6. `allow` - 24 edges
 7. `search()` - 23 edges
 8. `search()` - 23 edges
 9. `now_utc()` - 20 edges
-10. `Tasks: Sales Call Tracker v1` - 20 edges
+10. `create_user_fixture()` - 20 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `TestConfig` --uses--> `BaseConfig`  [INFERRED]
   backend/tests/conftest.py → backend/app/config/base.py
+- `DashboardTimeWindows` --uses--> `AppException`  [INFERRED]
+  backend/app/modules/dashboard/services.py → backend/app/core/errors.py
 - `_generate_intelligent_overrides()` --calls--> `search()`  [EXTRACTED]
   .agents/skills/design-screens/uiux/scripts/design_system.py → .agents/skills/design-screens/uiux/scripts/core.py
 - `get_agent_runner()` --indirect_call--> `execute_agy_process()`  [INFERRED]
   .autonomous-coding-agent/our_agent.py → .autonomous-coding-agent/runner.py
 - `get_agent_runner()` --indirect_call--> `execute_claude_process()`  [INFERRED]
   .autonomous-coding-agent/our_agent.py → .autonomous-coding-agent/runner.py
-- `_generate_intelligent_overrides()` --calls--> `search()`  [EXTRACTED]
-  .claude/skills/design-screens/uiux/scripts/design_system.py → .claude/skills/design-screens/uiux/scripts/core.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (161 total, 16 thin omitted)
+## Communities (164 total, 16 thin omitted)
 
 ### Community 0 - ".claude/skills/grill-with-superpower/scripts/server.cjs"
 Cohesion: 0.06
@@ -630,9 +633,9 @@ Nodes (7): Capabilities, Impact, New Capabilities, Proposal: Sales Call Tracker 
 Cohesion: 0.33
 Nodes (6): Requirement: Name-and-password login, Scenario: Deactivated account, Scenario: Missing fields, Scenario: Name not found, Scenario: Successful login, Scenario: Wrong password
 
-### Community 152 - "User"
-Cohesion: 0.05
-Nodes (86): Flask, register_commands(), seed_command(), BaseConfig, DevConfig, ProdConfig, AppException, Flask (+78 more)
+### Community 152 - "AppException"
+Cohesion: 0.06
+Nodes (73): Flask, register_commands(), seed_command(), AppException, Any, require_auth(), require_manager(), generate_auth_token() (+65 more)
 
 ### Community 153 - "test_users.py"
 Cohesion: 0.21
@@ -652,7 +655,7 @@ Nodes (5): Requirement: Lead resolution via call sync, Scenario: Connected call 
 
 ### Community 157 - "test_calls.py"
 Cohesion: 0.13
-Nodes (40): get_ist_timezone(), normalize_phone_number(), now_ist(), now_utc(), parse_utc_datetime(), datetime, to_ist(), Call (+32 more)
+Nodes (38): get_ist_timezone(), normalize_phone_number(), now_utc(), datetime, to_ist(), Call, extract_valid_call(), Any (+30 more)
 
 ### Community 158 - "Requirement: Lead scheduling"
 Cohesion: 0.40
@@ -666,6 +669,18 @@ Nodes (5): Requirement: Next-lead serving — priority order, Scenario: Due sche
 Cohesion: 0.50
 Nodes (4): Requirement: Token-gated API access, Scenario: Deactivated user with valid token, Scenario: Invalid or missing token, Scenario: Valid token on protected endpoint
 
+### Community 161 - "test_dashboard.py"
+Cohesion: 0.29
+Nodes (25): now_ist(), create_call_record(), create_user_fixture(), datetime, Flask, FlaskClient, test_person_dashboard_connected_derived_from_duration(), test_person_dashboard_fewer_than_five_numbers() (+17 more)
+
+### Community 162 - "dashboard/services.py"
+Cohesion: 0.18
+Nodes (23): parse_utc_datetime(), get_person_dashboard(), get_team_dashboard(), get, Response, PeriodStats, PersonDashboardResponse, PersonDashboardSummary (+15 more)
+
+### Community 163 - "base.py"
+Cohesion: 0.25
+Nodes (13): BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers(), create_app(), Flask, app() (+5 more)
+
 ## Knowledge Gaps
 - **876 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+871 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -675,9 +690,11 @@ Nodes (4): Requirement: Token-gated API access, Scenario: Deactivated user with 
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `search()` connect `.agents/skills/design-screens/uiux/scripts/core.py` to `.agents/skills/design-screens/uiux/scripts/design_system.py`, `.generate`, `_generate_intelligent_overrides`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Why does `search()` connect `core.py` to `.generate`, `.claude/skills/design-screens/uiux/scripts/design_system.py`, `_generate_intelligent_overrides`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `Requirements` connect `Requirements` to `Requirement: CSV upload into lead pool`, `Requirement: Lead resolution via call sync`, `Requirement: Lead scheduling`, `Requirement: Next-lead serving — priority order`?**
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
   _876 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `.claude/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**
@@ -686,5 +703,3 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `allow` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
-- **Should `Dimensions` be split into smaller, more focused modules?**
-  _Cohesion score 0.08 - nodes in this community are weakly interconnected._

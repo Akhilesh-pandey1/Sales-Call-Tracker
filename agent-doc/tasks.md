@@ -66,9 +66,9 @@
 
 > Spec refs: `specs/dashboard.md` — all scenarios
 
-- [ ] 6.1 Implement `GET /api/dashboard/team` (manager only): compute today/yesterday IST boundaries in UTC, aggregate dials/connected/seconds for the full team, return per-active-salesperson rows with zeros included, sorted by today's dials desc (all scenarios in `specs/dashboard.md §Team dashboard`)
-- [ ] 6.2 Implement `GET /api/dashboard/person/<id>`: compute three periods (today, yesterday, last 30 days) in IST, return dials/connected/seconds/connected_percent for each; null percent when dials = 0; top 5 numbers by talk seconds; enforce owner-only access for salesperson tokens (all scenarios in `specs/dashboard.md §Per-person stats` and `§Top 5 numbers`)
-- [ ] 6.3 Write `tests/modules/test_dashboard.py` covering all scenarios in `specs/dashboard.md`
+- [x] 6.1 Implement `GET /api/dashboard/team` (manager only): compute today/yesterday IST boundaries in UTC, aggregate dials/connected/seconds for the full team, return per-active-salesperson rows with zeros included, sorted by today's dials desc (all scenarios in `specs/dashboard.md §Team dashboard`)
+- [x] 6.2 Implement `GET /api/dashboard/person/<id>`: compute three periods (today, yesterday, last 30 days) in IST, return dials/connected/seconds/connected_percent for each; null percent when dials = 0; top 5 numbers by talk seconds; enforce owner-only access for salesperson tokens (all scenarios in `specs/dashboard.md §Per-person stats` and `§Top 5 numbers`)
+- [x] 6.3 Write `tests/modules/test_dashboard.py` covering all scenarios in `specs/dashboard.md`
 
 ---
 

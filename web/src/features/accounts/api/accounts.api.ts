@@ -1,9 +1,9 @@
 import { apiClient } from "@/shared/api/api-client";
 import type {
-  AccountCountry,
   AccountRole,
   AccountSummary,
   CreateUserApiResponse,
+  CreateUserInput,
 } from "../types";
 
 export async function getAccounts(): Promise<AccountSummary[]> {
@@ -12,24 +12,17 @@ export async function getAccounts(): Promise<AccountSummary[]> {
   return accounts;
 }
 
-interface CreateUserApiRequest {
-  name: string;
-  password: string;
+interface CreateUserApiRequest extends CreateUserInput {
   role: AccountRole;
-  country: AccountCountry;
 }
 
-export async function createUser(
-  name: string,
-  password: string,
-  country: AccountCountry
-): Promise<void> {
+export async function createUser(userInput: CreateUserInput): Promise<void> {
   const salespersonRole: AccountRole = "salesperson";
   const requestBody: CreateUserApiRequest = {
-    name,
-    password,
+    name: userInput.name,
+    password: userInput.password,
+    country: userInput.country,
     role: salespersonRole,
-    country,
   };
   await apiClient.post<CreateUserApiResponse>("/users", requestBody);
 }

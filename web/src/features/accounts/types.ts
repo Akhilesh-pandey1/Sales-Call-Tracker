@@ -1,6 +1,8 @@
 export type AccountRole = "manager" | "salesperson";
 
-export type AccountCountry = "IN" | "AE" | "US";
+export const accountCountries = ["IN", "AE", "US"] as const;
+
+export type AccountCountry = (typeof accountCountries)[number];
 
 export interface AccountSummary {
   id: number;
@@ -8,6 +10,12 @@ export interface AccountSummary {
   role: AccountRole;
   country: string;
   is_active: boolean;
+}
+
+export interface CreateUserInput {
+  name: string;
+  password: string;
+  country: AccountCountry;
 }
 
 export interface CreateUserApiResponse {

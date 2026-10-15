@@ -2,13 +2,7 @@ import { isAxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createUser } from "../api/accounts.api";
 import { ACCOUNTS_QUERY_KEY } from "./use-accounts";
-import type { AccountCountry } from "../types";
-
-interface CreateUserRequest {
-  name: string;
-  password: string;
-  country: AccountCountry;
-}
+import type { CreateUserInput } from "../types";
 
 interface CreateUserApiErrorBody {
   message?: string;
@@ -19,7 +13,7 @@ interface UseCreateUserOptions {
 }
 
 interface UseCreateUserResult {
-  submitCreateUser: (name: string, password: string, country: AccountCountry) => void;
+  submitCreateUser: (userInput: CreateUserInput) => void;
   isCreatePending: boolean;
   createErrorMessage: string | null;
   clearCreateState: () => void;
@@ -49,16 +43,15 @@ export function useCreateUser(options: UseCreateUserOptions): UseCreateUserResul
   };
 
   const createUserMutation = useMutation({
-    mutationFn: (createRequest: CreateUserRequest) =>
-      createUser(createRequest.name, createRequest.password, createRequest.country),
+    mutationFn: createUser,
     onSuccess: () => {
       refreshAccountsList();
       options.onAccountCreated();
     },
   });
 
-  const submitCreateUser = (name: string, password: string, country: AccountCountry): void => {
-    createUserMutation.mutate({ name, password, country });
+  const submitCreateUser = (userInput: CreateUserInput): void => {
+    createUserMutation.mutate(userInput);
   };
 
   const clearCreateState = (): void => {

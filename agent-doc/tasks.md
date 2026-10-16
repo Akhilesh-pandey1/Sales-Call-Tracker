@@ -60,11 +60,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] `package.json` resolves the agreed set (react 19.3.1, vite 8.3.4, @vitejs/plugin-react 6.1.2, updated router/query/axios/radix/lucide) with npm's peer check passing
-- [ ] No source code changes are needed beyond what the upgrades require — every page still renders as before
+- [x] `package.json` resolves the agreed set (react 19.3.1, vite 8.3.4, @vitejs/plugin-react 6.1.2, updated router/query/axios/radix/lucide) with npm's peer check passing
+- [x] No source code changes are needed beyond what the upgrades require — every page still renders as before
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

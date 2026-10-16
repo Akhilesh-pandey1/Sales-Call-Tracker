@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent } from "react";
 import { FileUp, UploadCloud } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,11 +21,6 @@ import type { LeadCountry, LeadUploadResult } from "../types";
 interface LeadCountryOption {
   value: LeadCountry;
   label: string;
-}
-
-interface UploadResultPanelProps {
-  result: LeadUploadResult;
-  handleClose: () => void;
 }
 
 interface CsvFileDropzoneProps {
@@ -93,43 +89,12 @@ function CsvFileDropzone({
   );
 }
 
-function UploadResultPanel({ result, handleClose }: UploadResultPanelProps) {
-  const uploadedCounts = [
-    { label: "Added", count: result.added },
-    { label: "Duplicates", count: result.duplicates },
-    { label: "Invalid", count: result.invalid },
-  ];
-
-  return (
-    <div className="space-y-4">
-      <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-center">
-        <h3 className="text-sm font-bold text-emerald-900">Upload complete.</h3>
-        <p className="mt-1 text-xs text-emerald-800">
-          The new leads are ready in the calling pool.
-        </p>
-      </div>
-      <div className="grid grid-cols-3 gap-3">
-        {uploadedCounts.map((uploadedCount) => (
-          <div
-            key={uploadedCount.label}
-            className="rounded-xl border bg-background p-3 text-center"
-          >
-            <div className="text-2xl font-bold tabular-nums tracking-tight">
-              {uploadedCount.count}
-            </div>
-            <p className="mt-1 text-[11px] font-semibold text-muted-foreground">
-              {uploadedCount.label}
-            </p>
-          </div>
-        ))}
-      </div>
-      <div className="flex items-center justify-end border-t pt-4">
-        <Button type="button" className="rounded-xl text-xs font-semibold" onClick={handleClose}>
-          Done
-        </Button>
-      </div>
-    </div>
-  );
+function getUploadToastDescription(uploadResult: LeadUploadResult): string {
+  const addedCount: number = uploadResult.added;
+  const duplicateCount: number = uploadResult.duplicates;
+  const invalidCount: number = uploadResult.invalid;
+  const toastDescription: string = `${addedCount} added, ${duplicateCount} duplicates skipped, ${invalidCount} invalid.`;
+  return toastDescription;
 }
 
 export function LeadUploadCard() {
@@ -141,7 +106,6 @@ export function LeadUploadCard() {
     submitUpload,
     isUploadPending,
     uploadErrorMessage,
-    uploadResult,
     clearUploadState,
   } = useLeadUpload();
 
@@ -197,15 +161,21 @@ export function LeadUploadCard() {
     }
   };
 
+  const handleCloseDialog = (): void => {
+    handleDialogOpenChange(false);
+  };
+
+  const handleUploadSuccess = (uploadResult: LeadUploadResult): void => {
+    const toastDescription: string = getUploadToastDescription(uploadResult);
+    toast.success("Upload complete.", { description: toastDescription });
+    handleCloseDialog();
+  };
+
   const handleUploadClick = (): void => {
     if (!canUpload || !selectedFile) {
       return;
     }
-    submitUpload(selectedFile, country);
-  };
-
-  const handleCloseDialog = (): void => {
-    handleDialogOpenChange(false);
+    submitUpload(selectedFile, country, handleUploadSuccess);
   };
 
   return (
@@ -228,60 +198,56 @@ export function LeadUploadCard() {
           </div>
         </div>
 
-        {uploadResult ? (
-          <UploadResultPanel result={uploadResult} handleClose={handleCloseDialog} />
-        ) : (
-          <div className="space-y-4">
-            <CsvFileDropzone
-              selectedFile={selectedFile}
-              fileErrorMessage={fileErrorMessage}
-              handleFileChange={handleFileChange}
-            />
+        <div className="space-y-4">
+          <CsvFileDropzone
+            selectedFile={selectedFile}
+            fileErrorMessage={fileErrorMessage}
+            handleFileChange={handleFileChange}
+          />
 
-            <div>
-              <label
-                htmlFor="lead-upload-country"
-                className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-              >
-                Default Country
-              </label>
-              <select
-                id="lead-upload-country"
-                value={country}
-                onChange={handleCountryChange}
-                className="mt-1.5 w-full rounded-xl border border-border bg-card px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring"
-              >
-                {leadCountryOptions.map((leadCountryOption: LeadCountryOption) => (
-                  <option key={leadCountryOption.value} value={leadCountryOption.value}>
-                    {leadCountryOption.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {uploadErrorMessage ? <ErrorAlert message={uploadErrorMessage} /> : null}
-
-            <div className="flex items-center justify-end gap-2 border-t pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                className="rounded-xl text-xs font-semibold text-muted-foreground"
-                onClick={handleCloseDialog}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="button"
-                className="rounded-xl text-xs font-semibold"
-                disabled={!canUpload}
-                onClick={handleUploadClick}
-              >
-                <UploadCloud className="h-4 w-4" />
-                {isUploadPending ? "Uploading..." : "Upload Leads"}
-              </Button>
-            </div>
+          <div>
+            <label
+              htmlFor="lead-upload-country"
+              className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+            >
+              Default Country
+            </label>
+            <select
+              id="lead-upload-country"
+              value={country}
+              onChange={handleCountryChange}
+              className="mt-1.5 w-full rounded-xl border border-border bg-card px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              {leadCountryOptions.map((leadCountryOption: LeadCountryOption) => (
+                <option key={leadCountryOption.value} value={leadCountryOption.value}>
+                  {leadCountryOption.label}
+                </option>
+              ))}
+            </select>
           </div>
-        )}
+
+          {uploadErrorMessage ? <ErrorAlert message={uploadErrorMessage} /> : null}
+
+          <div className="flex items-center justify-end gap-2 border-t pt-4">
+            <Button
+              type="button"
+              variant="outline"
+              className="rounded-xl text-xs font-semibold text-muted-foreground"
+              onClick={handleCloseDialog}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              className="rounded-xl text-xs font-semibold"
+              disabled={!canUpload}
+              onClick={handleUploadClick}
+            >
+              <UploadCloud className="h-4 w-4" />
+              {isUploadPending ? "Uploading..." : "Upload Leads"}
+            </Button>
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );

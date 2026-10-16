@@ -11,11 +11,16 @@ interface LeadUploadRequest {
   country: LeadCountry;
 }
 
+type HandleUploadSuccess = (uploadResult: LeadUploadResult) => void;
+
 interface UseLeadUploadResult {
-  submitUpload: (file: File, country: LeadCountry) => void;
+  submitUpload: (
+    file: File,
+    country: LeadCountry,
+    handleUploadSuccess: HandleUploadSuccess
+  ) => void;
   isUploadPending: boolean;
   uploadErrorMessage: string | null;
-  uploadResult: LeadUploadResult | null;
   clearUploadState: () => void;
 }
 
@@ -50,8 +55,12 @@ export function useLeadUpload(): UseLeadUploadResult {
     onSuccess: refreshPoolSummary,
   });
 
-  const submitUpload = (file: File, country: LeadCountry): void => {
-    uploadMutation.mutate({ file, country });
+  const submitUpload = (
+    file: File,
+    country: LeadCountry,
+    handleUploadSuccess: HandleUploadSuccess
+  ): void => {
+    uploadMutation.mutate({ file, country }, { onSuccess: handleUploadSuccess });
   };
 
   const clearUploadState = (): void => {
@@ -67,7 +76,6 @@ export function useLeadUpload(): UseLeadUploadResult {
     submitUpload,
     isUploadPending: uploadMutation.isPending,
     uploadErrorMessage,
-    uploadResult: uploadMutation.data ?? null,
     clearUploadState,
   };
   return result;

@@ -23,11 +23,13 @@ The system consists of three parts in a single repository:
 - **Utilities**: `libphonenumber-js` (E.164 phone normalization), `axios` (API requests), `@react-native-clipboard/clipboard`
 
 ### 2. Web Dashboard (`web/`) — Manager Web App
-- **Build Tool & Language**: Vite + React + TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui (Button, Dialog, Input, Table, Badge in `components/ui/`) + Lucide React (`lucide-react`)
-- **Routing**: React Router (`react-router-dom`)
-- **Server State & Data Fetching**: TanStack Query (`@tanstack/react-query`) + `axios`
+- **Build Tool & Language**: Vite 8.3.4 + React 19.3.1 + TypeScript
+- **Styling**: Tailwind CSS v4 (4.3.3) through the `@tailwindcss/vite` plugin and a CSS `@theme` block — no `tailwind.config.js`, no `postcss.config.js` — plus `tw-animate-css` (1.4.0) for dialog animations
+- **UI Components**: shadcn/ui (Button, Dialog, Input, Table, Badge in `components/ui/`) + Lucide React (1.58.0)
+- **Toasts**: sonner (2.0.8)
+- **Charts**: recharts (3.10.1)
+- **Routing**: React Router (`react-router-dom` 7.18.4)
+- **Server State & Data Fetching**: TanStack Query (`@tanstack/react-query` 5.104.3) + `axios` (1.20.0)
 
 ### 3. Backend (`backend/`) — Python Flask API
 - **Framework & Language**: Python + Flask (Modular Monolith)
@@ -121,6 +123,7 @@ web/
     │   │   ├── api/dashboard.api.ts
     │   │   ├── hooks/use-team-dashboard.ts
     │   │   ├── hooks/use-person-stats.ts
+    │   │   ├── components/kpi-card.tsx
     │   │   ├── components/team-table.tsx
     │   │   ├── components/top-numbers-table.tsx
     │   │   ├── pages/team-page.tsx
@@ -142,7 +145,7 @@ web/
     ├── components/
     │   └── ui/                      # shadcn/ui components: button, dialog, input, table, badge
     ├── shared/
-    │   ├── components/navbar.tsx    # Header bar with user profile and logout
+    │   ├── components/page-header.tsx  # Slim per-page top bar: title left, date or action right
     │   └── api/api-client.ts        # Axios client with auth token interceptor and 401 redirect
     └── main.tsx                     # React DOM entry point
 ```

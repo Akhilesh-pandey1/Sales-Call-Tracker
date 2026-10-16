@@ -8,62 +8,88 @@ Proves who is calling. Every salesperson signs in with name + password; the serv
 The system SHALL authenticate a user by matching their name and plaintext password against the stored hash and returning a session token, user ID, role, name, and dialing country on success.
 
 #### Scenario: Successful login
-- **WHEN** a user submits a valid name and correct password for an active account
-- **THEN** the server returns HTTP 200 with a token, id, role, name, and country
+- **GIVEN** an active account with a known name and password
+- **WHEN** the user submits both correctly
+- **THEN** the server returns a token, id, role, name, and country
 
 #### Scenario: Wrong password
-- **WHEN** a user submits a correct name but wrong password
-- **THEN** the server returns HTTP 401 with message "Wrong name or password."
+- **GIVEN** a registered name
+- **WHEN** the user submits it with a wrong password
+- **THEN** the server returns "Wrong name or password."
 
 #### Scenario: Name not found
-- **WHEN** a user submits a name that does not exist in the system
-- **THEN** the server returns HTTP 401 with message "Wrong name or password."
+- **GIVEN** a name that does not exist in the system
+- **WHEN** the user submits it with any password
+- **THEN** the server returns the same "Wrong name or password." message
 
 #### Scenario: Deactivated account
-- **WHEN** a user submits correct credentials for a deactivated account
-- **THEN** the server returns HTTP 403 with message "Your account is not active. Please contact your manager."
+- **GIVEN** a deactivated account with correct credentials
+- **WHEN** login is attempted
+- **THEN** the server returns "Your account is not active. Please contact your manager."
 
 #### Scenario: Missing fields
-- **WHEN** the login request body omits name or password
-- **THEN** the server returns HTTP 400 with message "Name and password are required."
+- **GIVEN** a login request missing the name or the password
+- **WHEN** the request is submitted
+- **THEN** the server returns "Name and password are required."
 
 ### Requirement: Single active session per user
 The system SHALL issue a new random auth token on every login, replacing any previously stored token for that user, so logging in on a new device instantly invalidates the old session.
 
 #### Scenario: Re-login replaces old token
-- **WHEN** a user logs in successfully for a second time
-- **THEN** the old token is no longer valid for any API request
+- **GIVEN** a user logged in on one device
+- **WHEN** the same user logs in successfully elsewhere
+- **THEN** the old token no longer works for any API request
 
 #### Scenario: Token used after password reset
-- **WHEN** the manager resets a salesperson's password
-- **THEN** the salesperson's existing token is replaced and any subsequent request with the old token returns HTTP 401
+- **GIVEN** the manager reset a salesperson's password
+- **WHEN** the salesperson's next request uses the old token
+- **THEN** it is rejected as invalid
 
 ### Requirement: Token-gated API access
-The system SHALL require a valid `Authorization: Bearer <token>` header on every endpoint except `POST /api/login`, and SHALL verify the token owner's account is active before processing the request.
+The system SHALL require a valid `Authorization: Bearer <token>` header on every endpoint except login and SHALL verify the token owner's account is active before processing the request.
 
 #### Scenario: Valid token on protected endpoint
-- **WHEN** a request includes a token matching an active user
-- **THEN** the server processes the request normally
+- **GIVEN** a request carries a token matching an active user
+- **WHEN** the request reaches a protected endpoint
+- **THEN** it is processed normally
 
 #### Scenario: Invalid or missing token
-- **WHEN** a request to a protected endpoint contains an invalid or missing token
-- **THEN** the server returns HTTP 401 with message "Invalid or expired token."
+- **GIVEN** a request to a protected endpoint with an invalid or missing token
+- **WHEN** the request is processed
+- **THEN** the server returns "Invalid or expired token."
 
 #### Scenario: Deactivated user with valid token
-- **WHEN** a request includes a token belonging to a deactivated account
-- **THEN** the server returns HTTP 403 with message "Your account is not active. Please contact your manager."
+- **GIVEN** a valid token belonging to a deactivated account
+- **WHEN** it is used on a protected endpoint
+- **THEN** the server returns "Your account is not active. Please contact your manager."
+
+### Requirement: Manager-only web gate
+The system SHALL route by role on the web: a salesperson who logs in on the web sees one message — "This dashboard is for managers." — and no data, while the login endpoint itself stays shared with the app.
+
+#### Scenario: Salesperson on the web
+- **GIVEN** a salesperson account logs in on the web dashboard
+- **WHEN** the web routes the session
+- **THEN** the manager-only message shows and no dashboard data loads
+
+#### Scenario: Manager on the web
+- **GIVEN** a manager account logs in on the web
+- **WHEN** the web routes the session
+- **THEN** the team dashboard opens
 
 ### Requirement: Login brute-force lockout
-The system SHALL lock a name out of login for 5 minutes after 10 consecutive wrong-password attempts, blocking even the correct password during the lockout window. The counter resets on a successful login.
+The system SHALL lock a name out of login for 5 minutes after 10 consecutive wrong-password attempts, blocking even the correct password during the lockout window; the counter resets on a successful login.
 
 #### Scenario: Lockout triggered
-- **WHEN** 10 consecutive failed login attempts are made for the same name
-- **THEN** the 11th attempt returns HTTP 429 with message "Too many tries. Wait 5 minutes and try again." regardless of whether the password is correct
+- **GIVEN** 10 consecutive failed login attempts for the same name
+- **WHEN** the 11th attempt arrives
+- **THEN** it is refused with "Too many tries. Wait 5 minutes and try again." even if the password is correct
 
 #### Scenario: Lockout expires
-- **WHEN** 5 minutes have elapsed since the lockout was triggered
-- **THEN** the next login attempt is accepted normally if credentials are correct
+- **GIVEN** a name locked out for 5 minutes
+- **WHEN** the window elapses and correct credentials arrive
+- **THEN** the login is accepted normally
 
 #### Scenario: Counter reset on success
-- **WHEN** a user logs in successfully before reaching 10 failures
+- **GIVEN** a name with some recorded failures
+- **WHEN** a login with correct credentials succeeds before 10 failures
 - **THEN** the failure counter for that name resets to zero

@@ -81,7 +81,7 @@ Receives a batch of completed calls from the salesperson's mobile app.
 ## 3. Dashboards
 
 ### `GET /api/dashboard/team`
-Returns team call aggregates for today and yesterday, plus individual stats for all active salespeople.
+Returns team call aggregates for today, yesterday, and the last 30 days, plus dials per hour, top people by talk time, and individual stats for all active salespeople.
 
 - **Auth**: Manager token only
 - **Response 200**:
@@ -97,6 +97,28 @@ Returns team call aggregates for today and yesterday, plus individual stats for 
       "connected": 70,
       "seconds": 21300
     },
+    "last_30_days": {
+      "dials": 3400,
+      "connected": 1500,
+      "seconds": 530000
+    },
+    "calls_by_hour": {
+      "today": [0, 0, 0, 0, 0, 0, 0, 0, 5, 17, 32, 38, 11, 21, 33, 24, 12, 8, 4, 2, 1, 0, 0, 0],
+      "yesterday": [0, 0, 0, 0, 0, 0, 0, 0, 3, 12, 25, 30, 9, 18, 28, 20, 10, 6, 3, 1, 1, 0, 0, 0],
+      "last_30_days": [0, 0, 0, 0, 0, 0, 0, 0, 140, 510, 960, 1140, 330, 630, 990, 720, 360, 240, 120, 60, 30, 0, 0, 0]
+    },
+    "top_people": {
+      "today": [
+        { "id": 3, "name": "Ramesh", "seconds": 2280 },
+        { "id": 5, "name": "Priya", "seconds": 1740 }
+      ],
+      "yesterday": [
+        { "id": 5, "name": "Priya", "seconds": 2460 }
+      ],
+      "last_30_days": [
+        { "id": 5, "name": "Priya", "seconds": 53000 }
+      ]
+    },
     "people": [
       {
         "id": 3,
@@ -108,7 +130,9 @@ Returns team call aggregates for today and yesterday, plus individual stats for 
   }
   ```
 - **Rules**:
-  - `today` and `yesterday` totals count every call recorded in those IST windows, including calls made by currently deactivated salespeople.
+  - `today`, `yesterday`, and `last_30_days` totals count every call recorded in those IST windows, including calls made by currently deactivated salespeople.
+  - `calls_by_hour` holds 24 dial counts per IST hour for each period; the `last_30_days` block holds 30-day totals per hour — screens divide by 30 for the daily average.
+  - `top_people` holds at most 5 active salespeople by talk seconds in the period, highest first.
   - `people` lists all active salespeople (including those with 0 calls), sorted by `today.dials` descending.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
@@ -138,7 +162,8 @@ Returns call performance stats and top 5 numbers for a specific user across toda
       "dials": 410,
       "connected": 205,
       "seconds": 61200,
-      "connected_percent": 50
+      "connected_percent": 50,
+      "active_days": 26
     },
     "top_numbers": [
       {
@@ -151,6 +176,7 @@ Returns call performance stats and top 5 numbers for a specific user across toda
   ```
 - **Rules**:
   - `connected_percent` is `null` if dials equal 0 in that period.
+  - `active_days` counts the days with at least one dial inside the last 30 IST days; screens divide the period totals by it for per-active-day averages.
   - `top_numbers` includes at most 5 phone numbers with the highest talk seconds in the last 30 days.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
@@ -294,7 +320,7 @@ Uploads a single-column CSV of phone numbers into the lead pool.
   - `400 Bad Request`: `{"message": "File is too large."}` / `{"message": "Please select a valid CSV file."}`
 
 ### `GET /api/leads/summary`
-Returns pool bucket counts and today's calling activity per salesperson.
+Returns pool bucket counts with the waiting split, daily upload and tackle counts, and today's calling activity per salesperson.
 
 - **Auth**: Manager token
 - **Response 200**:
@@ -302,11 +328,14 @@ Returns pool bucket counts and today's calling activity per salesperson.
   {
     "status": true,
     "pool": {
-      "waiting": 340,
+      "waiting": 277,
+      "waiting_by_attempts": { "0": 138, "1": 94, "2": 45 },
       "scheduled": 25,
       "connected": 80,
       "stopped": 15
     },
+    "uploaded": { "today": 450, "yesterday": 380 },
+    "tackled": { "today": 312, "yesterday": 285 },
     "people": [
       {
         "id": 3,
@@ -318,6 +347,11 @@ Returns pool bucket counts and today's calling activity per salesperson.
     ]
   }
   ```
+- **Rules**:
+  - `waiting` equals the sum of `waiting_by_attempts`.
+  - `waiting_by_attempts` splits the waiting pool by `attempt_count` (0, 1, or 2 calls so far).
+  - `uploaded` counts leads whose `created_at` falls in today's / yesterday's IST window.
+  - `tackled` counts distinct leads with at least one synced call in today's / yesterday's IST window.
 
 ### `POST /api/leads/next`
 Retrieves and claims the next lead for automated calling, with an optional lead scheduling parameter in the same request.

@@ -163,15 +163,15 @@
 
 **Blocked by:** Tasks 2, 5, 6
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The header shows an initials avatar beside the person's name above a Back link
-- [ ] Each card divides the returned 30-day totals by `active_days` and shows the total as its sub-line; "26 / 30" style active-days display comes straight from the field
-- [ ] A person with zero active days shows "—" in all four cards with the no-calls message
+- [x] The header shows an initials avatar beside the person's name above a Back link
+- [x] Each card divides the returned 30-day totals by `active_days` and shows the total as its sub-line; "26 / 30" style active-days display comes straight from the field
+- [x] A person with zero active days shows "—" in all four cards with the no-calls message
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 
@@ -181,15 +181,15 @@
 
 **Blocked by:** Tasks 3, 5, 6
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The uploaded card shows today's count against yesterday's with a percentage change
-- [ ] The tackled card shows today's count against yesterday's with a percentage change
-- [ ] A zero yesterday hides the percentage pill and reads "vs 0 yesterday"
+- [x] The uploaded card shows today's count against yesterday's with a percentage change
+- [x] The tackled card shows today's count against yesterday's with a percentage change
+- [x] A zero yesterday hides the percentage pill and reads "vs 0 yesterday"
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

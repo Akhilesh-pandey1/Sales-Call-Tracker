@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, type ComponentType, type ReactElement } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Megaphone, PhoneIncoming } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -14,13 +14,21 @@ import { cn } from "@/shared/utils/cn";
 import { PageHeader } from "@/shared/components/page-header";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { DashboardErrorState } from "../components/dashboard-error-state";
+import { KpiCard } from "../components/kpi-card";
 import { TopNumbersTable } from "../components/top-numbers-table";
 import { isValidPersonId, usePersonStats } from "../hooks/use-person-stats";
-import type { PersonDashboard, PersonPeriodStats } from "../types";
+import type {
+  PersonDashboard,
+  PersonLast30DaysStats,
+  PersonPeriodStats,
+} from "../types";
 import {
   convertSecondsToMinutes,
+  formatActiveDaysOutOfPeriod,
+  formatAveragePerActiveDay,
   formatConnectedPercent,
   formatCount,
+  getPersonInitials,
 } from "../utils/format";
 
 interface PeriodView {
@@ -170,6 +178,114 @@ function PerformanceSection({ personStats }: PerformanceSectionProps) {
   );
 }
 
+interface PersonAvatarProps {
+  name: string;
+}
+
+function PersonAvatar({ name }: PersonAvatarProps) {
+  const initials: string = getPersonInitials(name);
+
+  return (
+    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+      {initials}
+    </div>
+  );
+}
+
+interface PersonKpiCardData {
+  key: string;
+  label: string;
+  value: string;
+  icon: ComponentType<{ className?: string }>;
+  iconClassName: string;
+  valueClassName?: string;
+  subLine: string;
+}
+
+function buildAverageCardSubLine(metricTotal: number): string {
+  const subLine: string = `per active day · ${formatCount(metricTotal)} total`;
+  return subLine;
+}
+
+function buildPersonKpiCards(last30DaysStats: PersonLast30DaysStats): PersonKpiCardData[] {
+  const activeDays: number = last30DaysStats.active_days;
+  const secondsPerMinute: number = 60;
+  const exactTalkMinutes: number = last30DaysStats.seconds / secondsPerMinute;
+  const totalTalkMinutes: number = convertSecondsToMinutes(last30DaysStats.seconds);
+
+  const activeDaysCard: PersonKpiCardData = {
+    key: "active-days",
+    label: "Active days",
+    value: formatActiveDaysOutOfPeriod(activeDays),
+    icon: Calendar,
+    iconClassName: "text-primary",
+    subLine: "days with at least 1 dial",
+  };
+
+  const avgDialsCard: PersonKpiCardData = {
+    key: "avg-dials",
+    label: "Avg dials",
+    value: formatAveragePerActiveDay(last30DaysStats.dials, activeDays),
+    icon: Megaphone,
+    iconClassName: "text-primary",
+    subLine: buildAverageCardSubLine(last30DaysStats.dials),
+  };
+
+  const avgConnectedCard: PersonKpiCardData = {
+    key: "avg-connected",
+    label: "Avg connected",
+    value: formatAveragePerActiveDay(last30DaysStats.connected, activeDays),
+    icon: PhoneIncoming,
+    iconClassName: "text-green-500",
+    valueClassName: "text-green-600",
+    subLine: buildAverageCardSubLine(last30DaysStats.connected),
+  };
+
+  const avgMinutesCard: PersonKpiCardData = {
+    key: "avg-minutes",
+    label: "Avg minutes",
+    value: formatAveragePerActiveDay(exactTalkMinutes, activeDays),
+    icon: Clock,
+    iconClassName: "text-primary",
+    subLine: buildAverageCardSubLine(totalTalkMinutes),
+  };
+
+  const kpiCards: PersonKpiCardData[] = [
+    activeDaysCard,
+    avgDialsCard,
+    avgConnectedCard,
+    avgMinutesCard,
+  ];
+  return kpiCards;
+}
+
+interface Last30DaysKpiSectionProps {
+  last30DaysStats: PersonLast30DaysStats;
+}
+
+function Last30DaysKpiSection({ last30DaysStats }: Last30DaysKpiSectionProps) {
+  const kpiCards: PersonKpiCardData[] = buildPersonKpiCards(last30DaysStats);
+
+  return (
+    <section>
+      <h3 className="text-base font-bold tracking-tight text-primary sm:text-lg">Last 30 days</h3>
+      <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        {kpiCards.map((kpiCard: PersonKpiCardData) => (
+          <KpiCard
+            key={kpiCard.key}
+            label={kpiCard.label}
+            value={kpiCard.value}
+            icon={kpiCard.icon}
+            iconClassName={kpiCard.iconClassName}
+            valueClassName={kpiCard.valueClassName}
+            subLine={kpiCard.subLine}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function PersonPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -188,6 +304,9 @@ export function PersonPage() {
 
   const fallbackPageTitle: string = "Person";
   const headerTitle: string = personStats?.name ?? fallbackPageTitle;
+  const headerAvatar: ReactElement | undefined = personStats ? (
+    <PersonAvatar name={personStats.name} />
+  ) : undefined;
   const dateAction = (
     <span className="text-sm text-muted-foreground">{todaysDateLabel}</span>
   );
@@ -198,14 +317,14 @@ export function PersonPage() {
 
   if (hasError) {
     return (
-      <PageHeader title={headerTitle} action={dateAction}>
+      <PageHeader title={headerTitle} icon={headerAvatar} action={dateAction}>
         <DashboardErrorState onRetry={handleRetryClick} />
       </PageHeader>
     );
   }
 
   return (
-    <PageHeader title={headerTitle} action={dateAction}>
+    <PageHeader title={headerTitle} icon={headerAvatar} action={dateAction}>
       <div>
         <Button
           variant="ghost"
@@ -221,6 +340,7 @@ export function PersonPage() {
       {isLoading && <p className="text-sm text-muted-foreground">Loading stats…</p>}
       {personStats && (
         <>
+          <Last30DaysKpiSection last30DaysStats={personStats.last_30_days} />
           <PerformanceSection personStats={personStats} />
           <TopNumbersTable numbers={personStats.top_numbers} />
         </>

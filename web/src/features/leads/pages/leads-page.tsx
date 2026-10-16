@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/shared/components/page-header";
 import { LeadUploadCard } from "../components/lead-upload-card";
+import { LeadDailyStats } from "../components/lead-daily-stats";
 import { LeadPoolStats } from "../components/lead-pool-stats";
 import { LeadAgentTable } from "../components/lead-agent-table";
 import { useLeads } from "../hooks/use-leads";
@@ -50,6 +51,7 @@ export function LeadsPage() {
 
   return (
     <PageHeader title="Leads" action={<LeadUploadCard />}>
+      <LeadDailyStats uploaded={leadsSummary.uploaded} tackled={leadsSummary.tackled} />
       <LeadPoolStats pool={leadsSummary.pool} />
       {isPoolEmpty ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed bg-background/50 px-6 py-12 text-center">

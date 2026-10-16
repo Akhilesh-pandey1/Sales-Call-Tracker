@@ -39,6 +39,10 @@ export interface PersonPeriodStats {
   connected_percent: number | null;
 }
 
+export interface PersonLast30DaysStats extends PersonPeriodStats {
+  active_days: number;
+}
+
 export interface TopCalledNumber {
   phone_number: string;
   seconds: number;
@@ -49,6 +53,6 @@ export interface PersonDashboard {
   name: string;
   today: PersonPeriodStats;
   yesterday: PersonPeriodStats;
-  last_30_days: PersonPeriodStats;
+  last_30_days: PersonLast30DaysStats;
   top_numbers: TopCalledNumber[];
 }

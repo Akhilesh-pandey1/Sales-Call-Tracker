@@ -44,6 +44,40 @@ export function formatAveragePerPersonPerDay(
   return averageLabel;
 }
 
+export function formatAveragePerActiveDay(
+  metricTotal: number,
+  activeDays: number
+): string {
+  const noAverageLabel: string = "—";
+  if (activeDays === 0) {
+    return noAverageLabel;
+  }
+  const averagePerActiveDay: number = Math.round(metricTotal / activeDays);
+  const averageLabel: string = formatCount(averagePerActiveDay);
+  return averageLabel;
+}
+
+export function formatActiveDaysOutOfPeriod(activeDays: number): string {
+  const noActiveDaysLabel: string = "—";
+  if (activeDays === 0) {
+    return noActiveDaysLabel;
+  }
+  const last30DaysPeriodDayCount: number = 30;
+  const activeDaysLabel: string = `${formatCount(activeDays)} / ${last30DaysPeriodDayCount}`;
+  return activeDaysLabel;
+}
+
+export function getPersonInitials(name: string): string {
+  const maximumInitialCount: number = 2;
+  const nameParts: string[] = name.trim().split(/\s+/);
+  const initials: string = nameParts
+    .slice(0, maximumInitialCount)
+    .map((namePart: string) => namePart.charAt(0))
+    .join("")
+    .toUpperCase();
+  return initials;
+}
+
 export function formatYesterdayComparison(
   currentValue: number,
   yesterdayValue: number

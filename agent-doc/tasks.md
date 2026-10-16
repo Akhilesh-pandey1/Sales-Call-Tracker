@@ -110,14 +110,14 @@
 
 **Blocked by:** Task 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A successful upload shows a sonner toast with the three counts and closes the dialog
-- [ ] No in-dialog result panel remains; the pool summary still refreshes after upload
+- [x] A successful upload shows a sonner toast with the three counts and closes the dialog
+- [x] No in-dialog result panel remains; the pool summary still refreshes after upload
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

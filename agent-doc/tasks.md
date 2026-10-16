@@ -181,15 +181,15 @@
 
 **Blocked by:** Tasks 3, 5, 6
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The uploaded card shows today's count against yesterday's with a percentage change
-- [ ] The tackled card shows today's count against yesterday's with a percentage change
-- [ ] A zero yesterday hides the percentage pill and reads "vs 0 yesterday"
+- [x] The uploaded card shows today's count against yesterday's with a percentage change
+- [x] The tackled card shows today's count against yesterday's with a percentage change
+- [x] A zero yesterday hides the percentage pill and reads "vs 0 yesterday"
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

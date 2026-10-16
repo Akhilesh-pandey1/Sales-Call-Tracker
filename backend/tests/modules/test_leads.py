@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import io
 from typing import Any
 from flask import Flask
@@ -382,6 +382,158 @@ def test_summary_per_person_activity(app: Flask, client: FlaskClient) -> None:
     assert pooja_entry["attempted"] == 0
     assert pooja_entry["connected"] == 0
     assert pooja_entry["not_connected"] == 0
+
+
+def test_summary_waiting_split_by_attempts(app: Flask, client: FlaskClient) -> None:
+    manager_token: str = "manager-split-token"
+    manager = create_user_fixture(name="ManagerSplit", role="manager", token=manager_token)
+
+    current_time: datetime = now_utc()
+    create_lead_fixture(phone_number="+919870000001", status="waiting", attempt_count=0)
+    create_lead_fixture(phone_number="+919870000002", status="waiting", attempt_count=1)
+    create_lead_fixture(phone_number="+919870000003", status="waiting", attempt_count=2)
+    create_lead_fixture(
+        phone_number="+919870000004",
+        status="waiting",
+        attempt_count=1,
+        scheduled_by=manager.id,
+        scheduled_at=current_time + timedelta(days=1),
+    )
+    create_lead_fixture(phone_number="+919870000005", status="done", attempt_count=3)
+    create_lead_fixture(phone_number="+919870000006", status="stopped", attempt_count=3)
+
+    headers: dict[str, str] = {"Authorization": f"Bearer {manager_token}"}
+    response = client.get("/api/leads/summary", headers=headers)
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    pool = json_data["pool"]
+    assert pool["waiting_by_attempts"] == {"0": 1, "1": 1, "2": 1}
+    assert pool["waiting"] == 3
+    assert pool["scheduled"] == 1
+    assert pool["connected"] == 1
+    assert pool["stopped"] == 1
+
+
+def test_summary_uploaded_counts_by_ist_day(app: Flask, client: FlaskClient) -> None:
+    manager_token: str = "manager-upload-day-token"
+    create_user_fixture(name="ManagerUploadDay", role="manager", token=manager_token)
+
+    current_ist: datetime = now_ist()
+    midnight_today_ist: datetime = current_ist.replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
+    one_hour: timedelta = timedelta(hours=1)
+    half_day: timedelta = timedelta(hours=12)
+    day_and_a_half: timedelta = timedelta(hours=36)
+    utc_zone: timezone = timezone.utc
+    today_creation_utc: datetime = (midnight_today_ist + one_hour).astimezone(utc_zone)
+    yesterday_creation_utc: datetime = (midnight_today_ist - half_day).astimezone(
+        utc_zone
+    )
+    older_creation_utc: datetime = (midnight_today_ist - day_and_a_half).astimezone(
+        utc_zone
+    )
+
+    create_lead_fixture(
+        phone_number="+919871000001", status="waiting", created_at=today_creation_utc
+    )
+    create_lead_fixture(
+        phone_number="+919871000002",
+        status="waiting",
+        created_at=yesterday_creation_utc,
+    )
+    create_lead_fixture(
+        phone_number="+919871000003", status="waiting", created_at=older_creation_utc
+    )
+
+    headers: dict[str, str] = {"Authorization": f"Bearer {manager_token}"}
+    response = client.get("/api/leads/summary", headers=headers)
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    uploaded = json_data["uploaded"]
+    assert uploaded["today"] == 1
+    assert uploaded["yesterday"] == 1
+
+
+def test_summary_tackled_counts_distinct_leads(
+    app: Flask, client: FlaskClient
+) -> None:
+    manager_token: str = "manager-tackle-token"
+    create_user_fixture(name="ManagerTackle", role="manager", token=manager_token)
+    salesperson = create_user_fixture(
+        name="Tackler", role="salesperson", token="tackle-sales-token"
+    )
+
+    create_lead_fixture(phone_number="+919872000001", status="waiting", attempt_count=2)
+    create_lead_fixture(phone_number="+919872000002", status="waiting", attempt_count=1)
+    create_lead_fixture(phone_number="+919872000003", status="done")
+
+    current_ist: datetime = now_ist()
+    midnight_today_ist: datetime = current_ist.replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
+    one_hour: timedelta = timedelta(hours=1)
+    half_day: timedelta = timedelta(hours=12)
+    utc_zone: timezone = timezone.utc
+    today_dial_utc: datetime = (midnight_today_ist + one_hour).astimezone(utc_zone)
+    yesterday_dial_utc: datetime = (midnight_today_ist - half_day).astimezone(utc_zone)
+
+    repeat_lead_call_1 = Call(
+        call_id="tackle-call-1",
+        user_id=salesperson.id,
+        phone_number="+919872000001",
+        dialed_at=today_dial_utc,
+        duration_seconds=0,
+    )
+    repeat_lead_call_2 = Call(
+        call_id="tackle-call-2",
+        user_id=salesperson.id,
+        phone_number="+919872000001",
+        dialed_at=today_dial_utc,
+        duration_seconds=40,
+    )
+    second_lead_call = Call(
+        call_id="tackle-call-3",
+        user_id=salesperson.id,
+        phone_number="+919872000002",
+        dialed_at=today_dial_utc,
+        duration_seconds=0,
+    )
+    yesterday_lead_call = Call(
+        call_id="tackle-call-4",
+        user_id=salesperson.id,
+        phone_number="+919872000003",
+        dialed_at=yesterday_dial_utc,
+        duration_seconds=25,
+    )
+    non_lead_call = Call(
+        call_id="tackle-call-5",
+        user_id=salesperson.id,
+        phone_number="+919999999999",
+        dialed_at=today_dial_utc,
+        duration_seconds=10,
+    )
+    db.session.add_all(
+        [
+            repeat_lead_call_1,
+            repeat_lead_call_2,
+            second_lead_call,
+            yesterday_lead_call,
+            non_lead_call,
+        ]
+    )
+    db.session.commit()
+
+    headers: dict[str, str] = {"Authorization": f"Bearer {manager_token}"}
+    response = client.get("/api/leads/summary", headers=headers)
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    tackled = json_data["tackled"]
+    assert tackled["today"] == 2
+    assert tackled["yesterday"] == 1
 
 
 def test_next_lead_manager_forbidden(app: Flask, client: FlaskClient) -> None:

@@ -42,12 +42,9 @@ export function LeadsPage() {
     );
   }
 
-  const totalLeadsInPool: number =
-    leadsSummary.pool.waiting +
-    leadsSummary.pool.scheduled +
-    leadsSummary.pool.connected +
-    leadsSummary.pool.stopped;
-  const isPoolEmpty: boolean = totalLeadsInPool === 0;
+  const totalActiveLeads: number =
+    leadsSummary.pool.waiting + leadsSummary.pool.scheduled + leadsSummary.pool.stopped;
+  const isPoolEmpty: boolean = totalActiveLeads === 0;
 
   return (
     <PageHeader title="Leads" action={<LeadUploadCard />}>

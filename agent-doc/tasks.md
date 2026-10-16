@@ -199,15 +199,15 @@
 
 **Blocked by:** Tasks 3, 11
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The five stage cards show their counts from the waiting split and the other buckets
-- [ ] The composition bar segments the pool by stage with a legend, and the chip shows the stage total
-- [ ] A completely empty pool shows all zeros with the existing "No leads in calling pool" prompt
+- [x] The five stage cards show their counts from the waiting split and the other buckets
+- [x] The composition bar segments the pool by stage with a legend, and the chip shows the stage total
+- [x] A completely empty pool shows all zeros with the existing "No leads in calling pool" prompt
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

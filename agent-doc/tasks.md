@@ -25,11 +25,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] `last_30_days.active_days` counts days with at least one dial, computed server-side in IST
-- [ ] A person with no calls in 30 days returns `active_days` 0 while all existing fields stay unchanged
+- [x] `last_30_days.active_days` counts days with at least one dial, computed server-side in IST
+- [x] A person with no calls in 30 days returns `active_days` 0 while all existing fields stay unchanged
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
 
 ---
 

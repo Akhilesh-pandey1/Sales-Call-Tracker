@@ -38,10 +38,15 @@ class TopNumberItem(BaseModel):
     calls: int
 
 
+class PersonThirtyDayStats(PersonPeriodStats):
+    model_config = ConfigDict(from_attributes=True)
+    active_days: int
+
+
 class PersonDashboardResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     name: str
     today: PersonPeriodStats
     yesterday: PersonPeriodStats
-    last_30_days: PersonPeriodStats
+    last_30_days: PersonThirtyDayStats
     top_numbers: list[TopNumberItem]

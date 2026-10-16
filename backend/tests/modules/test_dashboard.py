@@ -48,6 +48,17 @@ def create_call_record(
     return call
 
 
+def create_utc_call_time(days_ago: int, hour_of_day: int) -> datetime:
+    ist_today_midnight: datetime = now_ist().replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
+    ist_call_time: datetime = ist_today_midnight - timedelta(
+        days=days_ago
+    ) + timedelta(hours=hour_of_day)
+    utc_call_time: datetime = ist_call_time.astimezone(timezone.utc)
+    return utc_call_time
+
+
 def test_team_dashboard_unauthenticated_rejected(client: FlaskClient) -> None:
     response: Response = client.get("/api/dashboard/team")
     expected_status: int = 401
@@ -250,6 +261,247 @@ def test_team_dashboard_sorted_by_today_dials_descending(
         names_in_order: list[str] = [p["name"] for p in data["people"]]
         expected_order: list[str] = ["rep_high", "rep_mid", "rep_low"]
         assert names_in_order == expected_order
+
+
+def test_team_dashboard_empty_response_includes_new_blocks(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        manager: User = create_user_fixture(
+            name="manager8", role="manager", token="mgr-token-8"
+        )
+        create_user_fixture(
+            name="rep_empty", role="salesperson", token="rep-empty-token"
+        )
+        headers: dict[str, str] = {"Authorization": "Bearer mgr-token-8"}
+        response: Response = client.get("/api/dashboard/team", headers=headers)
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        data: dict[str, Any] = response.get_json()
+
+        assert data["last_30_days"]["dials"] == 0
+        assert data["last_30_days"]["connected"] == 0
+        assert data["last_30_days"]["seconds"] == 0
+
+        hours_per_day: int = 24
+        assert len(data["calls_by_hour"]["today"]) == hours_per_day
+        assert len(data["calls_by_hour"]["yesterday"]) == hours_per_day
+        assert len(data["calls_by_hour"]["last_30_days"]) == hours_per_day
+        assert sum(data["calls_by_hour"]["today"]) == 0
+        assert sum(data["calls_by_hour"]["yesterday"]) == 0
+        assert sum(data["calls_by_hour"]["last_30_days"]) == 0
+
+        assert data["top_people"]["today"] == []
+        assert data["top_people"]["yesterday"] == []
+        assert data["top_people"]["last_30_days"] == []
+
+
+def test_team_dashboard_last_30_days_totals_include_deactivated_salesperson(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        manager: User = create_user_fixture(
+            name="manager9", role="manager", token="mgr-token-9"
+        )
+        active_rep: User = create_user_fixture(
+            name="rep_active30", role="salesperson", token="rep-active30-token"
+        )
+        deactivated_rep: User = create_user_fixture(
+            name="rep_deact30",
+            role="salesperson",
+            is_active=False,
+            token="rep-deact30-token",
+        )
+
+        today_time: datetime = create_utc_call_time(0, 10)
+        yesterday_time: datetime = create_utc_call_time(1, 10)
+        old_call_time: datetime = create_utc_call_time(10, 10)
+        deactivated_call_time: datetime = create_utc_call_time(10, 16)
+
+        create_call_record("c30-1", active_rep.id, "+919876543210", today_time, 120)
+        create_call_record("c30-2", active_rep.id, "+919876543211", yesterday_time, 60)
+        create_call_record("c30-3", active_rep.id, "+919876543212", old_call_time, 200)
+        create_call_record(
+            "c30-4", deactivated_rep.id, "+919876543213", deactivated_call_time, 50
+        )
+
+        headers: dict[str, str] = {"Authorization": "Bearer mgr-token-9"}
+        response: Response = client.get("/api/dashboard/team", headers=headers)
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        data: dict[str, Any] = response.get_json()
+
+        assert data["last_30_days"]["dials"] == 4
+        assert data["last_30_days"]["connected"] == 4
+        assert data["last_30_days"]["seconds"] == 430
+
+        thirty_day_buckets: list[int] = data["calls_by_hour"]["last_30_days"]
+        deactivated_hour: int = 16
+        assert thirty_day_buckets[deactivated_hour] == 1
+        assert thirty_day_buckets[10] == 3
+
+
+def test_team_dashboard_calls_by_hour_ist_buckets(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        manager: User = create_user_fixture(
+            name="manager10", role="manager", token="mgr-token-10"
+        )
+        rep: User = create_user_fixture(
+            name="rep_hours", role="salesperson", token="rep-hours-token"
+        )
+
+        morning_hour: int = 9
+        evening_hour: int = 23
+        afternoon_hour: int = 14
+        early_morning_hour: int = 5
+
+        today_morning: datetime = create_utc_call_time(0, morning_hour)
+        today_evening: datetime = create_utc_call_time(0, evening_hour)
+        today_early_morning: datetime = create_utc_call_time(0, early_morning_hour)
+        yesterday_afternoon: datetime = create_utc_call_time(1, afternoon_hour)
+        old_morning: datetime = create_utc_call_time(10, morning_hour)
+
+        create_call_record("ch-1", rep.id, "+919876543210", today_morning, 30)
+        create_call_record("ch-2", rep.id, "+919876543211", today_evening, 30)
+        create_call_record("ch-3", rep.id, "+919876543212", today_early_morning, 30)
+        create_call_record("ch-4", rep.id, "+919876543213", yesterday_afternoon, 30)
+        create_call_record("ch-5", rep.id, "+919876543214", old_morning, 30)
+
+        headers: dict[str, str] = {"Authorization": "Bearer mgr-token-10"}
+        response: Response = client.get("/api/dashboard/team", headers=headers)
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        data: dict[str, Any] = response.get_json()
+
+        today_buckets: list[int] = data["calls_by_hour"]["today"]
+        yesterday_buckets: list[int] = data["calls_by_hour"]["yesterday"]
+        thirty_day_buckets: list[int] = data["calls_by_hour"]["last_30_days"]
+
+        hours_per_day: int = 24
+        assert len(today_buckets) == hours_per_day
+        assert len(yesterday_buckets) == hours_per_day
+        assert len(thirty_day_buckets) == hours_per_day
+
+        assert today_buckets[morning_hour] == 1
+        assert today_buckets[early_morning_hour] == 1
+        assert today_buckets[evening_hour] == 1
+        assert sum(today_buckets) == 3
+
+        assert yesterday_buckets[afternoon_hour] == 1
+        assert sum(yesterday_buckets) == 1
+
+        assert thirty_day_buckets[morning_hour] == 2
+        assert thirty_day_buckets[afternoon_hour] == 1
+        assert thirty_day_buckets[evening_hour] == 1
+        assert sum(thirty_day_buckets) == 5
+
+
+def test_team_dashboard_top_people_max_five_sorted_by_seconds(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        manager: User = create_user_fixture(
+            name="manager11", role="manager", token="mgr-token-11"
+        )
+        rep_names_and_seconds: list[tuple[str, int]] = [
+            ("rep_a", 600),
+            ("rep_b", 500),
+            ("rep_c", 400),
+            ("rep_d", 300),
+            ("rep_e", 200),
+            ("rep_f", 100),
+        ]
+        reps_by_name: dict[str, User] = {}
+        call_time: datetime = now_ist().astimezone(timezone.utc)
+        call_counter: int = 1
+        for rep_name, talk_seconds in rep_names_and_seconds:
+            created_rep: User = create_user_fixture(
+                name=rep_name, role="salesperson", token=f"token-{rep_name}"
+            )
+            reps_by_name[rep_name] = created_rep
+            create_call_record(
+                f"tp-{call_counter}",
+                created_rep.id,
+                f"+9198765432{call_counter:02d}",
+                call_time,
+                talk_seconds,
+            )
+            call_counter += 1
+
+        headers: dict[str, str] = {"Authorization": "Bearer mgr-token-11"}
+        response: Response = client.get("/api/dashboard/team", headers=headers)
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        data: dict[str, Any] = response.get_json()
+
+        top_people_limit: int = 5
+        today_top: list[dict[str, Any]] = data["top_people"]["today"]
+        assert len(today_top) == top_people_limit
+        expected_seconds_order: list[int] = [600, 500, 400, 300, 200]
+        returned_seconds: list[int] = [person["seconds"] for person in today_top]
+        assert returned_seconds == expected_seconds_order
+        assert today_top[0]["id"] == reps_by_name["rep_a"].id
+        assert today_top[0]["name"] == "rep_a"
+        assert "rep_f" not in [person["name"] for person in today_top]
+
+        thirty_day_top: list[dict[str, Any]] = data["top_people"]["last_30_days"]
+        assert len(thirty_day_top) == top_people_limit
+        expected_thirty_day_names: list[str] = [
+            "rep_a",
+            "rep_b",
+            "rep_c",
+            "rep_d",
+            "rep_e",
+        ]
+        returned_thirty_day_names: list[str] = [
+            person["name"] for person in thirty_day_top
+        ]
+        assert returned_thirty_day_names == expected_thirty_day_names
+
+        assert data["top_people"]["yesterday"] == []
+
+
+def test_team_dashboard_top_people_active_only_with_talk_time(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        manager: User = create_user_fixture(
+            name="manager12", role="manager", token="mgr-token-12"
+        )
+        active_rep: User = create_user_fixture(
+            name="rep_talk", role="salesperson", token="token-rep-talk"
+        )
+        silent_rep: User = create_user_fixture(
+            name="rep_silent", role="salesperson", token="token-rep-silent"
+        )
+        deactivated_rep: User = create_user_fixture(
+            name="rep_deact_talk",
+            role="salesperson",
+            is_active=False,
+            token="token-rep-deact-talk",
+        )
+
+        call_time: datetime = now_ist().astimezone(timezone.utc)
+        create_call_record("ta-1", active_rep.id, "+919876543210", call_time, 300)
+        create_call_record("ta-2", silent_rep.id, "+919876543211", call_time, 0)
+        create_call_record("ta-3", deactivated_rep.id, "+919876543212", call_time, 900)
+
+        headers: dict[str, str] = {"Authorization": "Bearer mgr-token-12"}
+        response: Response = client.get("/api/dashboard/team", headers=headers)
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        data: dict[str, Any] = response.get_json()
+
+        today_top: list[dict[str, Any]] = data["top_people"]["today"]
+        assert len(today_top) == 1
+        assert today_top[0]["id"] == active_rep.id
+        assert today_top[0]["seconds"] == 300
+
+        assert data["last_30_days"]["dials"] == 3
+        assert data["last_30_days"]["connected"] == 2
+        assert data["last_30_days"]["seconds"] == 1200
 
 
 def test_person_dashboard_unauthenticated_rejected(client: FlaskClient) -> None:

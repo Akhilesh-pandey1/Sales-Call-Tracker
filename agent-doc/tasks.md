@@ -217,12 +217,12 @@
 
 **Blocked by:** Tasks 5, 6
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The card header shows the total and active account counts
-- [ ] The manager's own row carries a "You" badge with no action buttons
-- [ ] Deactivated rows stay greyed out with their Activate action reachable
+- [x] The card header shows the total and active account counts
+- [x] The manager's own row carries a "You" badge with no action buttons
+- [x] Deactivated rows stay greyed out with their Activate action reachable
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)

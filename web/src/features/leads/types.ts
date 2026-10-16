@@ -13,15 +13,20 @@ export interface LeadPersonActivity {
   not_connected: number;
 }
 
+export interface LeadsDailyCount {
+  today: number;
+  yesterday: number;
+}
+
 export interface LeadsSummary {
   pool: LeadPoolCounts;
+  uploaded: LeadsDailyCount;
+  tackled: LeadsDailyCount;
   people: LeadPersonActivity[];
 }
 
-export interface LeadsSummaryApiResponse {
+export interface LeadsSummaryApiResponse extends LeadsSummary {
   status: boolean;
-  pool: LeadPoolCounts;
-  people: LeadPersonActivity[];
 }
 
 export type LeadCountry = "IN" | "AE" | "US";

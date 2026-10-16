@@ -11,6 +11,8 @@ export async function getLeadsSummary(): Promise<LeadsSummary> {
   const response = await apiClient.get<LeadsSummaryApiResponse>("/leads/summary");
   const summary: LeadsSummary = {
     pool: response.data.pool,
+    uploaded: response.data.uploaded,
+    tackled: response.data.tackled,
     people: response.data.people,
   };
   return summary;

@@ -175,6 +175,10 @@ The stack is settled by now — grilling decided it, or this sweep does. For eve
 - No match → search for a well-made, well-maintained library and propose it, with why it is trusted. After the user agrees, the user adds it to `stacks.md` so the next piece starts from it.
 - Building by hand is chosen only when no good library exists — and the reason is said out loud.
 - The user confirms or corrects each choice. Never "TBD" — always a real library name.
+- After the user agrees to a library, find its current stable version — never take the version from memory. Search the web for the best stable version of that library: the newest release people actually use, not a day-one release with known breakage. If web search is not available, ask the package registry instead — `npm view <package> version` for JS, `pip index versions <package>` for Python.
+- An old stable version is a wrong choice, not a safe one — React 18 when React 19 is stable is a bug. If the current stable major needs companions (a React version other picks must match, a build tool the new Tailwind needs), say it in the same question.
+- Versions must fit together. No compatibility API exists to ask — so check the pairings that touch each other by web search ("X compatible with React 19", "Y with Tailwind 4"), and treat the package manager as the final checker: npm and pip read each library's declared compatible ranges at install time and refuse a set that clashes. The sweep must not propose a set that fails there.
+- The agreed library goes into the change surface with its exact version: `Library x.y.z`. The spec and the install step use exactly that version.
 
 ## Terminal state
 
@@ -191,7 +195,7 @@ User flow: <steps made easier, what got automated — or "no change">
 Config: <new env vars, keys, services — or "none">
 Integration: <consumers updated in this change, breaking changes if any>
 Tests: <scenarios that get tests>
-Libraries: <existing library chosen for each piece — or "none, all custom">
+Libraries: <library + exact stable version for each piece, one compatible set — or "none, all custom">
 Undo: <how to roll back>
 ```
 

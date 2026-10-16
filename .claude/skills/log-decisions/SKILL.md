@@ -38,7 +38,7 @@ Go through the conversation's agreements. Each one belongs to exactly one file, 
 | `database.md` | Database schema and design | Tables, fields, indexes, migrations |
 | `api.md` | API contracts | Method, path, request shape, response shape, errors, auth |
 | `testing.md` | Testing approach | What gets tests and how |
-| `structure.md` | File structure | Which files and folders are created, changed, or deleted |
+| `structure.md` | File structure and tech stack | Which files and folders are created, changed, or deleted; the tech stack with exact versions — frontend framework, backend framework, every agreed library — as one compatible set |
 
 A file that does not exist yet is created, with a simple header, the moment its topic has something agreed. A topic with nothing agreed gets no file.
 

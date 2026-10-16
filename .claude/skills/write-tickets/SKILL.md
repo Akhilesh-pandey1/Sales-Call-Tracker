@@ -1,6 +1,6 @@
 ---
 name: write-tickets
-description: Decompose specifications and requirements into ordered, atomic vertical-slice tasks in agent-doc/tasks.md using Addy Osmani sizing rules with checkpoints and verification gates. Pure task generation.
+description: Decompose specifications and requirements into ordered, atomic vertical-slice tasks in agent-doc/tasks.md using Addy Osmani sizing rules with verification gates. Pure task generation.
 disable-model-invocation: true
 ---
 
@@ -29,6 +29,7 @@ Decompose specifications in `agent-doc/specs/` and technical contracts in `agent
 4. **The "And" Prohibition:** If a task title contains the word "and", it is two tasks. You MUST split it.
 5. **Subsystem Slicing Trigger:** If a task touches two or more independent subsystems (e.g., auth and billing), you MUST split it.
 6. **Development Work Only:** Never ticket manual or production work — `git push`, connecting the repo to a remote, deploying to hosting (Render, Vercel, …), or setting up the production database. The user does these by hand later. Include a deployment step ONLY when the user explicitly asked for it, and then as the last task — never as a gate between development tasks.
+7. **Tasks Only, No Preamble:** `agent-doc/tasks.md` starts directly with `## Task 1:`. Never write anything before the first task — no scope summary, no "remaining work" paragraph, no assumptions block about manual checks. Context the user needs goes in the chat reply, not in the file.
 </HARD GATE>
 
 ---
@@ -48,7 +49,7 @@ Before writing any code, operate in read-only mode:
 - Map dependencies between components
 - Note risks and unknowns
 
-**Do NOT write code during planning.** The output is a structured task list and checkpoints recorded in `agent-doc/tasks.md`, not implementation code.
+**Do NOT write code during planning.** The output is a structured task list recorded in `agent-doc/tasks.md`, not implementation code.
 
 ### Step 2: Identify the Dependency Graph
 
@@ -105,6 +106,8 @@ Each task follows this structure in `agent-doc/tasks.md`:
 
 **Blocked by:** [Task numbers this depends on, or "None"]
 
+**Status:** Not started
+
 **Acceptance criteria:**
 - [ ] [Specific, testable condition cited from specs/<module>.md]
 - [ ] [Specific, testable condition]
@@ -112,27 +115,23 @@ Each task follows this structure in `agent-doc/tasks.md`:
 **Verification:**
 - [ ] Tests pass: [the repository's focused-test command, e.g., npm test path/to/focused.test.ts]
 - [ ] Build succeeds: [the repository's build command, e.g., npm run build]
-- [ ] Manual check: [description of what to verify, or "None"]
 ```
 
-### Step 5: Order and Checkpoint
+**No Manual check lines.** Verification in the file is automation only — tests and build. Never write a "Manual check" line in a task. Anything worth testing by hand goes in the chat reply when the work is done, not in `tasks.md`.
+
+The **Status** line records agent time so the user can see how long each agent takes on a task:
+
+- Tasks are always generated as `**Status:** Not started`.
+- The implementing agent fills it from the machine's local clock (the user's desktop time — never UTC). When work begins: `**Status:** In progress — Started: 2026-10-15 14:30`
+- When the task is checked off: `**Status:** Done — Started: 2026-10-15 14:30 · Total: 35 minutes`
+
+### Step 5: Order the Tasks
 
 Arrange tasks so that:
 
 1. Dependencies are satisfied (build foundation first)
 2. Each task leaves the system in a working state
-3. Verification checkpoints occur after every 2–3 tasks
-4. High-risk tasks are early (fail fast)
-
-Add explicit checkpoints to `agent-doc/tasks.md`:
-
-```markdown
-## Checkpoint: After Tasks 1-3
-- [ ] All tests pass
-- [ ] Application builds without errors
-- [ ] Core user flow works end-to-end
-- [ ] Review with human before proceeding
-```
+3. High-risk tasks are early (fail fast)
 
 ---
 
@@ -173,7 +172,7 @@ The user does this work by hand, later — deployment comes after development, n
 
 ## Output File & Protection Rules
 
-Save all tasks and checkpoints to **`agent-doc/tasks.md`**. Create the `agent-doc/` directory if it does not exist.
+Save all tasks to **`agent-doc/tasks.md`**. Create the `agent-doc/` directory if it does not exist.
 
 ### Never Overwrite an Incomplete Plan
 
@@ -218,7 +217,7 @@ When multiple agents or sessions are available:
 - Tasks that say "implement the feature" without acceptance criteria
 - No verification steps in the plan
 - All tasks are L/XL-sized
-- No checkpoints between tasks
+- An intro or scope paragraph before the first task
 - Dependency order isn't considered
 - Tasks that wait for a human step (git push, deploy, prod DB) before the next task can start
 - Deployment or production setup ticketed without the user explicitly asking for it
@@ -230,9 +229,11 @@ When multiple agents or sessions are available:
 Before completing task generation, confirm:
 
 - [ ] Every task has acceptance criteria (≤ 3 bullet points)
-- [ ] Every task has an explicit verification step (focused test command, build command, or manual check)
+- [ ] Every task has an explicit verification step (focused test command or build command)
+- [ ] No task contains a "Manual check" line — hand-testing items go in the chat reply
+- [ ] Every task has a `Status:` line generated as "Not started"
 - [ ] Task dependencies (`Blocked by:`) are identified and ordered correctly
-- [ ] Checkpoints exist after every 2–3 tasks
+- [ ] The file starts directly with Task 1 — no intro or scope paragraph before it
 - [ ] No pre-existing incomplete plan was overwritten without explicit user confirmation
 - [ ] No task touches multiple independent subsystems or uses "and" in its title
 - [ ] Tasks are recorded cleanly in `agent-doc/tasks.md`
@@ -243,7 +244,7 @@ Before completing task generation, confirm:
 ## Output Summary
 
 After creating `agent-doc/tasks.md`:
-- Report the total number of tasks and checkpoints created.
+- Report the total number of tasks created.
 - List each task with its ID, title, and `Blocked by:` dependency.
 - Highlight parallelizable task groups vs sequential dependency chains.
-- Final prompt: *"Tasks and checkpoints are written to `agent-doc/tasks.md`. Ready for subagent handoff."*
+- Final prompt: *"Tasks are written to `agent-doc/tasks.md`. Ready for subagent handoff."*

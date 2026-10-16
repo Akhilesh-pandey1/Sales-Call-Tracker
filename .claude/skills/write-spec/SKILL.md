@@ -31,7 +31,7 @@ Before writing, read all existing files in `agent-doc/` from disk:
 - `agent-doc/decisions.md` (Product rules, edge case agreements)
 - `agent-doc/database.md` (Schemas, tables, columns, relations)
 - `agent-doc/api.md` (Endpoints, request/response structures)
-- `agent-doc/structure.md` (Directory and module layouts)
+- `agent-doc/structure.md` (Directory and module layouts, tech stack with exact versions)
 - `agent-doc/testing.md` (Test strategies and runners)
 
 If `agent-doc/` does not exist, create it.

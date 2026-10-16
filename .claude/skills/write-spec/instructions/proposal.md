@@ -7,7 +7,7 @@ Create the proposal document (`agent-doc/proposal.md`) that serves as the master
    - `agent-doc/decisions.md` (Product & design decisions)
    - `agent-doc/database.md` (Database models & tables)
    - `agent-doc/api.md` (API contracts & schemas)
-   - `agent-doc/structure.md` (Directory structure)
+   - `agent-doc/structure.md` (Directory structure, tech stack with exact versions)
    - `agent-doc/testing.md` (Testing guidelines)
    These files represent settled technical truth. The proposal must align with them, not contradict them.
 

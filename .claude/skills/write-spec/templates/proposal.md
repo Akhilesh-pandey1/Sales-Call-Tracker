@@ -5,7 +5,7 @@
 > - [`agent-doc/decisions.md`](./decisions.md) — Core architectural decisions, business rules, and settled constraints.
 > - [`agent-doc/database.md`](./database.md) — Database schemas, table definitions, fields, and relationships.
 > - [`agent-doc/api.md`](./api.md) — API contracts, endpoints, request/response payloads, and error shapes.
-> - [`agent-doc/structure.md`](./structure.md) — Directory layout, file locations, and module organization.
+> - [`agent-doc/structure.md`](./structure.md) — Directory layout, file locations, module organization, and the tech stack with exact versions.
 > - [`agent-doc/testing.md`](./testing.md) — Testing strategy, test runners, commands, and expectations.
 > Always consult these files whenever you need specific schema, endpoint, or architecture details.
 

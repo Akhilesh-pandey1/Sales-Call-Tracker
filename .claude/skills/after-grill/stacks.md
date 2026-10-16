@@ -7,6 +7,7 @@ One catalog of known libraries — JS, Python, and React Native. Every entry say
 - Choosing a library for any piece: look here first. A match here is the default proposal.
 - No match here: search for a well-made, well-maintained library, propose it with the reason, and add it to this file after agreement — so the next search starts here.
 - Each library serves its own work only, as needed — never forced onto a piece that does not need it.
+- This file never stores version numbers — versions go stale fast. When a library is chosen, its current stable version is found fresh by web search (or the package registry if search is down), and the version is written into the change surface with the library name.
 - New entries: one or two lines — the library name and what exactly it is for. Numbered, one by one. A new language or platform gets its own section when its first library arrives.
 
 ## JS libraries

@@ -1,6 +1,6 @@
 ---
 name: design-screens
-description: Turn agent-doc/screen.md into real designed HTML screens - one HTML file per screen, Tailwind CDN, inline JavaScript only for same-page interactions, screens never link to each other. Includes a runner (index.html) to flip left/right through screens and preview Mobile / iPad / Desktop. Designs ONE screen first for approval, then generates all screens in the locked theme. Use when the user asks to design screens, make HTML designs, or build designs from screen.md.
+description: Turn agent-doc/screen.md into real designed HTML screens - one HTML file per screen, Tailwind CDN, inline JavaScript only for same-page interactions, screens never link to each other. Includes a runner (index.html) to flip left/right through screens and preview Mobile / iPad / Desktop. Follows the user's pace - all screens in one go or one at a time, as the user chooses. Use when the user asks to design screens, make HTML designs, or build designs from screen.md.
 ---
 
 # Design Screens
@@ -39,9 +39,9 @@ python "<this skill's folder>/uiux/scripts/search.py" "<product type> <industry>
 1. **Read the input** - `agent-doc/screen.md`. Missing - stop: "Run /write-screens first - screen.md is the design input."
 2. **Ask the user ONE thing** - the output folder name. Suggest `design/`. Nothing else - the user is not a designer; every design decision comes from the brain and the rules below.
 3. **Get the theme** - run the search, write `THEME.md`.
-4. **Design ONE screen** - the first screen of the primary view. Build `<folder>/screens/index.html` from `templates/runner.html` with the SCREENS list holding just this one screen. Build the screen from `templates/screen.html` + THEME.md, named with its size marker. Tell the user: "Open <folder>/screens/index.html - arrows to flip, buttons for Mobile / iPad / Desktop." Then ask: "Good?"
-5. **Generate ALL screens** - flow order from screen.md, one HTML per screen, exactly the same head and theme as the approved screen. Edge cases become separate files with their screen's marker: `02-dashboard--empty--P.html`, `02-dashboard--offline--P.html`. Repeating pieces (top bar, buttons, cards, tables) copy the exact classes from the approved screen - same structure everywhere, never restyle.
-6. **Run the checklist**, update the runner list, report: folder path, screen count, edge-case screens.
+4. **Ask how to proceed** - "Should I design ALL screens now, or one at a time (say `next` for each new screen)?" If the user already said in chat how to proceed, follow that - don't ask again.
+5. **Design the screens** - in flow order from screen.md, one HTML per screen, exactly the same head and theme every time. Build `<folder>/screens/index.html` from `templates/runner.html` and keep its SCREENS list matching the files as they are added. Edge cases become separate files with their screen's marker: `02-dashboard--empty--P.html`, `02-dashboard--offline--P.html`. Repeating pieces (top bar, buttons, cards, tables) copy the exact classes from the screens already built - same structure everywhere, never restyle.
+6. **Run the checklist**, then report: folder path, screen count, edge-case screens. Remind the user: open `<folder>/screens/index.html` - arrows to flip, buttons for Mobile / iPad / Desktop.
 
 ## Screen file rules
 
@@ -71,7 +71,7 @@ python "<this skill's folder>/uiux/scripts/search.py" "<product type> <industry>
 
 ## Guardrails
 
-- Never ask the user design questions. Allowed questions only: folder name, "good?" (approve the first screen).
+- Never ask the user design questions - every design decision comes from THEME.md and the rules here. The only things to ask: folder name, and how to proceed (all at once or one at a time).
 - Never let a screen move to another screen - no links, no redirects, no loading another screen's HTML. The runner flips screens.
 - Never redesign a locked theme mid-run - THEME.md is final once approved.
 - One file per screen; never bundle screens into one HTML.

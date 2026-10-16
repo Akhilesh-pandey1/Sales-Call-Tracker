@@ -148,12 +148,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The chart shows 24 IST hour bars for the selected period, dividing 30-day totals by 30 for the daily average, with the best hour highlighted and named in the summary line
-- [ ] A period with zero dials shows "No calls in this period." instead of an empty chart with no best-hour highlight
-- [ ] The Top 5 list shows at most five active people by talk minutes, highest first, for the selected period
+- [x] The chart shows 24 IST hour bars for the selected period, dividing 30-day totals by 30 for the daily average, with the best hour highlighted and named in the summary line
+- [x] A period with zero dials shows "No calls in this period." instead of an empty chart with no best-hour highlight
+- [x] The Top 5 list shows at most five active people by talk minutes, highest first, for the selected period
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

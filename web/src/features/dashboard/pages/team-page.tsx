@@ -4,11 +4,13 @@ import { Clock, Megaphone, PhoneIncoming, PhoneMissed } from "lucide-react";
 import { PageHeader } from "@/shared/components/page-header";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { cn } from "@/shared/utils/cn";
+import { CallsByHourChart } from "../components/calls-by-hour-chart";
 import { DashboardErrorState } from "../components/dashboard-error-state";
 import { KpiCard } from "../components/kpi-card";
 import { TeamTable } from "../components/team-table";
+import { TopPeopleList } from "../components/top-people-list";
 import { useTeamDashboard } from "../hooks/use-team-dashboard";
-import type { TeamDashboard, TeamPeriodStats } from "../types";
+import type { TeamDashboard, TeamPeriod, TeamPeriodStats, TeamTopPerson } from "../types";
 import {
   convertSecondsToMinutes,
   formatAveragePerPersonPerDay,
@@ -17,8 +19,6 @@ import {
   formatYesterdayComparison,
   getCountSharePercent,
 } from "../utils/format";
-
-type TeamPeriod = "today" | "yesterday" | "last_30_days";
 
 interface TeamKpiCardData {
   key: string;
@@ -191,6 +191,30 @@ function buildTeamKpiCards(
   return kpiCards;
 }
 
+interface PeriodHeadingLabels {
+  chart: string;
+  topPeople: string;
+}
+
+function getPeriodHeadingLabels(period: TeamPeriod): PeriodHeadingLabels {
+  const chartHeadingLabelsByPeriod: Record<TeamPeriod, string> = {
+    today: "Dials per hour · Today (IST)",
+    yesterday: "Dials per hour · Yesterday (IST)",
+    last_30_days: "Avg dials per hour · 30 days (IST)",
+  };
+  const topPeopleHeadingLabelsByPeriod: Record<TeamPeriod, string> = {
+    today: "Talk time · Today",
+    yesterday: "Talk time · Yesterday",
+    last_30_days: "Talk time · 30 days",
+  };
+
+  const periodHeadingLabels: PeriodHeadingLabels = {
+    chart: chartHeadingLabelsByPeriod[period],
+    topPeople: topPeopleHeadingLabelsByPeriod[period],
+  };
+  return periodHeadingLabels;
+}
+
 interface PeriodSwitchProps {
   selectedPeriod: TeamPeriod;
   onSelectPeriod: (period: TeamPeriod) => void;
@@ -248,6 +272,10 @@ function TeamPerformanceSection({
   onSelectPeriod,
 }: TeamPerformanceSectionProps) {
   const kpiCards: TeamKpiCardData[] = buildTeamKpiCards(teamDashboard, selectedPeriod);
+  const headingLabels: PeriodHeadingLabels = getPeriodHeadingLabels(selectedPeriod);
+  const periodHourlyDials: number[] = teamDashboard.calls_by_hour[selectedPeriod];
+  const periodTopPeople: TeamTopPerson[] = teamDashboard.top_people[selectedPeriod];
+  const showsDailyAverage: boolean = selectedPeriod === "last_30_days";
 
   return (
     <section>
@@ -267,6 +295,18 @@ function TeamPerformanceSection({
             subLine={kpiCard.subLine}
           />
         ))}
+      </div>
+      <div className="mt-3 grid gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-3">
+        <CallsByHourChart
+          className="lg:col-span-2"
+          hourlyDials={periodHourlyDials}
+          showsDailyAverage={showsDailyAverage}
+          headingLabel={headingLabels.chart}
+        />
+        <TopPeopleList
+          people={periodTopPeople}
+          headingLabel={headingLabels.topPeople}
+        />
       </div>
     </section>
   );

@@ -1,5 +1,12 @@
+export interface LeadWaitingAttemptCounts {
+  "0": number;
+  "1": number;
+  "2": number;
+}
+
 export interface LeadPoolCounts {
   waiting: number;
+  waiting_by_attempts: LeadWaitingAttemptCounts;
   scheduled: number;
   connected: number;
   stopped: number;

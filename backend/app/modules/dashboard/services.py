@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Any
 from backend.app.core.errors import AppException
-from backend.app.core.utils import now_ist, parse_utc_datetime
+from backend.app.core.utils import now_ist, parse_utc_datetime, to_ist
 from backend.app.extensions import db
 from backend.app.modules.calls import Call
 from backend.app.modules.users import User
@@ -196,9 +196,12 @@ def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
     stats_yesterday: dict[str, Any] = create_empty_period_metrics()
     stats_thirty_days: dict[str, Any] = create_empty_period_metrics()
     phone_summary: dict[str, dict[str, int]] = {}
+    active_ist_dates: set[date] = set()
 
     for phone_number, raw_dialed_at, duration_seconds in call_records:
         dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
+        call_ist_date: date = to_ist(dialed_at).date()
+        active_ist_dates.add(call_ist_date)
         apply_call_to_metrics(stats_thirty_days, duration_seconds)
 
         if phone_number not in phone_summary:
@@ -217,6 +220,7 @@ def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
     stats_yesterday["connected_percent"] = calculate_connected_percentage(
         stats_yesterday["dials"], stats_yesterday["connected"]
     )
+    stats_thirty_days["active_days"] = len(active_ist_dates)
     stats_thirty_days["connected_percent"] = calculate_connected_percentage(
         stats_thirty_days["dials"], stats_thirty_days["connected"]
     )

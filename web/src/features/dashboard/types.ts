@@ -14,6 +14,7 @@ export interface TeamMemberStats {
 export interface TeamDashboard {
   today: TeamPeriodStats;
   yesterday: TeamPeriodStats;
+  last_30_days: TeamPeriodStats;
   people: TeamMemberStats[];
 }
 

@@ -130,12 +130,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The switch renders three periods and each selection drives the four cards without refetching the page
-- [ ] Not connected shows dials − connected, and each card's sub-line shows its per-active-person-per-day average
-- [ ] The team table lists every active salesperson with grouped Today / Yesterday columns, zeros included, sorted by today's dials, scrolling horizontally on narrow screens
+- [x] The switch renders three periods and each selection drives the four cards without refetching the page
+- [x] Not connected shows dials − connected, and each card's sub-line shows its per-active-person-per-day average
+- [x] The team table lists every active salesperson with grouped Today / Yesterday columns, zeros included, sorted by today's dials, scrolling horizontally on narrow screens
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

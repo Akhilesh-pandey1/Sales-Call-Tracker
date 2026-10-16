@@ -16,6 +16,19 @@ class DashboardTimeWindows:
     thirty_days_start_utc: datetime
 
 
+@dataclass(frozen=True)
+class TeamCallAggregates:
+    team_today: dict[str, int]
+    team_yesterday: dict[str, int]
+    team_thirty_days: dict[str, int]
+    user_today: dict[int, dict[str, int]]
+    user_yesterday: dict[int, dict[str, int]]
+    user_thirty_days_seconds: dict[int, int]
+    hourly_today: list[int]
+    hourly_yesterday: list[int]
+    hourly_thirty_days: list[int]
+
+
 def calculate_dashboard_time_windows() -> DashboardTimeWindows:
     current_ist: datetime = now_ist()
     midnight_today_ist: datetime = current_ist.replace(
@@ -64,69 +77,117 @@ def apply_call_to_metrics(
         target_dict["connected"] += 1
 
 
-def partition_team_call_records(
-    call_records: list[Any],
-    today_start_utc: datetime,
-) -> tuple[
-    dict[str, int],
-    dict[str, int],
-    dict[int, dict[str, int]],
-    dict[int, dict[str, int]],
-]:
-    team_today: dict[str, int] = create_empty_period_metrics()
-    team_yesterday: dict[str, int] = create_empty_period_metrics()
-    user_today: dict[int, dict[str, int]] = {}
-    user_yesterday: dict[int, dict[str, int]] = {}
-
-    for user_id, raw_dialed_at, duration_seconds in call_records:
-        dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
-        if dialed_at >= today_start_utc:
-            apply_call_to_metrics(team_today, duration_seconds)
-            if user_id not in user_today:
-                user_today[user_id] = create_empty_period_metrics()
-            apply_call_to_metrics(user_today[user_id], duration_seconds)
-        else:
-            apply_call_to_metrics(team_yesterday, duration_seconds)
-            if user_id not in user_yesterday:
-                user_yesterday[user_id] = create_empty_period_metrics()
-            apply_call_to_metrics(user_yesterday[user_id], duration_seconds)
-
-    result_tuple: tuple[
-        dict[str, int],
-        dict[str, int],
-        dict[int, dict[str, int]],
-        dict[int, dict[str, int]],
-    ] = (team_today, team_yesterday, user_today, user_yesterday)
-    return result_tuple
+def apply_call_to_hourly_bucket(
+    hourly_buckets: list[int], dialed_at_utc: datetime
+) -> None:
+    ist_dialed_at: datetime = to_ist(dialed_at_utc)
+    hour_bucket_index: int = ist_dialed_at.hour
+    hourly_buckets[hour_bucket_index] += 1
 
 
-def get_team_dashboard_data() -> dict[str, Any]:
-    windows: DashboardTimeWindows = calculate_dashboard_time_windows()
+def apply_call_to_user_metrics(
+    user_metrics_by_user: dict[int, dict[str, int]],
+    user_id: int,
+    duration_seconds: int,
+) -> None:
+    if user_id not in user_metrics_by_user:
+        user_metrics_by_user[user_id] = create_empty_period_metrics()
+    apply_call_to_metrics(user_metrics_by_user[user_id], duration_seconds)
+
+
+def add_user_talk_seconds(
+    user_seconds_by_user: dict[int, int], user_id: int, duration_seconds: int
+) -> None:
+    current_seconds: int = user_seconds_by_user.get(user_id, 0)
+    user_seconds_by_user[user_id] = current_seconds + duration_seconds
+
+
+def collect_user_talk_seconds(
+    user_metrics_by_user: dict[int, dict[str, int]]
+) -> dict[int, int]:
+    user_seconds_by_user: dict[int, int] = {}
+    for user_id, user_metrics in user_metrics_by_user.items():
+        user_seconds_by_user[user_id] = user_metrics["seconds"]
+    return user_seconds_by_user
+
+
+def fetch_team_call_records(windows: DashboardTimeWindows) -> list[Any]:
     salesperson_role: str = "salesperson"
-
-    call_records: list[Any] = (
+    team_call_records: list[Any] = (
         Call.query.join(User, Call.user_id == User.id)
         .filter(
             User.role == salesperson_role,
-            Call.dialed_at >= windows.yesterday_start_utc,
+            Call.dialed_at >= windows.thirty_days_start_utc,
             Call.dialed_at < windows.tomorrow_start_utc,
         )
         .with_entities(Call.user_id, Call.dialed_at, Call.duration_seconds)
         .all()
     )
+    return team_call_records
 
-    team_today, team_yesterday, user_today, user_yesterday = (
-        partition_team_call_records(call_records, windows.today_start_utc)
-    )
 
+def fetch_active_salespeople() -> list[Any]:
+    salesperson_role: str = "salesperson"
     active_salespeople: list[Any] = (
         User.query.filter_by(role=salesperson_role, is_active=True)
         .with_entities(User.id, User.name)
         .all()
     )
+    return active_salespeople
 
+
+def create_empty_team_aggregates() -> TeamCallAggregates:
+    hours_per_day: int = 24
+    aggregates: TeamCallAggregates = TeamCallAggregates(
+        team_today=create_empty_period_metrics(),
+        team_yesterday=create_empty_period_metrics(),
+        team_thirty_days=create_empty_period_metrics(),
+        user_today={},
+        user_yesterday={},
+        user_thirty_days_seconds={},
+        hourly_today=[0] * hours_per_day,
+        hourly_yesterday=[0] * hours_per_day,
+        hourly_thirty_days=[0] * hours_per_day,
+    )
+    return aggregates
+
+
+def accumulate_team_call_records(
+    call_records: list[Any],
+    windows: DashboardTimeWindows,
+) -> TeamCallAggregates:
+    aggregates: TeamCallAggregates = create_empty_team_aggregates()
+
+    for user_id, raw_dialed_at, duration_seconds in call_records:
+        dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
+
+        apply_call_to_metrics(aggregates.team_thirty_days, duration_seconds)
+        add_user_talk_seconds(
+            aggregates.user_thirty_days_seconds, user_id, duration_seconds
+        )
+        apply_call_to_hourly_bucket(aggregates.hourly_thirty_days, dialed_at)
+
+        if dialed_at >= windows.today_start_utc:
+            apply_call_to_metrics(aggregates.team_today, duration_seconds)
+            apply_call_to_user_metrics(aggregates.user_today, user_id, duration_seconds)
+            apply_call_to_hourly_bucket(aggregates.hourly_today, dialed_at)
+        elif dialed_at >= windows.yesterday_start_utc:
+            apply_call_to_metrics(aggregates.team_yesterday, duration_seconds)
+            apply_call_to_user_metrics(
+                aggregates.user_yesterday, user_id, duration_seconds
+            )
+            apply_call_to_hourly_bucket(aggregates.hourly_yesterday, dialed_at)
+
+    return aggregates
+
+
+def build_people_list(
+    active_people: list[Any],
+    user_today: dict[int, dict[str, int]],
+    user_yesterday: dict[int, dict[str, int]],
+) -> list[dict[str, Any]]:
     people_list: list[dict[str, Any]] = []
-    for person_id, person_name in active_salespeople:
+    for person_id, person_name in active_people:
         person_today_data: dict[str, int] = user_today.get(
             person_id, create_empty_period_metrics()
         )
@@ -140,16 +201,72 @@ def get_team_dashboard_data() -> dict[str, Any]:
             "yesterday": person_yesterday_data,
         }
         people_list.append(person_summary)
+    return people_list
 
+
+def build_top_people_list(
+    active_people: list[Any], user_seconds_by_user: dict[int, int]
+) -> list[dict[str, Any]]:
+    top_people_limit: int = 5
+    zero_talk_seconds: int = 0
+    people_with_talk_time: list[dict[str, Any]] = []
+    for person_id, person_name in active_people:
+        talk_seconds: int = user_seconds_by_user.get(person_id, zero_talk_seconds)
+        if talk_seconds > zero_talk_seconds:
+            person_entry: dict[str, Any] = {
+                "id": person_id,
+                "name": person_name,
+                "seconds": talk_seconds,
+            }
+            people_with_talk_time.append(person_entry)
+    ranked_people: list[dict[str, Any]] = sorted(
+        people_with_talk_time,
+        key=lambda entry: (-entry["seconds"], entry["id"]),
+    )
+    return ranked_people[:top_people_limit]
+
+
+def get_team_dashboard_data() -> dict[str, Any]:
+    windows: DashboardTimeWindows = calculate_dashboard_time_windows()
+
+    call_records: list[Any] = fetch_team_call_records(windows)
+    aggregates: TeamCallAggregates = accumulate_team_call_records(call_records, windows)
+
+    active_salespeople: list[Any] = fetch_active_salespeople()
+
+    people_list: list[dict[str, Any]] = build_people_list(
+        active_salespeople, aggregates.user_today, aggregates.user_yesterday
+    )
     sorted_people: list[dict[str, Any]] = sorted(
         people_list,
         key=lambda entry: entry["today"]["dials"],
         reverse=True,
     )
 
+    top_people_payload: dict[str, Any] = {
+        "today": build_top_people_list(
+            active_salespeople, collect_user_talk_seconds(aggregates.user_today)
+        ),
+        "yesterday": build_top_people_list(
+            active_salespeople, collect_user_talk_seconds(aggregates.user_yesterday)
+        ),
+        "last_30_days": build_top_people_list(
+            active_salespeople, aggregates.user_thirty_days_seconds
+        ),
+    }
+
+    calls_by_hour_payload: dict[str, Any] = {
+        "today": aggregates.hourly_today,
+        "yesterday": aggregates.hourly_yesterday,
+        "last_30_days": aggregates.hourly_thirty_days,
+    }
+
     response_payload: dict[str, Any] = {
-        "today": team_today,
-        "yesterday": team_yesterday,
+        "today": aggregates.team_today,
+        "yesterday": aggregates.team_yesterday,
+        "last_30_days": aggregates.team_thirty_days,
+        "calls_by_hour": calls_by_hour_payload,
+        "top_people": top_people_payload,
         "people": sorted_people,
     }
     return response_payload

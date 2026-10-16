@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The response carries `last_30_days`, `calls_by_hour` (24 IST hour buckets × today / yesterday / last_30_days), and `top_people` (max 5, highest talk seconds first) while `today`, `yesterday`, and `people` stay unchanged
-- [ ] A deactivated salesperson's past calls count in `last_30_days` totals, and their calls land in the correct IST hour buckets
-- [ ] `top_people` includes only active salespeople and omits anyone beyond the top 5
+- [x] The response carries `last_30_days`, `calls_by_hour` (24 IST hour buckets × today / yesterday / last_30_days), and `top_people` (max 5, highest talk seconds first) while `today`, `yesterday`, and `people` stay unchanged
+- [x] A deactivated salesperson's past calls count in `last_30_days` totals, and their calls land in the correct IST hour buckets
+- [x] `top_people` includes only active salespeople and omits anyone beyond the top 5
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
 
 ---
 

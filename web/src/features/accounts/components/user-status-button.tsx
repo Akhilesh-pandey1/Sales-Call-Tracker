@@ -24,8 +24,8 @@ export function UserStatusButton({ userId, isActive }: UserStatusButtonProps) {
   const buttonClassName: string = cn(
     "inline-flex h-8 w-24 cursor-pointer items-center justify-center rounded-lg text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
     isActive
-      ? "font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
-      : "bg-muted font-semibold text-foreground hover:bg-border"
+      ? "font-medium text-foreground hover:bg-muted"
+      : "bg-primary/10 font-semibold text-primary hover:bg-primary/20"
   );
 
   return (

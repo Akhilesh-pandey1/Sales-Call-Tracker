@@ -142,12 +142,14 @@ function AccountStatusTags({ account, isOwnAccount }: AccountStatusTagsProps) {
 
 interface AccountRowActionsProps {
   account: AccountSummary;
+  onEdit: (accountId: number) => void;
   onDelete: (accountId: number) => void;
 }
 
-function AccountRowActions({ account, onDelete }: AccountRowActionsProps) {
+function AccountRowActions({ account, onEdit, onDelete }: AccountRowActionsProps) {
   return (
     <span className="inline-flex items-center justify-end gap-1">
+      <EditAccountButton account={account} onEdit={onEdit} />
       <UserStatusButton userId={account.id} isActive={account.is_active} />
       <DeleteAccountButton
         accountId={account.id}
@@ -199,10 +201,9 @@ function DesktopAccountRow({
         {account.country}
       </TableCell>
       <TableCell className="p-4 text-right">
-        <div className="flex items-center justify-end gap-1">
-          <EditAccountButton account={account} onEdit={onEdit} />
-          {!isOwnAccount && <AccountRowActions account={account} onDelete={onDelete} />}
-        </div>
+        {!isOwnAccount && (
+          <AccountRowActions account={account} onEdit={onEdit} onDelete={onDelete} />
+        )}
       </TableCell>
     </TableRow>
   );
@@ -291,10 +292,9 @@ function AccountCard({ account, isOwnAccount, onOpen, onDelete, onEdit }: Accoun
         <span className="capitalize">
           {account.role} · {account.country}
         </span>
-        <span className="flex items-center gap-1">
-          <EditAccountButton account={account} onEdit={onEdit} />
-          {!isOwnAccount && <AccountRowActions account={account} onDelete={onDelete} />}
-        </span>
+        {!isOwnAccount && (
+          <AccountRowActions account={account} onEdit={onEdit} onDelete={onDelete} />
+        )}
       </span>
     </div>
   );

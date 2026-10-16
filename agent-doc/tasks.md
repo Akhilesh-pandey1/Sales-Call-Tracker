@@ -92,15 +92,15 @@
 
 **Blocked by:** Task 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The sidebar shows brand, MENU label, Dashboard / Leads / Accounts links, and Logout at the bottom, collapsing to an icon rail on small screens
-- [ ] Each page renders its own slim top bar via `page-header.tsx` and `shared/components/navbar.tsx` no longer exists
-- [ ] Logout still clears the saved token and shows the login page
+- [x] The sidebar shows brand, MENU label, Dashboard / Leads / Accounts links, and Logout at the bottom, collapsing to an icon rail on small screens
+- [x] Each page renders its own slim top bar via `page-header.tsx` and `shared/components/navbar.tsx` no longer exists
+- [x] Logout still clears the saved token and shows the login page
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

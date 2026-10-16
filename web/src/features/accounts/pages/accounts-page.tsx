@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { PageHeader } from "@/shared/components/page-header";
+import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { AddUserModal } from "../components/add-user-modal";
 import { AccountsErrorState } from "../components/accounts-error-state";
 import { AccountsTable } from "../components/accounts-table";
@@ -44,18 +46,21 @@ export function AccountsPage() {
     }
   };
 
+  const dateAction = (
+    <span className="text-sm text-muted-foreground">{getTodaysDateLabel()}</span>
+  );
+
   if (hasError) {
     return (
-      <div className="mx-auto w-full max-w-6xl">
+      <PageHeader title="Accounts" action={dateAction}>
         <AccountsErrorState onRetry={refetch} />
-      </div>
+      </PageHeader>
     );
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-2xl font-bold tracking-tight">Accounts</h2>
+    <PageHeader title="Accounts" action={dateAction}>
+      <div className="flex justify-end">
         <AddUserModal />
       </div>
       {isLoading && <p className="text-sm text-muted-foreground">Loading accounts…</p>}
@@ -80,6 +85,6 @@ export function AccountsPage() {
         isModalOpen={isEditModalOpen}
         onModalOpenChange={handleEditModalOpenChange}
       />
-    </div>
+    </PageHeader>
   );
 }

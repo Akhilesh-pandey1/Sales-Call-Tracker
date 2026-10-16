@@ -25,11 +25,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] `last_30_days.active_days` counts days with at least one dial, computed server-side in IST
-- [ ] A person with no calls in 30 days returns `active_days` 0 while all existing fields stay unchanged
+- [x] `last_30_days.active_days` counts days with at least one dial, computed server-side in IST
+- [x] A person with no calls in 30 days returns `active_days` 0 while all existing fields stay unchanged
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
 
 ---
 
@@ -42,12 +42,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] `waiting_by_attempts` splits the waiting pool by attempt count and `waiting` equals its sum; `scheduled`, `connected`, `stopped`, and `people` stay unchanged
-- [ ] `uploaded` counts leads whose creation time falls in today's / yesterday's IST window
-- [ ] `tackled` counts distinct leads with at least one synced call in each window — never call counts
+- [x] `waiting_by_attempts` splits the waiting pool by attempt count and `waiting` equals its sum; `scheduled`, `connected`, `stopped`, and `people` stay unchanged
+- [x] `uploaded` counts leads whose creation time falls in today's / yesterday's IST window
+- [x] `tackled` counts distinct leads with at least one synced call in each window — never call counts
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_leads.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_leads.py` (from `backend/`)
 
 ---
 
@@ -60,11 +60,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] `package.json` resolves the agreed set (react 19.3.1, vite 8.3.4, @vitejs/plugin-react 6.1.2, updated router/query/axios/radix/lucide) with npm's peer check passing
-- [ ] No source code changes are needed beyond what the upgrades require — every page still renders as before
+- [x] `package.json` resolves the agreed set (react 19.3.1, vite 8.3.4, @vitejs/plugin-react 6.1.2, updated router/query/axios/radix/lucide) with npm's peer check passing
+- [x] No source code changes are needed beyond what the upgrades require — every page still renders as before
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

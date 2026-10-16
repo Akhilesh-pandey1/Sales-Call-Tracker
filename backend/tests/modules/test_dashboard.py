@@ -776,6 +776,103 @@ def test_person_dashboard_connected_derived_from_duration(
         assert data["today"]["connected_percent"] == 50
 
 
+def test_person_dashboard_no_calls_returns_zero_active_days(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        rep: User = create_user_fixture(
+            name="rep_no_calls", role="salesperson", token="rep-no-calls-token"
+        )
+        headers: dict[str, str] = {"Authorization": "Bearer rep-no-calls-token"}
+        target_url: str = f"/api/dashboard/person/{rep.id}"
+        response: Response = client.get(target_url, headers=headers)
+        assert response.status_code == 200
+        data: dict[str, Any] = response.get_json()
+
+        assert data["name"] == "rep_no_calls"
+        assert data["last_30_days"]["active_days"] == 0
+        assert data["last_30_days"]["dials"] == 0
+        assert data["last_30_days"]["connected"] == 0
+        assert data["last_30_days"]["seconds"] == 0
+        assert data["last_30_days"]["connected_percent"] is None
+        assert data["today"]["dials"] == 0
+        assert data["yesterday"]["dials"] == 0
+        assert data["top_numbers"] == []
+
+
+def test_person_dashboard_active_days_counts_distinct_ist_days(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        rep: User = create_user_fixture(
+            name="rep_active_days", role="salesperson", token="rep-active-days-token"
+        )
+        ist_now: datetime = now_ist()
+        today_midnight_ist: datetime = ist_now.replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+
+        offset_from_midnight: timedelta = timedelta(hours=3)
+        ten_days_back: timedelta = timedelta(days=10)
+
+        today_time: datetime = (
+            today_midnight_ist + offset_from_midnight
+        ).astimezone(timezone.utc)
+        ten_days_ago_time: datetime = (
+            today_midnight_ist - ten_days_back - offset_from_midnight
+        ).astimezone(timezone.utc)
+
+        create_call_record("call-ad-1", rep.id, "+919876543201", today_time, 30)
+        create_call_record("call-ad-2", rep.id, "+919876543202", today_time, 40)
+        create_call_record("call-ad-3", rep.id, "+919876543203", ten_days_ago_time, 20)
+
+        headers: dict[str, str] = {"Authorization": "Bearer rep-active-days-token"}
+        target_url: str = f"/api/dashboard/person/{rep.id}"
+        response: Response = client.get(target_url, headers=headers)
+        assert response.status_code == 200
+        data: dict[str, Any] = response.get_json()
+
+        assert data["last_30_days"]["active_days"] == 2
+        assert data["last_30_days"]["dials"] == 3
+        assert data["last_30_days"]["seconds"] == 90
+
+
+def test_person_dashboard_active_days_respects_thirty_day_window(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        rep: User = create_user_fixture(
+            name="rep_window", role="salesperson", token="rep-window-token"
+        )
+        ist_now: datetime = now_ist()
+        today_midnight_ist: datetime = ist_now.replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+
+        oldest_in_window_time: datetime = (
+            today_midnight_ist - timedelta(days=29)
+        ).astimezone(timezone.utc)
+        outside_window_time: datetime = (
+            today_midnight_ist - timedelta(days=30)
+        ).astimezone(timezone.utc)
+
+        create_call_record(
+            "call-win-1", rep.id, "+919876543201", oldest_in_window_time, 30
+        )
+        create_call_record(
+            "call-win-2", rep.id, "+919876543202", outside_window_time, 30
+        )
+
+        headers: dict[str, str] = {"Authorization": "Bearer rep-window-token"}
+        target_url: str = f"/api/dashboard/person/{rep.id}"
+        response: Response = client.get(target_url, headers=headers)
+        assert response.status_code == 200
+        data: dict[str, Any] = response.get_json()
+
+        assert data["last_30_days"]["active_days"] == 1
+        assert data["last_30_days"]["dials"] == 1
+
+
 def test_team_dashboard_excludes_manager_calls_from_team_totals(
     app: Flask, client: FlaskClient
 ) -> None:

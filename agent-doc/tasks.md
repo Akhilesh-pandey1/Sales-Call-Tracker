@@ -74,15 +74,15 @@
 
 **Blocked by:** Task 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] No `tailwind.config.js` or `postcss.config.js` remains; the Vite plugin compiles all existing utility classes
-- [ ] The `@theme` tokens render the indigo-on-lavender look on every existing page with no component edits
-- [ ] Dialogs fade in and out — `tw-animate-css` restores the animations the old setup silently lacked
+- [x] No `tailwind.config.js` or `postcss.config.js` remains; the Vite plugin compiles all existing utility classes
+- [x] The `@theme` tokens render the indigo-on-lavender look on every existing page with no component edits
+- [x] Dialogs fade in and out — `tw-animate-css` restores the animations the old setup silently lacked
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

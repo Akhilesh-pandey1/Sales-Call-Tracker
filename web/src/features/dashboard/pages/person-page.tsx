@@ -11,6 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/shared/utils/cn";
+import { PageHeader } from "@/shared/components/page-header";
+import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { DashboardErrorState } from "../components/dashboard-error-state";
 import { TopNumbersTable } from "../components/top-numbers-table";
 import { isValidPersonId, usePersonStats } from "../hooks/use-person-stats";
@@ -19,7 +21,6 @@ import {
   convertSecondsToMinutes,
   formatConnectedPercent,
   formatCount,
-  getTodaysDateLabel,
 } from "../utils/format";
 
 interface PeriodView {
@@ -185,20 +186,26 @@ export function PersonPage() {
     refetch();
   };
 
+  const fallbackPageTitle: string = "Person";
+  const headerTitle: string = personStats?.name ?? fallbackPageTitle;
+  const dateAction = (
+    <span className="text-sm text-muted-foreground">{todaysDateLabel}</span>
+  );
+
   if (!hasValidPersonId) {
     return <Navigate to="/" replace />;
   }
 
   if (hasError) {
     return (
-      <div className="mx-auto w-full max-w-6xl">
+      <PageHeader title={headerTitle} action={dateAction}>
         <DashboardErrorState onRetry={handleRetryClick} />
-      </div>
+      </PageHeader>
     );
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-6">
+    <PageHeader title={headerTitle} action={dateAction}>
       <div>
         <Button
           variant="ghost"
@@ -211,11 +218,6 @@ export function PersonPage() {
         </Button>
       </div>
 
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h2 className="text-2xl font-bold tracking-tight">{personStats?.name}</h2>
-        <span className="text-sm text-muted-foreground">{todaysDateLabel}</span>
-      </div>
-
       {isLoading && <p className="text-sm text-muted-foreground">Loading stats…</p>}
       {personStats && (
         <>
@@ -223,6 +225,6 @@ export function PersonPage() {
           <TopNumbersTable numbers={personStats.top_numbers} />
         </>
       )}
-    </div>
+    </PageHeader>
   );
 }

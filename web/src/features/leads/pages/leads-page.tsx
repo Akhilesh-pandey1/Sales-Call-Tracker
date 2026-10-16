@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/shared/components/page-header";
 import { LeadUploadCard } from "../components/lead-upload-card";
 import { LeadPoolStats } from "../components/lead-pool-stats";
 import { LeadAgentTable } from "../components/lead-agent-table";
@@ -18,24 +19,25 @@ export function LeadsPage() {
 
   if (isError) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="w-full max-w-md rounded-lg border bg-card p-6 text-center shadow-sm">
-          <p className="text-sm text-muted-foreground">Could not load data.</p>
-          <Button variant="outline" className="mt-4" onClick={handleRetryClick}>
-            Retry
-          </Button>
+      <PageHeader title="Leads">
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <div className="w-full max-w-md rounded-lg border bg-card p-6 text-center shadow-sm">
+            <p className="text-sm text-muted-foreground">Could not load data.</p>
+            <Button variant="outline" className="mt-4" onClick={handleRetryClick}>
+              Retry
+            </Button>
+          </div>
         </div>
-      </div>
+      </PageHeader>
     );
   }
 
   if (isPending) {
     return (
-      <div className="space-y-6">
-        <h1 className="text-2xl font-bold tracking-tight">Leads</h1>
+      <PageHeader title="Leads">
         <div className="h-40 animate-pulse rounded-xl bg-muted" />
         <div className="h-64 animate-pulse rounded-xl bg-muted" />
-      </div>
+      </PageHeader>
     );
   }
 
@@ -47,11 +49,7 @@ export function LeadsPage() {
   const isPoolEmpty: boolean = totalLeadsInPool === 0;
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold tracking-tight">Leads</h1>
-        <LeadUploadCard />
-      </div>
+    <PageHeader title="Leads" action={<LeadUploadCard />}>
       <LeadPoolStats pool={leadsSummary.pool} />
       {isPoolEmpty ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed bg-background/50 px-6 py-12 text-center">
@@ -62,6 +60,6 @@ export function LeadsPage() {
         </div>
       ) : null}
       <LeadAgentTable people={leadsSummary.people} />
-    </div>
+    </PageHeader>
   );
 }

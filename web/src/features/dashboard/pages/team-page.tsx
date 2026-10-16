@@ -1,11 +1,13 @@
 import { useMemo, type ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
 import { Clock, PhoneIncoming, PhoneOutgoing } from "lucide-react";
+import { PageHeader } from "@/shared/components/page-header";
+import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { DashboardErrorState } from "../components/dashboard-error-state";
 import { TeamTable } from "../components/team-table";
 import { useTeamDashboard } from "../hooks/use-team-dashboard";
 import type { TeamPeriodStats } from "../types";
-import { convertSecondsToMinutes, getTodaysDateLabel } from "../utils/format";
+import { convertSecondsToMinutes } from "../utils/format";
 
 interface KpiCardProps {
   label: string;
@@ -54,21 +56,20 @@ export function TeamPage() {
     navigate(`/person/${personId}`);
   };
 
+  const dateAction = (
+    <span className="text-sm text-muted-foreground">{todaysDateLabel}</span>
+  );
+
   if (hasError) {
     return (
-      <div className="mx-auto w-full max-w-6xl">
+      <PageHeader title="Team Dashboard" action={dateAction}>
         <DashboardErrorState onRetry={refetch} />
-      </div>
+      </PageHeader>
     );
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-6">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h2 className="text-2xl font-bold tracking-tight">Team Dashboard</h2>
-        <span className="text-sm text-muted-foreground">{todaysDateLabel}</span>
-      </div>
-
+    <PageHeader title="Team Dashboard" action={dateAction}>
       {isLoading && <p className="text-sm text-muted-foreground">Loading dashboard…</p>}
       {teamDashboard && (
         <>
@@ -77,6 +78,6 @@ export function TeamPage() {
           <TeamTable people={teamDashboard.people} onOpenPerson={handleOpenPerson} />
         </>
       )}
-    </div>
+    </PageHeader>
   );
 }

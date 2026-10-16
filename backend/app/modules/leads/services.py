@@ -37,16 +37,18 @@ def validate_and_format_e164(raw_phone: str, country_code: str) -> str | None:
     return None
 
 
-def get_today_ist_utc_range() -> tuple[datetime, datetime]:
+def get_ist_day_utc_range(days_back: int) -> tuple[datetime, datetime]:
     current_ist: datetime = now_ist()
     midnight_today_ist: datetime = current_ist.replace(
         hour=0, minute=0, second=0, microsecond=0
     )
+    days_back_delta: timedelta = timedelta(days=days_back)
+    midnight_of_day_ist: datetime = midnight_today_ist - days_back_delta
     one_day: timedelta = timedelta(days=1)
-    midnight_tomorrow_ist: datetime = midnight_today_ist + one_day
+    midnight_of_next_day_ist: datetime = midnight_of_day_ist + one_day
     utc_zone: timezone = timezone.utc
-    start_utc: datetime = midnight_today_ist.astimezone(utc_zone)
-    end_utc: datetime = midnight_tomorrow_ist.astimezone(utc_zone)
+    start_utc: datetime = midnight_of_day_ist.astimezone(utc_zone)
+    end_utc: datetime = midnight_of_next_day_ist.astimezone(utc_zone)
     result_range: tuple[datetime, datetime] = (start_utc, end_utc)
     return result_range
 
@@ -161,27 +163,103 @@ def import_leads_csv(file_content: bytes, country_code: str) -> dict[str, Any]:
     return import_result
 
 
-def get_pool_bucket_counts() -> dict[str, int]:
+def get_waiting_by_attempt_counts() -> dict[str, int]:
+    waiting_status: str = "waiting"
+    max_waiting_attempts: int = MAX_LEAD_ATTEMPTS - 1
+    possible_attempt_counts: range = range(max_waiting_attempts + 1)
+    attempt_split: dict[str, int] = {
+        str(attempt_count): 0 for attempt_count in possible_attempt_counts
+    }
+    attempt_rows = (
+        db.session.query(Lead.attempt_count, db.func.count(Lead.id))
+        .filter(Lead.status == waiting_status, Lead.scheduled_at.is_(None))
+        .group_by(Lead.attempt_count)
+        .all()
+    )
+
+    for attempt_count, lead_count in attempt_rows:
+        attempt_key: str = str(attempt_count)
+        attempt_split[attempt_key] = lead_count
+
+    return attempt_split
+
+
+def get_pool_bucket_counts() -> dict[str, Any]:
     waiting_status: str = "waiting"
     done_status: str = "done"
     stopped_status: str = "stopped"
 
-    waiting_count: int = Lead.query.filter(
-        Lead.status == waiting_status, Lead.scheduled_at.is_(None)
-    ).count()
+    waiting_by_attempts: dict[str, int] = get_waiting_by_attempt_counts()
+    waiting_total: int = sum(waiting_by_attempts.values())
     scheduled_count: int = Lead.query.filter(
         Lead.status == waiting_status, Lead.scheduled_at.is_not(None)
     ).count()
     connected_count: int = Lead.query.filter_by(status=done_status).count()
     stopped_count: int = Lead.query.filter_by(status=stopped_status).count()
 
-    counts: dict[str, int] = {
-        "waiting": waiting_count,
+    counts: dict[str, Any] = {
+        "waiting": waiting_total,
+        "waiting_by_attempts": waiting_by_attempts,
         "scheduled": scheduled_count,
         "connected": connected_count,
         "stopped": stopped_count,
     }
     return counts
+
+
+def get_daily_ist_utc_ranges() -> dict[str, tuple[datetime, datetime]]:
+    today_days_back: int = 0
+    yesterday_days_back: int = 1
+    daily_ranges: dict[str, tuple[datetime, datetime]] = {
+        "today": get_ist_day_utc_range(today_days_back),
+        "yesterday": get_ist_day_utc_range(yesterday_days_back),
+    }
+    return daily_ranges
+
+
+def get_uploaded_day_counts() -> dict[str, int]:
+    daily_ranges: dict[str, tuple[datetime, datetime]] = get_daily_ist_utc_ranges()
+    today_range: tuple[datetime, datetime] = daily_ranges["today"]
+    yesterday_range: tuple[datetime, datetime] = daily_ranges["yesterday"]
+
+    today_count: int = Lead.query.filter(
+        Lead.created_at >= today_range[0], Lead.created_at < today_range[1]
+    ).count()
+    yesterday_count: int = Lead.query.filter(
+        Lead.created_at >= yesterday_range[0], Lead.created_at < yesterday_range[1]
+    ).count()
+
+    day_counts: dict[str, int] = {"today": today_count, "yesterday": yesterday_count}
+    return day_counts
+
+
+def get_tackled_day_counts() -> dict[str, int]:
+    daily_ranges: dict[str, tuple[datetime, datetime]] = get_daily_ist_utc_ranges()
+    today_range: tuple[datetime, datetime] = daily_ranges["today"]
+    yesterday_range: tuple[datetime, datetime] = daily_ranges["yesterday"]
+    lead_numbers_subquery = db.session.query(Lead.phone_number).scalar_subquery()
+
+    today_count: int = (
+        db.session.query(db.func.count(db.distinct(Call.phone_number)))
+        .filter(
+            Call.dialed_at >= today_range[0],
+            Call.dialed_at < today_range[1],
+            Call.phone_number.in_(lead_numbers_subquery),
+        )
+        .scalar()
+    )
+    yesterday_count: int = (
+        db.session.query(db.func.count(db.distinct(Call.phone_number)))
+        .filter(
+            Call.dialed_at >= yesterday_range[0],
+            Call.dialed_at < yesterday_range[1],
+            Call.phone_number.in_(lead_numbers_subquery),
+        )
+        .scalar()
+    )
+
+    day_counts: dict[str, int] = {"today": today_count, "yesterday": yesterday_count}
+    return day_counts
 
 
 def get_salespeople_lead_activity() -> list[dict[str, Any]]:
@@ -193,7 +271,8 @@ def get_salespeople_lead_activity() -> list[dict[str, Any]]:
         .all()
     )
 
-    today_range: tuple[datetime, datetime] = get_today_ist_utc_range()
+    today_days_back: int = 0
+    today_range: tuple[datetime, datetime] = get_ist_day_utc_range(today_days_back)
     start_utc: datetime = today_range[0]
     end_utc: datetime = today_range[1]
 
@@ -232,12 +311,16 @@ def get_salespeople_lead_activity() -> list[dict[str, Any]]:
 
 
 def get_leads_summary() -> dict[str, Any]:
-    pool_counts: dict[str, int] = get_pool_bucket_counts()
+    pool_counts: dict[str, Any] = get_pool_bucket_counts()
+    uploaded_counts: dict[str, int] = get_uploaded_day_counts()
+    tackled_counts: dict[str, int] = get_tackled_day_counts()
     salespeople_activity: list[dict[str, Any]] = get_salespeople_lead_activity()
 
     summary_result: dict[str, Any] = {
         "status": True,
         "pool": pool_counts,
+        "uploaded": uploaded_counts,
+        "tackled": tackled_counts,
         "people": salespeople_activity,
     }
     return summary_result

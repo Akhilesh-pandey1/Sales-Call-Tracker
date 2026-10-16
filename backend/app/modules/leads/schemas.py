@@ -10,6 +10,7 @@ class UploadLeadsResponse(BaseModel):
 
 class LeadPoolBucketCounts(BaseModel):
     waiting: int
+    waiting_by_attempts: dict[str, int]
     scheduled: int
     connected: int
     stopped: int
@@ -23,9 +24,16 @@ class SalespersonLeadActivity(BaseModel):
     not_connected: int
 
 
+class DayCounts(BaseModel):
+    today: int
+    yesterday: int
+
+
 class LeadsSummaryResponse(BaseModel):
     status: bool
     pool: LeadPoolBucketCounts
+    uploaded: DayCounts
+    tackled: DayCounts
     people: list[SalespersonLeadActivity]
 
 

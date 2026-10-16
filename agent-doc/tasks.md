@@ -163,15 +163,15 @@
 
 **Blocked by:** Tasks 2, 5, 6
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The header shows an initials avatar beside the person's name above a Back link
-- [ ] Each card divides the returned 30-day totals by `active_days` and shows the total as its sub-line; "26 / 30" style active-days display comes straight from the field
-- [ ] A person with zero active days shows "—" in all four cards with the no-calls message
+- [x] The header shows an initials avatar beside the person's name above a Back link
+- [x] Each card divides the returned 30-day totals by `active_days` and shows the total as its sub-line; "26 / 30" style active-days display comes straight from the field
+- [x] A person with zero active days shows "—" in all four cards with the no-calls message
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

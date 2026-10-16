@@ -42,12 +42,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] `waiting_by_attempts` splits the waiting pool by attempt count and `waiting` equals its sum; `scheduled`, `connected`, `stopped`, and `people` stay unchanged
-- [ ] `uploaded` counts leads whose creation time falls in today's / yesterday's IST window
-- [ ] `tackled` counts distinct leads with at least one synced call in each window — never call counts
+- [x] `waiting_by_attempts` splits the waiting pool by attempt count and `waiting` equals its sum; `scheduled`, `connected`, `stopped`, and `people` stay unchanged
+- [x] `uploaded` counts leads whose creation time falls in today's / yesterday's IST window
+- [x] `tackled` counts distinct leads with at least one synced call in each window — never call counts
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_leads.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_leads.py` (from `backend/`)
 
 ---
 

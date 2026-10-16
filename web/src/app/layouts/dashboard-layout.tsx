@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { LayoutDashboard, LogOut, PhoneCall, User, UserPlus } from "lucide-react";
 import { useAuth } from "@/app/providers";
 import { cn } from "@/shared/utils/cn";
@@ -23,7 +23,22 @@ function SidebarBrand() {
   );
 }
 
-function SidebarLink({ item }: { item: NavItem }) {
+function getHighlightedSectionPath(pathname: string, search: string): string | null {
+  const isPersonPage: boolean = pathname.startsWith("/person/");
+  if (!isPersonPage) {
+    return null;
+  }
+  const fromSectionPath: string | null = new URLSearchParams(search).get("from");
+  return fromSectionPath;
+}
+
+function SidebarLink({
+  item,
+  isHighlighted,
+}: {
+  item: NavItem;
+  isHighlighted: boolean;
+}) {
   const Icon = item.icon;
 
   return (
@@ -34,7 +49,7 @@ function SidebarLink({ item }: { item: NavItem }) {
       className={({ isActive }) =>
         cn(
           "flex items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors md:justify-start",
-          isActive
+          isActive || isHighlighted
             ? "bg-primary text-primary-foreground shadow-sm"
             : "text-foreground hover:bg-muted"
         )
@@ -66,12 +81,22 @@ function SidebarLogout({ onLogout }: SidebarLogoutProps) {
 
 export function DashboardLayout() {
   const { logout } = useAuth();
+  const location = useLocation();
 
   const navItems: NavItem[] = [
     { name: "Dashboard", to: "/", icon: LayoutDashboard },
     { name: "Leads", to: "/leads", icon: UserPlus },
     { name: "Accounts", to: "/accounts", icon: User },
   ];
+
+  const fromSectionPath: string | null = getHighlightedSectionPath(
+    location.pathname,
+    location.search
+  );
+  const isKnownSection: boolean = navItems.some(
+    (item: NavItem) => item.to === fromSectionPath
+  );
+  const highlightedPath: string | null = isKnownSection ? fromSectionPath : null;
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -82,7 +107,11 @@ export function DashboardLayout() {
         </span>
         <nav className="mt-2 flex flex-col gap-1 md:mt-1">
           {navItems.map((item: NavItem) => (
-            <SidebarLink key={item.to} item={item} />
+            <SidebarLink
+              key={item.to}
+              item={item}
+              isHighlighted={item.to === highlightedPath}
+            />
           ))}
         </nav>
         <div className="mt-auto">

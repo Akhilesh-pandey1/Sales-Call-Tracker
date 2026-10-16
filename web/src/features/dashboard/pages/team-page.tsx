@@ -319,7 +319,7 @@ export function TeamPage() {
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
 
   const handleOpenPerson = (personId: number): void => {
-    navigate(`/person/${personId}`);
+    navigate(`/person/${personId}?from=/`);
   };
 
   const handleSelectPeriod = (period: TeamPeriod): void => {

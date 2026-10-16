@@ -21,7 +21,7 @@ export function AccountsPage() {
   const isEditModalOpen: boolean = editedAccount !== null;
 
   const handleOpenAccount = (accountId: number): void => {
-    navigate(`/person/${accountId}`);
+    navigate(`/person/${accountId}?from=/accounts`);
   };
 
   const handleDeleteAccount = (accountId: number): void => {

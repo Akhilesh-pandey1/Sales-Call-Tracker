@@ -9,26 +9,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/shared/utils/cn";
+import { handleRowActivationKeyDown } from "@/shared/utils/row-activation";
 import { UserStatusButton } from "./user-status-button";
 import type { AccountSummary } from "../types";
-
-function handleRowActivationKeyDown(
-  event: KeyboardEvent<HTMLElement>,
-  onActivate: () => void
-): void {
-  const enterKey: string = "Enter";
-  const spaceKey: string = " ";
-  const isEventFromElementItself: boolean = event.target === event.currentTarget;
-  if (!isEventFromElementItself) {
-    return;
-  }
-  const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
-  if (!isActivationKey) {
-    return;
-  }
-  event.preventDefault();
-  onActivate();
-}
 
 interface AccountsTableProps {
   accounts: AccountSummary[];

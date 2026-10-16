@@ -12,10 +12,8 @@ import {
   markPendingCallFilled,
   type PendingCall,
 } from '@/features/tracking/db';
-import {
-  matchPendingCallsToLogEntries,
-  type MatchedPendingCall,
-} from '@/features/tracking/lib/call-log-matcher';
+import { matchPendingCallsToLogEntries } from '@/features/tracking/lib/call-log-matcher';
+import { fillMatchedPendingCalls } from '@/features/tracking/lib/pending-call-filler';
 
 const STALE_ROW_AGE_MS = 60 * 60 * 1000;
 const MAX_JANITOR_ATTEMPTS = 5;
@@ -71,14 +69,6 @@ async function loadCallLogEntriesSince(
   }
 }
 
-async function fillMatchedPendingCalls(
-  matches: MatchedPendingCall[],
-): Promise<void> {
-  for (const match of matches) {
-    await markPendingCallFilled(match.callId, match.dialedAt, match.durationSeconds);
-  }
-}
-
 async function strikeUnmatchedPendingCalls(
   stalePendingCalls: PendingCall[],
   matchedCallIds: Set<string>,
@@ -112,7 +102,7 @@ async function completeStalePendingCalls(
   const matchedCallIds = new Set(
     matches.map(match => match.callId),
   );
-  await fillMatchedPendingCalls(matches);
+  await fillMatchedPendingCalls(matches, false);
   await strikeUnmatchedPendingCalls(stalePendingCalls, matchedCallIds);
 }
 

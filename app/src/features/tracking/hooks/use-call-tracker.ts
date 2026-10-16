@@ -7,13 +7,12 @@ import CallDetection, {
 } from 'react-native-call-detection-android';
 import CallLogs from 'react-native-call-log';
 import { readStoredCountry } from '@/features/auth';
-import { getUnfilledPendingCalls, markPendingCallFilled } from '../db';
+import { getUnfilledPendingCalls } from '../db';
 import {
   matchPendingCallsToLogEntries,
   type CallLogEntry,
-  type MatchedPendingCall,
 } from '../lib/call-log-matcher';
-import { emitCallFilled } from '../sync-events';
+import { fillMatchedPendingCalls } from '../lib/pending-call-filler';
 import { findMissingPermissions } from './use-permissions';
 
 async function readRecentCallLogEntries(sinceTimeMs: number): Promise<CallLogEntry[]> {
@@ -30,13 +29,6 @@ function readOldestIntentTimeMs(intentTimesMs: number[]): number {
   }
   const oldestIntentTimeMs = Math.min(...validIntentTimesMs);
   return oldestIntentTimeMs;
-}
-
-async function fillMatchedPendingCalls(matches: MatchedPendingCall[]): Promise<void> {
-  for (const match of matches) {
-    await markPendingCallFilled(match.callId, match.dialedAt, match.durationSeconds);
-    emitCallFilled();
-  }
 }
 
 async function runCallLogMatchAttempt(): Promise<void> {
@@ -62,7 +54,7 @@ async function runCallLogMatchAttempt(): Promise<void> {
   try {
     const callLogEntries = await readRecentCallLogEntries(oldestIntentTimeMs);
     const matches = matchPendingCallsToLogEntries(unfilledPendingCalls, callLogEntries, countryCode);
-    await fillMatchedPendingCalls(matches);
+    await fillMatchedPendingCalls(matches, true);
   } catch {
     return;
   }

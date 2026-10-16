@@ -1,9 +1,9 @@
 import type { ComponentType, ReactNode } from "react";
 import { ArrowDownRight, ArrowUpRight, PhoneCall, Upload } from "lucide-react";
 import { KpiCard } from "../../dashboard";
+import { formatCount } from "@/shared/utils/format-count";
 import type { LeadsDailyCount } from "../types";
 import {
-  formatCount,
   formatPercentChangeLabel,
   getDayOverDayPercentChange,
 } from "../utils/format";

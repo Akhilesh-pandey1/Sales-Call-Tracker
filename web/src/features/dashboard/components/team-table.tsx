@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/shared/utils/cn";
+import { handleRowActivationKeyDown } from "@/shared/utils/row-activation";
 import type { TeamMemberStats, TeamPeriodStats } from "../types";
 import { convertSecondsToMinutes } from "../utils/format";
 
@@ -76,20 +77,12 @@ interface PersonRowProps {
 }
 
 function PersonRow({ person, onOpen }: PersonRowProps) {
-  const enterKey: string = "Enter";
-  const spaceKey: string = " ";
-
   const handleRowClick = (): void => {
     onOpen(person.id);
   };
 
   const handleRowKeyDown = (event: KeyboardEvent<HTMLTableRowElement>): void => {
-    const isActivationKey: boolean = event.key === enterKey || event.key === spaceKey;
-    if (!isActivationKey) {
-      return;
-    }
-    event.preventDefault();
-    onOpen(person.id);
+    handleRowActivationKeyDown(event, handleRowClick);
   };
 
   return (

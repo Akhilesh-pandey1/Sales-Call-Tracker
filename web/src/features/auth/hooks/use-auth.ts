@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useAuth, type UserData } from "@/app/providers";
-import { getApiErrorMessage } from "@/shared/api/api-error-message";
+import { getApiErrorMessage } from "@/shared/api/api-error";
 import { loginUser } from "../api/auth.api";
 import type { LoginApiResponse, LoginCredentials } from "../types";
 

@@ -11,9 +11,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/shared/utils/cn";
+import { ErrorState } from "@/shared/components/error-state";
 import { PageHeader } from "@/shared/components/page-header";
+import { formatCount } from "@/shared/utils/format-count";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
-import { DashboardErrorState } from "../components/dashboard-error-state";
 import { KpiCard } from "../components/kpi-card";
 import { TopNumbersTable } from "../components/top-numbers-table";
 import { isValidPersonId, usePersonStats } from "../hooks/use-person-stats";
@@ -27,7 +28,6 @@ import {
   formatActiveDaysOutOfPeriod,
   formatAveragePerActiveDay,
   formatConnectedPercent,
-  formatCount,
   getPersonInitials,
 } from "../utils/format";
 
@@ -318,7 +318,7 @@ export function PersonPage() {
   if (hasError) {
     return (
       <PageHeader title={headerTitle} icon={headerAvatar} action={dateAction}>
-        <DashboardErrorState onRetry={handleRetryClick} />
+        <ErrorState onRetry={handleRetryClick} />
       </PageHeader>
     );
   }

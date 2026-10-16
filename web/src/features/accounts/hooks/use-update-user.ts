@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUser } from "../api/accounts.api";
-import { getApiErrorMessage } from "@/shared/api/api-error-message";
+import { getApiErrorMessage } from "@/shared/api/api-error";
 import { ACCOUNTS_QUERY_KEY } from "./use-accounts";
 import type { UpdateUserRequest } from "../types";
 

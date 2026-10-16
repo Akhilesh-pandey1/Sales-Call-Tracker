@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 
-interface AccountsErrorStateProps {
+interface ErrorStateProps {
   onRetry: () => void;
 }
 
-export function AccountsErrorState({ onRetry }: AccountsErrorStateProps) {
+export function ErrorState({ onRetry }: ErrorStateProps) {
   return (
     <div className="flex flex-col items-center rounded-2xl border bg-card px-6 py-10 text-center shadow-sm">
       <p role="alert" className="text-sm font-medium text-destructive">

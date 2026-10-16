@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageHeader } from "@/shared/components/page-header";
+import { ErrorState } from "@/shared/components/error-state";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { AddUserModal } from "../components/add-user-modal";
-import { AccountsErrorState } from "../components/accounts-error-state";
 import { AccountsTable } from "../components/accounts-table";
 import { DeleteDialog } from "../components/delete-dialog";
 import { EditUserModal } from "../components/edit-user-modal";
@@ -53,7 +53,7 @@ export function AccountsPage() {
   if (hasError) {
     return (
       <PageHeader title="Accounts" action={dateAction}>
-        <AccountsErrorState onRetry={refetch} />
+        <ErrorState onRetry={refetch} />
       </PageHeader>
     );
   }

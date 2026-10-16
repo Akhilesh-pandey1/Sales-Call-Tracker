@@ -2,10 +2,11 @@ import { useMemo, useState, type ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
 import { Clock, Megaphone, PhoneIncoming, PhoneMissed } from "lucide-react";
 import { PageHeader } from "@/shared/components/page-header";
+import { formatCount } from "@/shared/utils/format-count";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { cn } from "@/shared/utils/cn";
 import { CallsByHourChart } from "../components/calls-by-hour-chart";
-import { DashboardErrorState } from "../components/dashboard-error-state";
+import { ErrorState } from "@/shared/components/error-state";
 import { KpiCard } from "../components/kpi-card";
 import { TeamTable } from "../components/team-table";
 import { TopPeopleList } from "../components/top-people-list";
@@ -15,7 +16,6 @@ import {
   convertSecondsToMinutes,
   formatAveragePerPersonPerDay,
   formatConnectedPercent,
-  formatCount,
   formatYesterdayComparison,
   getCountSharePercent,
 } from "../utils/format";
@@ -333,7 +333,7 @@ export function TeamPage() {
   if (hasError) {
     return (
       <PageHeader title="Team Dashboard" action={dateAction}>
-        <DashboardErrorState onRetry={refetch} />
+        <ErrorState onRetry={refetch} />
       </PageHeader>
     );
   }

@@ -1,3 +1,5 @@
+import { formatCount } from "@/shared/utils/format-count";
+
 export function convertSecondsToMinutes(totalSeconds: number): number {
   const secondsPerMinute: number = 60;
   const totalMinutes: number = Math.round(totalSeconds / secondsPerMinute);
@@ -11,12 +13,6 @@ export function formatConnectedPercent(connectedPercent: number | null): string 
   }
   const percentLabel: string = `${connectedPercent}%`;
   return percentLabel;
-}
-
-export function formatCount(count: number): string {
-  const locale: string = "en-US";
-  const formattedCount: string = count.toLocaleString(locale);
-  return formattedCount;
 }
 
 export function getCountSharePercent(count: number, dials: number): number | null {

@@ -1,7 +1,8 @@
 import { cn } from "@/shared/utils/cn";
+import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard, EmptyPeriodNote } from "./dashboard-card";
 import type { TeamTopPerson } from "../types";
-import { convertSecondsToMinutes, formatCount } from "../utils/format";
+import { convertSecondsToMinutes } from "../utils/format";
 
 interface TopPeopleListProps {
   people: TeamTopPerson[];

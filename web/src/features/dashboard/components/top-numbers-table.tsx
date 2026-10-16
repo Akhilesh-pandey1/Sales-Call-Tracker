@@ -6,8 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatCount } from "@/shared/utils/format-count";
 import type { TopCalledNumber } from "../types";
-import { convertSecondsToMinutes, formatCount } from "../utils/format";
+import { convertSecondsToMinutes } from "../utils/format";
 
 interface TopNumbersTableProps {
   numbers: TopCalledNumber[];

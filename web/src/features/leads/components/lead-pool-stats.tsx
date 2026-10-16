@@ -1,5 +1,5 @@
 import type { LeadPoolCounts, LeadWaitingAttemptCounts } from "../types";
-import { formatCount } from "../utils/format";
+import { formatCount } from "@/shared/utils/format-count";
 
 interface LeadPoolStage {
   key: string;

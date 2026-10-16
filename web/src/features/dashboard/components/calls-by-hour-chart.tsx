@@ -1,6 +1,6 @@
 import { Bar, BarChart, Cell, LabelList, ResponsiveContainer, XAxis } from "recharts";
+import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard, EmptyPeriodNote } from "./dashboard-card";
-import { formatCount } from "../utils/format";
 
 interface HourlyDialBar {
   hourLabel: string;

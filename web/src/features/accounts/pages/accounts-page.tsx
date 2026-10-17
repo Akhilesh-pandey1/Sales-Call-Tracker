@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { OfficeHoursEditor } from "@/features/settings";
 import { PageHeader } from "@/shared/components/page-header";
 import { ErrorState } from "@/shared/components/error-state";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
@@ -60,6 +61,7 @@ export function AccountsPage() {
 
   return (
     <PageHeader title="Accounts" action={dateAction}>
+      <OfficeHoursEditor />
       <div className="flex justify-end">
         <AddUserModal />
       </div>

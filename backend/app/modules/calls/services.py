@@ -6,18 +6,29 @@ from backend.app.core.utils import (
     normalize_phone_number,
     now_utc,
     parse_utc_datetime,
+    to_ist,
 )
 from backend.app.extensions import db
 from backend.app.modules.calls.models import Call
 from backend.app.modules.leads import resolve_lead_for_call
+from backend.app.modules.settings import get_or_create_office_hours_window
 
 logger: logging.Logger = logging.getLogger(__name__)
+
+
+def get_ist_start_minute_of_day(dialed_at_utc: datetime) -> int:
+    ist_start_time = to_ist(dialed_at_utc)
+    minutes_per_hour = 60
+    start_minute_of_day = ist_start_time.hour * minutes_per_hour + ist_start_time.minute
+    return start_minute_of_day
 
 
 def extract_valid_call(
     item: Any,
     default_country: str,
     cutoff_time: datetime,
+    window_start_minute: int,
+    window_end_minute: int,
     seen_call_ids: set[str],
 ) -> tuple[str, str, datetime, int] | None:
     if not isinstance(item, dict):
@@ -51,6 +62,15 @@ def extract_valid_call(
         logger.info("Discarding call %s older than cutoff", call_id)
         return None
 
+    ist_start_minute_of_day = get_ist_start_minute_of_day(dialed_at_utc)
+    outside_window = (
+        ist_start_minute_of_day < window_start_minute
+        or ist_start_minute_of_day > window_end_minute
+    )
+    if outside_window:
+        logger.warning("Discarding call %s outside office hours window", call_id)
+        return None
+
     raw_duration: Any = item.get("duration_seconds")
     zero_duration: int = 0
     if not isinstance(raw_duration, int) or isinstance(raw_duration, bool):
@@ -77,10 +97,18 @@ def sync_calls_batch(
     current_time: datetime = now_utc()
     age_limit_days: int = MAX_CALL_AGE_DAYS
     cutoff_time: datetime = current_time - timedelta(days=age_limit_days)
+    office_hours_window = get_or_create_office_hours_window()
+    window_start_minute = office_hours_window.start_minute
+    window_end_minute = office_hours_window.end_minute
 
     for item in raw_calls:
         call_data = extract_valid_call(
-            item, user_country, cutoff_time, seen_call_ids
+            item,
+            user_country,
+            cutoff_time,
+            window_start_minute,
+            window_end_minute,
+            seen_call_ids,
         )
         if call_data is None:
             continue

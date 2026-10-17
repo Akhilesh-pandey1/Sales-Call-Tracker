@@ -2,6 +2,7 @@ import { Bar, BarChart, Cell, LabelList, XAxis } from "recharts";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard, EmptyPeriodNote } from "./dashboard-card";
+import type { TeamCallsByHourBlock } from "../types";
 
 interface HourlyDialBar {
   hourLabel: string;
@@ -18,8 +19,8 @@ interface DialsTopLabelProps {
 }
 
 interface CallsByHourChartProps {
-  hourlyDials: number[];
-  showsDailyAverage: boolean;
+  callsByHour: TeamCallsByHourBlock;
+  usesDailyAverageWording: boolean;
   headingLabel: string;
   className?: string;
 }
@@ -32,52 +33,45 @@ function getTwelveHourLabel(hour: number): string {
   return hourLabel;
 }
 
-function hasAnyDials(hourlyDials: number[]): boolean {
-  return hourlyDials.some((hourTotal: number) => hourTotal > 0);
-}
-
-function getBestHourIndex(hourlyDials: number[]): number {
-  const highestDialCount: number = Math.max(...hourlyDials);
-  const bestHourIndex: number = hourlyDials.indexOf(highestDialCount);
-  return bestHourIndex;
-}
-
-function buildHourlyBars(
-  hourlyDials: number[],
-  bestHourIndex: number,
-  dailyAverageDivisor: number
-): HourlyDialBar[] {
-  const hourlyBars: HourlyDialBar[] = hourlyDials.map((hourTotal: number, hour: number) => {
-    const dials: number = Math.round(hourTotal / dailyAverageDivisor);
-    const dialsLabel: string = dials === 0 ? "" : formatCount(dials);
-    const hourlyBar: HourlyDialBar = {
-      hourLabel: getTwelveHourLabel(hour),
-      dials,
-      dialsLabel,
-      isBestHour: hour === bestHourIndex,
-    };
-    return hourlyBar;
-  });
+function buildHourlyBars(callsByHour: TeamCallsByHourBlock): HourlyDialBar[] {
+  const bestHour: number | null = callsByHour.best_hour;
+  const hourlyBars: HourlyDialBar[] = callsByHour.hours.map(
+    (hour: number, hourIndex: number) => {
+      const dialsCount: number = callsByHour.dials[hourIndex];
+      const hourlyBar: HourlyDialBar = {
+        hourLabel: getTwelveHourLabel(hour),
+        dials: dialsCount,
+        dialsLabel: dialsCount === 0 ? "" : formatCount(dialsCount),
+        isBestHour: hour === bestHour,
+      };
+      return hourlyBar;
+    }
+  );
   return hourlyBars;
 }
 
-function buildBestHourSummaryLine(bestHourBar: HourlyDialBar, showsDailyAverage: boolean): string {
-  const bestHourDialsLabel: string = formatCount(bestHourBar.dials);
-  if (showsDailyAverage) {
-    const summaryLine: string = `Best hour: ${bestHourBar.hourLabel} — ${bestHourDialsLabel} dials a day on average.`;
+function buildBestHourSummaryLine(
+  bestHourLabel: string,
+  bestHourDials: number,
+  usesDailyAverageWording: boolean
+): string {
+  const bestHourDialsLabel: string = formatCount(bestHourDials);
+  if (usesDailyAverageWording) {
+    const summaryLine: string = `Best hour: ${bestHourLabel} — ${bestHourDialsLabel} dials a day on average.`;
     return summaryLine;
   }
-  const summaryLine: string = `Best hour: ${bestHourBar.hourLabel} — ${bestHourDialsLabel} dials.`;
+  const summaryLine: string = `Best hour: ${bestHourLabel} — ${bestHourDialsLabel} dials.`;
   return summaryLine;
 }
 
 export function CallsByHourChart({
-  hourlyDials,
-  showsDailyAverage,
+  callsByHour,
+  usesDailyAverageWording,
   headingLabel,
   className,
 }: CallsByHourChartProps) {
-  if (!hasAnyDials(hourlyDials)) {
+  const bestHour: number | null = callsByHour.best_hour;
+  if (bestHour === null) {
     return (
       <DashboardCard title="Calls by hour" headingLabel={headingLabel} className={className}>
         <EmptyPeriodNote />
@@ -85,18 +79,14 @@ export function CallsByHourChart({
     );
   }
 
-  const singleDayDivisor: number = 1;
-  const thirtyDayDivisor: number = 30;
-  const dailyAverageDivisor: number = showsDailyAverage ? thirtyDayDivisor : singleDayDivisor;
-
-  const bestHourIndex: number = getBestHourIndex(hourlyDials);
-  const hourlyBars: HourlyDialBar[] = buildHourlyBars(
-    hourlyDials,
-    bestHourIndex,
-    dailyAverageDivisor
-  );
+  const bestHourIndex: number = callsByHour.hours.indexOf(bestHour);
+  const hourlyBars: HourlyDialBar[] = buildHourlyBars(callsByHour);
   const bestHourBar: HourlyDialBar = hourlyBars[bestHourIndex];
-  const bestHourSummaryLine: string = buildBestHourSummaryLine(bestHourBar, showsDailyAverage);
+  const bestHourSummaryLine: string = buildBestHourSummaryLine(
+    bestHourBar.hourLabel,
+    bestHourBar.dials,
+    usesDailyAverageWording
+  );
 
   const chartConfig: ChartConfig = {
     dials: {
@@ -121,7 +111,7 @@ export function CallsByHourChart({
     if (labelProps.x === undefined || labelProps.y === undefined || !labelProps.value) {
       return null;
     }
-    const isBestHour: boolean = labelProps.index === bestHourIndex;
+    const isBestHourLabel: boolean = labelProps.index === bestHourIndex;
     const labelX: number = Number(labelProps.x);
     const labelY: number = Number(labelProps.y) - labelGapAboveBar;
     return (
@@ -130,8 +120,8 @@ export function CallsByHourChart({
         y={labelY}
         textAnchor="middle"
         fontSize={chartLabelFontSize}
-        fontWeight={isBestHour ? 600 : 400}
-        fill={isBestHour ? bestHourLabelColor : axisLabelColor}
+        fontWeight={isBestHourLabel ? 600 : 400}
+        fill={isBestHourLabel ? bestHourLabelColor : axisLabelColor}
       >
         {labelProps.value}
       </text>

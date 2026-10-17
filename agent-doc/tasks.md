@@ -112,14 +112,14 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The editor opens showing the stored window and saves a valid change with a confirmation toast
-- [ ] Refused saves show the API messages ("End time must be after start time." / invalid format) without closing the editor
+- [x] The editor opens showing the stored window and saves a valid change with a confirmation toast
+- [x] Refused saves show the API messages ("End time must be after start time." / invalid format) without closing the editor
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

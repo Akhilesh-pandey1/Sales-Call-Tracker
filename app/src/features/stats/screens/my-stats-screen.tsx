@@ -14,12 +14,6 @@ function formatCount(count: number): string {
   return formattedCount;
 }
 
-function formatTalkMinutes(talkSeconds: number): string {
-  const secondsPerMinute = 60;
-  const talkMinutes: number = Math.round(talkSeconds / secondsPerMinute);
-  return formatCount(talkMinutes);
-}
-
 function formatConnectedPercent(connectedPercent: number | null): string {
   if (connectedPercent === null) {
     const noDataLabel = '—';
@@ -133,7 +127,7 @@ type PeriodStatsRowProps = {
 function PeriodStatsRow({ periodLabel, periodStats, showsDivider }: PeriodStatsRowProps) {
   const dialsCount: string = formatCount(periodStats.dials);
   const connectedCount: string = formatCount(periodStats.connected);
-  const talkMinutes: string = formatTalkMinutes(periodStats.seconds);
+  const talkMinutes: string = formatCount(periodStats.minutes);
   const connectedPercent: string = formatConnectedPercent(periodStats.connected_percent);
   return (
     <StatsRow showsDivider={showsDivider}>
@@ -198,7 +192,7 @@ type TopNumberRowProps = {
 };
 
 function TopNumberRow({ topNumber, showsDivider }: TopNumberRowProps) {
-  const talkMinutes: string = formatTalkMinutes(topNumber.seconds);
+  const talkMinutes: string = formatCount(topNumber.minutes);
   const callCount: string = formatCount(topNumber.calls);
   return (
     <StatsRow showsDivider={showsDivider}>

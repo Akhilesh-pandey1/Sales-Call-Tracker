@@ -82,7 +82,7 @@ The system SHALL send all filled intent rows to the server in a single batch req
 - **THEN** the server skips it silently and still answers success
 
 ### Requirement: Server-side call ingestion
-The system SHALL accept batched calls, validate each row individually, save good rows under the token owner's ID, discard bad rows with a log line, skip calls older than `MAX_CALL_AGE_DAYS` days, and still answer success so the app can clear its queue.
+The system SHALL accept batched calls, validate each row individually, save good rows under the token owner's ID, discard bad rows with a log line, skip calls older than `MAX_CALL_AGE_DAYS` days, drop calls whose IST start minute falls outside the manager's office-hours window, and still answer success so the app can clear its queue.
 
 #### Scenario: Valid batch saved
 - **GIVEN** a sync batch of valid call rows
@@ -93,6 +93,11 @@ The system SHALL accept batched calls, validate each row individually, save good
 - **GIVEN** a call dialed more than 3 days before the server's current time
 - **WHEN** the batch is processed
 - **THEN** the row is discarded with a server log entry and never counted
+
+#### Scenario: Out-of-office-hours call dropped
+- **GIVEN** a call whose IST start minute falls outside the manager's office-hours window
+- **WHEN** the batch is processed
+- **THEN** the row is discarded with a log line and success is still returned — the gate rules live in `specs/office-hours.md`
 
 #### Scenario: Malformed row in batch
 - **GIVEN** one row in the batch is missing required fields or holds invalid data

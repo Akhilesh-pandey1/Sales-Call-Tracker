@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "agent-doc/proposal.md": {
-    "mtime": 1792143716.6175787,
-    "ast_hash": "4f08851695ca70801b506006a620c604",
+    "mtime": 1792234602.814484,
+    "ast_hash": "72ec0ddcdac6675438c7e06e97ac2281",
     "semantic_hash": ""
   },
   "agent-doc/specs/authentication.md": {
@@ -335,18 +335,18 @@
     "semantic_hash": ""
   },
   "agent-doc/specs/call-tracking.md": {
-    "mtime": 1792143887.7114925,
-    "ast_hash": "b53ecf8b556a21ddbfe0b5c7e9f84ac9",
+    "mtime": 1792234518.9910781,
+    "ast_hash": "a98077b2e63c692c6a5b35f79fa90e60",
     "semantic_hash": ""
   },
   "agent-doc/specs/dashboard.md": {
-    "mtime": 1792143760.5720475,
-    "ast_hash": "97c9bd3eb4c9348f20a12b8270513d47",
+    "mtime": 1792234581.7681174,
+    "ast_hash": "bef64ee1b7a97e51987b740681f74f4f",
     "semantic_hash": ""
   },
   "agent-doc/specs/lead-management.md": {
-    "mtime": 1792143801.7155538,
-    "ast_hash": "521af3ea199b5c1840a1d617a238d6b1",
+    "mtime": 1792234523.7383487,
+    "ast_hash": "dcf03dd08f263dab56b3ea08ad1edebe",
     "semantic_hash": ""
   },
   "agent-doc/specs/user-management.md": {
@@ -355,8 +355,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792152496.142746,
-    "ast_hash": "5766d82235fdb05a98c1c55124e45bbe",
+    "mtime": 1792234974.9800694,
+    "ast_hash": "137ad6cf12a6c571c45d976f16b4d4db",
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {
@@ -1577,6 +1577,11 @@
   ".claude/skills/shadcn/assets/shadcn.png": {
     "mtime": 1792193867.5068533,
     "ast_hash": "cb56bf002d36bb860c3d320a23bd871a",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/office-hours.md": {
+    "mtime": 1792234541.3620985,
+    "ast_hash": "e31df1cc71f79ead624821a7e020c138",
     "semantic_hash": ""
   }
 }

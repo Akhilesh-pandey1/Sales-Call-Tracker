@@ -120,7 +120,7 @@ The system SHALL allow a salesperson to schedule any lead that is neither done n
 - **THEN** the request is refused
 
 ### Requirement: Lead resolution via call sync
-The system SHALL update a lead's status when a matching call is synced, matching on normalized phone number: connected finishes the lead, unconnected adds a failed attempt with a 2-hour retry lock, and the third unconnected attempt stops the lead; manual keypad calls to a lead's number resolve it the same way.
+The system SHALL update a lead's status when a matching call is synced and kept by the server, matching on normalized phone number: connected finishes the lead, unconnected adds a failed attempt with a 2-hour retry lock, and the third unconnected attempt stops the lead; manual keypad calls to a lead's number resolve it the same way.
 
 #### Scenario: Connected call finishes lead
 - **GIVEN** a synced call with duration above zero matches a lead's number
@@ -141,6 +141,11 @@ The system SHALL update a lead's status when a matching call is synced, matching
 - **GIVEN** a salesperson dialed a number manually from the keypad
 - **WHEN** the call syncs and its normalized number matches a waiting lead
 - **THEN** the lead is resolved by the same connected / unconnected rules
+
+#### Scenario: Discarded call leaves the lead unchanged
+- **GIVEN** a synced call matching a waiting lead's number whose IST start minute falls outside the office-hours window
+- **WHEN** the sync is processed
+- **THEN** the call is discarded and the lead keeps its status, attempt count, and locks — only kept calls resolve leads
 
 ### Requirement: Lead state is authoritative and server-stored
 The system SHALL store the full lead state — status, attempt count, last-attempted time, retry lock, claim, and schedule — on the server only, reading it directly from the leads table and never deriving it from the calls table.

@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "agent-doc/decisions.md": {
-    "mtime": 1792143297.6910422,
-    "ast_hash": "2610d1245cbe1c9926fdf6b2abed7a14",
+    "mtime": 1792224623.739943,
+    "ast_hash": "d83bc86d42c4ea0a8496f1b313a20abe",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/uiux/data/catalog-summary.json": {
@@ -305,23 +305,23 @@
     "semantic_hash": ""
   },
   "agent-doc/api.md": {
-    "mtime": 1792143344.1771035,
-    "ast_hash": "5d42659949bf6958ceff1ebcf5ca49ce",
+    "mtime": 1792224684.587035,
+    "ast_hash": "8f6089e57d3a8215263a0bcfeb056599",
     "semantic_hash": ""
   },
   "agent-doc/database.md": {
-    "mtime": 1791975399.4266176,
-    "ast_hash": "65801abdee028ab4f27a2e20b0064d98",
+    "mtime": 1792224634.4824882,
+    "ast_hash": "4cf9969228ed4bfa57230cdb881f4218",
     "semantic_hash": ""
   },
   "agent-doc/structure.md": {
-    "mtime": 1792143387.1783824,
-    "ast_hash": "b88c0213869446f781bde64bfaeae2b5",
+    "mtime": 1792224753.2886825,
+    "ast_hash": "0662196ec5892e577b260de8bec36718",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
-    "mtime": 1792143378.1478992,
-    "ast_hash": "2e3bf5f5a47ac91302a751cba71094b8",
+    "mtime": 1792224698.3843877,
+    "ast_hash": "8117a20b83a090f86adc7030754e842a",
     "semantic_hash": ""
   },
   "agent-doc/proposal.md": {
@@ -590,8 +590,8 @@
     "semantic_hash": ""
   },
   "web/package.json": {
-    "mtime": 1792151839.220295,
-    "ast_hash": "8c06d5df6571f55cf99bcd20f3075aca",
+    "mtime": 1792193003.2817082,
+    "ast_hash": "cead042762055d326013a73eac090304",
     "semantic_hash": ""
   },
   "web/src/app/guards/manager-guard.tsx": {
@@ -705,8 +705,8 @@
     "semantic_hash": ""
   },
   "web/vite.config.ts": {
-    "mtime": 1792147148.9489064,
-    "ast_hash": "759028c4591d86e3ad0e7fd07cd29977",
+    "mtime": 1792193777.5085392,
+    "ast_hash": "9588aa4ddda5b70f60a439d8cc7efba9",
     "semantic_hash": ""
   },
   "web/index.html": {
@@ -1400,8 +1400,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/calls-by-hour-chart.tsx": {
-    "mtime": 1792153589.2929382,
-    "ast_hash": "3bbbfaed4463cd0092095686d4a40b49",
+    "mtime": 1792197232.7333412,
+    "ast_hash": "612fe9c5fd0bed1f237265114df1c2cf",
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/dashboard-card.tsx": {
@@ -1467,6 +1467,116 @@
   "agent-doc/.cos-ledger.md": {
     "mtime": 1792153961.5391805,
     "ast_hash": "a159125773373bba48d0f85931a5eb7a",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/assets/showcase/color-pair.tsx": {
+    "mtime": 1792193867.508103,
+    "ast_hash": "deea9209282815e9639465ac4ff41a5e",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/assets/showcase/state-matrix.tsx": {
+    "mtime": 1792193867.509334,
+    "ast_hash": "2a2bb1b70c07b3f2df8f4b8df2f47a62",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/evals/evals.json": {
+    "mtime": 1792193867.512337,
+    "ast_hash": "ff2596fefcdd2ddb853a73870214164c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/scripts/showcase-coverage.mjs": {
+    "mtime": 1792193867.518311,
+    "ast_hash": "2cbb4e479b376730348e82fea973d9bf",
+    "semantic_hash": ""
+  },
+  "skills-lock.json": {
+    "mtime": 1792193902.7517092,
+    "ast_hash": "2da46036d0af4388da9633c3ca880e4a",
+    "semantic_hash": ""
+  },
+  "web/src/components/ui/chart.tsx": {
+    "mtime": 1792190117.3248408,
+    "ast_hash": "ca3357714cdb3e1a7a78ff440c6511e2",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/SKILL.md": {
+    "mtime": 1792193867.5048535,
+    "ast_hash": "4a57d8723afac2230bc1738475c3e559",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/agents/openai.yml": {
+    "mtime": 1792193867.505854,
+    "ast_hash": "a93201a1b378a868c0795edbf1ae751c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/cli.md": {
+    "mtime": 1792193867.509334,
+    "ast_hash": "06dc1478b5449f2a3c60f4bf4e043687",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/customization.md": {
+    "mtime": 1792193867.5103369,
+    "ast_hash": "f012ac15403e90fec2533ec7fc6638a6",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/design-system-page.md": {
+    "mtime": 1792193867.5103369,
+    "ast_hash": "08e7dea8cfb14593d18e3db5ca57b266",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/design-system.md": {
+    "mtime": 1792193867.5113368,
+    "ast_hash": "33bde97198b0d0a941643f25df17d31b",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/mcp.md": {
+    "mtime": 1792193867.512337,
+    "ast_hash": "aa876f97643326a64e99b86d5ac41bc5",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/registry.md": {
+    "mtime": 1792193867.5134227,
+    "ast_hash": "f7e28f2e510e8ec5847619641ddfeea4",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/rules/base-vs-radix.md": {
+    "mtime": 1792193867.5144272,
+    "ast_hash": "582481904d3c35aae4125153db97fc37",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/rules/chat.md": {
+    "mtime": 1792193867.5157523,
+    "ast_hash": "650b1871f8aea9e8f9ce486ba97e7bf5",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/rules/composition.md": {
+    "mtime": 1792193867.5162702,
+    "ast_hash": "44ec3d642cf72d48e1d370fb267b79a3",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/rules/forms.md": {
+    "mtime": 1792193867.5162702,
+    "ast_hash": "41155ed5a844952613e717a5add76606",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/rules/icons.md": {
+    "mtime": 1792193867.5173066,
+    "ast_hash": "56b5a01599f8c03c90f248c5e5e01f67",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/rules/styling.md": {
+    "mtime": 1792193867.5173066,
+    "ast_hash": "3eaa3bb2a07262feabbea63b33fd0f67",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/assets/shadcn-small.png": {
+    "mtime": 1792193867.5068533,
+    "ast_hash": "72349c6b7f303e6be598a2196391291b",
+    "semantic_hash": ""
+  },
+  ".claude/skills/shadcn/assets/shadcn.png": {
+    "mtime": 1792193867.5068533,
+    "ast_hash": "cb56bf002d36bb860c3d320a23bd871a",
     "semantic_hash": ""
   }
 }

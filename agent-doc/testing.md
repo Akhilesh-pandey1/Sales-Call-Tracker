@@ -16,19 +16,31 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - Single batch inserts multiple valid calls and associates them with the token owner's user ID.
 - Duplicate `call_id`s in subsequent batches are skipped silently without error or duplication.
 - Calls older than 3 days (`MAX_CALL_AGE_DAYS`) are discarded with a server log line.
+- A call starting 09:59 IST is discarded with a server log line; 10:00 is saved (window start inclusive).
+- A call starting 18:59 and exactly 19:00 IST are saved; 19:01 is discarded (window end inclusive).
+- After the manager updates the office hours window, the gate uses the new window on the next sync.
 - Malformed call rows are skipped while valid rows in the same batch are saved.
 - Returns `{"status": true}` on success.
 
 ### `tests/modules/test_dashboard.py`
 - All date boundaries for "today", "yesterday", and "last_30_days" match IST (Asia/Kolkata) calendar days over UTC call timestamps.
-- Active salespeople with 0 calls still appear in the team list with zeros.
-- People list is sorted by today's dials descending.
-- Deactivated salespeople are excluded from the `people` array, but their past calls remain counted in team totals — including the `last_30_days` totals.
-- `calls_by_hour` buckets dials by IST hour for each period; the 30-day block holds 30-day totals per hour.
-- `top_people` returns at most 5 active salespeople by talk seconds in the period, highest first.
-- `connected_percent` returns `null` when a period has 0 dials.
-- `active_days` counts days with at least one dial; a person with no calls in 30 days has `active_days` 0.
-- Top 5 numbers return the highest duration numbers for the last 30 days.
+- Each period object carries its own totals, computed KPIs, `calls_by_hour`, and `top_people`; the team response has no `people` array.
+- `not_connected` equals `dials - connected`; `minutes` equals `round(seconds / 60)`.
+- `connected_percent` returns `null` when a period has 0 dials, otherwise the rounded percent.
+- `avg_per_person_per_day` divides each metric by the period day count and the active salesperson count, then rounds.
+- `vs_yesterday` exists only on `today`, holds today minus yesterday in the displayed unit, and is `null` on the other two periods.
+- `calls_by_hour.hours` spans the office hours window start-to-end inclusive; `best_hour` is `null` when the period has no calls.
+- The `last_30_days` `calls_by_hour.dials` holds `round(total / 30)` per hour.
+- Calls by deactivated salespeople stay counted in every period total.
+- `avg_per_active_day` is `null` when `active_days` is 0, otherwise the rounded per-active-day averages.
+- Top 5 numbers return the highest talk-time numbers with `minutes` alongside `seconds`.
+
+### `tests/modules/test_settings.py`
+- GET returns the stored window as `start_time` / `end_time` `HH:MM` strings.
+- PUT updates the window, and the next call sync and chart immediately use the new window.
+- PUT with `end_time` not after `start_time` returns 400 `"End time must be after start time."`.
+- PUT with a malformed body or non-`HH:MM` values returns 400.
+- A salesperson token gets 403 on both GET and PUT.
 
 ### `tests/modules/test_users.py`
 - Manager creates a salesperson with unique name, password (8+ chars, upper/lower), and country code.

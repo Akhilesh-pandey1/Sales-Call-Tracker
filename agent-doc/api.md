@@ -64,6 +64,7 @@ Receives a batch of completed calls from the salesperson's mobile app.
   - Saves all valid call entries under the authenticated user's ID.
   - Silently ignores existing `call_id` values (idempotent unique key).
   - Skips and logs any call older than 3 days (`MAX_CALL_AGE_DAYS`).
+  - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped.
   - Automatically updates any matching lead in `leads`:
     - If `duration_seconds > 0` (connected): marks `status = 'done'`, clears claims and schedules.
     - If `duration_seconds == 0` (not connected): increments `attempt_count`, sets `retry_locked_until = now() + 2 hours`. If attempts reach 3 (`MAX_LEAD_ATTEMPTS`), sets `status = 'stopped'`. Clears claims and schedules.
@@ -81,7 +82,7 @@ Receives a batch of completed calls from the salesperson's mobile app.
 ## 3. Dashboards
 
 ### `GET /api/dashboard/team`
-Returns team call aggregates for today, yesterday, and the last 30 days, plus dials per hour, top people by talk time, and individual stats for all active salespeople.
+Returns team call aggregates for today, yesterday, and the last 30 days. Each period carries its own totals, computed KPIs, calls-by-hour, and top people. The frontend only formats these values for display.
 
 - **Auth**: Manager token only
 - **Response 200**:
@@ -90,56 +91,50 @@ Returns team call aggregates for today, yesterday, and the last 30 days, plus di
     "today": {
       "dials": 120,
       "connected": 64,
-      "seconds": 18600
-    },
-    "yesterday": {
-      "dials": 145,
-      "connected": 70,
-      "seconds": 21300
-    },
-    "last_30_days": {
-      "dials": 3400,
-      "connected": 1500,
-      "seconds": 530000
-    },
-    "calls_by_hour": {
-      "today": [0, 0, 0, 0, 0, 0, 0, 0, 5, 17, 32, 38, 11, 21, 33, 24, 12, 8, 4, 2, 1, 0, 0, 0],
-      "yesterday": [0, 0, 0, 0, 0, 0, 0, 0, 3, 12, 25, 30, 9, 18, 28, 20, 10, 6, 3, 1, 1, 0, 0, 0],
-      "last_30_days": [0, 0, 0, 0, 0, 0, 0, 0, 140, 510, 960, 1140, 330, 630, 990, 720, 360, 240, 120, 60, 30, 0, 0, 0]
-    },
-    "top_people": {
-      "today": [
-        { "id": 3, "name": "Ramesh", "seconds": 2280 },
-        { "id": 5, "name": "Priya", "seconds": 1740 }
-      ],
-      "yesterday": [
-        { "id": 5, "name": "Priya", "seconds": 2460 }
-      ],
-      "last_30_days": [
-        { "id": 5, "name": "Priya", "seconds": 53000 }
+      "not_connected": 56,
+      "seconds": 18600,
+      "minutes": 310,
+      "connected_percent": 53,
+      "avg_per_person_per_day": {
+        "dials": 12,
+        "connected": 6,
+        "not_connected": 6,
+        "minutes": 31
+      },
+      "vs_yesterday": {
+        "dials": -25,
+        "connected": -6,
+        "not_connected": -19,
+        "minutes": -45
+      },
+      "calls_by_hour": {
+        "hours": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+        "dials": [0, 5, 25, 38, 15, 20, 12, 3, 1, 1],
+        "best_hour": 12
+      },
+      "top_people": [
+        { "id": 3, "name": "Ramesh", "seconds": 2280, "minutes": 38 }
       ]
     },
-    "people": [
-      {
-        "id": 3,
-        "name": "Ramesh",
-        "today": { "dials": 12, "connected": 7, "seconds": 2280 },
-        "yesterday": { "dials": 15, "connected": 9, "seconds": 2460 }
-      }
-    ]
+    "yesterday": { "...": "same shape as today, with \"vs_yesterday\": null" },
+    "last_30_days": { "...": "same shape as today, with \"vs_yesterday\": null; calls_by_hour.dials holds per-day averages" }
   }
   ```
 - **Rules**:
-  - `today`, `yesterday`, and `last_30_days` totals count every call recorded in those IST windows, including calls made by currently deactivated salespeople.
-  - `calls_by_hour` holds 24 dial counts per IST hour for each period; the `last_30_days` block holds 30-day totals per hour — screens divide by 30 for the daily average.
+  - Each period object holds every number its screen shows: raw counts (`dials`, `connected`, `not_connected`, `seconds`, `minutes`) and the computed KPIs (`connected_percent`, `avg_per_person_per_day`, `vs_yesterday`).
+  - `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60)`.
+  - `connected_percent` is `round(connected / dials * 100)`, `null` when dials is 0.
+  - `avg_per_person_per_day` divides each metric by the period day count (1 or 30) and the active salesperson count, then rounds.
+  - `vs_yesterday` exists only on `today`; each value is today minus yesterday in the displayed unit (`minutes` against yesterday's `minutes`). It is `null` on the other two periods.
+  - `calls_by_hour.hours` lists the IST hours of the office hours window, start to end inclusive. `calls_by_hour.dials` holds one count per hour; for `last_30_days` it holds `round(total / 30)` per hour. `best_hour` is the hour number with the highest count, `null` when the period has no calls.
   - `top_people` holds at most 5 active salespeople by talk seconds in the period, highest first.
-  - `people` lists all active salespeople (including those with 0 calls), sorted by `today.dials` descending.
+  - Period totals count every stored call in those IST windows, including calls made by currently deactivated salespeople.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
   - `403 Forbidden`: `{"message": "This dashboard is for managers."}`
 
 ### `GET /api/dashboard/person/<id>`
-Returns call performance stats and top 5 numbers for a specific user across today, yesterday, and the last 30 days.
+Returns call performance stats, calls-by-hour, and top 5 numbers for a specific user across today, yesterday, and the last 30 days. Each period carries its own totals and computed KPIs. The frontend only formats these values for display.
 
 - **Auth**: Manager token (can view any user) OR Salesperson token (where `token.user_id == id`).
 - **Response 200**:
@@ -149,34 +144,48 @@ Returns call performance stats and top 5 numbers for a specific user across toda
     "today": {
       "dials": 12,
       "connected": 7,
+      "not_connected": 5,
       "seconds": 2280,
-      "connected_percent": 58
+      "minutes": 38,
+      "connected_percent": 58,
+      "calls_by_hour": {
+        "hours": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+        "dials": [0, 1, 2, 3, 1, 2, 1, 1, 0, 1],
+        "best_hour": 13
+      }
     },
-    "yesterday": {
-      "dials": 15,
-      "connected": 9,
-      "seconds": 2460,
-      "connected_percent": 60
-    },
+    "yesterday": { "...": "same shape as today" },
     "last_30_days": {
       "dials": 410,
       "connected": 205,
+      "not_connected": 205,
       "seconds": 61200,
+      "minutes": 1020,
       "connected_percent": 50,
-      "active_days": 26
+      "active_days": 26,
+      "avg_per_active_day": {
+        "dials": 16,
+        "connected": 8,
+        "minutes": 39
+      },
+      "calls_by_hour": { "...": "same shape; dials holds per-day averages" }
     },
     "top_numbers": [
       {
         "phone_number": "+919876543210",
         "seconds": 4320,
+        "minutes": 72,
         "calls": 14
       }
     ]
   }
   ```
 - **Rules**:
-  - `connected_percent` is `null` if dials equal 0 in that period.
-  - `active_days` counts the days with at least one dial inside the last 30 IST days; screens divide the period totals by it for per-active-day averages.
+  - `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60)`.
+  - `connected_percent` is `round(connected / dials * 100)`, `null` if dials equal 0 in that period.
+  - `active_days` counts the days with at least one dial inside the last 30 IST days.
+  - `avg_per_active_day` divides dials, connected, and exact talk minutes by `active_days`, then rounds; it is `null` when `active_days` is 0.
+  - `calls_by_hour` follows the same rules as the team endpoint: office-hours `hours`, one count per hour (per-day averages for `last_30_days`), and `best_hour` as the hour number or `null`.
   - `top_numbers` includes at most 5 phone numbers with the highest talk seconds in the last 30 days.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
@@ -402,3 +411,40 @@ Retrieves and claims the next lead for automated calling, with an optional lead 
   ```
 - **Error Responses**:
   - `400 Bad Request`: `{"message": "Scheduled time must be in the future within 30 days."}`
+
+---
+
+## 6. Office Hours Settings (Manager Only)
+
+### `GET /api/settings/office-hours`
+Returns the office hours window applied to call sync and the calls-by-hour chart.
+
+- **Auth**: Manager token
+- **Response 200**:
+  ```json
+  { "start_time": "10:00", "end_time": "19:00" }
+  ```
+- **Error Responses**:
+  - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
+  - `403 Forbidden`: `{"message": "This setting is for managers."}`
+
+### `PUT /api/settings/office-hours`
+Updates the office hours window.
+
+- **Auth**: Manager token
+- **Request Body**:
+  ```json
+  { "start_time": "10:00", "end_time": "19:00" }
+  ```
+- **Processing Logic**:
+  - Times are IST in `HH:MM` format with minute precision; the server stores them as minutes since midnight.
+  - The window applies to every day of the week.
+- **Response 200**:
+  ```json
+  { "status": true }
+  ```
+- **Error Responses**:
+  - `400 Bad Request`: `{"message": "Invalid request format: start_time and end_time required."}`
+  - `400 Bad Request`: `{"message": "End time must be after start time."}`
+  - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
+  - `403 Forbidden`: `{"message": "This setting is for managers."}`

@@ -1,4 +1,5 @@
-import { Bar, BarChart, Cell, LabelList, ResponsiveContainer, XAxis } from "recharts";
+import { Bar, BarChart, Cell, LabelList, XAxis } from "recharts";
+import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard, EmptyPeriodNote } from "./dashboard-card";
 
@@ -7,6 +8,13 @@ interface HourlyDialBar {
   dials: number;
   dialsLabel: string;
   isBestHour: boolean;
+}
+
+interface DialsTopLabelProps {
+  x?: number | string;
+  y?: number | string;
+  value?: string | number | boolean | null;
+  index?: number;
 }
 
 interface CallsByHourChartProps {
@@ -90,50 +98,75 @@ export function CallsByHourChart({
   const bestHourBar: HourlyDialBar = hourlyBars[bestHourIndex];
   const bestHourSummaryLine: string = buildBestHourSummaryLine(bestHourBar, showsDailyAverage);
 
+  const chartConfig: ChartConfig = {
+    dials: {
+      label: "Dials",
+    },
+  };
+
   const bestHourBarColor: string = "hsl(var(--primary))";
   const otherBarColor: string = "hsl(var(--primary) / 0.3)";
   const axisLabelColor: string = "hsl(var(--muted-foreground))";
+  const bestHourLabelColor: string = "hsl(var(--primary))";
 
   const chartLabelFontSize: number = 10;
   const maxBarWidth: number = 28;
   const chartTopMargin: number = 20;
+  const labelGapAboveBar: number = 6;
   const xAxisTickMargin: number = 8;
   const showTickLabelEveryNthHour: number = 2;
   const barCornerRadius: [number, number, number, number] = [4, 4, 0, 0];
 
+  const renderDialsTopLabel = (labelProps: DialsTopLabelProps) => {
+    if (labelProps.x === undefined || labelProps.y === undefined || !labelProps.value) {
+      return null;
+    }
+    const isBestHour: boolean = labelProps.index === bestHourIndex;
+    const labelX: number = Number(labelProps.x);
+    const labelY: number = Number(labelProps.y) - labelGapAboveBar;
+    return (
+      <text
+        x={labelX}
+        y={labelY}
+        textAnchor="middle"
+        fontSize={chartLabelFontSize}
+        fontWeight={isBestHour ? 600 : 400}
+        fill={isBestHour ? bestHourLabelColor : axisLabelColor}
+      >
+        {labelProps.value}
+      </text>
+    );
+  };
+
   return (
     <DashboardCard title="Calls by hour" headingLabel={headingLabel} className={className}>
-      <div className="mt-4 h-52 sm:h-64">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={hourlyBars}
-            margin={{ top: chartTopMargin, right: 0, bottom: 0, left: 0 }}
-          >
-            <XAxis
-              dataKey="hourLabel"
-              interval={showTickLabelEveryNthHour}
-              axisLine={false}
-              tickLine={false}
-              tickMargin={xAxisTickMargin}
-              tick={{ fontSize: chartLabelFontSize, fill: axisLabelColor }}
-            />
-            <Bar dataKey="dials" radius={barCornerRadius} maxBarSize={maxBarWidth}>
-              {hourlyBars.map((hourlyBar: HourlyDialBar) => (
-                <Cell
-                  key={hourlyBar.hourLabel}
-                  fill={hourlyBar.isBestHour ? bestHourBarColor : otherBarColor}
-                />
-              ))}
-            </Bar>
-            <LabelList
-              dataKey="dialsLabel"
-              position="top"
-              fontSize={chartLabelFontSize}
-              fill={axisLabelColor}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartContainer
+        config={chartConfig}
+        className="mt-4 aspect-auto h-44 sm:h-48"
+      >
+        <BarChart
+          data={hourlyBars}
+          margin={{ top: chartTopMargin, right: 0, bottom: 0, left: 0 }}
+        >
+          <XAxis
+            dataKey="hourLabel"
+            interval={showTickLabelEveryNthHour}
+            axisLine={false}
+            tickLine={false}
+            tickMargin={xAxisTickMargin}
+            tick={{ fontSize: chartLabelFontSize, fill: axisLabelColor }}
+          />
+          <Bar dataKey="dials" radius={barCornerRadius} maxBarSize={maxBarWidth}>
+            {hourlyBars.map((hourlyBar: HourlyDialBar) => (
+              <Cell
+                key={hourlyBar.hourLabel}
+                fill={hourlyBar.isBestHour ? bestHourBarColor : otherBarColor}
+              />
+            ))}
+            <LabelList dataKey="dialsLabel" position="top" content={renderDialsTopLabel} />
+          </Bar>
+        </BarChart>
+      </ChartContainer>
       <p className="mt-3 text-xs text-muted-foreground sm:text-sm">{bestHourSummaryLine}</p>
     </DashboardCard>
   );

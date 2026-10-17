@@ -125,5 +125,18 @@
 - **Decision 127:** The whole web dependency set upgrades to current stable in one install — React 19 line, Vite 8 line, and every library bump together — because the pieces pin each other (the Vite React plugin requires Vite 8, and the current UI libraries require React 19). npm's peer-range check at install is the final compatibility gate. The Tailwind v4 build removes `web/tailwind.config.js` and `web/postcss.config.js` in favor of the `@tailwindcss/vite` plugin and a CSS `@theme` block; `tw-animate-css` restores the dialog animations the old setup silently lacked.
 - **Decision 128:** The web and backend halves of the mockup-matching work ship together in one push — Render deploys the API and serves the rebuilt web from the same repo. Every API change is additive, so the old web keeps working against the new API during the deploy window. Rolling back means reverting the release commit on GitHub; Render auto-deploys the old version and the additive fields left behind are harmless.
 
+---
+
+## Round 2
+
+- **Decision 129:** All dashboard math moves to the backend — the web frontend renders only what the API returns: it adds %, +, commas, "10 AM" hour labels, and card wording, but computes no number (no percents, no averages, no deltas, no best hour, no ÷30, no seconds-to-minutes).
+- **Decision 130:** Dashboard responses use a per-period shape — each period object (today, yesterday, last_30_days) carries its own totals, calls_by_hour, and top_people, because every screen shows one period at a time.
+- **Decision 131:** The team dashboard response drops the `people` list — salesperson rows come from a future separate Team section with its own endpoint; the backend still counts active salespeople internally to compute the per-person averages.
+- **Decision 132:** Office hours is one manager-editable window stored in the database, default 10:00–19:00 IST, set from a small editor in the Accounts screen, and it applies to every day of the week — Sunday included. The window shape is start and end time only; there is no working-day rule.
+- **Decision 133:** The office-hours gate runs at call sync: a synced call is kept only when its IST start minute falls inside the window, both ends inclusive (18:59 ✓, 19:00 ✓, 19:01 ✗, 9:59 ✗, 10:00 ✓). Outside calls are discarded with a warning log like the other rejects, so no dashboard query needs an office-hours filter. The call's start time decides — not the sync moment.
+- **Decision 134:** No retroactive cleanup — calls stored before the gate keep counting in totals; the calls-by-hour chart simply has no bucket for their hours. Only newly synced calls are gated.
+- **Decision 135:** Manager and salesperson both get the calls-by-hour chart — the person dashboard response gains `calls_by_hour` per period and the person page renders the same chart component.
+- **Decision 136:** The Android app is unchanged — it keeps syncing exactly as today; the gate lives server-side, and refused calls simply never appear for the admin or the salesperson.
+
 
 

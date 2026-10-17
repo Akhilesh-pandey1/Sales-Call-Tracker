@@ -67,13 +67,13 @@ backend/
 │       ├── calls/
 │       │   ├── routes.py            # POST /api/calls/sync
 │       │   ├── schemas.py           # Sync batch schemas
-│       │   ├── services.py          # Call ingestion, duplicate skip, lead resolution
+│       │   ├── services.py          # Call ingestion, office-hours gate, duplicate skip, lead resolution
 │       │   ├── models.py            # Call SQLAlchemy database model
 │       │   └── __init__.py
 │       ├── dashboard/
 │       │   ├── routes.py            # GET /api/dashboard/team, GET /api/dashboard/person/<id>
 │       │   ├── schemas.py           # Dashboard response schemas
-│       │   ├── services.py          # IST period aggregation and top numbers calculation
+│       │   ├── services.py          # IST period aggregation, computed dashboard KPIs, and top numbers calculation
 │       │   └── __init__.py
 │       ├── users/
 │       │   ├── routes.py            # User management endpoints (create, list, update, activate, deactivate, delete)
@@ -81,20 +81,27 @@ backend/
 │       │   ├── services.py          # User CRUD and self-action guards
 │       │   ├── models.py            # User SQLAlchemy database model
 │       │   └── __init__.py
-│       └── leads/
-│           ├── routes.py            # POST /api/leads/upload, GET /api/leads/summary, POST /api/leads/next
-│           ├── schemas.py           # Lead upload, summary, and next-lead schemas
-│           ├── services.py          # Lead parsing, pool queries, claims, and scheduling
-│           ├── models.py            # Lead SQLAlchemy database model
+│       ├── leads/
+│       │   ├── routes.py            # POST /api/leads/upload, GET /api/leads/summary, POST /api/leads/next
+│       │   ├── schemas.py           # Lead upload, summary, and next-lead schemas
+│       │   ├── services.py          # Lead parsing, pool queries, claims, and scheduling
+│       │   ├── models.py            # Lead SQLAlchemy database model
+│       │   └── __init__.py
+│       └── settings/
+│           ├── routes.py            # GET /api/settings/office-hours, PUT /api/settings/office-hours
+│           ├── schemas.py           # Office hours request and response validation
+│           ├── services.py          # Office hours read, update, and window validation
+│           ├── models.py            # OfficeHours SQLAlchemy database model
 │           └── __init__.py
 ├── tests/
 │   ├── conftest.py                  # Pytest fixtures and test database setup
 │   └── modules/
 │       ├── test_auth.py             # Login and lockout tests
-│       ├── test_calls.py            # Call sync and deduplication tests
+│       ├── test_calls.py            # Call sync, office-hours gate, and deduplication tests
 │       ├── test_dashboard.py        # Team and person metrics over IST boundaries
 │       ├── test_users.py            # Account lifecycle and guard tests
-│       └── test_leads.py            # CSV upload, serving order, claims, and resolution
+│       ├── test_leads.py            # CSV upload, serving order, claims, and resolution
+│       └── test_settings.py         # Office hours read, update, and permission tests
 ├── wsgi.py                          # Gunicorn WSGI production entry point
 └── requirements.txt                 # flask, flask-sqlalchemy, gunicorn, psycopg2-binary, pytest, phonenumbers
 ```
@@ -124,8 +131,10 @@ web/
     │   │   ├── hooks/use-team-dashboard.ts
     │   │   ├── hooks/use-person-stats.ts
     │   │   ├── components/kpi-card.tsx
+    │   │   ├── components/calls-by-hour-chart.tsx
     │   │   ├── components/team-table.tsx
     │   │   ├── components/top-numbers-table.tsx
+    │   │   ├── utils/format.ts          # Display-only formatting (no calculations)
     │   │   ├── pages/team-page.tsx
     │   │   └── pages/person-page.tsx
     │   ├── accounts/

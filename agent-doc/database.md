@@ -67,6 +67,20 @@ CREATE INDEX idx_leads_status_created ON leads(status, created_at DESC);
 CREATE INDEX idx_leads_scheduled ON leads(scheduled_by, scheduled_at);
 ```
 
+### `office_hours`
+Holds the single office-hours window applied to call sync and the calls-by-hour chart. One row only.
+
+```sql
+CREATE TABLE office_hours (
+    id INTEGER PRIMARY KEY DEFAULT 1,
+    start_minute INTEGER NOT NULL DEFAULT 600,
+    end_minute INTEGER NOT NULL DEFAULT 1140
+);
+```
+
+- `start_minute` and `end_minute` are minutes since midnight IST. Defaults are 10:00 (600) to 19:00 (1140).
+- `end_minute` must be greater than `start_minute`; the server enforces this on update.
+
 ---
 
 ## 2. Android Local Phone Database (SQLite)
@@ -94,6 +108,7 @@ CREATE TABLE pending_calls (
 - **Greenfield Setup**: Tables are created automatically on startup using Flask-SQLAlchemy `db.create_all()` or initial database migration.
 - **Rollback Procedure**: To roll back the database completely, execute:
   ```sql
+  DROP TABLE IF EXISTS office_hours CASCADE;
   DROP TABLE IF EXISTS leads CASCADE;
   DROP TABLE IF EXISTS calls CASCADE;
   DROP TABLE IF EXISTS users CASCADE;

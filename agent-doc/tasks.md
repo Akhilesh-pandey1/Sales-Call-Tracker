@@ -22,15 +22,15 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Under the 10:00–19:00 window, calls starting 09:59 are dropped while 10:00, 18:59, and 19:00 are saved
-- [ ] A call starting 19:01 is dropped with a log line, and every dropped row still lets the batch answer success
-- [ ] After the manager updates the window, the next sync uses the new window
+- [x] Under the 10:00–19:00 window, calls starting 09:59 are dropped while 10:00, 18:59, and 19:00 are saved
+- [x] A call starting 19:01 is dropped with a log line, and every dropped row still lets the batch answer success
+- [x] After the manager updates the window, the next sync uses the new window
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_calls.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_calls.py` (from `backend/`)
 
 ---
 
@@ -112,14 +112,14 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The editor opens showing the stored window and saves a valid change with a confirmation toast
-- [ ] Refused saves show the API messages ("End time must be after start time." / invalid format) without closing the editor
+- [x] The editor opens showing the stored window and saves a valid change with a confirmation toast
+- [x] Refused saves show the API messages ("End time must be after start time." / invalid format) without closing the editor
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

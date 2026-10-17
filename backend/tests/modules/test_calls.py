@@ -1,5 +1,8 @@
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
+import logging
 from typing import Any
+import pytest
+from zoneinfo import ZoneInfo
 from flask import Flask, Response
 from flask.testing import FlaskClient
 from backend.app.config.base import (
@@ -8,7 +11,12 @@ from backend.app.config.base import (
     RETRY_LOCK_HOURS,
 )
 from backend.app.core.security import hash_password
-from backend.app.core.utils import normalize_phone_number, now_utc
+from backend.app.core.utils import (
+    get_ist_timezone,
+    normalize_phone_number,
+    now_ist,
+    now_utc,
+)
 from backend.app.extensions import db
 from backend.app.modules.calls.models import Call
 from backend.app.modules.leads import Lead
@@ -57,24 +65,38 @@ def create_lead_fixture(
     return lead
 
 
+def build_ist_dialed_at(day_offset_days: int, hour: int, minute: int) -> str:
+    ist_timezone: ZoneInfo = get_ist_timezone()
+    current_ist: datetime = now_ist()
+    target_day: date = (current_ist + timedelta(days=day_offset_days)).date()
+    ist_datetime: datetime = datetime(
+        target_day.year,
+        target_day.month,
+        target_day.day,
+        hour,
+        minute,
+        tzinfo=ist_timezone,
+    )
+    return ist_datetime.isoformat()
+
+
 def test_sync_valid_batch_saved(app: Flask, client: FlaskClient) -> None:
     with app.app_context():
         user: User = create_user_fixture()
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         payload: dict[str, Any] = {
             "calls": [
                 {
                     "call_id": "call-1",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 45,
                 },
                 {
                     "call_id": "call-2",
                     "phone_number": "+919876543211",
-                    "dialed_at": (current_time - timedelta(minutes=10)).isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 11, 50),
                     "duration_seconds": 0,
                 },
             ]
@@ -122,7 +144,7 @@ def test_sync_old_call_dropped(app: Flask, client: FlaskClient) -> None:
                 {
                     "call_id": "call-new",
                     "phone_number": "9876543212",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 30,
                 },
             ]
@@ -144,20 +166,194 @@ def test_sync_old_call_dropped(app: Flask, client: FlaskClient) -> None:
         assert new_call.user_id == user.id
 
 
+def test_sync_window_boundaries_inclusive(app: Flask, client: FlaskClient) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "before-window",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 9, 59),
+                    "duration_seconds": 10,
+                },
+                {
+                    "call_id": "at-window-start",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 10, 0),
+                    "duration_seconds": 10,
+                },
+                {
+                    "call_id": "before-window-end",
+                    "phone_number": "9876543212",
+                    "dialed_at": build_ist_dialed_at(0, 18, 59),
+                    "duration_seconds": 10,
+                },
+                {
+                    "call_id": "at-window-end",
+                    "phone_number": "9876543213",
+                    "dialed_at": build_ist_dialed_at(0, 19, 0),
+                    "duration_seconds": 10,
+                },
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        assert db.session.get(Call, "before-window") is None
+        assert db.session.get(Call, "at-window-start") is not None
+        assert db.session.get(Call, "before-window-end") is not None
+        assert db.session.get(Call, "at-window-end") is not None
+
+
+def test_sync_out_of_window_call_dropped_with_warning(
+    app: Flask, client: FlaskClient, caplog: pytest.LogCaptureFixture
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "after-window",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 19, 1),
+                    "duration_seconds": 30,
+                },
+                {
+                    "call_id": "inside-window",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 30,
+                },
+            ]
+        }
+
+        services_logger_name: str = "backend.app.modules.calls.services"
+        with caplog.at_level(logging.WARNING, logger=services_logger_name):
+            response: Response = client.post(
+                "/api/calls/sync", json=payload, headers=headers
+            )
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        assert db.session.get(Call, "after-window") is None
+        assert db.session.get(Call, "inside-window") is not None
+        assert "after-window" in caplog.text
+
+
+def test_sync_judges_call_own_start_time_not_sync_moment(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "yesterday-morning",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(-1, 11, 0),
+                    "duration_seconds": 15,
+                },
+                {
+                    "call_id": "yesterday-night",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(-1, 21, 0),
+                    "duration_seconds": 15,
+                },
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        assert db.session.get(Call, "yesterday-morning") is not None
+        assert db.session.get(Call, "yesterday-night") is None
+
+
+def test_sync_uses_updated_window_after_manager_change(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        manager: User = create_user_fixture(
+            name="manager1", role="manager", token="manager-token"
+        )
+        user: User = create_user_fixture()
+        manager_headers: dict[str, str] = {
+            "Authorization": f"Bearer {manager.auth_token}"
+        }
+        user_headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        new_window: dict[str, str] = {"start_time": "08:00", "end_time": "09:30"}
+        update_response: Response = client.put(
+            "/api/settings/office-hours", json=new_window, headers=manager_headers
+        )
+        expected_code: int = 200
+        assert update_response.status_code == expected_code
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "inside-new-window",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 8, 30),
+                    "duration_seconds": 10,
+                },
+                {
+                    "call_id": "outside-new-window",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 10, 30),
+                    "duration_seconds": 10,
+                },
+            ]
+        }
+
+        response: Response = client.post(
+            "/api/calls/sync", json=payload, headers=user_headers
+        )
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        assert db.session.get(Call, "inside-new-window") is not None
+        assert db.session.get(Call, "outside-new-window") is None
+
+
 def test_sync_malformed_row_skipped_while_valid_saved(
     app: Flask, client: FlaskClient
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         payload: dict[str, Any] = {
             "calls": [
                 {
                     "call_id": "",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 10,
                 },
                 {
@@ -169,14 +365,14 @@ def test_sync_malformed_row_skipped_while_valid_saved(
                 {
                     "call_id": "bad-duration",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": -5,
                 },
                 "not-a-dict",
                 {
                     "call_id": "valid-call",
                     "phone_number": "9876543213",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 60,
                 },
             ]
@@ -204,14 +400,13 @@ def test_sync_server_deduplicates_retried_rows(
     with app.app_context():
         user: User = create_user_fixture()
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         batch_one: dict[str, Any] = {
             "calls": [
                 {
                     "call_id": "duplicate-call-id",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 15,
                 }
             ]
@@ -227,19 +422,19 @@ def test_sync_server_deduplicates_retried_rows(
                 {
                     "call_id": "duplicate-call-id",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 15,
                 },
                 {
                     "call_id": "duplicate-call-id",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 15,
                 },
                 {
                     "call_id": "second-call-id",
                     "phone_number": "9876543214",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 25,
                 },
             ]
@@ -263,14 +458,13 @@ def test_phone_number_normalization_local_format(
     with app.app_context():
         user: User = create_user_fixture(country="IN")
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         payload: dict[str, Any] = {
             "calls": [
                 {
                     "call_id": "call-local",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 10,
                 }
             ]
@@ -290,14 +484,13 @@ def test_phone_number_normalization_international_format(
     with app.app_context():
         user: User = create_user_fixture(country="IN")
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         payload: dict[str, Any] = {
             "calls": [
                 {
                     "call_id": "call-us",
                     "phone_number": "+14155552671",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 20,
                 }
             ]
@@ -317,14 +510,13 @@ def test_phone_number_normalization_unparseable_stored_raw(
     with app.app_context():
         user: User = create_user_fixture(country="IN")
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         payload: dict[str, Any] = {
             "calls": [
                 {
                     "call_id": "call-raw",
                     "phone_number": "invalid-12345",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 5,
                 }
             ]
@@ -344,7 +536,6 @@ def test_lead_resolution_connected_call_finishes_lead(
     with app.app_context():
         user: User = create_user_fixture()
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         lead: Lead = create_lead_fixture(
             phone_number="+919876543210",
@@ -359,7 +550,7 @@ def test_lead_resolution_connected_call_finishes_lead(
                 {
                     "call_id": "call-finish",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 45,
                 }
             ]
@@ -399,7 +590,7 @@ def test_lead_resolution_unconnected_call_increments_and_locks(
                 {
                     "call_id": "call-unconnected",
                     "phone_number": "+919876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 0,
                 }
             ]
@@ -436,7 +627,6 @@ def test_lead_resolution_stopped_at_attempt_cap(
     with app.app_context():
         user: User = create_user_fixture()
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         starting_attempts: int = MAX_LEAD_ATTEMPTS - 1
         lead: Lead = create_lead_fixture(
@@ -450,7 +640,7 @@ def test_lead_resolution_stopped_at_attempt_cap(
                 {
                     "call_id": "call-cap",
                     "phone_number": "+919876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 0,
                 }
             ]
@@ -471,7 +661,6 @@ def test_lead_resolution_manual_keypad_call_resolves_lead(
     with app.app_context():
         user: User = create_user_fixture()
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         lead: Lead = create_lead_fixture(
             phone_number="+919876543210",
@@ -484,7 +673,7 @@ def test_lead_resolution_manual_keypad_call_resolves_lead(
                 {
                     "call_id": "call-manual-keypad",
                     "phone_number": "9876543210",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 15,
                 }
             ]
@@ -504,7 +693,6 @@ def test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_ca
     with app.app_context():
         user: User = create_user_fixture()
         headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
-        current_time: datetime = now_utc()
 
         done_lead: Lead = create_lead_fixture(
             phone_number="+919876543211",
@@ -522,13 +710,13 @@ def test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_ca
                 {
                     "call_id": "call-done-unconnected",
                     "phone_number": "+919876543211",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 0,
                 },
                 {
                     "call_id": "call-stopped-unconnected",
                     "phone_number": "+919876543212",
-                    "dialed_at": current_time.isoformat(),
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 0,
                 },
             ]

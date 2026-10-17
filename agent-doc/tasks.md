@@ -40,15 +40,15 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Each period object carries its own totals, computed KPIs, calls_by_hour, and top_people, matching the shapes and formulas in `api.md`
-- [ ] `calls_by_hour.hours` spans the office-hours window start to end inclusive, `best_hour` is the highest-count hour or null with no calls, and last_30_days dials hold per-day averages
-- [ ] The response carries no `people` array, deactivated people's calls stay counted, and top_people holds at most 5 active people with seconds and minutes
+- [x] Each period object carries its own totals, computed KPIs, calls_by_hour, and top_people, matching the shapes and formulas in `api.md`
+- [x] `calls_by_hour.hours` spans the office-hours window start to end inclusive, `best_hour` is the highest-count hour or null with no calls, and last_30_days dials hold per-day averages
+- [x] The response carries no `people` array, deactivated people's calls stay counted, and top_people holds at most 5 active people with seconds and minutes
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
 
 ---
 

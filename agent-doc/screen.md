@@ -9,7 +9,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 ### Screen 1: Login
 - Name field - the login name (the name is the login ID)
 - Password field - login password
-- Login button - signs in and opens the Team Dashboard
+- Login button - signs in and opens the Dashboard
 - Manager-only gate - a salesperson who logs in here sees one message and no data
 
 **Edge cases:**
@@ -20,26 +20,40 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 
 → Next: Screen 2 Team Dashboard
 
-### Screen 2: Team Dashboard - home after login
-- Sidebar - product name, Dashboard, Leads, Accounts links, Logout at the bottom (icon rail on mobile, labeled bar on PC)
-- Top bar - page title "Team Dashboard" and today's date
+### Screen 2: Dashboard - home after login
+- Sidebar - product name, Dashboard, Team, Leads, Accounts, Settings links, Logout at the bottom (icon rail on mobile, labeled bar on PC)
+- Top bar - page title "Dashboard" and today's date
 - Period switch - Today | Yesterday | Last 30 days; drives the KPI cards, Calls by hour, and Top 5
 - KPI cards (4) - Dials, Connected calls, Not connected, Talk minutes. Sub-line shows per-active-person per-day average; the Today card sub-line compares with yesterday instead
 - Calls by hour - dials per hour for the selected period; 30 days shows the daily average per hour; best hour highlighted
 - Top 5 by minutes - the 5 people with the most talk time in the selected period
-- Team table - one row per active salesperson: name, today dials / connected / minutes, yesterday dials / connected / minutes (not affected by the period switch)
-- Zeros included - a person with no calls still shows a row of zeros (seeing who is NOT calling is the point)
-- Sorted by today's dials, highest first
-- Tap a row - opens that person's Screen 3 Person View
-- Totals count every call on record - including deactivated people's past calls, so a total can be larger than the sum of the rows shown
+- No person rows here - per-salesperson rows live on Screen 2b Team
+- Totals count every call on record - including deactivated people's past calls
 - Numbers update on open and page refresh - no live updates
 
 **Edge cases:**
-- No calls yet at all: totals show 0 and every active person still lists with zeros
+- No calls yet at all: totals show 0 and the chart shows the "No calls in this period." note
 - Backend does not load: "Could not load data." with a Retry button
 - Login ended (signed in on another device): back to Screen 1 Login
 
 **Graph - what it means:** Calls by hour shows how team dialing is distributed throughout the working day. The manager uses it to identify peak calling windows, see when activity drops off, and schedule team meetings outside high-volume hours.
+
+→ Next: Screen 2b Team
+
+### Screen 2b: Team
+- Sidebar item "Team" opens this page
+- Top bar - clean page title "Team" (no date, no period switch)
+- Team table - one row per active salesperson: name, today dials / connected / minutes, yesterday dials / connected / minutes
+- Zeros included - a person with no calls still shows a row of zeros (seeing who is NOT calling is the point)
+- Sorted by today's dials, highest first
+- Tap a row - opens that person's Screen 3 Person View
+- On mobile the table becomes one card per person with the same numbers
+
+**Edge cases:**
+- No calls yet at all: every active person still lists with zeros
+- No salespeople created yet: an empty state prompts the manager to add people in Accounts
+- Backend does not load: "Could not load data." with a Retry button
+- Login ended: back to Screen 1 Login
 
 → Next: Screen 3 Person View
 
@@ -47,14 +61,16 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Person's name as the heading
 - KPI cards (4, last 30 days) - Active days (of 30), Avg dials, Avg connected, Avg minutes; averages per active day, not calendar day
 - Stats block - three rows (Today, Yesterday, Last 30 days), each with: Dials, Connected, Minutes, Connected %
+- Calls by hour - the same chart as the Dashboard, for this person only; its own small period switch (Today | Yesterday | Last 30 days) drives only this chart
 - Connected % - connected ÷ dials for that period; "—" means the period has no dials yet, not 0%
 - Most contacted numbers table (last 30 days) - number, minutes, calls; sorted by talk time
-- No graphs - red flags (one number with huge minutes, the same number dialed daily) are read by eye from the table
+- Red flags - one number with huge minutes, or the same number dialed daily - are read by eye from the Most contacted table
 
 **Edge cases:**
 - No dials in a period: that period's Connected % shows "—"
 - Fewer than 5 numbers in 30 days: the table lists what exists
 - No calls in the last 30 days: "No calls in the last 30 days."
+- Chart period with no calls: the chart shows "No calls in this period."
 - Backend does not load: "Could not load data." with a Retry button
 
 → Next: Screen 4 Leads
@@ -86,7 +102,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 ### Screen 5: Accounts
 - Account list - every account: name, role, country, active or inactive; deactivated included
 - Deactivated rows - greyed out, with an Activate button, so they can always be found again
-- Tap an account row - opens that person's Screen 3 Person View (deactivated people too - their call history stays reachable)
+- The list is management only - rows do not open Person View; performance lives on Screen 2b Team
 - Add person button, top right above the list - opens a dialog with the form: name, starting password, country dropdown (IN, AE, US); role is always Salesperson
 - Per-row actions - Edit (name, password, country) · Deactivate or Activate · Delete
 - The manager's own row shows no actions at all - no edit, no deactivate, no delete
@@ -98,6 +114,21 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Weak password (under 8 characters, or no uppercase or lowercase letter): "Password needs 8+ characters with an uppercase and a lowercase letter."
 - Deactivate or delete aimed at the manager's own account: refused - "You cannot do this to your own account."
 - No salespeople created yet: the list shows only the manager's own row
+
+→ Next: Screen 5b Settings (web)
+
+### Screen 5b: Settings (web)
+- Sidebar item "Settings" opens this page - manager only
+- One card - Office hours: shows the current window, for example "10:00 - 19:00 IST"
+- Edit - start time and end time fields (HH:MM) and a Save button
+- Save applies the window at once - the next call sync and every Calls-by-hour chart use it immediately
+- One window for every day of the week - Sunday included; no working-day rule
+
+**Edge cases:**
+- End time not after start time: "End time must be after start time."
+- Missing or malformed time: "Invalid request format: start_time and end_time required."
+- Backend does not load: "Could not load data." with a Retry button
+- Login ended: back to Screen 1 Login
 
 → Next: Screen 6 Login (app)
 

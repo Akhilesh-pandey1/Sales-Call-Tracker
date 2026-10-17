@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "agent-doc/decisions.md": {
-    "mtime": 1792224623.739943,
-    "ast_hash": "d83bc86d42c4ea0a8496f1b313a20abe",
+    "mtime": 1792240875.7503135,
+    "ast_hash": "cd68377e84cf1ae36532ed2e9fed63b2",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/uiux/data/catalog-summary.json": {
@@ -275,8 +275,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screen.md": {
-    "mtime": 1791983388.5039854,
-    "ast_hash": "82c62af083af1280d44336352aa0bc4a",
+    "mtime": 1792242602.7050884,
+    "ast_hash": "bef5b0153ca77bdb90e32e4540999508",
     "semantic_hash": ""
   },
   ".claude/skills/after-grill/stacks.md": {
@@ -1580,8 +1580,173 @@
     "semantic_hash": ""
   },
   "agent-doc/specs/office-hours.md": {
-    "mtime": 1792234541.3620985,
-    "ast_hash": "e31df1cc71f79ead624821a7e020c138",
+    "mtime": 1792240875.4891317,
+    "ast_hash": "ec73392057a436867e0596a2234f89bb",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/01-login--P.html": {
+    "mtime": 1791978194.8666203,
+    "ast_hash": "3d6531567c502982ce13aa58daafc45b",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/02-dashboard--P.html": {
+    "mtime": 1792241020.012184,
+    "ast_hash": "7684579557d8aeafd8233ddb38f67fa8",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/02-team--P.html": {
+    "mtime": 1792243474.933116,
+    "ast_hash": "0c73738a34e0aa5420d0a6f56b5045ee",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/02-team--empty--P.html": {
+    "mtime": 1792242225.9987435,
+    "ast_hash": "b8977aad76647aee623649c12b048acc",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-leads--P.html": {
+    "mtime": 1792242460.2702703,
+    "ast_hash": "35b72d44f5993ff3361d50f14db53893",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-leads--empty--P.html": {
+    "mtime": 1792242485.603199,
+    "ast_hash": "deeb6c207b9b43a0efa47ba0c1fe7f3c",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-leads--upload-dialog--P.html": {
+    "mtime": 1791982838.2879229,
+    "ast_hash": "c39efd038e7243e8268cdd1ad608cd42",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-leads--upload-error--P.html": {
+    "mtime": 1791982901.60184,
+    "ast_hash": "1bb127b71ddcfa4b86be75c10c8971f8",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view--P.html": {
+    "mtime": 1792242004.3514,
+    "ast_hash": "3e2551d6442da3f95f1ba2891469afb8",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view--error--P.html": {
+    "mtime": 1792242065.7633862,
+    "ast_hash": "c1445ce74a76486dd79f5abac91a3e9f",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/04-person-view--no-calls--P.html": {
+    "mtime": 1792242037.9387865,
+    "ast_hash": "19e2e3103f1d7db065ccbe7847e59f35",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--P.html": {
+    "mtime": 1792242348.213516,
+    "ast_hash": "0105d314effe917ec1774ed0bed75e06",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--add-dialog--P.html": {
+    "mtime": 1792242751.8961608,
+    "ast_hash": "6f7c1ff0d3f18c2ac74e7529e2578dd7",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--add-error--P.html": {
+    "mtime": 1792242871.307511,
+    "ast_hash": "981795f20073e2ccf27275e8dc29dc63",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-accounts--delete-dialog--P.html": {
+    "mtime": 1792242811.0273302,
+    "ast_hash": "ca905038db0f03bbc577ac6e5a7cdb1c",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-settings--P.html": {
+    "mtime": 1792242538.102626,
+    "ast_hash": "c05b572414dfe59794f74f6e941a3e60",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/05-settings--error--P.html": {
+    "mtime": 1792242584.882242,
+    "ast_hash": "43c8191a220808d93fdbca8e5889e309",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login--M.html": {
+    "mtime": 1789821973.9690013,
+    "ast_hash": "62cda51e83c25a94c9df2294f2a9683f",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login--error--M.html": {
+    "mtime": 1789821995.7778995,
+    "ast_hash": "f7c882e9d3b891e59c9529ae8c1680f2",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/06-login--locked--M.html": {
+    "mtime": 1789822006.906716,
+    "ast_hash": "35835c91d454e6b7d618a5c9dfa8ced1",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--M.html": {
+    "mtime": 1791983373.1911085,
+    "ast_hash": "84f9aa88d287ec3bfe47e9ccf783959a",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--automated--M.html": {
+    "mtime": 1791983365.7274013,
+    "ast_hash": "5ec217dca01ad5f504614a0831ad6e59",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--empty--M.html": {
+    "mtime": 1791979721.9014816,
+    "ast_hash": "9accb0abe6ed369417d4d420f8e7f4e3",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--outcome-dialog--M.html": {
+    "mtime": 1791979704.3116376,
+    "ast_hash": "955482f37a032fe64959ac6bfff42a60",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/07-dialer--permissions-off--M.html": {
+    "mtime": 1791979729.7692404,
+    "ast_hash": "8e0b601eae9844081084a2255cb688a9",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/08-my-stats--M.html": {
+    "mtime": 1791978640.5939596,
+    "ast_hash": "a732e6bb531344821fb9390c05f0621e",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/08-my-stats--offline--M.html": {
+    "mtime": 1791978664.7205174,
+    "ast_hash": "6c1a37c952c555b8f607a3713d465698",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/09-settings--M.html": {
+    "mtime": 1791978681.0422573,
+    "ast_hash": "594e2db1a2260b342fa8d9a9b40bcebd",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/09-settings--confirm-dialog--M.html": {
+    "mtime": 1791978711.9588902,
+    "ast_hash": "ab34fa8dc1518a0076edc589a1574fb3",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/AGENTS.md": {
+    "mtime": 1792044749.5189486,
+    "ast_hash": "6c2d36cb1895115b974a1ef84bee683d",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/CLAUDE.md": {
+    "mtime": 1792044749.5189486,
+    "ast_hash": "6c2d36cb1895115b974a1ef84bee683d",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/THEME.md": {
+    "mtime": 1792240895.3995473,
+    "ast_hash": "fee87a304a877f4264a92d898538f243",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/index.html": {
+    "mtime": 1792242599.529256,
+    "ast_hash": "9cc70641b3749332d4e7e858cf6bf206",
     "semantic_hash": ""
   }
 }

@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard — Apex Sales Call (v2 light)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #6366F1;
+      --color-on-primary: #000000;
+      --color-secondary: #818CF8;
+      --color-on-secondary: #0F172A;
+      --color-accent: #059669;
+      --color-on-accent: #000000;
+      --color-background: #F5F3FF;
+      --color-foreground: #1E1B4B;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #1E1B4B;
+      --color-muted: #EBEFF9;
+      --color-muted-foreground: #475569;
+      --color-border: #E0E7FF;
+      --color-destructive: #DC2626;
+      --color-on-destructive: #FFFFFF;
+      --color-ring: #6366F1;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+
+  <h1 class="sr-only">Dashboard</h1>
+
+  <!-- Sidebar: icon rail on mobile, open with labels on PC -->
+  <aside class="fixed inset-y-0 left-0 z-10 flex w-16 flex-col border-r border-[var(--color-border)] bg-[var(--color-card)] px-2 py-4 md:w-60 md:px-3" aria-label="Main navigation">
+    <div class="flex items-center gap-3 px-1.5 md:px-2">
+      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)] text-[var(--color-on-primary)]">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </span>
+      <span class="hidden text-base font-bold tracking-tight md:block">Apex Sales Call</span>
+    </div>
+
+    <p class="mt-7 mb-2 hidden px-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)] md:block">Menu</p>
+
+    <nav class="flex flex-col gap-1">
+      <a href="#" title="Dashboard" aria-current="page" class="flex cursor-pointer items-center justify-center gap-3 rounded-xl bg-[var(--color-primary)] px-3 py-2.5 text-sm font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="9" rx="1"/>
+          <rect x="14" y="3" width="7" height="5" rx="1"/>
+          <rect x="14" y="12" width="7" height="9" rx="1"/>
+          <rect x="3" y="16" width="7" height="5" rx="1"/>
+        </svg>
+        <span class="hidden md:inline">Dashboard</span>
+      </a>
+      <a href="#" title="Team" class="flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="hidden md:inline">Team</span>
+      </a>
+      <a href="#" title="Leads" class="flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <line x1="19" y1="8" x2="19" y2="14"/>
+          <line x1="22" y1="11" x2="16" y2="11"/>
+        </svg>
+        <span class="hidden md:inline">Leads</span>
+      </a>
+      <a href="#" title="Accounts" class="flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span class="hidden md:inline">Accounts</span>
+      </a>
+      <a href="#" title="Settings" class="flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span class="hidden md:inline">Settings</span>
+      </a>
+    </nav>
+
+    <a href="#" title="Log out" class="mt-auto flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-destructive)] md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-card)]">
+      <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+      <span class="hidden md:inline">Log out</span>
+    </a>
+  </aside>
+
+  <div class="pl-16 md:pl-60">
+
+    <!-- Top bar -->
+    <header class="sticky top-0 z-20 border-b border-[var(--color-border)] bg-[var(--color-card)]">
+      <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:px-6">
+        <span class="text-lg font-bold tracking-tight">Dashboard</span>
+        <span class="text-sm text-[var(--color-muted-foreground)]">Thursday, September 18</span>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-6xl px-4 pb-12 pt-6 sm:px-6">
+
+      <!-- Team performance: the switch drives the KPI cards, calls by hour, and top 5 -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h2 class="text-base font-bold tracking-tight">Team performance</h2>
+        <div class="inline-flex rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-1" role="group" aria-label="Period">
+          <button type="button" data-period="today" aria-pressed="false" class="cursor-pointer rounded-lg px-3 py-1.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Today</button>
+          <button type="button" data-period="yesterday" aria-pressed="false" class="cursor-pointer rounded-lg px-3 py-1.5 text-sm font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Yesterday</button>
+          <button type="button" data-period="days30" aria-pressed="true" class="cursor-pointer rounded-lg bg-[var(--color-primary)] px-3 py-1.5 text-sm font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">30 days</button>
+        </div>
+      </div>
+
+      <!-- KPI cards for the selected period (30 days shown) -->
+      <section aria-label="Team KPIs" class="mt-3 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Dials</span>
+            <svg class="h-6 w-6 shrink-0 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 11 18-5v12L3 14v-3z"/>
+              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+            </svg>
+          </div>
+          <div id="kpi-dials" class="mt-2 text-2xl font-bold tabular-nums tracking-tight sm:text-4xl">5,847</div>
+          <p id="kpi-dials-sub" class="mt-1 text-xs text-[var(--color-muted-foreground)]">avg 33/person/day</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Connected calls</span>
+            <svg class="h-6 w-6 shrink-0 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              <path d="m14.05 2 1.18 4.38L19.6 7.5"/>
+            </svg>
+          </div>
+          <div id="kpi-connected" class="mt-2 text-2xl font-bold tabular-nums tracking-tight text-[var(--color-accent)] sm:text-4xl">1,872</div>
+          <p id="kpi-connected-sub" class="mt-1 text-xs text-[var(--color-muted-foreground)]">32% connected · avg 10/person/day</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Not connected</span>
+            <svg class="h-6 w-6 shrink-0 text-[var(--color-destructive)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="22" y1="2" x2="16" y2="8"/>
+              <line x1="16" y1="2" x2="22" y2="8"/>
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <div id="kpi-not-connected" class="mt-2 text-2xl font-bold tabular-nums tracking-tight sm:text-4xl">3,975</div>
+          <p id="kpi-not-connected-sub" class="mt-1 text-xs text-[var(--color-muted-foreground)]">68% of dials · avg 22/person/day</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Talk minutes</span>
+            <svg class="h-6 w-6 shrink-0 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div id="kpi-minutes" class="mt-2 text-2xl font-bold tabular-nums tracking-tight sm:text-4xl">8,742</div>
+          <p id="kpi-minutes-sub" class="mt-1 text-xs text-[var(--color-muted-foreground)]">avg 49/person/day</p>
+        </div>
+      </section>
+
+      <!-- Calls by hour + Top 5 by minutes -->
+      <section class="mt-4 grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-3">
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5 lg:col-span-2">
+          <div class="flex items-center justify-between gap-3">
+            <h2 class="text-base font-bold tracking-tight">Calls by hour</h2>
+            <span id="chart-hint" class="text-xs text-[var(--color-muted-foreground)]">Avg dials per hour · 30 days (IST)</span>
+          </div>
+          <div id="hour-chart" class="mt-5 flex h-44 items-end gap-1.5 sm:gap-2.5">
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] tabular-nums text-[var(--color-muted-foreground)]">18</span>
+              <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:44%"></div>
+              <span class="text-[10px] text-[var(--color-muted-foreground)]">9 AM</span>
+            </div>
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] tabular-nums text-[var(--color-muted-foreground)]">34</span>
+              <div class="w-full rounded-t-md bg-[var(--color-secondary)]" style="height:83%"></div>
+              <span class="text-[10px] text-[var(--color-muted-foreground)]">10</span>
+            </div>
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] font-semibold tabular-nums text-[var(--color-primary)]">41</span>
+              <div class="w-full rounded-t-md bg-[var(--color-primary)]" style="height:100%"></div>
+              <span class="text-[10px] font-semibold text-[var(--color-foreground)]">11 AM</span>
+            </div>
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] tabular-nums text-[var(--color-muted-foreground)]">12</span>
+              <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:29%"></div>
+              <span class="text-[10px] text-[var(--color-muted-foreground)]">12 PM</span>
+            </div>
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] tabular-nums text-[var(--color-muted-foreground)]">22</span>
+              <div class="w-full rounded-t-md bg-[var(--color-secondary)]" style="height:54%"></div>
+              <span class="text-[10px] text-[var(--color-muted-foreground)]">1 PM</span>
+            </div>
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] tabular-nums text-[var(--color-muted-foreground)]">35</span>
+              <div class="w-full rounded-t-md bg-[var(--color-secondary)]" style="height:85%"></div>
+              <span class="text-[10px] text-[var(--color-muted-foreground)]">2 PM</span>
+            </div>
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] tabular-nums text-[var(--color-muted-foreground)]">26</span>
+              <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:63%"></div>
+              <span class="text-[10px] text-[var(--color-muted-foreground)]">3 PM</span>
+            </div>
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] tabular-nums text-[var(--color-muted-foreground)]">14</span>
+              <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:34%"></div>
+              <span class="text-[10px] text-[var(--color-muted-foreground)]">4 PM</span>
+            </div>
+            <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
+              <span class="text-[10px] tabular-nums text-[var(--color-muted-foreground)]">8</span>
+              <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:20%"></div>
+              <span class="text-[10px] text-[var(--color-muted-foreground)]">5 PM</span>
+            </div>
+          </div>
+          <p id="chart-note" class="mt-3 text-xs text-[var(--color-muted-foreground)]">Best hour: 11 AM — 38 dials a day on average. Slowest: 12 PM and after 4 PM.</p>
+        </div>
+
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5">
+          <div class="flex items-center justify-between gap-3">
+            <h2 class="text-base font-bold tracking-tight">Top 5 by minutes</h2>
+            <span id="top-five-hint" class="text-xs text-[var(--color-muted-foreground)]">Talk time · 30 days</span>
+          </div>
+          <ol id="top-five" class="mt-3">
+            <li class="flex items-center gap-3 border-b border-[var(--color-border)] py-2.5">
+              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-xs font-bold text-[var(--color-on-primary)]">1</span>
+              <span class="flex-1 text-sm font-medium">Priya Sharma</span>
+              <span class="text-sm font-bold tabular-nums">2,410 <span class="font-normal text-[var(--color-muted-foreground)]">min</span></span>
+            </li>
+            <li class="flex items-center gap-3 border-b border-[var(--color-border)] py-2.5">
+              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-muted)] text-xs font-bold text-[var(--color-muted-foreground)]">2</span>
+              <span class="flex-1 text-sm font-medium">Arjun Mehta</span>
+              <span class="text-sm font-bold tabular-nums">2,205 <span class="font-normal text-[var(--color-muted-foreground)]">min</span></span>
+            </li>
+            <li class="flex items-center gap-3 border-b border-[var(--color-border)] py-2.5">
+              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-muted)] text-xs font-bold text-[var(--color-muted-foreground)]">3</span>
+              <span class="flex-1 text-sm font-medium">Sneha Iyer</span>
+              <span class="text-sm font-bold tabular-nums">1,650 <span class="font-normal text-[var(--color-muted-foreground)]">min</span></span>
+            </li>
+            <li class="flex items-center gap-3 border-b border-[var(--color-border)] py-2.5">
+              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-muted)] text-xs font-bold text-[var(--color-muted-foreground)]">4</span>
+              <span class="flex-1 text-sm font-medium">Rahul Verma</span>
+              <span class="text-sm font-bold tabular-nums">1,230 <span class="font-normal text-[var(--color-muted-foreground)]">min</span></span>
+            </li>
+            <li class="flex items-center gap-3 py-2.5">
+              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-muted)] text-xs font-bold text-[var(--color-muted-foreground)]">5</span>
+              <span class="flex-1 text-sm font-medium">Ananya Gupta</span>
+              <span class="text-sm font-bold tabular-nums">890 <span class="font-normal text-[var(--color-muted-foreground)]">min</span></span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const periodData = {
+      today: {
+        hint: "Dials per hour · today (IST)",
+        note: "Best hour: 11 AM — 41 dials. Slowest: 12 PM and after 4 PM.",
+        kpis: {
+          dials: ["210", "Yesterday 219"],
+          connected: ["67", "32% connected · yesterday 72"],
+          notConnected: ["143", "68% of dials · yesterday 147"],
+          minutes: ["304", "Yesterday 342"],
+        },
+        hours: [18, 34, 41, 12, 22, 35, 26, 14, 8],
+        topFive: [["Priya Sharma", "96"], ["Arjun Mehta", "88"], ["Sneha Iyer", "55"], ["Rahul Verma", "41"], ["Ananya Gupta", "17"]],
+      },
+      yesterday: {
+        hint: "Dials per hour · yesterday (IST)",
+        note: "Best hour: 11 AM — 38 dials. Slowest: 9 AM and after 4 PM.",
+        kpis: {
+          dials: ["219", "avg 37/person/day"],
+          connected: ["72", "33% connected · avg 12/person/day"],
+          notConnected: ["147", "67% of dials · avg 25/person/day"],
+          minutes: ["342", "avg 57/person/day"],
+        },
+        hours: [15, 31, 38, 14, 25, 33, 29, 17, 17],
+        topFive: [["Arjun Mehta", "102"], ["Priya Sharma", "74"], ["Rahul Verma", "66"], ["Sneha Iyer", "49"], ["Ananya Gupta", "28"]],
+      },
+      days30: {
+        hint: "Avg dials per hour · 30 days (IST)",
+        note: "Best hour: 11 AM — 38 dials a day on average. Slowest: 12 PM and after 4 PM.",
+        kpis: {
+          dials: ["5,847", "avg 33/person/day"],
+          connected: ["1,872", "32% connected · avg 10/person/day"],
+          notConnected: ["3,975", "68% of dials · avg 22/person/day"],
+          minutes: ["8,742", "avg 49/person/day"],
+        },
+        hours: [17, 32, 38, 11, 21, 33, 24, 12, 7],
+        topFive: [["Priya Sharma", "2,410"], ["Arjun Mehta", "2,205"], ["Sneha Iyer", "1,650"], ["Rahul Verma", "1,230"], ["Ananya Gupta", "890"]],
+      },
+    };
+
+    const hourLabels = ["9 AM", "10", "11", "12 PM", "1 PM", "2", "3", "4", "5"];
+    const chart = document.getElementById("hour-chart");
+    const chartHint = document.getElementById("chart-hint");
+    const chartNote = document.getElementById("chart-note");
+    const topFiveList = document.getElementById("top-five");
+    const topFiveHint = document.getElementById("top-five-hint");
+    const switchButtons = document.querySelectorAll("[data-period]");
+
+    function renderChart(hours) {
+      const peak = Math.max.apply(null, hours);
+      chart.textContent = "";
+      hours.forEach(function (value, index) {
+        const isPeak = value === peak;
+        const column = document.createElement("div");
+        column.className = "flex h-full flex-1 flex-col items-center justify-end gap-1.5";
+        const valueLabel = document.createElement("span");
+        valueLabel.className = "text-[10px] tabular-nums " + (isPeak ? "font-semibold text-[var(--color-primary)]" : "text-[var(--color-muted-foreground)]");
+        valueLabel.textContent = value;
+        const bar = document.createElement("div");
+        bar.className = "w-full rounded-t-md " + (isPeak ? "bg-[var(--color-primary)]" : value >= peak / 2 ? "bg-[var(--color-secondary)]" : "bg-[var(--color-muted)]");
+        bar.style.height = Math.round((value / peak) * 100) + "%";
+        const hourLabel = document.createElement("span");
+        hourLabel.className = "text-[10px] " + (isPeak ? "font-semibold text-[var(--color-foreground)]" : "text-[var(--color-muted-foreground)]");
+        hourLabel.textContent = hourLabels[index];
+        column.appendChild(valueLabel);
+        column.appendChild(bar);
+        column.appendChild(hourLabel);
+        chart.appendChild(column);
+      });
+    }
+
+    function renderTopFive(entries) {
+      topFiveList.textContent = "";
+      entries.forEach(function (entry, index) {
+        const row = document.createElement("li");
+        row.className = "flex items-center gap-3 " + (index < entries.length - 1 ? "border-b border-[var(--color-border)] " : "") + "py-2.5";
+        const badge = document.createElement("span");
+        badge.className = "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold " + (index === 0 ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]" : "bg-[var(--color-muted)] text-[var(--color-muted-foreground)]");
+        badge.textContent = index + 1;
+        const name = document.createElement("span");
+        name.className = "flex-1 text-sm font-medium";
+        name.textContent = entry[0];
+        const minutes = document.createElement("span");
+        minutes.className = "text-sm font-bold tabular-nums";
+        minutes.textContent = entry[1];
+        const unit = document.createElement("span");
+        unit.className = "font-normal text-[var(--color-muted-foreground)]";
+        unit.textContent = " min";
+        minutes.appendChild(unit);
+        row.appendChild(badge);
+        row.appendChild(name);
+        row.appendChild(minutes);
+        topFiveList.appendChild(row);
+      });
+    }
+
+    function renderPeriod(period) {
+      const data = periodData[period];
+      document.getElementById("kpi-dials").textContent = data.kpis.dials[0];
+      document.getElementById("kpi-dials-sub").textContent = data.kpis.dials[1];
+      document.getElementById("kpi-connected").textContent = data.kpis.connected[0];
+      document.getElementById("kpi-connected-sub").textContent = data.kpis.connected[1];
+      document.getElementById("kpi-not-connected").textContent = data.kpis.notConnected[0];
+      document.getElementById("kpi-not-connected-sub").textContent = data.kpis.notConnected[1];
+      document.getElementById("kpi-minutes").textContent = data.kpis.minutes[0];
+      document.getElementById("kpi-minutes-sub").textContent = data.kpis.minutes[1];
+      chartHint.textContent = data.hint;
+      chartNote.textContent = data.note;
+      renderChart(data.hours);
+      topFiveHint.textContent = "Talk time · " + (period === "days30" ? "30 days" : period);
+      renderTopFive(data.topFive);
+    }
+
+    function handleSwitchClick(event) {
+      const clickedButton = event.currentTarget;
+      switchButtons.forEach(function (button) {
+        const active = button === clickedButton;
+        button.classList.toggle("bg-[var(--color-primary)]", active);
+        button.classList.toggle("text-[var(--color-on-primary)]", active);
+        button.classList.toggle("font-semibold", active);
+        button.classList.toggle("hover:bg-[var(--color-secondary)]", active);
+        button.classList.toggle("text-[var(--color-muted-foreground)]", !active);
+        button.classList.toggle("hover:text-[var(--color-foreground)]", !active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      renderPeriod(clickedButton.dataset.period);
+    }
+
+    switchButtons.forEach(function (button) {
+      button.addEventListener("click", handleSwitchClick);
+    });
+
+    renderPeriod("days30");
+  </script>
+</body>
+</html>

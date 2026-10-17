@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings — Apex Sales Call</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #6366F1;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #818CF8;
+      --color-on-secondary: #0F172A;
+      --color-accent: #059669;
+      --color-on-accent: #FFFFFF;
+      --color-background: #F5F3FF;
+      --color-foreground: #1E1B4B;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #1E1B4B;
+      --color-muted: #EBEFF9;
+      --color-muted-foreground: #475569;
+      --color-border: #E0E7FF;
+      --color-destructive: #DC2626;
+      --color-on-destructive: #FFFFFF;
+      --color-ring: #6366F1;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+
+  <div class="mx-auto flex min-h-screen w-full max-w-md flex-col">
+
+    <!-- Header: opened from Gear icon on My Stats, includes Back button -->
+    <header class="sticky top-0 z-20 border-b border-[var(--color-border)] bg-[var(--color-card)]">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <button type="button" title="Back" class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl text-[var(--color-muted-foreground)] transition-colors hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+        </button>
+        <h1 class="text-lg font-bold tracking-tight">Settings</h1>
+      </div>
+    </header>
+
+    <main class="flex flex-1 flex-col px-5 pb-6 pt-4">
+      <div class="my-auto">
+
+        <!-- The one setting: wipes only the unsent calls on this phone; server numbers stay untouched -->
+        <p class="px-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Local data</p>
+        <button type="button" class="mt-2 flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 text-left shadow-sm transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-50 text-[var(--color-destructive)]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 6h18"/>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+              <line x1="10" y1="11" x2="10" y2="17"/>
+              <line x1="14" y1="11" x2="14" y2="17"/>
+            </svg>
+          </span>
+          <span class="flex-1">
+            <span class="block text-base font-bold">Clear local data</span>
+            <span class="mt-0.5 block text-xs text-[var(--color-muted-foreground)]">Deletes only the calls on this phone that haven't reached the server yet.</span>
+          </span>
+          <svg class="h-5 w-5 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+
+      </div>
+    </main>
+
+    <!-- Bottom tab bar: 2 tabs - Dialer | My Stats -->
+    <nav class="sticky bottom-0 z-20 border-t border-[var(--color-border)] bg-[var(--color-card)]" aria-label="App tabs">
+      <div class="grid grid-cols-2">
+        <a href="#" class="flex cursor-pointer flex-col items-center gap-1 py-2.5 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)]">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Dialer
+        </a>
+        <a href="#" class="flex cursor-pointer flex-col items-center gap-1 py-2.5 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)]">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/>
+            <path d="M18 17V9"/>
+            <path d="M13 17V5"/>
+            <path d="M8 17v-3"/>
+          </svg>
+          My Stats
+        </a>
+      </div>
+    </nav>
+
+  </div>
+
+</body>
+</html>

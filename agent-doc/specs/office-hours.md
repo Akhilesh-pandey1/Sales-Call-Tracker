@@ -5,7 +5,7 @@ Keeps one manager-editable office-hours window that decides which synced calls c
 ## Requirements
 
 ### Requirement: Single office-hours window
-The system SHALL store exactly one office-hours window (start and end time only) in the database, default 10:00–19:00 IST, apply it to every day of the week with no working-day rule, and let the manager edit it from a small editor in the Accounts screen.
+The system SHALL store exactly one office-hours window (start and end time only) in the database, default 10:00–19:00 IST, apply it to every day of the week with no working-day rule, and let the manager edit it from a small editor in the manager Settings screen.
 
 #### Scenario: Default window on a fresh system
 - **GIVEN** a fresh database
@@ -31,7 +31,7 @@ The system SHALL store exactly one office-hours window (start and end time only)
 The system SHALL accept a window update only when it carries both a start and an end time in HH:MM with the end after the start, storing them as minutes since midnight IST, and the saved window SHALL apply to the next call sync and chart immediately.
 
 #### Scenario: Valid update applies immediately
-- **GIVEN** the manager submits 09:30–18:00 from the Accounts-screen editor
+- **GIVEN** the manager submits 09:30–18:00 from the Settings-screen editor
 - **WHEN** the update is saved
 - **THEN** the next call sync and the chart use 09:30–18:00 at once
 

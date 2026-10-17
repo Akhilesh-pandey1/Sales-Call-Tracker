@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dialer — Automated Calling (Screen 2: Outcome Pop-up) — Apex Sales Call</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #6366F1;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #818CF8;
+      --color-on-secondary: #0F172A;
+      --color-accent: #059669;
+      --color-on-accent: #FFFFFF;
+      --color-background: #F5F3FF;
+      --color-foreground: #1E1B4B;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #1E1B4B;
+      --color-muted: #EBEFF9;
+      --color-muted-foreground: #475569;
+      --color-border: #E0E7FF;
+      --color-destructive: #DC2626;
+      --color-on-destructive: #FFFFFF;
+      --color-ring: #6366F1;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+
+  <div class="mx-auto flex min-h-screen w-full max-w-md flex-col relative">
+
+    <!-- Header: Compact & Sleek Sub-Tab Switch -->
+    <header class="sticky top-0 z-20 flex items-center justify-center border-b border-[var(--color-border)] bg-[var(--color-card)] py-2 px-4 shadow-xs opacity-50">
+      <div class="inline-flex items-center rounded-full bg-[var(--color-muted)] p-0.5 border border-[var(--color-border)] text-xs font-semibold">
+        <span class="rounded-full px-4 py-1 text-xs text-[var(--color-muted-foreground)]">Keypad</span>
+        <span class="rounded-full px-4 py-1 text-xs bg-[var(--color-primary)] text-white shadow-xs">Automated</span>
+      </div>
+    </header>
+
+    <!-- Background Calling Card (dimmed behind modal) -->
+    <main class="flex flex-1 flex-col px-5 pb-4 pt-2 opacity-50">
+      <div class="my-auto py-8 text-center">
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-primary)] text-white shadow-sm">
+          <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <p class="mt-4 text-2xl font-extrabold tabular-nums">+91 98765 43210</p>
+      </div>
+    </main>
+
+    <!-- SCREEN 2: POST-CALL OUTCOME POP-UP MODAL (User Requested) -->
+    <div class="absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
+      <div class="w-full max-w-sm rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
+        
+        <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+          <div>
+            <h3 class="text-base font-bold tracking-tight">Call Outcome</h3>
+            <p class="text-xs text-[var(--color-muted-foreground)] tabular-nums">+91 98765 43210 (Attempt 1 of 3)</p>
+          </div>
+          <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
+        </div>
+
+        <!-- 3 Required Options: Connected | Did not connect | Schedule -->
+        <div class="mt-4 space-y-2.5">
+          <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Select Call Result</p>
+          
+          <!-- Option 1: Connected -->
+          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-[var(--color-accent)] has-checked:bg-emerald-50/50">
+            <div class="flex items-center gap-3">
+              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-100 text-[var(--color-accent)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-[var(--color-foreground)]">Connected</p>
+                <p class="text-[11px] text-[var(--color-muted-foreground)]">Spoke with client / Lead completed</p>
+              </div>
+            </div>
+            <input type="radio" name="call-outcome" value="connected" checked class="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-accent)]">
+          </label>
+
+          <!-- Option 2: Did not connect -->
+          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-red-400 has-checked:bg-red-50/50">
+            <div class="flex items-center gap-3">
+              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-red-100 text-[var(--color-destructive)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-[var(--color-foreground)]">Did not connect</p>
+                <p class="text-[11px] text-[var(--color-muted-foreground)]">No answer, busy, or unreachable</p>
+              </div>
+            </div>
+            <input type="radio" name="call-outcome" value="not_connected" class="h-4 w-4 text-[var(--color-destructive)] focus:ring-[var(--color-destructive)]">
+          </label>
+
+          <!-- Option 3: Schedule -->
+          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/50">
+            <div class="flex items-center gap-3">
+              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-100 text-[var(--color-primary)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-[var(--color-foreground)]">Schedule</p>
+                <p class="text-[11px] text-[var(--color-muted-foreground)]">Reserve callback date & time</p>
+              </div>
+            </div>
+            <input type="radio" name="call-outcome" value="schedule" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+          </label>
+        </div>
+
+        <!-- Next Call Checkbox: check or uncheck whether to do the next call or pause -->
+        <div class="mt-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-3">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="auto-next-checkbox" checked class="h-4 w-4 rounded text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            <span class="text-xs font-bold text-[var(--color-foreground)]">Auto-dial next lead immediately</span>
+          </label>
+          <p class="mt-1 pl-7 text-[10px] text-[var(--color-muted-foreground)]">Uncheck to pause and review before placing next call.</p>
+        </div>
+
+        <!-- Action Button -->
+        <div class="mt-5">
+          <button type="button" class="w-full cursor-pointer rounded-xl bg-[var(--color-primary)] py-3 text-xs font-bold text-white shadow-xs transition-colors hover:bg-[var(--color-secondary)] text-center">
+            Save & Continue →
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom tab bar -->
+    <nav class="sticky bottom-0 z-20 border-t border-[var(--color-border)] bg-[var(--color-card)] opacity-50" aria-label="App tabs">
+      <div class="grid grid-cols-2">
+        <div class="flex flex-col items-center gap-1 py-2 text-xs font-semibold text-[var(--color-primary)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Dialer
+        </div>
+        <div class="flex flex-col items-center gap-1 py-2 text-xs font-medium text-[var(--color-muted-foreground)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/>
+            <path d="M18 17V9"/>
+            <path d="M13 17V5"/>
+            <path d="M8 17v-3"/>
+          </svg>
+          My Stats
+        </div>
+      </div>
+    </nav>
+
+  </div>
+
+</body>
+</html>

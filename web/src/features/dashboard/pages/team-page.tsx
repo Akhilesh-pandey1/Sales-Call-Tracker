@@ -1,5 +1,4 @@
 import { useMemo, useState, type ComponentType } from "react";
-import { useNavigate } from "react-router-dom";
 import { Clock, Megaphone, PhoneIncoming, PhoneMissed } from "lucide-react";
 import { PageHeader } from "@/shared/components/page-header";
 import { formatCount } from "@/shared/utils/format-count";
@@ -8,17 +7,19 @@ import { cn } from "@/shared/utils/cn";
 import { CallsByHourChart } from "../components/calls-by-hour-chart";
 import { ErrorState } from "@/shared/components/error-state";
 import { KpiCard } from "../components/kpi-card";
-import { TeamTable } from "../components/team-table";
 import { TopPeopleList } from "../components/top-people-list";
 import { useTeamDashboard } from "../hooks/use-team-dashboard";
-import type { TeamDashboard, TeamPeriod, TeamPeriodStats, TeamTopPerson } from "../types";
 import {
-  convertSecondsToMinutes,
-  formatAveragePerPersonPerDay,
+  formatAveragePerPersonPerDayLabel,
   formatConnectedPercent,
-  formatYesterdayComparison,
-  getCountSharePercent,
+  formatYesterdayDeltaLabel,
 } from "../utils/format";
+import type {
+  TeamAveragePerPersonPerDay,
+  TeamPeriod,
+  TeamPeriodBlock,
+  TeamVsYesterday,
+} from "../types";
 
 interface TeamKpiCardData {
   key: string;
@@ -30,156 +31,86 @@ interface TeamKpiCardData {
   subLine: string;
 }
 
-function getPeriodStats(teamDashboard: TeamDashboard, period: TeamPeriod): TeamPeriodStats {
-  if (period === "yesterday") {
-    return teamDashboard.yesterday;
+function getMetricYesterdayDelta(
+  yesterdayDeltas: TeamVsYesterday | null,
+  metricName: keyof TeamVsYesterday
+): number | null {
+  if (yesterdayDeltas === null) {
+    return null;
   }
-  if (period === "last_30_days") {
-    return teamDashboard.last_30_days;
-  }
-  return teamDashboard.today;
+  const metricDelta: number = yesterdayDeltas[metricName];
+  return metricDelta;
 }
 
-function getPeriodDayCount(period: TeamPeriod): number {
-  const singleDayPeriodDayCount: number = 1;
-  const thirtyDayPeriodDayCount: number = 30;
-  if (period === "last_30_days") {
-    return thirtyDayPeriodDayCount;
-  }
-  return singleDayPeriodDayCount;
-}
-
-function buildAverageSubLine(
-  metricTotal: number,
-  periodDayCount: number,
-  activePeopleCount: number,
-  todayComparison: string | null
+function buildMetricSubLine(
+  yesterdayDelta: number | null,
+  averagePerPersonPerDay: number
 ): string {
-  const averageLabel: string = formatAveragePerPersonPerDay(
-    metricTotal,
-    periodDayCount,
-    activePeopleCount
-  );
-  if (todayComparison === null) {
-    return averageLabel;
+  if (yesterdayDelta === null) {
+    return formatAveragePerPersonPerDayLabel(averagePerPersonPerDay);
   }
-  const subLine: string = `${averageLabel} · ${todayComparison}`;
-  return subLine;
+  return formatYesterdayDeltaLabel(yesterdayDelta);
 }
 
-function buildShareAverageSubLine(
-  count: number,
-  dials: number,
-  shareLabelNoun: string,
-  periodDayCount: number,
-  activePeopleCount: number,
-  todayComparison: string | null
-): string {
-  const sharePercent: number | null = getCountSharePercent(count, dials);
-  const shareLabel: string = `${formatConnectedPercent(sharePercent)} ${shareLabelNoun}`;
-  const averageLabel: string = formatAveragePerPersonPerDay(
-    count,
-    periodDayCount,
-    activePeopleCount
+function buildTeamKpiCards(periodBlock: TeamPeriodBlock): TeamKpiCardData[] {
+  const yesterdayDeltas: TeamVsYesterday | null = periodBlock.vs_yesterday;
+  const averages: TeamAveragePerPersonPerDay = periodBlock.avg_per_person_per_day;
+
+  const dialsSubLine: string = buildMetricSubLine(
+    getMetricYesterdayDelta(yesterdayDeltas, "dials"),
+    averages.dials
   );
-  const subLineParts: string[] = [shareLabel, averageLabel];
-  if (todayComparison !== null) {
-    subLineParts.push(todayComparison);
-  }
-  const subLine: string = subLineParts.join(" · ");
-  return subLine;
-}
-
-function buildTeamKpiCards(
-  teamDashboard: TeamDashboard,
-  period: TeamPeriod
-): TeamKpiCardData[] {
-  const periodStats: TeamPeriodStats = getPeriodStats(teamDashboard, period);
-  const periodDayCount: number = getPeriodDayCount(period);
-  const activePeopleCount: number = teamDashboard.people.length;
-  const isTodaySelected: boolean = period === "today";
-
-  const notConnectedCount: number = periodStats.dials - periodStats.connected;
-  const secondsPerMinute: number = 60;
-  const exactTalkMinutes: number = periodStats.seconds / secondsPerMinute;
-  const talkMinutes: number = convertSecondsToMinutes(periodStats.seconds);
-
-  const dialsComparison: string | null = isTodaySelected
-    ? formatYesterdayComparison(periodStats.dials, teamDashboard.yesterday.dials)
-    : null;
-  const connectedComparison: string | null = isTodaySelected
-    ? formatYesterdayComparison(periodStats.connected, teamDashboard.yesterday.connected)
-    : null;
-  const notConnectedComparison: string | null = isTodaySelected
-    ? formatYesterdayComparison(
-        notConnectedCount,
-        teamDashboard.yesterday.dials - teamDashboard.yesterday.connected
-      )
-    : null;
-  const minutesComparison: string | null = isTodaySelected
-    ? formatYesterdayComparison(talkMinutes, convertSecondsToMinutes(teamDashboard.yesterday.seconds))
-    : null;
+  const connectedChangeSubLine: string = buildMetricSubLine(
+    getMetricYesterdayDelta(yesterdayDeltas, "connected"),
+    averages.connected
+  );
+  const connectedShareLabel: string = formatConnectedPercent(periodBlock.connected_percent);
+  const connectedSubLine: string = `${connectedShareLabel} connected · ${connectedChangeSubLine}`;
+  const notConnectedSubLine: string = buildMetricSubLine(
+    getMetricYesterdayDelta(yesterdayDeltas, "not_connected"),
+    averages.not_connected
+  );
+  const minutesSubLine: string = buildMetricSubLine(
+    getMetricYesterdayDelta(yesterdayDeltas, "minutes"),
+    averages.minutes
+  );
 
   const dialsCard: TeamKpiCardData = {
     key: "dials",
     label: "Dials",
-    value: formatCount(periodStats.dials),
+    value: formatCount(periodBlock.dials),
     icon: Megaphone,
     iconClassName: "text-primary",
-    subLine: buildAverageSubLine(
-      periodStats.dials,
-      periodDayCount,
-      activePeopleCount,
-      dialsComparison
-    ),
+    subLine: dialsSubLine,
   };
 
   const connectedCard: TeamKpiCardData = {
     key: "connected",
     label: "Connected calls",
-    value: formatCount(periodStats.connected),
+    value: formatCount(periodBlock.connected),
     icon: PhoneIncoming,
     iconClassName: "text-green-500",
     valueClassName: "text-green-600",
-    subLine: buildShareAverageSubLine(
-      periodStats.connected,
-      periodStats.dials,
-      "connected",
-      periodDayCount,
-      activePeopleCount,
-      connectedComparison
-    ),
+    subLine: connectedSubLine,
   };
 
   const notConnectedCard: TeamKpiCardData = {
     key: "not-connected",
     label: "Not connected",
-    value: formatCount(notConnectedCount),
+    value: formatCount(periodBlock.not_connected),
     icon: PhoneMissed,
     iconClassName: "text-red-500",
     valueClassName: "text-red-600",
-    subLine: buildShareAverageSubLine(
-      notConnectedCount,
-      periodStats.dials,
-      "of dials",
-      periodDayCount,
-      activePeopleCount,
-      notConnectedComparison
-    ),
+    subLine: notConnectedSubLine,
   };
 
   const talkMinutesCard: TeamKpiCardData = {
     key: "talk-minutes",
     label: "Talk minutes",
-    value: formatCount(talkMinutes),
+    value: formatCount(periodBlock.minutes),
     icon: Clock,
     iconClassName: "text-primary",
-    subLine: buildAverageSubLine(
-      exactTalkMinutes,
-      periodDayCount,
-      activePeopleCount,
-      minutesComparison
-    ),
+    subLine: minutesSubLine,
   };
 
   const kpiCards: TeamKpiCardData[] = [
@@ -261,21 +192,19 @@ function PeriodSwitch({ selectedPeriod, onSelectPeriod }: PeriodSwitchProps) {
 }
 
 interface TeamPerformanceSectionProps {
-  teamDashboard: TeamDashboard;
+  periodBlock: TeamPeriodBlock;
   selectedPeriod: TeamPeriod;
   onSelectPeriod: (period: TeamPeriod) => void;
 }
 
 function TeamPerformanceSection({
-  teamDashboard,
+  periodBlock,
   selectedPeriod,
   onSelectPeriod,
 }: TeamPerformanceSectionProps) {
-  const kpiCards: TeamKpiCardData[] = buildTeamKpiCards(teamDashboard, selectedPeriod);
+  const kpiCards: TeamKpiCardData[] = buildTeamKpiCards(periodBlock);
   const headingLabels: PeriodHeadingLabels = getPeriodHeadingLabels(selectedPeriod);
-  const periodHourlyDials: number[] = teamDashboard.calls_by_hour[selectedPeriod];
-  const periodTopPeople: TeamTopPerson[] = teamDashboard.top_people[selectedPeriod];
-  const showsDailyAverage: boolean = selectedPeriod === "last_30_days";
+  const usesDailyAverageWording: boolean = selectedPeriod === "last_30_days";
 
   return (
     <section>
@@ -299,12 +228,12 @@ function TeamPerformanceSection({
       <div className="mt-3 grid gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-3">
         <CallsByHourChart
           className="lg:col-span-2"
-          hourlyDials={periodHourlyDials}
-          showsDailyAverage={showsDailyAverage}
+          callsByHour={periodBlock.calls_by_hour}
+          usesDailyAverageWording={usesDailyAverageWording}
           headingLabel={headingLabels.chart}
         />
         <TopPeopleList
-          people={periodTopPeople}
+          people={periodBlock.top_people}
           headingLabel={headingLabels.topPeople}
         />
       </div>
@@ -314,13 +243,8 @@ function TeamPerformanceSection({
 
 export function TeamPage() {
   const { teamDashboard, isLoading, hasError, refetch } = useTeamDashboard();
-  const navigate = useNavigate();
   const [selectedPeriod, setSelectedPeriod] = useState<TeamPeriod>("today");
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
-
-  const handleOpenPerson = (personId: number): void => {
-    navigate(`/person/${personId}?from=/`);
-  };
 
   const handleSelectPeriod = (period: TeamPeriod): void => {
     setSelectedPeriod(period);
@@ -342,14 +266,11 @@ export function TeamPage() {
     <PageHeader title="Team Dashboard" action={dateAction}>
       {isLoading && <p className="text-sm text-muted-foreground">Loading dashboard…</p>}
       {teamDashboard && (
-        <>
-          <TeamPerformanceSection
-            teamDashboard={teamDashboard}
-            selectedPeriod={selectedPeriod}
-            onSelectPeriod={handleSelectPeriod}
-          />
-          <TeamTable people={teamDashboard.people} onOpenPerson={handleOpenPerson} />
-        </>
+        <TeamPerformanceSection
+          periodBlock={teamDashboard[selectedPeriod]}
+          selectedPeriod={selectedPeriod}
+          onSelectPeriod={handleSelectPeriod}
+        />
       )}
     </PageHeader>
   );

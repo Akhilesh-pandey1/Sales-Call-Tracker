@@ -76,15 +76,15 @@
 
 **Blocked by:** Task 3
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The four cards render returned values — no subtraction, division, average, or delta math remains in web code
-- [ ] The chart renders the returned hours, counts, and best_hour directly, showing "No calls in this period." when best_hour is null
-- [ ] The team table and all client-side computation helpers are deleted; every widget builds from the one selected period object
+- [x] The four cards render returned values — no subtraction, division, average, or delta math remains in web code
+- [x] The chart renders the returned hours, counts, and best_hour directly, showing "No calls in this period." when best_hour is null
+- [x] The team table and all client-side computation helpers are deleted; every widget builds from the one selected period object
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

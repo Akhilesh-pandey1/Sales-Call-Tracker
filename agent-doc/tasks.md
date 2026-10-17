@@ -58,15 +58,15 @@
 
 **Blocked by:** Task 3
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Each period carries not_connected and minutes, and last_30_days returns avg_per_active_day that is null when active_days is 0
-- [ ] Every period carries a calls_by_hour block with office-hours hours, per-hour counts, and best_hour
-- [ ] top_numbers holds at most 5 numbers each with seconds, minutes, and call count
+- [x] Each period carries not_connected and minutes, and last_30_days returns avg_per_active_day that is null when active_days is 0
+- [x] Every period carries a calls_by_hour block with office-hours hours, per-hour counts, and best_hour
+- [x] top_numbers holds at most 5 numbers each with seconds, minutes, and call count
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
 
 ---
 

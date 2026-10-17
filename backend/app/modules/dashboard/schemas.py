@@ -53,10 +53,18 @@ class TeamDashboardResponse(BaseModel):
     last_30_days: TeamPeriodBlock
 
 
+class AvgPerActiveDay(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    dials: int
+    connected: int
+    minutes: int
+
+
 class TopNumberItem(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     phone_number: str
     seconds: int
+    minutes: int
     calls: int
 
 
@@ -64,13 +72,17 @@ class PersonPeriodStats(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     dials: int
     connected: int
+    not_connected: int
     seconds: int
+    minutes: int
     connected_percent: int | None
+    calls_by_hour: CallsByHourBlock
 
 
 class PersonThirtyDayStats(PersonPeriodStats):
     model_config = ConfigDict(from_attributes=True)
     active_days: int
+    avg_per_active_day: AvgPerActiveDay | None
 
 
 class PersonDashboardResponse(BaseModel):

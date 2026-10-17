@@ -12,6 +12,7 @@ from backend.app.config.prod import ProdConfig
 from backend.app.core.errors import register_error_handlers
 from backend.app.core.security import hash_password
 from backend.app.extensions import db
+from backend.app.modules.settings import get_or_create_office_hours_window
 from backend.app.modules.users.models import User
 from backend.app.static_routes import register_static_routes
 
@@ -62,6 +63,7 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
 
     with app.app_context():
         db.create_all()
+        get_or_create_office_hours_window()
         create_initial_manager(app)
 
     return app

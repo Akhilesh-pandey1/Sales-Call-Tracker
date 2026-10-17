@@ -5192,8 +5192,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_dialog",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "app/src/components/ui/dialog.tsx"
     },
     {
@@ -5203,8 +5203,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogoverlay",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogoverlay()"
     },
     {
@@ -5225,8 +5225,8 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogheader",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogheader()"
     },
     {
@@ -5236,8 +5236,8 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogfooter",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogfooter()"
     },
     {
@@ -5247,8 +5247,8 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogtitle",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogtitle()"
     },
     {
@@ -5258,8 +5258,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogdescription",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogdescription()"
     },
     {
@@ -5335,8 +5335,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_native_only_animated_view",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "native-only-animated-view.tsx"
     },
     {
@@ -5346,8 +5346,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_src_components_ui_native_only_animated_view_animatedpressable",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "animatedpressable"
     },
     {
@@ -5357,8 +5357,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "app_src_components_ui_native_only_animated_view_nativeonlyanimatedview",
-      "community": 179,
-      "community_name": "cn",
+      "community": 68,
+      "community_name": "settings-screen.tsx",
       "norm_label": "nativeonlyanimatedview()"
     },
     {
@@ -5368,8 +5368,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_text",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "text.tsx"
     },
     {
@@ -5379,8 +5379,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariants",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "textvariants"
     },
     {
@@ -5390,8 +5390,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariantprops",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "textvariantprops"
     },
     {
@@ -5401,8 +5401,8 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariant",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "textvariant"
     },
     {
@@ -5412,8 +5412,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "app_src_components_ui_text_role",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "role"
     },
     {
@@ -5423,8 +5423,8 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "app_src_components_ui_text_aria_level",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "aria_level"
     },
     {
@@ -5445,8 +5445,8 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "app_src_components_ui_text_text",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "text()"
     },
     {
@@ -5687,8 +5687,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "keypad.tsx"
     },
     {
@@ -5698,8 +5698,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypadcharacters",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "keypadcharacters"
     },
     {
@@ -5709,8 +5709,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypadprops",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "keypadprops"
     },
     {
@@ -5720,8 +5720,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypad",
-      "community": 78,
-      "community_name": "text.tsx",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "keypad()"
     },
     {
@@ -6116,8 +6116,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_automated_calling_useautomatedcallingresult",
-      "community": 74,
-      "community_name": "dialer-screen.tsx",
+      "community": 73,
+      "community_name": "use-automated-calling.ts",
       "norm_label": "useautomatedcallingresult"
     },
     {
@@ -7271,8 +7271,8 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_janitor_runjanitorsweep",
-      "community": 71,
-      "community_name": "use-sync.ts",
+      "community": 82,
+      "community_name": "use-janitor.ts",
       "norm_label": "runjanitorsweep()"
     },
     {
@@ -7282,8 +7282,8 @@
       "source_location": "L176",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_janitor_usejanitor",
-      "community": 71,
-      "community_name": "use-sync.ts",
+      "community": 82,
+      "community_name": "use-janitor.ts",
       "norm_label": "usejanitor()"
     },
     {
@@ -7403,8 +7403,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_index",
-      "community": 71,
-      "community_name": "use-sync.ts",
+      "community": 70,
+      "community_name": "use-call-tracker.ts",
       "norm_label": "tracking/index.ts"
     },
     {
@@ -7557,8 +7557,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events",
-      "community": 71,
-      "community_name": "use-sync.ts",
+      "community": 82,
+      "community_name": "use-janitor.ts",
       "norm_label": "sync-events.ts"
     },
     {
@@ -7568,8 +7568,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_callfilledlistener",
-      "community": 71,
-      "community_name": "use-sync.ts",
+      "community": 82,
+      "community_name": "use-janitor.ts",
       "norm_label": "callfilledlistener"
     },
     {
@@ -7579,8 +7579,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_callfilledlisteners",
-      "community": 71,
-      "community_name": "use-sync.ts",
+      "community": 82,
+      "community_name": "use-janitor.ts",
       "norm_label": "callfilledlisteners"
     },
     {
@@ -7590,8 +7590,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_subscribetocallfilled",
-      "community": 71,
-      "community_name": "use-sync.ts",
+      "community": 73,
+      "community_name": "use-automated-calling.ts",
       "norm_label": "subscribetocallfilled()"
     },
     {
@@ -7983,7 +7983,7 @@
       "label": "create_initial_manager()",
       "file_type": "code",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L19",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "backend_app_init_create_initial_manager",
       "community": 60,
@@ -8005,7 +8005,7 @@
       "label": "create_app()",
       "file_type": "code",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L45",
+      "source_location": "L46",
       "_origin": "ast",
       "id": "backend_app_init_create_app",
       "community": 60,
@@ -8019,8 +8019,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_api_init",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 9,
+      "community_name": "seed_fake_data.py",
       "norm_label": "api/__init__.py"
     },
     {
@@ -8108,7 +8108,7 @@
       "_origin": "ast",
       "id": "backend_app_core_errors",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "errors.py"
     },
     {
@@ -8162,8 +8162,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "backend_app_core_errors_register_error_handlers",
-      "community": 91,
-      "community_name": "errors.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "register_error_handlers()"
     },
     {
@@ -8173,8 +8173,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_errors_py_flask",
-      "community": 91,
-      "community_name": "errors.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "flask"
     },
     {
@@ -8185,7 +8185,7 @@
       "_origin": "ast",
       "id": "backend_app_core_permissions",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "permissions.py"
     },
     {
@@ -8196,7 +8196,7 @@
       "_origin": "ast",
       "id": "backend_app_core_permissions_require_auth",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "require_auth()"
     },
     {
@@ -8207,7 +8207,7 @@
       "_origin": "ast",
       "id": "backend_app_core_permissions_py_any",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "any"
     },
     {
@@ -8228,8 +8228,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_core_security",
-      "community": 176,
-      "community_name": "test_foundation.py",
+      "community": 81,
+      "community_name": "auth/services.py",
       "norm_label": "security.py"
     },
     {
@@ -8250,8 +8250,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "backend_app_core_security_verify_password",
-      "community": 176,
-      "community_name": "test_foundation.py",
+      "community": 81,
+      "community_name": "auth/services.py",
       "norm_label": "verify_password()"
     },
     {
@@ -8261,8 +8261,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "backend_app_core_security_generate_auth_token",
-      "community": 176,
-      "community_name": "test_foundation.py",
+      "community": 87,
+      "community_name": "User",
       "norm_label": "generate_auth_token()"
     },
     {
@@ -8272,8 +8272,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "backend_app_core_security_validate_password_strength",
-      "community": 176,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "AppException",
       "norm_label": "validate_password_strength()"
     },
     {
@@ -8283,8 +8283,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_core_utils",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "utils.py"
     },
     {
@@ -8294,8 +8294,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_app_core_utils_get_ist_timezone",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "get_ist_timezone()"
     },
     {
@@ -8327,8 +8327,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_utils_py_datetime",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "datetime"
     },
     {
@@ -8349,8 +8349,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "backend_app_core_utils_to_ist",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "to_ist()"
     },
     {
@@ -8360,8 +8360,8 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "backend_app_core_utils_normalize_phone_number",
-      "community": 9,
-      "community_name": "seed_fake_data.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "normalize_phone_number()"
     },
     {
@@ -8371,8 +8371,8 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "backend_app_core_utils_parse_utc_datetime",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "parse_utc_datetime()"
     },
     {
@@ -8382,8 +8382,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_extensions",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 91,
+      "community_name": "extensions.py",
       "norm_label": "extensions.py"
     },
     {
@@ -8393,8 +8393,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_auth_init",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 9,
+      "community_name": "seed_fake_data.py",
       "norm_label": "auth/__init__.py"
     },
     {
@@ -8658,7 +8658,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "calls/routes.py"
     },
     {
@@ -8669,7 +8669,7 @@
       "_origin": "ast",
       "id": "route",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "route"
     },
     {
@@ -8680,7 +8680,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_sync_calls",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "sync_calls()"
     },
     {
@@ -8691,7 +8691,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_py_response",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "response"
     },
     {
@@ -8702,7 +8702,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "calls/schemas.py"
     },
     {
@@ -8713,7 +8713,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_synccallsrequest",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "synccallsrequest"
     },
     {
@@ -8724,7 +8724,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_py_basemodel",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "basemodel"
     },
     {
@@ -8735,7 +8735,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_synccallsresponse",
       "community": 91,
-      "community_name": "errors.py",
+      "community_name": "extensions.py",
       "norm_label": "synccallsresponse"
     },
     {
@@ -8745,8 +8745,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services",
-      "community": 9,
-      "community_name": "seed_fake_data.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "calls/services.py"
     },
     {
@@ -8756,8 +8756,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_extract_valid_call",
-      "community": 9,
-      "community_name": "seed_fake_data.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "extract_valid_call()"
     },
     {
@@ -8767,8 +8767,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_any",
-      "community": 9,
-      "community_name": "seed_fake_data.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "any"
     },
     {
@@ -8778,8 +8778,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_datetime",
-      "community": 9,
-      "community_name": "seed_fake_data.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "datetime"
     },
     {
@@ -8789,8 +8789,8 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_sync_calls_batch",
-      "community": 9,
-      "community_name": "seed_fake_data.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "sync_calls_batch()"
     },
     {
@@ -8800,8 +8800,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_init",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 9,
+      "community_name": "seed_fake_data.py",
       "norm_label": "dashboard/__init__.py"
     },
     {
@@ -8811,8 +8811,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes",
-      "community": 91,
-      "community_name": "errors.py",
+      "community": 51,
+      "community_name": "dashboard/routes.py",
       "norm_label": "dashboard/routes.py"
     },
     {
@@ -8822,8 +8822,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_py_get",
-      "community": 91,
-      "community_name": "errors.py",
+      "community": 51,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get"
     },
     {
@@ -8833,8 +8833,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_get_team_dashboard",
-      "community": 91,
-      "community_name": "errors.py",
+      "community": 51,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get_team_dashboard()"
     },
     {
@@ -8844,8 +8844,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_py_response",
-      "community": 91,
-      "community_name": "errors.py",
+      "community": 51,
+      "community_name": "dashboard/routes.py",
       "norm_label": "response"
     },
     {
@@ -8855,8 +8855,8 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_get_person_dashboard",
-      "community": 91,
-      "community_name": "errors.py",
+      "community": 51,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get_person_dashboard()"
     },
     {
@@ -8867,7 +8867,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "dashboard/schemas.py"
     },
     {
@@ -8878,7 +8878,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_periodstats",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "periodstats"
     },
     {
@@ -8889,7 +8889,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_py_basemodel",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "basemodel"
     },
     {
@@ -8900,7 +8900,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_personperiodstats",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "personperiodstats"
     },
     {
@@ -8911,7 +8911,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_hourlycallbuckets",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "hourlycallbuckets"
     },
     {
@@ -8922,7 +8922,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_py_field_validator",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "field_validator"
     },
     {
@@ -8933,7 +8933,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_hourlycallbuckets_check_hour_bucket_count",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": ".check_hour_bucket_count()"
     },
     {
@@ -8944,7 +8944,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_toppersonsummary",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "toppersonsummary"
     },
     {
@@ -8955,7 +8955,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_toppeoplebyperiod",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "toppeoplebyperiod"
     },
     {
@@ -8966,7 +8966,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_persondashboardsummary",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "persondashboardsummary"
     },
     {
@@ -8977,7 +8977,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_teamdashboardresponse",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "teamdashboardresponse"
     },
     {
@@ -8988,7 +8988,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_topnumberitem",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "topnumberitem"
     },
     {
@@ -8999,7 +8999,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_personthirtydaystats",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "personthirtydaystats"
     },
     {
@@ -9010,7 +9010,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_persondashboardresponse",
       "community": 51,
-      "community_name": "dashboard/schemas.py",
+      "community_name": "dashboard/routes.py",
       "norm_label": "persondashboardresponse"
     },
     {
@@ -9020,8 +9020,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "dashboard/services.py"
     },
     {
@@ -9031,8 +9031,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_dashboardtimewindows",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "dashboardtimewindows"
     },
     {
@@ -9042,8 +9042,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_teamcallaggregates",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "teamcallaggregates"
     },
     {
@@ -9053,8 +9053,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_calculate_dashboard_time_windows",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "calculate_dashboard_time_windows()"
     },
     {
@@ -9064,8 +9064,8 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_calculate_connected_percentage",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "calculate_connected_percentage()"
     },
     {
@@ -9075,8 +9075,8 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_create_empty_period_metrics",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "create_empty_period_metrics()"
     },
     {
@@ -9086,8 +9086,8 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_apply_call_to_metrics",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "apply_call_to_metrics()"
     },
     {
@@ -9097,8 +9097,8 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_apply_call_to_hourly_bucket",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "apply_call_to_hourly_bucket()"
     },
     {
@@ -9108,8 +9108,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_py_datetime",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "datetime"
     },
     {
@@ -9119,8 +9119,8 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_apply_call_to_user_metrics",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "apply_call_to_user_metrics()"
     },
     {
@@ -9130,8 +9130,8 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_add_user_talk_seconds",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "add_user_talk_seconds()"
     },
     {
@@ -9141,8 +9141,8 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_collect_user_talk_seconds",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "collect_user_talk_seconds()"
     },
     {
@@ -9152,8 +9152,8 @@
       "source_location": "L114",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_fetch_team_call_records",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "fetch_team_call_records()"
     },
     {
@@ -9163,8 +9163,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_py_any",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "any"
     },
     {
@@ -9174,8 +9174,8 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_fetch_active_salespeople",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "fetch_active_salespeople()"
     },
     {
@@ -9185,8 +9185,8 @@
       "source_location": "L139",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_create_empty_team_aggregates",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "create_empty_team_aggregates()"
     },
     {
@@ -9196,8 +9196,8 @@
       "source_location": "L155",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_accumulate_team_call_records",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "accumulate_team_call_records()"
     },
     {
@@ -9207,8 +9207,8 @@
       "source_location": "L184",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_build_people_list",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "build_people_list()"
     },
     {
@@ -9218,8 +9218,8 @@
       "source_location": "L207",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_build_top_people_list",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "build_top_people_list()"
     },
     {
@@ -9229,8 +9229,8 @@
       "source_location": "L229",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_get_team_dashboard_data",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "get_team_dashboard_data()"
     },
     {
@@ -9240,8 +9240,8 @@
       "source_location": "L275",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_build_top_numbers_list",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "build_top_numbers_list()"
     },
     {
@@ -9251,8 +9251,8 @@
       "source_location": "L295",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_services_get_person_dashboard_data",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "get_person_dashboard_data()"
     },
     {
@@ -9647,8 +9647,8 @@
       "source_location": "L329",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_schedule_lead_callback",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 9,
+      "community_name": "seed_fake_data.py",
       "norm_label": "schedule_lead_callback()"
     },
     {
@@ -9674,14 +9674,256 @@
       "norm_label": "serve_next_lead()"
     },
     {
+      "label": "settings/__init__.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_init",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "settings/__init__.py"
+    },
+    {
+      "label": "settings/models.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/models.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_models",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "settings/models.py"
+    },
+    {
+      "label": "OfficeHours",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/models.py",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_models_officehours",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "officehours"
+    },
+    {
+      "label": "settings/routes.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_routes",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "settings/routes.py"
+    },
+    {
+      "label": "refuse_non_manager()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_routes_refuse_non_manager",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "refuse_non_manager()"
+    },
+    {
+      "label": "get",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_routes_py_get",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "get"
+    },
+    {
+      "label": "get_office_hours()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_routes_get_office_hours",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "get_office_hours()"
+    },
+    {
+      "label": "Response",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_routes_py_response",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "response"
+    },
+    {
+      "label": "put",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "put",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "put"
+    },
+    {
+      "label": "update_office_hours()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_routes_update_office_hours",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "update_office_hours()"
+    },
+    {
+      "label": "settings/schemas.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_schemas",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "settings/schemas.py"
+    },
+    {
+      "label": "OfficeHoursResponse",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_schemas_officehoursresponse",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "officehoursresponse"
+    },
+    {
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_schemas_py_basemodel",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "basemodel"
+    },
+    {
+      "label": "UpdateOfficeHoursRequest",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_schemas_updateofficehoursrequest",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "updateofficehoursrequest"
+    },
+    {
+      "label": "field_validator",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_schemas_py_field_validator",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "field_validator"
+    },
+    {
+      "label": ".require_hhmm_format()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_schemas_updateofficehoursrequest_require_hhmm_format",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": ".require_hhmm_format()"
+    },
+    {
+      "label": "settings/services.py",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_services",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "settings/services.py"
+    },
+    {
+      "label": "format_minute_of_day()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_services_format_minute_of_day",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "format_minute_of_day()"
+    },
+    {
+      "label": "parse_time_to_minute()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_services_parse_time_to_minute",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "parse_time_to_minute()"
+    },
+    {
+      "label": "get_or_create_office_hours_window()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_services_get_or_create_office_hours_window",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "get_or_create_office_hours_window()"
+    },
+    {
+      "label": "get_office_hours_view()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_services_get_office_hours_view",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "get_office_hours_view()"
+    },
+    {
+      "label": "update_office_hours_window()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "backend_app_modules_settings_services_update_office_hours_window",
+      "community": 91,
+      "community_name": "extensions.py",
+      "norm_label": "update_office_hours_window()"
+    },
+    {
       "label": "users/__init__.py",
       "file_type": "code",
       "source_file": "backend/app/modules/users/__init__.py",
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_users_init",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 87,
+      "community_name": "User",
       "norm_label": "users/__init__.py"
     },
     {
@@ -9691,8 +9933,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_users_models",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 87,
+      "community_name": "User",
       "norm_label": "users/models.py"
     },
     {
@@ -11511,6 +11753,116 @@
       "norm_label": "test_next_lead_done_or_stopped_cannot_be_scheduled()"
     },
     {
+      "label": "test_settings.py",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "test_settings.py"
+    },
+    {
+      "label": "create_user_fixture()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_create_user_fixture",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "create_user_fixture()"
+    },
+    {
+      "label": "test_get_office_hours_fresh_database_returns_default_window()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_test_get_office_hours_fresh_database_returns_default_window",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "test_get_office_hours_fresh_database_returns_default_window()"
+    },
+    {
+      "label": "Flask",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_py_flask",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "flask"
+    },
+    {
+      "label": "FlaskClient",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_py_flaskclient",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "flaskclient"
+    },
+    {
+      "label": "test_put_office_hours_saves_window_for_next_read()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_test_put_office_hours_saves_window_for_next_read",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "test_put_office_hours_saves_window_for_next_read()"
+    },
+    {
+      "label": "test_put_office_hours_end_not_after_start_refused()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_test_put_office_hours_end_not_after_start_refused",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "test_put_office_hours_end_not_after_start_refused()"
+    },
+    {
+      "label": "test_put_office_hours_malformed_body_refused()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_test_put_office_hours_malformed_body_refused",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "test_put_office_hours_malformed_body_refused()"
+    },
+    {
+      "label": "test_salesperson_refused_on_both_office_hours_endpoints()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L115",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_test_salesperson_refused_on_both_office_hours_endpoints",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "test_salesperson_refused_on_both_office_hours_endpoints()"
+    },
+    {
+      "label": "test_office_hours_unauthenticated_rejected()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L145",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_settings_test_office_hours_unauthenticated_rejected",
+      "community": 164,
+      "community_name": "test_settings.py",
+      "norm_label": "test_office_hours_unauthenticated_rejected()"
+    },
+    {
       "label": "test_users.py",
       "file_type": "code",
       "source_file": "backend/tests/modules/test_users.py",
@@ -11935,8 +12287,8 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_security_helpers",
-      "community": 176,
-      "community_name": "test_foundation.py",
+      "community": 87,
+      "community_name": "User",
       "norm_label": "test_security_helpers()"
     },
     {
@@ -11968,8 +12320,8 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_utils_helpers",
-      "community": 152,
-      "community_name": "test_dashboard.py",
+      "community": 176,
+      "community_name": "test_foundation.py",
       "norm_label": "test_utils_helpers()"
     },
     {
@@ -11979,8 +12331,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_tests_test_production",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_production.py"
     },
     {
@@ -11990,8 +12342,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_serve_index_html_on_root",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_serve_index_html_on_root()"
     },
     {
@@ -12001,8 +12353,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_production_py_flask",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "flask"
     },
     {
@@ -12012,8 +12364,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_production_py_flaskclient",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "flaskclient"
     },
     {
@@ -12023,8 +12375,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_production_py_path",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "path"
     },
     {
@@ -12034,8 +12386,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_serve_static_asset",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_serve_static_asset()"
     },
     {
@@ -12045,8 +12397,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_missing_static_asset_returns_404",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_missing_static_asset_returns_404()"
     },
     {
@@ -12056,8 +12408,8 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_serve_spa_client_route",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_serve_spa_client_route()"
     },
     {
@@ -12067,8 +12419,8 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_api_route_not_found_returns_json",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_api_route_not_found_returns_json()"
     },
     {
@@ -12078,8 +12430,8 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_missing_dist_returns_404",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_missing_dist_returns_404()"
     },
     {
@@ -12089,8 +12441,8 @@
       "source_location": "L93",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_wsgi_entrypoint",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_wsgi_entrypoint()"
     },
     {
@@ -12100,8 +12452,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_wsgi",
-      "community": 164,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "wsgi.py"
     },
     {
@@ -12221,8 +12573,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "web_package_dependencies_radix_ui_react_dialog",
-      "community": 109,
-      "community_name": "@radix-ui/react-dialog",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "@radix-ui/react-dialog"
     },
     {
@@ -12232,8 +12584,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "radix_ui_react_dialog",
-      "community": 109,
-      "community_name": "@radix-ui/react-dialog",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "@radix-ui/react-dialog"
     },
     {
@@ -12309,8 +12661,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_package_dependencies_class_variance_authority",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 201,
+      "community_name": "class-variance-authority",
       "norm_label": "class-variance-authority"
     },
     {
@@ -12320,8 +12672,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_package_json_class_variance_authority",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 201,
+      "community_name": "class-variance-authority",
       "norm_label": "class-variance-authority"
     },
     {
@@ -12947,7 +13299,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_components_ui_badge",
-      "community": 43,
+      "community": 129,
       "community_name": "cn",
       "norm_label": "badge.tsx"
     },
@@ -12958,7 +13310,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_components_ui_badge_badgevariants",
-      "community": 43,
+      "community": 129,
       "community_name": "cn",
       "norm_label": "badgevariants"
     },
@@ -12969,7 +13321,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "web_src_components_ui_badge_badgeprops",
-      "community": 43,
+      "community": 129,
       "community_name": "cn",
       "norm_label": "badgeprops"
     },
@@ -12980,7 +13332,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "web_src_components_ui_badge_badge",
-      "community": 43,
+      "community": 129,
       "community_name": "cn",
       "norm_label": "badge()"
     },
@@ -13036,7 +13388,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "chart.tsx"
     },
     {
@@ -13047,7 +13399,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_themes",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "themes"
     },
     {
@@ -13058,7 +13410,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_initial_dimension",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "initial_dimension"
     },
     {
@@ -13069,7 +13421,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_tooltipnametype",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "tooltipnametype"
     },
     {
@@ -13079,8 +13431,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "web_src_components_ui_chart_chartconfig",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "chartconfig"
     },
     {
@@ -13091,7 +13443,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_chartcontextprops",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "chartcontextprops"
     },
     {
@@ -13102,7 +13454,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_chartcontext",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "chartcontext"
     },
     {
@@ -13113,7 +13465,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_usechart",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "usechart()"
     },
     {
@@ -13124,7 +13476,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_getpayloadconfigfrompayload",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "getpayloadconfigfrompayload()"
     },
     {
@@ -13135,7 +13487,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_chartstyle",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "chartstyle()"
     },
     {
@@ -13146,7 +13498,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_chartcontainer",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "chartcontainer()"
     },
     {
@@ -13157,7 +13509,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_charttooltipcontent",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "charttooltipcontent()"
     },
     {
@@ -13168,7 +13520,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_chartlegendcontent",
       "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "cn",
       "norm_label": "chartlegendcontent()"
     },
     {
@@ -13211,7 +13563,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "web_src_components_ui_dialog_dialogheader",
-      "community": 43,
+      "community": 129,
       "community_name": "cn",
       "norm_label": "dialogheader()"
     },
@@ -13222,7 +13574,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "web_src_components_ui_dialog_dialogfooter",
-      "community": 43,
+      "community": 129,
       "community_name": "cn",
       "norm_label": "dialogfooter()"
     },
@@ -13398,8 +13750,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_accounts_api_accounts_api_getaccounts",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "getaccounts()"
     },
     {
@@ -13443,7 +13795,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_api_accounts_api_deactivateuser",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "deactivateuser()"
     },
     {
@@ -13454,7 +13806,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_api_accounts_api_activateuser",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "activateuser()"
     },
     {
@@ -13464,8 +13816,8 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "web_src_features_accounts_api_accounts_api_deleteuser",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "deleteuser()"
     },
     {
@@ -13618,8 +13970,8 @@
       "source_location": "L146",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_accounts_table_desktopaccountrow",
-      "community": 171,
-      "community_name": "team-table.tsx",
+      "community": 67,
+      "community_name": "accounts-table.tsx",
       "norm_label": "desktopaccountrow()"
     },
     {
@@ -13651,8 +14003,8 @@
       "source_location": "L238",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_accounts_table_accountcard",
-      "community": 171,
-      "community_name": "team-table.tsx",
+      "community": 67,
+      "community_name": "accounts-table.tsx",
       "norm_label": "accountcard()"
     },
     {
@@ -13662,8 +14014,8 @@
       "source_location": "L286",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_accounts_table_accountstable",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "accountstable()"
     },
     {
@@ -13706,7 +14058,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_add_user_modal_userformtextfield",
-      "community": 43,
+      "community": 129,
       "community_name": "cn",
       "norm_label": "userformtextfield()"
     },
@@ -13761,8 +14113,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_delete_dialog_deletedialog",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "deletedialog()"
     },
     {
@@ -13794,8 +14146,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_edit_user_modal_editusermodal",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "editusermodal()"
     },
     {
@@ -13806,7 +14158,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "user-status-button.tsx"
     },
     {
@@ -13817,7 +14169,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button_userstatusbuttonprops",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "userstatusbuttonprops"
     },
     {
@@ -13828,7 +14180,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button_userstatusbutton",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "userstatusbutton()"
     },
     {
@@ -13838,8 +14190,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "use-accounts.ts"
     },
     {
@@ -13849,8 +14201,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts_accounts_query_key",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "accounts_query_key"
     },
     {
@@ -13860,8 +14212,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts_useaccountsresult",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "useaccountsresult"
     },
     {
@@ -13871,8 +14223,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts_sortownaccountfirst",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "sortownaccountfirst()"
     },
     {
@@ -13882,8 +14234,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts_useaccounts",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "useaccounts()"
     },
     {
@@ -13937,8 +14289,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_delete_user",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "use-delete-user.ts"
     },
     {
@@ -13948,8 +14300,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_delete_user_usedeleteuserresult",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "usedeleteuserresult"
     },
     {
@@ -13959,8 +14311,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_delete_user_usedeleteuser",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "usedeleteuser()"
     },
     {
@@ -14070,7 +14422,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_user_status",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "use-user-status.ts"
     },
     {
@@ -14081,7 +14433,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_user_status_userstatuschange",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "userstatuschange"
     },
     {
@@ -14092,7 +14444,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_user_status_useuserstatusresult",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "useuserstatusresult"
     },
     {
@@ -14103,7 +14455,7 @@
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_user_status_useuserstatus",
       "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community_name": "use-user-status.ts",
       "norm_label": "useuserstatus()"
     },
     {
@@ -14124,8 +14476,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_pages_accounts_page",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "accounts-page.tsx"
     },
     {
@@ -14135,8 +14487,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_accounts_pages_accounts_page_accountspage",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "accountspage()"
     },
     {
@@ -14289,8 +14641,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_auth_index",
-      "community": 167,
-      "community_name": "router.tsx",
+      "community": 140,
+      "community_name": "web/src/features/auth/hooks/use-auth.ts",
       "norm_label": "web/src/features/auth/index.ts"
     },
     {
@@ -14388,8 +14740,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "calls-by-hour-chart.tsx"
     },
     {
@@ -14399,8 +14751,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_hourlydialbar",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "hourlydialbar"
     },
     {
@@ -14410,8 +14762,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_dialstoplabelprops",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "dialstoplabelprops"
     },
     {
@@ -14421,8 +14773,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_callsbyhourchartprops",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "callsbyhourchartprops"
     },
     {
@@ -14432,8 +14784,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_gettwelvehourlabel",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "gettwelvehourlabel()"
     },
     {
@@ -14443,8 +14795,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_hasanydials",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "hasanydials()"
     },
     {
@@ -14454,8 +14806,8 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_getbesthourindex",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "getbesthourindex()"
     },
     {
@@ -14465,8 +14817,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_buildhourlybars",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "buildhourlybars()"
     },
     {
@@ -14476,8 +14828,8 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_buildbesthoursummaryline",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "buildbesthoursummaryline()"
     },
     {
@@ -14487,8 +14839,8 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_callsbyhourchart",
-      "community": 129,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 43,
+      "community_name": "formatCount",
       "norm_label": "callsbyhourchart()"
     },
     {
@@ -14499,7 +14851,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card",
       "community": 43,
-      "community_name": "cn",
+      "community_name": "formatCount",
       "norm_label": "dashboard-card.tsx"
     },
     {
@@ -14510,7 +14862,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_dashboardcardprops",
       "community": 43,
-      "community_name": "cn",
+      "community_name": "formatCount",
       "norm_label": "dashboardcardprops"
     },
     {
@@ -14521,7 +14873,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_dashboardcard",
       "community": 43,
-      "community_name": "cn",
+      "community_name": "formatCount",
       "norm_label": "dashboardcard()"
     },
     {
@@ -14532,7 +14884,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_emptyperiodnote",
       "community": 43,
-      "community_name": "cn",
+      "community_name": "formatCount",
       "norm_label": "emptyperiodnote()"
     },
     {
@@ -14542,8 +14894,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card",
-      "community": 56,
-      "community_name": "team-page.tsx",
+      "community": 138,
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "kpi-card.tsx"
     },
     {
@@ -14553,8 +14905,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card_kpicardprops",
-      "community": 56,
-      "community_name": "team-page.tsx",
+      "community": 138,
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "kpicardprops"
     },
     {
@@ -14564,8 +14916,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card_kpicard",
-      "community": 56,
-      "community_name": "team-page.tsx",
+      "community": 138,
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "kpicard()"
     },
     {
@@ -14608,8 +14960,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_team_table_metriccolumnheads",
-      "community": 43,
-      "community_name": "cn",
+      "community": 171,
+      "community_name": "team-table.tsx",
       "norm_label": "metriccolumnheads()"
     },
     {
@@ -14630,8 +14982,8 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_team_table_personperiodcells",
-      "community": 43,
-      "community_name": "cn",
+      "community": 171,
+      "community_name": "team-table.tsx",
       "norm_label": "personperiodcells()"
     },
     {
@@ -14652,8 +15004,8 @@
       "source_location": "L79",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_team_table_personrow",
-      "community": 171,
-      "community_name": "team-table.tsx",
+      "community": 67,
+      "community_name": "accounts-table.tsx",
       "norm_label": "personrow()"
     },
     {
@@ -14663,8 +15015,8 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_team_table_teamtable",
-      "community": 56,
-      "community_name": "team-page.tsx",
+      "community": 171,
+      "community_name": "team-table.tsx",
       "norm_label": "teamtable()"
     },
     {
@@ -14751,8 +15103,8 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_numbers_table_topnumberstable",
-      "community": 54,
-      "community_name": "person-page.tsx",
+      "community": 171,
+      "community_name": "team-table.tsx",
       "norm_label": "topnumberstable()"
     },
     {
@@ -14763,7 +15115,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_people_list",
       "community": 43,
-      "community_name": "cn",
+      "community_name": "formatCount",
       "norm_label": "top-people-list.tsx"
     },
     {
@@ -14774,7 +15126,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_people_list_toppeoplelistprops",
       "community": 43,
-      "community_name": "cn",
+      "community_name": "formatCount",
       "norm_label": "toppeoplelistprops"
     },
     {
@@ -14785,7 +15137,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_people_list_toppeoplelist",
       "community": 43,
-      "community_name": "cn",
+      "community_name": "formatCount",
       "norm_label": "toppeoplelist()"
     },
     {
@@ -14872,8 +15224,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_index",
-      "community": 56,
-      "community_name": "team-page.tsx",
+      "community": 138,
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "dashboard/index.ts"
     },
     {
@@ -14971,8 +15323,8 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_mobileperiodmetric",
-      "community": 43,
-      "community_name": "cn",
+      "community": 54,
+      "community_name": "person-page.tsx",
       "norm_label": "mobileperiodmetric()"
     },
     {
@@ -15059,8 +15411,8 @@
       "source_location": "L205",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_buildaveragecardsubline",
-      "community": 94,
-      "community_name": "formatCount",
+      "community": 54,
+      "community_name": "person-page.tsx",
       "norm_label": "buildaveragecardsubline()"
     },
     {
@@ -15070,8 +15422,8 @@
       "source_location": "L210",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_buildpersonkpicards",
-      "community": 94,
-      "community_name": "formatCount",
+      "community": 54,
+      "community_name": "person-page.tsx",
       "norm_label": "buildpersonkpicards()"
     },
     {
@@ -15224,8 +15576,8 @@
       "source_location": "L223",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_team_page_periodswitch",
-      "community": 43,
-      "community_name": "cn",
+      "community": 56,
+      "community_name": "team-page.tsx",
       "norm_label": "periodswitch()"
     },
     {
@@ -15257,8 +15609,8 @@
       "source_location": "L315",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_team_page_teampage",
-      "community": 56,
-      "community_name": "team-page.tsx",
+      "community": 174,
+      "community_name": "dashboard/types.ts",
       "norm_label": "teampage()"
     },
     {
@@ -15313,7 +15665,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamtopperson",
       "community": 43,
-      "community_name": "cn",
+      "community_name": "formatCount",
       "norm_label": "teamtopperson"
     },
     {
@@ -15400,8 +15752,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format",
-      "community": 94,
-      "community_name": "formatCount",
+      "community": 56,
+      "community_name": "team-page.tsx",
       "norm_label": "dashboard/utils/format.ts"
     },
     {
@@ -15411,8 +15763,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_convertsecondstominutes",
-      "community": 43,
-      "community_name": "cn",
+      "community": 171,
+      "community_name": "team-table.tsx",
       "norm_label": "convertsecondstominutes()"
     },
     {
@@ -15444,8 +15796,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formataverageperpersonperday",
-      "community": 94,
-      "community_name": "formatCount",
+      "community": 56,
+      "community_name": "team-page.tsx",
       "norm_label": "formataverageperpersonperday()"
     },
     {
@@ -15455,8 +15807,8 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formataverageperactiveday",
-      "community": 94,
-      "community_name": "formatCount",
+      "community": 54,
+      "community_name": "person-page.tsx",
       "norm_label": "formataverageperactiveday()"
     },
     {
@@ -15466,8 +15818,8 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formatactivedaysoutofperiod",
-      "community": 94,
-      "community_name": "formatCount",
+      "community": 54,
+      "community_name": "person-page.tsx",
       "norm_label": "formatactivedaysoutofperiod()"
     },
     {
@@ -15488,8 +15840,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formatyesterdaycomparison",
-      "community": 94,
-      "community_name": "formatCount",
+      "community": 56,
+      "community_name": "team-page.tsx",
       "norm_label": "formatyesterdaycomparison()"
     },
     {
@@ -15632,7 +15984,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "lead-pool-stats.tsx"
     },
     {
@@ -15643,7 +15995,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstage",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstage"
     },
     {
@@ -15654,7 +16006,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstagecardprops",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstagecardprops"
     },
     {
@@ -15665,7 +16017,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_poolcompositionbarprops",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "poolcompositionbarprops"
     },
     {
@@ -15676,7 +16028,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_poolcompositionlegendprops",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "poolcompositionlegendprops"
     },
     {
@@ -15687,7 +16039,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstatsprops",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstatsprops"
     },
     {
@@ -15698,7 +16050,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_getstagewidthpercent",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "getstagewidthpercent()"
     },
     {
@@ -15709,7 +16061,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_buildpoolstages",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "buildpoolstages()"
     },
     {
@@ -15720,7 +16072,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstagecard",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstagecard()"
     },
     {
@@ -15731,7 +16083,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_poolcompositionbar",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "poolcompositionbar()"
     },
     {
@@ -15742,7 +16094,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_poolcompositionlegend",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "poolcompositionlegend()"
     },
     {
@@ -15753,7 +16105,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstats",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstats()"
     },
     {
@@ -15939,8 +16291,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_index",
-      "community": 47,
-      "community_name": "leads-page.tsx",
+      "community": 167,
+      "community_name": "router.tsx",
       "norm_label": "leads/index.ts"
     },
     {
@@ -15984,7 +16336,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadwaitingattemptcounts",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadwaitingattemptcounts"
     },
     {
@@ -15995,7 +16347,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadpoolcounts",
       "community": 94,
-      "community_name": "formatCount",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolcounts"
     },
     {
@@ -16159,8 +16511,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "api-error.ts"
     },
     {
@@ -16170,8 +16522,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error_apierrorbody",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "apierrorbody"
     },
     {
@@ -16181,8 +16533,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error_getapierrormessage",
-      "community": 52,
-      "community_name": "getApiErrorMessage",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "getapierrormessage()"
     },
     {
@@ -16225,8 +16577,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_components_error_state",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "error-state.tsx"
     },
     {
@@ -16236,8 +16588,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_shared_components_error_state_errorstateprops",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "errorstateprops"
     },
     {
@@ -16247,8 +16599,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_src_shared_components_error_state_errorstate",
-      "community": 67,
-      "community_name": "accounts-table.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "errorstate()"
     },
     {
@@ -16258,8 +16610,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_components_page_header",
-      "community": 54,
-      "community_name": "person-page.tsx",
+      "community": 47,
+      "community_name": "leads-page.tsx",
       "norm_label": "page-header.tsx"
     },
     {
@@ -16269,8 +16621,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_shared_components_page_header_pageheaderprops",
-      "community": 54,
-      "community_name": "person-page.tsx",
+      "community": 47,
+      "community_name": "leads-page.tsx",
       "norm_label": "pageheaderprops"
     },
     {
@@ -16280,8 +16632,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_shared_components_page_header_pageheader",
-      "community": 54,
-      "community_name": "person-page.tsx",
+      "community": 47,
+      "community_name": "leads-page.tsx",
       "norm_label": "pageheader()"
     },
     {
@@ -16302,7 +16654,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_shared_utils_cn_cn",
-      "community": 43,
+      "community": 129,
       "community_name": "cn",
       "norm_label": "cn()"
     },
@@ -16313,7 +16665,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_format_count",
-      "community": 94,
+      "community": 43,
       "community_name": "formatCount",
       "norm_label": "format-count.ts"
     },
@@ -16324,7 +16676,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_format_count_formatcount",
-      "community": 94,
+      "community": 43,
       "community_name": "formatCount",
       "norm_label": "formatcount()"
     },
@@ -16335,8 +16687,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_row_activation",
-      "community": 171,
-      "community_name": "team-table.tsx",
+      "community": 67,
+      "community_name": "accounts-table.tsx",
       "norm_label": "row-activation.ts"
     },
     {
@@ -16346,8 +16698,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_shared_utils_row_activation_handlerowactivationkeydown",
-      "community": 171,
-      "community_name": "team-table.tsx",
+      "community": 67,
+      "community_name": "accounts-table.tsx",
       "norm_label": "handlerowactivationkeydown()"
     },
     {
@@ -16357,8 +16709,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_todays_date",
-      "community": 56,
-      "community_name": "team-page.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "todays-date.ts"
     },
     {
@@ -16368,8 +16720,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_todays_date_gettodaysdatelabel",
-      "community": 56,
-      "community_name": "team-page.tsx",
+      "community": 109,
+      "community_name": "accounts-page.tsx",
       "norm_label": "gettodaysdatelabel()"
     },
     {
@@ -22995,6 +23347,17 @@
       "norm_label": "output summary"
     },
     {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents",
+      "community": 202,
+      "community_name": "AGENTS.md",
+      "norm_label": "agents.md"
+    },
+    {
       "label": "CLAUDE.md",
       "file_type": "document",
       "source_file": "CLAUDE.md",
@@ -23842,114 +24205,15 @@
       "norm_label": "screen 9: settings"
     },
     {
-      "label": "AGENTS.md",
+      "label": "screens/AGENTS.md",
       "file_type": "document",
       "source_file": "agent-doc/screens/AGENTS.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "agent_doc_screens_agents",
       "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "agents.md"
-    },
-    {
-      "label": "Rules",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_rules",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "rules"
-    },
-    {
-      "label": "Language",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_language",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "language"
-    },
-    {
-      "label": "Source of Truth (No Guessing)",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_source_of_truth_no_guessing",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "source of truth (no guessing)"
-    },
-    {
-      "label": "Tasks",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_tasks",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "tasks"
-    },
-    {
-      "label": "Search",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L32",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_search",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "search"
-    },
-    {
-      "label": "Timelines",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L40",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_timelines",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "timelines"
-    },
-    {
-      "label": "Working Directory",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L47",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_working_directory",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "working directory"
-    },
-    {
-      "label": "Env Files",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L54",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_env_files",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "env files"
-    },
-    {
-      "label": "Private Folder",
-      "file_type": "document",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L59",
-      "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_private_folder",
-      "community": 104,
-      "community_name": "AGENTS.md",
-      "norm_label": "private folder"
+      "community_name": "screens/AGENTS.md",
+      "norm_label": "screens/agents.md"
     },
     {
       "label": "screens/CLAUDE.md",
@@ -41189,7 +41453,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init",
@@ -41200,7 +41464,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init",
@@ -41228,7 +41492,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init",
-      "target": "backend_app_modules_users_models",
+      "target": "backend_app_modules_settings_init",
       "confidence_score": 1.0
     },
     {
@@ -41240,7 +41504,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init",
-      "target": "backend_app_modules_users_models_user",
+      "target": "backend_app_modules_settings_services_get_or_create_office_hours_window",
       "confidence_score": 1.0
     },
     {
@@ -41252,7 +41516,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init",
-      "target": "backend_app_static_routes",
+      "target": "backend_app_modules_users_models",
       "confidence_score": 1.0
     },
     {
@@ -41264,6 +41528,30 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init",
+      "target": "backend_app_modules_users_models_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/__init__.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_init",
+      "target": "backend_app_static_routes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/__init__.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_init",
       "target": "backend_app_static_routes_register_static_routes",
       "confidence_score": 1.0
     },
@@ -41272,7 +41560,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L65",
+      "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
@@ -41284,7 +41572,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_initial_manager",
@@ -41296,7 +41584,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_initial_manager",
@@ -41308,7 +41596,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_initial_manager",
@@ -41320,7 +41608,7 @@
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
@@ -41332,7 +41620,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
@@ -41344,7 +41632,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L59",
+      "source_location": "L60",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
@@ -41356,7 +41644,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/__init__.py",
-      "source_location": "L61",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_init_create_app",
+      "target": "backend_app_modules_settings_services_get_or_create_office_hours_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/__init__.py",
+      "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_init_create_app",
@@ -41477,6 +41777,18 @@
       "confidence": "EXTRACTED",
       "source_file": "backend/app/api/__init__.py",
       "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_api_init",
+      "target": "backend_app_modules_settings_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/__init__.py",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_api_init",
@@ -41983,6 +42295,30 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_core_errors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_core_errors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/users/routes.py",
       "source_location": "L4",
       "weight": 1.0,
@@ -42326,6 +42662,66 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_core_errors_appexception",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_refuse_non_manager",
+      "target": "backend_app_core_errors_appexception",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_update_office_hours",
+      "target": "backend_app_core_errors_appexception"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_core_errors_appexception",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services_update_office_hours_window",
+      "target": "backend_app_core_errors_appexception",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/users/routes.py",
       "source_location": "L4",
       "weight": 1.0,
@@ -42540,6 +42936,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_core_permissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/users/routes.py",
       "source_location": "L5",
       "weight": 1.0,
@@ -42653,6 +43061,42 @@
       "context": "decorator",
       "_origin": "ast",
       "source": "backend_app_modules_leads_routes_get_next_lead",
+      "target": "backend_app_core_permissions_require_auth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_core_permissions_require_auth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_get_office_hours",
+      "target": "backend_app_core_permissions_require_auth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_update_office_hours",
       "target": "backend_app_core_permissions_require_auth",
       "confidence_score": 1.0
     },
@@ -42925,6 +43369,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_leads",
+      "target": "backend_app_core_security",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
       "target": "backend_app_core_security",
       "confidence_score": 1.0
     },
@@ -43225,6 +43681,30 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_leads_create_user_fixture",
+      "target": "backend_app_core_security_hash_password",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_app_core_security_hash_password",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_create_user_fixture",
       "target": "backend_app_core_security_hash_password",
       "confidence_score": 1.0
     },
@@ -44810,6 +45290,30 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/models.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_models",
+      "target": "backend_app_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/users/models.py",
       "source_location": "L2",
       "weight": 1.0,
@@ -44899,6 +45403,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_leads",
+      "target": "backend_app_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
       "target": "backend_app_extensions",
       "confidence_score": 1.0
     },
@@ -48323,6 +48839,508 @@
       "relation": "re_exports",
       "context": "export",
       "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_init",
+      "target": "backend_app_modules_settings_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_init",
+      "target": "backend_app_modules_settings_models_officehours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/__init__.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_init",
+      "target": "backend_app_modules_settings_routes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/__init__.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_init",
+      "target": "backend_app_modules_settings_services",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/__init__.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_init",
+      "target": "backend_app_modules_settings_services_get_or_create_office_hours_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/models.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_models",
+      "target": "backend_app_modules_settings_models_officehours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_modules_settings_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_modules_settings_models_officehours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services_get_or_create_office_hours_window",
+      "target": "backend_app_modules_settings_models_officehours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_routes_get_office_hours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_routes_refuse_non_manager",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_routes_update_office_hours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_schemas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_schemas_officehoursresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_schemas_updateofficehoursrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_services",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_services_get_office_hours_view",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes",
+      "target": "backend_app_modules_settings_services_update_office_hours_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_get_office_hours",
+      "target": "backend_app_modules_settings_routes_refuse_non_manager",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_update_office_hours",
+      "target": "backend_app_modules_settings_routes_refuse_non_manager",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_get_office_hours",
+      "target": "backend_app_modules_settings_routes_py_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_get_office_hours",
+      "target": "backend_app_modules_settings_routes_py_response",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_get_office_hours",
+      "target": "backend_app_modules_settings_schemas_officehoursresponse"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_get_office_hours",
+      "target": "backend_app_modules_settings_services_get_office_hours_view"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_update_office_hours",
+      "target": "backend_app_modules_settings_routes_py_response",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_update_office_hours",
+      "target": "put",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_update_office_hours",
+      "target": "backend_app_modules_settings_schemas_updateofficehoursrequest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/modules/settings/routes.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_routes_update_office_hours",
+      "target": "backend_app_modules_settings_services_update_office_hours_window"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_schemas",
+      "target": "backend_app_modules_settings_schemas_officehoursresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_schemas",
+      "target": "backend_app_modules_settings_schemas_updateofficehoursrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_schemas_officehoursresponse",
+      "target": "backend_app_modules_settings_schemas_py_basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_schemas_updateofficehoursrequest",
+      "target": "backend_app_modules_settings_schemas_py_basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_schemas_updateofficehoursrequest",
+      "target": "backend_app_modules_settings_schemas_updateofficehoursrequest_require_hhmm_format",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/schemas.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_schemas_updateofficehoursrequest_require_hhmm_format",
+      "target": "backend_app_modules_settings_schemas_py_field_validator",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_modules_settings_services_format_minute_of_day",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_modules_settings_services_get_office_hours_view",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_modules_settings_services_get_or_create_office_hours_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_modules_settings_services_parse_time_to_minute",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services",
+      "target": "backend_app_modules_settings_services_update_office_hours_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services_get_office_hours_view",
+      "target": "backend_app_modules_settings_services_format_minute_of_day",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services_update_office_hours_window",
+      "target": "backend_app_modules_settings_services_parse_time_to_minute",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services_get_office_hours_view",
+      "target": "backend_app_modules_settings_services_get_or_create_office_hours_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/settings/services.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_settings_services_update_office_hours_window",
+      "target": "backend_app_modules_settings_services_get_or_create_office_hours_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/users/__init__.py",
       "source_location": "L1",
       "weight": 1.0,
@@ -48746,6 +49764,30 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_leads_create_user_fixture",
+      "target": "backend_app_modules_users_models_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_app_modules_users_models_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_create_user_fixture",
       "target": "backend_app_modules_users_models_user",
       "confidence_score": 1.0
     },
@@ -54472,6 +55514,287 @@
       "_origin": "ast",
       "source": "backend_tests_modules_test_leads_test_upload_leads_unparseable_number_skipped",
       "target": "backend_tests_modules_test_leads_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_tests_modules_test_settings_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_tests_modules_test_settings_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_tests_modules_test_settings_test_get_office_hours_fresh_database_returns_default_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_tests_modules_test_settings_test_office_hours_unauthenticated_rejected",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_tests_modules_test_settings_test_put_office_hours_end_not_after_start_refused",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_tests_modules_test_settings_test_put_office_hours_malformed_body_refused",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_tests_modules_test_settings_test_put_office_hours_saves_window_for_next_read",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings",
+      "target": "backend_tests_modules_test_settings_test_salesperson_refused_on_both_office_hours_endpoints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_get_office_hours_fresh_database_returns_default_window",
+      "target": "backend_tests_modules_test_settings_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_end_not_after_start_refused",
+      "target": "backend_tests_modules_test_settings_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_malformed_body_refused",
+      "target": "backend_tests_modules_test_settings_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_saves_window_for_next_read",
+      "target": "backend_tests_modules_test_settings_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_salesperson_refused_on_both_office_hours_endpoints",
+      "target": "backend_tests_modules_test_settings_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_get_office_hours_fresh_database_returns_default_window",
+      "target": "backend_tests_modules_test_settings_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_get_office_hours_fresh_database_returns_default_window",
+      "target": "backend_tests_modules_test_settings_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_end_not_after_start_refused",
+      "target": "backend_tests_modules_test_settings_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_malformed_body_refused",
+      "target": "backend_tests_modules_test_settings_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_saves_window_for_next_read",
+      "target": "backend_tests_modules_test_settings_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_salesperson_refused_on_both_office_hours_endpoints",
+      "target": "backend_tests_modules_test_settings_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_office_hours_unauthenticated_rejected",
+      "target": "backend_tests_modules_test_settings_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_end_not_after_start_refused",
+      "target": "backend_tests_modules_test_settings_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_malformed_body_refused",
+      "target": "backend_tests_modules_test_settings_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_put_office_hours_saves_window_for_next_read",
+      "target": "backend_tests_modules_test_settings_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_settings.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_settings_test_salesperson_refused_on_both_office_hours_endpoints",
+      "target": "backend_tests_modules_test_settings_py_flaskclient",
       "confidence_score": 1.0
     },
     {
@@ -73729,105 +75052,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L54",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_env_files",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_language",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L59",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_private_folder",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_rules",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L32",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_search",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_source_of_truth_no_guessing",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L22",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_tasks",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L40",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_timelines",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/screens/AGENTS.md",
-      "source_location": "L47",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_screens_agents",
-      "target": "d_company_projects_sales_call_tracker_agent_doc_screens_agents_working_directory",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "agent-doc/screens/CLAUDE.md",
       "source_location": "L54",
       "weight": 1.0,
@@ -76555,5 +77779,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3a2cf41237008c2798bc1922009169708aedd254"
+  "built_at_commit": "94055999acc980be41f836678973469a313bf522"
 }

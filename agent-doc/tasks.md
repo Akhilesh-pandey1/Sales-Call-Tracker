@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A fresh database answers GET with 10:00 / 19:00, and a valid PUT is saved and returned by the next read
-- [ ] PUT refuses an end not after start with "End time must be after start time." and a missing or non-HH:MM body with "Invalid request format: start_time and end_time required."
-- [ ] A salesperson token gets 403 "This setting is for managers." on both endpoints
+- [x] A fresh database answers GET with 10:00 / 19:00, and a valid PUT is saved and returned by the next read
+- [x] PUT refuses an end not after start with "End time must be after start time." and a missing or non-HH:MM body with "Invalid request format: start_time and end_time required."
+- [x] A salesperson token gets 403 "This setting is for managers." on both endpoints
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_settings.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_settings.py` (from `backend/`)
 
 ---
 

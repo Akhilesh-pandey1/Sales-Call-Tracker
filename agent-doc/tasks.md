@@ -149,15 +149,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The row shows its full title and description at its natural height — no forced standard button height
-- [ ] Tapping the row still opens the clear-local-data confirm dialog
+- [x] The row shows its full title and description at its natural height — no forced standard button height
+- [x] Tapping the row still opens the clear-local-data confirm dialog
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

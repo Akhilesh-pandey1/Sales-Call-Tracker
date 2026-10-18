@@ -94,15 +94,15 @@
 
 **Blocked by:** Task 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [ ] Save & Continue still schedules the lead when chosen and claims the next lead through `/api/leads/next`
 - [ ] The chosen outcome is recorded on the call record — on the queued row or through PATCH, the same rule as keypad calls
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

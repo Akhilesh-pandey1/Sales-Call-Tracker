@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Sync stores a valid per-call `outcome`; an absent or empty value leaves the column unset, and an invalid value skips that row like any malformed row
-- [ ] The `calls` table has the nullable `outcome` column after startup — on a fresh database and on the existing one, with existing rows left empty
-- [ ] The outcome tests in `backend/tests/modules/test_calls.py` cover the stored, absent, and invalid cases per `testing.md`
+- [x] Sync stores a valid per-call `outcome`; an absent or empty value leaves the column unset, and an invalid value skips that row like any malformed row
+- [x] The `calls` table has the nullable `outcome` column after startup — on a fresh database and on the existing one, with existing rows left empty
+- [x] The outcome tests in `backend/tests/modules/test_calls.py` cover the stored, absent, and invalid cases per `testing.md`
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest backend/tests/modules/test_calls.py` (from the project root)
+- [x] Tests pass: `python -m pytest backend/tests/modules/test_calls.py` (from the project root)
 
 ---
 

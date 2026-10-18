@@ -105,6 +105,8 @@ YOUR TASK (read the full task from agent-doc/tasks.md, Task <N>):
 - Blocked by: <already done — no concern>
 
 CONTEXT POINTERS (read these before starting):
+- agent-doc/ is the main folder — it holds everything: all the decisions, the grilling and brainstorming results, specs, API contracts, database schemas, the designer's screens (HTML code), and the actual photos.
+- First list every file and folder in agent-doc/, then read every file your task needs. Take your answers from there — most things are already written down, so look there before assuming anything.
 - Spec: agent-doc/specs/<relevant-spec>.md
 - API contract: agent-doc/api.md (if relevant)
 - Database schema: agent-doc/database.md (if relevant)

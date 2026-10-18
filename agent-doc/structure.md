@@ -71,7 +71,7 @@ backend/
 │       │   ├── models.py            # Call SQLAlchemy database model
 │       │   └── __init__.py
 │       ├── dashboard/
-│       │   ├── routes.py            # GET /api/dashboard/team, GET /api/dashboard/person/<id>
+│       │   ├── routes.py            # GET /api/dashboard/team, GET /api/dashboard/team/people, GET /api/dashboard/person/<id>
 │       │   ├── schemas.py           # Dashboard response schemas
 │       │   ├── services.py          # IST period aggregation, computed dashboard KPIs, and top numbers calculation
 │       │   └── __init__.py
@@ -117,10 +117,12 @@ web/
 ├── index.html
 └── src/
     ├── app/
-    │   ├── router.tsx               # App routing with manager auth guard
+    │   ├── router.tsx               # Routes: /, /team, /leads, /accounts, /settings, /person/:id with manager auth guard
     │   ├── providers.tsx            # TanStack Query and Auth context providers
+    │   ├── guards/
+    │   │   └── manager-guard.tsx    # Manager-only gate: salesperson logins see one message
     │   └── layouts/
-    │       └── dashboard-layout.tsx # Persistent sidebar and top navbar wrapper
+    │       └── dashboard-layout.tsx # Sidebar: Dashboard, Team, Leads, Accounts, Settings, Logout
     ├── features/
     │   ├── auth/
     │   │   ├── api/auth.api.ts
@@ -131,31 +133,54 @@ web/
     │   │   ├── hooks/use-team-dashboard.ts
     │   │   ├── hooks/use-person-stats.ts
     │   │   ├── components/kpi-card.tsx
+    │   │   ├── components/period-switch.tsx
+    │   │   ├── components/dashboard-card.tsx
     │   │   ├── components/calls-by-hour-chart.tsx
-    │   │   ├── components/team-table.tsx
+    │   │   ├── components/top-people-list.tsx
     │   │   ├── components/top-numbers-table.tsx
+    │   │   ├── components/team-table.tsx  # Team page rows: today and yesterday per salesperson
     │   │   ├── utils/format.ts          # Display-only formatting (no calculations)
-    │   │   ├── pages/team-page.tsx
+    │   │   ├── pages/dashboard-page.tsx # Dashboard: KPI cards, calls-by-hour chart, Top 5
+    │   │   ├── pages/team-page.tsx      # Team: one row per active salesperson, opens person page
     │   │   └── pages/person-page.tsx
     │   ├── accounts/
     │   │   ├── api/accounts.api.ts
     │   │   ├── hooks/use-accounts.ts
+    │   │   ├── hooks/use-create-user.ts
+    │   │   ├── hooks/use-update-user.ts
+    │   │   ├── hooks/use-delete-user.ts
+    │   │   ├── hooks/use-user-status.ts
+    │   │   ├── hooks/use-edit-account-form.ts
+    │   │   ├── components/accounts-table.tsx
+    │   │   ├── components/user-status-button.tsx
     │   │   ├── components/add-user-modal.tsx
     │   │   ├── components/edit-user-modal.tsx
     │   │   ├── components/delete-dialog.tsx
     │   │   └── pages/accounts-page.tsx
+    │   ├── settings/
+    │   │   ├── api/office-hours.api.ts
+    │   │   ├── hooks/use-office-hours.ts
+    │   │   ├── hooks/use-office-hours-form.ts
+    │   │   ├── components/office-hours-editor.tsx
+    │   │   └── pages/settings-page.tsx   # Settings: the office-hours card
     │   └── leads/
     │       ├── api/leads.api.ts
     │       ├── hooks/use-leads.ts
+    │       ├── hooks/use-lead-upload.ts
     │       ├── components/lead-upload-card.tsx
     │       ├── components/lead-pool-stats.tsx
+    │       ├── components/lead-daily-stats.tsx
     │       ├── components/lead-agent-table.tsx
     │       └── pages/leads-page.tsx
     ├── components/
-    │   └── ui/                      # shadcn/ui components: button, dialog, input, table, badge
+    │   └── ui/                      # shadcn/ui components: button, dialog, input, table, badge, chart
     ├── shared/
     │   ├── components/page-header.tsx  # Slim per-page top bar: title left, date or action right
-    │   └── api/api-client.ts        # Axios client with auth token interceptor and 401 redirect
+    │   ├── components/error-state.tsx  # "Could not load data." with a Retry button
+    │   ├── components/error-alert.tsx
+    │   ├── api/api-client.ts        # Axios client with auth token interceptor and 401 redirect
+    │   ├── api/api-error.ts
+    │   └── utils/                   # cn, format-count, todays-date, row-activation helpers
     └── main.tsx                     # React DOM entry point
 ```
 

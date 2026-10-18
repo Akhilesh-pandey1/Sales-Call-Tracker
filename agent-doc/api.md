@@ -133,6 +133,30 @@ Returns team call aggregates for today, yesterday, and the last 30 days. Each pe
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
   - `403 Forbidden`: `{"message": "This dashboard is for managers."}`
 
+### `GET /api/dashboard/team/people`
+Returns one row per active salesperson for the Team page table: today and yesterday dials, connected, and minutes. The frontend only formats these values for display.
+
+- **Auth**: Manager token only
+- **Response 200**:
+  ```json
+  [
+    {
+      "user_id": 3,
+      "name": "Ramesh",
+      "today": { "dials": 58, "connected": 21, "minutes": 96 },
+      "yesterday": { "dials": 47, "connected": 15, "minutes": 74 }
+    }
+  ]
+  ```
+- **Rules**:
+  - One row per active salesperson; a person with no calls still lists with zeros. Deactivated salespeople never appear.
+  - Each period block carries only `dials`, `connected`, and `minutes`; `minutes` is `round(seconds / 60)` computed on the server. No `seconds` field is returned.
+  - Rows are sorted by today's dials, highest first.
+  - Today and yesterday are IST calendar days over UTC call timestamps, same as the team endpoint.
+- **Error Responses**:
+  - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
+  - `403 Forbidden`: `{"message": "This dashboard is for managers."}`
+
 ### `GET /api/dashboard/person/<id>`
 Returns call performance stats, calls-by-hour, and top 5 numbers for a specific user across today, yesterday, and the last 30 days. Each period carries its own totals and computed KPIs. The frontend only formats these values for display.
 

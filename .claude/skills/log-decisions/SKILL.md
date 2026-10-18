@@ -46,6 +46,87 @@ A file that does not exist yet is created, with a simple header, the moment its 
 
 Write each agreement into its one file. No interview, no questions — the conversation is the input.
 
+### File formats — every file follows this exact shape
+
+#### `database.md` — field table
+
+One `## Table: <name>` section per table. One line on what the table holds, then the field table, then rules as bullets.
+
+```
+## Table: users
+
+Holds one row for every person who can log in.
+
+| Key | Description | Type | Example |
+|---|---|---|---|
+| id | Primary key, auto-generated | integer | 42 |
+| email | Login email, unique | string | ravi@example.com |
+
+Rules:
+- `email` has a unique index.
+- `calls.user_id` points to `users.id`.
+```
+
+#### `api.md` — one endpoint per section
+
+One `## <METHOD> <path>` section per endpoint. One line on what it does and whether it needs login. Then three bullet groups — one field per bullet: `key` — type, required or optional. What it is. Example.
+
+```
+## POST /api/v1/calls
+
+Books one call with a customer. Needs login (JWT).
+
+**Request body**
+- `phone_number` — string, required. Customer phone with country code. Example: `+919876543210`
+- `notes` — string, optional. What the call is about. Example: `Discuss invoice`
+
+**Response 200**
+- `id` — integer. New call id. Example: `101`
+- `status` — string. Call state after booking. Example: `scheduled`
+
+**Errors**
+- `400` — phone number is missing. Message: "Phone number is required"
+- `401` — token missing or expired. Message: "Please log in again"
+```
+
+#### `testing.md` — grouped by feature
+
+A tools line first, then one `### <feature>` group per feature, one short line per test.
+
+```
+## Testing approach
+
+Tools: Jest for unit tests, Supertest for API tests.
+
+### Login
+- Unit: valid user gets a token with the right expiry.
+- API test: login endpoint returns 401 on a wrong password.
+```
+
+#### `structure.md` — stack list and folder tree
+
+Tech stack as bullets with exact versions. Folder tree as an indented tree — never as a table.
+
+```
+## Tech stack
+
+- Frontend: React 18.3.1
+- Backend: Node.js 20.11 + Express 4.19
+- Database: PostgreSQL 16
+
+## Folder tree
+
+backend/
+├── src/
+│   ├── modules/
+│   │   ├── auth/
+│   │   └── calls/
+│   └── server.ts
+└── package.json
+```
+
+`decisions.md` keeps the `before-grill` decision format — no change.
+
 ### One fact, one place
 
 - A fact lives in exactly one file — the one its topic picks. Never the same thing in two files.

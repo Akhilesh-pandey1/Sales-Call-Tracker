@@ -43,12 +43,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] `/settings` shows the single Office hours card with the stored window, and saving a valid change updates it
-- [ ] A refused save shows the API's message and keeps the editor open
-- [ ] The Accounts page no longer renders the editor and keeps Add person, per-row Edit, Deactivate/Activate, Delete, with no actions on the manager's own row
+- [x] `/settings` shows the single Office hours card with the stored window, and saving a valid change updates it
+- [x] A refused save shows the API's message and keeps the editor open
+- [x] The Accounts page no longer renders the editor and keeps Add person, per-row Edit, Deactivate/Activate, Delete, with no actions on the manager's own row
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

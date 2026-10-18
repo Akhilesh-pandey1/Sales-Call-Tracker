@@ -75,7 +75,7 @@
 
 **Blocked by:** Task 3, Task 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [ ] When a keypad call ends, the dialog opens by itself showing the dialed number with Connected and Did not connect only, and Save records the choice
@@ -83,8 +83,8 @@
 - [ ] The keypad dialog has no Schedule choice, no auto-dial checkbox, and no attempt line
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

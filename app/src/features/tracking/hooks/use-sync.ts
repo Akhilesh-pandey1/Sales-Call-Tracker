@@ -67,6 +67,20 @@ function syncPendingCalls(): Promise<void> {
   return syncPromise;
 }
 
+async function recordOutcomeOnSyncedCall(
+  callId: string,
+  outcome: CallOutcome,
+): Promise<boolean> {
+  try {
+    await updateCallOutcome(callId, outcome);
+    const didRecordOutcome = true;
+    return didRecordOutcome;
+  } catch {
+    const didNotRecordOutcome = false;
+    return didNotRecordOutcome;
+  }
+}
+
 export async function recordCallOutcome(
   callId: string,
   outcome: CallOutcome,
@@ -74,6 +88,13 @@ export async function recordCallOutcome(
   const didStoreOnPendingRow = await updatePendingCallOutcome(callId, outcome);
   if (!didStoreOnPendingRow) {
     await updateCallOutcome(callId, outcome);
+    return;
+  }
+  const wasOutcomeRecordedOnSyncedCall = await recordOutcomeOnSyncedCall(
+    callId,
+    outcome,
+  );
+  if (wasOutcomeRecordedOnSyncedCall) {
     return;
   }
   const runningPromise = runningSync;

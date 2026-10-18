@@ -179,7 +179,7 @@ function AutomatedStartView({
   const handleStartPress = () => onStartCalling();
 
   return (
-    <View className="flex-1 items-center justify-center px-6">
+    <View className="flex-1 items-center justify-center px-3">
       <View className="h-16 w-16 items-center justify-center rounded-2xl bg-primary">
         <Icon as={Phone} size={32} className="text-primary-foreground" />
       </View>
@@ -210,7 +210,7 @@ function AutomatedStartView({
 
 function AutomatedLoadingView({ loadingLabel }: { loadingLabel: string }) {
   return (
-    <View className="flex-1 items-center justify-center gap-3 px-6">
+    <View className="flex-1 items-center justify-center gap-3 px-3">
       <ActivityIndicator size="large" className="text-primary" />
       <Text className="text-xs font-semibold text-muted-foreground">{loadingLabel}</Text>
     </View>
@@ -221,7 +221,7 @@ function AutomatedEmptyView({ onTryAgain }: { onTryAgain: () => void }) {
   const handleTryAgainPress = () => onTryAgain();
 
   return (
-    <View className="flex-1 items-center justify-center px-6">
+    <View className="flex-1 items-center justify-center px-3">
       <View className="h-16 w-16 items-center justify-center rounded-2xl bg-muted">
         <Icon as={Inbox} size={32} className="text-muted-foreground" />
       </View>

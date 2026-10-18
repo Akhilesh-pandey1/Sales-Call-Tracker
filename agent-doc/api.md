@@ -49,7 +49,8 @@ Receives a batch of completed calls from the salesperson's mobile app.
         "call_id": "c1f7b8d4-5e92-4a7b-91c2-3e4f5a6b7c8d",
         "phone_number": "+919876543210",
         "dialed_at": "2026-10-14T06:30:00Z",
-        "duration_seconds": 95
+        "duration_seconds": 95,
+        "outcome": "connected"
       },
       {
         "call_id": "d2a8c9e5-6f03-4b8c-82d3-4f5a6b7c8d9e",
@@ -62,6 +63,7 @@ Receives a batch of completed calls from the salesperson's mobile app.
   ```
 - **Processing Logic**:
   - Saves all valid call entries under the authenticated user's ID.
+  - Stores the optional per-call `outcome` (`connected`, `not_connected`, or `schedule`); an absent or empty value leaves the outcome unrecorded.
   - Silently ignores existing `call_id` values (idempotent unique key).
   - Skips and logs any call older than 3 days (`MAX_CALL_AGE_DAYS`).
   - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped.
@@ -76,6 +78,28 @@ Receives a batch of completed calls from the salesperson's mobile app.
   - `400 Bad Request`: `{"message": "Invalid request format: 'calls' array required."}`
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
   - `403 Forbidden`: `{"message": "Your account is not active. Please contact your manager."}`
+
+### `PATCH /api/calls/<call_id>/outcome`
+Records the salesperson's chosen outcome on a call that already synced before the choice was made. Needs login.
+
+- **Auth**: Any active user token
+- **Request Body**:
+  ```json
+  { "outcome": "connected" }
+  ```
+  - `outcome` — string, required. One of `connected`, `not_connected`, `schedule`. Example: `not_connected`
+- **Response 200**:
+  ```json
+  { "status": true }
+  ```
+- **Rules**:
+  - Updates only the authenticated user's own call; any other `call_id` answers 404.
+  - A new outcome replaces a previously stored one.
+- **Error Responses**:
+  - `400 Bad Request`: `{"message": "Outcome must be connected, not_connected, or schedule."}`
+  - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
+  - `403 Forbidden`: `{"message": "Your account is not active. Please contact your manager."}`
+  - `404 Not Found`: `{"message": "Call not found."}`
 
 ---
 

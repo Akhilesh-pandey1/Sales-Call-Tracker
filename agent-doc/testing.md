@@ -20,6 +20,9 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - A call starting 18:59 and exactly 19:00 IST are saved; 19:01 is discarded (window end inclusive).
 - After the manager updates the office hours window, the gate uses the new window on the next sync.
 - Malformed call rows are skipped while valid rows in the same batch are saved.
+- Sync stores an optional per-call `outcome` (`connected`, `not_connected`, `schedule`); an absent or empty value leaves the column unset.
+- `PATCH /api/calls/<call_id>/outcome` updates the outcome of the token owner's synced call.
+- PATCH with an invalid outcome value returns 400; an unknown call or another user's call returns 404.
 - Returns `{"status": true}` on success.
 
 ### `tests/modules/test_dashboard.py`
@@ -97,3 +100,9 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - Save & Continue with auto-dial on starts the next lead's call immediately.
 - The tab bar shows three tabs with icons — Dialer (phone), My Stats (bar chart), Settings (gear) — and the My Stats header has no gear button.
 - No screen draws content under the status bar (Login, Dialer, My Stats, Settings).
+- After a keypad call ends, the Call Outcome dialog opens by itself with Connected and Did not connect only, and Save sends the outcome to the server (visible as the call's `outcome` in the `calls` table).
+- After an automated call ends, the Call Outcome dialog opens by itself with all three choices, and Save & Continue still brings up the next lead.
+- The Settings "Clear local data" row shows its full title and description, and tapping it opens the confirm dialog.
+- Holding the dialer backspace clears the whole typed number; a single tap still deletes one character.
+- My Stats shows the Last-30-days KPI cards, the performance table, and the Calls-by-hour chart with its period switch — and no most-contacted-numbers table.
+- Every screen keeps a slim 12px side margin.

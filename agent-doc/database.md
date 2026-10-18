@@ -37,12 +37,15 @@ CREATE TABLE calls (
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     phone_number VARCHAR(30) NOT NULL,
     dialed_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    duration_seconds INTEGER NOT NULL DEFAULT 0
+    duration_seconds INTEGER NOT NULL DEFAULT 0,
+    outcome VARCHAR(20)
 );
 
 CREATE UNIQUE INDEX idx_calls_call_id ON calls(call_id);
 CREATE INDEX idx_calls_user_dialed ON calls(user_id, dialed_at);
 ```
+
+- `outcome` holds the salesperson's chosen result: `connected`, `not_connected`, or `schedule`. Empty means the outcome was never recorded. The column is additive — existing rows keep it empty and nothing is backfilled.
 
 ### `leads`
 Stores shared lead numbers, call outcomes, retry locks, claims, and scheduling.
@@ -95,11 +98,13 @@ CREATE TABLE pending_calls (
     intent_at TEXT NOT NULL,
     dialed_at TEXT,
     duration_seconds INTEGER,
+    outcome TEXT,
     attempts INTEGER NOT NULL DEFAULT 0
 );
 ```
 
 - `dialed_at` and `duration_seconds` remain `NULL` until filled by the real-time call-end listener or the 1-hour janitor.
+- `outcome` holds the result picked in the outcome dialog (`connected` or `not_connected`) until sync sends it; the row is deleted after sync as usual.
 - At 5 janitor attempts, an unfilled row is set to `dialed_at = intent_at` and `duration_seconds = 0` so the dial reaches the server and counts.
 
 ---

@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "agent-doc/decisions.md": {
-    "mtime": 1792341247.128552,
-    "ast_hash": "298dfb4754e8013e6328eee138a077d8",
+    "mtime": 1792356089.8322954,
+    "ast_hash": "44de1c92575a890e6c00e2b240cfd6be",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/uiux/data/catalog-summary.json": {
@@ -305,23 +305,23 @@
     "semantic_hash": ""
   },
   "agent-doc/api.md": {
-    "mtime": 1792320699.6694713,
-    "ast_hash": "a0d9bd18d6d14831c8dc36d1e403097c",
+    "mtime": 1792356145.859841,
+    "ast_hash": "8653a087fc4a766bf4868c975edb954e",
     "semantic_hash": ""
   },
   "agent-doc/database.md": {
-    "mtime": 1792224634.4824882,
-    "ast_hash": "4cf9969228ed4bfa57230cdb881f4218",
+    "mtime": 1792356099.484005,
+    "ast_hash": "c3d01853fe3fe4163a3cbe559955a20b",
     "semantic_hash": ""
   },
   "agent-doc/structure.md": {
-    "mtime": 1792341269.3451412,
-    "ast_hash": "4177c37c92a155a02d73a1988b836735",
+    "mtime": 1792356164.2766428,
+    "ast_hash": "f10136749c7640249039bca53b237fc0",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
-    "mtime": 1792341279.8123543,
-    "ast_hash": "33364cf3f5898d88b06a8b4010edc76d",
+    "mtime": 1792356157.76237,
+    "ast_hash": "b06ce38070989c38832ca8066c6186ee",
     "semantic_hash": ""
   },
   "agent-doc/proposal.md": {
@@ -355,8 +355,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792345798.8913927,
-    "ast_hash": "6ded4383ae0c6e13afe0257377577ae6",
+    "mtime": 1792356565.9372487,
+    "ast_hash": "5dd576d20d28505733afb3c3f4c4263b",
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {

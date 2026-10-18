@@ -66,7 +66,7 @@ backend/
 │       │   ├── services.py          # Authentication and in-memory lockout logic
 │       │   └── __init__.py
 │       ├── calls/
-│       │   ├── routes.py            # POST /api/calls/sync
+│       │   ├── routes.py            # POST /api/calls/sync, PATCH /api/calls/<call_id>/outcome
 │       │   ├── schemas.py           # Sync batch schemas
 │       │   ├── services.py          # Call ingestion, office-hours gate, duplicate skip, lead resolution
 │       │   ├── models.py            # Call SQLAlchemy database model
@@ -221,7 +221,7 @@ app/
     │   │   ├── api/stats.api.ts
     │   │   ├── hooks/use-my-stats.ts
     │   │   └── screens/
-    │   │       ├── my-stats-screen.tsx   # Salesperson KPI view
+    │   │       ├── my-stats-screen.tsx   # Salesperson stats: last-30-days KPI cards, performance table, calls-by-hour chart
     │   │       └── settings-screen.tsx   # Settings tab: clear local data recovery button
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations

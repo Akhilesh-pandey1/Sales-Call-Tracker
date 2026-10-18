@@ -1,11 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { AppState, type AppStateStatus } from 'react-native';
-import { subscribeToCallEnded } from '@/features/tracking';
+import { useCallback, useRef, useState } from 'react';
+import type { CallOutcome } from '@/features/tracking';
 import type { ServedLead } from '../api/leads.api';
+import { useCallHangUpDetector } from './use-call-hang-up-detector';
 import { useLeadLoading } from './use-lead-loading';
 import { useOutcomeSubmit } from './use-outcome-submit';
-
-export type LeadOutcome = 'connected' | 'not_connected' | 'schedule';
 
 export type AutomatedViewState =
   | { kind: 'start' }
@@ -28,36 +26,10 @@ export type UseAutomatedCallingResult = {
   closeOutcomeDialog: () => void;
   setAutoDialNextEnabled: (isEnabled: boolean) => void;
   submitOutcome: (
-    outcome: LeadOutcome,
+    outcome: CallOutcome,
     scheduledAt: string | null,
   ) => Promise<void>;
 };
-
-function useCallHangUpDetector(
-  isDialing: boolean,
-  onCallEnded: () => void,
-): void {
-  useEffect(() => {
-    if (!isDialing) {
-      return;
-    }
-    function handleAppStateChange(nextAppState: AppStateStatus): void {
-      if (nextAppState !== 'active') {
-        return;
-      }
-      onCallEnded();
-    }
-    const appStateSubscription = AppState.addEventListener(
-      'change',
-      handleAppStateChange,
-    );
-    const unsubscribeCallEnded = subscribeToCallEnded(onCallEnded);
-    return () => {
-      appStateSubscription.remove();
-      unsubscribeCallEnded();
-    };
-  }, [isDialing, onCallEnded]);
-}
 
 export function useAutomatedCalling(): UseAutomatedCallingResult {
   const [viewState, setViewState] = useState<AutomatedViewState>({ kind: 'start' });

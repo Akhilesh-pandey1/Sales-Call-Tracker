@@ -5,6 +5,11 @@ import { insertPendingCall } from '@/features/tracking';
 
 const callFailedMessage = 'Could not start the call. Please try again.';
 
+type LaunchedCall = {
+  callId: string;
+  phoneNumber: string;
+};
+
 function createCallId(): string {
   const callId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
   return callId;
@@ -20,7 +25,7 @@ function rejectAfterTimeout(
   return timeoutPromise;
 }
 
-async function launchTrackedCall(phoneNumber: string): Promise<void> {
+async function launchTrackedCall(phoneNumber: string): Promise<LaunchedCall | null> {
   const e164PhonePattern = /^\+[1-9]\d{6,14}$/;
   if (!e164PhonePattern.test(phoneNumber)) {
     throw new Error('Phone number is not a valid E.164 number.');
@@ -31,7 +36,7 @@ async function launchTrackedCall(phoneNumber: string): Promise<void> {
   );
   if (!isCallPermissionGranted) {
     await Linking.openURL(telUrl);
-    return;
+    return null;
   }
   const intentAt = new Date().toISOString();
   const callId = createCallId();
@@ -47,6 +52,9 @@ async function launchTrackedCall(phoneNumber: string): Promise<void> {
     directCallTimeoutMessage,
   );
   await Promise.race([startActivityPromise, startActivityTimeoutPromise]);
+  const launchedCall: LaunchedCall = { callId, phoneNumber };
+  return launchedCall;
 }
 
 export { callFailedMessage, launchTrackedCall };
+export type { LaunchedCall };

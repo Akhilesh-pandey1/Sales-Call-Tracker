@@ -22,15 +22,15 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The page at `/team` renders returned rows only — name plus today/yesterday dials, connected, and minutes, in the server's sort order, zeros included
-- [ ] Tapping a row opens `/person/<id>?from=/team`, and narrow screens show one card per person with the same numbers
-- [ ] With no salespeople the page shows an empty state pointing to Accounts, and the Dashboard at `/` keeps its exact current content
+- [x] The page at `/team` renders returned rows only — name plus today/yesterday dials, connected, and minutes, in the server's sort order, zeros included
+- [x] Tapping a row opens `/person/<id>?from=/team`, and narrow screens show one card per person with the same numbers
+- [x] With no salespeople the page shows an empty state pointing to Accounts, and the Dashboard at `/` keeps its exact current content
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

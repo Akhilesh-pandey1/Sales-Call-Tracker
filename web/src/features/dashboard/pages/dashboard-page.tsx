@@ -196,7 +196,7 @@ function TeamPerformanceSection({
   );
 }
 
-export function TeamPage() {
+export function DashboardPage() {
   const { teamDashboard, isLoading, hasError, refetch } = useTeamDashboard();
   const [selectedPeriod, setSelectedPeriod] = useState<DashboardPeriod>("today");
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);

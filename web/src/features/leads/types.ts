@@ -12,14 +12,6 @@ export interface LeadPoolCounts {
   stopped: number;
 }
 
-export interface LeadPersonActivity {
-  id: number;
-  name: string;
-  attempted: number;
-  connected: number;
-  not_connected: number;
-}
-
 export interface LeadsDailyCount {
   today: number;
   yesterday: number;
@@ -29,7 +21,6 @@ export interface LeadsSummary {
   pool: LeadPoolCounts;
   uploaded: LeadsDailyCount;
   tackled: LeadsDailyCount;
-  people: LeadPersonActivity[];
 }
 
 export interface LeadsSummaryApiResponse extends LeadsSummary {

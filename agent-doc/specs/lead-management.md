@@ -50,11 +50,6 @@ The system SHALL return the pool bucket counts — waiting split by attempt coun
 - **WHEN** the summary is requested
 - **THEN** tackled shows 1 for today and 1 for yesterday — distinct leads, not call counts
 
-#### Scenario: Per-person activity returned
-- **GIVEN** active salespeople made lead calls today
-- **WHEN** the summary is requested
-- **THEN** each salesperson's today attempted, connected, and not-connected counts are included
-
 #### Scenario: Zero yesterday hides percentage change
 - **GIVEN** the uploaded or tackled count for yesterday is 0
 - **WHEN** the daily cards render on the Leads page

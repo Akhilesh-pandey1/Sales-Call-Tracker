@@ -13,7 +13,6 @@ export async function getLeadsSummary(): Promise<LeadsSummary> {
     pool: response.data.pool,
     uploaded: response.data.uploaded,
     tackled: response.data.tackled,
-    people: response.data.people,
   };
   return summary;
 }

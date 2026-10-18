@@ -16,14 +16,6 @@ class LeadPoolBucketCounts(BaseModel):
     stopped: int
 
 
-class SalespersonLeadActivity(BaseModel):
-    id: int
-    name: str
-    attempted: int
-    connected: int
-    not_connected: int
-
-
 class DayCounts(BaseModel):
     today: int
     yesterday: int
@@ -34,7 +26,6 @@ class LeadsSummaryResponse(BaseModel):
     pool: LeadPoolBucketCounts
     uploaded: DayCounts
     tackled: DayCounts
-    people: list[SalespersonLeadActivity]
 
 
 class ScheduleLeadRequest(BaseModel):

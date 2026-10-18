@@ -85,5 +85,6 @@ logs.txt
 # Extra folder for local work
 not_to_be_pushed
 
-# Chief-of-staff worktrees
+# Chief-of-staff
 .worktrees/
+agent-doc/.cos-ledger.md

@@ -3,7 +3,6 @@ import { PageHeader } from "@/shared/components/page-header";
 import { LeadUploadCard } from "../components/lead-upload-card";
 import { LeadDailyStats } from "../components/lead-daily-stats";
 import { LeadPoolStats } from "../components/lead-pool-stats";
-import { LeadAgentTable } from "../components/lead-agent-table";
 import { useLeads } from "../hooks/use-leads";
 
 export function LeadsPage() {
@@ -58,7 +57,6 @@ export function LeadsPage() {
           </p>
         </div>
       ) : null}
-      <LeadAgentTable people={leadsSummary.people} />
     </PageHeader>
   );
 }

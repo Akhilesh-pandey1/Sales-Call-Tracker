@@ -353,7 +353,7 @@ Uploads a single-column CSV of phone numbers into the lead pool.
   - `400 Bad Request`: `{"message": "File is too large."}` / `{"message": "Please select a valid CSV file."}`
 
 ### `GET /api/leads/summary`
-Returns pool bucket counts with the waiting split, daily upload and tackle counts, and today's calling activity per salesperson.
+Returns pool bucket counts with the waiting split, plus daily upload and tackle counts.
 
 - **Auth**: Manager token
 - **Response 200**:
@@ -368,16 +368,7 @@ Returns pool bucket counts with the waiting split, daily upload and tackle count
       "stopped": 15
     },
     "uploaded": { "today": 450, "yesterday": 380 },
-    "tackled": { "today": 312, "yesterday": 285 },
-    "people": [
-      {
-        "id": 3,
-        "name": "Ramesh",
-        "attempted": 30,
-        "connected": 18,
-        "not_connected": 12
-      }
-    ]
+    "tackled": { "today": 312, "yesterday": 285 }
   }
   ```
 - **Rules**:

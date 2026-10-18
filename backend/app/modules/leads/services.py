@@ -16,7 +16,6 @@ from backend.app.extensions import db
 from backend.app.modules.calls import Call
 from backend.app.modules.leads.models import Lead
 from backend.app.modules.leads.schemas import ScheduleLeadRequest
-from backend.app.modules.users import User
 
 
 def validate_and_format_e164(raw_phone: str, country_code: str) -> str | None:
@@ -262,66 +261,16 @@ def get_tackled_day_counts() -> dict[str, int]:
     return day_counts
 
 
-def get_salespeople_lead_activity() -> list[dict[str, Any]]:
-    salesperson_role: str = "salesperson"
-    active_salespeople = (
-        User.query.with_entities(User.id, User.name)
-        .filter_by(role=salesperson_role, is_active=True)
-        .order_by(User.id.asc())
-        .all()
-    )
-
-    today_days_back: int = 0
-    today_range: tuple[datetime, datetime] = get_ist_day_utc_range(today_days_back)
-    start_utc: datetime = today_range[0]
-    end_utc: datetime = today_range[1]
-
-    lead_numbers_subquery = db.session.query(Lead.phone_number).scalar_subquery()
-    today_lead_calls = (
-        Call.query.with_entities(Call.user_id, Call.duration_seconds)
-        .filter(
-            Call.dialed_at >= start_utc,
-            Call.dialed_at < end_utc,
-            Call.phone_number.in_(lead_numbers_subquery),
-        )
-        .all()
-    )
-
-    activity_list: list[dict[str, Any]] = []
-    zero_duration: int = 0
-
-    for person_id, person_name in active_salespeople:
-        person_calls = [
-            duration for uid, duration in today_lead_calls if uid == person_id
-        ]
-        attempted: int = len(person_calls)
-        connected: int = sum(1 for duration in person_calls if duration > zero_duration)
-        not_connected: int = attempted - connected
-
-        person_data: dict[str, Any] = {
-            "id": person_id,
-            "name": person_name,
-            "attempted": attempted,
-            "connected": connected,
-            "not_connected": not_connected,
-        }
-        activity_list.append(person_data)
-
-    return activity_list
-
-
 def get_leads_summary() -> dict[str, Any]:
     pool_counts: dict[str, Any] = get_pool_bucket_counts()
     uploaded_counts: dict[str, int] = get_uploaded_day_counts()
     tackled_counts: dict[str, int] = get_tackled_day_counts()
-    salespeople_activity: list[dict[str, Any]] = get_salespeople_lead_activity()
 
     summary_result: dict[str, Any] = {
         "status": True,
         "pool": pool_counts,
         "uploaded": uploaded_counts,
         "tackled": tackled_counts,
-        "people": salespeople_activity,
     }
     return summary_result
 

@@ -14,6 +14,7 @@ import {
   type CallLogEntry,
 } from '../lib/call-log-matcher';
 import { fillMatchedPendingCalls } from '../lib/pending-call-filler';
+import { emitCallEnded } from '../sync-events';
 import { findMissingPermissions } from './use-permissions';
 
 async function readRecentCallLogEntries(sinceTimeMs: number): Promise<CallLogEntry[]> {
@@ -121,6 +122,7 @@ export function useCallTracker(): void {
       if (previousCallState !== 'OFFHOOK' || callStateEvent.state !== 'IDLE') {
         return;
       }
+      emitCallEnded();
       scheduleCallLogMatchRetries(addRetryTimer);
     };
 

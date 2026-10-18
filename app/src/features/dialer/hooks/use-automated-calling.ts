@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState, type AppStateStatus } from 'react-native';
-import { subscribeToCallFilled } from '@/features/tracking';
+import { subscribeToCallEnded } from '@/features/tracking';
 import type { ServedLead } from '../api/leads.api';
 import { useLeadLoading } from './use-lead-loading';
 import { useOutcomeSubmit } from './use-outcome-submit';
@@ -51,10 +51,10 @@ function useCallHangUpDetector(
       'change',
       handleAppStateChange,
     );
-    const unsubscribeCallFilled = subscribeToCallFilled(onCallEnded);
+    const unsubscribeCallEnded = subscribeToCallEnded(onCallEnded);
     return () => {
       appStateSubscription.remove();
-      unsubscribeCallFilled();
+      unsubscribeCallEnded();
     };
   }, [isDialing, onCallEnded]);
 }

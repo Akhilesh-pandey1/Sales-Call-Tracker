@@ -1,5 +1,5 @@
 {
-  "apiBaseUrl": "https://sales-call-tracker.onrender.com/api",
+  "apiBaseUrl": "http://localhost:5000/api",
   "maxLeadAttempts": 3,
   "maxScheduleAheadDays": 30,
   "callLogMatchRetryDelaysMs": [3000, 10000, 30000],

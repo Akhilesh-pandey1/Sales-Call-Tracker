@@ -129,11 +129,11 @@
 
 **Blocked by:** Task 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Talk-minutes values on My Stats come from the returned `minutes` field and the seconds-division helper is gone
-- [ ] Dials, connected, and connected_percent still render as before against the reshaped per-period response
+- [x] Talk-minutes values on My Stats come from the returned `minutes` field and the seconds-division helper is gone
+- [x] Dials, connected, and connected_percent still render as before against the reshaped per-period response
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)

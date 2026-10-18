@@ -128,7 +128,7 @@ type MyStatsHeaderProps = {
 
 function MyStatsHeader({ personName }: MyStatsHeaderProps) {
   return (
-    <View className="flex-row items-center gap-3 border-b border-border bg-card px-5 py-3">
+    <View className="flex-row items-center gap-3 border-b border-border bg-card px-3 py-3">
       {personName ? (
         <>
           <View className="h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary">
@@ -155,7 +155,7 @@ type StatsErrorCardProps = {
 
 function StatsErrorCard({ message, onRetryPress }: StatsErrorCardProps) {
   return (
-    <View className="flex-1 items-center justify-center px-5">
+    <View className="flex-1 items-center justify-center px-3">
       <View
         role="alert"
         className="w-full items-center rounded-2xl border border-border bg-card px-6 py-10 shadow-sm shadow-black/5"
@@ -503,7 +503,7 @@ export function MyStatsScreen() {
         <StatsErrorCard message={errorMessage} onRetryPress={reloadMyStats} />
       ) : null}
       {!isLoading && !errorMessage && myStats ? (
-        <ScrollView className="flex-1" contentContainerClassName="gap-4 px-5 pb-6 pt-4">
+        <ScrollView className="flex-1" contentContainerClassName="gap-4 px-3 pb-6 pt-4">
           <Last30DaysCards last30DaysStats={myStats.last_30_days} />
           <PerformanceTable periodStats={collectPeriodStats(myStats)} />
           <CallsByHourChart periodCallsByHour={collectPeriodCallsByHour(myStats)} />

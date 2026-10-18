@@ -526,8 +526,8 @@ export function LeadCallCard({
   const handleOutcomeOpenPress = () => onOpenOutcomeDialog();
 
   return (
-    <View className="flex-1 justify-center px-5 pb-4 pt-2">
-      <Card className="gap-4 rounded-3xl px-5 py-6">
+    <View className="flex-1 justify-center px-3 pb-4 pt-2">
+      <Card className="gap-4 rounded-3xl px-3 py-6">
         <View className="items-center gap-2">
           <Text className="text-center text-2xl font-extrabold tabular-nums tracking-tight">
             {displayedPhoneNumber}

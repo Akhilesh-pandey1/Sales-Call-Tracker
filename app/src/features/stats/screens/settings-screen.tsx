@@ -9,7 +9,7 @@ import { useClearLocalData } from '../hooks/use-clear-local-data';
 
 function SettingsHeader() {
   return (
-    <View className="border-b border-border bg-card px-4 py-3">
+    <View className="border-b border-border bg-card px-3 py-3">
       <Text className="text-lg font-bold tracking-tight">Settings</Text>
     </View>
   );
@@ -122,7 +122,7 @@ export function SettingsScreen() {
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
       <SettingsHeader />
-      <View className="flex-1 px-5 pb-6 pt-4">
+      <View className="flex-1 px-3 pb-6 pt-4">
         <View className="my-auto gap-2">
           <Text className="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Local data

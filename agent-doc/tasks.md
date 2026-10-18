@@ -1,85 +1,107 @@
-## Task 1: Team people endpoint returns per-salesperson rows
+## Task 1: Give the bottom tab bar its icons
 
-**Description:** Add `GET /api/dashboard/team/people` exactly as contracted in `api.md` — one row per active salesperson with today and yesterday blocks of `dials`, `connected`, and `minutes`, zeros included, deactivated people never listed, rows sorted by today's dials highest first. Covers `specs/dashboard.md` (per-salesperson rows return with the Team section) and Decisions 131, 139.
+**Description:** The Dialer and My Stats tabs currently render no icon (Decision 143). Add a `tabBarIcon` to each tab in `app-navigator.tsx` through the app's existing `Icon` component — phone icon for Dialer, bar-chart icon for My Stats — active in the primary color, inactive in gray, matching the approved app mockups. No new dependency.
 
 **Blocked by:** None
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] The endpoint returns one row per active salesperson including zeros, and deactivated salespeople never appear
-- [x] Each period block carries only `dials`, `connected`, and `minutes` — `minutes` is `round(seconds / 60)` computed on the server with no `seconds` field — and rows come back sorted by today's dials, highest first
-- [x] A salesperson token gets 403 `{"message": "This dashboard is for managers."}` on the endpoint
+- [ ] The Dialer tab shows a phone icon and the My Stats tab shows a bar-chart icon, active in primary color and inactive in gray
+- [ ] Icons come from the existing `Icon` component with lucide icons — no new package
 
 **Verification:**
-- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [ ] Lint passes: `npm run lint` (from `app/`)
 
 ---
 
-## Task 2: Team page at /team renders the per-person table
+## Task 2: Add Settings as the third bottom tab
 
-**Description:** Build the Team page (Screen 2b, Decision 139) in a new `features/team` folder — a table of name plus Today and Yesterday column groups (dials / connected / minutes), rows in the server's order, tapping a row opens the person page, and on mobile one card per person with the same numbers. With no salespeople yet it shows an empty state pointing the manager to Accounts, and a failed load shows the existing "Could not load data." pattern with Retry. The dashboard component currently named `TeamPage` is renamed `DashboardPage` so the new page can own the Team name — its `/` route and content stay exactly as they are (Decision 138).
+**Description:** Settings is currently a hidden screen (`tabBarButton: () => null`, Decision 143). Un-hide it as the third tab in `app-navigator.tsx` with the gear icon, so Settings opens straight from the bottom bar like Dialer and My Stats.
 
 **Blocked by:** Task 1
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] The page at `/team` renders returned rows only — name plus today/yesterday dials, connected, and minutes, in the server's sort order, zeros included
-- [x] Tapping a row opens `/person/<id>?from=/team`, and narrow screens show one card per person with the same numbers
-- [x] With no salespeople the page shows an empty state pointing to Accounts, and the Dashboard at `/` keeps its exact current content
+- [ ] The tab bar shows a third Settings tab with the gear icon, and tapping it opens the existing Settings screen
+- [ ] The Settings screen still works from the tab — including the clear-local-data action
 
 **Verification:**
-- [x] Build succeeds: `npm run build` (from `web/`)
+- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [ ] Lint passes: `npm run lint` (from `app/`)
 
 ---
 
-## Task 3: Settings page hosts the office-hours editor
+## Task 3: Remove the old Settings entry points
 
-**Description:** Create the Settings page at `/settings` (Decision 142) holding its one card — Office hours — by rendering the existing `OfficeHoursEditor`: it shows the stored window, saves a new start and end time, and a refused save surfaces the API's message with the editor kept open. The editor is removed from the Accounts page so it lives in its new home only (Decision 141).
-
-**Blocked by:** None
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] `/settings` shows the single Office hours card with the stored window, and saving a valid change updates it
-- [x] A refused save shows the API's message and keeps the editor open
-- [x] The Accounts page no longer renders the editor and keeps Add person, per-row Edit, Deactivate/Activate, Delete, with no actions on the manager's own row
-
-**Verification:**
-- [x] Build succeeds: `npm run build` (from `web/`)
-
----
-
-## Task 4: Sidebar carries the five section links
-
-**Description:** Update the sidebar to the approved mockup set (Decision 137) — exactly five links in the order Dashboard, Team, Leads, Accounts, Settings, with the mockup icons: grid, two people, person-plus, single person, gear. Opening a person page keeps the section it came from highlighted — Team for a team-row person, Accounts for a deactivated person's page — through the existing `?from=` mechanism.
-
-**Blocked by:** Tasks 2, 3
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] The sidebar shows exactly five links in the order Dashboard, Team, Leads, Accounts, Settings with the mockup icons
-- [x] A person page opened from a Team row highlights Team, and one opened from Accounts highlights Accounts
-
-**Verification:**
-- [x] Build succeeds: `npm run build` (from `web/`)
-
----
-
-## Task 5: Person page entry rules with source-aware Back link
-
-**Description:** Finish Decision 140's contract — Accounts rows open the person page only for deactivated people, while active Accounts rows never navigate (Team rows already open it from Task 2) — and the Back link returns to the section the page was opened from instead of relying on browser history: Team entries go back to `/team`, Accounts entries to `/accounts`.
+**Description:** With Settings living in the bottom bar (Decision 143), the old ways in are gone. Remove the gear button from the top of the My Stats header — the header keeps the avatar and name — and remove the back arrow from the Settings screen header, which keeps its plain "Settings" title because a tab is a top-level screen.
 
 **Blocked by:** Task 2
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] A deactivated person's Accounts row opens their person page, and active Accounts rows never navigate to it
-- [x] Back from a person page opened via a Team row returns to `/team`, and via an Accounts row returns to `/accounts`
+- [ ] The My Stats header shows only the avatar and name — no gear button
+- [ ] The Settings screen shows the title "Settings" with no back arrow
 
 **Verification:**
-- [x] Build succeeds: `npm run build` (from `web/`)
+- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [ ] Lint passes: `npm run lint` (from `app/`)
+
+---
+
+## Task 4: Start screen content below the status bar
+
+**Description:** App content currently draws up under the camera and time/battery strip (Decision 147). Add top safe-area padding from `react-native-safe-area-context` (already installed) to the four screens — Login, Dialer, My Stats, Settings — so content starts below the status bar on every device. Nothing else about the layouts changes.
+
+**Blocked by:** None
+
+**Status:** Not started
+
+**Acceptance criteria:**
+- [ ] Login, Dialer, My Stats, and Settings all start their content below the status bar using the top safe-area inset
+- [ ] Screen layouts are otherwise unchanged
+
+**Verification:**
+- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [ ] Lint passes: `npm run lint` (from `app/`)
+
+---
+
+## Task 5: Start calls directly in the Android call screen
+
+**Description:** `Linking.openURL('tel:…')` in `call-launcher.ts` sends the number through whatever dialer app the phone picks (Decision 144). With CALL_PHONE granted, start the call immediately with Android's direct-call intent (ACTION_CALL) fired through `react-native-intent-launcher` (Decision 146) — the pending-call row is still written first, so tracking is unchanged. Without CALL_PHONE, the current handing-over fallback stays exactly as is (Decision 145). A failed direct call surfaces the existing "Could not start the call. Please try again." message. Repo rule: the agent never runs installs — tell the developer to run `npm install react-native-intent-launcher` in `app/`, then run verification.
+
+**Blocked by:** None
+
+**Status:** Not started
+
+**Acceptance criteria:**
+- [ ] With CALL_PHONE granted, tapping Call (keypad or lead card) starts the call at once through ACTION_CALL and the pending-call row is written first
+- [ ] Without CALL_PHONE, the Call button still hands the number to the phone's dialer via `tel:` and writes no pending-call row
+- [ ] A failed direct call shows "Could not start the call. Please try again."
+
+**Verification:**
+- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [ ] Lint passes: `npm run lint` (from `app/`)
+
+---
+
+## Task 6: Open the Call Outcome box directly when a call ends
+
+**Description:** After an automated call ends, the app shows a "Call ended. Choose what happened." card and makes the person tap "Enter outcome" first (Decision 148). Rework the flow inside the existing hooks (`use-automated-calling.ts`) and `lead-call-card.tsx` so the Call Outcome dialog opens by itself the moment the call is over — driven by the real call-state end, or the app coming back to the foreground — and root-fix why the current auto-open silently missed. Closing the box without saving keeps the lead card with its Enter outcome button as the fallback.
+
+**Blocked by:** None
+
+**Status:** Not started
+
+**Acceptance criteria:**
+- [ ] When an automated call ends, the Call Outcome dialog is already open on return — no "Enter outcome" middle step required
+- [ ] Closing the dialog without saving keeps the lead card with a working Enter outcome button
+- [ ] Save & Continue with auto-dial on starts the next lead's call immediately
+
+**Verification:**
+- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [ ] Lint passes: `npm run lint` (from `app/`)

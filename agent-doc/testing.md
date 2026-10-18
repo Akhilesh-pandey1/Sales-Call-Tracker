@@ -84,3 +84,16 @@ The tracking spike verifies the complete dialer and call-log pipeline on the old
 6. App killed mid-call completes via the 1-hour janitor on the next app open.
 7. Call-end listener fires upon hang-up.
 8. Call-log reading retries at 3s / 10s / 30s to handle vendor logging delays.
+
+---
+
+## 3. App Calling & Navigation — Manual On-Device Pass
+
+The app has no automated UI tests; the calling and navigation fixes are verified by hand on a real phone:
+- Tapping Call starts the call at once in the Android calling screen — no other dialer app, no second confirm tap.
+- With CALL_PHONE off, the Call button hands the number to the phone's own dialer (one extra tap there) and no intent row is written.
+- When an automated call ends, the Call Outcome box is already open on return to the app — three results with icons, the auto-dial-next checkbox, and Save & Continue.
+- Closing the outcome box without saving keeps the lead card with an Enter outcome button, and the call can still be logged.
+- Save & Continue with auto-dial on starts the next lead's call immediately.
+- The tab bar shows three tabs with icons — Dialer (phone), My Stats (bar chart), Settings (gear) — and the My Stats header has no gear button.
+- No screen draws content under the status bar (Login, Dialer, My Stats, Settings).

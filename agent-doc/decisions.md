@@ -149,4 +149,14 @@
 - **Decision 142:** The Settings page at `/settings` holds one card — Office hours: it shows the stored window, edits the start and end time, and saves; a refused save shows the API's message and keeps the editor open. Nothing else is on the page.
 
 
+## Round 4
+
+- **Decision 143:** The app's bottom tab bar has three tabs, each with its icon — Dialer (phone), My Stats (bar chart), Settings (gear) — matching the approved app mockups. Settings is a top-level tab: its screen keeps a plain "Settings" title with no back arrow, and the gear button is removed from the top of the My Stats header.
+- **Decision 144:** Tapping Call — from the keypad or the lead card — starts the call immediately through Android's direct-call intent (ACTION_CALL): the call goes straight to the Android calling screen, with no other dialer app in between and no second confirm tap. The app's existing CALL_PHONE permission covers this.
+- **Decision 145:** With CALL_PHONE off, the Call button keeps the handing-over fallback — the number goes to the phone's own dialer with one extra tap there, and that call is not tracked: no intent row is written. Permission off = not tracked stays the rule, and the red banner remains the real protection.
+- **Decision 146:** The direct-call intent is fired through the `react-native-intent-launcher` library — the one new npm package in the app. Custom Kotlin is not needed here and stays the last resort. If the direct call fails, the person sees "Could not start the call. Please try again."
+- **Decision 147:** Every app screen — Login, Dialer, My Stats, Settings — starts its content below the phone's status bar, using top safe-area insets from `react-native-safe-area-context`. Nothing renders under the camera / time / battery strip on any device.
+- **Decision 148:** When an automated call ends, the Call Outcome box opens by itself the moment the call is over — driven by the real call-state end, or the app coming back to the foreground — showing the three results with icons (Connected / Did not connect / Schedule), the auto-dial-next checkbox, and Save & Continue. The "Call ended. Choose what happened." card with its Enter outcome button is no longer a required middle step. Closing the box without saving leaves the lead card with an Enter outcome button so the call can still be logged. With auto-dial on, Save & Continue starts the next lead's call immediately — the direct call from Decision 144 makes that next call truly hands-free.
+
+
 

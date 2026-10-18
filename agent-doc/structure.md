@@ -20,6 +20,7 @@ The system consists of three parts in a single repository:
   - `react-native-permissions`
   - `react-native-call-detection-android`
   - `react-native-call-log`
+  - `react-native-intent-launcher` (Android direct-call intent, ACTION_CALL)
 - **Utilities**: `libphonenumber-js` (E.164 phone normalization), `axios` (API requests), `@react-native-clipboard/clipboard`
 
 ### 2. Web Dashboard (`web/`) — Manager Web App
@@ -199,7 +200,7 @@ app/
 └── src/
     ├── app/
     │   └── navigation/
-    │       ├── app-navigator.tsx    # Bottom tabs: Dialer (with Dialer & Automated tabs) and My Stats
+    │       ├── app-navigator.tsx    # Bottom tabs with icons: Dialer, My Stats, Settings
     │       └── root-navigator.tsx   # Login vs Main App screen switch
     ├── components/
     │   └── ui/                      # React Native Reusables (shadcn for mobile): button, input, card, dialog, text
@@ -212,6 +213,7 @@ app/
     │   │   ├── components/keypad.tsx
     │   │   ├── components/permission-banner.tsx
     │   │   ├── components/lead-call-card.tsx
+    │   │   ├── lib/call-launcher.ts     # Starts the call: ACTION_CALL direct dial; tel: hand-over without CALL_PHONE
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
     │   │   └── screens/dialer-screen.tsx # Hosts Dialer keypad and Automated lead calling sub-tabs
@@ -219,8 +221,8 @@ app/
     │   │   ├── api/stats.api.ts
     │   │   ├── hooks/use-my-stats.ts
     │   │   └── screens/
-    │   │       ├── my-stats-screen.tsx   # Salesperson KPI view with gear icon
-    │   │       └── settings-screen.tsx   # Clear local data recovery button
+    │   │       ├── my-stats-screen.tsx   # Salesperson KPI view
+    │   │       └── settings-screen.tsx   # Settings tab: clear local data recovery button
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
     │       ├── hooks/use-permissions.ts  # Runtime permissions check, request, settings link

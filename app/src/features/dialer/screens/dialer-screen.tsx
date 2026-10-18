@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ActivityIndicator, Pressable, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
@@ -250,9 +251,10 @@ export function DialerScreen() {
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
   const dialer = useDialer();
   const automatedCalling = useAutomatedCalling();
+  const { top: topInset } = useSafeAreaInsets();
 
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
       <View className="px-5 pt-3">
         <PermissionBanner missingPermissions={missingPermissions} />
       </View>

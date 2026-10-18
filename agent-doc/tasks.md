@@ -58,14 +58,14 @@
 
 **Blocked by:** Tasks 2, 3
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The sidebar shows exactly five links in the order Dashboard, Team, Leads, Accounts, Settings with the mockup icons
-- [ ] A person page opened from a Team row highlights Team, and one opened from Accounts highlights Accounts
+- [x] The sidebar shows exactly five links in the order Dashboard, Team, Leads, Accounts, Settings with the mockup icons
+- [x] A person page opened from a Team row highlights Team, and one opened from Accounts highlights Accounts
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

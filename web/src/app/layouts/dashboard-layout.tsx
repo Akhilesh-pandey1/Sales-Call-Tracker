@@ -1,6 +1,14 @@
 import type { ComponentType } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { LayoutDashboard, LogOut, PhoneCall, User, UserPlus } from "lucide-react";
+import {
+  LayoutDashboard,
+  LogOut,
+  PhoneCall,
+  Settings,
+  User,
+  UserPlus,
+  Users,
+} from "lucide-react";
 import { useAuth } from "@/app/providers";
 import { cn } from "@/shared/utils/cn";
 
@@ -85,8 +93,10 @@ export function DashboardLayout() {
 
   const navItems: NavItem[] = [
     { name: "Dashboard", to: "/", icon: LayoutDashboard },
+    { name: "Team", to: "/team", icon: Users },
     { name: "Leads", to: "/leads", icon: UserPlus },
     { name: "Accounts", to: "/accounts", icon: User },
+    { name: "Settings", to: "/settings", icon: Settings },
   ];
 
   const fromSectionPath: string | null = getHighlightedSectionPath(

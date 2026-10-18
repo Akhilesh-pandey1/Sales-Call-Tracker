@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { OfficeHoursEditor } from "@/features/settings";
 import { PageHeader } from "@/shared/components/page-header";
 import { ErrorState } from "@/shared/components/error-state";
-import { getTodaysDateLabel } from "@/shared/utils/todays-date";
+import { TodaysDateAction } from "@/shared/components/todays-date-action";
 import { AddUserModal } from "../components/add-user-modal";
 import { AccountsTable } from "../components/accounts-table";
 import { DeleteDialog } from "../components/delete-dialog";
@@ -47,21 +46,16 @@ export function AccountsPage() {
     }
   };
 
-  const dateAction = (
-    <span className="text-sm text-muted-foreground">{getTodaysDateLabel()}</span>
-  );
-
   if (hasError) {
     return (
-      <PageHeader title="Accounts" action={dateAction}>
+      <PageHeader title="Accounts" action={<TodaysDateAction />}>
         <ErrorState onRetry={refetch} />
       </PageHeader>
     );
   }
 
   return (
-    <PageHeader title="Accounts" action={dateAction}>
-      <OfficeHoursEditor />
+    <PageHeader title="Accounts" action={<TodaysDateAction />}>
       <div className="flex justify-end">
         <AddUserModal />
       </div>

@@ -1,17 +1,35 @@
-export type CallFilledListener = () => void;
+type SyncListener = () => void;
 
-const callFilledListeners = new Set<CallFilledListener>();
+type SyncEvent = {
+  subscribe: (listener: SyncListener) => () => void;
+  emit: () => void;
+};
 
-export function subscribeToCallFilled(listener: CallFilledListener): () => void {
-  callFilledListeners.add(listener);
-  const unsubscribe = () => {
-    callFilledListeners.delete(listener);
+function createSyncEvent(): SyncEvent {
+  const listeners = new Set<SyncListener>();
+  const syncEvent: SyncEvent = {
+    subscribe(listener: SyncListener): () => void {
+      listeners.add(listener);
+      const unsubscribe = () => {
+        listeners.delete(listener);
+      };
+      return unsubscribe;
+    },
+    emit(): void {
+      for (const listener of listeners) {
+        listener();
+      }
+    },
   };
-  return unsubscribe;
+  return syncEvent;
 }
 
-export function emitCallFilled(): void {
-  for (const listener of callFilledListeners) {
-    listener();
-  }
-}
+const callFilledEvent = createSyncEvent();
+const callEndedEvent = createSyncEvent();
+
+export const subscribeToCallFilled: (listener: SyncListener) => () => void =
+  callFilledEvent.subscribe;
+export const emitCallFilled: () => void = callFilledEvent.emit;
+export const subscribeToCallEnded: (listener: SyncListener) => () => void =
+  callEndedEvent.subscribe;
+export const emitCallEnded: () => void = callEndedEvent.emit;

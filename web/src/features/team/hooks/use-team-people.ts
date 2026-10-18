@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getTeamPeople } from "../api/team.api";
 import type { TeamPersonRow } from "../types";
 
-export const TEAM_PEOPLE_QUERY_KEY = ["team-people"] as const;
+const TEAM_PEOPLE_QUERY_KEY = ["team-people"] as const;
 
 interface UseTeamPeopleResult {
   teamPeople: TeamPersonRow[];

@@ -40,7 +40,7 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] `/settings` shows the single Office hours card with the stored window, and saving a valid change updates it

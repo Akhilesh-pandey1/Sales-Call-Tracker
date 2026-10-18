@@ -3,7 +3,7 @@ import { DialerScreen } from '@/features/dialer';
 import { MyStatsScreen, SettingsScreen } from '@/features/stats';
 import { useJanitor, useSync } from '@/features/tracking';
 import { Icon } from '@/components/ui/icon';
-import { ChartColumn, Phone } from 'lucide-react-native';
+import { ChartColumn, Phone, Settings } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import type { MainTabsParamList } from './main-tabs-param-list';
 
@@ -21,6 +21,10 @@ function DialerTabIcon({ focused }: { focused: boolean }) {
 
 function MyStatsTabIcon({ focused }: { focused: boolean }) {
   return <TabIcon focused={focused} icon={ChartColumn} />;
+}
+
+function SettingsTabIcon({ focused }: { focused: boolean }) {
+  return <TabIcon focused={focused} icon={Settings} />;
 }
 
 export function AppNavigator() {
@@ -42,7 +46,7 @@ export function AppNavigator() {
       <MainTabs.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{ tabBarButton: () => null }}
+        options={{ tabBarIcon: SettingsTabIcon }}
       />
     </MainTabs.Navigator>
   );

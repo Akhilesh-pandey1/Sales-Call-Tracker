@@ -8,3 +8,4 @@ export {
   countPendingCalls,
   insertPendingCall,
 } from './db';
+export type { CallOutcome } from './types';

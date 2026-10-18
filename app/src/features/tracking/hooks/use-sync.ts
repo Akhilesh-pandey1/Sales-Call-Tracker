@@ -17,6 +17,9 @@ function toSyncCallOrNull(pendingCall: PendingCall): SyncCall | null {
     dialed_at: pendingCall.dialedAt,
     duration_seconds: pendingCall.durationSeconds,
   };
+  if (pendingCall.outcome !== null) {
+    syncCall.outcome = pendingCall.outcome;
+  }
   return syncCall;
 }
 

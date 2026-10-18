@@ -2,7 +2,8 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { DashboardLayout } from "@/app/layouts/dashboard-layout";
 import { ManagerGuard } from "@/app/guards/manager-guard";
 import { LoginPage } from "@/features/auth";
-import { TeamPage, PersonPage } from "@/features/dashboard";
+import { DashboardPage, PersonPage } from "@/features/dashboard";
+import { TeamPage } from "@/features/team";
 import { LeadsPage } from "@/features/leads";
 import { AccountsPage } from "@/features/accounts";
 import { SettingsPage } from "@/features/settings";
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "/",
+            element: <DashboardPage />,
+          },
+          {
+            path: "/team",
             element: <TeamPage />,
           },
           {

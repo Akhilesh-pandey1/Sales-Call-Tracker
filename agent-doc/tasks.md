@@ -11,8 +11,8 @@
 - [ ] Icons come from the existing `Icon` component with lucide icons — no new package
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 
@@ -29,8 +29,8 @@
 - [ ] The Settings screen still works from the tab — including the clear-local-data action
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 
@@ -62,11 +62,11 @@
 
 **Acceptance criteria:**
 - [ ] Login, Dialer, My Stats, and Settings all start their content below the status bar using the top safe-area inset
-- [ ] Screen layouts are otherwise unchanged
+- [x] Screen layouts are otherwise unchanged
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 
@@ -84,8 +84,8 @@
 - [ ] A failed direct call shows "Could not start the call. Please try again."
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

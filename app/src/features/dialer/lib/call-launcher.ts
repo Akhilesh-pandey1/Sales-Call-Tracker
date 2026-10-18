@@ -1,5 +1,5 @@
 import { Linking, PermissionsAndroid } from 'react-native';
-import { insertPendingCall } from '@/features/tracking/db';
+import { insertPendingCall } from '@/features/tracking';
 
 const callFailedMessage = 'Could not start the call. Please try again.';
 

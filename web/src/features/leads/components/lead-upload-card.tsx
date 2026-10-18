@@ -9,13 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { maxLeadUploadMb } from "@/config/app-config";
 import { ErrorAlert } from "@/shared/components/error-alert";
 import { cn } from "@/shared/utils/cn";
-import {
-  getCsvFileValidationError,
-  MAX_LEAD_UPLOAD_MB,
-  useLeadUpload,
-} from "../hooks/use-lead-upload";
+import { getCsvFileValidationError, useLeadUpload } from "../hooks/use-lead-upload";
 import type { LeadCountry, LeadUploadResult } from "../types";
 
 interface LeadCountryOption {
@@ -193,7 +190,7 @@ export function LeadUploadCard() {
               Upload Leads
             </DialogTitle>
             <DialogDescription className="text-xs">
-              Single-column CSV file (max {MAX_LEAD_UPLOAD_MB} MB)
+              Single-column CSV file (max {maxLeadUploadMb} MB)
             </DialogDescription>
           </div>
         </div>

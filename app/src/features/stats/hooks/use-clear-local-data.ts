@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { clearAllPendingCalls, countPendingCalls } from '@/features/tracking/db';
+import { clearAllPendingCalls, countPendingCalls } from '@/features/tracking';
 
 export type ClearLocalDataState = {
   pendingCallCount: number;

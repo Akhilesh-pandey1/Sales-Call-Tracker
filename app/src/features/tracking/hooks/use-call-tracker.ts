@@ -6,6 +6,7 @@ import CallDetection, {
   type CallStateEvent,
 } from 'react-native-call-detection-android';
 import CallLogs from 'react-native-call-log';
+import { callLogMatchRetryDelaysMs } from '@/config/app-config';
 import { readStoredCountry } from '@/features/auth';
 import { getUnfilledPendingCalls } from '../db';
 import {
@@ -55,19 +56,17 @@ async function runCallLogMatchAttempt(): Promise<void> {
     const callLogEntries = await readRecentCallLogEntries(oldestIntentTimeMs);
     const matches = matchPendingCallsToLogEntries(unfilledPendingCalls, callLogEntries, countryCode);
     await fillMatchedPendingCalls(matches, true);
-  } catch {
+  } catch (callLogError: unknown) {
+    console.warn('Could not read the call log on this phone.', callLogError);
     return;
   }
 }
 
 function scheduleCallLogMatchRetries(addRetryTimer: (delayMs: number) => void): void {
   runCallLogMatchAttempt();
-  const firstRetryDelayMs = 3 * 1000;
-  const secondRetryDelayMs = 10 * 1000;
-  const thirdRetryDelayMs = 30 * 1000;
-  addRetryTimer(firstRetryDelayMs);
-  addRetryTimer(secondRetryDelayMs);
-  addRetryTimer(thirdRetryDelayMs);
+  for (const retryDelayMs of callLogMatchRetryDelaysMs) {
+    addRetryTimer(retryDelayMs);
+  }
 }
 
 async function startCallTracking(

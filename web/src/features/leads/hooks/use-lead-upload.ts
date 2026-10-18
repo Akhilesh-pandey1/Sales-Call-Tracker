@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { maxLeadUploadMb } from "@/config/app-config";
 import { getApiErrorMessage } from "@/shared/api/api-error";
 import { uploadLeads } from "../api/leads.api";
 import { LEADS_SUMMARY_QUERY_KEY } from "./use-leads";
 import type { LeadCountry, LeadUploadResult } from "../types";
-
-export const MAX_LEAD_UPLOAD_MB: number = 2;
 
 interface LeadUploadRequest {
   file: File;
@@ -26,7 +25,7 @@ interface UseLeadUploadResult {
 
 export function getCsvFileValidationError(file: File): string | null {
   const bytesPerMb: number = 1024 * 1024;
-  const maxLeadUploadBytes: number = MAX_LEAD_UPLOAD_MB * bytesPerMb;
+  const maxLeadUploadBytes: number = maxLeadUploadMb * bytesPerMb;
   const csvMimeType: string = "text/csv";
   const csvFileExtension: string = ".csv";
   const hasCsvMimeType: boolean = file.type === csvMimeType;

@@ -1,0 +1,89 @@
+import { useCallback, useRef, useState } from 'react';
+import { ToastAndroid } from 'react-native';
+import { isAxiosError } from 'axios';
+import type { RefObject } from 'react';
+import { readResponseErrorMessage } from '@/shared/api/api-client';
+import { serverUnreachableMessage } from '@/shared/constants/messages';
+import { fetchNextLead, type ServedLead } from '../api/leads.api';
+import { callFailedMessage, launchTrackedCall } from '../lib/call-launcher';
+import type { AutomatedViewState } from './use-automated-calling';
+
+export type UseLeadLoadingResult = {
+  startErrorMessage: string | null;
+  dialLead: (lead: ServedLead) => Promise<void>;
+  startCalling: () => Promise<void>;
+  dialCurrentLead: () => Promise<void>;
+};
+
+function readRequestErrorMessage(requestError: unknown): string {
+  if (!isAxiosError(requestError) || !requestError.response) {
+    return serverUnreachableMessage;
+  }
+  const serverMessage = readResponseErrorMessage(requestError);
+  return serverMessage ?? serverUnreachableMessage;
+}
+
+export { readRequestErrorMessage };
+
+export function useLeadLoading(
+  viewStateRef: RefObject<AutomatedViewState>,
+  updateViewState: (nextViewState: AutomatedViewState) => void,
+): UseLeadLoadingResult {
+  const [startErrorMessage, setStartErrorMessage] = useState<string | null>(null);
+  const isDialLaunchLockedRef = useRef(false);
+
+  const dialLead = useCallback(
+    async (lead: ServedLead): Promise<void> => {
+      if (isDialLaunchLockedRef.current) {
+        return;
+      }
+      isDialLaunchLockedRef.current = true;
+      try {
+        await launchTrackedCall(lead.phone_number);
+        updateViewState({ kind: 'dialing', lead });
+      } catch {
+        updateViewState({ kind: 'ready', lead });
+        ToastAndroid.show(callFailedMessage, ToastAndroid.SHORT);
+      } finally {
+        isDialLaunchLockedRef.current = false;
+      }
+    },
+    [updateViewState],
+  );
+
+  const startCalling = useCallback(async (): Promise<void> => {
+    if (viewStateRef.current.kind === 'loading') {
+      return;
+    }
+    const findingLeadMessage = 'Finding the next lead…';
+    setStartErrorMessage(null);
+    updateViewState({ kind: 'loading', loadingLabel: findingLeadMessage });
+    try {
+      const servedLead = await fetchNextLead(null);
+      if (servedLead === null) {
+        updateViewState({ kind: 'empty' });
+        return;
+      }
+      await dialLead(servedLead);
+    } catch (fetchError) {
+      updateViewState({ kind: 'start' });
+      setStartErrorMessage(readRequestErrorMessage(fetchError));
+    }
+  }, [dialLead, updateViewState, viewStateRef]);
+
+  const dialCurrentLead = useCallback(async (): Promise<void> => {
+    const currentState = viewStateRef.current;
+    if (currentState.kind !== 'ready') {
+      return;
+    }
+    await dialLead(currentState.lead);
+  }, [dialLead, viewStateRef]);
+
+  const leadLoading: UseLeadLoadingResult = {
+    startErrorMessage,
+    dialLead,
+    startCalling,
+    dialCurrentLead,
+  };
+  return leadLoading;
+}

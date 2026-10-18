@@ -5,6 +5,11 @@ import {
   type AppStateStatus,
 } from 'react-native';
 import CallLogs, { type CallLog } from 'react-native-call-log';
+import {
+  maxJanitorAttempts,
+  minMsBetweenJanitorSweeps,
+  stalePendingCallAgeMs,
+} from '@/config/app-config';
 import { readStoredCountry } from '@/features/auth';
 import {
   addPendingCallAttempt,
@@ -15,9 +20,6 @@ import {
 import { matchPendingCallsToLogEntries } from '@/features/tracking/lib/call-log-matcher';
 import { fillMatchedPendingCalls } from '@/features/tracking/lib/pending-call-filler';
 
-const STALE_ROW_AGE_MS = 60 * 60 * 1000;
-const MAX_JANITOR_ATTEMPTS = 5;
-const MIN_MS_BETWEEN_SWEEPS = 5_000;
 const NO_LOAD_LIMIT = -1;
 
 let janitorSweepPromise: Promise<void> | null = null;
@@ -39,7 +41,7 @@ function isStaleUnfilledPendingCall(
   if (Number.isNaN(intentTimeMs)) {
     return true;
   }
-  return nowMs - intentTimeMs >= STALE_ROW_AGE_MS;
+  return nowMs - intentTimeMs >= stalePendingCallAgeMs;
 }
 
 function getOldestIntentTimeMs(stalePendingCalls: PendingCall[]): number {
@@ -78,7 +80,7 @@ async function strikeUnmatchedPendingCalls(
       continue;
     }
     const attemptCount = await addPendingCallAttempt(stalePendingCall.callId);
-    if (attemptCount >= MAX_JANITOR_ATTEMPTS) {
+    if (attemptCount >= maxJanitorAttempts) {
       const giveUpDurationSeconds = 0;
       await markPendingCallFilled(
         stalePendingCall.callId,
@@ -164,7 +166,7 @@ export async function runJanitorSweep(): Promise<void> {
   }
   const nowMs = Date.now();
   const isTooSoonAfterLastSweep =
-    nowMs - lastSweepStartedAtMs < MIN_MS_BETWEEN_SWEEPS;
+    nowMs - lastSweepStartedAtMs < minMsBetweenJanitorSweeps;
   if (isTooSoonAfterLastSweep) {
     return;
   }

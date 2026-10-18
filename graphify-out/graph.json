@@ -1330,8 +1330,8 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_relative_luminance",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_relative_luminance()"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_palette_is_dark",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_palette_is_dark()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_contrast_ratio",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_contrast_ratio()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_style_is_dark_primary",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 109,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_style_is_dark_primary()"
     },
     {
@@ -1374,8 +1374,8 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_query_wants_dark",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 109,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_query_wants_dark()"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_resolve_color_mode",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 109,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_resolve_color_mode()"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_derive_dark_palette",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_derive_dark_palette()"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L220",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_select_palette_for_mode",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_select_palette_for_mode()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L791",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_markdown",
-      "community": 96,
-      "community_name": "generate_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "format_markdown()"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L919",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_design_system",
-      "community": 96,
-      "community_name": "generate_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "generate_design_system()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L961",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_safe_slug",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "safe_slug()"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L972",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_write_persisted_file",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "_write_persisted_file()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_py_path",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "path"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L995",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_persist_design_system",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "persist_design_system()"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L1076",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_master_md",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "format_master_md()"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L1381",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_page_override_md",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "format_page_override_md()"
     },
     {
@@ -1704,8 +1704,8 @@
       "source_location": "L1490",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_intelligent_overrides",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -1715,8 +1715,8 @@
       "source_location": "L1596",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_detect_page_type",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "_detect_page_type()"
     },
     {
@@ -1737,8 +1737,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_130",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "wcag relative luminance of a #rrggbb string, or none if unparseable."
     },
     {
@@ -1748,8 +1748,8 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_148",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "true when a colors.csv row's background is a dark surface."
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_154",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid."
     },
     {
@@ -1770,8 +1770,8 @@
       "source_location": "L165",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_165",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 109,
+      "community_name": "_resolve_color_mode",
       "norm_label": "true when a styles.csv row describes itself as dark-first."
     },
     {
@@ -1781,8 +1781,8 @@
       "source_location": "L181",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_181",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 109,
+      "community_name": "_resolve_color_mode",
       "norm_label": "true when the query explicitly asks for a dark theme."
     },
     {
@@ -1792,8 +1792,8 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_187",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 109,
+      "community_name": "_resolve_color_mode",
       "norm_label": "resolve the mode the rest of the output has to agree with."
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L194",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_194",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "keep product brand tokens while deriving accessible dark surfaces."
     },
     {
@@ -1814,8 +1814,8 @@
       "source_location": "L222",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_222",
-      "community": 57,
-      "community_name": "design_system.py",
+      "community": 96,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case..."
     },
     {
@@ -1968,8 +1968,8 @@
       "source_location": "L792",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_792",
-      "community": 96,
-      "community_name": "generate_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "format design system as markdown."
     },
     {
@@ -1979,8 +1979,8 @@
       "source_location": "L923",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_923",
-      "community": 96,
-      "community_name": "generate_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
     {
@@ -1990,8 +1990,8 @@
       "source_location": "L962",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_962",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "slugify a name into a single safe path segment. only [a-z0-9_-] survives; every..."
     },
     {
@@ -2001,8 +2001,8 @@
       "source_location": "L973",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_973",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "write fully to a temp file, then publish atomically."
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L997",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_997",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "persist design system to design-system/<project>/ folder using master +..."
     },
     {
@@ -2023,8 +2023,8 @@
       "source_location": "L1077",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1077",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "format design system as master.md with hierarchical override logic."
     },
     {
@@ -2034,8 +2034,8 @@
       "source_location": "L1382",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1382",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1491",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1491",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "generate intelligent overrides based on page type using layered search. uses..."
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L1597",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1597",
-      "community": 91,
-      "community_name": "persist_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search",
-      "community": 96,
-      "community_name": "generate_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "search.py"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_format_output",
-      "community": 96,
-      "community_name": "generate_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "format_output()"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_rationale_45",
-      "community": 96,
-      "community_name": "generate_design_system",
+      "community": 57,
+      "community_name": "design_system.py",
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
@@ -4004,8 +4004,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_package_dependencies_axios",
-      "community": 97,
-      "community_name": "axios",
+      "community": 114,
+      "community_name": "dependencies",
       "norm_label": "axios"
     },
     {
@@ -4015,8 +4015,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_package_json_axios",
-      "community": 97,
-      "community_name": "axios",
+      "community": 114,
+      "community_name": "dependencies",
       "norm_label": "axios"
     },
     {
@@ -4092,8 +4092,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "app_package_dependencies_lucide_react_native",
-      "community": 114,
-      "community_name": "dependencies",
+      "community": 123,
+      "community_name": "lucide-react-native",
       "norm_label": "lucide-react-native"
     },
     {
@@ -4103,8 +4103,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "lucide_react_native",
-      "community": 114,
-      "community_name": "dependencies",
+      "community": 123,
+      "community_name": "lucide-react-native",
       "norm_label": "lucide-react-native"
     },
     {
@@ -5060,8 +5060,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_card",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "card.tsx"
     },
     {
@@ -5071,8 +5071,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_src_components_ui_card_card",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "card()"
     },
     {
@@ -5082,8 +5082,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_src_components_ui_card_cardheader",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "cardheader()"
     },
     {
@@ -5093,8 +5093,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_components_ui_card_cardtitle",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "cardtitle()"
     },
     {
@@ -5104,8 +5104,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "app_src_components_ui_card_carddescription",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "carddescription()"
     },
     {
@@ -5115,8 +5115,8 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_components_ui_card_cardcontent",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "cardcontent()"
     },
     {
@@ -5126,8 +5126,8 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "app_src_components_ui_card_cardfooter",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "cardfooter()"
     },
     {
@@ -5138,7 +5138,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_dialog",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "app/src/components/ui/dialog.tsx"
     },
     {
@@ -5149,7 +5149,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogoverlay",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogoverlay()"
     },
     {
@@ -5160,7 +5160,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogcontent",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogcontent()"
     },
     {
@@ -5171,7 +5171,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogheader",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogheader()"
     },
     {
@@ -5182,7 +5182,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogfooter",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogfooter()"
     },
     {
@@ -5193,7 +5193,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogtitle",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogtitle()"
     },
     {
@@ -5204,7 +5204,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_dialog_dialogdescription",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "dialogdescription()"
     },
     {
@@ -5214,8 +5214,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_icon",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "icon.tsx"
     },
     {
@@ -5225,8 +5225,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_components_ui_icon_iconprops",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "iconprops"
     },
     {
@@ -5236,8 +5236,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_src_components_ui_icon_iconimpl",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "iconimpl()"
     },
     {
@@ -5247,8 +5247,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "app_src_components_ui_icon_icon",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "icon()"
     },
     {
@@ -5258,8 +5258,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_input",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "app/src/components/ui/input.tsx"
     },
     {
@@ -5269,8 +5269,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_src_components_ui_input_input",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "input()"
     },
     {
@@ -5281,7 +5281,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_native_only_animated_view",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "native-only-animated-view.tsx"
     },
     {
@@ -5292,7 +5292,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_native_only_animated_view_animatedpressable",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "animatedpressable"
     },
     {
@@ -5303,7 +5303,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_native_only_animated_view_nativeonlyanimatedview",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "nativeonlyanimatedview()"
     },
     {
@@ -5379,8 +5379,8 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textclasscontext",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "textclasscontext"
     },
     {
@@ -5467,8 +5467,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_src_features_auth_hooks_use_auth_loginresult",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "loginresult"
     },
     {
@@ -5522,8 +5522,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_auth_screens_login_screen",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "login-screen.tsx"
     },
     {
@@ -5533,8 +5533,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_src_features_auth_screens_login_screen_loginscreenprops",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "loginscreenprops"
     },
     {
@@ -6050,8 +6050,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_automated_calling_useautomatedcallingresult",
-      "community": 73,
-      "community_name": "use-automated-calling.ts",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "useautomatedcallingresult"
     },
     {
@@ -6102,7 +6102,7 @@
       "label": "useStoredCountry()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_dialer_usestoredcountry",
       "community": 107,
@@ -6113,7 +6113,7 @@
       "label": "useDialer()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_dialer_usedialer",
       "community": 107,
@@ -6278,7 +6278,7 @@
       "label": "DialerSubTab",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_dialersubtab",
       "community": 74,
@@ -6289,7 +6289,7 @@
       "label": "SubTabButtonProps",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_subtabbuttonprops",
       "community": 74,
@@ -6300,7 +6300,7 @@
       "label": "SubTabButton()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L27",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_subtabbutton",
       "community": 74,
@@ -6311,7 +6311,7 @@
       "label": "DialerSubTabs()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_dialersubtabs",
       "community": 74,
@@ -6322,7 +6322,7 @@
       "label": "KeypadView()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L72",
+      "source_location": "L73",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_keypadview",
       "community": 74,
@@ -6333,7 +6333,7 @@
       "label": "AutomatedStartView()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L138",
+      "source_location": "L142",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_automatedstartview",
       "community": 74,
@@ -6344,7 +6344,7 @@
       "label": "AutomatedLoadingView()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L177",
+      "source_location": "L181",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_automatedloadingview",
       "community": 74,
@@ -6355,7 +6355,7 @@
       "label": "AutomatedEmptyView()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L186",
+      "source_location": "L190",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_automatedemptyview",
       "community": 74,
@@ -6366,7 +6366,7 @@
       "label": "AutomatedView()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L209",
+      "source_location": "L213",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_automatedview",
       "community": 74,
@@ -6377,7 +6377,7 @@
       "label": "DialerScreen()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L249",
+      "source_location": "L253",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_dialerscreen",
       "community": 9,
@@ -6447,7 +6447,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "use-clear-local-data.ts"
     },
     {
@@ -6458,7 +6458,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data_clearlocaldatastate",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "clearlocaldatastate"
     },
     {
@@ -6469,7 +6469,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data_useclearlocaldata",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "useclearlocaldata()"
     },
     {
@@ -6744,7 +6744,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "settings-screen.tsx"
     },
     {
@@ -6755,7 +6755,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen_settingsheader",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "settingsheader()"
     },
     {
@@ -6766,7 +6766,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen_cleardatarowprops",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "cleardatarowprops"
     },
     {
@@ -6777,7 +6777,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen_cleardatarow",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "cleardatarow()"
     },
     {
@@ -6788,7 +6788,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen_builddeletemessage",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "builddeletemessage()"
     },
     {
@@ -6799,7 +6799,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen_clearconfirmdialogprops",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "clearconfirmdialogprops"
     },
     {
@@ -6810,7 +6810,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen_clearconfirmdialog",
       "community": 106,
-      "community_name": "cn",
+      "community_name": "settings-screen.tsx",
       "norm_label": "clearconfirmdialog()"
     },
     {
@@ -6865,7 +6865,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_index",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "db/index.ts"
     },
     {
@@ -6876,7 +6876,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "pending-calls-db.ts"
     },
     {
@@ -6887,7 +6887,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_pendingcall",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "pendingcall"
     },
     {
@@ -6898,7 +6898,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_pendingcalltablerow",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "pendingcalltablerow"
     },
     {
@@ -6909,7 +6909,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_unfilledpendingcall",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "unfilledpendingcall"
     },
     {
@@ -6920,7 +6920,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_unfilledpendingcalltablerow",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "unfilledpendingcalltablerow"
     },
     {
@@ -6931,7 +6931,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_opendatabase",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "opendatabase()"
     },
     {
@@ -6942,7 +6942,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_runquery",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "runquery()"
     },
     {
@@ -6953,7 +6953,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_topendingcall",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "topendingcall()"
     },
     {
@@ -6964,7 +6964,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_tounfilledpendingcall",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "tounfilledpendingcall()"
     },
     {
@@ -6975,7 +6975,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_readrowlist",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "readrowlist()"
     },
     {
@@ -6986,7 +6986,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_insertpendingcall",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "insertpendingcall()"
     },
     {
@@ -6997,7 +6997,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_getallpendingcalls",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "getallpendingcalls()"
     },
     {
@@ -7008,7 +7008,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_getunfilledpendingcalls",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "getunfilledpendingcalls()"
     },
     {
@@ -7018,8 +7018,8 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_markpendingcallfilled",
-      "community": 90,
-      "community_name": "use-janitor.ts",
+      "community": 70,
+      "community_name": "tracking/index.ts",
       "norm_label": "markpendingcallfilled()"
     },
     {
@@ -7030,7 +7030,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_addpendingcallattempt",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "addpendingcallattempt()"
     },
     {
@@ -7041,7 +7041,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_deletependingcall",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "deletependingcall()"
     },
     {
@@ -7052,7 +7052,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_countpendingcalls",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "countpendingcalls()"
     },
     {
@@ -7063,7 +7063,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_clearallpendingcalls",
       "community": 70,
-      "community_name": "pending-calls-db.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "clearallpendingcalls()"
     },
     {
@@ -7392,8 +7392,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_index",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 70,
+      "community_name": "tracking/index.ts",
       "norm_label": "tracking/index.ts"
     },
     {
@@ -7524,8 +7524,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_pending_call_filler",
-      "community": 90,
-      "community_name": "use-janitor.ts",
+      "community": 94,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "pending-call-filler.ts"
     },
     {
@@ -7535,8 +7535,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_pending_call_filler_fillmatchedpendingcalls",
-      "community": 90,
-      "community_name": "use-janitor.ts",
+      "community": 71,
+      "community_name": "use-call-tracker.ts",
       "norm_label": "fillmatchedpendingcalls()"
     },
     {
@@ -7546,8 +7546,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 108,
+      "community_name": "sync-events.ts",
       "norm_label": "sync-events.ts"
     },
     {
@@ -7557,8 +7557,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_synclistener",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 108,
+      "community_name": "sync-events.ts",
       "norm_label": "synclistener"
     },
     {
@@ -7568,8 +7568,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_syncevent",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 108,
+      "community_name": "sync-events.ts",
       "norm_label": "syncevent"
     },
     {
@@ -7579,8 +7579,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_createsyncevent",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 108,
+      "community_name": "sync-events.ts",
       "norm_label": "createsyncevent()"
     },
     {
@@ -7590,8 +7590,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_callfilledevent",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 108,
+      "community_name": "sync-events.ts",
       "norm_label": "callfilledevent"
     },
     {
@@ -7601,8 +7601,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_callendedevent",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 108,
+      "community_name": "sync-events.ts",
       "norm_label": "callendedevent"
     },
     {
@@ -7612,8 +7612,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_lib_utils",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "utils.ts"
     },
     {
@@ -7623,8 +7623,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_src_lib_utils_cn",
-      "community": 106,
-      "community_name": "cn",
+      "community": 74,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "cn()"
     },
     {
@@ -13343,8 +13343,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_package_dependencies_axios",
-      "community": 155,
-      "community_name": "axios",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "axios"
     },
     {
@@ -13354,8 +13354,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_package_json_axios",
-      "community": 155,
-      "community_name": "axios",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "axios"
     },
     {
@@ -13365,8 +13365,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_package_dependencies_class_variance_authority",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 138,
+      "community_name": "class-variance-authority",
       "norm_label": "class-variance-authority"
     },
     {
@@ -13376,8 +13376,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_package_json_class_variance_authority",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 138,
+      "community_name": "class-variance-authority",
       "norm_label": "class-variance-authority"
     },
     {
@@ -14136,7 +14136,7 @@
       "_origin": "ast",
       "id": "web_src_components_ui_chart_chartconfig",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "chartconfig"
     },
     {
@@ -14311,8 +14311,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_components_ui_input",
-      "community": 166,
-      "community_name": "cn",
+      "community": 167,
+      "community_name": "router.tsx",
       "norm_label": "web/src/components/ui/input.tsx"
     },
     {
@@ -14322,8 +14322,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_components_ui_input_inputprops",
-      "community": 166,
-      "community_name": "cn",
+      "community": 167,
+      "community_name": "router.tsx",
       "norm_label": "inputprops"
     },
     {
@@ -14333,8 +14333,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "web_src_components_ui_input_input",
-      "community": 166,
-      "community_name": "cn",
+      "community": 167,
+      "community_name": "router.tsx",
       "norm_label": "input"
     },
     {
@@ -14444,7 +14444,7 @@
       "_origin": "ast",
       "id": "web_src_config_app_config",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "web/src/config/app-config.ts"
     },
     {
@@ -14465,8 +14465,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_accounts_api_accounts_api_getaccounts",
-      "community": 82,
-      "community_name": "accounts-table.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "getaccounts()"
     },
     {
@@ -14828,8 +14828,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_edit_user_modal",
-      "community": 166,
-      "community_name": "cn",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "edit-user-modal.tsx"
     },
     {
@@ -14839,8 +14839,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_edit_user_modal_editusermodalprops",
-      "community": 82,
-      "community_name": "accounts-table.tsx",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "editusermodalprops"
     },
     {
@@ -14850,8 +14850,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_edit_user_modal_editusermodal",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "editusermodal()"
     },
     {
@@ -14861,8 +14861,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 82,
+      "community_name": "accounts-table.tsx",
       "norm_label": "user-status-button.tsx"
     },
     {
@@ -14872,8 +14872,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button_userstatusbuttonprops",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 82,
+      "community_name": "accounts-table.tsx",
       "norm_label": "userstatusbuttonprops"
     },
     {
@@ -14883,8 +14883,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button_userstatusbutton",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 82,
+      "community_name": "accounts-table.tsx",
       "norm_label": "userstatusbutton()"
     },
     {
@@ -14894,8 +14894,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts",
-      "community": 82,
-      "community_name": "accounts-table.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "use-accounts.ts"
     },
     {
@@ -14927,8 +14927,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts_sortownaccountfirst",
-      "community": 82,
-      "community_name": "accounts-table.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "sortownaccountfirst()"
     },
     {
@@ -14938,8 +14938,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts_useaccounts",
-      "community": 82,
-      "community_name": "accounts-table.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "useaccounts()"
     },
     {
@@ -15026,8 +15026,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "use-edit-account-form.ts"
     },
     {
@@ -15037,8 +15037,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form_useeditaccountformresult",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "useeditaccountformresult"
     },
     {
@@ -15048,8 +15048,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form_isaccountcountry",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "isaccountcountry()"
     },
     {
@@ -15059,8 +15059,8 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form_getaccountcountry",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "getaccountcountry()"
     },
     {
@@ -15070,8 +15070,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form_useeditaccountform",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "useeditaccountform()"
     },
     {
@@ -15191,8 +15191,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_accounts_pages_accounts_page_accountspage",
-      "community": 82,
-      "community_name": "accounts-table.tsx",
+      "community": 167,
+      "community_name": "router.tsx",
       "norm_label": "accountspage()"
     },
     {
@@ -15224,8 +15224,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_features_accounts_types_accountcountries",
-      "community": 166,
-      "community_name": "cn",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "accountcountries"
     },
     {
@@ -15235,8 +15235,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_accounts_types_accountcountry",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 97,
+      "community_name": "edit-user-modal.tsx",
       "norm_label": "accountcountry"
     },
     {
@@ -15433,8 +15433,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_dashboard_api_dashboard_api_getpersondashboard",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "getpersondashboard()"
     },
     {
@@ -15445,7 +15445,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "calls-by-hour-chart.tsx"
     },
     {
@@ -15456,7 +15456,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_hourlydialbar",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "hourlydialbar"
     },
     {
@@ -15467,7 +15467,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_dialstoplabelprops",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "dialstoplabelprops"
     },
     {
@@ -15477,7 +15477,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_callsbyhourchartprops",
-      "community": 54,
+      "community": 91,
       "community_name": "dashboard/types.ts",
       "norm_label": "callsbyhourchartprops"
     },
@@ -15489,7 +15489,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_gettwelvehourlabel",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "gettwelvehourlabel()"
     },
     {
@@ -15500,7 +15500,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_buildhourlybars",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "buildhourlybars()"
     },
     {
@@ -15511,7 +15511,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_buildbesthoursummaryline",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "buildbesthoursummaryline()"
     },
     {
@@ -15522,7 +15522,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_callsbyhourchart",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "callsbyhourchart()"
     },
     {
@@ -15533,7 +15533,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "dashboard-card.tsx"
     },
     {
@@ -15544,7 +15544,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_dashboardcardprops",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "dashboardcardprops"
     },
     {
@@ -15555,7 +15555,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_dashboardcard",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "dashboardcard()"
     },
     {
@@ -15566,7 +15566,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_emptyperiodnote",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "emptyperiodnote()"
     },
     {
@@ -15576,8 +15576,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "kpi-card.tsx"
     },
     {
@@ -15587,8 +15587,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card_kpicardprops",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "kpicardprops"
     },
     {
@@ -15598,8 +15598,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card_kpicard",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "kpicard()"
     },
     {
@@ -15609,8 +15609,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_period_switch",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 91,
+      "community_name": "dashboard/types.ts",
       "norm_label": "period-switch.tsx"
     },
     {
@@ -15620,8 +15620,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_period_switch_periodswitchprops",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 91,
+      "community_name": "dashboard/types.ts",
       "norm_label": "periodswitchprops"
     },
     {
@@ -15631,8 +15631,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_period_switch_periodswitch",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 91,
+      "community_name": "dashboard/types.ts",
       "norm_label": "periodswitch()"
     },
     {
@@ -15731,7 +15731,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_people_list",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "top-people-list.tsx"
     },
     {
@@ -15742,7 +15742,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_people_list_toppeoplelistprops",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "toppeoplelistprops"
     },
     {
@@ -15763,8 +15763,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_person_stats",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "use-person-stats.ts"
     },
     {
@@ -15774,8 +15774,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_person_stats_isvalidpersonid",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "isvalidpersonid()"
     },
     {
@@ -15785,8 +15785,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_person_stats_usepersonstatsresult",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "usepersonstatsresult"
     },
     {
@@ -15796,8 +15796,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_person_stats_usepersonstats",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "usepersonstats()"
     },
     {
@@ -15840,8 +15840,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_index",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "dashboard/index.ts"
     },
     {
@@ -15928,8 +15928,8 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_dashboard_page_teamperformancesectionprops",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 91,
+      "community_name": "dashboard/types.ts",
       "norm_label": "teamperformancesectionprops"
     },
     {
@@ -16082,8 +16082,8 @@
       "source_location": "L139",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_performancesectionprops",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "performancesectionprops"
     },
     {
@@ -16192,7 +16192,7 @@
       "source_location": "L300",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_callsbyhoursectionprops",
-      "community": 54,
+      "community": 91,
       "community_name": "dashboard/types.ts",
       "norm_label": "callsbyhoursectionprops"
     },
@@ -16214,8 +16214,8 @@
       "source_location": "L324",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_getpersonpagebacktarget",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "getpersonpagebacktarget()"
     },
     {
@@ -16225,8 +16225,8 @@
       "source_location": "L335",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_personpage",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "personpage()"
     },
     {
@@ -16236,7 +16236,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types",
-      "community": 54,
+      "community": 91,
       "community_name": "dashboard/types.ts",
       "norm_label": "dashboard/types.ts"
     },
@@ -16247,8 +16247,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_dashboardperiod",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 91,
+      "community_name": "dashboard/types.ts",
       "norm_label": "dashboardperiod"
     },
     {
@@ -16258,7 +16258,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_callsbyhourblock",
-      "community": 54,
+      "community": 91,
       "community_name": "dashboard/types.ts",
       "norm_label": "callsbyhourblock"
     },
@@ -16270,7 +16270,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamtopperson",
       "community": 54,
-      "community_name": "dashboard/types.ts",
+      "community_name": "calls-by-hour-chart.tsx",
       "norm_label": "teamtopperson"
     },
     {
@@ -16280,7 +16280,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamaverageperpersonperday",
-      "community": 54,
+      "community": 91,
       "community_name": "dashboard/types.ts",
       "norm_label": "teamaverageperpersonperday"
     },
@@ -16291,7 +16291,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamvsyesterday",
-      "community": 54,
+      "community": 91,
       "community_name": "dashboard/types.ts",
       "norm_label": "teamvsyesterday"
     },
@@ -16302,8 +16302,8 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamperiodblock",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 91,
+      "community_name": "dashboard/types.ts",
       "norm_label": "teamperiodblock"
     },
     {
@@ -16324,7 +16324,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_personaverageperactiveday",
-      "community": 54,
+      "community": 91,
       "community_name": "dashboard/types.ts",
       "norm_label": "personaverageperactiveday"
     },
@@ -16368,8 +16368,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_persondashboard",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "persondashboard"
     },
     {
@@ -16423,8 +16423,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formatactivedaysoutofperiod",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "formatactivedaysoutofperiod()"
     },
     {
@@ -16446,7 +16446,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_api_leads_api",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leads/api/leads.api.ts"
     },
     {
@@ -16457,7 +16457,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_api_leads_api_getleadssummary",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "getleadssummary()"
     },
     {
@@ -16468,7 +16468,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_api_leads_api_uploadleads",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "uploadleads()"
     },
     {
@@ -16478,8 +16478,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "lead-daily-stats.tsx"
     },
     {
@@ -16489,8 +16489,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_percentchangepilldata",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "percentchangepilldata"
     },
     {
@@ -16500,8 +16500,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_leaddailystatsprops",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leaddailystatsprops"
     },
     {
@@ -16511,8 +16511,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_buildpercentchangepill",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "buildpercentchangepill()"
     },
     {
@@ -16522,8 +16522,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_buildcomparisonsubline",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "buildcomparisonsubline()"
     },
     {
@@ -16533,8 +16533,8 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_leaddailystats",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leaddailystats()"
     },
     {
@@ -16544,7 +16544,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "lead-pool-stats.tsx"
     },
@@ -16555,7 +16555,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstage",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstage"
     },
@@ -16566,7 +16566,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstagecardprops",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstagecardprops"
     },
@@ -16577,7 +16577,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_poolcompositionbarprops",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "poolcompositionbarprops"
     },
@@ -16588,7 +16588,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_poolcompositionlegendprops",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "poolcompositionlegendprops"
     },
@@ -16599,7 +16599,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstatsprops",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstatsprops"
     },
@@ -16610,7 +16610,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_getstagewidthpercent",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "getstagewidthpercent()"
     },
@@ -16621,7 +16621,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_buildpoolstages",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "buildpoolstages()"
     },
@@ -16632,7 +16632,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstagecard",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstagecard()"
     },
@@ -16643,7 +16643,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_poolcompositionbar",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "poolcompositionbar()"
     },
@@ -16654,7 +16654,7 @@
       "source_location": "L137",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_poolcompositionlegend",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "poolcompositionlegend()"
     },
@@ -16665,7 +16665,7 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_pool_stats_leadpoolstats",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolstats()"
     },
@@ -16688,7 +16688,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_upload_card_leadcountryoption",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadcountryoption"
     },
     {
@@ -16732,7 +16732,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_upload_card_getuploadtoastdescription",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "getuploadtoastdescription()"
     },
     {
@@ -16743,7 +16743,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_upload_card_leaduploadcard",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leaduploadcard()"
     },
     {
@@ -16754,7 +16754,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "use-lead-upload.ts"
     },
     {
@@ -16765,7 +16765,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload_leaduploadrequest",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leaduploadrequest"
     },
     {
@@ -16776,7 +16776,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload_handleuploadsuccess",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "handleuploadsuccess"
     },
     {
@@ -16787,7 +16787,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload_useleaduploadresult",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "useleaduploadresult"
     },
     {
@@ -16798,7 +16798,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload_getcsvfilevalidationerror",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "getcsvfilevalidationerror()"
     },
     {
@@ -16809,7 +16809,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload_useleadupload",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "useleadupload()"
     },
     {
@@ -16820,7 +16820,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_leads",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "use-leads.ts"
     },
     {
@@ -16831,7 +16831,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_leads_leads_summary_query_key",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leads_summary_query_key"
     },
     {
@@ -16842,7 +16842,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_leads_useleads",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "useleads()"
     },
     {
@@ -16852,8 +16852,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_index",
-      "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community": 167,
+      "community_name": "router.tsx",
       "norm_label": "leads/index.ts"
     },
     {
@@ -16864,7 +16864,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_pages_leads_page",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leads-page.tsx"
     },
     {
@@ -16875,7 +16875,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_pages_leads_page_leadspage",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadspage()"
     },
     {
@@ -16886,7 +16886,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leads/types.ts"
     },
     {
@@ -16896,7 +16896,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadwaitingattemptcounts",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadwaitingattemptcounts"
     },
@@ -16907,7 +16907,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadpoolcounts",
-      "community": 109,
+      "community": 47,
       "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadpoolcounts"
     },
@@ -16918,8 +16918,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadsdailycount",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadsdailycount"
     },
     {
@@ -16930,7 +16930,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadssummary",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadssummary"
     },
     {
@@ -16941,7 +16941,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadssummaryapiresponse",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadssummaryapiresponse"
     },
     {
@@ -16952,7 +16952,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadcountry",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadcountry"
     },
     {
@@ -16963,7 +16963,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types_leaduploadapiresponse",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leaduploadapiresponse"
     },
     {
@@ -16974,7 +16974,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types_leaduploadresult",
       "community": 47,
-      "community_name": "use-lead-upload.ts",
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leaduploadresult"
     },
     {
@@ -16984,8 +16984,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leads/utils/format.ts"
     },
     {
@@ -16995,8 +16995,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format_getdayoverdaypercentchange",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "getdayoverdaypercentchange()"
     },
     {
@@ -17006,8 +17006,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format_formatpercentchangelabel",
-      "community": 142,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "formatpercentchangelabel()"
     },
     {
@@ -17182,8 +17182,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_settings_pages_settings_page_settingspage",
-      "community": 167,
-      "community_name": "router.tsx",
+      "community": 88,
+      "community_name": "office-hours-editor.tsx",
       "norm_label": "settingspage()"
     },
     {
@@ -22454,6 +22454,17 @@
       "community": 37,
       "community_name": "Write Tasks \u2014 Planning and Task Breakdown",
       "norm_label": "output summary"
+    },
+    {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents",
+      "community": 142,
+      "community_name": "AGENTS.md",
+      "norm_label": "agents.md"
     },
     {
       "label": "CLAUDE.md",
@@ -34786,6 +34797,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_dialer_screens_dialer_screen",
+      "target": "app_src_config_app_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-call-tracker.ts",
       "source_location": "L9",
       "weight": 1.0,
@@ -35104,7 +35127,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L30",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_dialer_usestoredcountry",
@@ -35550,7 +35573,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -35562,7 +35585,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -35954,7 +35977,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36194,7 +36217,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36228,7 +36251,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36240,7 +36263,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36367,7 +36390,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36415,7 +36438,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36463,7 +36486,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36476,7 +36499,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L253",
+      "source_location": "L257",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen_dialerscreen",
@@ -36486,7 +36509,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_dialer",
@@ -36508,7 +36531,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_dialer",
@@ -36580,7 +36603,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36592,7 +36615,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36604,7 +36627,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L50",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_dialer_usedialer",
@@ -36617,7 +36640,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L85",
+      "source_location": "L90",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_dialer_usedialer",
@@ -36629,7 +36652,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L74",
+      "source_location": "L79",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_dialer_usedialer",
@@ -36641,7 +36664,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/features/dialer/hooks/use-dialer.ts",
-      "source_location": "L81",
+      "source_location": "L86",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_dialer_usedialer",
@@ -36652,7 +36675,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -36665,7 +36688,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L252",
+      "source_location": "L256",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen_dialerscreen",
@@ -37002,7 +37025,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L186",
+      "source_location": "L190",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37013,7 +37036,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L177",
+      "source_location": "L181",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37024,7 +37047,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L138",
+      "source_location": "L142",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37035,7 +37058,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L209",
+      "source_location": "L213",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37046,7 +37069,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L249",
+      "source_location": "L253",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37057,7 +37080,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37068,7 +37091,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37079,7 +37102,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L72",
+      "source_location": "L73",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37090,7 +37113,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L27",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37101,7 +37124,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37113,7 +37136,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37125,7 +37148,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37137,7 +37160,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37149,7 +37172,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen",
@@ -37161,7 +37184,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen_subtabbutton",
@@ -37173,7 +37196,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L74",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen_keypadview",
@@ -37186,7 +37209,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/features/dialer/screens/dialer-screen.tsx",
-      "source_location": "L250",
+      "source_location": "L254",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_screens_dialer_screen_dialerscreen",
@@ -78932,5 +78955,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "bf315db2ab316d5e96d28bc4d1dbc2d597a83bbf"
+  "built_at_commit": "e84565bb348bebd868c8124ddab0561abe69b4c7"
 }

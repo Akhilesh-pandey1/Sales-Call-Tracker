@@ -16,6 +16,7 @@ export type UseDialerResult = {
   isDialLocked: boolean;
   appendKeypadCharacter: (character: string) => void;
   removeLastCharacter: () => void;
+  clearDialedNumber: () => void;
   pasteNumberFromClipboard: () => Promise<void>;
   startCall: () => Promise<void>;
 };
@@ -55,6 +56,10 @@ export function useDialer(): UseDialerResult {
 
   const removeLastCharacter = useCallback((): void => {
     setDialedNumberInput(currentInput => currentInput.slice(0, -1));
+  }, []);
+
+  const clearDialedNumber = useCallback((): void => {
+    setDialedNumberInput('');
   }, []);
 
   const pasteNumberFromClipboard = useCallback(async (): Promise<void> => {
@@ -100,6 +105,7 @@ export function useDialer(): UseDialerResult {
     isDialLocked,
     appendKeypadCharacter,
     removeLastCharacter,
+    clearDialedNumber,
     pasteNumberFromClipboard,
     startCall,
   };

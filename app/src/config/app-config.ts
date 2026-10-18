@@ -7,8 +7,11 @@ const stalePendingCallAgeMs: number = appConfigJson.stalePendingCallAgeMs;
 const maxJanitorAttempts: number = appConfigJson.maxJanitorAttempts;
 const minMsBetweenJanitorSweeps: number = appConfigJson.minMsBetweenJanitorSweeps;
 const directCallStartTimeoutMs: number = appConfigJson.directCallStartTimeoutMs;
+const backspaceLongPressClearMs: number =
+  appConfigJson.backspaceLongPressClearMs;
 
 export {
+  backspaceLongPressClearMs,
   callLogMatchRetryDelaysMs,
   directCallStartTimeoutMs,
   maxJanitorAttempts,

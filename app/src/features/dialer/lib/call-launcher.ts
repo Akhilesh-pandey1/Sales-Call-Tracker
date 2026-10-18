@@ -1,4 +1,5 @@
 import { Linking, PermissionsAndroid } from 'react-native';
+import intentLauncher, { IntentConstant } from 'react-native-intent-launcher';
 import { insertPendingCall } from '@/features/tracking';
 
 const callFailedMessage = 'Could not start the call. Please try again.';
@@ -17,12 +18,18 @@ async function launchTrackedCall(phoneNumber: string): Promise<void> {
   const isCallPermissionGranted = await PermissionsAndroid.check(
     PermissionsAndroid.PERMISSIONS.CALL_PHONE,
   );
-  if (isCallPermissionGranted) {
-    const intentAt = new Date().toISOString();
-    const callId = createCallId();
-    await insertPendingCall(callId, phoneNumber, intentAt);
+  if (!isCallPermissionGranted) {
+    await Linking.openURL(telUrl);
+    return;
   }
-  await Linking.openURL(telUrl);
+  const intentAt = new Date().toISOString();
+  const callId = createCallId();
+  await insertPendingCall(callId, phoneNumber, intentAt);
+  const directCallParams = {
+    action: IntentConstant.ACTION_CALL,
+    data: telUrl,
+  };
+  await intentLauncher.startActivity(directCallParams);
 }
 
 export { callFailedMessage, launchTrackedCall };

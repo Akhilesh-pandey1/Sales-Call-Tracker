@@ -1,5 +1,4 @@
 import type { KeyboardEvent, MouseEvent } from "react";
-import { ChevronRight } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -99,30 +98,6 @@ function OwnAccountTag() {
   );
 }
 
-function DeactivatedAccountTag() {
-  return (
-    <span className="rounded-full border px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
-      Deactivated
-    </span>
-  );
-}
-
-interface AccountStatusTagsProps {
-  account: AccountSummary;
-  isOwnAccount: boolean;
-}
-
-function AccountStatusTags({ account, isOwnAccount }: AccountStatusTagsProps) {
-  const isInactive: boolean = !account.is_active;
-
-  return (
-    <>
-      {isOwnAccount && <OwnAccountTag />}
-      {isInactive && <DeactivatedAccountTag />}
-    </>
-  );
-}
-
 interface AccountRowActionsProps {
   account: AccountSummary;
   onEdit: (accountId: number) => void;
@@ -198,8 +173,7 @@ function DesktopAccountRow({
       <TableCell className="p-4 font-medium">
         <span className="flex items-center gap-2">
           {account.name}
-          <AccountStatusTags account={account} isOwnAccount={isOwnAccount} />
-          {canOpenPersonPage && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+          {isOwnAccount && <OwnAccountTag />}
         </span>
       </TableCell>
       <TableCell className="p-4 text-sm capitalize text-muted-foreground">
@@ -297,9 +271,8 @@ function AccountCard({ account, isOwnAccount, onOpen, onDelete, onEdit }: Accoun
       <span className="flex items-center justify-between gap-2">
         <span className={cardNameClassName}>
           {account.name}
-          <AccountStatusTags account={account} isOwnAccount={isOwnAccount} />
+          {isOwnAccount && <OwnAccountTag />}
         </span>
-        {canOpenPersonPage && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
       </span>
       <span className="mt-1 flex items-center justify-between gap-2 text-sm text-muted-foreground">
         <span className="capitalize">

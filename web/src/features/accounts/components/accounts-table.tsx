@@ -143,6 +143,24 @@ function AccountRowActions({ account, onEdit, onDelete }: AccountRowActionsProps
   );
 }
 
+interface AccountPersonPageOpenState {
+  canOpenPersonPage: boolean;
+  openStatsLabel: string | undefined;
+}
+
+function getPersonPageOpenState(
+  account: AccountSummary,
+  isOwnAccount: boolean
+): AccountPersonPageOpenState {
+  const isInactive: boolean = !account.is_active;
+  const canOpenPersonPage: boolean = isInactive && !isOwnAccount;
+  const openStatsLabel: string | undefined = canOpenPersonPage
+    ? `Open stats for ${account.name}`
+    : undefined;
+  const openState: AccountPersonPageOpenState = { canOpenPersonPage, openStatsLabel };
+  return openState;
+}
+
 function DesktopAccountRow({
   account,
   isOwnAccount,
@@ -151,8 +169,12 @@ function DesktopAccountRow({
   onEdit,
 }: AccountRowProps) {
   const isInactive: boolean = !account.is_active;
+  const { canOpenPersonPage, openStatsLabel } = getPersonPageOpenState(account, isOwnAccount);
 
   const handleRowClick = (): void => {
+    if (!canOpenPersonPage) {
+      return;
+    }
     onOpen(account.id);
   };
 
@@ -160,21 +182,24 @@ function DesktopAccountRow({
     handleRowActivationKeyDown(event, handleRowClick);
   };
 
-  const rowClassName: string = cn("cursor-pointer", isInactive && "text-muted-foreground");
+  const rowClassName: string = cn(
+    canOpenPersonPage && "cursor-pointer",
+    isInactive && "text-muted-foreground"
+  );
 
   return (
     <TableRow
       onClick={handleRowClick}
       onKeyDown={handleRowKeyDown}
-      tabIndex={0}
-      aria-label={`Open stats for ${account.name}`}
+      tabIndex={canOpenPersonPage ? 0 : undefined}
+      aria-label={openStatsLabel}
       className={rowClassName}
     >
       <TableCell className="p-4 font-medium">
         <span className="flex items-center gap-2">
           {account.name}
           <AccountStatusTags account={account} isOwnAccount={isOwnAccount} />
-          {!isOwnAccount && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+          {canOpenPersonPage && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
         </span>
       </TableCell>
       <TableCell className="p-4 text-sm capitalize text-muted-foreground">
@@ -237,8 +262,12 @@ function DesktopAccountsTable({
 
 function AccountCard({ account, isOwnAccount, onOpen, onDelete, onEdit }: AccountRowProps) {
   const isInactive: boolean = !account.is_active;
+  const { canOpenPersonPage, openStatsLabel } = getPersonPageOpenState(account, isOwnAccount);
 
   const handleCardClick = (): void => {
+    if (!canOpenPersonPage) {
+      return;
+    }
     onOpen(account.id);
   };
 
@@ -247,7 +276,8 @@ function AccountCard({ account, isOwnAccount, onOpen, onDelete, onEdit }: Accoun
   };
 
   const cardClassName: string = cn(
-    "block w-full cursor-pointer rounded-xl border px-4 py-3.5 text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    "block w-full rounded-xl border px-4 py-3.5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    canOpenPersonPage && "cursor-pointer hover:bg-muted/50",
     isInactive && "bg-muted/50"
   );
   const cardNameClassName: string = cn(
@@ -257,11 +287,11 @@ function AccountCard({ account, isOwnAccount, onOpen, onDelete, onEdit }: Accoun
 
   return (
     <div
-      role="button"
-      tabIndex={0}
+      role={canOpenPersonPage ? "button" : undefined}
+      tabIndex={canOpenPersonPage ? 0 : undefined}
       onClick={handleCardClick}
       onKeyDown={handleCardKeyDown}
-      aria-label={`Open stats for ${account.name}`}
+      aria-label={openStatsLabel}
       className={cardClassName}
     >
       <span className="flex items-center justify-between gap-2">
@@ -269,7 +299,7 @@ function AccountCard({ account, isOwnAccount, onOpen, onDelete, onEdit }: Accoun
           {account.name}
           <AccountStatusTags account={account} isOwnAccount={isOwnAccount} />
         </span>
-        {!isOwnAccount && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+        {canOpenPersonPage && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
       </span>
       <span className="mt-1 flex items-center justify-between gap-2 text-sm text-muted-foreground">
         <span className="capitalize">

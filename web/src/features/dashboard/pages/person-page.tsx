@@ -1,5 +1,5 @@
 import { useMemo, useState, type ComponentType, type ReactElement } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, Megaphone, PhoneIncoming } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -321,17 +321,31 @@ function CallsByHourSection({
   );
 }
 
+function getPersonPageBackTarget(fromSectionPath: string | null): string {
+  const teamPagePath: string = "/team";
+  const accountsPagePath: string = "/accounts";
+  const fallbackBackTarget: string = teamPagePath;
+
+  if (fromSectionPath === teamPagePath || fromSectionPath === accountsPagePath) {
+    return fromSectionPath;
+  }
+  return fallbackBackTarget;
+}
+
 export function PersonPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const personId: number = Number(id);
   const hasValidPersonId: boolean = isValidPersonId(personId);
   const { personStats, isLoading, hasError, refetch } = usePersonStats(personId);
   const [selectedPeriod, setSelectedPeriod] = useState<DashboardPeriod>("last_30_days");
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
+  const fromSectionPath: string | null = searchParams.get("from");
+  const backTargetPath: string = getPersonPageBackTarget(fromSectionPath);
 
   const handleBackClick = (): void => {
-    navigate(-1);
+    navigate(backTargetPath);
   };
 
   const handleRetryClick = (): void => {

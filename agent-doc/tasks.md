@@ -75,11 +75,11 @@
 
 **Blocked by:** Task 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A deactivated person's Accounts row opens their person page, and active Accounts rows never navigate to it
-- [ ] Back from a person page opened via a Team row returns to `/team`, and via an Accounts row returns to `/accounts`
+- [x] A deactivated person's Accounts row opens their person page, and active Accounts rows never navigate to it
+- [x] Back from a person page opened via a Team row returns to `/team`, and via an Accounts row returns to `/accounts`
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)

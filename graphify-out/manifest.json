@@ -355,8 +355,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792341429.912943,
-    "ast_hash": "ac8d9394b0e1e6b82fb0ec20e3be24b2",
+    "mtime": 1792345798.8913927,
+    "ast_hash": "6ded4383ae0c6e13afe0257377577ae6",
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {
@@ -785,8 +785,8 @@
     "semantic_hash": ""
   },
   "app/config.json": {
-    "mtime": 1792339434.7484972,
-    "ast_hash": "8392acff5134458a1404c6a4ec5001df",
+    "mtime": 1792345798.892842,
+    "ast_hash": "7076806d34dbb59ca2c3ed39986fb5be",
     "semantic_hash": ""
   },
   "app/index.js": {
@@ -805,13 +805,13 @@
     "semantic_hash": ""
   },
   "app/package.json": {
-    "mtime": 1792066515.384212,
-    "ast_hash": "9624c5323510ad7c7556798fe3e3e0de",
+    "mtime": 1792345317.554514,
+    "ast_hash": "a3a49f2ca55fa55e2ab0e4d75cacbaf1",
     "semantic_hash": ""
   },
   "app/src/app/navigation/app-navigator.tsx": {
-    "mtime": 1792084753.0172381,
-    "ast_hash": "94c81e2aa1166da30810e964a5fb36fc",
+    "mtime": 1792345798.892842,
+    "ast_hash": "7840d9551acbadaa4eea2d1c78e90f3e",
     "semantic_hash": ""
   },
   "app/src/app/navigation/main-tabs-param-list.ts": {
@@ -860,8 +860,8 @@
     "semantic_hash": ""
   },
   "app/src/config/app-config.ts": {
-    "mtime": 1792304321.067803,
-    "ast_hash": "79a2fde30c535e66e553fcfd721000e3",
+    "mtime": 1792345798.8941638,
+    "ast_hash": "02937e8f685cf5f1079ca21387add6ff",
     "semantic_hash": ""
   },
   "app/src/features/auth/api/auth.api.ts": {
@@ -880,8 +880,8 @@
     "semantic_hash": ""
   },
   "app/src/features/auth/screens/login-screen.tsx": {
-    "mtime": 1792075785.1464543,
-    "ast_hash": "018af9b13bb179f1c71f8886632c1301",
+    "mtime": 1792343418.0785809,
+    "ast_hash": "a64c87ea1e56c200da1f2cd5512221c2",
     "semantic_hash": ""
   },
   "app/src/features/dialer/api/leads.api.ts": {
@@ -905,8 +905,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-automated-calling.ts": {
-    "mtime": 1792304393.8109403,
-    "ast_hash": "4bf970b5217fd6c7a24ab3ad751ab0d1",
+    "mtime": 1792344432.5789268,
+    "ast_hash": "5e3759490d246de97544dff24fa65c51",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-dialer.ts": {
@@ -920,13 +920,13 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/lib/call-launcher.ts": {
-    "mtime": 1792304283.0543518,
-    "ast_hash": "36fdc3bc2ee29848d1266046b921b710",
+    "mtime": 1792345798.8941638,
+    "ast_hash": "3812aaa373a314ea8f7df31c35687878",
     "semantic_hash": ""
   },
   "app/src/features/dialer/screens/dialer-screen.tsx": {
-    "mtime": 1792087261.900974,
-    "ast_hash": "6179f7f3c5ed16550c9ef0296b4bae7a",
+    "mtime": 1792343418.079584,
+    "ast_hash": "12844070a4aaa63272be9ca4e4241231",
     "semantic_hash": ""
   },
   "app/src/features/stats/api/stats.api.ts": {
@@ -950,13 +950,13 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/my-stats-screen.tsx": {
-    "mtime": 1792301492.6808896,
-    "ast_hash": "057446fd5d6b9612745c54713b874079",
+    "mtime": 1792344584.7834132,
+    "ast_hash": "64344f470c0b6431e5da69a0f2422a6d",
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/settings-screen.tsx": {
-    "mtime": 1792084538.5709336,
-    "ast_hash": "d439bcbacfe517ba78446382a509d72f",
+    "mtime": 1792344584.784417,
+    "ast_hash": "85901835bbee40926104268b66fe1b1d",
     "semantic_hash": ""
   },
   "app/src/features/tracking/api/calls.api.ts": {
@@ -975,8 +975,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-call-tracker.ts": {
-    "mtime": 1792304344.4646695,
-    "ast_hash": "e477f2dbec6602156479b0bcafb30364",
+    "mtime": 1792344432.5789268,
+    "ast_hash": "2b7b5582cf359ab7ad4b97af148d996d",
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-janitor.ts": {
@@ -995,8 +995,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/index.ts": {
-    "mtime": 1792304282.0921998,
-    "ast_hash": "42548a167990bbefb66674eb6ccbe0a4",
+    "mtime": 1792344432.579986,
+    "ast_hash": "39bbc8affedb0faa58fc3816adad692d",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-log-matcher.ts": {
@@ -1005,8 +1005,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/sync-events.ts": {
-    "mtime": 1792081490.8308651,
-    "ast_hash": "2407fe4db75cbfecc42408b84a4ea395",
+    "mtime": 1792344432.5809934,
+    "ast_hash": "74845e3dca5c31ebdf00a8ba64884f2c",
     "semantic_hash": ""
   },
   "app/src/lib/utils.ts": {
@@ -1260,128 +1260,128 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/01-login--P.png": {
-    "mtime": 1792311331.5766258,
+    "mtime": 1792347384.6865523,
     "ast_hash": "efba631c996f286cb4a9c558408b3096",
     "semantic_hash": ""
   },
   "agent-doc/screens/02-dashboard--P.png": {
-    "mtime": 1792311332.9777381,
+    "mtime": 1792347386.1523967,
     "ast_hash": "c0bfe6ca537141674c04228cec17fc8d",
     "semantic_hash": ""
   },
   "agent-doc/screens/04-leads--P.png": {
-    "mtime": 1792311338.5403342,
+    "mtime": 1792347391.7691958,
     "ast_hash": "c4a1e2907eb20adc09000619c7242097",
     "semantic_hash": ""
   },
   "agent-doc/screens/04-leads--empty--P.png": {
-    "mtime": 1792311337.1580489,
+    "mtime": 1792347390.3642068,
     "ast_hash": "dbdae231658725548930bc9b79c91e81",
     "semantic_hash": ""
   },
   "agent-doc/screens/04-leads--upload-dialog--P.png": {
-    "mtime": 1792311339.9287772,
+    "mtime": 1792347393.1313446,
     "ast_hash": "f0ff2f42cd77da8da19cde9aa8d9dfee",
     "semantic_hash": ""
   },
   "agent-doc/screens/04-leads--upload-error--P.png": {
-    "mtime": 1792311341.307848,
+    "mtime": 1792347394.5122564,
     "ast_hash": "848ec4144bad51d517bce3a1a43974ad",
     "semantic_hash": ""
   },
   "agent-doc/screens/04-person-view--P.png": {
-    "mtime": 1792311345.6075377,
+    "mtime": 1792347398.863813,
     "ast_hash": "01328a192c739b5e82543cb3c8dd44bd",
     "semantic_hash": ""
   },
   "agent-doc/screens/04-person-view--error--P.png": {
-    "mtime": 1792311342.7390337,
+    "mtime": 1792347395.9095252,
     "ast_hash": "0987548e3b1c5ac95ae675e69e1feca2",
     "semantic_hash": ""
   },
   "agent-doc/screens/04-person-view--no-calls--P.png": {
-    "mtime": 1792311344.1496198,
+    "mtime": 1792347397.3898036,
     "ast_hash": "1c5305ea7139092e568c7f427eb3a62c",
     "semantic_hash": ""
   },
   "agent-doc/screens/05-accounts--P.png": {
-    "mtime": 1792311351.2441866,
+    "mtime": 1792347404.5193474,
     "ast_hash": "7f0e45787f1fc181178c6c8a199fe212",
     "semantic_hash": ""
   },
   "agent-doc/screens/05-accounts--add-dialog--P.png": {
-    "mtime": 1792311347.014008,
+    "mtime": 1792347400.2410638,
     "ast_hash": "573d0e4194cded222ce04790d2185c6c",
     "semantic_hash": ""
   },
   "agent-doc/screens/05-accounts--add-error--P.png": {
-    "mtime": 1792311348.4321992,
+    "mtime": 1792347401.6886692,
     "ast_hash": "b6d16def3398632f1ef1be663b11a5d6",
     "semantic_hash": ""
   },
   "agent-doc/screens/05-accounts--delete-dialog--P.png": {
-    "mtime": 1792311349.861799,
+    "mtime": 1792347403.1222289,
     "ast_hash": "5389127f86a5c6a106a8006a9ea61557",
     "semantic_hash": ""
   },
   "agent-doc/screens/06-login--M.png": {
-    "mtime": 1792311358.1213834,
+    "mtime": 1792347411.395319,
     "ast_hash": "841ffcdab6ee1a5faada31553ac66343",
     "semantic_hash": ""
   },
   "agent-doc/screens/06-login--error--M.png": {
-    "mtime": 1792311355.406616,
+    "mtime": 1792347408.6949115,
     "ast_hash": "47850d5f18f6ca7f0bb8596e4052c8c8",
     "semantic_hash": ""
   },
   "agent-doc/screens/06-login--locked--M.png": {
-    "mtime": 1792311356.7701063,
+    "mtime": 1792347410.0445862,
     "ast_hash": "df87100ba5a9e417318aec4ec3f63830",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--M.png": {
-    "mtime": 1792311362.2203317,
-    "ast_hash": "f46745f1c946efeb4e154a8bdcada42d",
+    "mtime": 1792347415.5114608,
+    "ast_hash": "69ea9f4c9f6a72f146e941fa096af067",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--automated--M.png": {
-    "mtime": 1792311359.4699118,
-    "ast_hash": "5f6fed3cdee15668c2e71f045d8f9110",
+    "mtime": 1792347412.7616067,
+    "ast_hash": "f09222cf0f130764440bf7d296d78c8f",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--empty--M.png": {
-    "mtime": 1792311360.8079677,
-    "ast_hash": "ee69b8bf10f3d38d5609de6bf3895b7f",
+    "mtime": 1792347414.1131878,
+    "ast_hash": "d0d7ae127cb328d9561e92b1319492f9",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--outcome-dialog--M.png": {
-    "mtime": 1792311363.621994,
-    "ast_hash": "22f6e91d8a55c0ed83c1481ca85fea22",
+    "mtime": 1792347416.9328227,
+    "ast_hash": "279207113978f55e9c3359a6ab0565e0",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--permissions-off--M.png": {
-    "mtime": 1792311364.971087,
-    "ast_hash": "bfc81c78c7cb81c8f79392587ac147e2",
+    "mtime": 1792347418.296777,
+    "ast_hash": "9ed33adb4ab7f3d14343d7e998bf8349",
     "semantic_hash": ""
   },
   "agent-doc/screens/08-my-stats--M.png": {
-    "mtime": 1792311366.3423378,
-    "ast_hash": "18d96e8858bc0c36048da3a3af440f61",
+    "mtime": 1792347419.6667926,
+    "ast_hash": "37fe2f5ae0869f7875da22652acffe63",
     "semantic_hash": ""
   },
   "agent-doc/screens/08-my-stats--offline--M.png": {
-    "mtime": 1792311367.6862023,
-    "ast_hash": "019ba1ed68e76d362ac034c21ffff1c4",
+    "mtime": 1792347421.1107516,
+    "ast_hash": "bacd7ab24c2a395ac04fa118fa364a31",
     "semantic_hash": ""
   },
   "agent-doc/screens/09-settings--M.png": {
-    "mtime": 1792311370.368356,
-    "ast_hash": "3246f98645c67655804a1bb00d613e5d",
+    "mtime": 1792347423.8260791,
+    "ast_hash": "f803bdf0dbe4c5d48f46d72bb8aa264c",
     "semantic_hash": ""
   },
   "agent-doc/screens/09-settings--confirm-dialog--M.png": {
-    "mtime": 1792311369.0195472,
-    "ast_hash": "721fa2dfb69beab5c245193f63581a8d",
+    "mtime": 1792347422.4788597,
+    "ast_hash": "4b4dd4e58cc7e60b170461f0cda9530f",
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/calls-by-hour-chart.tsx": {
@@ -1565,58 +1565,48 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--M.html": {
-    "mtime": 1791983373.1911085,
-    "ast_hash": "84f9aa88d287ec3bfe47e9ccf783959a",
+    "mtime": 1792342151.3439846,
+    "ast_hash": "3236a0164698c7e188c056a2ed7c8b9c",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--automated--M.html": {
-    "mtime": 1791983365.7274013,
-    "ast_hash": "5ec217dca01ad5f504614a0831ad6e59",
+    "mtime": 1792342159.5584722,
+    "ast_hash": "0da788e4169ab9e1cebbc7cb05ea60dd",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--empty--M.html": {
-    "mtime": 1791979721.9014816,
-    "ast_hash": "9accb0abe6ed369417d4d420f8e7f4e3",
+    "mtime": 1792342174.6414518,
+    "ast_hash": "b1dd7c97e9fa27996e862c750deef4db",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--outcome-dialog--M.html": {
-    "mtime": 1791979704.3116376,
-    "ast_hash": "955482f37a032fe64959ac6bfff42a60",
+    "mtime": 1792342166.6034923,
+    "ast_hash": "491cde47e13961c0bc2205619a93b00e",
     "semantic_hash": ""
   },
   "agent-doc/screens/07-dialer--permissions-off--M.html": {
-    "mtime": 1791979729.7692404,
-    "ast_hash": "8e0b601eae9844081084a2255cb688a9",
+    "mtime": 1792342181.7843804,
+    "ast_hash": "7ffa68dc9f89f12db295c1711affe8f3",
     "semantic_hash": ""
   },
   "agent-doc/screens/08-my-stats--M.html": {
-    "mtime": 1791978640.5939596,
-    "ast_hash": "a732e6bb531344821fb9390c05f0621e",
+    "mtime": 1792341866.6962905,
+    "ast_hash": "11f3f1ab6b819b62cc18f9bccfa01066",
     "semantic_hash": ""
   },
   "agent-doc/screens/08-my-stats--offline--M.html": {
-    "mtime": 1791978664.7205174,
-    "ast_hash": "6c1a37c952c555b8f607a3713d465698",
+    "mtime": 1792341875.4749491,
+    "ast_hash": "719ec56f3b641dacb3d0dcaddd121c6f",
     "semantic_hash": ""
   },
   "agent-doc/screens/09-settings--M.html": {
-    "mtime": 1791978681.0422573,
-    "ast_hash": "594e2db1a2260b342fa8d9a9b40bcebd",
+    "mtime": 1792341883.6317482,
+    "ast_hash": "b1628516b2d144555c21748875048c6f",
     "semantic_hash": ""
   },
   "agent-doc/screens/09-settings--confirm-dialog--M.html": {
-    "mtime": 1791978711.9588902,
-    "ast_hash": "ab34fa8dc1518a0076edc589a1574fb3",
-    "semantic_hash": ""
-  },
-  "agent-doc/screens/AGENTS.md": {
-    "mtime": 1792044749.5189486,
-    "ast_hash": "6c2d36cb1895115b974a1ef84bee683d",
-    "semantic_hash": ""
-  },
-  "agent-doc/screens/CLAUDE.md": {
-    "mtime": 1792044749.5189486,
-    "ast_hash": "6c2d36cb1895115b974a1ef84bee683d",
+    "mtime": 1792341890.7345445,
+    "ast_hash": "34b65cbd68e6db7be94858fe24073371",
     "semantic_hash": ""
   },
   "agent-doc/screens/THEME.md": {
@@ -1720,22 +1710,22 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/02-team--P.png": {
-    "mtime": 1792311335.761973,
+    "mtime": 1792347388.950357,
     "ast_hash": "006bc945be5c85ff0f36a24e96550946",
     "semantic_hash": ""
   },
   "agent-doc/screens/02-team--empty--P.png": {
-    "mtime": 1792311334.3733552,
+    "mtime": 1792347387.5461228,
     "ast_hash": "169071ee850cb64af01188f396e80ed0",
     "semantic_hash": ""
   },
   "agent-doc/screens/05-settings--P.png": {
-    "mtime": 1792311353.9883225,
+    "mtime": 1792347407.3214288,
     "ast_hash": "745059fca2ee885f19a55fe9ce19da9a",
     "semantic_hash": ""
   },
   "agent-doc/screens/05-settings--error--P.png": {
-    "mtime": 1792311352.6084924,
+    "mtime": 1792347405.9149313,
     "ast_hash": "4fe111c7f9fc61e75adf4c671bfd947a",
     "semantic_hash": ""
   },
@@ -1787,6 +1777,11 @@
   "web/src/shared/components/todays-date-action.tsx": {
     "mtime": 1792312975.2829869,
     "ast_hash": "6c9a575b0b312100dbc81e9030de15cd",
+    "semantic_hash": ""
+  },
+  "app/src/types/react-native-intent-launcher.d.ts": {
+    "mtime": 1792345798.8941638,
+    "ast_hash": "bb538f84d7c44719ef6bf4c7c6012985",
     "semantic_hash": ""
   }
 }

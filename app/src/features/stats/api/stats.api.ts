@@ -3,13 +3,13 @@ import { apiClient } from '@/shared/api/api-client';
 export type PeriodStats = {
   dials: number;
   connected: number;
-  seconds: number;
+  minutes: number;
   connected_percent: number | null;
 };
 
 export type TopNumberStats = {
   phone_number: string;
-  seconds: number;
+  minutes: number;
   calls: number;
 };
 

@@ -22,14 +22,14 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] PATCH updates the outcome of the token owner's synced call, and a new outcome replaces a stored one
-- [ ] An invalid value returns 400 "Outcome must be connected, not_connected, or schedule."; an unknown call or another user's call returns 404 "Call not found."
+- [x] PATCH updates the outcome of the token owner's synced call, and a new outcome replaces a stored one
+- [x] An invalid value returns 400 "Outcome must be connected, not_connected, or schedule."; an unknown call or another user's call returns 404 "Call not found."
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest backend/tests/modules/test_calls.py` (from the project root)
+- [x] Tests pass: `python -m pytest backend/tests/modules/test_calls.py` (from the project root)
 
 ---
 

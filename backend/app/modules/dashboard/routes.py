@@ -24,7 +24,7 @@ def require_dashboard_manager(
 ) -> Callable[..., Any]:
     @wraps(endpoint_handler)
     @require_auth
-    def decorated_function(*args: Any, **kwargs: Any) -> Any:
+    def manager_gate_wrapper(*args: Any, **kwargs: Any) -> Any:
         forbidden_code: int = 403
         manager_role: str = "manager"
         current_user: User = g.user
@@ -33,7 +33,7 @@ def require_dashboard_manager(
         handler_result: Any = endpoint_handler(*args, **kwargs)
         return handler_result
 
-    result_function: Callable[..., Any] = decorated_function
+    result_function: Callable[..., Any] = manager_gate_wrapper
     return result_function
 
 

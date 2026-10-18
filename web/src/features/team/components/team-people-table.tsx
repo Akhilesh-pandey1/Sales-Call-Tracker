@@ -137,15 +137,14 @@ function TodayNumbers({ todayStats }: TodayNumbersProps) {
     "tabular-nums",
     hasNoDialsToday ? "text-muted-foreground" : "font-semibold"
   );
-
-  if (hasNoDialsToday) {
-    return <span className={lineClassName}>{formatPeriodNumbers(todayStats)}</span>;
-  }
+  const connectedClassName: string = hasNoDialsToday
+    ? "text-muted-foreground"
+    : "text-green-600";
 
   return (
     <span className={lineClassName}>
       {formatCount(todayStats.dials)} /{" "}
-      <span className="text-green-600">{formatCount(todayStats.connected)}</span> /{" "}
+      <span className={connectedClassName}>{formatCount(todayStats.connected)}</span> /{" "}
       {formatCount(todayStats.minutes)}
     </span>
   );
@@ -178,7 +177,7 @@ function PersonCard({ person, onOpen }: PersonCardProps) {
         <span className="font-medium">{person.name}</span>
         <ChevronRight className="h-6 w-6 shrink-0 text-muted-foreground" />
       </span>
-      <span className="mt-2 grid grid-cols-[6.5rem_1fr] gap-y-1 text-sm">
+      <span className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
         <span className="text-muted-foreground">Today</span>
         <TodayNumbers todayStats={person.today} />
         <span className="text-muted-foreground">Yesterday</span>

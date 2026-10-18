@@ -1,4 +1,4 @@
-import { useMemo, type ComponentType, type ReactElement } from "react";
+import { useMemo, useState, type ComponentType, type ReactElement } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, Megaphone, PhoneIncoming } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,18 +15,21 @@ import { ErrorState } from "@/shared/components/error-state";
 import { PageHeader } from "@/shared/components/page-header";
 import { formatCount } from "@/shared/utils/format-count";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
+import { CallsByHourChart } from "../components/calls-by-hour-chart";
 import { KpiCard } from "../components/kpi-card";
+import { PeriodSwitch } from "../components/period-switch";
 import { TopNumbersTable } from "../components/top-numbers-table";
 import { isValidPersonId, usePersonStats } from "../hooks/use-person-stats";
 import type {
+  CallsByHourBlock,
+  DashboardPeriod,
+  PersonAveragePerActiveDay,
   PersonDashboard,
   PersonLast30DaysStats,
   PersonPeriodStats,
 } from "../types";
 import {
-  convertSecondsToMinutes,
   formatActiveDaysOutOfPeriod,
-  formatAveragePerActiveDay,
   formatConnectedPercent,
   getPersonInitials,
 } from "../utils/format";
@@ -53,11 +56,10 @@ interface PeriodValueLabels {
 }
 
 function buildPeriodValueLabels(period: PeriodView): PeriodValueLabels {
-  const talkMinutes: number = convertSecondsToMinutes(period.stats.seconds);
   const valueLabels: PeriodValueLabels = {
     dials: formatCount(period.stats.dials),
     connected: formatCount(period.stats.connected),
-    minutes: formatCount(talkMinutes),
+    minutes: formatCount(period.stats.minutes),
     connectedPercent: formatConnectedPercent(period.stats.connected_percent),
   };
   return valueLabels;
@@ -202,21 +204,30 @@ interface PersonKpiCardData {
   subLine: string;
 }
 
+function buildAverageCardValue(
+  averagePerActiveDay: PersonAveragePerActiveDay | null,
+  metricName: keyof PersonAveragePerActiveDay
+): string {
+  const noAverageLabel: string = "—";
+  if (averagePerActiveDay === null) {
+    return noAverageLabel;
+  }
+  return formatCount(averagePerActiveDay[metricName]);
+}
+
 function buildAverageCardSubLine(metricTotal: number): string {
   const subLine: string = `per active day · ${formatCount(metricTotal)} total`;
   return subLine;
 }
 
 function buildPersonKpiCards(last30DaysStats: PersonLast30DaysStats): PersonKpiCardData[] {
-  const activeDays: number = last30DaysStats.active_days;
-  const secondsPerMinute: number = 60;
-  const exactTalkMinutes: number = last30DaysStats.seconds / secondsPerMinute;
-  const totalTalkMinutes: number = convertSecondsToMinutes(last30DaysStats.seconds);
+  const averagePerActiveDay: PersonAveragePerActiveDay | null =
+    last30DaysStats.avg_per_active_day;
 
   const activeDaysCard: PersonKpiCardData = {
     key: "active-days",
     label: "Active days",
-    value: formatActiveDaysOutOfPeriod(activeDays),
+    value: formatActiveDaysOutOfPeriod(last30DaysStats.active_days),
     icon: Calendar,
     iconClassName: "text-primary",
     subLine: "days with at least 1 dial",
@@ -225,7 +236,7 @@ function buildPersonKpiCards(last30DaysStats: PersonLast30DaysStats): PersonKpiC
   const avgDialsCard: PersonKpiCardData = {
     key: "avg-dials",
     label: "Avg dials",
-    value: formatAveragePerActiveDay(last30DaysStats.dials, activeDays),
+    value: buildAverageCardValue(averagePerActiveDay, "dials"),
     icon: Megaphone,
     iconClassName: "text-primary",
     subLine: buildAverageCardSubLine(last30DaysStats.dials),
@@ -234,7 +245,7 @@ function buildPersonKpiCards(last30DaysStats: PersonLast30DaysStats): PersonKpiC
   const avgConnectedCard: PersonKpiCardData = {
     key: "avg-connected",
     label: "Avg connected",
-    value: formatAveragePerActiveDay(last30DaysStats.connected, activeDays),
+    value: buildAverageCardValue(averagePerActiveDay, "connected"),
     icon: PhoneIncoming,
     iconClassName: "text-green-500",
     valueClassName: "text-green-600",
@@ -244,10 +255,10 @@ function buildPersonKpiCards(last30DaysStats: PersonLast30DaysStats): PersonKpiC
   const avgMinutesCard: PersonKpiCardData = {
     key: "avg-minutes",
     label: "Avg minutes",
-    value: formatAveragePerActiveDay(exactTalkMinutes, activeDays),
+    value: buildAverageCardValue(averagePerActiveDay, "minutes"),
     icon: Clock,
     iconClassName: "text-primary",
-    subLine: buildAverageCardSubLine(totalTalkMinutes),
+    subLine: buildAverageCardSubLine(last30DaysStats.minutes),
   };
 
   const kpiCards: PersonKpiCardData[] = [
@@ -286,12 +297,37 @@ function Last30DaysKpiSection({ last30DaysStats }: Last30DaysKpiSectionProps) {
   );
 }
 
+interface CallsByHourSectionProps {
+  callsByHour: CallsByHourBlock;
+  selectedPeriod: DashboardPeriod;
+  onSelectPeriod: (period: DashboardPeriod) => void;
+}
+
+function CallsByHourSection({
+  callsByHour,
+  selectedPeriod,
+  onSelectPeriod,
+}: CallsByHourSectionProps) {
+  const usesDailyAverageWording: boolean = selectedPeriod === "last_30_days";
+
+  return (
+    <CallsByHourChart
+      callsByHour={callsByHour}
+      usesDailyAverageWording={usesDailyAverageWording}
+      headingAction={
+        <PeriodSwitch selectedPeriod={selectedPeriod} onSelectPeriod={onSelectPeriod} />
+      }
+    />
+  );
+}
+
 export function PersonPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const personId: number = Number(id);
   const hasValidPersonId: boolean = isValidPersonId(personId);
   const { personStats, isLoading, hasError, refetch } = usePersonStats(personId);
+  const [selectedPeriod, setSelectedPeriod] = useState<DashboardPeriod>("last_30_days");
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
 
   const handleBackClick = (): void => {
@@ -300,6 +336,10 @@ export function PersonPage() {
 
   const handleRetryClick = (): void => {
     refetch();
+  };
+
+  const handleSelectPeriod = (period: DashboardPeriod): void => {
+    setSelectedPeriod(period);
   };
 
   const fallbackPageTitle: string = "Person";
@@ -342,6 +382,11 @@ export function PersonPage() {
         <>
           <Last30DaysKpiSection last30DaysStats={personStats.last_30_days} />
           <PerformanceSection personStats={personStats} />
+          <CallsByHourSection
+            callsByHour={personStats[selectedPeriod].calls_by_hour}
+            selectedPeriod={selectedPeriod}
+            onSelectPeriod={handleSelectPeriod}
+          />
           <TopNumbersTable numbers={personStats.top_numbers} />
         </>
       )}

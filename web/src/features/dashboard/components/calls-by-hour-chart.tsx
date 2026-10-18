@@ -1,8 +1,9 @@
+import type { ReactNode } from "react";
 import { Bar, BarChart, Cell, LabelList, XAxis } from "recharts";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard, EmptyPeriodNote } from "./dashboard-card";
-import type { TeamCallsByHourBlock } from "../types";
+import type { CallsByHourBlock } from "../types";
 
 interface HourlyDialBar {
   hourLabel: string;
@@ -19,9 +20,10 @@ interface DialsTopLabelProps {
 }
 
 interface CallsByHourChartProps {
-  callsByHour: TeamCallsByHourBlock;
+  callsByHour: CallsByHourBlock;
   usesDailyAverageWording: boolean;
-  headingLabel: string;
+  headingLabel?: string;
+  headingAction?: ReactNode;
   className?: string;
 }
 
@@ -33,7 +35,7 @@ function getTwelveHourLabel(hour: number): string {
   return hourLabel;
 }
 
-function buildHourlyBars(callsByHour: TeamCallsByHourBlock): HourlyDialBar[] {
+function buildHourlyBars(callsByHour: CallsByHourBlock): HourlyDialBar[] {
   const bestHour: number | null = callsByHour.best_hour;
   const hourlyBars: HourlyDialBar[] = callsByHour.hours.map(
     (hour: number, hourIndex: number) => {
@@ -68,12 +70,18 @@ export function CallsByHourChart({
   callsByHour,
   usesDailyAverageWording,
   headingLabel,
+  headingAction,
   className,
 }: CallsByHourChartProps) {
   const bestHour: number | null = callsByHour.best_hour;
   if (bestHour === null) {
     return (
-      <DashboardCard title="Calls by hour" headingLabel={headingLabel} className={className}>
+      <DashboardCard
+        title="Calls by hour"
+        headingLabel={headingLabel}
+        headingAction={headingAction}
+        className={className}
+      >
         <EmptyPeriodNote />
       </DashboardCard>
     );
@@ -129,7 +137,12 @@ export function CallsByHourChart({
   };
 
   return (
-    <DashboardCard title="Calls by hour" headingLabel={headingLabel} className={className}>
+    <DashboardCard
+      title="Calls by hour"
+      headingLabel={headingLabel}
+      headingAction={headingAction}
+      className={className}
+    >
       <ChartContainer
         config={chartConfig}
         className="mt-4 aspect-auto h-44 sm:h-48"

@@ -92,7 +92,7 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
   const handleCallPress = () => dialer.startCall();
 
   return (
-    <View className="flex-1 justify-center px-5 pb-4 pt-2">
+    <View className="flex-1 justify-center px-3 pb-4 pt-2">
       <View className="flex-row items-center gap-3 py-2" aria-live="polite">
         {dialer.dialedNumberInput === '' ? (
           <Text className="flex-1 text-right text-3xl font-medium tracking-[0.08em] text-muted-foreground">
@@ -259,7 +259,7 @@ export function DialerScreen() {
 
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
-      <View className="px-5 pt-3">
+      <View className="px-3 pt-3">
         <PermissionBanner missingPermissions={missingPermissions} />
       </View>
       <DialerSubTabs activeSubTab={activeSubTab} onSelectSubTab={setActiveSubTab} />

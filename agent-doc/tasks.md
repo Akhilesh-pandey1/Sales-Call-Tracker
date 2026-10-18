@@ -131,15 +131,15 @@
 
 **Blocked by:** Task 7
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Dialer, My Stats, and Settings — screens, cards, and headers — use a 12px side gutter (`px-3`), replacing the 20px padding
-- [ ] Dialogs keep their own centered padding
+- [x] Dialer, My Stats, and Settings — screens, cards, and headers — use a 12px side gutter (`px-3`), replacing the 20px padding
+- [x] Dialogs keep their own centered padding
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

@@ -1,4 +1,7 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  type BottomTabNavigationOptions,
+} from '@react-navigation/bottom-tabs';
 import { DialerScreen } from '@/features/dialer';
 import { MyStatsScreen, SettingsScreen } from '@/features/stats';
 import { useJanitor, useSync } from '@/features/tracking';
@@ -9,23 +12,23 @@ import type { MainTabsParamList } from './main-tabs-param-list';
 
 const MainTabs = createBottomTabNavigator<MainTabsParamList>();
 
-function TabIcon({ focused, icon }: { focused: boolean; icon: LucideIcon }) {
-  const iconSize = 20;
-  const iconColorClass = focused ? 'text-primary' : 'text-muted-foreground';
-  return <Icon as={icon} size={iconSize} className={iconColorClass} />;
+type TabIconProps = { focused: boolean };
+type TabBarIconComponent = NonNullable<
+  BottomTabNavigationOptions['tabBarIcon']
+>;
+
+function createTabIcon(icon: LucideIcon): TabBarIconComponent {
+  function TabIcon({ focused }: TabIconProps) {
+    const iconSize = 20;
+    const iconColorClass = focused ? 'text-primary' : 'text-muted-foreground';
+    return <Icon as={icon} size={iconSize} className={iconColorClass} />;
+  }
+  return TabIcon;
 }
 
-function DialerTabIcon({ focused }: { focused: boolean }) {
-  return <TabIcon focused={focused} icon={Phone} />;
-}
-
-function MyStatsTabIcon({ focused }: { focused: boolean }) {
-  return <TabIcon focused={focused} icon={ChartColumn} />;
-}
-
-function SettingsTabIcon({ focused }: { focused: boolean }) {
-  return <TabIcon focused={focused} icon={Settings} />;
-}
+const DialerTabIcon = createTabIcon(Phone);
+const MyStatsTabIcon = createTabIcon(ChartColumn);
+const SettingsTabIcon = createTabIcon(Settings);
 
 export function AppNavigator() {
   useJanitor();

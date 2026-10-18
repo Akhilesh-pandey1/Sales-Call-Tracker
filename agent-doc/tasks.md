@@ -57,15 +57,15 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The queue stores the chosen outcome on a pending row, and an existing install's database gains the column without losing queued rows
-- [ ] Sync sends each filled call's stored outcome in the batch; calls with no recorded outcome send none
+- [x] The queue stores the chosen outcome on a pending row, and an existing install's database gains the column without losing queued rows
+- [x] Sync sends each filled call's stored outcome in the batch; calls with no recorded outcome send none
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

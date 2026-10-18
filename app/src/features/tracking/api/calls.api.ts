@@ -13,4 +13,8 @@ async function syncCalls(calls: SyncCall[]): Promise<void> {
   await apiClient.post('/calls/sync', { calls });
 }
 
-export { syncCalls };
+async function updateCallOutcome(callId: string, outcome: CallOutcome): Promise<void> {
+  await apiClient.patch(`/calls/${callId}/outcome`, { outcome });
+}
+
+export { syncCalls, updateCallOutcome };

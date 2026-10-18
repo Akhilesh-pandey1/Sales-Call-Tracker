@@ -28,6 +28,8 @@ const MARK_PENDING_CALL_FILLED = `UPDATE pending_calls
   SET dialed_at = ?, duration_seconds = ?
   WHERE call_id = ?`;
 
+const UPDATE_PENDING_CALL_OUTCOME = `UPDATE pending_calls SET outcome = ? WHERE call_id = ?`;
+
 const INCREMENT_PENDING_CALL_ATTEMPTS = `UPDATE pending_calls SET attempts = attempts + 1 WHERE call_id = ?`;
 
 const SELECT_PENDING_CALL_ATTEMPTS = `SELECT attempts FROM pending_calls WHERE call_id = ?`;
@@ -180,6 +182,15 @@ export async function markPendingCallFilled(
   durationSeconds: number,
 ): Promise<void> {
   await runQuery(MARK_PENDING_CALL_FILLED, [dialedAt, durationSeconds, callId]);
+}
+
+export async function updatePendingCallOutcome(
+  callId: string,
+  outcome: CallOutcome,
+): Promise<boolean> {
+  const result = await runQuery(UPDATE_PENDING_CALL_OUTCOME, [outcome, callId]);
+  const didUpdateRow = result.rowsAffected > 0;
+  return didUpdateRow;
 }
 
 export async function addPendingCallAttempt(callId: string): Promise<number> {

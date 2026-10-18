@@ -7,7 +7,9 @@ import { Text } from '@/components/ui/text';
 import { backspaceLongPressClearMs } from '@/config/app-config';
 import { usePermissions } from '@/features/tracking';
 import { cn } from '@/lib/utils';
+import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { ClipboardPaste, Delete, Inbox, Phone } from 'lucide-react-native';
+import { KeypadOutcomeDialog } from '../components/keypad-outcome-dialog';
 import { LeadCallCard } from '../components/lead-call-card';
 import { Keypad } from '../components/keypad';
 import { PermissionBanner } from '../components/permission-banner';
@@ -16,6 +18,10 @@ import {
   type UseAutomatedCallingResult,
 } from '../hooks/use-automated-calling';
 import { useDialer, type UseDialerResult } from '../hooks/use-dialer';
+import {
+  useKeypadCallOutcome,
+  type UseKeypadCallOutcomeResult,
+} from '../hooks/use-keypad-outcome';
 
 type DialerSubTab = 'keypad' | 'automated';
 
@@ -70,7 +76,13 @@ function DialerSubTabs({
   );
 }
 
-function KeypadView({ dialer }: { dialer: UseDialerResult }) {
+function KeypadView({
+  dialer,
+  keypadCallOutcome,
+}: {
+  dialer: UseDialerResult;
+  keypadCallOutcome: UseKeypadCallOutcomeResult;
+}) {
   const isCallEnabled = dialer.isNumberValid && !dialer.isDialLocked;
   const callButtonClasses = cn(
     'h-14 rounded-2xl',
@@ -85,11 +97,19 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
   const callHintMessage = dialer.isNumberValid
     ? 'Calls are logged and sent to your manager automatically.'
     : 'Type a valid number to enable calling.';
+  const trackedCall = keypadCallOutcome.trackedCall;
+  const outcomeDialogKey = trackedCall?.callId ?? 'idle-keypad-outcome';
+  const outcomeDialogPhoneNumber = trackedCall === null
+    ? ''
+    : formatInternationalPhoneNumber(trackedCall.phoneNumber);
 
   const handleBackspacePress = () => dialer.removeLastCharacter();
   const handleBackspaceLongPress = () => dialer.clearDialedNumber();
   const handlePastePress = () => dialer.pasteNumberFromClipboard();
-  const handleCallPress = () => dialer.startCall();
+  const handleCallPress = async () => {
+    const launchedCall = await dialer.startCall();
+    keypadCallOutcome.trackLaunchedCall(launchedCall);
+  };
 
   return (
     <View className="flex-1 justify-center px-3 pb-4 pt-2">
@@ -135,6 +155,16 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
           {callHintMessage}
         </Text>
       </View>
+
+      <KeypadOutcomeDialog
+        key={outcomeDialogKey}
+        isOpen={keypadCallOutcome.isOutcomeDialogOpen}
+        phoneNumber={outcomeDialogPhoneNumber}
+        isSubmitting={keypadCallOutcome.isSubmittingOutcome}
+        errorMessage={keypadCallOutcome.outcomeErrorMessage}
+        onClose={keypadCallOutcome.closeOutcomeDialog}
+        onSubmit={keypadCallOutcome.saveOutcome}
+      />
     </View>
   );
 }
@@ -254,6 +284,7 @@ export function DialerScreen() {
   const missingPermissions = usePermissions();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
   const dialer = useDialer();
+  const keypadCallOutcome = useKeypadCallOutcome();
   const automatedCalling = useAutomatedCalling();
   const { top: topInset } = useSafeAreaInsets();
 
@@ -264,7 +295,7 @@ export function DialerScreen() {
       </View>
       <DialerSubTabs activeSubTab={activeSubTab} onSelectSubTab={setActiveSubTab} />
       {activeSubTab === 'keypad' ? (
-        <KeypadView dialer={dialer} />
+        <KeypadView dialer={dialer} keypadCallOutcome={keypadCallOutcome} />
       ) : (
         <AutomatedView automatedCalling={automatedCalling} />
       )}

@@ -5,18 +5,19 @@ import {
   type LeadScheduleRequest,
   type ServedLead,
 } from '../api/leads.api';
-import type { AutomatedViewState, LeadOutcome } from './use-automated-calling';
+import type { AutomatedViewState } from './use-automated-calling';
+import type { CallOutcome } from '@/features/tracking';
 import { readRequestErrorMessage } from './use-lead-loading';
 
 export type UseOutcomeSubmitResult = {
   isSubmittingOutcome: boolean;
   outcomeErrorMessage: string | null;
   resetOutcomeError: () => void;
-  submitOutcome: (outcome: LeadOutcome, scheduledAt: string | null) => Promise<void>;
+  submitOutcome: (outcome: CallOutcome, scheduledAt: string | null) => Promise<void>;
 };
 
 function buildScheduleRequest(
-  outcome: LeadOutcome,
+  outcome: CallOutcome,
   scheduledAt: string | null,
   leadId: number,
 ): LeadScheduleRequest | null {
@@ -43,7 +44,7 @@ export function useOutcomeSubmit(
   }, []);
 
   const submitOutcome = useCallback(
-    async (outcome: LeadOutcome, scheduledAt: string | null): Promise<void> => {
+    async (outcome: CallOutcome, scheduledAt: string | null): Promise<void> => {
       const currentState = viewStateRef.current;
       if (currentState.kind !== 'outcome' || isSubmittingOutcomeRef.current) {
         return;

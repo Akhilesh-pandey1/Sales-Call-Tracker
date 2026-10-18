@@ -6,7 +6,7 @@ import {
   isValidPhoneNumber,
   normalizePhoneNumber,
 } from '@/shared/utils/phone-formatter';
-import { callFailedMessage, launchTrackedCall } from '../lib/call-launcher';
+import { callFailedMessage, launchTrackedCall, type LaunchedCall } from '../lib/call-launcher';
 
 const emptyClipboardMessage = 'Nothing copied.';
 
@@ -18,7 +18,7 @@ export type UseDialerResult = {
   removeLastCharacter: () => void;
   clearDialedNumber: () => void;
   pasteNumberFromClipboard: () => Promise<void>;
-  startCall: () => Promise<void>;
+  startCall: () => Promise<LaunchedCall | null>;
 };
 
 function useStoredCountry(): string | null {
@@ -72,28 +72,31 @@ export function useDialer(): UseDialerResult {
     setDialedNumberInput(trimmedClipboardText);
   }, []);
 
-  const startCall = useCallback(async (): Promise<void> => {
+  const startCall = useCallback(async (): Promise<LaunchedCall | null> => {
     if (
       isDialLockHeld.current ||
       countryCode === null ||
       !isValidPhoneNumber(dialedNumberInput, countryCode)
     ) {
-      return;
+      const noLaunchedCall = null;
+      return noLaunchedCall;
     }
     isDialLockHeld.current = true;
     setIsDialLocked(true);
+    let launchedCall: LaunchedCall | null = null;
     try {
       const normalizedPhoneNumber = normalizePhoneNumber(
         dialedNumberInput,
         countryCode,
       );
-      await launchTrackedCall(normalizedPhoneNumber);
+      launchedCall = await launchTrackedCall(normalizedPhoneNumber);
     } catch {
       ToastAndroid.show(callFailedMessage, ToastAndroid.SHORT);
     } finally {
       isDialLockHeld.current = false;
       setIsDialLocked(false);
     }
+    return launchedCall;
   }, [dialedNumberInput, countryCode]);
 
   const isNumberValid =

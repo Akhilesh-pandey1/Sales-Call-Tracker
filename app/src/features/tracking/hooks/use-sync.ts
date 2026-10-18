@@ -1,11 +1,17 @@
 import { useEffect } from 'react';
 import { AppState, type AppStateStatus } from 'react-native';
-import { syncCalls, type SyncCall } from '../api/calls.api';
-import { deletePendingCall, getAllPendingCalls, type PendingCall } from '../db';
+import { syncCalls, updateCallOutcome, type SyncCall } from '../api/calls.api';
+import {
+  deletePendingCall,
+  getAllPendingCalls,
+  updatePendingCallOutcome,
+  type PendingCall,
+} from '../db';
+import type { CallOutcome } from '../types';
 import { subscribeToCallFilled } from '../sync-events';
 import { runJanitorSweep } from './use-janitor';
 
-let isSyncRunning = false;
+let runningSync: Promise<void> | null = null;
 
 function toSyncCallOrNull(pendingCall: PendingCall): SyncCall | null {
   if (pendingCall.dialedAt === null || pendingCall.durationSeconds === null) {
@@ -42,18 +48,44 @@ async function sendFilledPendingCalls(): Promise<void> {
   await deleteSentPendingCalls(sentCallIds);
 }
 
-async function syncPendingCalls(): Promise<void> {
-  if (isSyncRunning) {
-    return;
-  }
-  isSyncRunning = true;
+async function sendFilledPendingCallsSafely(): Promise<void> {
   try {
     await sendFilledPendingCalls();
   } catch (syncError: unknown) {
     console.warn('Queued calls stay on the phone until the server is reachable.', syncError);
-  } finally {
-    isSyncRunning = false;
   }
+}
+
+function syncPendingCalls(): Promise<void> {
+  if (runningSync !== null) {
+    return runningSync;
+  }
+  const syncPromise = sendFilledPendingCallsSafely().then(() => {
+    runningSync = null;
+  });
+  runningSync = syncPromise;
+  return syncPromise;
+}
+
+export async function recordCallOutcome(
+  callId: string,
+  outcome: CallOutcome,
+): Promise<void> {
+  const didStoreOnPendingRow = await updatePendingCallOutcome(callId, outcome);
+  if (!didStoreOnPendingRow) {
+    await updateCallOutcome(callId, outcome);
+    return;
+  }
+  const runningPromise = runningSync;
+  if (runningPromise !== null) {
+    await runningPromise;
+  }
+  const didSurviveRunningSync = await updatePendingCallOutcome(callId, outcome);
+  if (!didSurviveRunningSync) {
+    await updateCallOutcome(callId, outcome);
+    return;
+  }
+  syncPendingCalls();
 }
 
 async function runJanitorThenSync(): Promise<void> {

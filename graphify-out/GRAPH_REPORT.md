@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-18)
 
 ## Corpus Check
-- 280 files · ~332,638 words
+- 280 files · ~332,662 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2351 nodes · 4558 edges · 185 communities (150 shown, 35 thin omitted)
+- 2351 nodes · 4558 edges · 184 communities (149 shown, 35 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 32 edges (avg confidence: 0.6)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1d122f43`
+- Built from commit: `41f7a051`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -57,7 +57,7 @@
 - lead-call-card.tsx
 - instructions/proposal.md
 - instructions/spec.md
-- leads/services.py
+- react
 - Execution Steps
 - core.py
 - my-stats-screen.tsx
@@ -102,7 +102,7 @@
 - dashboard-page.tsx
 - Requirement: Office-hours gate at call sync
 - seed_fake_data.py
-- web/src/components/ui/button.tsx
+- office-hours-editor.tsx
 - dependencies
 - call-log-matcher.ts
 - app-navigator.tsx
@@ -119,12 +119,11 @@
 - Project File Structure
 - metro.config.js
 - team-people-table.tsx
-- leads/routes.py
+- leads/services.py
 - settings-screen.tsx
 - team-page.tsx
 - lucide-react-native
 - 3. Dashboards
-- class-variance-authority
 - 5. Leads
 - @react-native-async-storage/async-storage
 - test_foundation.py
@@ -146,7 +145,7 @@
 - @tanstack/react-query
 - app/src/components/ui/button.tsx
 - Snap Screens
-- _suggest_identities
+- _row_identities
 - nativewind
 - @radix-ui/react-dialog
 - calls/routes.py
@@ -218,7 +217,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (185 total, 35 thin omitted)
+## Communities (184 total, 35 thin omitted)
 
 ### Community 0 - "server.cjs"
 Cohesion: 0.06
@@ -363,10 +362,6 @@ Nodes (4): 1. Single Source of Truth (No Guessing / No Assumptions), 2. Implemen
 ### Community 40 - "lead-call-card.tsx"
 Cohesion: 0.11
 Nodes (27): addDays(), buildAttemptLabel(), createDefaultScheduleSelection(), formatScheduleDateLabel(), formatScheduleTimeLabel(), getOutcomeAccentClass(), getOutcomeChipClass(), getOutcomeDotClass() (+19 more)
-
-### Community 43 - "leads/services.py"
-Cohesion: 0.18
-Nodes (11): find_candidate_lead(), get_daily_ist_utc_ranges(), get_ist_day_utc_range(), get_leads_summary(), get_pool_bucket_counts(), get_tackled_day_counts(), get_uploaded_day_counts(), get_waiting_by_attempt_counts() (+3 more)
 
 ### Community 44 - "Execution Steps"
 Cohesion: 0.25
@@ -517,8 +512,8 @@ Cohesion: 0.17
 Nodes (11): compilerOptions, paths, types, exclude, extends, include, **/node_modules, **/Pods (+3 more)
 
 ### Community 81 - "search"
-Cohesion: 0.14
-Nodes (21): _exact_match_diagnostic(), _exact_stack_identifier(), _legacy_successor_guidance(), _normalize(), _project_row(), Apply longest-first synonym substitution at token boundaries., Resolve an explicit style identity without opening generic variant ranking., Resolve a deprecated in-domain alias, or expose a cross-domain redirect. (+13 more)
+Cohesion: 0.13
+Nodes (23): _exact_match_diagnostic(), _exact_stack_identifier(), _legacy_successor_guidance(), _load_rows_or_empty(), _normalize(), _project_row(), Apply longest-first synonym substitution at token boundaries., Resolve an explicit style identity without opening generic variant ranking. (+15 more)
 
 ### Community 82 - "use-janitor.ts"
 Cohesion: 0.20
@@ -541,16 +536,16 @@ Cohesion: 0.10
 Nodes (20): Purpose, Requirement: No retroactive cleanup, Requirement: Office-hours gate at call sync, Requirement: Single office-hours window, Requirement: Window update validation, Requirements, Scenario: Applies to every day of the week, Scenario: Call's start time decides (+12 more)
 
 ### Community 87 - "seed_fake_data.py"
-Cohesion: 0.16
-Nodes (31): Call, Lead, import_leads_csv(), validate_and_format_e164(), apply_schedule(), build_attempt_times_ist(), build_calls_for_lead(), build_extra_calls() (+23 more)
+Cohesion: 0.12
+Nodes (30): Call, Lead, validate_and_format_e164(), apply_schedule(), build_attempt_times_ist(), build_calls_for_lead(), build_extra_calls(), build_ist_datetime() (+22 more)
 
-### Community 88 - "web/src/components/ui/button.tsx"
-Cohesion: 0.18
-Nodes (16): Button, ButtonProps, buttonVariants, getOfficeHours(), updateOfficeHours(), OfficeHoursEditor(), HandleSaveSuccess, useOfficeHoursForm() (+8 more)
+### Community 88 - "office-hours-editor.tsx"
+Cohesion: 0.22
+Nodes (13): getOfficeHours(), updateOfficeHours(), OfficeHoursEditor(), HandleSaveSuccess, useOfficeHoursForm(), UseOfficeHoursFormResult, OFFICE_HOURS_QUERY_KEY, useOfficeHours() (+5 more)
 
 ### Community 89 - "dependencies"
 Cohesion: 0.29
-Nodes (7): dependencies, axios, react, @react-navigation/bottom-tabs, axios, react, @react-navigation/bottom-tabs
+Nodes (7): dependencies, axios, class-variance-authority, @react-navigation/bottom-tabs, axios, class-variance-authority, @react-navigation/bottom-tabs
 
 ### Community 90 - "call-log-matcher.ts"
 Cohesion: 0.19
@@ -612,9 +607,9 @@ Nodes (3): config, { getDefaultConfig, mergeConfig }, { withNativeWind }
 Cohesion: 0.23
 Nodes (10): DesktopPersonRowProps, formatPeriodNumbers(), PeopleListProps, PersonCard(), PersonCardProps, TeamPeopleTableProps, TodayNumbers(), TodayNumbersProps (+2 more)
 
-### Community 105 - "leads/routes.py"
-Cohesion: 0.22
-Nodes (18): Any, require_auth(), get_next_lead(), get_summary(), get, post, Response, upload_leads() (+10 more)
+### Community 105 - "leads/services.py"
+Cohesion: 0.15
+Nodes (29): Any, require_auth(), get_next_lead(), get_summary(), get, post, Response, upload_leads() (+21 more)
 
 ### Community 106 - "settings-screen.tsx"
 Cohesion: 0.13
@@ -633,8 +628,8 @@ Cohesion: 0.50
 Nodes (4): 5. Leads, `GET /api/leads/summary`, `POST /api/leads/next`, `POST /api/leads/upload`
 
 ### Community 113 - "test_foundation.py"
-Cohesion: 0.23
-Nodes (17): get_ist_timezone(), normalize_phone_number(), parse_utc_datetime(), datetime, to_ist(), extract_valid_call(), get_ist_start_minute_of_day(), Any (+9 more)
+Cohesion: 0.21
+Nodes (18): get_ist_timezone(), normalize_phone_number(), parse_utc_datetime(), datetime, to_ist(), extract_valid_call(), get_ist_start_minute_of_day(), Any (+10 more)
 
 ### Community 114 - "App.tsx"
 Cohesion: 0.47
@@ -660,9 +655,9 @@ Nodes (7): Button(), ButtonProps, buttonTextVariants, buttonVariants, LoginResul
 Cohesion: 0.50
 Nodes (3): Guardrails, Snap Screens, Steps
 
-### Community 140 - "_suggest_identities"
-Cohesion: 0.33
-Nodes (6): _exact_row_identity(), Suggest complete public identities so a retry can bypass score thresholds., Return non-empty public identities from ordinary and alias fields., Return one row whose stable public identity exactly matches the query., _row_identities(), _suggest_identities()
+### Community 140 - "_row_identities"
+Cohesion: 0.50
+Nodes (4): _exact_row_identity(), Return non-empty public identities from ordinary and alias fields., Return one row whose stable public identity exactly matches the query., _row_identities()
 
 ### Community 144 - "calls/routes.py"
 Cohesion: 0.36
@@ -709,8 +704,8 @@ Cohesion: 0.12
 Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, dependencies, class-variance-authority, lucide-react (+9 more)
 
 ### Community 166 - "add-user-modal.tsx"
-Cohesion: 0.15
-Nodes (15): DialogContent, DialogDescription, DialogFooter(), DialogHeader(), DialogOverlay, DialogTitle, AccountFormField, AddUserModal() (+7 more)
+Cohesion: 0.13
+Nodes (18): Button, ButtonProps, buttonVariants, DialogContent, DialogDescription, DialogFooter(), DialogHeader(), DialogOverlay (+10 more)
 
 ### Community 167 - "router.tsx"
 Cohesion: 0.11
@@ -792,7 +787,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **Why does `loginUser()` connect `web/src/features/auth/hooks/use-auth.ts` to `app/src/shared/api/api-client.ts`?**
   _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **Why does `User` connect `User` to `test_settings.py`, `test_leads.py`, `leads/services.py`, `dashboard/services.py`, `test_foundation.py`, `test_dashboard.py`, `auth/services.py`, `seed_fake_data.py`, `test_dashboard_person.py`, `test_users.py`, `AppException`, `test_calls.py`, `app/__init__.py`?**
+- **Why does `User` connect `User` to `test_settings.py`, `test_leads.py`, `dashboard/services.py`, `test_foundation.py`, `test_dashboard.py`, `auth/services.py`, `seed_fake_data.py`, `test_dashboard_person.py`, `test_users.py`, `AppException`, `test_calls.py`, `app/__init__.py`?**
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Are the 5 inferred relationships involving `AppException` (e.g. with `DashboardTimeWindows` and `PeopleCallMetrics`) actually correct?**
   _`AppException` has 5 INFERRED edges - model-reasoned connections that need verification._

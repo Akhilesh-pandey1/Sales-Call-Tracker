@@ -75,13 +75,13 @@ function DesktopPeriodRow({ period }: DesktopPeriodRowProps) {
   return (
     <TableRow>
       <TableCell className="p-4 font-medium">{period.label}</TableCell>
-      <TableCell className="p-4 text-right font-semibold tabular-nums">
+      <TableCell className="p-4 text-left font-semibold tabular-nums">
         {valueLabels.dials}
       </TableCell>
-      <TableCell className="p-4 text-right font-semibold tabular-nums">
+      <TableCell className="p-4 text-center font-semibold tabular-nums">
         {valueLabels.connected}
       </TableCell>
-      <TableCell className="p-4 text-right font-semibold tabular-nums">
+      <TableCell className="p-4 text-center font-semibold tabular-nums">
         {valueLabels.minutes}
       </TableCell>
       <TableCell className="p-4 text-right font-semibold tabular-nums">
@@ -155,9 +155,9 @@ function PerformanceSection({ personStats }: PerformanceSectionProps) {
           <TableHeader>
             <TableRow className="hover:bg-transparent">
               <TableHead>Period</TableHead>
-              <TableHead className="text-right">Dials</TableHead>
-              <TableHead className="text-right">Connected</TableHead>
-              <TableHead className="text-right">Minutes</TableHead>
+              <TableHead className="text-left">Dials</TableHead>
+              <TableHead className="text-center">Connected</TableHead>
+              <TableHead className="text-center">Minutes</TableHead>
               <TableHead className="text-right">Connected %</TableHead>
             </TableRow>
           </TableHeader>

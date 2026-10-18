@@ -44,11 +44,11 @@ function DesktopPersonRow({ person, onOpen }: DesktopPersonRowProps) {
 
   const hasNoDialsToday: boolean = person.today.dials === 0;
   const todayDialsClassName: string = cn(
-    "border-l p-4 text-right tabular-nums",
+    "border-l p-4 text-left tabular-nums",
     hasNoDialsToday ? "text-muted-foreground" : "font-semibold"
   );
   const todayConnectedClassName: string = cn(
-    "p-4 text-right tabular-nums",
+    "p-4 text-center tabular-nums",
     hasNoDialsToday ? "text-muted-foreground" : "font-semibold text-green-600"
   );
   const todayMinutesClassName: string = cn(
@@ -74,10 +74,10 @@ function DesktopPersonRow({ person, onOpen }: DesktopPersonRowProps) {
       <TableCell className={todayMinutesClassName}>
         {formatCount(person.today.minutes)}
       </TableCell>
-      <TableCell className="border-l p-4 text-right tabular-nums text-muted-foreground">
+      <TableCell className="border-l p-4 text-left tabular-nums text-muted-foreground">
         {formatCount(person.yesterday.dials)}
       </TableCell>
-      <TableCell className="p-4 text-right tabular-nums text-muted-foreground">
+      <TableCell className="p-4 text-center tabular-nums text-muted-foreground">
         {formatCount(person.yesterday.connected)}
       </TableCell>
       <TableCell className="p-4 text-right tabular-nums text-muted-foreground">
@@ -109,11 +109,11 @@ function DesktopPeopleTable({ people, onOpen }: PeopleListProps) {
           </TableRow>
           <TableRow className="hover:bg-transparent">
             <TableHead aria-hidden="true" />
-            <TableHead className="border-l text-right">Dials</TableHead>
-            <TableHead className="text-right">Connected</TableHead>
+            <TableHead className="border-l text-left">Dials</TableHead>
+            <TableHead className="text-center">Connected</TableHead>
             <TableHead className="text-right">Min</TableHead>
-            <TableHead className="border-l text-right">Dials</TableHead>
-            <TableHead className="text-right">Connected</TableHead>
+            <TableHead className="border-l text-left">Dials</TableHead>
+            <TableHead className="text-center">Connected</TableHead>
             <TableHead className="text-right">Min</TableHead>
           </TableRow>
         </TableHeader>

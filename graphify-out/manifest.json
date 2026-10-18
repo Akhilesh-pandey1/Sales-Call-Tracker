@@ -665,8 +665,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/pages/person-page.tsx": {
-    "mtime": 1792315403.8713484,
-    "ast_hash": "1cf817094606539a04bcfa5fef715c24",
+    "mtime": 1792322140.8664956,
+    "ast_hash": "183f5116c34b0e17e54b70a97fd206c4",
     "semantic_hash": ""
   },
   "web/src/features/leads/index.ts": {
@@ -1385,8 +1385,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/calls-by-hour-chart.tsx": {
-    "mtime": 1792302644.8212345,
-    "ast_hash": "66907cb3df6b467bec1b4e47f678f149",
+    "mtime": 1792322144.7271671,
+    "ast_hash": "c264aa96f0d256d336ba424c2840c5e0",
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/dashboard-card.tsx": {
@@ -1760,8 +1760,8 @@
     "semantic_hash": ""
   },
   "web/src/features/team/components/team-people-table.tsx": {
-    "mtime": 1792316389.8809943,
-    "ast_hash": "832fa8c65a5a05f7253889a69c1ddaa4",
+    "mtime": 1792322137.561045,
+    "ast_hash": "ed3902a9414d656560888cc80fdf8229",
     "semantic_hash": ""
   },
   "web/src/features/team/hooks/use-team-people.ts": {

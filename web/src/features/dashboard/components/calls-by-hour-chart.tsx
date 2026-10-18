@@ -15,6 +15,7 @@ interface HourlyDialBar {
 interface DialsTopLabelProps {
   x?: number | string;
   y?: number | string;
+  width?: number | string;
   value?: string | number | boolean | null;
   index?: number;
 }
@@ -116,15 +117,22 @@ export function CallsByHourChart({
   const barCornerRadius: [number, number, number, number] = [4, 4, 0, 0];
 
   const renderDialsTopLabel = (labelProps: DialsTopLabelProps) => {
-    if (labelProps.x === undefined || labelProps.y === undefined || !labelProps.value) {
+    if (
+      labelProps.x === undefined ||
+      labelProps.y === undefined ||
+      labelProps.width === undefined ||
+      !labelProps.value
+    ) {
       return null;
     }
     const isBestHourLabel: boolean = labelProps.index === bestHourIndex;
-    const labelX: number = Number(labelProps.x);
+    const barLeftEdge: number = Number(labelProps.x);
+    const barWidth: number = Number(labelProps.width);
+    const barCenterX: number = barLeftEdge + barWidth / 2;
     const labelY: number = Number(labelProps.y) - labelGapAboveBar;
     return (
       <text
-        x={labelX}
+        x={barCenterX}
         y={labelY}
         textAnchor="middle"
         fontSize={chartLabelFontSize}

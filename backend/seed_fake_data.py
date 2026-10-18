@@ -155,18 +155,14 @@ def pick_call_duration_seconds(outcome: str) -> int:
 def pick_dialed_at_utc(now_utc: datetime) -> datetime:
     ist_zone = ZoneInfo("Asia/Kolkata")
     now_ist = now_utc.astimezone(ist_zone)
-    lookback_days = 30
-    recent_lookback_days = 10
-    recent_day_weight = 3
-    old_day_weight = 1
+    lookback_days = 31
     day_offsets = list(range(lookback_days))
-    day_weights = [recent_day_weight if offset < recent_lookback_days else old_day_weight for offset in day_offsets]
-    day_offset = random.choices(day_offsets, weights=day_weights, k=1)[0]
-    business_start_hour = 9
-    business_end_hour = 21
-    business_hours = list(range(business_start_hour, business_end_hour))
-    hour_weights = [2, 4, 5, 5, 4, 2, 1, 1, 3, 3, 3, 2]
-    chosen_hour = random.choices(business_hours, weights=hour_weights, k=1)[0]
+    day_offset = random.choice(day_offsets)
+    window_start_hour = 10
+    window_end_hour = 20
+    window_hours = list(range(window_start_hour, window_end_hour))
+    hour_weights = [3, 4, 5, 5, 4, 3, 3, 4, 3, 2]
+    chosen_hour = random.choices(window_hours, weights=hour_weights, k=1)[0]
     dialed_day = now_ist.date() - timedelta(days=day_offset)
     dialed_ist = build_ist_datetime(dialed_day, chosen_hour, random.randint(0, 59))
     if dialed_ist > now_ist:
@@ -192,6 +188,18 @@ def pick_created_at_ist(now_ist: datetime, attempt_total: int) -> datetime:
     return created_ist
 
 
+def move_ist_time_into_call_window(moment_ist: datetime) -> datetime:
+    minutes_per_hour = 60
+    minutes_per_day = 24 * minutes_per_hour
+    window_start_minute = 10 * minutes_per_hour
+    window_end_minute = 20 * minutes_per_hour
+    window_length_minutes = window_end_minute - window_start_minute
+    minute_of_day = moment_ist.hour * minutes_per_hour + moment_ist.minute
+    offset_in_window = (minute_of_day * window_length_minutes) // minutes_per_day
+    window_minute = window_start_minute + offset_in_window
+    return moment_ist.replace(hour=window_minute // minutes_per_hour, minute=window_minute % minutes_per_hour)
+
+
 def build_attempt_times_ist(created_at_ist: datetime, attempt_total: int, now_ist: datetime) -> list[datetime]:
     attempt_times: list[datetime] = []
     if attempt_total == 0:
@@ -203,7 +211,12 @@ def build_attempt_times_ist(created_at_ist: datetime, attempt_total: int, now_is
     slot_seconds = window_seconds // attempt_total
     for attempt_index in range(attempt_total):
         slot_start_ist = created_at_ist + timedelta(seconds=slot_seconds * attempt_index)
-        attempt_times.append(slot_start_ist + timedelta(seconds=random.randint(0, slot_seconds)))
+        attempt_time_ist = move_ist_time_into_call_window(
+            slot_start_ist + timedelta(seconds=random.randint(0, slot_seconds))
+        )
+        if attempt_time_ist > now_ist:
+            attempt_time_ist = attempt_time_ist - timedelta(days=1)
+        attempt_times.append(attempt_time_ist)
     return attempt_times
 
 
@@ -312,8 +325,8 @@ def build_leads_and_calls(lead_total: int, salespeople: list[User], used_numbers
 def build_extra_calls(salespeople: list[User], used_numbers: set[str], data_faker: Faker) -> list[Call]:
     extra_calls: list[Call] = []
     now_utc = datetime.now(timezone.utc)
-    minimum_dials_per_person = 15
-    maximum_dials_per_person = 60
+    minimum_dials_per_person = 400
+    maximum_dials_per_person = 700
     for calling_person in salespeople:
         dial_total = random.randint(minimum_dials_per_person, maximum_dials_per_person)
         for _ in range(dial_total):

@@ -39,8 +39,9 @@ export function useLeadLoading(
       }
       isDialLaunchLockedRef.current = true;
       try {
-        await launchTrackedCall(lead.phone_number);
-        updateViewState({ kind: 'dialing', lead });
+        const launchedCall = await launchTrackedCall(lead.phone_number);
+        const launchedCallId = launchedCall === null ? null : launchedCall.callId;
+        updateViewState({ kind: 'dialing', lead, callId: launchedCallId });
       } catch {
         updateViewState({ kind: 'ready', lead });
         ToastAndroid.show(callFailedMessage, ToastAndroid.SHORT);

@@ -112,16 +112,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] My Stats shows the Last-30-days KPI cards, the calls-by-hour chart with its period switch and best-hour summary line, and the existing performance table — matching the approved mockup
-- [ ] The most-contacted-numbers table is removed from My Stats
-- [ ] Everything renders from fields the person endpoint already returns — no new endpoint and no chart library
+- [x] My Stats shows the Last-30-days KPI cards, the calls-by-hour chart with its period switch and best-hour summary line, and the existing performance table — matching the approved mockup
+- [x] The most-contacted-numbers table is removed from My Stats
+- [x] Everything renders from fields the person endpoint already returns — no new endpoint and no chart library
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

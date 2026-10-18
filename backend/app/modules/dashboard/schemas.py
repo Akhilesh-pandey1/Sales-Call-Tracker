@@ -53,6 +53,21 @@ class TeamDashboardResponse(BaseModel):
     last_30_days: TeamPeriodBlock
 
 
+class PeoplePeriodBlock(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    dials: int
+    connected: int
+    minutes: int
+
+
+class TeamPeopleRow(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    user_id: int
+    name: str
+    today: PeoplePeriodBlock
+    yesterday: PeoplePeriodBlock
+
+
 class AvgPerActiveDay(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     dials: int

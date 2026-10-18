@@ -86,6 +86,23 @@ def fetch_team_dashboard(
     return response, response_json
 
 
+def fetch_team_people(
+    client: FlaskClient, manager_token: str
+) -> tuple[Response, list[dict[str, Any]]]:
+    headers: dict[str, str] = {"Authorization": f"Bearer {manager_token}"}
+    response: Response = client.get("/api/dashboard/team/people", headers=headers)
+    response_json: list[dict[str, Any]] = response.get_json()
+    return response, response_json
+
+
+def test_team_people_unauthenticated_rejected(client: FlaskClient) -> None:
+    response: Response = client.get("/api/dashboard/team/people")
+    expected_status: int = 401
+    assert response.status_code == expected_status
+    response_json: dict[str, Any] = response.get_json()
+    assert response_json.get("message") == "Invalid or expired token."
+
+
 def test_team_dashboard_unauthenticated_rejected(client: FlaskClient) -> None:
     response: Response = client.get("/api/dashboard/team")
     expected_status: int = 401
@@ -101,6 +118,19 @@ def test_team_dashboard_salesperson_rejected(app: Flask, client: FlaskClient) ->
         )
         headers: dict[str, str] = {"Authorization": "Bearer sales-token"}
         response: Response = client.get("/api/dashboard/team", headers=headers)
+        expected_status: int = 403
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "This dashboard is for managers."
+
+
+def test_team_people_salesperson_rejected(app: Flask, client: FlaskClient) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="people_salesperson", role="salesperson", token="people-sales-token"
+        )
+        headers: dict[str, str] = {"Authorization": "Bearer people-sales-token"}
+        response: Response = client.get("/api/dashboard/team/people", headers=headers)
         expected_status: int = 403
         assert response.status_code == expected_status
         response_json: dict[str, Any] = response.get_json()
@@ -126,6 +156,207 @@ def test_team_dashboard_deactivated_manager_rejected(
             response_json.get("message")
             == "Your account is not active. Please contact your manager."
         )
+
+
+def test_team_people_empty_list_when_no_salespeople(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="people_mgr_empty", role="manager", token="mgr-empty-token")
+        response, data = fetch_team_people(client, "mgr-empty-token")
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        assert data == []
+
+
+def test_team_people_lists_every_active_salesperson_with_zeros(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        manager: User = create_user_fixture(
+            name="people_mgr_rows", role="manager", token="mgr-rows-token"
+        )
+        calling_rep: User = create_user_fixture(
+            name="rep_caller", role="salesperson", token="rep-caller-token"
+        )
+        silent_rep: User = create_user_fixture(
+            name="rep_silent", role="salesperson", token="rep-silent-token"
+        )
+        deactivated_rep: User = create_user_fixture(
+            name="rep_deactivated_rows",
+            role="salesperson",
+            is_active=False,
+            token="rep-deact-rows-token",
+        )
+
+        today_time: datetime = create_utc_call_time(0, 11)
+        yesterday_time: datetime = create_utc_call_time(1, 11)
+
+        create_call_record("pr-1", calling_rep.id, "+919876543201", today_time, 100)
+        create_call_record("pr-2", calling_rep.id, "+919876543202", today_time, 0)
+        create_call_record("pr-3", calling_rep.id, "+919876543203", yesterday_time, 60)
+        create_call_record(
+            "pr-4", deactivated_rep.id, "+919876543204", today_time, 300
+        )
+        create_call_record("pr-5", manager.id, "+919876543205", today_time, 300)
+
+        response, data = fetch_team_people(client, "mgr-rows-token")
+        expected_status: int = 200
+        assert response.status_code == expected_status
+
+        expected_row_count: int = 2
+        assert len(data) == expected_row_count
+
+        returned_user_ids: set[int] = {row["user_id"] for row in data}
+        expected_user_ids: set[int] = {calling_rep.id, silent_rep.id}
+        assert returned_user_ids == expected_user_ids
+
+        caller_row: dict[str, Any] = next(
+            row for row in data if row["user_id"] == calling_rep.id
+        )
+        assert set(caller_row.keys()) == {"user_id", "name", "today", "yesterday"}
+        assert caller_row["name"] == "rep_caller"
+        assert caller_row["today"]["dials"] == 2
+        assert caller_row["today"]["connected"] == 1
+        assert caller_row["yesterday"]["dials"] == 1
+        assert caller_row["yesterday"]["connected"] == 1
+
+        silent_row: dict[str, Any] = next(
+            row for row in data if row["user_id"] == silent_rep.id
+        )
+        assert silent_row["name"] == "rep_silent"
+        assert silent_row["today"]["dials"] == 0
+        assert silent_row["today"]["connected"] == 0
+        assert silent_row["yesterday"]["dials"] == 0
+        assert silent_row["yesterday"]["connected"] == 0
+
+
+def test_team_people_period_blocks_carry_only_dials_connected_minutes(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="people_mgr_block", role="manager", token="mgr-block-token"
+        )
+        rep: User = create_user_fixture(
+            name="rep_block", role="salesperson", token="rep-block-token"
+        )
+
+        today_time: datetime = create_utc_call_time(0, 12)
+        yesterday_time: datetime = create_utc_call_time(1, 12)
+
+        create_call_record("pb-1", rep.id, "+919876543210", today_time, 115)
+        create_call_record("pb-2", rep.id, "+919876543211", today_time, 115)
+        create_call_record("pb-3", rep.id, "+919876543212", yesterday_time, 45)
+
+        response, data = fetch_team_people(client, "mgr-block-token")
+        expected_status: int = 200
+        assert response.status_code == expected_status
+
+        expected_period_keys: set[str] = {"dials", "connected", "minutes"}
+        rep_row: dict[str, Any] = data[0]
+        today_block: dict[str, Any] = rep_row["today"]
+        yesterday_block: dict[str, Any] = rep_row["yesterday"]
+
+        assert set(today_block.keys()) == expected_period_keys
+        assert set(yesterday_block.keys()) == expected_period_keys
+
+        expected_today_minutes: int = 4
+        expected_yesterday_minutes: int = 1
+        assert today_block == {
+            "dials": 2,
+            "connected": 2,
+            "minutes": expected_today_minutes,
+        }
+        assert yesterday_block == {
+            "dials": 1,
+            "connected": 1,
+            "minutes": expected_yesterday_minutes,
+        }
+
+
+def test_team_people_rows_sorted_by_today_dials_highest_first(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="people_mgr_sort", role="manager", token="mgr-sort-token"
+        )
+        low_rep: User = create_user_fixture(
+            name="rep_sort_low", role="salesperson", token="rep-sort-low-token"
+        )
+        high_rep: User = create_user_fixture(
+            name="rep_sort_high", role="salesperson", token="rep-sort-high-token"
+        )
+        mid_rep: User = create_user_fixture(
+            name="rep_sort_mid", role="salesperson", token="rep-sort-mid-token"
+        )
+        silent_rep: User = create_user_fixture(
+            name="rep_sort_silent", role="salesperson", token="rep-sort-silent-token"
+        )
+
+        today_time: datetime = create_utc_call_time(0, 11)
+        create_call_record("ps-1", low_rep.id, "+919876543210", today_time, 30)
+        create_call_record("ps-2", high_rep.id, "+919876543211", today_time, 30)
+        create_call_record("ps-3", high_rep.id, "+919876543212", today_time, 30)
+        create_call_record("ps-4", high_rep.id, "+919876543213", today_time, 30)
+        create_call_record("ps-5", mid_rep.id, "+919876543214", today_time, 30)
+        create_call_record("ps-6", mid_rep.id, "+919876543215", today_time, 30)
+
+        response, data = fetch_team_people(client, "mgr-sort-token")
+        expected_status: int = 200
+        assert response.status_code == expected_status
+
+        expected_dials_order: list[int] = [3, 2, 1, 0]
+        returned_dials_order: list[int] = [row["today"]["dials"] for row in data]
+        assert returned_dials_order == expected_dials_order
+
+        expected_user_order: list[int] = [
+            high_rep.id,
+            mid_rep.id,
+            low_rep.id,
+            silent_rep.id,
+        ]
+        returned_user_order: list[int] = [row["user_id"] for row in data]
+        assert returned_user_order == expected_user_order
+
+
+def test_team_people_ist_day_boundary_respected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="people_mgr_boundary", role="manager", token="mgr-boundary-token"
+        )
+        rep: User = create_user_fixture(
+            name="rep_boundary_people",
+            role="salesperson",
+            token="rep-boundary-people-token",
+        )
+
+        ist_now: datetime = now_ist()
+        ist_today_midnight: datetime = ist_now.replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+
+        yesterday_late_ist: datetime = ist_today_midnight - timedelta(minutes=5)
+        today_early_ist: datetime = ist_today_midnight + timedelta(minutes=5)
+
+        yesterday_utc: datetime = yesterday_late_ist.astimezone(timezone.utc)
+        today_utc: datetime = today_early_ist.astimezone(timezone.utc)
+
+        create_call_record("pbd-1", rep.id, "+919876543210", yesterday_utc, 40)
+        create_call_record("pbd-2", rep.id, "+919876543211", today_utc, 80)
+
+        response, data = fetch_team_people(client, "mgr-boundary-token")
+        expected_status: int = 200
+        assert response.status_code == expected_status
+
+        rep_row: dict[str, Any] = data[0]
+        assert rep_row["today"]["dials"] == 1
+        assert rep_row["today"]["minutes"] == 1
+        assert rep_row["yesterday"]["dials"] == 1
+        assert rep_row["yesterday"]["minutes"] == 1
 
 
 def test_team_dashboard_empty_response_shape(app: Flask, client: FlaskClient) -> None:

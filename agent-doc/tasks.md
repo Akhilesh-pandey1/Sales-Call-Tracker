@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The endpoint returns one row per active salesperson including zeros, and deactivated salespeople never appear
-- [ ] Each period block carries only `dials`, `connected`, and `minutes` — `minutes` is `round(seconds / 60)` computed on the server with no `seconds` field — and rows come back sorted by today's dials, highest first
-- [ ] A salesperson token gets 403 `{"message": "This dashboard is for managers."}` on the endpoint
+- [x] The endpoint returns one row per active salesperson including zeros, and deactivated salespeople never appear
+- [x] Each period block carries only `dials`, `connected`, and `minutes` — `minutes` is `round(seconds / 60)` computed on the server with no `seconds` field — and rows come back sorted by today's dials, highest first
+- [x] A salesperson token gets 403 `{"message": "This dashboard is for managers."}` on the endpoint
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
 
 ---
 

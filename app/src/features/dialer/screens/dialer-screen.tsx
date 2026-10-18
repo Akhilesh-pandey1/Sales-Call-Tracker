@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
+import { backspaceLongPressClearMs } from '@/config/app-config';
 import { usePermissions } from '@/features/tracking';
 import { cn } from '@/lib/utils';
 import { ClipboardPaste, Delete, Inbox, Phone } from 'lucide-react-native';
@@ -86,6 +87,7 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
     : 'Type a valid number to enable calling.';
 
   const handleBackspacePress = () => dialer.removeLastCharacter();
+  const handleBackspaceLongPress = () => dialer.clearDialedNumber();
   const handlePastePress = () => dialer.pasteNumberFromClipboard();
   const handleCallPress = () => dialer.startCall();
 
@@ -105,6 +107,8 @@ function KeypadView({ dialer }: { dialer: UseDialerResult }) {
           accessibilityLabel="Backspace"
           accessibilityRole="button"
           onPress={handleBackspacePress}
+          onLongPress={handleBackspaceLongPress}
+          delayLongPress={backspaceLongPressClearMs}
           className="h-11 w-11 shrink-0 items-center justify-center rounded-full active:bg-muted"
         >
           <Icon as={Delete} size={24} className="text-muted-foreground" />

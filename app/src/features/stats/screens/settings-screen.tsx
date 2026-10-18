@@ -23,6 +23,7 @@ function ClearDataRow({ onOpenClearDialog }: ClearDataRowProps) {
   return (
     <Button
       variant="outline"
+      size="none"
       className="w-full shrink-0 justify-start gap-4 rounded-2xl border-border bg-card p-4 active:bg-muted"
       onPress={onOpenClearDialog}
     >

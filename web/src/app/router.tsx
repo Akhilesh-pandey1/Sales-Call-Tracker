@@ -5,6 +5,7 @@ import { LoginPage } from "@/features/auth";
 import { TeamPage, PersonPage } from "@/features/dashboard";
 import { LeadsPage } from "@/features/leads";
 import { AccountsPage } from "@/features/accounts";
+import { SettingsPage } from "@/features/settings";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
           {
             path: "/accounts",
             element: <AccountsPage />,
+          },
+          {
+            path: "/settings",
+            element: <SettingsPage />,
           },
           {
             path: "/person/:id",

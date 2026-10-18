@@ -366,7 +366,10 @@ function OutcomeDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-w-sm rounded-3xl p-5">
+      <DialogContent
+        className="max-w-sm rounded-3xl p-6"
+        backdropClassName="bg-black/60 p-4"
+      >
         <View className="flex-row items-start justify-between border-b border-border pb-3">
           <View className="flex-1 gap-1">
             <DialogTitle className="text-base font-bold tracking-tight">

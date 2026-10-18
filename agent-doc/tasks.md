@@ -167,7 +167,7 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [ ] A tap deletes one character exactly as before

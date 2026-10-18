@@ -3,10 +3,10 @@ import { Clock, Megaphone, PhoneIncoming, PhoneMissed } from "lucide-react";
 import { PageHeader } from "@/shared/components/page-header";
 import { formatCount } from "@/shared/utils/format-count";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
-import { cn } from "@/shared/utils/cn";
 import { CallsByHourChart } from "../components/calls-by-hour-chart";
 import { ErrorState } from "@/shared/components/error-state";
 import { KpiCard } from "../components/kpi-card";
+import { PeriodSwitch } from "../components/period-switch";
 import { TopPeopleList } from "../components/top-people-list";
 import { useTeamDashboard } from "../hooks/use-team-dashboard";
 import {
@@ -15,8 +15,8 @@ import {
   formatYesterdayDeltaLabel,
 } from "../utils/format";
 import type {
+  DashboardPeriod,
   TeamAveragePerPersonPerDay,
-  TeamPeriod,
   TeamPeriodBlock,
   TeamVsYesterday,
 } from "../types";
@@ -127,13 +127,13 @@ interface PeriodHeadingLabels {
   topPeople: string;
 }
 
-function getPeriodHeadingLabels(period: TeamPeriod): PeriodHeadingLabels {
-  const chartHeadingLabelsByPeriod: Record<TeamPeriod, string> = {
+function getPeriodHeadingLabels(period: DashboardPeriod): PeriodHeadingLabels {
+  const chartHeadingLabelsByPeriod: Record<DashboardPeriod, string> = {
     today: "Dials per hour · Today (IST)",
     yesterday: "Dials per hour · Yesterday (IST)",
     last_30_days: "Avg dials per hour · 30 days (IST)",
   };
-  const topPeopleHeadingLabelsByPeriod: Record<TeamPeriod, string> = {
+  const topPeopleHeadingLabelsByPeriod: Record<DashboardPeriod, string> = {
     today: "Talk time · Today",
     yesterday: "Talk time · Yesterday",
     last_30_days: "Talk time · 30 days",
@@ -146,55 +146,10 @@ function getPeriodHeadingLabels(period: TeamPeriod): PeriodHeadingLabels {
   return periodHeadingLabels;
 }
 
-interface PeriodSwitchProps {
-  selectedPeriod: TeamPeriod;
-  onSelectPeriod: (period: TeamPeriod) => void;
-}
-
-function PeriodSwitch({ selectedPeriod, onSelectPeriod }: PeriodSwitchProps) {
-  const periodOptions: Array<{ value: TeamPeriod; label: string }> = [
-    { value: "today", label: "Today" },
-    { value: "yesterday", label: "Yesterday" },
-    { value: "last_30_days", label: "30 days" },
-  ];
-
-  const handleSelectClick = (period: TeamPeriod): void => {
-    onSelectPeriod(period);
-  };
-
-  return (
-    <div
-      role="group"
-      aria-label="Dashboard period"
-      className="inline-flex rounded-full border bg-card p-1 shadow-sm"
-    >
-      {periodOptions.map((periodOption) => {
-        const isSelected: boolean = periodOption.value === selectedPeriod;
-        return (
-          <button
-            key={periodOption.value}
-            type="button"
-            aria-pressed={isSelected}
-            onClick={() => handleSelectClick(periodOption.value)}
-            className={cn(
-              "cursor-pointer rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
-              isSelected
-                ? "bg-primary text-primary-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            {periodOption.label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
 interface TeamPerformanceSectionProps {
   periodBlock: TeamPeriodBlock;
-  selectedPeriod: TeamPeriod;
-  onSelectPeriod: (period: TeamPeriod) => void;
+  selectedPeriod: DashboardPeriod;
+  onSelectPeriod: (period: DashboardPeriod) => void;
 }
 
 function TeamPerformanceSection({
@@ -243,10 +198,10 @@ function TeamPerformanceSection({
 
 export function TeamPage() {
   const { teamDashboard, isLoading, hasError, refetch } = useTeamDashboard();
-  const [selectedPeriod, setSelectedPeriod] = useState<TeamPeriod>("today");
+  const [selectedPeriod, setSelectedPeriod] = useState<DashboardPeriod>("today");
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
 
-  const handleSelectPeriod = (period: TeamPeriod): void => {
+  const handleSelectPeriod = (period: DashboardPeriod): void => {
     setSelectedPeriod(period);
   };
 

@@ -1,11 +1,5 @@
 import { formatCount } from "@/shared/utils/format-count";
 
-export function convertSecondsToMinutes(totalSeconds: number): number {
-  const secondsPerMinute: number = 60;
-  const totalMinutes: number = Math.round(totalSeconds / secondsPerMinute);
-  return totalMinutes;
-}
-
 export function formatConnectedPercent(connectedPercent: number | null): string {
   const noDialsLabel: string = "—";
   if (connectedPercent === null) {
@@ -27,19 +21,6 @@ export function formatYesterdayDeltaLabel(yesterdayDelta: number): string {
     : formatCount(yesterdayDelta);
   const deltaLabel: string = `${signedDelta} vs yesterday`;
   return deltaLabel;
-}
-
-export function formatAveragePerActiveDay(
-  metricTotal: number,
-  activeDays: number
-): string {
-  const noAverageLabel: string = "—";
-  if (activeDays === 0) {
-    return noAverageLabel;
-  }
-  const averagePerActiveDay: number = Math.round(metricTotal / activeDays);
-  const averageLabel: string = formatCount(averagePerActiveDay);
-  return averageLabel;
 }
 
 export function formatActiveDaysOutOfPeriod(activeDays: number): string {

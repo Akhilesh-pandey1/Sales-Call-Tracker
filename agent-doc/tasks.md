@@ -94,15 +94,15 @@
 
 **Blocked by:** Tasks 4, 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The four cards render returned averages — no client-side division by active_days remains
-- [ ] The performance table renders returned minutes and connected_percent with "—" where null
-- [ ] The person page shows the same chart component reading the returned calls_by_hour block
+- [x] The four cards render returned averages — no client-side division by active_days remains
+- [x] The performance table renders returned minutes and connected_percent with "—" where null
+- [x] The person page shows the same chart component reading the returned calls_by_hour block
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` (from `web/`)
+- [x] Build succeeds: `npm run build` (from `web/`)
 
 ---
 

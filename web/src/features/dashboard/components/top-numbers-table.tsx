@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/table";
 import { formatCount } from "@/shared/utils/format-count";
 import type { TopCalledNumber } from "../types";
-import { convertSecondsToMinutes } from "../utils/format";
 
 interface TopNumbersTableProps {
   numbers: TopCalledNumber[];
@@ -20,9 +19,8 @@ interface TopNumberLabels {
 }
 
 function buildTopNumberLabels(topNumber: TopCalledNumber): TopNumberLabels {
-  const talkMinutes: number = convertSecondsToMinutes(topNumber.seconds);
   const topNumberLabels: TopNumberLabels = {
-    minutes: formatCount(talkMinutes),
+    minutes: formatCount(topNumber.minutes),
     calls: formatCount(topNumber.calls),
   };
   return topNumberLabels;

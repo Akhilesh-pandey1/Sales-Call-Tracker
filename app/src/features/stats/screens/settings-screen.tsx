@@ -1,30 +1,15 @@
-import type { MainTabsParamList } from '@/app/navigation/main-tabs-param-list';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { useNavigation, type NavigationProp } from '@react-navigation/native';
-import { ArrowLeft, ChevronRight, Trash2 } from 'lucide-react-native';
+import { ChevronRight, Trash2 } from 'lucide-react-native';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useClearLocalData } from '../hooks/use-clear-local-data';
 
-type SettingsHeaderProps = {
-  onBackPress: () => void;
-};
-
-function SettingsHeader({ onBackPress }: SettingsHeaderProps) {
+function SettingsHeader() {
   return (
-    <View className="flex-row items-center gap-3 border-b border-border bg-card px-4 py-3">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="rounded-xl"
-        onPress={onBackPress}
-        accessibilityLabel="Back"
-      >
-        <Icon as={ArrowLeft} size={20} className="text-muted-foreground" />
-      </Button>
+    <View className="border-b border-border bg-card px-4 py-3">
       <Text className="text-lg font-bold tracking-tight">Settings</Text>
     </View>
   );
@@ -122,7 +107,6 @@ function ClearConfirmDialog({
 }
 
 export function SettingsScreen() {
-  const navigation = useNavigation<NavigationProp<MainTabsParamList>>();
   const { top: topInset } = useSafeAreaInsets();
   const {
     pendingCallCount,
@@ -134,13 +118,9 @@ export function SettingsScreen() {
     clearLocalData,
   } = useClearLocalData();
 
-  function handleBackPress(): void {
-    navigation.goBack();
-  }
-
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
-      <SettingsHeader onBackPress={handleBackPress} />
+      <SettingsHeader />
       <View className="flex-1 px-5 pb-6 pt-4">
         <View className="my-auto gap-2">
           <Text className="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">

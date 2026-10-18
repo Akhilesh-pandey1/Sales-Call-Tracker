@@ -1,9 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import type { MainTabsParamList } from '@/app/navigation/main-tabs-param-list';
-import { useNavigation, type NavigationProp } from '@react-navigation/native';
-import { CloudOff, Settings } from 'lucide-react-native';
+import { CloudOff } from 'lucide-react-native';
 import type { ReactNode } from 'react';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -36,38 +34,26 @@ function getPersonInitials(personName: string): string {
 
 type MyStatsHeaderProps = {
   personName: string | null;
-  onOpenSettings: () => void;
 };
 
-function MyStatsHeader({ personName, onOpenSettings }: MyStatsHeaderProps) {
+function MyStatsHeader({ personName }: MyStatsHeaderProps) {
   return (
-    <View className="flex-row items-center justify-between border-b border-border bg-card px-5 py-3">
-      <View className="min-w-0 flex-row items-center gap-3">
-        {personName ? (
-          <>
-            <View className="h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary">
-              <Text className="text-sm font-bold text-primary-foreground">
-                {getPersonInitials(personName)}
-              </Text>
-            </View>
-            <View>
-              <Text className="text-lg font-bold leading-tight tracking-tight">
-                {personName}
-              </Text>
-              <Text className="text-xs text-muted-foreground">My Calling Stats</Text>
-            </View>
-          </>
-        ) : null}
-      </View>
-      <Button
-        variant="outline"
-        size="icon"
-        className="rounded-xl"
-        onPress={onOpenSettings}
-        accessibilityLabel="Settings"
-      >
-        <Icon as={Settings} size={20} className="text-muted-foreground" />
-      </Button>
+    <View className="flex-row items-center gap-3 border-b border-border bg-card px-5 py-3">
+      {personName ? (
+        <>
+          <View className="h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary">
+            <Text className="text-sm font-bold text-primary-foreground">
+              {getPersonInitials(personName)}
+            </Text>
+          </View>
+          <View className="min-w-0">
+            <Text className="text-lg font-bold leading-tight tracking-tight">
+              {personName}
+            </Text>
+            <Text className="text-xs text-muted-foreground">My Calling Stats</Text>
+          </View>
+        </>
+      ) : null}
     </View>
   );
 }
@@ -260,19 +246,11 @@ function TopNumbersTable({ topNumbers }: { topNumbers: TopNumberStats[] }) {
 
 export function MyStatsScreen() {
   const { isLoading, myStats, errorMessage, reloadMyStats } = useMyStats();
-  const navigation = useNavigation<NavigationProp<MainTabsParamList>>();
   const { top: topInset } = useSafeAreaInsets();
-
-  function handleOpenSettingsPress(): void {
-    navigation.navigate('Settings');
-  }
 
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
-      <MyStatsHeader
-        personName={myStats?.name ?? null}
-        onOpenSettings={handleOpenSettingsPress}
-      />
+      <MyStatsHeader personName={myStats?.name ?? null} />
       {isLoading ? <LoadingStats /> : null}
       {!isLoading && errorMessage ? (
         <StatsErrorCard message={errorMessage} onRetryPress={reloadMyStats} />

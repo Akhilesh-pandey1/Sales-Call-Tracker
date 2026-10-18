@@ -62,11 +62,11 @@
 
 **Acceptance criteria:**
 - [ ] Login, Dialer, My Stats, and Settings all start their content below the status bar using the top safe-area inset
-- [ ] Screen layouts are otherwise unchanged
+- [x] Screen layouts are otherwise unchanged
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

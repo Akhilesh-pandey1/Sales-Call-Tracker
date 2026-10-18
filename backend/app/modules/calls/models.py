@@ -15,6 +15,7 @@ class Call(db.Model):
     duration_seconds = db.Column(
         db.Integer, nullable=False, default=0, server_default="0"
     )
+    outcome = db.Column(db.String(20), nullable=True)
 
     __table_args__ = (
         db.Index("idx_calls_call_id", "call_id", unique=True),

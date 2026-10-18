@@ -2,6 +2,7 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask
+from sqlalchemy import inspect, text
 
 load_dotenv()
 
@@ -43,6 +44,27 @@ def create_initial_manager(app: Flask) -> None:
     db.session.commit()
 
 
+def ensure_calls_outcome_column() -> None:
+    database_inspector = inspect(db.engine)
+    existing_column_names: list[str] = [
+        column["name"] for column in database_inspector.get_columns("calls")
+    ]
+    if "outcome" in existing_column_names:
+        return
+
+    is_postgres_database: bool = db.engine.dialect.name == "postgresql"
+    if is_postgres_database:
+        add_outcome_column_statement = text(
+            "ALTER TABLE calls ADD COLUMN IF NOT EXISTS outcome VARCHAR(20)"
+        )
+    else:
+        add_outcome_column_statement = text(
+            "ALTER TABLE calls ADD COLUMN outcome VARCHAR(20)"
+        )
+    db.session.execute(add_outcome_column_statement)
+    db.session.commit()
+
+
 def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
     app: Flask = Flask(__name__)
 
@@ -63,6 +85,7 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
 
     with app.app_context():
         db.create_all()
+        ensure_calls_outcome_column()
         get_or_create_office_hours_window()
         create_initial_manager(app)
 

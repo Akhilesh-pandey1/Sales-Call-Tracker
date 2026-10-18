@@ -1,6 +1,10 @@
+from pathlib import Path
 from flask import Flask, Response
 from flask.testing import FlaskClient
+from sqlalchemy import create_engine, inspect, text
 from zoneinfo import ZoneInfo
+from backend.app import create_app
+from backend.app.config.base import BaseConfig
 from backend.app.core.errors import AppException
 from backend.app.core.security import (
     generate_auth_token,
@@ -16,12 +20,54 @@ from backend.app.core.utils import (
     to_ist,
 )
 from backend.app.extensions import db
+from backend.app.modules.calls.models import Call
 from backend.app.modules.users.models import User
 
 
 def test_app_creation(app: Flask) -> None:
     is_testing: bool = app.config["TESTING"]
     assert is_testing is True
+
+
+def test_startup_adds_outcome_column_to_existing_database(tmp_path: Path) -> None:
+    database_path: Path = tmp_path / "existing-database.sqlite"
+    database_url: str = f"sqlite:///{database_path.as_posix()}"
+
+    legacy_engine = create_engine(database_url)
+    create_legacy_calls_table_statement = text(
+        "CREATE TABLE calls ("
+        "call_id VARCHAR(64) PRIMARY KEY, "
+        "user_id INTEGER, "
+        "phone_number VARCHAR(30) NOT NULL, "
+        "dialed_at TIMESTAMP, "
+        "duration_seconds INTEGER NOT NULL DEFAULT 0)"
+    )
+    insert_legacy_call_statement = text(
+        "INSERT INTO calls (call_id, user_id, phone_number, dialed_at, duration_seconds) "
+        "VALUES ('existing-call', 1, '+919876543210', '2026-10-01 10:00:00.000000', 30)"
+    )
+    with legacy_engine.begin() as connection:
+        connection.execute(create_legacy_calls_table_statement)
+        connection.execute(insert_legacy_call_statement)
+    legacy_engine.dispose()
+
+    class ExistingDatabaseConfig(BaseConfig):
+        TESTING: bool = True
+        SQLALCHEMY_DATABASE_URI: str = database_url
+
+    application: Flask = create_app(ExistingDatabaseConfig)
+    with application.app_context():
+        database_inspector = inspect(db.engine)
+        existing_column_names: list[str] = [
+            column["name"] for column in database_inspector.get_columns("calls")
+        ]
+        stored_existing_call: Call | None = db.session.get(Call, "existing-call")
+        db.session.remove()
+        db.engine.dispose()
+
+    assert "outcome" in existing_column_names
+    assert stored_existing_call is not None
+    assert stored_existing_call.outcome is None
 
 
 def test_user_model(app: Flask) -> None:

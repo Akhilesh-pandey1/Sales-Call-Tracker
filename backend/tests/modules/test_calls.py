@@ -394,6 +394,147 @@ def test_sync_malformed_row_skipped_while_valid_saved(
         assert db.session.get(Call, "bad-duration") is None
 
 
+def test_sync_stores_valid_call_outcome(app: Flask, client: FlaskClient) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-outcome-connected",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                    "outcome": "connected",
+                },
+                {
+                    "call_id": "call-outcome-not-connected",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 12, 5),
+                    "duration_seconds": 0,
+                    "outcome": "not_connected",
+                },
+                {
+                    "call_id": "call-outcome-schedule",
+                    "phone_number": "9876543212",
+                    "dialed_at": build_ist_dialed_at(0, 12, 10),
+                    "duration_seconds": 20,
+                    "outcome": "schedule",
+                },
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("status") is True
+
+        saved_connected: Call | None = db.session.get(Call, "call-outcome-connected")
+        saved_not_connected: Call | None = db.session.get(
+            Call, "call-outcome-not-connected"
+        )
+        saved_schedule: Call | None = db.session.get(Call, "call-outcome-schedule")
+
+        assert saved_connected is not None
+        assert saved_connected.outcome == "connected"
+        assert saved_not_connected is not None
+        assert saved_not_connected.outcome == "not_connected"
+        assert saved_schedule is not None
+        assert saved_schedule.outcome == "schedule"
+
+
+def test_sync_absent_or_empty_outcome_leaves_column_unset(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-without-outcome",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                },
+                {
+                    "call_id": "call-with-empty-outcome",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 12, 5),
+                    "duration_seconds": 30,
+                    "outcome": "",
+                },
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("status") is True
+
+        saved_absent: Call | None = db.session.get(Call, "call-without-outcome")
+        saved_empty: Call | None = db.session.get(Call, "call-with-empty-outcome")
+
+        assert saved_absent is not None
+        assert saved_absent.outcome is None
+        assert saved_empty is not None
+        assert saved_empty.outcome is None
+
+
+def test_sync_invalid_outcome_skips_row(app: Flask, client: FlaskClient) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-unknown-outcome",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                    "outcome": "maybe",
+                },
+                {
+                    "call_id": "call-non-string-outcome",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 12, 5),
+                    "duration_seconds": 30,
+                    "outcome": 123,
+                },
+                {
+                    "call_id": "call-padded-outcome",
+                    "phone_number": "9876543213",
+                    "dialed_at": build_ist_dialed_at(0, 12, 15),
+                    "duration_seconds": 25,
+                    "outcome": " connected ",
+                },
+                {
+                    "call_id": "call-valid-beside-invalid",
+                    "phone_number": "9876543212",
+                    "dialed_at": build_ist_dialed_at(0, 12, 10),
+                    "duration_seconds": 60,
+                    "outcome": "connected",
+                },
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("status") is True
+
+        assert db.session.get(Call, "call-unknown-outcome") is None
+        assert db.session.get(Call, "call-non-string-outcome") is None
+        assert db.session.get(Call, "call-padded-outcome") is None
+
+        saved_valid: Call | None = db.session.get(Call, "call-valid-beside-invalid")
+        assert saved_valid is not None
+        assert saved_valid.outcome == "connected"
+
+
 def test_sync_server_deduplicates_retried_rows(
     app: Flask, client: FlaskClient
 ) -> None:

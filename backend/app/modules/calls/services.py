@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import logging
 from typing import Any
 from backend.app.config.base import MAX_CALL_AGE_DAYS
+from backend.app.core.errors import AppException
 from backend.app.core.utils import (
     normalize_phone_number,
     now_utc,
@@ -10,6 +11,7 @@ from backend.app.core.utils import (
 )
 from backend.app.extensions import db
 from backend.app.modules.calls.models import Call
+from backend.app.modules.calls.schemas import VALID_CALL_OUTCOMES
 from backend.app.modules.leads import resolve_lead_for_call
 from backend.app.modules.settings import get_or_create_office_hours_window
 
@@ -33,8 +35,7 @@ def has_invalid_call_outcome(raw_outcome: Any) -> bool:
     if raw_outcome == empty_outcome:
         return False
 
-    valid_outcomes: list[str] = ["connected", "not_connected", "schedule"]
-    outcome_is_known: bool = raw_outcome in valid_outcomes
+    outcome_is_known: bool = raw_outcome in VALID_CALL_OUTCOMES
     outcome_is_invalid: bool = not outcome_is_known
     return outcome_is_invalid
 
@@ -164,6 +165,22 @@ def sync_calls_batch(
 
         resolve_lead_for_call(phone_number, duration, dialed_at)
 
+    db.session.commit()
+
+    response_data: dict[str, bool] = {"status": True}
+    return response_data
+
+
+def update_call_outcome(call_id: str, outcome: str, user_id: int) -> dict[str, bool]:
+    not_found_code: int = 404
+
+    call_record: Call | None = Call.query.filter_by(
+        call_id=call_id, user_id=user_id
+    ).first()
+    if call_record is None:
+        raise AppException("Call not found.", not_found_code)
+
+    call_record.outcome = outcome
     db.session.commit()
 
     response_data: dict[str, bool] = {"status": True}

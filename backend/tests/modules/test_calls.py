@@ -535,6 +535,223 @@ def test_sync_invalid_outcome_skips_row(app: Flask, client: FlaskClient) -> None
         assert saved_valid.outcome == "connected"
 
 
+def sync_call_for_outcome_patch(
+    client: FlaskClient,
+    headers: dict[str, str],
+    call_id: str,
+    outcome: str | None = None,
+) -> Response:
+    call_row: dict[str, Any] = {
+        "call_id": call_id,
+        "phone_number": "9876543210",
+        "dialed_at": build_ist_dialed_at(0, 12, 0),
+        "duration_seconds": 45,
+    }
+    if outcome is not None:
+        call_row["outcome"] = outcome
+
+    response: Response = client.post(
+        "/api/calls/sync", json={"calls": [call_row]}, headers=headers
+    )
+    return response
+
+
+def test_patch_outcome_updates_synced_call(app: Flask, client: FlaskClient) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        sync_response: Response = sync_call_for_outcome_patch(
+            client, headers, "call-awaiting-outcome"
+        )
+        assert sync_response.status_code == 200
+
+        patch_payload: dict[str, Any] = {"outcome": "connected"}
+        response: Response = client.patch(
+            "/api/calls/call-awaiting-outcome/outcome",
+            json=patch_payload,
+            headers=headers,
+        )
+
+        expected_code: int = 200
+        assert response.status_code == expected_code
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("status") is True
+
+        updated_call: Call | None = db.session.get(Call, "call-awaiting-outcome")
+        assert updated_call is not None
+        assert updated_call.outcome == "connected"
+
+
+def test_patch_outcome_replaces_stored_outcome(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        sync_response: Response = sync_call_for_outcome_patch(
+            client, headers, "call-already-stored", outcome="connected"
+        )
+        assert sync_response.status_code == 200
+
+        patch_payload: dict[str, Any] = {"outcome": "schedule"}
+        response: Response = client.patch(
+            "/api/calls/call-already-stored/outcome",
+            json=patch_payload,
+            headers=headers,
+        )
+
+        expected_code: int = 200
+        assert response.status_code == expected_code
+
+        updated_call: Call | None = db.session.get(Call, "call-already-stored")
+        assert updated_call is not None
+        assert updated_call.outcome == "schedule"
+
+
+def test_patch_outcome_invalid_value_returns_400(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        sync_response: Response = sync_call_for_outcome_patch(
+            client, headers, "call-invalid-outcome", outcome="connected"
+        )
+        assert sync_response.status_code == 200
+
+        invalid_bodies: list[dict[str, Any]] = [
+            {"outcome": "maybe"},
+            {"outcome": 123},
+            {"outcome": ""},
+            {},
+        ]
+        expected_bad_request: int = 400
+        expected_message: str = "Outcome must be connected, not_connected, or schedule."
+        for invalid_body in invalid_bodies:
+            response: Response = client.patch(
+                "/api/calls/call-invalid-outcome/outcome",
+                json=invalid_body,
+                headers=headers,
+            )
+            assert response.status_code == expected_bad_request
+            response_json: dict[str, Any] = response.get_json()
+            assert response_json.get("message") == expected_message
+
+        no_body_response: Response = client.patch(
+            "/api/calls/call-invalid-outcome/outcome", headers=headers
+        )
+        assert no_body_response.status_code == expected_bad_request
+        no_body_json: dict[str, Any] = no_body_response.get_json()
+        assert no_body_json.get("message") == expected_message
+
+        unchanged_call: Call | None = db.session.get(Call, "call-invalid-outcome")
+        assert unchanged_call is not None
+        assert unchanged_call.outcome == "connected"
+
+
+def test_patch_outcome_unknown_call_returns_404(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        patch_payload: dict[str, Any] = {"outcome": "connected"}
+        response: Response = client.patch(
+            "/api/calls/no-such-call/outcome",
+            json=patch_payload,
+            headers=headers,
+        )
+
+        expected_not_found: int = 404
+        assert response.status_code == expected_not_found
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "Call not found."
+
+
+def test_patch_outcome_rejects_another_users_call(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        owner: User = create_user_fixture()
+        owner_headers: dict[str, str] = {
+            "Authorization": f"Bearer {owner.auth_token}"
+        }
+        other_user: User = create_user_fixture(
+            name="salesperson2", token="test-token-456"
+        )
+        other_headers: dict[str, str] = {
+            "Authorization": f"Bearer {other_user.auth_token}"
+        }
+
+        sync_response: Response = sync_call_for_outcome_patch(
+            client, owner_headers, "call-owned-by-first"
+        )
+        assert sync_response.status_code == 200
+
+        patch_payload: dict[str, Any] = {"outcome": "schedule"}
+        response: Response = client.patch(
+            "/api/calls/call-owned-by-first/outcome",
+            json=patch_payload,
+            headers=other_headers,
+        )
+
+        expected_not_found: int = 404
+        assert response.status_code == expected_not_found
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "Call not found."
+
+        untouched_call: Call | None = db.session.get(Call, "call-owned-by-first")
+        assert untouched_call is not None
+        assert untouched_call.user_id == owner.id
+        assert untouched_call.outcome is None
+
+
+def test_patch_outcome_requires_active_authentication(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        sync_response: Response = sync_call_for_outcome_patch(
+            client, headers, "call-auth-check"
+        )
+        assert sync_response.status_code == 200
+
+        patch_payload: dict[str, Any] = {"outcome": "connected"}
+
+        no_token_response: Response = client.patch(
+            "/api/calls/call-auth-check/outcome", json=patch_payload
+        )
+        expected_unauthorized: int = 401
+        assert no_token_response.status_code == expected_unauthorized
+        no_token_json: dict[str, Any] = no_token_response.get_json()
+        assert no_token_json.get("message") == "Invalid or expired token."
+
+        deactivated_user: User = create_user_fixture(
+            name="salesperson2", token="test-token-456", is_active=False
+        )
+        deactivated_headers: dict[str, str] = {
+            "Authorization": f"Bearer {deactivated_user.auth_token}"
+        }
+        deactivated_response: Response = client.patch(
+            "/api/calls/call-auth-check/outcome",
+            json=patch_payload,
+            headers=deactivated_headers,
+        )
+        expected_forbidden: int = 403
+        assert deactivated_response.status_code == expected_forbidden
+        deactivated_json: dict[str, Any] = deactivated_response.get_json()
+        assert (
+            deactivated_json.get("message")
+            == "Your account is not active. Please contact your manager."
+        )
+
+
 def test_sync_server_deduplicates_retried_rows(
     app: Flask, client: FlaskClient
 ) -> None:

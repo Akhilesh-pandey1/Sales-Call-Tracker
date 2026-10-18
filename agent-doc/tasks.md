@@ -1,139 +1,85 @@
-## Task 1: Office-hours window storage with manager endpoints
+## Task 1: Team people endpoint returns per-salesperson rows
 
-**Description:** Add the `office_hours` table (one row, defaults 10:00–19:00 IST stored as minutes since midnight) and the `settings` module with `GET /api/settings/office-hours` and `PUT /api/settings/office-hours` — manager-only, HH:MM validation with end after start. Covers `specs/office-hours.md` window and validation requirements.
+**Description:** Add `GET /api/dashboard/team/people` exactly as contracted in `api.md` — one row per active salesperson with today and yesterday blocks of `dials`, `connected`, and `minutes`, zeros included, deactivated people never listed, rows sorted by today's dials highest first. Covers `specs/dashboard.md` (per-salesperson rows return with the Team section) and Decisions 131, 139.
 
 **Blocked by:** None
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] A fresh database answers GET with 10:00 / 19:00, and a valid PUT is saved and returned by the next read
-- [x] PUT refuses an end not after start with "End time must be after start time." and a missing or non-HH:MM body with "Invalid request format: start_time and end_time required."
-- [x] A salesperson token gets 403 "This setting is for managers." on both endpoints
+- [ ] The endpoint returns one row per active salesperson including zeros, and deactivated salespeople never appear
+- [ ] Each period block carries only `dials`, `connected`, and `minutes` — `minutes` is `round(seconds / 60)` computed on the server with no `seconds` field — and rows come back sorted by today's dials, highest first
+- [ ] A salesperson token gets 403 `{"message": "This dashboard is for managers."}` on the endpoint
 
 **Verification:**
-- [x] Tests pass: `python -m pytest tests/modules/test_settings.py` (from `backend/`)
+- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
 
 ---
 
-## Task 2: Call sync keeps only calls inside office hours
+## Task 2: Team page at /team renders the per-person table
 
-**Description:** Extend call ingestion so a synced call is kept only when its IST start minute falls inside the stored window, both ends inclusive — judged on the call's own start time, never the sync moment. Outside calls are dropped with a warning log while the server still answers `{"status": true}` so the app clears its queue. Covers `specs/office-hours.md` gate requirement.
+**Description:** Build the Team page (Screen 2b, Decision 139) in a new `features/team` folder — a table of name plus Today and Yesterday column groups (dials / connected / minutes), rows in the server's order, tapping a row opens the person page, and on mobile one card per person with the same numbers. With no salespeople yet it shows an empty state pointing the manager to Accounts, and a failed load shows the existing "Could not load data." pattern with Retry. The dashboard component currently named `TeamPage` is renamed `DashboardPage` so the new page can own the Team name — its `/` route and content stay exactly as they are (Decision 138).
 
 **Blocked by:** Task 1
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] Under the 10:00–19:00 window, calls starting 09:59 are dropped while 10:00, 18:59, and 19:00 are saved
-- [x] A call starting 19:01 is dropped with a log line, and every dropped row still lets the batch answer success
-- [x] After the manager updates the window, the next sync uses the new window
+- [ ] The page at `/team` renders returned rows only — name plus today/yesterday dials, connected, and minutes, in the server's sort order, zeros included
+- [ ] Tapping a row opens `/person/<id>?from=/team`, and narrow screens show one card per person with the same numbers
+- [ ] With no salespeople the page shows an empty state pointing to Accounts, and the Dashboard at `/` keeps its exact current content
 
 **Verification:**
-- [x] Tests pass: `python -m pytest tests/modules/test_calls.py` (from `backend/`)
+- [ ] Build succeeds: `npm run build` (from `web/`)
 
 ---
 
-## Task 3: Team endpoint returns per-period computed blocks
+## Task 3: Settings page hosts the office-hours editor
 
-**Description:** Restructure `GET /api/dashboard/team` to the per-period shape — each period object carries its totals plus server-computed `not_connected`, `minutes`, `connected_percent`, `avg_per_person_per_day`, and `vs_yesterday` (today only), its own `calls_by_hour` (`hours` spanning the office window, `dials`, `best_hour`, 30-day values as daily averages) and `top_people` with `minutes`. The `people` list is removed while active salespeople are still counted internally for the averages. Covers `specs/dashboard.md` team requirements (Decisions 129–131).
+**Description:** Create the Settings page at `/settings` (Decision 142) holding its one card — Office hours — by rendering the existing `OfficeHoursEditor`: it shows the stored window, saves a new start and end time, and a refused save surfaces the API's message with the editor kept open. The editor is removed from the Accounts page so it lives in its new home only (Decision 141).
 
-**Blocked by:** Task 1
+**Blocked by:** None
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] Each period object carries its own totals, computed KPIs, calls_by_hour, and top_people, matching the shapes and formulas in `api.md`
-- [x] `calls_by_hour.hours` spans the office-hours window start to end inclusive, `best_hour` is the highest-count hour or null with no calls, and last_30_days dials hold per-day averages
-- [x] The response carries no `people` array, deactivated people's calls stay counted, and top_people holds at most 5 active people with seconds and minutes
+- [ ] `/settings` shows the single Office hours card with the stored window, and saving a valid change updates it
+- [ ] A refused save shows the API's message and keeps the editor open
+- [ ] The Accounts page no longer renders the editor and keeps Add person, per-row Edit, Deactivate/Activate, Delete, with no actions on the manager's own row
 
 **Verification:**
-- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [ ] Build succeeds: `npm run build` (from `web/`)
 
 ---
 
-## Task 4: Person endpoint returns per-period computed blocks
+## Task 4: Sidebar carries the five section links
 
-**Description:** Extend `GET /api/dashboard/person/<id>` so every period object carries `not_connected` and `minutes`, last_30_days adds `avg_per_active_day` (null when active_days is 0), every period carries its own `calls_by_hour` block on the office window, and `top_numbers` entries add `minutes`. Covers `specs/dashboard.md` person requirements (Decisions 129, 130, 135).
+**Description:** Update the sidebar to the approved mockup set (Decision 137) — exactly five links in the order Dashboard, Team, Leads, Accounts, Settings, with the mockup icons: grid, two people, person-plus, single person, gear. Opening a person page keeps the section it came from highlighted — Team for a team-row person, Accounts for a deactivated person's page — through the existing `?from=` mechanism.
 
-**Blocked by:** Task 3
+**Blocked by:** Tasks 2, 3
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] Each period carries not_connected and minutes, and last_30_days returns avg_per_active_day that is null when active_days is 0
-- [x] Every period carries a calls_by_hour block with office-hours hours, per-hour counts, and best_hour
-- [x] top_numbers holds at most 5 numbers each with seconds, minutes, and call count
+- [ ] The sidebar shows exactly five links in the order Dashboard, Team, Leads, Accounts, Settings with the mockup icons
+- [ ] A person page opened from a Team row highlights Team, and one opened from Accounts highlights Accounts
 
 **Verification:**
-- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py` (from `backend/`)
+- [ ] Build succeeds: `npm run build` (from `web/`)
 
 ---
 
-## Task 5: Team page renders server-computed period blocks
+## Task 5: Person page entry rules with source-aware Back link
 
-**Description:** Rework `team-page.tsx` to render the selected period object only — the four KPI cards show returned totals with `avg_per_person_per_day` sub-lines and `vs_yesterday` deltas on Today, and the chart renders the returned `calls_by_hour` block with "10 AM" labels as the only formatting. The team table is removed with the `people` list gone. Covers `specs/dashboard.md` team and server-side computation requirements (Decision 129).
+**Description:** Finish Decision 140's contract — Accounts rows open the person page only for deactivated people, while active Accounts rows never navigate (Team rows already open it from Task 2) — and the Back link returns to the section the page was opened from instead of relying on browser history: Team entries go back to `/team`, Accounts entries to `/accounts`.
 
-**Blocked by:** Task 3
+**Blocked by:** Task 2
 
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] The four cards render returned values — no subtraction, division, average, or delta math remains in web code
-- [x] The chart renders the returned hours, counts, and best_hour directly, showing "No calls in this period." when best_hour is null
-- [x] The team table and all client-side computation helpers are deleted; every widget builds from the one selected period object
-
-**Verification:**
-- [x] Build succeeds: `npm run build` (from `web/`)
-
----
-
-## Task 6: Person page renders server-computed stats with the calls-by-hour chart
-
-**Description:** Rework `person-page.tsx` to render returned values — the four cards show `active_days` and `avg_per_active_day` with period totals as sub-lines and "—" when null, the performance table shows returned `minutes` and `connected_percent`, and the shared calls-by-hour chart component renders the per-period `calls_by_hour` block. Covers `specs/dashboard.md` person requirements (Decisions 129, 135).
-
-**Blocked by:** Tasks 4, 5
-
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] The four cards render returned averages — no client-side division by active_days remains
-- [x] The performance table renders returned minutes and connected_percent with "—" where null
-- [x] The person page shows the same chart component reading the returned calls_by_hour block
+- [ ] A deactivated person's Accounts row opens their person page, and active Accounts rows never navigate to it
+- [ ] Back from a person page opened via a Team row returns to `/team`, and via an Accounts row returns to `/accounts`
 
 **Verification:**
-- [x] Build succeeds: `npm run build` (from `web/`)
-
----
-
-## Task 7: Accounts page gains the office-hours editor
-
-**Description:** Add the small office-hours editor to the Accounts screen — the manager sees the current window and saves a new start and end time, with refused saves surfacing the API's messages. Covers `specs/office-hours.md` editing behavior (Decision 132).
-
-**Blocked by:** Task 1
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] The editor opens showing the stored window and saves a valid change with a confirmation toast
-- [x] Refused saves show the API messages ("End time must be after start time." / invalid format) without closing the editor
-
-**Verification:**
-- [x] Build succeeds: `npm run build` (from `web/`)
-
----
-
-## Task 8: My Stats renders returned talk minutes
-
-**Description:** Switch the app's My Stats screen from dividing `seconds` by 60 to rendering the `minutes` field the reshaped person response now provides; everything else on the screen stays as is. Covers `specs/dashboard.md` server-side computation requirement (Decision 129) with the app otherwise unchanged (Decision 136).
-
-**Blocked by:** Task 4
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] Talk-minutes values on My Stats come from the returned `minutes` field and the seconds-division helper is gone
-- [x] Dials, connected, and connected_percent still render as before against the reshaped per-period response
-
-**Verification:**
-- [x] Lint passes: `npm run lint` (from `app/`)
+- [ ] Build succeeds: `npm run build` (from `web/`)

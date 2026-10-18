@@ -6,9 +6,11 @@ const callLogMatchRetryDelaysMs: number[] = appConfigJson.callLogMatchRetryDelay
 const stalePendingCallAgeMs: number = appConfigJson.stalePendingCallAgeMs;
 const maxJanitorAttempts: number = appConfigJson.maxJanitorAttempts;
 const minMsBetweenJanitorSweeps: number = appConfigJson.minMsBetweenJanitorSweeps;
+const directCallStartTimeoutMs: number = appConfigJson.directCallStartTimeoutMs;
 
 export {
   callLogMatchRetryDelaysMs,
+  directCallStartTimeoutMs,
   maxJanitorAttempts,
   maxLeadAttempts,
   maxScheduleAheadDays,

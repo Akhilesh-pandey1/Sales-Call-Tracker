@@ -4,11 +4,11 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The Dialer tab shows a phone icon and the My Stats tab shows a bar-chart icon, active in primary color and inactive in gray
-- [ ] Icons come from the existing `Icon` component with lucide icons — no new package
+- [x] The Dialer tab shows a phone icon and the My Stats tab shows a bar-chart icon, active in primary color and inactive in gray
+- [x] Icons come from the existing `Icon` component with lucide icons — no new package
 
 **Verification:**
 - [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
@@ -22,11 +22,11 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The tab bar shows a third Settings tab with the gear icon, and tapping it opens the existing Settings screen
-- [ ] The Settings screen still works from the tab — including the clear-local-data action
+- [x] The tab bar shows a third Settings tab with the gear icon, and tapping it opens the existing Settings screen
+- [x] The Settings screen still works from the tab — including the clear-local-data action
 
 **Verification:**
 - [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
@@ -40,11 +40,11 @@
 
 **Blocked by:** Task 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The My Stats header shows only the avatar and name — no gear button
-- [ ] The Settings screen shows the title "Settings" with no back arrow
+- [x] The My Stats header shows only the avatar and name — no gear button
+- [x] The Settings screen shows the title "Settings" with no back arrow
 
 **Verification:**
 - [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
@@ -58,10 +58,10 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Login, Dialer, My Stats, and Settings all start their content below the status bar using the top safe-area inset
+- [x] Login, Dialer, My Stats, and Settings all start their content below the status bar using the top safe-area inset
 - [x] Screen layouts are otherwise unchanged
 
 **Verification:**
@@ -76,7 +76,7 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [ ] With CALL_PHONE granted, tapping Call (keypad or lead card) starts the call at once through ACTION_CALL and the pending-call row is written first
@@ -95,12 +95,12 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] When an automated call ends, the Call Outcome dialog is already open on return — no "Enter outcome" middle step required
-- [ ] Closing the dialog without saving keeps the lead card with a working Enter outcome button
-- [ ] Save & Continue with auto-dial on starts the next lead's call immediately
+- [x] When an automated call ends, the Call Outcome dialog is already open on return — no "Enter outcome" middle step required
+- [x] Closing the dialog without saving keeps the lead card with a working Enter outcome button
+- [x] Save & Continue with auto-dial on starts the next lead's call immediately
 
 **Verification:**
 - [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)

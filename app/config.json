@@ -5,5 +5,6 @@
   "callLogMatchRetryDelaysMs": [3000, 10000, 30000],
   "stalePendingCallAgeMs": 3600000,
   "maxJanitorAttempts": 5,
-  "minMsBetweenJanitorSweeps": 5000
+  "minMsBetweenJanitorSweeps": 5000,
+  "directCallStartTimeoutMs": 8000
 }

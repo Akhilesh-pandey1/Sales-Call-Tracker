@@ -25,4 +25,4 @@ Create the proposal document (`agent-doc/proposal.md`) that serves as the master
    - Keep the proposal concise (1-2 pages).
    - Define clear In Scope and Out of Scope boundaries.
    - Do NOT include code snippets.
-   - Do NOT write implementation tasks here (tasks belong to the dedicated ticketing phase).
+   - Do NOT write implementation tasks here (tasks belong to the dedicated task-writing phase).

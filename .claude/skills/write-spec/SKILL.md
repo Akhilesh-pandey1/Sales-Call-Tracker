@@ -9,7 +9,7 @@ disable-model-invocation: true
 Synthesize the grilling conversation and technical decision files into clean, modular specification documents in `agent-doc/`.
 
 <HARD GATE>
-1. **Planning & Spec boundary only:** Do NOT write project implementation code. Do NOT generate tasks or execution tickets here (tickets belong in a dedicated downstream skill).
+1. **Planning & Spec boundary only:** Do NOT write project implementation code. Do NOT generate execution tasks here (tasks belong in a dedicated downstream skill).
 2. **No re-interviewing:** Grilling already settled the scope and requirements. Synthesize the existing session history and the files in `agent-doc/`. Do not ask the user what to build.
 3. **Behavior contracts only:** Specs define WHAT the system does (normative requirements + testable scenarios). Never dump code implementations into specs.
 4. **Only two artifact types:** This skill writes ONLY `agent-doc/proposal.md` and `agent-doc/specs/<module-id>.md`. Technical designs already exist in `agent-doc/database.md`, `agent-doc/api.md`, etc.
@@ -65,4 +65,4 @@ Follow templates in `templates/` and instructions in `instructions/`:
 After creating the files, output:
 - List of created files in `agent-doc/` (`proposal.md` and `specs/*.md`)
 - The Capability Map modules and their spec paths
-- Final prompt: *"Specifications are complete and ready in `agent-doc/`. Next step: Run the task/ticket decomposition skill to generate execution tickets."*
+- Final prompt: *"Specifications are complete and ready in `agent-doc/`. Next step: Run the task decomposition skill to generate execution tasks."*

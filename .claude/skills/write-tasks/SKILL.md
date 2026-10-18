@@ -1,10 +1,10 @@
 ---
-name: write-tickets
+name: write-tasks
 description: Decompose specifications and requirements into ordered, atomic vertical-slice tasks in agent-doc/tasks.md using Addy Osmani sizing rules with verification gates. Pure task generation.
 disable-model-invocation: true
 ---
 
-# Write Tickets — Planning and Task Breakdown
+# Write Tasks — Planning and Task Breakdown
 
 ## Overview
 
@@ -28,8 +28,9 @@ Decompose specifications in `agent-doc/specs/` and technical contracts in `agent
 3. **Vertical Slices Only:** Never create horizontal layer tasks (e.g., "Build all database tables", "Build all API routes"). Every task must deliver a narrow, working path for ONE user capability or scenario.
 4. **The "And" Prohibition:** If a task title contains the word "and", it is two tasks. You MUST split it.
 5. **Subsystem Slicing Trigger:** If a task touches two or more independent subsystems (e.g., auth and billing), you MUST split it.
-6. **Development Work Only:** Never ticket manual or production work — `git push`, connecting the repo to a remote, deploying to hosting (Render, Vercel, …), or setting up the production database. The user does these by hand later. Include a deployment step ONLY when the user explicitly asked for it, and then as the last task — never as a gate between development tasks.
+6. **Development Work Only:** Never make a task for manual or production work — `git push`, connecting the repo to a remote, deploying to hosting (Render, Vercel, …), or setting up the production database. The user does these by hand later. Include a deployment step ONLY when the user explicitly asked for it, and then as the last task — never as a gate between development tasks.
 7. **Tasks Only, No Preamble:** `agent-doc/tasks.md` starts directly with `## Task 1:`. Never write anything before the first task — no scope summary, no "remaining work" paragraph, no assumptions block about manual checks. Context the user needs goes in the chat reply, not in the file.
+8. **No Heavy Machine Work:** Never make a task or verification step that sits through a long, heavy build — mobile APK / IPA, `gradle`, emulator runs, big native or Docker image builds. Quick commands stay fine (`npm run build`, tests, lint). The agent writes code and runs quick checks; the human runs the heavy build.
 </HARD GATE>
 
 ---
@@ -156,15 +157,15 @@ If a task is L or larger, it should be broken into smaller tasks. An agent perfo
 
 ---
 
-## No Manual or Deployment Work in Tickets
+## No Manual or Deployment Work in Tasks
 
-Tickets are development work only. Never put these in `agent-doc/tasks.md`:
+Tasks are development work only. Never put these in `agent-doc/tasks.md`:
 
 - `git push`, connecting the repo to a remote, branch protection
 - Deploying to hosting (Render, Vercel, AWS, …) or CI/CD setup
 - Creating or migrating the production database, DNS, secrets/env setup on the host
 
-The user does this work by hand, later — deployment comes after development, not inside it. A ticket that ends with "wait for the user to push/deploy before continuing" breaks the chain: subagents and the orchestrator would stall on a step only a human can do. Development tasks must flow end to end with no human in the middle.
+The user does this work by hand, later — deployment comes after development, not inside it. A task that ends with "wait for the user to push/deploy before continuing" breaks the chain: subagents and the orchestrator would stall on a step only a human can do. Development tasks must flow end to end with no human in the middle.
 
 **Exception:** if the user explicitly names the deployment work (e.g., "include pushing to Render"), write it as its own task at the very end — never as a `Blocked by:` gate between development tasks.
 
@@ -206,7 +207,8 @@ When multiple agents or sessions are available:
 | *"It's faster to do DB + API + UI in one big task"* | Doing all layers together causes context bloat and debugging failures. Slice vertically into separate tasks. |
 | *"I'll combine these two small endpoints with 'and'"* | The "And" rule is absolute. If a title has "and", split it into two tasks. |
 | *"I'll leave verification for the end of the project"* | Every individual task must have its own verification command. Untested tasks are plan failures. |
-| *"Deployment is part of this feature"* | Manual and production work (push, deploy, prod DB) is the user's job, done later. Ticketing it stalls the whole chain behind a human step. |
+| *"Deployment is part of this feature"* | Manual and production work (push, deploy, prod DB) is the user's job, done later. Making it a task stalls the whole chain behind a human step. |
+| *"The APK build proves it works"* | A multi-minute APK or `gradle` build is not agent work. Quick checks (`npm run build`, tests) verify the code; the human runs the heavy build. |
 
 ---
 
@@ -220,7 +222,8 @@ When multiple agents or sessions are available:
 - An intro or scope paragraph before the first task
 - Dependency order isn't considered
 - Tasks that wait for a human step (git push, deploy, prod DB) before the next task can start
-- Deployment or production setup ticketed without the user explicitly asking for it
+- Deployment or production setup added as a task without the user explicitly asking for it
+- A task whose core is a long heavy build (mobile APK, `gradle`, emulator, Docker image) instead of writing code
 
 ---
 
@@ -237,7 +240,8 @@ Before completing task generation, confirm:
 - [ ] No pre-existing incomplete plan was overwritten without explicit user confirmation
 - [ ] No task touches multiple independent subsystems or uses "and" in its title
 - [ ] Tasks are recorded cleanly in `agent-doc/tasks.md`
-- [ ] No task contains or blocks on manual/production work (git push, deploy, prod database) — deployment is ticketed only when the user explicitly asked, and then last
+- [ ] No task contains or blocks on manual/production work (git push, deploy, prod database) — deployment becomes a task only when the user explicitly asked, and then last
+- [ ] No task runs or waits on a heavy build (APK/IPA, `gradle`, emulator, big image builds) — quick checks like `npm run build` are fine
 
 ---
 

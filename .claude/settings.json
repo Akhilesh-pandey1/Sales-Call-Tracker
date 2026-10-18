@@ -6,6 +6,19 @@
   "disableArtifact": true,
   "disableRemoteControl": true,
   "disableClaudeAiConnectors": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const fs=require('fs');if(fs.existsSync('graphify-out/graph.json'))console.log(JSON.stringify({hookSpecificOutput:{hookEventName:'PreToolUse',additionalContext:'graphify: the code graph exists. For a where/how/what question, run graphify query first, then grep.'}}))\""
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "View",

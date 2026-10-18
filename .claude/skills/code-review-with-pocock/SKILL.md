@@ -10,7 +10,7 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
 
-Tickets and specs live in the project's `agent-doc/` folder — `agent-doc/tickets.json` holds the tickets (with specs, coding rules, and UI design paths at its top level). There is no issue tracker; never look for GitHub/GitLab issues.
+Tasks and specs live in the project's `agent-doc/` folder — `agent-doc/tasks.md` holds the tasks, each with acceptance criteria cited from `agent-doc/specs/`. There is no issue tracker; never look for GitHub/GitLab issues.
 
 ## Process
 
@@ -26,7 +26,7 @@ Before going further, confirm the fixed point resolves (`git rev-parse <fixed-po
 
 Look for the originating spec, in this order:
 
-1. The project's `agent-doc/` folder — the ticket and its acceptance criteria from `agent-doc/tickets.json`, plus any spec or coding-rules files referenced there. Check here first.
+1. The project's `agent-doc/` folder — the task and its acceptance criteria from `agent-doc/tasks.md`, plus any spec files those criteria cite. Check here first.
 2. A path the user passed as an argument.
 3. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
 4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".

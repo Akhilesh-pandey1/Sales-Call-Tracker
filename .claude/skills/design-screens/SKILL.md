@@ -48,7 +48,8 @@ python "<this skill's folder>/uiux/scripts/search.py" "<product type> <industry>
 - Name every screen file with its max designed size at the end: `--M` (mobile only, 375), `--T` (up to tablet, 768), `--P` (up to PC, 1440). A mobile-app screen is always `--M`. A screen that also runs on PC is `--P`, even if it works on mobile too. Edge cases keep their screen's marker: `02-dashboard--empty--P.html`.
 - Build from `templates/screen.html` - theme colors go in `:root` CSS variables, fonts from THEME.md.
 - Use tokens everywhere: `bg-[var(--color-card)]`, `text-[var(--color-muted-foreground)]`, `border-[var(--color-border)]`. No raw hex in classes.
-- Icons: inline SVG only, `stroke="currentColor"`, 24px, `stroke-width="2"` (Lucide style). Never emoji, never icon fonts.
+- Do not reinvent the wheel: before hand-writing a big piece, check if a known library already does it — via CDN, web search if needed, no install. Examples: Lucide CDN for icons instead of SVG, Chart.js CDN for charts.
+- For a small variation of an existing screen, copy that screen's file and edit only the parts that differ — never rebuild it.
 - `<script>` tags: the Tailwind CDN line plus one inline script for same-page interactions only. Never navigate to, link to, or load another screen file.
 - Responsive with Tailwind breakpoints - correct at 375, 768, 1024, 1440. Mobile app screens (screen.md says "Mobile app") design at 375 only.
 - Realistic sample content in the product's own language - never "Lorem ipsum".

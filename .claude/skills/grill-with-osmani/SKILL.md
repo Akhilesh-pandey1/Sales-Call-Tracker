@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Grill with Osmani — the intent interview
 
-What the user asks for and what they actually want are different things. They ask for "a dashboard" because that's what one asks for, not because a dashboard solves their problem. This interview closes that gap before any spec, ticket, or code exists — the cheapest moment to find it.
+What the user asks for and what they actually want are different things. They ask for "a dashboard" because that's what one asks for, not because a dashboard solves their problem. This interview closes that gap before any spec, task, or code exists — the cheapest moment to find it.
 
 Adapted from Addy Osmani's `interview-me`.
 

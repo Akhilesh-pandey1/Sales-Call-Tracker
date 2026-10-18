@@ -1,7 +1,7 @@
 {
   ".claude/settings.json": {
-    "mtime": 1789219475.8743477,
-    "ast_hash": "d61a56a84a116fe11e4688c4e3a5194b",
+    "mtime": 1792356840.060538,
+    "ast_hash": "5cff213b034f9fd1f7bcadfdf646efeb",
     "semantic_hash": ""
   },
   ".claude/skills/grill-with-superpower/scripts/helper.js": {
@@ -50,13 +50,13 @@
     "semantic_hash": ""
   },
   ".claude/skills/before-grill/SKILL.md": {
-    "mtime": 1791718364.0970104,
-    "ast_hash": "d189eefd1a88188530eb323ac3ca2225",
+    "mtime": 1792319799.3873918,
+    "ast_hash": "b3be23a72bae181a77d154de7cb344d2",
     "semantic_hash": ""
   },
   ".claude/skills/code-review-with-pocock/SKILL.md": {
-    "mtime": 1792053982.5751252,
-    "ast_hash": "84fb816112ae55be255865b8e0402ba7",
+    "mtime": 1792323544.754608,
+    "ast_hash": "92f3dc1c7d7b1f9e72cd48c3b3a68142",
     "semantic_hash": ""
   },
   ".claude/skills/code-review-with-pocock/agents/openai.yaml": {
@@ -145,13 +145,13 @@
     "semantic_hash": ""
   },
   ".claude/skills/implement-with-pocock/SKILL.md": {
-    "mtime": 1792044741.6336713,
-    "ast_hash": "8ef54e817e32d6962946528709707a7c",
+    "mtime": 1792354873.5902505,
+    "ast_hash": "e1d8e13209cc156b385b6a084a2515be",
     "semantic_hash": ""
   },
   ".claude/skills/implement-with-pocock/agents/openai.yaml": {
-    "mtime": 1786353743.2360048,
-    "ast_hash": "8b1644d5678a17f33306f98a7c236d20",
+    "mtime": 1792319795.033939,
+    "ast_hash": "a5faf2e29b6f2933d018e00dfdba8859",
     "semantic_hash": ""
   },
   ".claude/skills/tdd-with-pocock/SKILL.md": {
@@ -175,13 +175,13 @@
     "semantic_hash": ""
   },
   ".claude/skills/write-spec/SKILL.md": {
-    "mtime": 1792092031.6205218,
-    "ast_hash": "32f42c6568b0186d45f1223a188f1f07",
+    "mtime": 1792319797.7245257,
+    "ast_hash": "5e3e7d6cc7073204be66e5fcf05a37f5",
     "semantic_hash": ""
   },
   ".claude/skills/write-spec/instructions/proposal.md": {
-    "mtime": 1792092038.8667572,
-    "ast_hash": "12905d8f6885e46ab6a8c2f9c3a7d0ab",
+    "mtime": 1792319799.0085185,
+    "ast_hash": "19aa058626a9c92d7f71388906b93836",
     "semantic_hash": ""
   },
   ".claude/skills/write-spec/instructions/spec.md": {
@@ -197,11 +197,6 @@
   ".claude/skills/write-spec/templates/spec.md": {
     "mtime": 1792005277.904216,
     "ast_hash": "69bc2d5f370e3231c7551e9e404a965c",
-    "semantic_hash": ""
-  },
-  ".claude/skills/write-tickets/SKILL.md": {
-    "mtime": 1792097251.2692323,
-    "ast_hash": "5004f62fb381545c55b5f4c559c0b100",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -255,8 +250,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/SKILL.md": {
-    "mtime": 1792099822.4633098,
-    "ast_hash": "6c275aeb3f95203770286f977faaeb77",
+    "mtime": 1792354851.9504807,
+    "ast_hash": "d880879705a5455cda7e4beedb929896",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/templates/runner.html": {
@@ -295,8 +290,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/wait-what/SKILL.md": {
-    "mtime": 1791798470.3881192,
-    "ast_hash": "6884c324938f72d29d0cd98b2f248710",
+    "mtime": 1792323717.1265779,
+    "ast_hash": "5eb0137f037200a2a995262f5353e66d",
     "semantic_hash": ""
   },
   "AGENTS.md": {
@@ -720,8 +715,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/grill-with-osmani/SKILL.md": {
-    "mtime": 1792053968.4460497,
-    "ast_hash": "6981cd394125bae81329ac686ff8b12e",
+    "mtime": 1792319799.954836,
+    "ast_hash": "fa33a925cc5c493b3be64fb6ecf0e337",
     "semantic_hash": ""
   },
   "app/.eslintrc.js": {
@@ -1782,6 +1777,11 @@
   "app/src/types/react-native-intent-launcher.d.ts": {
     "mtime": 1792345798.8941638,
     "ast_hash": "bb538f84d7c44719ef6bf4c7c6012985",
+    "semantic_hash": ""
+  },
+  ".claude/skills/write-tasks/SKILL.md": {
+    "mtime": 1792354899.8282301,
+    "ast_hash": "c59115be92605681853ab004270600e2",
     "semantic_hash": ""
   }
 }

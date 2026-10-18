@@ -14,7 +14,6 @@ Rules:
 4. One line per point. As short as possible.
 5. Use very simple English (ASD-STE100 Simplified Technical English). No hard words.
 6. If a hard word is needed, explain it in the same line.
-7. Use the ubiquitous language from GLOSSARY.md (follow GLOSSARY-MAP.md to the right one if the repo has more than one).
-8. Do not add extra detail unless I ask.
+7. Do not add extra detail unless I ask.
 
 This works for anything: code, an event, an idea, a plan.

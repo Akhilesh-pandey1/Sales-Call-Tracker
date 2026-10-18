@@ -143,4 +143,4 @@ Then declare, and stop:
 
 > **BEFORE-GRILL COMPLETE** — the problem is defined and every decision is logged in `agent-doc/decisions.md`.
 
-What happens next — grill router, spec, tickets — is the caller's job.
+What happens next — grill router, spec, tasks — is the caller's job.

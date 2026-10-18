@@ -1,4 +1,5 @@
 import SQLite, { type ResultSet, type SQLiteDatabase } from 'react-native-sqlite-storage';
+import type { CallOutcome } from '../types';
 
 const CREATE_PENDING_CALLS_TABLE = `CREATE TABLE IF NOT EXISTS pending_calls (
   call_id TEXT PRIMARY KEY,
@@ -6,12 +7,13 @@ const CREATE_PENDING_CALLS_TABLE = `CREATE TABLE IF NOT EXISTS pending_calls (
   intent_at TEXT NOT NULL,
   dialed_at TEXT,
   duration_seconds INTEGER,
+  outcome TEXT,
   attempts INTEGER NOT NULL DEFAULT 0
 )`;
 
 const INSERT_PENDING_CALL = `INSERT INTO pending_calls (call_id, phone_number, intent_at) VALUES (?, ?, ?)`;
 
-const SELECT_ALL_PENDING_CALLS = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, attempts
+const SELECT_ALL_PENDING_CALLS = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, outcome, attempts
   FROM pending_calls
   ORDER BY intent_at ASC`;
 
@@ -34,12 +36,16 @@ const DELETE_PENDING_CALL = `DELETE FROM pending_calls WHERE call_id = ?`;
 
 const DELETE_ALL_PENDING_CALLS = `DELETE FROM pending_calls`;
 
+const TABLE_INFO_PENDING_CALLS = 'PRAGMA TABLE_INFO (pending_calls)';
+const ADD_OUTCOME_COLUMN_TO_PENDING_CALLS = 'ALTER TABLE pending_calls ADD COLUMN outcome TEXT';
+
 export interface PendingCall {
   callId: string;
   phoneNumber: string;
   intentAt: string;
   dialedAt: string | null;
   durationSeconds: number | null;
+  outcome: CallOutcome | null;
   attempts: number;
 }
 
@@ -49,6 +55,7 @@ interface PendingCallTableRow {
   intent_at: string;
   dialed_at: string | null;
   duration_seconds: number | null;
+  outcome: CallOutcome | null;
   attempts: number;
 }
 
@@ -64,6 +71,41 @@ interface UnfilledPendingCallTableRow {
   intent_at: string;
 }
 
+function readRowList<RowItemType, ResultItemType>(
+  result: ResultSet,
+  toRowItem: (row: RowItemType) => ResultItemType,
+): ResultItemType[] {
+  const rowItems: ResultItemType[] = [];
+  for (let rowIndex = 0; rowIndex < result.rows.length; rowIndex += 1) {
+    const row = result.rows.item(rowIndex) as RowItemType;
+    rowItems.push(toRowItem(row));
+  }
+  return rowItems;
+}
+
+interface PendingCallTableColumn {
+  name: string;
+}
+
+async function addOutcomeColumnWhenMissing(database: SQLiteDatabase): Promise<void> {
+  const outcomeColumnName = 'outcome';
+  const [tableInfoResult] = await database.executeSql(TABLE_INFO_PENDING_CALLS);
+  const columnNames = readRowList<PendingCallTableColumn, string>(
+    tableInfoResult,
+    pendingCallColumn => pendingCallColumn.name,
+  );
+  if (columnNames.includes(outcomeColumnName)) {
+    return;
+  }
+  await database.executeSql(ADD_OUTCOME_COLUMN_TO_PENDING_CALLS);
+}
+
+async function preparePendingCallsDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase> {
+  await database.executeSql(CREATE_PENDING_CALLS_TABLE);
+  await addOutcomeColumnWhenMissing(database);
+  return database;
+}
+
 let openDatabasePromise: Promise<SQLiteDatabase> | null = null;
 
 function openDatabase(): Promise<SQLiteDatabase> {
@@ -73,9 +115,7 @@ function openDatabase(): Promise<SQLiteDatabase> {
   const databaseName = 'pending_calls.db';
   SQLite.enablePromise(true);
   openDatabasePromise = SQLite.openDatabase({ name: databaseName })
-    .then((database) =>
-      database.executeSql(CREATE_PENDING_CALLS_TABLE).then(() => database),
-    )
+    .then(preparePendingCallsDatabase)
     .catch((error: unknown) => {
       openDatabasePromise = null;
       throw error;
@@ -96,6 +136,7 @@ function toPendingCall(row: PendingCallTableRow): PendingCall {
     intentAt: row.intent_at,
     dialedAt: row.dialed_at,
     durationSeconds: row.duration_seconds,
+    outcome: row.outcome,
     attempts: row.attempts,
   };
   return pendingCall;
@@ -108,18 +149,6 @@ function toUnfilledPendingCall(row: UnfilledPendingCallTableRow): UnfilledPendin
     intentAt: row.intent_at,
   };
   return unfilledPendingCall;
-}
-
-function readRowList<RowItemType, ResultItemType>(
-  result: ResultSet,
-  toRowItem: (row: RowItemType) => ResultItemType,
-): ResultItemType[] {
-  const rowItems: ResultItemType[] = [];
-  for (let rowIndex = 0; rowIndex < result.rows.length; rowIndex += 1) {
-    const row = result.rows.item(rowIndex) as RowItemType;
-    rowItems.push(toRowItem(row));
-  }
-  return rowItems;
 }
 
 export async function insertPendingCall(

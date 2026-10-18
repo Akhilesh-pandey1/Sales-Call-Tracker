@@ -39,15 +39,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Code done — needs the on-device visibility check
 
 **Acceptance criteria:**
 - [ ] The cause is identified and fixed in the shared dialog wrapper — the Settings confirm dialog and the Call Outcome dialog both become visible when opened
 - [ ] Dialog content matches the approved mockups, and the lead card's Enter outcome button still reopens the dialog after it was closed without saving
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

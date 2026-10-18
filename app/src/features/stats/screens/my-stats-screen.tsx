@@ -6,6 +6,7 @@ import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { CloudOff, Settings } from 'lucide-react-native';
 import type { ReactNode } from 'react';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { PersonStats, PeriodStats, TopNumberStats } from '../api/stats.api';
 import { useMyStats } from '../hooks/use-my-stats';
 
@@ -260,13 +261,14 @@ function TopNumbersTable({ topNumbers }: { topNumbers: TopNumberStats[] }) {
 export function MyStatsScreen() {
   const { isLoading, myStats, errorMessage, reloadMyStats } = useMyStats();
   const navigation = useNavigation<NavigationProp<MainTabsParamList>>();
+  const { top: topInset } = useSafeAreaInsets();
 
   function handleOpenSettingsPress(): void {
     navigation.navigate('Settings');
   }
 
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
       <MyStatsHeader
         personName={myStats?.name ?? null}
         onOpenSettings={handleOpenSettingsPress}

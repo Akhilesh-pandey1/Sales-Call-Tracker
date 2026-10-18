@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ScrollView, View, type StyleProp, type ViewStyle } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon } from '@/components/ui/icon';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -11,21 +12,22 @@ type LoginScreenProps = {
   onLogin: (userName: string, userPassword: string) => Promise<LoginResult>;
 };
 
-const screenPaddingHorizontal = 24;
-const screenPaddingVertical = 40;
-
-const loginContentContainerStyle: StyleProp<ViewStyle> = {
-  flexGrow: 1,
-  justifyContent: 'center',
-  paddingHorizontal: screenPaddingHorizontal,
-  paddingVertical: screenPaddingVertical,
-};
-
 export function LoginScreen({ onLogin }: LoginScreenProps) {
+  const { top: topInset } = useSafeAreaInsets();
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [loginErrorMessage, setLoginErrorMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const screenPaddingHorizontal = 24;
+  const screenPaddingVertical = 40;
+  const loginContentContainerStyle: StyleProp<ViewStyle> = {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingHorizontal: screenPaddingHorizontal,
+    paddingTop: screenPaddingVertical + topInset,
+    paddingBottom: screenPaddingVertical,
+  };
 
   async function handleLoginPress(): Promise<void> {
     if (isSubmitting) {

@@ -6,6 +6,7 @@ import { Text } from '@/components/ui/text';
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { ArrowLeft, ChevronRight, Trash2 } from 'lucide-react-native';
 import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useClearLocalData } from '../hooks/use-clear-local-data';
 
 type SettingsHeaderProps = {
@@ -122,6 +123,7 @@ function ClearConfirmDialog({
 
 export function SettingsScreen() {
   const navigation = useNavigation<NavigationProp<MainTabsParamList>>();
+  const { top: topInset } = useSafeAreaInsets();
   const {
     pendingCallCount,
     isClearDialogOpen,
@@ -137,7 +139,7 @@ export function SettingsScreen() {
   }
 
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
       <SettingsHeader onBackPress={handleBackPress} />
       <View className="flex-1 px-5 pb-6 pt-4">
         <View className="my-auto gap-2">

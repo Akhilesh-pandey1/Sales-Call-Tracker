@@ -6,7 +6,7 @@ import {
   type ServedLead,
 } from '../api/leads.api';
 import type { AutomatedViewState } from './use-automated-calling';
-import type { CallOutcome } from '@/features/tracking';
+import { recordCallOutcome, type CallOutcome } from '@/features/tracking';
 import { readRequestErrorMessage } from './use-lead-loading';
 
 export type UseOutcomeSubmitResult = {
@@ -61,6 +61,10 @@ export function useOutcomeSubmit(
       setIsSubmittingOutcome(true);
       setOutcomeErrorMessage(null);
       try {
+        const outcomeCallId = currentState.callId;
+        if (outcomeCallId !== null) {
+          await recordCallOutcome(outcomeCallId, outcome);
+        }
         const nextLead = await fetchNextLead(schedule);
         updateDialogOpen(false);
         if (nextLead === null) {

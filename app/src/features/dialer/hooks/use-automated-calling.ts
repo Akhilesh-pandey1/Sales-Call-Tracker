@@ -10,8 +10,8 @@ export type AutomatedViewState =
   | { kind: 'loading'; loadingLabel: string }
   | { kind: 'empty' }
   | { kind: 'ready'; lead: ServedLead }
-  | { kind: 'dialing'; lead: ServedLead }
-  | { kind: 'outcome'; lead: ServedLead };
+  | { kind: 'dialing'; lead: ServedLead; callId: string | null }
+  | { kind: 'outcome'; lead: ServedLead; callId: string | null };
 
 export type UseAutomatedCallingResult = {
   viewState: AutomatedViewState;
@@ -71,7 +71,11 @@ export function useAutomatedCalling(): UseAutomatedCallingResult {
     if (currentState.kind !== 'dialing' || isOutcomeDialogOpenRef.current) {
       return;
     }
-    updateViewState({ kind: 'outcome', lead: currentState.lead });
+    updateViewState({
+      kind: 'outcome',
+      lead: currentState.lead,
+      callId: currentState.callId,
+    });
     updateDialogOpen(true);
   }, [updateDialogOpen, updateViewState]);
 

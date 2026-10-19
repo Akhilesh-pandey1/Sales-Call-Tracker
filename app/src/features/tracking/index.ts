@@ -3,7 +3,7 @@ export { usePermissions } from './hooks/use-permissions';
 export { useCallTracker } from './hooks/use-call-tracker';
 export { useSync } from './hooks/use-sync';
 export { submitTrackedCall } from './lib/call-submit';
-export { emitCallFilled, subscribeToCallEnded, subscribeToCallFilled } from './sync-events';
+export { subscribeToCallEnded } from './sync-events';
 export {
   clearAllPendingCalls,
   countPendingCalls,

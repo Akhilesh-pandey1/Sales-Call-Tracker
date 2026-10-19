@@ -59,15 +59,15 @@
 
 **Blocked by:** Task 3
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The instant hang-up read and its retries are gone — `use-call-hang-up-detector.ts` is deleted with the call-log reading inside it
-- [ ] `use-call-tracker.ts` keeps only the call-state listener that opens the post-call popup — no call-log reading anywhere outside the Submit click
+- [x] The instant hang-up read and its retries are gone — `use-call-hang-up-detector.ts` is deleted with the call-log reading inside it
+- [x] `use-call-tracker.ts` keeps only the call-state listener that opens the post-call popup — no call-log reading anywhere outside the Submit click
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

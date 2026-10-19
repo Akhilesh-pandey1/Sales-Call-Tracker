@@ -352,13 +352,32 @@ def find_candidate_lead(user_id: int, current_utc: datetime) -> Lead | None:
     return pool_lead
 
 
+def release_active_claim(user_id: int) -> None:
+    current_utc: datetime = now_utc()
+    active_claims: list[Lead] = Lead.query.filter(
+        Lead.claimed_by == user_id,
+        Lead.claimed_until > current_utc,
+    ).all()
+    for claimed_lead in active_claims:
+        claimed_lead.claimed_by = None
+        claimed_lead.claimed_until = None
+
+
 def serve_next_lead(
-    user_id: int, schedule_data: ScheduleLeadRequest | None = None
+    user_id: int,
+    continue_calling: bool,
+    schedule_data: ScheduleLeadRequest | None = None,
 ) -> dict[str, Any]:
     if schedule_data is not None:
         schedule_lead_callback(
             schedule_data.lead_id, user_id, schedule_data.scheduled_at
         )
+
+    if not continue_calling:
+        release_active_claim(user_id)
+        db.session.commit()
+        stopped_result: dict[str, Any] = {"status": True, "lead": None}
+        return stopped_result
 
     current_utc: datetime = now_utc()
     candidate_lead: Lead | None = find_candidate_lead(user_id, current_utc)

@@ -77,12 +77,12 @@
 
 **Blocked by:** Task 2, Task 3
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] With "Go to next call" checked (the default), Submit saves the schedule (when chosen) and claims the next lead through `/api/leads/next`, and that lead's call starts immediately
-- [ ] With the box unchecked, the request carries `continue_calling: false` — the schedule (if chosen) is still saved, no lead is served, and automated calling stops until Start again
+- [x] With "Go to next call" checked (the default), Submit saves the schedule (when chosen) and claims the next lead through `/api/leads/next`, and that lead's call starts immediately
+- [x] With the box unchecked, the request carries `continue_calling: false` — the schedule (if chosen) is still saved, no lead is served, and automated calling stops until Start again
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)

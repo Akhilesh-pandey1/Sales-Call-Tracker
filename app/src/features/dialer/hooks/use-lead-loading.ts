@@ -60,7 +60,8 @@ export function useLeadLoading(
     setStartErrorMessage(null);
     updateViewState({ kind: 'loading', loadingLabel: findingLeadMessage });
     try {
-      const servedLead = await fetchNextLead(null);
+      const shouldContinueCalling = true;
+      const servedLead = await fetchNextLead(null, shouldContinueCalling);
       if (servedLead === null) {
         updateViewState({ kind: 'empty' });
         return;

@@ -12,6 +12,11 @@ export type LeadScheduleRequest = {
   scheduled_at: string;
 };
 
+type NextLeadRequestBody = {
+  continue_calling: boolean;
+  schedule?: LeadScheduleRequest;
+};
+
 type NextLeadResponseBody = {
   status: boolean;
   lead: ServedLead | null;
@@ -30,10 +35,22 @@ function isServedLead(value: unknown): value is ServedLead {
   return hasLeadShape;
 }
 
+function buildNextLeadRequestBody(
+  schedule: LeadScheduleRequest | null,
+  continueCalling: boolean,
+): NextLeadRequestBody {
+  const requestBody: NextLeadRequestBody = { continue_calling: continueCalling };
+  if (schedule !== null) {
+    requestBody.schedule = schedule;
+  }
+  return requestBody;
+}
+
 async function fetchNextLead(
   schedule: LeadScheduleRequest | null,
+  continueCalling: boolean,
 ): Promise<ServedLead | null> {
-  const requestBody = schedule === null ? {} : { schedule };
+  const requestBody = buildNextLeadRequestBody(schedule, continueCalling);
   const response = await apiClient.post<NextLeadResponseBody>(
     '/leads/next',
     requestBody,

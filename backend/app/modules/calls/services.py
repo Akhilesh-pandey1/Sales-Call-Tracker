@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 import logging
 from typing import Any
 from backend.app.config.base import MAX_CALL_AGE_DAYS
-from backend.app.core.errors import AppException
 from backend.app.core.utils import (
     normalize_phone_number,
     now_utc,
@@ -11,7 +10,6 @@ from backend.app.core.utils import (
 )
 from backend.app.extensions import db
 from backend.app.modules.calls.models import Call
-from backend.app.modules.calls.schemas import VALID_CALL_OUTCOMES
 from backend.app.modules.leads import resolve_lead_for_call
 from backend.app.modules.settings import get_or_create_office_hours_window
 
@@ -25,21 +23,6 @@ def get_ist_start_minute_of_day(dialed_at_utc: datetime) -> int:
     return start_minute_of_day
 
 
-def has_invalid_call_outcome(raw_outcome: Any) -> bool:
-    if raw_outcome is None:
-        return False
-    if not isinstance(raw_outcome, str):
-        return True
-
-    empty_outcome: str = ""
-    if raw_outcome == empty_outcome:
-        return False
-
-    outcome_is_known: bool = raw_outcome in VALID_CALL_OUTCOMES
-    outcome_is_invalid: bool = not outcome_is_known
-    return outcome_is_invalid
-
-
 def has_invalid_call_duration(raw_duration: Any) -> bool:
     zero_duration: int = 0
     if not isinstance(raw_duration, int) or isinstance(raw_duration, bool):
@@ -49,14 +32,6 @@ def has_invalid_call_duration(raw_duration: Any) -> bool:
     return duration_is_negative
 
 
-def extract_stored_call_outcome(raw_outcome: Any) -> str | None:
-    if not isinstance(raw_outcome, str):
-        return None
-
-    stored_outcome: str | None = raw_outcome if raw_outcome else None
-    return stored_outcome
-
-
 def extract_valid_call(
     item: Any,
     default_country: str,
@@ -64,7 +39,7 @@ def extract_valid_call(
     window_start_minute: int,
     window_end_minute: int,
     seen_call_ids: set[str],
-) -> tuple[str, str, datetime, int, str | None] | None:
+) -> tuple[str, str, datetime, int] | None:
     if not isinstance(item, dict):
         logger.warning("Discarding non-dict call item: %s", item)
         return None
@@ -112,18 +87,11 @@ def extract_valid_call(
 
     normalized_phone: str = normalize_phone_number(clean_phone, default_country)
 
-    raw_outcome: Any = item.get("outcome")
-    if has_invalid_call_outcome(raw_outcome):
-        logger.warning("Discarding call item with invalid outcome: %s", item)
-        return None
-    stored_outcome: str | None = extract_stored_call_outcome(raw_outcome)
-
-    parsed_record: tuple[str, str, datetime, int, str | None] = (
+    parsed_record: tuple[str, str, datetime, int] = (
         call_id,
         normalized_phone,
         dialed_at_utc,
         raw_duration,
-        stored_outcome,
     )
     return parsed_record
 
@@ -151,36 +119,19 @@ def sync_calls_batch(
         if call_data is None:
             continue
 
-        call_id, phone_number, dialed_at, duration, call_outcome = call_data
+        call_id, phone_number, dialed_at, duration = call_data
         call_record: Call = Call(
             call_id=call_id,
             user_id=user_id,
             phone_number=phone_number,
             dialed_at=dialed_at,
             duration_seconds=duration,
-            outcome=call_outcome,
         )
         db.session.add(call_record)
         seen_call_ids.add(call_id)
 
         resolve_lead_for_call(phone_number, duration, dialed_at)
 
-    db.session.commit()
-
-    response_data: dict[str, bool] = {"status": True}
-    return response_data
-
-
-def update_call_outcome(call_id: str, outcome: str, user_id: int) -> dict[str, bool]:
-    not_found_code: int = 404
-
-    call_record: Call | None = Call.query.filter_by(
-        call_id=call_id, user_id=user_id
-    ).first()
-    if call_record is None:
-        raise AppException("Call not found.", not_found_code)
-
-    call_record.outcome = outcome
     db.session.commit()
 
     response_data: dict[str, bool] = {"status": True}

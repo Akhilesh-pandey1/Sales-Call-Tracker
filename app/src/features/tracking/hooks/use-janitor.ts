@@ -104,7 +104,7 @@ async function completeStalePendingCalls(
   const matchedCallIds = new Set(
     matches.map(match => match.callId),
   );
-  await fillMatchedPendingCalls(matches, false);
+  await fillMatchedPendingCalls(matches);
   await strikeUnmatchedPendingCalls(stalePendingCalls, matchedCallIds);
 }
 

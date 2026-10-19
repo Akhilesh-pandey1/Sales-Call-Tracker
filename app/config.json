@@ -2,7 +2,6 @@
   "apiBaseUrl": "http://localhost:5000/api",
   "maxLeadAttempts": 3,
   "maxScheduleAheadDays": 30,
-  "callLogMatchRetryDelaysMs": [3000, 10000, 30000],
   "stalePendingCallAgeMs": 3600000,
   "maxJanitorAttempts": 5,
   "minMsBetweenJanitorSweeps": 5000,

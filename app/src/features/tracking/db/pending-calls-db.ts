@@ -16,11 +16,6 @@ const SELECT_ALL_PENDING_CALLS = `SELECT call_id, phone_number, intent_at, diale
   FROM pending_calls
   ORDER BY intent_at ASC`;
 
-const SELECT_UNFILLED_PENDING_CALLS = `SELECT call_id, phone_number, intent_at
-  FROM pending_calls
-  WHERE dialed_at IS NULL
-  ORDER BY intent_at ASC`;
-
 const SELECT_PENDING_CALL_BY_ID = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, attempts
   FROM pending_calls
   WHERE call_id = ?`;
@@ -58,18 +53,6 @@ interface PendingCallTableRow {
   dialed_at: string | null;
   duration_seconds: number | null;
   attempts: number;
-}
-
-export interface UnfilledPendingCall {
-  callId: string;
-  phoneNumber: string;
-  intentAt: string;
-}
-
-interface UnfilledPendingCallTableRow {
-  call_id: string;
-  phone_number: string;
-  intent_at: string;
 }
 
 function readRowList<RowItemType, ResultItemType>(
@@ -142,15 +125,6 @@ function toPendingCall(row: PendingCallTableRow): PendingCall {
   return pendingCall;
 }
 
-function toUnfilledPendingCall(row: UnfilledPendingCallTableRow): UnfilledPendingCall {
-  const unfilledPendingCall: UnfilledPendingCall = {
-    callId: row.call_id,
-    phoneNumber: row.phone_number,
-    intentAt: row.intent_at,
-  };
-  return unfilledPendingCall;
-}
-
 export async function insertPendingCall(
   callId: string,
   phoneNumber: string,
@@ -163,15 +137,6 @@ export async function getAllPendingCalls(): Promise<PendingCall[]> {
   const result = await runQuery(SELECT_ALL_PENDING_CALLS, []);
   const pendingCalls = readRowList<PendingCallTableRow, PendingCall>(result, toPendingCall);
   return pendingCalls;
-}
-
-export async function getUnfilledPendingCalls(): Promise<UnfilledPendingCall[]> {
-  const result = await runQuery(SELECT_UNFILLED_PENDING_CALLS, []);
-  const unfilledPendingCalls = readRowList<UnfilledPendingCallTableRow, UnfilledPendingCall>(
-    result,
-    toUnfilledPendingCall,
-  );
-  return unfilledPendingCalls;
 }
 
 export async function getPendingCallById(callId: string): Promise<PendingCall | null> {

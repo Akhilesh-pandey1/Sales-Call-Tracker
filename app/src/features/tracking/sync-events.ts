@@ -24,12 +24,8 @@ function createSyncEvent(): SyncEvent {
   return syncEvent;
 }
 
-const callFilledEvent = createSyncEvent();
 const callEndedEvent = createSyncEvent();
 
-export const subscribeToCallFilled: (listener: SyncListener) => () => void =
-  callFilledEvent.subscribe;
-export const emitCallFilled: () => void = callFilledEvent.emit;
 export const subscribeToCallEnded: (listener: SyncListener) => () => void =
   callEndedEvent.subscribe;
 export const emitCallEnded: () => void = callEndedEvent.emit;

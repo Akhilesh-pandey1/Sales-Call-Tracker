@@ -3,7 +3,6 @@ import { AppState, type AppStateStatus } from 'react-native';
 import { syncCalls, type SyncCall } from '../api/calls.api';
 import { deletePendingCall, getAllPendingCalls } from '../db';
 import { toSyncCallOrNull } from '../lib/sync-call';
-import { subscribeToCallFilled } from '../sync-events';
 import { runJanitorSweep } from './use-janitor';
 
 let runningSync: Promise<void> | null = null;
@@ -53,9 +52,6 @@ async function runJanitorThenSync(): Promise<void> {
 
 export function useSync(): void {
   useEffect(() => {
-    const handleCallFilled = (): void => {
-      syncPendingCalls();
-    };
     const handleAppStateChange = (nextAppState: AppStateStatus): void => {
       if (nextAppState !== 'active') {
         return;
@@ -63,10 +59,8 @@ export function useSync(): void {
       runJanitorThenSync();
     };
     runJanitorThenSync();
-    const unsubscribeFromCallFilled = subscribeToCallFilled(handleCallFilled);
     const appStateSubscription = AppState.addEventListener('change', handleAppStateChange);
     return () => {
-      unsubscribeFromCallFilled();
       appStateSubscription.remove();
     };
   }, []);

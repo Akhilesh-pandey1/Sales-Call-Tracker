@@ -1,13 +1,14 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback } from 'react';
 import type { RefObject } from 'react';
 import { fetchNextLead, type LeadScheduleRequest, type ServedLead } from '../api/leads.api';
+import { useDialogVisibility } from './use-dialog-visibility';
 import type { AutomatedViewState } from './use-automated-calling';
-import { usePostCallSubmit } from './use-post-call-submit';
+import {
+  usePostCallSubmit,
+  type PostCallDialogState,
+} from './use-post-call-submit';
 
-export type UseLeadPostCallResult = {
-  isPostCallDialogOpen: boolean;
-  isSubmittingPostCall: boolean;
-  postCallErrorMessage: string | null;
+export type UseLeadPostCallResult = PostCallDialogState & {
   openPostCallDialog: () => void;
   closePostCallDialog: () => void;
   showPostCallDialog: () => void;
@@ -29,24 +30,30 @@ function buildLeadScheduleRequest(
   return scheduleRequest;
 }
 
+function buildFinishedViewState(
+  currentState: AutomatedViewState,
+): AutomatedViewState | null {
+  if (currentState.kind !== 'dialing') {
+    return null;
+  }
+  const finishedState: AutomatedViewState = {
+    kind: 'finished',
+    lead: currentState.lead,
+    callId: currentState.callId,
+  };
+  return finishedState;
+}
+
 export function useLeadPostCall(
   viewStateRef: RefObject<AutomatedViewState>,
   updateViewState: (nextViewState: AutomatedViewState) => void,
   dialLead: (nextLead: ServedLead) => Promise<void>,
 ): UseLeadPostCallResult {
-  const [isPostCallDialogOpen, setIsPostCallDialogOpen] = useState(false);
-  const isPostCallDialogOpenRef = useRef(false);
-  const {
-    isSubmittingPostCall,
-    postCallErrorMessage,
-    clearPostCallErrorMessage,
-    submitPostCall: submitTrackedPostCall,
-  } = usePostCallSubmit();
-
-  const updateDialogOpen = useCallback((isOpen: boolean): void => {
-    isPostCallDialogOpenRef.current = isOpen;
-    setIsPostCallDialogOpen(isOpen);
-  }, []);
+  const { isPostCallDialogOpen, showDialog, closeDialog: closePostCallDialog } =
+    useDialogVisibility();
+  const postCallSubmit = usePostCallSubmit();
+  const { clearPostCallErrorMessage } = postCallSubmit;
+  const { submitPostCall: submitTrackedPostCall } = postCallSubmit;
 
   const continueAfterLeadSubmit = useCallback(
     async (
@@ -59,7 +66,7 @@ export function useLeadPostCall(
       }
       const leadSchedule = buildLeadScheduleRequest(scheduledAt, currentState.lead.id);
       const nextLead = await fetchNextLead(leadSchedule, shouldContinueToNextLead);
-      updateDialogOpen(false);
+      closePostCallDialog();
       if (!shouldContinueToNextLead) {
         updateViewState({ kind: 'start' });
         return;
@@ -70,31 +77,20 @@ export function useLeadPostCall(
       }
       await dialLead(nextLead);
     },
-    [dialLead, updateDialogOpen, updateViewState, viewStateRef],
+    [closePostCallDialog, dialLead, updateViewState, viewStateRef],
   );
-
   const showPostCallDialog = useCallback((): void => {
-    const currentState = viewStateRef.current;
-    if (currentState.kind !== 'dialing' || isPostCallDialogOpenRef.current) {
+    const finishedState = buildFinishedViewState(viewStateRef.current);
+    if (finishedState === null) {
       return;
     }
-    updateViewState({
-      kind: 'finished',
-      lead: currentState.lead,
-      callId: currentState.callId,
-    });
-    updateDialogOpen(true);
-  }, [updateDialogOpen, updateViewState, viewStateRef]);
-
+    updateViewState(finishedState);
+    showDialog();
+  }, [showDialog, updateViewState, viewStateRef]);
   const openPostCallDialog = useCallback((): void => {
     clearPostCallErrorMessage();
-    updateDialogOpen(true);
-  }, [clearPostCallErrorMessage, updateDialogOpen]);
-
-  const closePostCallDialog = useCallback((): void => {
-    updateDialogOpen(false);
-  }, [updateDialogOpen]);
-
+    showDialog();
+  }, [clearPostCallErrorMessage, showDialog]);
   const submitPostCall = useCallback(
     async (
       scheduledAt: string | null,
@@ -103,18 +99,17 @@ export function useLeadPostCall(
       const currentState = viewStateRef.current;
       const finishedCallId =
         currentState.kind === 'finished' ? currentState.callId : null;
-      const sendAndContinue = async (): Promise<void> => {
-        await continueAfterLeadSubmit(scheduledAt, shouldContinueToNextLead);
-      };
-      await submitTrackedPostCall(finishedCallId, sendAndContinue);
+      await submitTrackedPostCall(finishedCallId, () =>
+        continueAfterLeadSubmit(scheduledAt, shouldContinueToNextLead),
+      );
     },
     [continueAfterLeadSubmit, submitTrackedPostCall, viewStateRef],
   );
 
   const leadPostCall: UseLeadPostCallResult = {
     isPostCallDialogOpen,
-    isSubmittingPostCall,
-    postCallErrorMessage,
+    isSubmittingPostCall: postCallSubmit.isSubmittingPostCall,
+    postCallErrorMessage: postCallSubmit.postCallErrorMessage,
     openPostCallDialog,
     closePostCallDialog,
     showPostCallDialog,

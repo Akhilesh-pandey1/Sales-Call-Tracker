@@ -6,175 +6,51 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
+import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
-import { maxScheduleAheadDays } from '@/config/app-config';
-import { Check, ChevronLeft, ChevronRight } from 'lucide-react-native';
+import { Check } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { cn } from '@/lib/utils';
 
-type ScheduleSelection = {
-  dayOffset: number;
-  minutesOfDay: number;
-};
-
-function getStartOfToday(): Date {
-  const startOfToday = new Date();
-  startOfToday.setHours(0, 0, 0, 0);
-  return startOfToday;
+function createDefaultScheduleDate(): Date {
+  const dayStepToTomorrow = 1;
+  const defaultStartHour = 9;
+  const defaultScheduleDate = new Date();
+  defaultScheduleDate.setDate(defaultScheduleDate.getDate() + dayStepToTomorrow);
+  defaultScheduleDate.setHours(defaultStartHour, 0, 0, 0);
+  return defaultScheduleDate;
 }
 
-function addDays(date: Date, dayCount: number): Date {
-  const shiftedDate = new Date(date);
-  shiftedDate.setDate(shiftedDate.getDate() + dayCount);
-  return shiftedDate;
+function toDateTimeLocalInput(date: Date): string {
+  const twoDigitLength = 2;
+  const padToTwoDigits = (value: number): string =>
+    String(value).padStart(twoDigitLength, '0');
+  const monthNumber = date.getMonth() + 1;
+  const yearLabel = String(date.getFullYear());
+  const monthLabel = padToTwoDigits(monthNumber);
+  const dayLabel = padToTwoDigits(date.getDate());
+  const hourLabel = padToTwoDigits(date.getHours());
+  const minuteLabel = padToTwoDigits(date.getMinutes());
+  const dateTimeLocalInput = `${yearLabel}-${monthLabel}-${dayLabel}T${hourLabel}:${minuteLabel}`;
+  return dateTimeLocalInput;
 }
 
-function setTimeOfDay(date: Date, hour: number, minute: number): Date {
-  const timedDate = new Date(date);
-  timedDate.setHours(hour, minute, 0, 0);
-  return timedDate;
+function createDefaultScheduleInput(): string {
+  const defaultScheduleInput = toDateTimeLocalInput(createDefaultScheduleDate());
+  return defaultScheduleInput;
 }
 
-function createDefaultScheduleSelection(): ScheduleSelection {
-  const nineOclockMinutes = 9 * 60;
-  const defaultSelection = { dayOffset: 1, minutesOfDay: nineOclockMinutes };
-  return defaultSelection;
-}
-
-function stepScheduleDay(
-  selection: ScheduleSelection,
-  stepDirection: number,
-): ScheduleSelection {
-  const firstPickableOffset = 0;
-  const lastPickableOffset = maxScheduleAheadDays;
-  const steppedOffset = selection.dayOffset + stepDirection;
-  const clampedOffset = Math.min(
-    Math.max(steppedOffset, firstPickableOffset),
-    lastPickableOffset,
-  );
-  const nextSelection = { ...selection, dayOffset: clampedOffset };
-  return nextSelection;
-}
-
-function stepScheduleMinutes(
-  selection: ScheduleSelection,
-  stepDirection: number,
-): ScheduleSelection {
-  const minuteStepSize = 15;
-  const minutesPerDay = 24 * 60;
-  const firstPickableMinute = 0;
-  const lastPickableMinute = minutesPerDay - minuteStepSize;
-  const steppedMinutes = selection.minutesOfDay + stepDirection * minuteStepSize;
-  const clampedMinutes = Math.min(
-    Math.max(steppedMinutes, firstPickableMinute),
-    lastPickableMinute,
-  );
-  const nextSelection = { ...selection, minutesOfDay: clampedMinutes };
-  return nextSelection;
-}
-
-function toScheduleDate(selection: ScheduleSelection): Date {
-  const hour = Math.floor(selection.minutesOfDay / 60);
-  const minute = selection.minutesOfDay % 60;
-  const scheduleDate = setTimeOfDay(
-    addDays(getStartOfToday(), selection.dayOffset),
-    hour,
-    minute,
-  );
-  return scheduleDate;
-}
-
-function formatScheduleDateLabel(selection: ScheduleSelection): string {
-  const [weekdayName, monthName, dayOfMonth] = toScheduleDate(selection)
-    .toDateString()
-    .split(' ');
-  const dateLabel = `${weekdayName}, ${monthName} ${dayOfMonth}`;
-  return dateLabel;
-}
-
-function formatScheduleTimeLabel(selection: ScheduleSelection): string {
-  const hour = String(Math.floor(selection.minutesOfDay / 60)).padStart(2, '0');
-  const minute = String(selection.minutesOfDay % 60).padStart(2, '0');
-  const timeLabel = `${hour}:${minute}`;
-  return timeLabel;
-}
-
-type ScheduleStepperRowProps = {
-  label: string;
-  valueLabel: string;
-  onStepDown: () => void;
-  onStepUp: () => void;
-};
-
-function ScheduleStepperRow({
-  label,
-  valueLabel,
-  onStepDown,
-  onStepUp,
-}: ScheduleStepperRowProps) {
-  const handleStepDownPress = () => onStepDown();
-  const handleStepUpPress = () => onStepUp();
-
-  return (
-    <View className="flex-row items-center gap-2">
-      <Text className="w-20 text-xs font-semibold text-muted-foreground">{label}</Text>
-      <Pressable
-        accessibilityLabel={`Earlier ${label}`}
-        accessibilityRole="button"
-        onPress={handleStepDownPress}
-        className="h-9 w-9 items-center justify-center rounded-xl border border-border bg-card active:bg-muted"
-      >
-        <Icon as={ChevronLeft} size={18} className="text-foreground" />
-      </Pressable>
-      <Text className="flex-1 text-center text-sm font-bold tabular-nums">
-        {valueLabel}
-      </Text>
-      <Pressable
-        accessibilityLabel={`Later ${label}`}
-        accessibilityRole="button"
-        onPress={handleStepUpPress}
-        className="h-9 w-9 items-center justify-center rounded-xl border border-border bg-card active:bg-muted"
-      >
-        <Icon as={ChevronRight} size={18} className="text-foreground" />
-      </Pressable>
-    </View>
-  );
-}
-
-type SchedulePickerProps = {
-  selection: ScheduleSelection;
-  onSelectionChange: (nextSelection: ScheduleSelection) => void;
-};
-
-function SchedulePicker({ selection, onSelectionChange }: SchedulePickerProps) {
-  const handleDayStepDown = () =>
-    onSelectionChange(stepScheduleDay(selection, -1));
-  const handleDayStepUp = () => onSelectionChange(stepScheduleDay(selection, 1));
-  const handleMinuteStepDown = () =>
-    onSelectionChange(stepScheduleMinutes(selection, -1));
-  const handleMinuteStepUp = () =>
-    onSelectionChange(stepScheduleMinutes(selection, 1));
-
-  return (
-    <View className="gap-2.5 rounded-2xl border border-border bg-muted/40 p-3">
-      <Text className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-        Follow-up time (IST)
-      </Text>
-      <ScheduleStepperRow
-        label="Date"
-        valueLabel={formatScheduleDateLabel(selection)}
-        onStepDown={handleDayStepDown}
-        onStepUp={handleDayStepUp}
-      />
-      <ScheduleStepperRow
-        label="Time"
-        valueLabel={formatScheduleTimeLabel(selection)}
-        onStepDown={handleMinuteStepDown}
-        onStepUp={handleMinuteStepUp}
-      />
-    </View>
-  );
+function readScheduleDateFromInput(scheduleInput: string): Date | null {
+  const minutePrecisionEnding = /T\d{2}:\d{2}$/;
+  const inputWithSeconds = minutePrecisionEnding.test(scheduleInput)
+    ? `${scheduleInput}:00`
+    : scheduleInput;
+  const parsedDate = new Date(inputWithSeconds);
+  if (Number.isNaN(parsedDate.getTime())) {
+    return null;
+  }
+  return parsedDate;
 }
 
 type ScheduleChoiceRowProps = {
@@ -207,6 +83,29 @@ function ScheduleChoiceRow({ label, isSelected, onSelect }: ScheduleChoiceRowPro
   );
 }
 
+type ScheduleInputBoxProps = {
+  inputValue: string;
+  onInputChange: (nextInput: string) => void;
+};
+
+function ScheduleInputBox({ inputValue, onInputChange }: ScheduleInputBoxProps) {
+  const handleScheduleInputChange = (nextInput: string) => onInputChange(nextInput);
+
+  return (
+    <View className="mt-2 rounded-xl border border-border bg-muted/40 p-3">
+      <Text className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+        Follow-up time (IST)
+      </Text>
+      <Input
+        value={inputValue}
+        onChangeText={handleScheduleInputChange}
+        accessibilityLabel="Follow-up time"
+        className="mt-1 w-full rounded-lg border-border bg-white px-2.5 py-1.5 text-xs font-medium"
+      />
+    </View>
+  );
+}
+
 export type PostCallDialogVariant = 'keypad' | 'lead';
 
 type PostCallDialogProps = {
@@ -229,9 +128,8 @@ function PostCallDialog({
   onSubmit,
 }: PostCallDialogProps) {
   const [isScheduleChosen, setIsScheduleChosen] = useState(false);
-  const [scheduleSelection, setScheduleSelection] = useState<ScheduleSelection>(
-    createDefaultScheduleSelection,
-  );
+  const [scheduleInput, setScheduleInput] = useState<string>(createDefaultScheduleInput);
+  const [scheduleDate, setScheduleDate] = useState<Date>(createDefaultScheduleDate);
   const [shouldContinueToNextLead, setShouldContinueToNextLead] = useState(true);
 
   const handleOpenChange = (nextIsOpen: boolean) => {
@@ -243,10 +141,16 @@ function PostCallDialog({
   const handleChooseNoSchedule = () => setIsScheduleChosen(false);
   const handleContinueToNextLeadToggle = () =>
     setShouldContinueToNextLead(!shouldContinueToNextLead);
+  const handleScheduleInputChange = (nextInput: string) => {
+    setScheduleInput(nextInput);
+    const parsedDate = readScheduleDateFromInput(nextInput);
+    if (parsedDate === null) {
+      return;
+    }
+    setScheduleDate(parsedDate);
+  };
   const handleSubmitPress = () => {
-    const scheduledAt = isScheduleChosen
-      ? toScheduleDate(scheduleSelection).toISOString()
-      : null;
+    const scheduledAt = isScheduleChosen ? scheduleDate.toISOString() : null;
     onSubmit(scheduledAt, shouldContinueToNextLead);
   };
 
@@ -288,9 +192,9 @@ function PostCallDialog({
             onSelect={handleChooseSchedule}
           />
           {isScheduleChosen ? (
-            <SchedulePicker
-              selection={scheduleSelection}
-              onSelectionChange={setScheduleSelection}
+            <ScheduleInputBox
+              inputValue={scheduleInput}
+              onInputChange={handleScheduleInputChange}
             />
           ) : null}
         </View>

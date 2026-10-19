@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, timezone
 import io
 from typing import Any
 import phonenumbers
+from sqlalchemy import update, Update
 from backend.app.config.base import (
     CLAIM_MINUTES,
     MAX_LEAD_ATTEMPTS,
@@ -354,13 +355,12 @@ def find_candidate_lead(user_id: int, current_utc: datetime) -> Lead | None:
 
 def release_active_claim(user_id: int) -> None:
     current_utc: datetime = now_utc()
-    active_claims: list[Lead] = Lead.query.filter(
-        Lead.claimed_by == user_id,
-        Lead.claimed_until > current_utc,
-    ).all()
-    for claimed_lead in active_claims:
-        claimed_lead.claimed_by = None
-        claimed_lead.claimed_until = None
+    release_claim_statement: Update = (
+        update(Lead)
+        .where(Lead.claimed_by == user_id, Lead.claimed_until > current_utc)
+        .values(claimed_by=None, claimed_until=None)
+    )
+    db.session.execute(release_claim_statement)
 
 
 def serve_next_lead(

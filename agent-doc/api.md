@@ -49,8 +49,7 @@ Receives a batch of completed calls from the salesperson's mobile app.
         "call_id": "c1f7b8d4-5e92-4a7b-91c2-3e4f5a6b7c8d",
         "phone_number": "+919876543210",
         "dialed_at": "2026-10-14T06:30:00Z",
-        "duration_seconds": 95,
-        "outcome": "connected"
+        "duration_seconds": 95
       },
       {
         "call_id": "d2a8c9e5-6f03-4b8c-82d3-4f5a6b7c8d9e",
@@ -63,7 +62,7 @@ Receives a batch of completed calls from the salesperson's mobile app.
   ```
 - **Processing Logic**:
   - Saves all valid call entries under the authenticated user's ID.
-  - Stores the optional per-call `outcome` (`connected`, `not_connected`, or `schedule`); an absent or empty value leaves the outcome unrecorded.
+  - Calls carry no outcome — the salesperson is never asked for one; connected is derived from duration.
   - Silently ignores existing `call_id` values (idempotent unique key).
   - Skips and logs any call older than 3 days (`MAX_CALL_AGE_DAYS`).
   - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped.
@@ -78,28 +77,6 @@ Receives a batch of completed calls from the salesperson's mobile app.
   - `400 Bad Request`: `{"message": "Invalid request format: 'calls' array required."}`
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
   - `403 Forbidden`: `{"message": "Your account is not active. Please contact your manager."}`
-
-### `PATCH /api/calls/<call_id>/outcome`
-Records the salesperson's chosen outcome on a call that already synced before the choice was made. Needs login.
-
-- **Auth**: Any active user token
-- **Request Body**:
-  ```json
-  { "outcome": "connected" }
-  ```
-  - `outcome` — string, required. One of `connected`, `not_connected`, `schedule`. Example: `not_connected`
-- **Response 200**:
-  ```json
-  { "status": true }
-  ```
-- **Rules**:
-  - Updates only the authenticated user's own call; any other `call_id` answers 404.
-  - A new outcome replaces a previously stored one.
-- **Error Responses**:
-  - `400 Bad Request`: `{"message": "Outcome must be connected, not_connected, or schedule."}`
-  - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
-  - `403 Forbidden`: `{"message": "Your account is not active. Please contact your manager."}`
-  - `404 Not Found`: `{"message": "Call not found."}`
 
 ---
 
@@ -419,16 +396,28 @@ Retrieves and claims the next lead for automated calling, with an optional lead 
       }
     }
     ```
+  - Stop after this call — schedule if supplied, serve nothing:
+    ```json
+    {
+      "continue_calling": false,
+      "schedule": {
+        "lead_id": 42,
+        "scheduled_at": "2026-10-15T09:00:00Z"
+      }
+    }
+    ```
+  - `continue_calling` — boolean, optional, default `true`. When `false`, no lead is served or claimed in this request.
 - **Processing Logic**:
   1. If `schedule` is supplied:
      - Verifies `lead_id` is neither `done` nor `stopped`.
      - Validates `scheduled_at` is in the future and within 30 days (`MAX_SCHEDULE_AHEAD_DAYS`).
      - Sets `scheduled_by = user_id`, `scheduled_at = scheduled_at`, and releases active claim.
-  2. Prioritizes serving:
+  2. If `continue_calling` is `false`: skips serving and claiming and responds `lead: null` — the salesperson who stopped the automated loop is assigned nothing.
+  3. Prioritizes serving:
      - Current unexpired claim for this user (if one already exists).
      - Due scheduled leads reserved for this user (`scheduled_by == user_id`, `scheduled_at <= now()`).
      - Newest available pool lead (`created_at DESC`, `status == 'waiting'`, retry lock expired, unreserved).
-  3. Claims the served lead for 10 minutes (`CLAIM_MINUTES`): `claimed_by = user_id`, `claimed_until = now() + 10 minutes`.
+  4. Claims the served lead for 10 minutes (`CLAIM_MINUTES`): `claimed_by = user_id`, `claimed_until = now() + 10 minutes`.
 - **Response 200** (lead available):
   ```json
   {
@@ -441,7 +430,7 @@ Retrieves and claims the next lead for automated calling, with an optional lead 
     }
   }
   ```
-- **Response 200** (pool empty or no lead available):
+- **Response 200** (pool empty, no lead available, or `continue_calling` was `false`):
   ```json
   {
     "status": true,

@@ -1330,8 +1330,8 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_relative_luminance",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_relative_luminance()"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_palette_is_dark",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_palette_is_dark()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_contrast_ratio",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_contrast_ratio()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_style_is_dark_primary",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 142,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_style_is_dark_primary()"
     },
     {
@@ -1374,8 +1374,8 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_query_wants_dark",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 142,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_query_wants_dark()"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_resolve_color_mode",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 142,
+      "community_name": "_resolve_color_mode",
       "norm_label": "_resolve_color_mode()"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_derive_dark_palette",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_derive_dark_palette()"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L220",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_select_palette_for_mode",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_select_palette_for_mode()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L791",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_markdown",
-      "community": 57,
-      "community_name": "generate_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "format_markdown()"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L919",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_design_system",
-      "community": 57,
-      "community_name": "generate_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "generate_design_system()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L961",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_safe_slug",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "safe_slug()"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L972",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_write_persisted_file",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_write_persisted_file()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_py_path",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "path"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L995",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_persist_design_system",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "persist_design_system()"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L1076",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_master_md",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "format_master_md()"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L1381",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_page_override_md",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "format_page_override_md()"
     },
     {
@@ -1704,8 +1704,8 @@
       "source_location": "L1490",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_intelligent_overrides",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -1715,8 +1715,8 @@
       "source_location": "L1596",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_detect_page_type",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_detect_page_type()"
     },
     {
@@ -1737,8 +1737,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_130",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "wcag relative luminance of a #rrggbb string, or none if unparseable."
     },
     {
@@ -1748,8 +1748,8 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_148",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "true when a colors.csv row's background is a dark surface."
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_154",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid."
     },
     {
@@ -1770,8 +1770,8 @@
       "source_location": "L165",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_165",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 142,
+      "community_name": "_resolve_color_mode",
       "norm_label": "true when a styles.csv row describes itself as dark-first."
     },
     {
@@ -1781,8 +1781,8 @@
       "source_location": "L181",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_181",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 142,
+      "community_name": "_resolve_color_mode",
       "norm_label": "true when the query explicitly asks for a dark theme."
     },
     {
@@ -1792,8 +1792,8 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_187",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 142,
+      "community_name": "_resolve_color_mode",
       "norm_label": "resolve the mode the rest of the output has to agree with."
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L194",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_194",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "keep product brand tokens while deriving accessible dark surfaces."
     },
     {
@@ -1814,8 +1814,8 @@
       "source_location": "L222",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_222",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case..."
     },
     {
@@ -1968,8 +1968,8 @@
       "source_location": "L792",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_792",
-      "community": 57,
-      "community_name": "generate_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "format design system as markdown."
     },
     {
@@ -1979,8 +1979,8 @@
       "source_location": "L923",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_923",
-      "community": 57,
-      "community_name": "generate_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
     {
@@ -1990,8 +1990,8 @@
       "source_location": "L962",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_962",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "slugify a name into a single safe path segment. only [a-z0-9_-] survives; every..."
     },
     {
@@ -2001,8 +2001,8 @@
       "source_location": "L973",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_973",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "write fully to a temp file, then publish atomically."
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L997",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_997",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "persist design system to design-system/<project>/ folder using master +..."
     },
     {
@@ -2023,8 +2023,8 @@
       "source_location": "L1077",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1077",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "format design system as master.md with hierarchical override logic."
     },
     {
@@ -2034,8 +2034,8 @@
       "source_location": "L1382",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1382",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1491",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1491",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "generate intelligent overrides based on page type using layered search. uses..."
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L1597",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1597",
-      "community": 172,
-      "community_name": "persist_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search",
-      "community": 57,
-      "community_name": "generate_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "search.py"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_format_output",
-      "community": 57,
-      "community_name": "generate_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "format_output()"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_rationale_45",
-      "community": 57,
-      "community_name": "generate_design_system",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
@@ -4004,8 +4004,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_package_dependencies_axios",
-      "community": 114,
-      "community_name": "dependencies",
+      "community": 144,
+      "community_name": "axios",
       "norm_label": "axios"
     },
     {
@@ -4015,8 +4015,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_package_json_axios",
-      "community": 114,
-      "community_name": "dependencies",
+      "community": 144,
+      "community_name": "axios",
       "norm_label": "axios"
     },
     {
@@ -4026,8 +4026,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_package_dependencies_class_variance_authority",
-      "community": 94,
-      "community_name": "class-variance-authority",
+      "community": 114,
+      "community_name": "dependencies",
       "norm_label": "class-variance-authority"
     },
     {
@@ -4037,8 +4037,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_package_json_class_variance_authority",
-      "community": 94,
-      "community_name": "class-variance-authority",
+      "community": 114,
+      "community_name": "dependencies",
       "norm_label": "class-variance-authority"
     },
     {
@@ -4939,8 +4939,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "app_src_app_navigation_app_navigator_appnavigator",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "appnavigator()"
     },
     {
@@ -4983,8 +4983,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_app_navigation_root_navigator_authenticatedapp",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "authenticatedapp()"
     },
     {
@@ -5006,7 +5006,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_button",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "app/src/components/ui/button.tsx"
     },
     {
@@ -5017,7 +5017,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_button_buttonvariants",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "buttonvariants"
     },
     {
@@ -5028,7 +5028,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_button_buttontextvariants",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "buttontextvariants"
     },
     {
@@ -5039,7 +5039,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_button_buttonprops",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "buttonprops"
     },
     {
@@ -5050,7 +5050,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_button_button",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "button()"
     },
     {
@@ -5270,7 +5270,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_icon",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "icon.tsx"
     },
     {
@@ -5281,7 +5281,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_icon_iconprops",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "iconprops"
     },
     {
@@ -5292,7 +5292,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_icon_iconimpl",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "iconimpl()"
     },
     {
@@ -5303,7 +5303,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_icon_icon",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "icon()"
     },
     {
@@ -5368,7 +5368,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_text",
-      "community": 74,
+      "community": 94,
       "community_name": "text.tsx",
       "norm_label": "text.tsx"
     },
@@ -5379,7 +5379,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariants",
-      "community": 74,
+      "community": 94,
       "community_name": "text.tsx",
       "norm_label": "textvariants"
     },
@@ -5390,7 +5390,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariantprops",
-      "community": 74,
+      "community": 94,
       "community_name": "text.tsx",
       "norm_label": "textvariantprops"
     },
@@ -5401,7 +5401,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariant",
-      "community": 74,
+      "community": 94,
       "community_name": "text.tsx",
       "norm_label": "textvariant"
     },
@@ -5412,7 +5412,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "app_src_components_ui_text_role",
-      "community": 74,
+      "community": 94,
       "community_name": "text.tsx",
       "norm_label": "role"
     },
@@ -5423,7 +5423,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "app_src_components_ui_text_aria_level",
-      "community": 74,
+      "community": 94,
       "community_name": "text.tsx",
       "norm_label": "aria_level"
     },
@@ -5435,7 +5435,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_text_textclasscontext",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "textclasscontext"
     },
     {
@@ -5445,7 +5445,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "app_src_components_ui_text_text",
-      "community": 74,
+      "community": 94,
       "community_name": "text.tsx",
       "norm_label": "text()"
     },
@@ -5456,8 +5456,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_config_app_config",
-      "community": 107,
-      "community_name": "use-dialer.ts",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "app/src/config/app-config.ts"
     },
     {
@@ -5523,7 +5523,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_hooks_use_auth_loginresult",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "loginresult"
     },
     {
@@ -5534,7 +5534,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_hooks_use_auth_readstoredcountry",
       "community": 107,
-      "community_name": "use-dialer.ts",
+      "community_name": "call-log-matcher.ts",
       "norm_label": "readstoredcountry()"
     },
     {
@@ -5578,7 +5578,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_screens_login_screen",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "login-screen.tsx"
     },
     {
@@ -5589,7 +5589,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_screens_login_screen_loginscreenprops",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "loginscreenprops"
     },
     {
@@ -5698,8 +5698,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_outcome_dialog_keypadoutcomedialog",
-      "community": 106,
-      "community_name": "settings-screen.tsx",
+      "community": 104,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "keypadoutcomedialog()"
     },
     {
@@ -5709,8 +5709,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad",
-      "community": 104,
-      "community_name": "dialer-screen.tsx",
+      "community": 94,
+      "community_name": "text.tsx",
       "norm_label": "keypad.tsx"
     },
     {
@@ -5720,8 +5720,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypadcharacters",
-      "community": 104,
-      "community_name": "dialer-screen.tsx",
+      "community": 94,
+      "community_name": "text.tsx",
       "norm_label": "keypadcharacters"
     },
     {
@@ -5731,8 +5731,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypadprops",
-      "community": 104,
-      "community_name": "dialer-screen.tsx",
+      "community": 94,
+      "community_name": "text.tsx",
       "norm_label": "keypadprops"
     },
     {
@@ -5742,8 +5742,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypad",
-      "community": 104,
-      "community_name": "dialer-screen.tsx",
+      "community": 94,
+      "community_name": "text.tsx",
       "norm_label": "keypad()"
     },
     {
@@ -6084,7 +6084,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "permission-banner.tsx"
     },
     {
@@ -6095,7 +6095,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner_permissionbannerprops",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "permissionbannerprops"
     },
     {
@@ -6106,7 +6106,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner_permissionbanner",
       "community": 74,
-      "community_name": "text.tsx",
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "permissionbanner()"
     },
     {
@@ -6138,8 +6138,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_automated_calling_useautomatedcallingresult",
-      "community": 73,
-      "community_name": "use-lead-loading.ts",
+      "community": 104,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "useautomatedcallingresult"
     },
     {
@@ -6183,7 +6183,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_dialer",
       "community": 107,
-      "community_name": "use-dialer.ts",
+      "community_name": "call-log-matcher.ts",
       "norm_label": "use-dialer.ts"
     },
     {
@@ -6194,7 +6194,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_dialer_usedialerresult",
       "community": 107,
-      "community_name": "use-dialer.ts",
+      "community_name": "call-log-matcher.ts",
       "norm_label": "usedialerresult"
     },
     {
@@ -6205,7 +6205,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_dialer_usestoredcountry",
       "community": 107,
-      "community_name": "use-dialer.ts",
+      "community_name": "call-log-matcher.ts",
       "norm_label": "usestoredcountry()"
     },
     {
@@ -6216,7 +6216,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_dialer_usedialer",
       "community": 107,
-      "community_name": "use-dialer.ts",
+      "community_name": "call-log-matcher.ts",
       "norm_label": "usedialer()"
     },
     {
@@ -6270,8 +6270,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_keypad_outcome_usekeypadcalloutcomeresult",
-      "community": 104,
-      "community_name": "dialer-screen.tsx",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "usekeypadcalloutcomeresult"
     },
     {
@@ -6380,8 +6380,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_index",
-      "community": 9,
-      "community_name": "app-navigator.tsx",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "dialer/index.ts"
     },
     {
@@ -6391,8 +6391,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_lib_call_launcher",
-      "community": 107,
-      "community_name": "use-dialer.ts",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "call-launcher.ts"
     },
     {
@@ -6413,8 +6413,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_src_features_dialer_lib_call_launcher_createcallid",
-      "community": 107,
-      "community_name": "use-dialer.ts",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "createcallid()"
     },
     {
@@ -6424,8 +6424,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "app_src_features_dialer_lib_call_launcher_rejectaftertimeout",
-      "community": 107,
-      "community_name": "use-dialer.ts",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "rejectaftertimeout()"
     },
     {
@@ -6435,8 +6435,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_features_dialer_lib_call_launcher_launchtrackedcall",
-      "community": 107,
-      "community_name": "use-dialer.ts",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "launchtrackedcall()"
     },
     {
@@ -6556,8 +6556,8 @@
       "source_location": "L283",
       "_origin": "ast",
       "id": "app_src_features_dialer_screens_dialer_screen_dialerscreen",
-      "community": 9,
-      "community_name": "app-navigator.tsx",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "dialerscreen()"
     },
     {
@@ -6644,8 +6644,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data",
-      "community": 70,
-      "community_name": "tracking/index.ts",
+      "community": 106,
+      "community_name": "settings-screen.tsx",
       "norm_label": "use-clear-local-data.ts"
     },
     {
@@ -6655,8 +6655,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data_clearlocaldatastate",
-      "community": 70,
-      "community_name": "tracking/index.ts",
+      "community": 106,
+      "community_name": "settings-screen.tsx",
       "norm_label": "clearlocaldatastate"
     },
     {
@@ -6666,8 +6666,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data_useclearlocaldata",
-      "community": 70,
-      "community_name": "tracking/index.ts",
+      "community": 106,
+      "community_name": "settings-screen.tsx",
       "norm_label": "useclearlocaldata()"
     },
     {
@@ -6710,8 +6710,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_stats_index",
-      "community": 9,
-      "community_name": "app-navigator.tsx",
+      "community": 106,
+      "community_name": "settings-screen.tsx",
       "norm_label": "stats/index.ts"
     },
     {
@@ -7216,8 +7216,8 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen_settingsscreen",
-      "community": 9,
-      "community_name": "app-navigator.tsx",
+      "community": 106,
+      "community_name": "settings-screen.tsx",
       "norm_label": "settingsscreen()"
     },
     {
@@ -7272,7 +7272,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_index",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "db/index.ts"
     },
     {
@@ -7283,7 +7283,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "pending-calls-db.ts"
     },
     {
@@ -7293,8 +7293,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_pendingcall",
-      "community": 70,
-      "community_name": "tracking/index.ts",
+      "community": 140,
+      "community_name": "use-sync.ts",
       "norm_label": "pendingcall"
     },
     {
@@ -7316,7 +7316,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_unfilledpendingcall",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "unfilledpendingcall"
     },
     {
@@ -7327,7 +7327,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_unfilledpendingcalltablerow",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "unfilledpendingcalltablerow"
     },
     {
@@ -7338,7 +7338,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_readrowlist",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "readrowlist()"
     },
     {
@@ -7349,7 +7349,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_pendingcalltablecolumn",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "pendingcalltablecolumn"
     },
     {
@@ -7360,7 +7360,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_addoutcomecolumnwhenmissing",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "addoutcomecolumnwhenmissing()"
     },
     {
@@ -7371,7 +7371,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_preparependingcallsdatabase",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "preparependingcallsdatabase()"
     },
     {
@@ -7382,7 +7382,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_opendatabase",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "opendatabase()"
     },
     {
@@ -7393,7 +7393,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_runquery",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "runquery()"
     },
     {
@@ -7404,7 +7404,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_topendingcall",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "topendingcall()"
     },
     {
@@ -7415,7 +7415,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_tounfilledpendingcall",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "tounfilledpendingcall()"
     },
     {
@@ -7425,8 +7425,8 @@
       "source_location": "L156",
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_insertpendingcall",
-      "community": 70,
-      "community_name": "tracking/index.ts",
+      "community": 73,
+      "community_name": "use-lead-loading.ts",
       "norm_label": "insertpendingcall()"
     },
     {
@@ -7437,7 +7437,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_getallpendingcalls",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "getallpendingcalls()"
     },
     {
@@ -7448,7 +7448,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_getunfilledpendingcalls",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "getunfilledpendingcalls()"
     },
     {
@@ -7458,8 +7458,8 @@
       "source_location": "L179",
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_markpendingcallfilled",
-      "community": 90,
-      "community_name": "use-janitor.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "markpendingcallfilled()"
     },
     {
@@ -7470,7 +7470,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_updatependingcalloutcome",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "updatependingcalloutcome()"
     },
     {
@@ -7481,7 +7481,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_addpendingcallattempt",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "addpendingcallattempt()"
     },
     {
@@ -7492,7 +7492,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_deletependingcall",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "deletependingcall()"
     },
     {
@@ -7503,7 +7503,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_countpendingcalls",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "countpendingcalls()"
     },
     {
@@ -7514,7 +7514,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_clearallpendingcalls",
       "community": 70,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "clearallpendingcalls()"
     },
     {
@@ -7525,7 +7525,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "use-call-tracker.ts"
     },
     {
@@ -7536,7 +7536,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_readrecentcalllogentries",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "readrecentcalllogentries()"
     },
     {
@@ -7547,7 +7547,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_readoldestintenttimems",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "readoldestintenttimems()"
     },
     {
@@ -7558,7 +7558,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_runcalllogmatchattempt",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "runcalllogmatchattempt()"
     },
     {
@@ -7569,7 +7569,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_schedulecalllogmatchretries",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "schedulecalllogmatchretries()"
     },
     {
@@ -7580,7 +7580,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_startcalltracking",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "startcalltracking()"
     },
     {
@@ -7591,7 +7591,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_stopcalltracking",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "stopcalltracking()"
     },
     {
@@ -7602,7 +7602,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_usecalltracker",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "usecalltracker()"
     },
     {
@@ -7722,8 +7722,8 @@
       "source_location": "L178",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_janitor_usejanitor",
-      "community": 90,
-      "community_name": "use-janitor.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "usejanitor()"
     },
     {
@@ -7734,7 +7734,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_permissions",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "use-permissions.ts"
     },
     {
@@ -7745,7 +7745,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_permissions_findmissingpermissions",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "findmissingpermissions()"
     },
     {
@@ -7756,7 +7756,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_permissions_usepermissions",
       "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "usepermissions()"
     },
     {
@@ -7826,10 +7826,21 @@
       "norm_label": "syncpendingcalls()"
     },
     {
-      "label": "recordCallOutcome()",
+      "label": "recordOutcomeOnSyncedCall()",
       "file_type": "code",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
       "source_location": "L70",
+      "_origin": "ast",
+      "id": "app_src_features_tracking_hooks_use_sync_recordoutcomeonsyncedcall",
+      "community": 140,
+      "community_name": "use-sync.ts",
+      "norm_label": "recordoutcomeonsyncedcall()"
+    },
+    {
+      "label": "recordCallOutcome()",
+      "file_type": "code",
+      "source_file": "app/src/features/tracking/hooks/use-sync.ts",
+      "source_location": "L84",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_sync_recordcalloutcome",
       "community": 140,
@@ -7840,7 +7851,7 @@
       "label": "runJanitorThenSync()",
       "file_type": "code",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L91",
+      "source_location": "L112",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_sync_runjanitorthensync",
       "community": 140,
@@ -7851,7 +7862,7 @@
       "label": "useSync()",
       "file_type": "code",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L96",
+      "source_location": "L117",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_sync_usesync",
       "community": 140,
@@ -7865,7 +7876,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_index",
-      "community": 70,
+      "community": 71,
       "community_name": "tracking/index.ts",
       "norm_label": "tracking/index.ts"
     },
@@ -7876,8 +7887,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "call-log-matcher.ts"
     },
     {
@@ -7887,8 +7898,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_calllogentry",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "calllogentry"
     },
     {
@@ -7898,8 +7909,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_pendingcalltomatch",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "pendingcalltomatch"
     },
     {
@@ -7909,8 +7920,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_matchedpendingcall",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "matchedpendingcall"
     },
     {
@@ -7920,8 +7931,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_toentrytimems",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "toentrytimems()"
     },
     {
@@ -7931,8 +7942,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_isoutgoingcallentry",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "isoutgoingcallentry()"
     },
     {
@@ -7942,8 +7953,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_isentrywithinmatchwindow",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "isentrywithinmatchwindow()"
     },
     {
@@ -7953,8 +7964,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_doesentrymatchpendingcall",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "doesentrymatchpendingcall()"
     },
     {
@@ -7964,8 +7975,8 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_tomatchedpendingcall",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "tomatchedpendingcall()"
     },
     {
@@ -7975,8 +7986,8 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_findmatchingentryindex",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "findmatchingentryindex()"
     },
     {
@@ -7986,8 +7997,8 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_matchpendingcallstologentries",
-      "community": 71,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "matchpendingcallstologentries()"
     },
     {
@@ -7997,8 +8008,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_pending_call_filler",
-      "community": 90,
-      "community_name": "use-janitor.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "pending-call-filler.ts"
     },
     {
@@ -8008,8 +8019,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_pending_call_filler_fillmatchedpendingcalls",
-      "community": 90,
-      "community_name": "use-janitor.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "fillmatchedpendingcalls()"
     },
     {
@@ -8019,8 +8030,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events",
-      "community": 108,
-      "community_name": "sync-events.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "sync-events.ts"
     },
     {
@@ -8030,8 +8041,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_synclistener",
-      "community": 108,
-      "community_name": "sync-events.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "synclistener"
     },
     {
@@ -8041,8 +8052,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_syncevent",
-      "community": 108,
-      "community_name": "sync-events.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "syncevent"
     },
     {
@@ -8052,8 +8063,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_createsyncevent",
-      "community": 108,
-      "community_name": "sync-events.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "createsyncevent()"
     },
     {
@@ -8063,8 +8074,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_callfilledevent",
-      "community": 108,
-      "community_name": "sync-events.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "callfilledevent"
     },
     {
@@ -8074,8 +8085,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_callendedevent",
-      "community": 108,
-      "community_name": "sync-events.ts",
+      "community": 71,
+      "community_name": "tracking/index.ts",
       "norm_label": "callendedevent"
     },
     {
@@ -8250,8 +8261,8 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "app_src_shared_api_api_client_apiclient",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 46,
+      "community_name": "my-stats-screen.tsx",
       "norm_label": "apiclient"
     },
     {
@@ -8273,7 +8284,7 @@
       "_origin": "ast",
       "id": "app_src_shared_utils_phone_formatter",
       "community": 107,
-      "community_name": "use-dialer.ts",
+      "community_name": "call-log-matcher.ts",
       "norm_label": "phone-formatter.ts"
     },
     {
@@ -8284,7 +8295,7 @@
       "_origin": "ast",
       "id": "app_src_shared_utils_phone_formatter_isvalidphonenumber",
       "community": 107,
-      "community_name": "use-dialer.ts",
+      "community_name": "call-log-matcher.ts",
       "norm_label": "isvalidphonenumber()"
     },
     {
@@ -8295,7 +8306,7 @@
       "_origin": "ast",
       "id": "app_src_shared_utils_phone_formatter_normalizephonenumber",
       "community": 107,
-      "community_name": "use-dialer.ts",
+      "community_name": "call-log-matcher.ts",
       "norm_label": "normalizephonenumber()"
     },
     {
@@ -8580,8 +8591,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_api_init",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 57,
+      "community_name": "test_foundation.py",
       "norm_label": "api/__init__.py"
     },
     {
@@ -8723,8 +8734,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "backend_app_core_errors_register_error_handlers",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 53,
+      "community_name": "AppException",
       "norm_label": "register_error_handlers()"
     },
     {
@@ -8734,8 +8745,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_errors_py_flask",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 53,
+      "community_name": "AppException",
       "norm_label": "flask"
     },
     {
@@ -8844,8 +8855,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_core_utils",
-      "community": 89,
-      "community_name": "test_foundation.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "utils.py"
     },
     {
@@ -8855,7 +8866,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_app_core_utils_get_ist_timezone",
-      "community": 89,
+      "community": 57,
       "community_name": "test_foundation.py",
       "norm_label": "get_ist_timezone()"
     },
@@ -8866,7 +8877,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "zoneinfo",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "zoneinfo"
     },
@@ -8888,8 +8899,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_utils_py_datetime",
-      "community": 89,
-      "community_name": "test_foundation.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "datetime"
     },
     {
@@ -8910,8 +8921,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "backend_app_core_utils_to_ist",
-      "community": 89,
-      "community_name": "test_foundation.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "to_ist()"
     },
     {
@@ -8921,7 +8932,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "backend_app_core_utils_normalize_phone_number",
-      "community": 89,
+      "community": 57,
       "community_name": "test_foundation.py",
       "norm_label": "normalize_phone_number()"
     },
@@ -8943,8 +8954,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_extensions",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 53,
+      "community_name": "AppException",
       "norm_label": "extensions.py"
     },
     {
@@ -8954,8 +8965,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_auth_init",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 57,
+      "community_name": "test_foundation.py",
       "norm_label": "auth/__init__.py"
     },
     {
@@ -9185,8 +9196,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_init",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "calls/__init__.py"
     },
     {
@@ -9196,7 +9207,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_models",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "calls/models.py"
     },
@@ -9207,7 +9218,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "backend_app_modules_calls_models_call",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "call"
     },
@@ -9218,8 +9229,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "calls/routes.py"
     },
     {
@@ -9229,8 +9240,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "route",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "route"
     },
     {
@@ -9240,8 +9251,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_sync_calls",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "sync_calls()"
     },
     {
@@ -9251,8 +9262,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_py_response",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "response"
     },
     {
@@ -9262,8 +9273,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_record_call_outcome",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "record_call_outcome()"
     },
     {
@@ -9273,8 +9284,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "calls/schemas.py"
     },
     {
@@ -9284,8 +9295,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_synccallsrequest",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "synccallsrequest"
     },
     {
@@ -9295,8 +9306,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_py_basemodel",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "basemodel"
     },
     {
@@ -9306,8 +9317,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_synccallsresponse",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "synccallsresponse"
     },
     {
@@ -9317,8 +9328,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_recordoutcomerequest",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "recordoutcomerequest"
     },
     {
@@ -9329,7 +9340,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "calls/services.py"
     },
     {
@@ -9340,7 +9351,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_get_ist_start_minute_of_day",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "get_ist_start_minute_of_day()"
     },
     {
@@ -9351,7 +9362,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_datetime",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "datetime"
     },
     {
@@ -9362,7 +9373,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_has_invalid_call_outcome",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "has_invalid_call_outcome()"
     },
     {
@@ -9373,7 +9384,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_any",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "any"
     },
     {
@@ -9384,7 +9395,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_has_invalid_call_duration",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "has_invalid_call_duration()"
     },
     {
@@ -9395,7 +9406,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_extract_stored_call_outcome",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "extract_stored_call_outcome()"
     },
     {
@@ -9406,7 +9417,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_extract_valid_call",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "extract_valid_call()"
     },
     {
@@ -9417,7 +9428,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_sync_calls_batch",
       "community": 89,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "sync_calls_batch()"
     },
     {
@@ -9427,8 +9438,8 @@
       "source_location": "L174",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_update_call_outcome",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 89,
+      "community_name": "calls/services.py",
       "norm_label": "update_call_outcome()"
     },
     {
@@ -9438,8 +9449,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_init",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 57,
+      "community_name": "test_foundation.py",
       "norm_label": "dashboard/__init__.py"
     },
     {
@@ -10198,7 +10209,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_init",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "leads/__init__.py"
     },
     {
@@ -10209,7 +10220,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_models",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "leads/models.py"
     },
     {
@@ -10219,7 +10230,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "backend_app_modules_leads_models_lead",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "lead"
     },
@@ -10231,7 +10242,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "leads/routes.py"
     },
     {
@@ -10242,7 +10253,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_post",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "post"
     },
     {
@@ -10253,7 +10264,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_upload_leads",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "upload_leads()"
     },
     {
@@ -10264,7 +10275,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_response",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "response"
     },
     {
@@ -10275,7 +10286,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_get",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get"
     },
     {
@@ -10286,7 +10297,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_get_summary",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_summary()"
     },
     {
@@ -10297,7 +10308,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_get_next_lead",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_next_lead()"
     },
     {
@@ -10308,7 +10319,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "leads/schemas.py"
     },
     {
@@ -10319,7 +10330,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_uploadleadsresponse",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "uploadleadsresponse"
     },
     {
@@ -10330,7 +10341,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_py_basemodel",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "basemodel"
     },
     {
@@ -10341,7 +10352,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_leadpoolbucketcounts",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "leadpoolbucketcounts"
     },
     {
@@ -10352,7 +10363,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_daycounts",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "daycounts"
     },
     {
@@ -10363,7 +10374,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_leadssummaryresponse",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "leadssummaryresponse"
     },
     {
@@ -10374,7 +10385,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_scheduleleadrequest",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "scheduleleadrequest"
     },
     {
@@ -10385,7 +10396,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_nextleadrequest",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "nextleadrequest"
     },
     {
@@ -10396,7 +10407,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_servedlead",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "servedlead"
     },
     {
@@ -10407,7 +10418,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_nextleadresponse",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "nextleadresponse"
     },
     {
@@ -10418,7 +10429,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "leads/services.py"
     },
     {
@@ -10429,7 +10440,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_validate_and_format_e164",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "validate_and_format_e164()"
     },
     {
@@ -10440,7 +10451,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_ist_day_utc_range",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_ist_day_utc_range()"
     },
     {
@@ -10451,7 +10462,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_py_datetime",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "datetime"
     },
     {
@@ -10462,7 +10473,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_resolve_lead_for_call",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "resolve_lead_for_call()"
     },
     {
@@ -10473,7 +10484,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_import_leads_csv",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "import_leads_csv()"
     },
     {
@@ -10484,7 +10495,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_py_any",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "any"
     },
     {
@@ -10495,7 +10506,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_waiting_by_attempt_counts",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_waiting_by_attempt_counts()"
     },
     {
@@ -10506,7 +10517,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_pool_bucket_counts",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_pool_bucket_counts()"
     },
     {
@@ -10517,7 +10528,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_daily_ist_utc_ranges",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_daily_ist_utc_ranges()"
     },
     {
@@ -10528,7 +10539,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_uploaded_day_counts",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_uploaded_day_counts()"
     },
     {
@@ -10539,7 +10550,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_tackled_day_counts",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_tackled_day_counts()"
     },
     {
@@ -10550,7 +10561,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_leads_summary",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "get_leads_summary()"
     },
     {
@@ -10561,7 +10572,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_schedule_lead_callback",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "schedule_lead_callback()"
     },
     {
@@ -10572,7 +10583,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_find_candidate_lead",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "find_candidate_lead()"
     },
     {
@@ -10583,7 +10594,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_serve_next_lead",
       "community": 105,
-      "community_name": "leads/services.py",
+      "community_name": "seed_fake_data.py",
       "norm_label": "serve_next_lead()"
     },
     {
@@ -10835,8 +10846,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_users_init",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 57,
+      "community_name": "test_foundation.py",
       "norm_label": "users/__init__.py"
     },
     {
@@ -10846,8 +10857,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_users_models",
-      "community": 53,
-      "community_name": "AppException",
+      "community": 57,
+      "community_name": "test_foundation.py",
       "norm_label": "users/models.py"
     },
     {
@@ -11176,7 +11187,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_seed_fake_data",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "seed_fake_data.py"
     },
@@ -11187,7 +11198,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "backend_seed_fake_data_parse_seed_arguments",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "parse_seed_arguments()"
     },
@@ -11198,7 +11209,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_seed_fake_data_py_namespace",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "namespace"
     },
@@ -11209,7 +11220,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "backend_seed_fake_data_describe_database_uri",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "describe_database_uri()"
     },
@@ -11220,7 +11231,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "backend_seed_fake_data_print_seed_summary",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "print_seed_summary()"
     },
@@ -11231,7 +11242,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "backend_seed_fake_data_remove_existing_team_data",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "remove_existing_team_data()"
     },
@@ -11242,7 +11253,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "backend_seed_fake_data_build_ist_datetime",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "build_ist_datetime()"
     },
@@ -11253,7 +11264,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "date",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "date"
     },
@@ -11264,7 +11275,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_seed_fake_data_py_datetime",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "datetime"
     },
@@ -11275,7 +11286,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "backend_seed_fake_data_generate_unique_phone_number",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "generate_unique_phone_number()"
     },
@@ -11286,7 +11297,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "faker",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "faker"
     },
@@ -11297,7 +11308,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "backend_seed_fake_data_decide_lead_bucket",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "decide_lead_bucket()"
     },
@@ -11308,7 +11319,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "backend_seed_fake_data_decide_attempt_total",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "decide_attempt_total()"
     },
@@ -11319,7 +11330,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "backend_seed_fake_data_pick_attempt_outcome",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "pick_attempt_outcome()"
     },
@@ -11330,7 +11341,7 @@
       "source_location": "L126",
       "_origin": "ast",
       "id": "backend_seed_fake_data_decide_attempt_outcomes",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "decide_attempt_outcomes()"
     },
@@ -11341,7 +11352,7 @@
       "source_location": "L142",
       "_origin": "ast",
       "id": "backend_seed_fake_data_pick_call_duration_seconds",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "pick_call_duration_seconds()"
     },
@@ -11352,7 +11363,7 @@
       "source_location": "L155",
       "_origin": "ast",
       "id": "backend_seed_fake_data_pick_dialed_at_utc",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "pick_dialed_at_utc()"
     },
@@ -11363,7 +11374,7 @@
       "source_location": "L173",
       "_origin": "ast",
       "id": "backend_seed_fake_data_pick_created_at_ist",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "pick_created_at_ist()"
     },
@@ -11374,7 +11385,7 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "backend_seed_fake_data_move_ist_time_into_call_window",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "move_ist_time_into_call_window()"
     },
@@ -11385,7 +11396,7 @@
       "source_location": "L203",
       "_origin": "ast",
       "id": "backend_seed_fake_data_build_attempt_times_ist",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "build_attempt_times_ist()"
     },
@@ -11396,7 +11407,7 @@
       "source_location": "L223",
       "_origin": "ast",
       "id": "backend_seed_fake_data_apply_schedule",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "apply_schedule()"
     },
@@ -11407,7 +11418,7 @@
       "source_location": "L237",
       "_origin": "ast",
       "id": "backend_seed_fake_data_build_calls_for_lead",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "build_calls_for_lead()"
     },
@@ -11418,7 +11429,7 @@
       "source_location": "L264",
       "_origin": "ast",
       "id": "backend_seed_fake_data_build_lead_with_calls",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "build_lead_with_calls()"
     },
@@ -11429,7 +11440,7 @@
       "source_location": "L282",
       "_origin": "ast",
       "id": "backend_seed_fake_data_build_salespeople",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "build_salespeople()"
     },
@@ -11440,7 +11451,7 @@
       "source_location": "L309",
       "_origin": "ast",
       "id": "backend_seed_fake_data_build_leads_and_calls",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "build_leads_and_calls()"
     },
@@ -11451,7 +11462,7 @@
       "source_location": "L325",
       "_origin": "ast",
       "id": "backend_seed_fake_data_build_extra_calls",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "build_extra_calls()"
     },
@@ -11462,7 +11473,7 @@
       "source_location": "L348",
       "_origin": "ast",
       "id": "backend_seed_fake_data_mark_some_leads_claimed",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "mark_some_leads_claimed()"
     },
@@ -11473,7 +11484,7 @@
       "source_location": "L362",
       "_origin": "ast",
       "id": "backend_seed_fake_data_main",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "main()"
     },
@@ -11484,7 +11495,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_seed_fake_data_rationale_1",
-      "community": 67,
+      "community": 105,
       "community_name": "seed_fake_data.py",
       "norm_label": "fill the database with fake data so the ui can be reviewed with realistic..."
     },
@@ -13640,7 +13651,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_tests_test_foundation",
-      "community": 89,
+      "community": 57,
       "community_name": "test_foundation.py",
       "norm_label": "test_foundation.py"
     },
@@ -13651,7 +13662,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_app_creation",
-      "community": 89,
+      "community": 57,
       "community_name": "test_foundation.py",
       "norm_label": "test_app_creation()"
     },
@@ -13662,7 +13673,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_flask",
-      "community": 89,
+      "community": 57,
       "community_name": "test_foundation.py",
       "norm_label": "flask"
     },
@@ -13673,8 +13684,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_startup_adds_outcome_column_to_existing_database",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 57,
+      "community_name": "test_foundation.py",
       "norm_label": "test_startup_adds_outcome_column_to_existing_database()"
     },
     {
@@ -13684,8 +13695,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_path",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 57,
+      "community_name": "test_foundation.py",
       "norm_label": "path"
     },
     {
@@ -13717,7 +13728,7 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_error_handler",
-      "community": 89,
+      "community": 57,
       "community_name": "test_foundation.py",
       "norm_label": "test_error_handler()"
     },
@@ -13728,7 +13739,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_flaskclient",
-      "community": 89,
+      "community": 57,
       "community_name": "test_foundation.py",
       "norm_label": "flaskclient"
     },
@@ -13739,7 +13750,7 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_utils_helpers",
-      "community": 89,
+      "community": 57,
       "community_name": "test_foundation.py",
       "norm_label": "test_utils_helpers()"
     },
@@ -13750,8 +13761,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_tests_test_production",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "test_production.py"
     },
     {
@@ -13761,8 +13772,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_serve_index_html_on_root",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "test_serve_index_html_on_root()"
     },
     {
@@ -13772,8 +13783,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_production_py_flask",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "flask"
     },
     {
@@ -13783,8 +13794,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_production_py_flaskclient",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "flaskclient"
     },
     {
@@ -13794,8 +13805,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_production_py_path",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "path"
     },
     {
@@ -13805,8 +13816,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_serve_static_asset",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "test_serve_static_asset()"
     },
     {
@@ -13816,8 +13827,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_missing_static_asset_returns_404",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "test_missing_static_asset_returns_404()"
     },
     {
@@ -13827,8 +13838,8 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_serve_spa_client_route",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "test_serve_spa_client_route()"
     },
     {
@@ -13838,8 +13849,8 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_api_route_not_found_returns_json",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "test_api_route_not_found_returns_json()"
     },
     {
@@ -13849,8 +13860,8 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_missing_dist_returns_404",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "test_missing_dist_returns_404()"
     },
     {
@@ -13860,8 +13871,8 @@
       "source_location": "L93",
       "_origin": "ast",
       "id": "backend_tests_test_production_test_wsgi_entrypoint",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "test_wsgi_entrypoint()"
     },
     {
@@ -13871,8 +13882,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_wsgi",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 67,
+      "community_name": "test_production.py",
       "norm_label": "wsgi.py"
     },
     {
@@ -15026,8 +15037,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_components_ui_input",
-      "community": 166,
-      "community_name": "cn",
+      "community": 97,
+      "community_name": "web/src/features/auth/hooks/use-auth.ts",
       "norm_label": "web/src/components/ui/input.tsx"
     },
     {
@@ -15037,8 +15048,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_components_ui_input_inputprops",
-      "community": 166,
-      "community_name": "cn",
+      "community": 97,
+      "community_name": "web/src/features/auth/hooks/use-auth.ts",
       "norm_label": "inputprops"
     },
     {
@@ -15048,8 +15059,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "web_src_components_ui_input_input",
-      "community": 166,
-      "community_name": "cn",
+      "community": 97,
+      "community_name": "web/src/features/auth/hooks/use-auth.ts",
       "norm_label": "input"
     },
     {
@@ -15059,8 +15070,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_components_ui_table",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "table.tsx"
     },
     {
@@ -15070,8 +15081,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_components_ui_table_table",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "table"
     },
     {
@@ -15081,8 +15092,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_components_ui_table_tableheader",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "tableheader"
     },
     {
@@ -15092,8 +15103,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "web_src_components_ui_table_tablebody",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "tablebody"
     },
     {
@@ -15103,8 +15114,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "web_src_components_ui_table_tablefooter",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "tablefooter"
     },
     {
@@ -15114,8 +15125,8 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "web_src_components_ui_table_tablerow",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "tablerow"
     },
     {
@@ -15125,8 +15136,8 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "web_src_components_ui_table_tablehead",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "tablehead"
     },
     {
@@ -15136,8 +15147,8 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "web_src_components_ui_table_tablecell",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "tablecell"
     },
     {
@@ -15147,8 +15158,8 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "web_src_components_ui_table_tablecaption",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "tablecaption"
     },
     {
@@ -15180,8 +15191,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_accounts_api_accounts_api_getaccounts",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "getaccounts()"
     },
     {
@@ -15224,8 +15235,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "web_src_features_accounts_api_accounts_api_deactivateuser",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "deactivateuser()"
     },
     {
@@ -15235,8 +15246,8 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "web_src_features_accounts_api_accounts_api_activateuser",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "activateuser()"
     },
     {
@@ -15433,8 +15444,8 @@
       "source_location": "L289",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_accounts_table_accountstable",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 82,
+      "community_name": "accounts-table.tsx",
       "norm_label": "accountstable()"
     },
     {
@@ -15532,8 +15543,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_delete_dialog_deletedialog",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "deletedialog()"
     },
     {
@@ -15543,8 +15554,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_edit_user_modal",
-      "community": 166,
-      "community_name": "cn",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "edit-user-modal.tsx"
     },
     {
@@ -15554,8 +15565,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_edit_user_modal_editusermodalprops",
-      "community": 82,
-      "community_name": "accounts-table.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "editusermodalprops"
     },
     {
@@ -15565,8 +15576,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_edit_user_modal_editusermodal",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "editusermodal()"
     },
     {
@@ -15576,8 +15587,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "user-status-button.tsx"
     },
     {
@@ -15587,8 +15598,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button_userstatusbuttonprops",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "userstatusbuttonprops"
     },
     {
@@ -15598,8 +15609,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_user_status_button_userstatusbutton",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "userstatusbutton()"
     },
     {
@@ -15609,8 +15620,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "use-accounts.ts"
     },
     {
@@ -15642,8 +15653,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts_sortownaccountfirst",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "sortownaccountfirst()"
     },
     {
@@ -15653,8 +15664,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_accounts_useaccounts",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "useaccounts()"
     },
     {
@@ -15840,8 +15851,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_user_status",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "use-user-status.ts"
     },
     {
@@ -15851,8 +15862,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_user_status_userstatuschange",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "userstatuschange"
     },
     {
@@ -15862,8 +15873,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_user_status_useuserstatusresult",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "useuserstatusresult"
     },
     {
@@ -15873,8 +15884,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_user_status_useuserstatus",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 120,
+      "community_name": "use-user-status.ts",
       "norm_label": "useuserstatus()"
     },
     {
@@ -15895,8 +15906,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_pages_accounts_page",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "accounts-page.tsx"
     },
     {
@@ -15906,8 +15917,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_accounts_pages_accounts_page_accountspage",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "accountspage()"
     },
     {
@@ -15939,8 +15950,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_features_accounts_types_accountcountries",
-      "community": 166,
-      "community_name": "cn",
+      "community": 183,
+      "community_name": "accounts.api.ts",
       "norm_label": "accountcountries"
     },
     {
@@ -16060,8 +16071,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_auth_index",
-      "community": 97,
-      "community_name": "web/src/features/auth/hooks/use-auth.ts",
+      "community": 167,
+      "community_name": "router.tsx",
       "norm_label": "web/src/features/auth/index.ts"
     },
     {
@@ -16127,7 +16138,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_api_dashboard_api",
       "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community_name": "dashboard.api.ts",
       "norm_label": "dashboard.api.ts"
     },
     {
@@ -16138,7 +16149,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_api_dashboard_api_getteamdashboard",
       "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community_name": "dashboard.api.ts",
       "norm_label": "getteamdashboard()"
     },
     {
@@ -16148,8 +16159,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_dashboard_api_dashboard_api_getpersondashboard",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "getpersondashboard()"
     },
     {
@@ -16160,7 +16171,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "calls-by-hour-chart.tsx"
     },
     {
@@ -16171,7 +16182,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_hourlydialbar",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "hourlydialbar"
     },
     {
@@ -16182,7 +16193,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_dialstoplabelprops",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "dialstoplabelprops"
     },
     {
@@ -16192,8 +16203,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_callsbyhourchartprops",
-      "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "callsbyhourchartprops"
     },
     {
@@ -16204,7 +16215,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_gettwelvehourlabel",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "gettwelvehourlabel()"
     },
     {
@@ -16215,7 +16226,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_buildhourlybars",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "buildhourlybars()"
     },
     {
@@ -16226,7 +16237,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_buildbesthoursummaryline",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "buildbesthoursummaryline()"
     },
     {
@@ -16237,7 +16248,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_calls_by_hour_chart_callsbyhourchart",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "callsbyhourchart()"
     },
     {
@@ -16248,7 +16259,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "dashboard-card.tsx"
     },
     {
@@ -16259,7 +16270,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_dashboardcardprops",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "dashboardcardprops"
     },
     {
@@ -16270,7 +16281,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_dashboardcard",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "dashboardcard()"
     },
     {
@@ -16281,7 +16292,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_dashboard_card_emptyperiodnote",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "emptyperiodnote()"
     },
     {
@@ -16291,8 +16302,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card",
-      "community": 124,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "kpi-card.tsx"
     },
     {
@@ -16302,8 +16313,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card_kpicardprops",
-      "community": 124,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "kpicardprops"
     },
     {
@@ -16313,8 +16324,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card_kpicard",
-      "community": 124,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "kpicard()"
     },
     {
@@ -16357,8 +16368,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_numbers_table",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "top-numbers-table.tsx"
     },
     {
@@ -16368,8 +16379,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_numbers_table_topnumberstableprops",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "topnumberstableprops"
     },
     {
@@ -16379,8 +16390,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_numbers_table_topnumberlabels",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "topnumberlabels"
     },
     {
@@ -16390,8 +16401,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_numbers_table_buildtopnumberlabels",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "buildtopnumberlabels()"
     },
     {
@@ -16401,8 +16412,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_numbers_table_topnumberrowprops",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "topnumberrowprops"
     },
     {
@@ -16412,8 +16423,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_numbers_table_topnumberdesktoprow",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "topnumberdesktoprow()"
     },
     {
@@ -16423,8 +16434,8 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_numbers_table_topnumbermobilerow",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "topnumbermobilerow()"
     },
     {
@@ -16446,7 +16457,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_people_list",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "top-people-list.tsx"
     },
     {
@@ -16457,7 +16468,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_people_list_toppeoplelistprops",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "toppeoplelistprops"
     },
     {
@@ -16468,7 +16479,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_top_people_list_toppeoplelist",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "toppeoplelist()"
     },
     {
@@ -16478,8 +16489,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_person_stats",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "use-person-stats.ts"
     },
     {
@@ -16489,8 +16500,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_person_stats_isvalidpersonid",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "isvalidpersonid()"
     },
     {
@@ -16500,8 +16511,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_person_stats_usepersonstatsresult",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "usepersonstatsresult"
     },
     {
@@ -16511,8 +16522,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_person_stats_usepersonstats",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "usepersonstats()"
     },
     {
@@ -16523,7 +16534,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_team_dashboard",
       "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community_name": "dashboard.api.ts",
       "norm_label": "use-team-dashboard.ts"
     },
     {
@@ -16534,7 +16545,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_team_dashboard_useteamdashboardresult",
       "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community_name": "dashboard.api.ts",
       "norm_label": "useteamdashboardresult"
     },
     {
@@ -16545,7 +16556,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_team_dashboard_useteamdashboard",
       "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community_name": "dashboard.api.ts",
       "norm_label": "useteamdashboard()"
     },
     {
@@ -16555,8 +16566,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_index",
-      "community": 124,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "dashboard/index.ts"
     },
     {
@@ -16666,7 +16677,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_dashboard_page_dashboardpage",
       "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community_name": "dashboard.api.ts",
       "norm_label": "dashboardpage()"
     },
     {
@@ -16764,8 +16775,8 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_mobileperiodmetric",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 166,
+      "community_name": "cn",
       "norm_label": "mobileperiodmetric()"
     },
     {
@@ -16797,8 +16808,8 @@
       "source_location": "L139",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_performancesectionprops",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "performancesectionprops"
     },
     {
@@ -16852,8 +16863,8 @@
       "source_location": "L207",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_buildaveragecardvalue",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 54,
+      "community_name": "formatCount",
       "norm_label": "buildaveragecardvalue()"
     },
     {
@@ -16863,8 +16874,8 @@
       "source_location": "L218",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_buildaveragecardsubline",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 54,
+      "community_name": "formatCount",
       "norm_label": "buildaveragecardsubline()"
     },
     {
@@ -16874,8 +16885,8 @@
       "source_location": "L223",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_buildpersonkpicards",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 54,
+      "community_name": "formatCount",
       "norm_label": "buildpersonkpicards()"
     },
     {
@@ -16896,8 +16907,8 @@
       "source_location": "L277",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_last30dayskpisection",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 54,
+      "community_name": "formatCount",
       "norm_label": "last30dayskpisection()"
     },
     {
@@ -16907,8 +16918,8 @@
       "source_location": "L300",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_callsbyhoursectionprops",
-      "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "callsbyhoursectionprops"
     },
     {
@@ -16929,8 +16940,8 @@
       "source_location": "L324",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_getpersonpagebacktarget",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "getpersonpagebacktarget()"
     },
     {
@@ -16940,8 +16951,8 @@
       "source_location": "L335",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_personpage",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "personpage()"
     },
     {
@@ -16951,8 +16962,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "dashboard/types.ts"
     },
     {
@@ -16973,8 +16984,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_callsbyhourblock",
-      "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "callsbyhourblock"
     },
     {
@@ -16985,7 +16996,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamtopperson",
       "community": 54,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community_name": "formatCount",
       "norm_label": "teamtopperson"
     },
     {
@@ -16995,8 +17006,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamaverageperpersonperday",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "teamaverageperpersonperday"
     },
     {
@@ -17006,8 +17017,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamvsyesterday",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "teamvsyesterday"
     },
     {
@@ -17029,7 +17040,7 @@
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamdashboard",
       "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community_name": "dashboard.api.ts",
       "norm_label": "teamdashboard"
     },
     {
@@ -17039,8 +17050,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_personaverageperactiveday",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "personaverageperactiveday"
     },
     {
@@ -17072,8 +17083,8 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_topcallednumber",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "topcallednumber"
     },
     {
@@ -17083,8 +17094,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_persondashboard",
-      "community": 68,
-      "community_name": "dashboard/types.ts",
+      "community": 56,
+      "community_name": "person-page.tsx",
       "norm_label": "persondashboard"
     },
     {
@@ -17138,8 +17149,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formatactivedaysoutofperiod",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 54,
+      "community_name": "formatCount",
       "norm_label": "formatactivedaysoutofperiod()"
     },
     {
@@ -17875,8 +17886,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_settings_index",
-      "community": 59,
-      "community_name": "team-page.tsx",
+      "community": 88,
+      "community_name": "office-hours-editor.tsx",
       "norm_label": "settings/index.ts"
     },
     {
@@ -17886,8 +17897,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_settings_pages_settings_page",
-      "community": 59,
-      "community_name": "team-page.tsx",
+      "community": 88,
+      "community_name": "office-hours-editor.tsx",
       "norm_label": "settings-page.tsx"
     },
     {
@@ -17897,8 +17908,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_settings_pages_settings_page_settingspage",
-      "community": 59,
-      "community_name": "team-page.tsx",
+      "community": 167,
+      "community_name": "router.tsx",
       "norm_label": "settingspage()"
     },
     {
@@ -17941,8 +17952,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_team_api_team_api",
-      "community": 97,
-      "community_name": "web/src/features/auth/hooks/use-auth.ts",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "team.api.ts"
     },
     {
@@ -18073,8 +18084,8 @@
       "source_location": "L134",
       "_origin": "ast",
       "id": "web_src_features_team_components_team_people_table_todaynumbers",
-      "community": 161,
-      "community_name": "team-people-table.tsx",
+      "community": 166,
+      "community_name": "cn",
       "norm_label": "todaynumbers()"
     },
     {
@@ -18128,8 +18139,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_team_hooks_use_team_people",
-      "community": 161,
-      "community_name": "team-people-table.tsx",
+      "community": 59,
+      "community_name": "team-page.tsx",
       "norm_label": "use-team-people.ts"
     },
     {
@@ -18139,8 +18150,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_team_hooks_use_team_people_team_people_query_key",
-      "community": 161,
-      "community_name": "team-people-table.tsx",
+      "community": 59,
+      "community_name": "team-page.tsx",
       "norm_label": "team_people_query_key"
     },
     {
@@ -18150,8 +18161,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_src_features_team_hooks_use_team_people_useteampeopleresult",
-      "community": 161,
-      "community_name": "team-people-table.tsx",
+      "community": 59,
+      "community_name": "team-page.tsx",
       "norm_label": "useteampeopleresult"
     },
     {
@@ -18260,8 +18271,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_api_api_client",
-      "community": 97,
-      "community_name": "web/src/features/auth/hooks/use-auth.ts",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "web/src/shared/api/api-client.ts"
     },
     {
@@ -18271,8 +18282,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "web_src_shared_api_api_client_apiclient",
-      "community": 97,
-      "community_name": "web/src/features/auth/hooks/use-auth.ts",
+      "community": 68,
+      "community_name": "dashboard.api.ts",
       "norm_label": "apiclient"
     },
     {
@@ -18282,8 +18293,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 88,
+      "community_name": "office-hours-editor.tsx",
       "norm_label": "api-error.ts"
     },
     {
@@ -18293,8 +18304,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error_apierrorbody",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 88,
+      "community_name": "office-hours-editor.tsx",
       "norm_label": "apierrorbody"
     },
     {
@@ -18304,8 +18315,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error_getapierrormessage",
-      "community": 183,
-      "community_name": "accounts.api.ts",
+      "community": 88,
+      "community_name": "office-hours-editor.tsx",
       "norm_label": "getapierrormessage()"
     },
     {
@@ -18348,8 +18359,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_components_error_state",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 166,
+      "community_name": "cn",
       "norm_label": "error-state.tsx"
     },
     {
@@ -18359,8 +18370,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_shared_components_error_state_errorstateprops",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 166,
+      "community_name": "cn",
       "norm_label": "errorstateprops"
     },
     {
@@ -18370,8 +18381,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_src_shared_components_error_state_errorstate",
-      "community": 173,
-      "community_name": "accounts-page.tsx",
+      "community": 166,
+      "community_name": "cn",
       "norm_label": "errorstate()"
     },
     {
@@ -18458,8 +18469,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_format_count",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 161,
+      "community_name": "team-people-table.tsx",
       "norm_label": "format-count.ts"
     },
     {
@@ -18469,8 +18480,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_format_count_formatcount",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 54,
+      "community_name": "formatCount",
       "norm_label": "formatcount()"
     },
     {
@@ -23171,17 +23182,6 @@
       "norm_label": "output summary"
     },
     {
-      "label": "AGENTS.md",
-      "file_type": "document",
-      "source_file": "AGENTS.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "agents",
-      "community": 142,
-      "community_name": "AGENTS.md",
-      "norm_label": "agents.md"
-    },
-    {
       "label": "CLAUDE.md",
       "file_type": "document",
       "source_file": "CLAUDE.md",
@@ -23358,21 +23358,10 @@
       "norm_label": "`post /api/calls/sync`"
     },
     {
-      "label": "`PATCH /api/calls/<call_id>/outcome`",
-      "file_type": "document",
-      "source_file": "agent-doc/api.md",
-      "source_location": "L82",
-      "_origin": "ast",
-      "id": "agent_doc_api_patch_api_calls_call_id_outcome",
-      "community": 66,
-      "community_name": "API Specifications",
-      "norm_label": "`patch /api/calls/<call_id>/outcome`"
-    },
-    {
       "label": "3. Dashboards",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L106",
+      "source_location": "L83",
       "_origin": "ast",
       "id": "agent_doc_api_3_dashboards",
       "community": 66,
@@ -23383,7 +23372,7 @@
       "label": "`GET /api/dashboard/team`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L108",
+      "source_location": "L85",
       "_origin": "ast",
       "id": "agent_doc_api_get_api_dashboard_team",
       "community": 66,
@@ -23394,7 +23383,7 @@
       "label": "`GET /api/dashboard/team/people`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L160",
+      "source_location": "L137",
       "_origin": "ast",
       "id": "agent_doc_api_get_api_dashboard_team_people",
       "community": 66,
@@ -23405,7 +23394,7 @@
       "label": "`GET /api/dashboard/person/<id>`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L184",
+      "source_location": "L161",
       "_origin": "ast",
       "id": "agent_doc_api_get_api_dashboard_person_id",
       "community": 66,
@@ -23416,7 +23405,7 @@
       "label": "4. User Account Management (Manager Only)",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L245",
+      "source_location": "L222",
       "_origin": "ast",
       "id": "agent_doc_api_4_user_account_management_manager_only",
       "community": 58,
@@ -23427,7 +23416,7 @@
       "label": "`GET /api/users`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L247",
+      "source_location": "L224",
       "_origin": "ast",
       "id": "agent_doc_api_get_api_users",
       "community": 58,
@@ -23438,7 +23427,7 @@
       "label": "`POST /api/users`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L278",
+      "source_location": "L255",
       "_origin": "ast",
       "id": "agent_doc_api_post_api_users",
       "community": 58,
@@ -23449,7 +23438,7 @@
       "label": "`POST /api/users/<id>/update`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L300",
+      "source_location": "L277",
       "_origin": "ast",
       "id": "agent_doc_api_post_api_users_id_update",
       "community": 58,
@@ -23460,7 +23449,7 @@
       "label": "`POST /api/users/<id>/deactivate`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L320",
+      "source_location": "L297",
       "_origin": "ast",
       "id": "agent_doc_api_post_api_users_id_deactivate",
       "community": 58,
@@ -23471,7 +23460,7 @@
       "label": "`POST /api/users/<id>/activate`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L331",
+      "source_location": "L308",
       "_origin": "ast",
       "id": "agent_doc_api_post_api_users_id_activate",
       "community": 58,
@@ -23482,7 +23471,7 @@
       "label": "`DELETE /api/users/<id>`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L340",
+      "source_location": "L317",
       "_origin": "ast",
       "id": "agent_doc_api_delete_api_users_id",
       "community": 58,
@@ -23493,7 +23482,7 @@
       "label": "5. Leads",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L355",
+      "source_location": "L332",
       "_origin": "ast",
       "id": "agent_doc_api_5_leads",
       "community": 111,
@@ -23504,7 +23493,7 @@
       "label": "`POST /api/leads/upload`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L357",
+      "source_location": "L334",
       "_origin": "ast",
       "id": "agent_doc_api_post_api_leads_upload",
       "community": 111,
@@ -23515,7 +23504,7 @@
       "label": "`GET /api/leads/summary`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L379",
+      "source_location": "L356",
       "_origin": "ast",
       "id": "agent_doc_api_get_api_leads_summary",
       "community": 111,
@@ -23526,7 +23515,7 @@
       "label": "`POST /api/leads/next`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L404",
+      "source_location": "L381",
       "_origin": "ast",
       "id": "agent_doc_api_post_api_leads_next",
       "community": 111,
@@ -23537,7 +23526,7 @@
       "label": "6. Office Hours Settings (Manager Only)",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L456",
+      "source_location": "L445",
       "_origin": "ast",
       "id": "agent_doc_api_6_office_hours_settings_manager_only",
       "community": 66,
@@ -23548,7 +23537,7 @@
       "label": "`GET /api/settings/office-hours`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L458",
+      "source_location": "L447",
       "_origin": "ast",
       "id": "agent_doc_api_get_api_settings_office_hours",
       "community": 66,
@@ -23559,7 +23548,7 @@
       "label": "`PUT /api/settings/office-hours`",
       "file_type": "document",
       "source_file": "agent-doc/api.md",
-      "source_location": "L470",
+      "source_location": "L459",
       "_origin": "ast",
       "id": "agent_doc_api_put_api_settings_office_hours",
       "community": 66,
@@ -23754,6 +23743,17 @@
       "norm_label": "round 5"
     },
     {
+      "label": "Round 6",
+      "file_type": "document",
+      "source_file": "agent-doc/decisions.md",
+      "source_location": "L176",
+      "_origin": "ast",
+      "id": "agent_doc_decisions_round_6",
+      "community": 35,
+      "community_name": "Sales Call Tracker - Decision Log",
+      "norm_label": "round 6"
+    },
+    {
       "label": "agent-doc/proposal.md",
       "file_type": "document",
       "source_file": "agent-doc/proposal.md",
@@ -23933,7 +23933,7 @@
       "label": "Screen 4: Leads",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L78",
+      "source_location": "L79",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_4_leads",
       "community": 63,
@@ -23944,7 +23944,7 @@
       "label": "Screen 5: Accounts",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L102",
+      "source_location": "L103",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_5_accounts",
       "community": 63,
@@ -23955,7 +23955,7 @@
       "label": "Screen 5b: Settings (web)",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L120",
+      "source_location": "L122",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_5b_settings_web",
       "community": 63,
@@ -23966,7 +23966,7 @@
       "label": "Salesperson View (Android app \"Apex Sales Call\")",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L135",
+      "source_location": "L137",
       "_origin": "ast",
       "id": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
       "community": 63,
@@ -23977,7 +23977,7 @@
       "label": "Screen 6: Login",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L137",
+      "source_location": "L139",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_6_login",
       "community": 63,
@@ -23988,7 +23988,7 @@
       "label": "Screen 7: Dialer - home tab",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L142",
+      "source_location": "L144",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_7_dialer_home_tab",
       "community": 63,
@@ -24007,15 +24007,15 @@
       "norm_label": "screen 8: my stats - second tab"
     },
     {
-      "label": "Screen 9: Settings",
+      "label": "Screen 9: Settings - third tab",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L185",
+      "source_location": "L191",
       "_origin": "ast",
-      "id": "agent_doc_screen_screen_9_settings",
+      "id": "agent_doc_screen_screen_9_settings_third_tab",
       "community": 63,
       "community_name": "Manager View (web)",
-      "norm_label": "screen 9: settings"
+      "norm_label": "screen 9: settings - third tab"
     },
     {
       "label": "THEME.md",
@@ -26438,114 +26438,59 @@
       "norm_label": "tasks.md"
     },
     {
-      "label": "Task 1: A synced call carries the salesperson's chosen outcome",
+      "label": "Task 1: The server stops storing call outcomes",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "agent_doc_tasks_task_1_a_synced_call_carries_the_salesperson_s_chosen_outcome",
+      "id": "agent_doc_tasks_task_1_the_server_stops_storing_call_outcomes",
       "community": 146,
       "community_name": "tasks.md",
-      "norm_label": "task 1: a synced call carries the salesperson's chosen outcome"
+      "norm_label": "task 1: the server stops storing call outcomes"
     },
     {
-      "label": "Task 2: An already-synced call receives its outcome through PATCH",
+      "label": "Task 2: `/api/leads/next` serves no lead when `continue_calling` is false",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "agent_doc_tasks_task_2_an_already_synced_call_receives_its_outcome_through_patch",
+      "id": "agent_doc_tasks_task_2_api_leads_next_serves_no_lead_when_continue_calling_is_false",
       "community": 146,
       "community_name": "tasks.md",
-      "norm_label": "task 2: an already-synced call receives its outcome through patch"
+      "norm_label": "task 2: `/api/leads/next` serves no lead when `continue_calling` is false"
     },
     {
-      "label": "Task 3: Fix dialogs that mount but never become visible",
+      "label": "Task 3: The post-call popup is rebuilt around a single Submit",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L36",
+      "source_location": "L37",
       "_origin": "ast",
-      "id": "agent_doc_tasks_task_3_fix_dialogs_that_mount_but_never_become_visible",
+      "id": "agent_doc_tasks_task_3_the_post_call_popup_is_rebuilt_around_a_single_submit",
       "community": 146,
       "community_name": "tasks.md",
-      "norm_label": "task 3: fix dialogs that mount but never become visible"
+      "norm_label": "task 3: the post-call popup is rebuilt around a single submit"
     },
     {
-      "label": "Task 4: The phone queue keeps the chosen outcome until sync",
+      "label": "Task 4: The call-log read happens only at Submit",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L54",
+      "source_location": "L56",
       "_origin": "ast",
-      "id": "agent_doc_tasks_task_4_the_phone_queue_keeps_the_chosen_outcome_until_sync",
+      "id": "agent_doc_tasks_task_4_the_call_log_read_happens_only_at_submit",
       "community": 146,
       "community_name": "tasks.md",
-      "norm_label": "task 4: the phone queue keeps the chosen outcome until sync"
+      "norm_label": "task 4: the call-log read happens only at submit"
     },
     {
-      "label": "Task 5: Keypad calls ask for the outcome when the call ends",
+      "label": "Task 5: The automated flow stops when Go-to-next is unchecked",
       "file_type": "document",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L72",
+      "source_location": "L74",
       "_origin": "ast",
-      "id": "agent_doc_tasks_task_5_keypad_calls_ask_for_the_outcome_when_the_call_ends",
+      "id": "agent_doc_tasks_task_5_the_automated_flow_stops_when_go_to_next_is_unchecked",
       "community": 146,
       "community_name": "tasks.md",
-      "norm_label": "task 5: keypad calls ask for the outcome when the call ends"
-    },
-    {
-      "label": "Task 6: Save & Continue records the outcome on the call",
-      "file_type": "document",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L91",
-      "_origin": "ast",
-      "id": "agent_doc_tasks_task_6_save_continue_records_the_outcome_on_the_call",
-      "community": 146,
-      "community_name": "tasks.md",
-      "norm_label": "task 6: save & continue records the outcome on the call"
-    },
-    {
-      "label": "Task 7: My Stats is rebuilt to the approved mockup",
-      "file_type": "document",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L109",
-      "_origin": "ast",
-      "id": "agent_doc_tasks_task_7_my_stats_is_rebuilt_to_the_approved_mockup",
-      "community": 146,
-      "community_name": "tasks.md",
-      "norm_label": "task 7: my stats is rebuilt to the approved mockup"
-    },
-    {
-      "label": "Task 8: Every app screen uses a 12px side gutter",
-      "file_type": "document",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L128",
-      "_origin": "ast",
-      "id": "agent_doc_tasks_task_8_every_app_screen_uses_a_12px_side_gutter",
-      "community": 146,
-      "community_name": "tasks.md",
-      "norm_label": "task 8: every app screen uses a 12px side gutter"
-    },
-    {
-      "label": "Task 9: The Clear local data row grows to fit its full content",
-      "file_type": "document",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L146",
-      "_origin": "ast",
-      "id": "agent_doc_tasks_task_9_the_clear_local_data_row_grows_to_fit_its_full_content",
-      "community": 146,
-      "community_name": "tasks.md",
-      "norm_label": "task 9: the clear local data row grows to fit its full content"
-    },
-    {
-      "label": "Task 10: The dialer backspace clears everything on a long press",
-      "file_type": "document",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L164",
-      "_origin": "ast",
-      "id": "agent_doc_tasks_task_10_the_dialer_backspace_clears_everything_on_a_long_press",
-      "community": 146,
-      "community_name": "tasks.md",
-      "norm_label": "task 10: the dialer backspace clears everything on a long press"
+      "norm_label": "task 5: the automated flow stops when go-to-next is unchecked"
     },
     {
       "label": "testing.md",
@@ -26606,7 +26551,7 @@
       "label": "`tests/modules/test_dashboard.py`",
       "file_type": "document",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L28",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "agent_doc_testing_tests_modules_test_dashboard_py",
       "community": 83,
@@ -26617,7 +26562,7 @@
       "label": "`tests/modules/test_settings.py`",
       "file_type": "document",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L44",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "agent_doc_testing_tests_modules_test_settings_py",
       "community": 83,
@@ -26628,7 +26573,7 @@
       "label": "`tests/modules/test_users.py`",
       "file_type": "document",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L51",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "agent_doc_testing_tests_modules_test_users_py",
       "community": 83,
@@ -26639,7 +26584,7 @@
       "label": "`tests/modules/test_leads.py`",
       "file_type": "document",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L59",
+      "source_location": "L57",
       "_origin": "ast",
       "id": "agent_doc_testing_tests_modules_test_leads_py",
       "community": 83,
@@ -26650,7 +26595,7 @@
       "label": "2. Mobile Android Spike Checklist",
       "file_type": "document",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L79",
+      "source_location": "L78",
       "_origin": "ast",
       "id": "agent_doc_testing_2_mobile_android_spike_checklist",
       "community": 145,
@@ -26661,7 +26606,7 @@
       "label": "3. App Calling & Navigation \u2014 Manual On-Device Pass",
       "file_type": "document",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L93",
+      "source_location": "L92",
       "_origin": "ast",
       "id": "agent_doc_testing_3_app_calling_navigation_manual_on_device_pass",
       "community": 145,
@@ -39980,11 +39925,23 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L76",
+      "source_location": "L90",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync_recordcalloutcome",
       "target": "app_src_features_tracking_api_calls_api_updatecalloutcome"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/features/tracking/hooks/use-sync.ts",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_tracking_hooks_use_sync_recordoutcomeonsyncedcall",
+      "target": "app_src_features_tracking_api_calls_api_updatecalloutcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "re_exports",
@@ -40847,7 +40804,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L74",
+      "source_location": "L88",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync_recordcalloutcome",
@@ -41597,7 +41554,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L92",
+      "source_location": "L113",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync_runjanitorthensync",
@@ -41689,7 +41646,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L70",
+      "source_location": "L84",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync",
@@ -41700,7 +41657,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L91",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_tracking_hooks_use_sync",
+      "target": "app_src_features_tracking_hooks_use_sync_recordoutcomeonsyncedcall",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/features/tracking/hooks/use-sync.ts",
+      "source_location": "L112",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync",
@@ -41755,7 +41723,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L96",
+      "source_location": "L117",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync",
@@ -41863,7 +41831,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L88",
+      "source_location": "L109",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync_recordcalloutcome",
@@ -41875,7 +41843,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L93",
+      "source_location": "L114",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync_runjanitorthensync",
@@ -41887,11 +41855,23 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L99",
+      "source_location": "L120",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync_usesync",
       "target": "app_src_features_tracking_hooks_use_sync_syncpendingcalls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/features/tracking/hooks/use-sync.ts",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_tracking_hooks_use_sync_recordcalloutcome",
+      "target": "app_src_features_tracking_hooks_use_sync_recordoutcomeonsyncedcall",
       "confidence_score": 1.0
     },
     {
@@ -41911,7 +41891,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/tracking/hooks/use-sync.ts",
-      "source_location": "L105",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_tracking_hooks_use_sync_usesync",
@@ -78801,7 +78781,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L106",
+      "source_location": "L83",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_api_specifications",
@@ -78812,7 +78792,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L245",
+      "source_location": "L222",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_api_specifications",
@@ -78823,7 +78803,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L355",
+      "source_location": "L332",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_api_specifications",
@@ -78834,7 +78814,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L456",
+      "source_location": "L445",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_api_specifications",
@@ -78856,17 +78836,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L82",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_api_2_call_sync",
-      "target": "agent_doc_api_patch_api_calls_call_id_outcome",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/api.md",
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
@@ -78878,7 +78847,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L184",
+      "source_location": "L161",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_3_dashboards",
@@ -78889,7 +78858,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L108",
+      "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_3_dashboards",
@@ -78900,7 +78869,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L160",
+      "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_3_dashboards",
@@ -78911,7 +78880,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L340",
+      "source_location": "L317",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_4_user_account_management_manager_only",
@@ -78922,7 +78891,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L247",
+      "source_location": "L224",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_4_user_account_management_manager_only",
@@ -78933,7 +78902,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L278",
+      "source_location": "L255",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_4_user_account_management_manager_only",
@@ -78944,7 +78913,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L331",
+      "source_location": "L308",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_4_user_account_management_manager_only",
@@ -78955,7 +78924,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L320",
+      "source_location": "L297",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_4_user_account_management_manager_only",
@@ -78966,7 +78935,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L300",
+      "source_location": "L277",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_4_user_account_management_manager_only",
@@ -78977,7 +78946,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L379",
+      "source_location": "L356",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_5_leads",
@@ -78988,7 +78957,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L404",
+      "source_location": "L381",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_5_leads",
@@ -78999,7 +78968,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L357",
+      "source_location": "L334",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_5_leads",
@@ -79010,7 +78979,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L458",
+      "source_location": "L447",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_6_office_hours_settings_manager_only",
@@ -79021,7 +78990,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/api.md",
-      "source_location": "L470",
+      "source_location": "L459",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_api_6_office_hours_settings_manager_only",
@@ -79218,6 +79187,17 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "agent-doc/decisions.md",
+      "source_location": "L176",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agent_doc_decisions_sales_call_tracker_decision_log",
+      "target": "agent_doc_decisions_round_6",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "agent-doc/proposal.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -79351,7 +79331,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L135",
+      "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_screens_sales_call_tracker",
@@ -79406,7 +79386,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L78",
+      "source_location": "L79",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_manager_view_web",
@@ -79417,7 +79397,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L102",
+      "source_location": "L103",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_manager_view_web",
@@ -79428,7 +79408,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L120",
+      "source_location": "L122",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_manager_view_web",
@@ -79439,7 +79419,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L137",
+      "source_location": "L139",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -79450,7 +79430,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L142",
+      "source_location": "L144",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -79472,11 +79452,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L185",
+      "source_location": "L191",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
-      "target": "agent_doc_screen_screen_9_settings",
+      "target": "agent_doc_screen_screen_9_settings_third_tab",
       "confidence_score": 1.0
     },
     {
@@ -81804,22 +81784,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L164",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_10_the_dialer_backspace_clears_everything_on_a_long_press",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/tasks.md",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_1_a_synced_call_carries_the_salesperson_s_chosen_outcome",
+      "target": "agent_doc_tasks_task_1_the_server_stops_storing_call_outcomes",
       "confidence_score": 1.0
     },
     {
@@ -81830,84 +81799,40 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_2_an_already_synced_call_receives_its_outcome_through_patch",
+      "target": "agent_doc_tasks_task_2_api_leads_next_serves_no_lead_when_continue_calling_is_false",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_3_fix_dialogs_that_mount_but_never_become_visible",
+      "target": "agent_doc_tasks_task_3_the_post_call_popup_is_rebuilt_around_a_single_submit",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L54",
+      "source_location": "L56",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_4_the_phone_queue_keeps_the_chosen_outcome_until_sync",
+      "target": "agent_doc_tasks_task_4_the_call_log_read_happens_only_at_submit",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/tasks.md",
-      "source_location": "L72",
+      "source_location": "L74",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_5_keypad_calls_ask_for_the_outcome_when_the_call_ends",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L91",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_6_save_continue_records_the_outcome_on_the_call",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L109",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_7_my_stats_is_rebuilt_to_the_approved_mockup",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L128",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_8_every_app_screen_uses_a_12px_side_gutter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "agent-doc/tasks.md",
-      "source_location": "L146",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "agent_doc_tasks",
-      "target": "agent_doc_tasks_task_9_the_clear_local_data_row_grows_to_fit_its_full_content",
+      "target": "agent_doc_tasks_task_5_the_automated_flow_stops_when_go_to_next_is_unchecked",
       "confidence_score": 1.0
     },
     {
@@ -81936,7 +81861,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L79",
+      "source_location": "L78",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_testing_testing_specifications",
@@ -81947,7 +81872,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L93",
+      "source_location": "L92",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_testing_testing_specifications",
@@ -81980,7 +81905,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L28",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_testing_1_backend_automated_tests_backend_tests",
@@ -81991,7 +81916,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L59",
+      "source_location": "L57",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_testing_1_backend_automated_tests_backend_tests",
@@ -82002,7 +81927,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L44",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_testing_1_backend_automated_tests_backend_tests",
@@ -82013,7 +81938,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/testing.md",
-      "source_location": "L51",
+      "source_location": "L49",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_testing_1_backend_automated_tests_backend_tests",
@@ -82132,5 +82057,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "90531f1777f9e42b2f5811e23f59c5c27e9e354e"
+  "built_at_commit": "4c72e336b9022c4a6f08a84929395c7ae54bf629"
 }

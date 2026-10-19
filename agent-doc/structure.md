@@ -66,7 +66,7 @@ backend/
 │       │   ├── services.py          # Authentication and in-memory lockout logic
 │       │   └── __init__.py
 │       ├── calls/
-│       │   ├── routes.py            # POST /api/calls/sync, PATCH /api/calls/<call_id>/outcome
+│       │   ├── routes.py            # POST /api/calls/sync
 │       │   ├── schemas.py           # Sync batch schemas
 │       │   ├── services.py          # Call ingestion, office-hours gate, duplicate skip, lead resolution
 │       │   ├── models.py            # Call SQLAlchemy database model
@@ -213,9 +213,11 @@ app/
     │   │   ├── components/keypad.tsx
     │   │   ├── components/permission-banner.tsx
     │   │   ├── components/lead-call-card.tsx
+    │   │   ├── components/post-call-dialog.tsx  # Post-call popup: schedule question + Go-to-next checkbox + Submit; keypad version shows the number with OK
     │   │   ├── lib/call-launcher.ts     # Starts the call: ACTION_CALL direct dial; tel: hand-over without CALL_PHONE
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
+    │   │   ├── hooks/use-post-call-submit.ts  # Submit click: read call log, send to server, delete or save the row
     │   │   └── screens/dialer-screen.tsx # Hosts Dialer keypad and Automated lead calling sub-tabs
     │   ├── stats/
     │   │   ├── api/stats.api.ts
@@ -226,9 +228,9 @@ app/
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
     │       ├── hooks/use-permissions.ts  # Runtime permissions check, request, settings link
-    │       ├── hooks/use-call-tracker.ts # Native call-state listener and call-log matching
+    │       ├── hooks/use-call-tracker.ts # Call-state listener: opens the post-call popup when a call ends (no call-log reading)
     │       ├── hooks/use-janitor.ts      # 1-hour check and 5-strike give-up filler
-    │       └── hooks/use-sync.ts         # Janitor-first batch sync on foreground and call completion
+    │       └── hooks/use-sync.ts         # Janitor-first bulk sync on foreground; rows saved only on failed sends
     └── shared/
         ├── api/api-client.ts             # Axios HTTP client with token header
         └── utils/phone-formatter.ts      # libphonenumber-js E.164 normalization

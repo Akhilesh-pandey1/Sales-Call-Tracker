@@ -59,6 +59,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 
 ### Screen 3: Person View
 - Person's name as the heading
+- Back link - returns to the section the person was opened from (Team for an active person, Accounts for a deactivated one)
 - KPI cards (4, last 30 days) - Active days (of 30), Avg dials, Avg connected, Avg minutes; averages per active day, not calendar day
 - Stats block - three rows (Today, Yesterday, Last 30 days), each with: Dials, Connected, Minutes, Connected %
 - Calls by hour - the same chart as the Dashboard, for this person only; its own small period switch (Today | Yesterday | Last 30 days) drives only this chart
@@ -102,10 +103,11 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 ### Screen 5: Accounts
 - Account list - every account: name, role, country, active or inactive; deactivated included
 - Deactivated rows - greyed out, with an Activate button, so they can always be found again
-- The list is management only - rows do not open Person View; performance lives on Screen 2b Team
+- Accounts count in the list header - "8 accounts · 7 active"
+- Row taps - an active row does not open anything (performance lives on Screen 2b Team); a deactivated person's row opens their Person View, read-only
 - Add person button, top right above the list - opens a dialog with the form: name, starting password, country dropdown (IN, AE, US); role is always Salesperson
 - Per-row actions - Edit (name, password, country) · Deactivate or Activate · Delete
-- The manager's own row shows no actions at all - no edit, no deactivate, no delete
+- The manager's own row shows no actions at all - no edit, no deactivate, no delete; it carries a "You" badge
 - Delete confirmation dialog - "This permanently removes NAME and all their calls. Cannot be undone."
 - The list carries no call counts
 
@@ -140,51 +142,56 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 → Next: Screen 7 Dialer
 
 ### Screen 7: Dialer - home tab
-- Bottom tab bar - Dialer | My Stats
-- Sub-tab switch at top - compact, sleek pill switch: Keypad | Automated
+- Bottom tab bar - Dialer | My Stats | Settings
+- Sub-tab switch at top - pill switch: Keypad | Automated
 - **Keypad view**:
   - Number display - the phone number being typed
-  - Keypad - 0–9, *, #, and backspace
+  - Keypad - 0–9, *, #, and backspace (tap deletes one character, holding it clears the whole number)
   - Paste button - fills the number field from clipboard
-  - Call button - grey and unpressable until number is valid for country; green when valid
-- **Automated view (Lead Calling Flow)**:
-  - Screen 1 (Start calling): clean "Start Calling" button only (no lead preview card; the number is fetched directly from the server when calling starts)
-  - Screen 2 (Calling & Outcome pop-up):
-    - When Next / Start is clicked, phone automatically dials the lead
-    - Post-call outcome dialog with 3 options:
-      1. Connected
-      2. Did not connect
-      3. Schedule (reservation date/time picker)
-    - Next call checkbox: "[✓] Auto-dial next lead" (check or uncheck whether to do the next call or pause)
-    - Next button to submit outcome and advance
-- Red banner (on both views when permission is off) - "Calls are not being logged", with a Fix button that opens Android app settings
+  - Call button - grey and unpressable until the number is valid for the country; green when valid; starts the call at once, no confirm step
+  - Post-call popup - opens by itself when a keypad call ends; same popup as the lead call - the dialed number, the schedule question with the date and time reveal below, and one Submit button - no "Go to next call"
+- **Automated view (lead calling)**:
+  - Start Calling button - dials the next lead at once, one tap, no lead card step
+  - Post-call popup - opens by itself when the call ends: "Schedule this number for the next call?" with two choices - "Do not schedule" pre-selected and "Schedule", which reveals the date and time picker below in the same popup; a pre-checked "Go to next call" checkbox; one Submit button
+  - Submit - saves the chosen schedule and sends the call; with the box checked the next lead's call starts at once; with the box unchecked the flow pauses until Start Calling again
+  - Reopen button - brings the popup back when it was closed without Submit
+- Red banner (both views when any call permission is off) - "Calls are not being logged", with a Fix button that opens Android app settings
 
 **Edge cases:**
 - Paste with nothing copied: "Nothing copied." toast; typed number stays untouched
 - Number not valid yet: Call button stays grey
 - Any of the three call permissions off: red banner shows; Fix opens Android settings; banner clears once all three are on
-- Call permission off: tapping Call opens phone's native dialer - call happens but is not recorded
-- Schedule time not in future or beyond 30 days: "Scheduled time must be in the future within 30 days."
-- No internet: manual dialing and calling works as always; calls sync on later app open
+- Call permission off: tapping Call hands the number to the phone's own dialer (one extra tap there) - that call is not recorded
+- Direct call fails to start: "Could not start the call. Please try again."
+- Schedule time in the past or more than 30 days ahead: refused - "Scheduled time must be in the future within 30 days."
+- Popup closed without Submit: the call still records at the next app open
+- No internet: dialing and lead calling work as always; calls sync on a later app open
 - Login ended (signed in on another phone, deactivated, or password changed): back to Screen 6 Login
 
 → Next: Screen 8 My Stats
 
 ### Screen 8: My Stats - second tab
-Same as Screen 3 Person View, showing the salesperson's own numbers - plus:
-- Gear icon in the header - opens Screen 9 Settings
+- "Last 30 days" KPI cards (4) - Active days (out of 30), Avg dials, Avg connected, Avg minutes; averages per active day, with the 30-day totals as small sub-lines
+- Calls by hour - the salesperson's own dials per hour; small period switch (Today | Yesterday | 30 days) drives only this chart; one line under it names the best hour
+- Performance table - three rows (Today, Yesterday, Last 30 days), each with Dials, Connected, Minutes, Connected %
+- No most-contacted-numbers table here - that lives only on the manager's Person View
 - Loads fresh on every tab open - no saved copy on the phone
 
 **Edge cases:**
 - Server unreachable: "Can't reach the server. Check your internet." and no numbers - never fake zeros; next open retries
 - No dials in a period: that period's Connected % shows "—"
+- Zero active days in the last 30: all four average cards show "—"
+- Chart period with no calls: "No calls in this period." instead of the chart, with no best-hour line
 - Login ended (signed in on another phone, deactivated, or password changed): back to Screen 6 Login
+
+**Graph - what it means:** Same chart as Screen 2, but only this salesperson's calls - the person sees their own busy and quiet hours.
 
 → Next: Screen 9 Settings
 
-### Screen 9: Settings
-- One item - Clear local data button
-- Confirmation dialog - "This deletes N calls not yet sent to the server. Cannot be undone." (N is real count of unsent calls on phone)
+### Screen 9: Settings - third tab
+- Plain "Settings" title - no back arrow; this is a top-level tab
+- Clear local data row - icon, title, and a short description of what it wipes, all shown in full
+- Confirmation dialog on tap - "This deletes N calls not yet sent to the server. Cannot be undone." (N is the real count of unsent calls on the phone)
 - Confirm - wipes only the unsent calls on the phone; server numbers stay untouched
 - Cancel - closes dialog without changes
 

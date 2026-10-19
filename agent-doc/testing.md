@@ -20,9 +20,7 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - A call starting 18:59 and exactly 19:00 IST are saved; 19:01 is discarded (window end inclusive).
 - After the manager updates the office hours window, the gate uses the new window on the next sync.
 - Malformed call rows are skipped while valid rows in the same batch are saved.
-- Sync stores an optional per-call `outcome` (`connected`, `not_connected`, `schedule`); an absent or empty value leaves the column unset.
-- `PATCH /api/calls/<call_id>/outcome` updates the outcome of the token owner's synced call.
-- PATCH with an invalid outcome value returns 400; an unknown call or another user's call returns 404.
+- Calls sync without an outcome; the `outcome` column stays empty on every saved row.
 - Returns `{"status": true}` on success.
 
 ### `tests/modules/test_dashboard.py`
@@ -64,6 +62,7 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
   - Serves newest available leads (`created_at DESC`) when no due schedules exist.
   - Claims the served lead for 10 minutes (`CLAIM_MINUTES`).
   - Supports scheduling current lead and fetching next in a single request.
+  - `continue_calling: false` stores the schedule (if supplied) and releases the claim but serves and claims no lead — the response `lead` is `null`.
 - **Resolution via Call Sync**:
   - Connected call (`duration > 0`) marks lead `status = 'done'`.
   - Unconnected call (`duration == 0`) increments attempt count and locks for 2 hours (`RETRY_LOCK_HOURS`).
@@ -85,8 +84,8 @@ The tracking spike verifies the complete dialer and call-log pipeline on the old
 4. Two quick successive calls to the same number match in order.
 5. Incoming call from the same number is ignored (OUTGOING calls only).
 6. App killed mid-call completes via the 1-hour janitor on the next app open.
-7. Call-end listener fires upon hang-up.
-8. Call-log reading retries at 3s / 10s / 30s to handle vendor logging delays.
+7. Call-end listener opens the post-call popup upon hang-up.
+8. Submit-click read records the real duration even when the phone writes its call-log entry late (vendor delay) — a 15-second connected call shows 15 seconds on the dashboard, never 0.
 
 ---
 
@@ -95,13 +94,14 @@ The tracking spike verifies the complete dialer and call-log pipeline on the old
 The app has no automated UI tests; the calling and navigation fixes are verified by hand on a real phone:
 - Tapping Call starts the call at once in the Android calling screen — no other dialer app, no second confirm tap.
 - With CALL_PHONE off, the Call button hands the number to the phone's own dialer (one extra tap there) and no intent row is written.
-- When an automated call ends, the Call Outcome box is already open on return to the app — three results with icons, the auto-dial-next checkbox, and Save & Continue.
-- Closing the outcome box without saving keeps the lead card with an Enter outcome button, and the call can still be logged.
-- Save & Continue with auto-dial on starts the next lead's call immediately.
+- When a call ends, the post-call popup is already open on return to the app: a lead call shows the schedule question with "Do not schedule" pre-selected and "Go to next call" pre-checked; a keypad call shows the dialed number with OK only.
+- Tapping Submit sends the call, and a 15-second connected call shows 15 seconds of talk time on the dashboard — never 0.
+- With airplane mode on, Submit saves the row on the phone with its duration; with internet back, the next app open bulk-sends it and the row is deleted.
+- Unchecking "Go to next call" and submitting stops the automated loop — no new lead is served until Start calling is tapped again.
+- Submit with "Go to next call" checked starts the next lead's call immediately.
+- Closing the popup without Submit leaves the lead card with a button that reopens it.
 - The tab bar shows three tabs with icons — Dialer (phone), My Stats (bar chart), Settings (gear) — and the My Stats header has no gear button.
 - No screen draws content under the status bar (Login, Dialer, My Stats, Settings).
-- After a keypad call ends, the Call Outcome dialog opens by itself with Connected and Did not connect only, and Save sends the outcome to the server (visible as the call's `outcome` in the `calls` table).
-- After an automated call ends, the Call Outcome dialog opens by itself with all three choices, and Save & Continue still brings up the next lead.
 - The Settings "Clear local data" row shows its full title and description, and tapping it opens the confirm dialog.
 - Holding the dialer backspace clears the whole typed number; a single tap still deletes one character.
 - My Stats shows the Last-30-days KPI cards, the performance table, and the Calls-by-hour chart with its period switch — and no most-contacted-numbers table.

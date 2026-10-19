@@ -96,7 +96,7 @@
 
           <!-- Call button -->
           <div class="mt-4">
-            <button type="button" id="call-btn" class="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-accent)] py-3 text-lg font-bold text-[var(--color-on-accent)] shadow-xs transition-opacity hover:opacity-90">
+            <button type="button" id="call-btn" onclick="openKeypadPostCall()" class="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-accent)] py-3 text-lg font-bold text-[var(--color-on-accent)] shadow-xs transition-opacity hover:opacity-90">
               <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
@@ -120,7 +120,7 @@
           </div>
 
           <h2 class="mt-4 text-xl font-bold tracking-tight">Automated Calling</h2>
-          <p class="mt-1.5 text-xs text-[var(--color-muted-foreground)] px-6">Clicking Start Calling immediately dials the next lead. When call ends, record the outcome and auto-dial next.</p>
+          <p class="mt-1.5 text-xs text-[var(--color-muted-foreground)] px-6">Start Calling dials the next lead right away. When the call ends, the post-call popup opens by itself.</p>
 
           <!-- Start Calling Button -->
           <button type="button" onclick="startAutomatedCall()" class="mt-8 inline-flex w-full max-w-xs cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-accent)] py-4 text-base font-bold text-white shadow-sm transition-opacity hover:opacity-95">
@@ -131,7 +131,7 @@
           </button>
         </div>
 
-        <!-- CALL IN PROGRESS SIMULATION (Transitions quickly to outcome dialog) -->
+        <!-- Calling state: the call dials at once through the phone's dialer -->
         <div id="auto-calling-progress" class="hidden my-auto py-10 text-center">
           <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-[var(--color-accent)] animate-pulse">
             <svg class="h-10 w-10 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -140,9 +140,9 @@
           </div>
           <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-emerald-700">Call in progress...</p>
           <p id="calling-number-display" class="mt-1 text-2xl font-extrabold tabular-nums">+91 98765 43210</p>
-          <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">Dialing via telephony service...</p>
-          <button type="button" onclick="endCallAndShowOutcome()" class="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-xl bg-[var(--color-destructive)] px-6 py-2.5 text-xs font-bold text-white shadow-xs">
-            End Call & Record Outcome
+          <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">Dialing via the phone's dialer…</p>
+          <button type="button" onclick="endLeadCall()" class="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-xl bg-[var(--color-destructive)] px-6 py-2.5 text-xs font-bold text-white shadow-xs">
+            End call
           </button>
         </div>
 
@@ -150,99 +150,87 @@
 
     </main>
 
-    <!-- SCREEN 2: POST-CALL OUTCOME POP-UP MODAL (User Requested) -->
-    <div id="outcome-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-4 backdrop-blur-xs">
+    <!-- Keypad post-call popup: opens by itself when a keypad call ends. Same popup as the lead call - schedule question with date and time reveal, no Go to next call. -->
+    <div id="keypad-postcall-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-4 backdrop-blur-xs">
       <div class="w-full max-w-sm rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
-        
         <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
           <div>
-            <h3 class="text-base font-bold tracking-tight">Call Outcome</h3>
+            <h3 class="text-base font-bold tracking-tight">Call ended</h3>
+            <p id="keypad-call-number" class="text-xs text-[var(--color-muted-foreground)] tabular-nums">+91 98765 43210</p>
+          </div>
+          <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
+        </div>        <!-- Schedule question: "Do not schedule" pre-selected; choosing "Schedule" reveals the date and time below in the same popup -->
+        <div class="mt-4">
+          <p class="text-sm font-bold">Schedule this number for the next call?</p>
+          <div class="mt-2.5 space-y-2">
+            <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/40">
+              <span class="text-sm font-bold text-[var(--color-foreground)]">Do not schedule</span>
+              <input type="radio" name="keypad-schedule-choice" value="none" checked onchange="toggleKeypadScheduleInput()" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            </label>
+            <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/40">
+              <span class="text-sm font-bold text-[var(--color-foreground)]">Schedule</span>
+              <input type="radio" name="keypad-schedule-choice" value="pick" onchange="toggleKeypadScheduleInput()" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            </label>
+          </div>
+          <div id="keypad-schedule-input-box" class="mt-2 hidden rounded-xl border border-indigo-200 bg-indigo-50/40 p-3">
+            <label for="keypad-sched-dt" class="block text-[11px] font-semibold uppercase tracking-wider text-indigo-900">Follow-up time (IST)</label>
+            <input type="datetime-local" id="keypad-sched-dt" value="2026-10-21T11:00" class="mt-1 w-full rounded-lg border border-indigo-200 bg-white px-2.5 py-1.5 text-xs font-medium text-[var(--color-foreground)]">
+          </div>
+        </div>
+        <div class="mt-6">
+          <button type="button" onclick="closeKeypadPostCall()" class="w-full cursor-pointer rounded-xl bg-[var(--color-primary)] py-3 text-sm font-bold text-[var(--color-on-primary)] shadow-xs transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 text-center">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post-call popup: opens by itself when the lead call ends. One Submit button, no outcome choices. -->
+    <div id="post-call-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-4 backdrop-blur-xs">
+      <div class="w-full max-w-sm rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
+
+        <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+          <div>
+            <h3 class="text-base font-bold tracking-tight">Call ended</h3>
             <p id="modal-phone-num" class="text-xs text-[var(--color-muted-foreground)] tabular-nums">+91 98765 43210</p>
           </div>
-          <span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
+          <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
         </div>
 
-        <!-- 3 Required Options: Connected | Did not connect | Schedule -->
-        <div class="mt-4 space-y-2.5">
-          <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Select Call Result</p>
-          
-          <!-- Option 1: Connected -->
-          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-[var(--color-accent)] has-checked:bg-emerald-50/50">
-            <div class="flex items-center gap-3">
-              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-100 text-[var(--color-accent)]">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </span>
-              <div>
-                <p class="text-sm font-bold text-[var(--color-foreground)]">Connected</p>
-                <p class="text-[11px] text-[var(--color-muted-foreground)]">Spoke with client / Lead completed</p>
-              </div>
-            </div>
-            <input type="radio" name="call-outcome" value="connected" checked class="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-accent)]" onchange="toggleScheduleFields(false)">
-          </label>
-
-          <!-- Option 2: Did not connect -->
-          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-red-400 has-checked:bg-red-50/50">
-            <div class="flex items-center gap-3">
-              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-red-100 text-[var(--color-destructive)]">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"/>
-                  <line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-              </span>
-              <div>
-                <p class="text-sm font-bold text-[var(--color-foreground)]">Did not connect</p>
-                <p class="text-[11px] text-[var(--color-muted-foreground)]">No answer, busy, or unreachable</p>
-              </div>
-            </div>
-            <input type="radio" name="call-outcome" value="not_connected" class="h-4 w-4 text-[var(--color-destructive)] focus:ring-[var(--color-destructive)]" onchange="toggleScheduleFields(false)">
-          </label>
-
-          <!-- Option 3: Schedule -->
-          <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/50">
-            <div class="flex items-center gap-3">
-              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-100 text-[var(--color-primary)]">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="4" width="18" height="18" rx="2"/>
-                  <line x1="16" y1="2" x2="16" y2="6"/>
-                  <line x1="8" y1="2" x2="8" y2="6"/>
-                  <line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
-              </span>
-              <div>
-                <p class="text-sm font-bold text-[var(--color-foreground)]">Schedule</p>
-                <p class="text-[11px] text-[var(--color-muted-foreground)]">Reserve callback date & time</p>
-              </div>
-            </div>
-            <input type="radio" name="call-outcome" value="schedule" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-primary)]" onchange="toggleScheduleFields(true)">
-          </label>
+        <!-- Schedule question with "Do not schedule" pre-selected -->
+        <div class="mt-4">
+          <p class="text-sm font-bold">Schedule this number for the next call?</p>
+          <div class="mt-2.5 space-y-2">
+            <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/40">
+              <span class="text-sm font-bold text-[var(--color-foreground)]">Do not schedule</span>
+              <input type="radio" id="schedule-choice-none" name="schedule-choice" value="none" checked onchange="toggleScheduleInput()" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            </label>
+            <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/40">
+              <span class="text-sm font-bold text-[var(--color-foreground)]">Schedule</span>
+              <input type="radio" id="schedule-choice-pick" name="schedule-choice" value="pick" onchange="toggleScheduleInput()" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            </label>
+          </div>
+          <div id="schedule-input-box" class="mt-2 hidden rounded-xl border border-indigo-200 bg-indigo-50/40 p-3">
+            <label for="sched-dt" class="block text-[11px] font-semibold uppercase tracking-wider text-indigo-900">Follow-up time (IST)</label>
+            <input type="datetime-local" id="sched-dt" value="2026-10-21T11:00" class="mt-1 w-full rounded-lg border border-indigo-200 bg-white px-2.5 py-1.5 text-xs font-medium text-[var(--color-foreground)]">
+          </div>
         </div>
 
-        <!-- Schedule Date/Time input (shown if Schedule selected) -->
-        <div id="schedule-input-box" class="hidden mt-3 rounded-xl border border-indigo-200 bg-indigo-50/40 p-3">
-          <label for="sched-dt" class="block text-[11px] font-semibold uppercase tracking-wider text-indigo-900">Follow-up Time (IST)</label>
-          <input type="datetime-local" id="sched-dt" value="2026-10-15T11:00" class="mt-1 w-full rounded-lg border border-indigo-200 bg-white px-2.5 py-1.5 text-xs font-medium text-[var(--color-foreground)]">
-        </div>
-
-        <!-- Next Call Checkbox: check or uncheck whether to do the next call or pause -->
+        <!-- Go to next call: pre-checked -->
         <div class="mt-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-3">
           <label class="flex items-center gap-3 cursor-pointer">
-            <input type="checkbox" id="auto-next-checkbox" checked class="h-4 w-4 rounded text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
-            <span class="text-xs font-bold text-[var(--color-foreground)]">Auto-dial next lead immediately</span>
+            <input type="checkbox" id="go-next-checkbox" checked class="h-4 w-4 rounded text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            <span class="text-xs font-bold text-[var(--color-foreground)]">Go to next call</span>
           </label>
-          <p class="mt-1 pl-7 text-[10px] text-[var(--color-muted-foreground)]">Uncheck to pause and review before placing next call.</p>
+          <p class="mt-1 pl-7 text-[10px] text-[var(--color-muted-foreground)]">Uncheck to stop automated calling after Submit.</p>
         </div>
 
-        <!-- Submit & Advance Action -->
-        <div class="mt-5 flex gap-2">
-          <button type="button" onclick="submitOutcomeAndProceed()" class="flex-1 cursor-pointer rounded-xl bg-[var(--color-primary)] py-3 text-xs font-bold text-white shadow-xs transition-colors hover:bg-[var(--color-secondary)] text-center">
-            Save & Continue →
-          </button>
+        <!-- One Submit button: reads the call record and sends the call -->
+        <div class="mt-5">
+          <button type="button" onclick="submitPostCall()" class="w-full cursor-pointer rounded-xl bg-[var(--color-primary)] py-3 text-sm font-bold text-[var(--color-on-primary)] shadow-xs transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 text-center">Submit</button>
         </div>
 
       </div>
     </div>
+
 
     <!-- Bottom tab bar: 3 tabs - Dialer | My Stats | Settings -->
     <nav class="sticky bottom-0 z-20 border-t border-[var(--color-border)] bg-[var(--color-card)]" aria-label="App tabs">
@@ -310,7 +298,7 @@
       document.getElementById('dial-number').textContent = '+91 91234 56789';
     }
 
-    // Automated flow queue
+    // Automated flow: Start Calling dials the next lead at once
     const leadsList = [
       "+91 98765 43210",
       "+91 98123 45678",
@@ -319,45 +307,85 @@
     ];
     let currentIdx = 0;
 
+    function setLeadNumber(number) {
+      document.getElementById('calling-number-display').textContent = number;
+      document.getElementById('modal-phone-num').textContent = number;
+    }
+
+    function showAutomatedState(stateId) {
+      const stateIds = ['auto-screen-start', 'auto-calling-progress'];
+      stateIds.forEach(function (id) {
+        const element = document.getElementById(id);
+        if (id === stateId) {
+          element.classList.remove('hidden');
+        } else {
+          element.classList.add('hidden');
+        }      });
+    }
+
     function startAutomatedCall() {
-      const currentNumber = leadsList[currentIdx % leadsList.length];
-      document.getElementById('calling-number-display').textContent = currentNumber;
-      document.getElementById('auto-screen-start').classList.add('hidden');
-      document.getElementById('auto-calling-progress').classList.remove('hidden');
-      
-      // Auto-simulate call connected / prompt after 1.8s
-      setTimeout(function() {
-        endCallAndShowOutcome();
-      }, 1800);
+      setLeadNumber(leadsList[currentIdx % leadsList.length]);
+      showAutomatedState('auto-calling-progress');
+      setTimeout(function () { endLeadCall(); }, 1800);
     }
 
-    function endCallAndShowOutcome() {
-      const currentNumber = leadsList[currentIdx % leadsList.length];
-      document.getElementById('modal-phone-num').textContent = currentNumber;
-      document.getElementById('outcome-modal').classList.remove('hidden');
+    function endLeadCall() {
+      setLeadNumber(leadsList[currentIdx % leadsList.length]);
+      showAutomatedState('auto-screen-start');
+      document.getElementById('post-call-overlay').classList.remove('hidden');
     }
 
-    function toggleScheduleFields(show) {
-      const box = document.getElementById('schedule-input-box');
-      if (show) box.classList.remove('hidden');
+    function dismissPopup() {
+      document.getElementById('post-call-overlay').classList.add('hidden');
+    }
+
+    function submitPostCall() {
+      const goNext = document.getElementById('go-next-checkbox').checked;
+      document.getElementById('post-call-overlay').classList.add('hidden');
+      if (goNext) {
+        // With the box checked the next lead's call starts at once (hands-free)
+        currentIdx++;
+        setLeadNumber(leadsList[currentIdx % leadsList.length]);
+        showAutomatedState('auto-calling-progress');
+        setTimeout(function () { endLeadCall(); }, 1801);
+      } else {
+        // Unchecked: automated calling stops until Start Calling again
+        showAutomatedState('auto-screen-start');
+      }
+    }
+
+    // Tap on the dark area closes the popup without Submit; the reopen button brings it back
+    // Keypad flow: after a keypad call ends, its popup shows the number with one OK
+    function openKeypadPostCall() {
+      const typed = document.getElementById('dial-number').textContent.trim();
+      document.getElementById('keypad-call-number').textContent = typed.length > 0 ? typed : '+91 98765 43210';
+      document.getElementById('keypad-postcall-overlay').classList.remove('hidden');
+    }
+
+    function closeKeypadPostCall() {
+      document.getElementById('keypad-postcall-overlay').classList.add('hidden');
+    }
+
+    // Choosing "Schedule" reveals the date and time below in the same popup
+    function toggleKeypadScheduleInput() {
+      const box = document.getElementById('keypad-schedule-input-box');
+      const picked = document.querySelector('input[name="keypad-schedule-choice"]:checked').value === 'pick';
+      if (picked) box.classList.remove('hidden');
       else box.classList.add('hidden');
     }
 
-    function submitOutcomeAndProceed() {
-      const isAutoNext = document.getElementById('auto-next-checkbox').checked;
-      document.getElementById('outcome-modal').classList.add('hidden');
-      document.getElementById('auto-calling-progress').classList.add('hidden');
-      
-      currentIdx++;
-      const nextNumber = leadsList[currentIdx % leadsList.length];
-      document.getElementById('next-lead-preview').textContent = nextNumber;
 
-      if (isAutoNext) {
-        startAutomatedCall();
-      } else {
-        document.getElementById('auto-screen-start').classList.remove('hidden');
-      }
+    // Choosing "Schedule" reveals the date and time below in the same popup
+    function toggleScheduleInput() {
+      const box = document.getElementById('schedule-input-box');
+      const picked = document.querySelector('input[name="schedule-choice"]:checked').value === 'pick';
+      if (picked) box.classList.remove('hidden');
+      else box.classList.add('hidden');
     }
+
+    document.getElementById('post-call-overlay').addEventListener('click', function (event) {
+      if (event.target === this) dismissPopup();
+    });
   </script>
 
 </body>

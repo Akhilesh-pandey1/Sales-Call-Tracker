@@ -45,7 +45,7 @@ CREATE UNIQUE INDEX idx_calls_call_id ON calls(call_id);
 CREATE INDEX idx_calls_user_dialed ON calls(user_id, dialed_at);
 ```
 
-- `outcome` holds the salesperson's chosen result: `connected`, `not_connected`, or `schedule`. Empty means the outcome was never recorded. The column is additive — existing rows keep it empty and nothing is backfilled.
+- `outcome` is unused: the app never asks for an outcome, so every call syncs without one and the column stays empty on every row. The nullable column remains in place for a future decision.
 
 ### `leads`
 Stores shared lead numbers, call outcomes, retry locks, claims, and scheduling.
@@ -89,7 +89,7 @@ CREATE TABLE office_hours (
 ## 2. Android Local Phone Database (SQLite)
 
 ### `pending_calls`
-Temporary queue living only on the salesperson's phone. Rows are deleted after `POST /api/calls/sync` succeeds.
+Temporary queue living only on the salesperson's phone. A row is deleted as soon as the server accepts its call — at the post-call Submit send or on a later bulk sync.
 
 ```sql
 CREATE TABLE pending_calls (
@@ -103,8 +103,8 @@ CREATE TABLE pending_calls (
 );
 ```
 
-- `dialed_at` and `duration_seconds` remain `NULL` until filled by the real-time call-end listener or the 1-hour janitor.
-- `outcome` holds the result picked in the outcome dialog (`connected` or `not_connected`) until sync sends it; the row is deleted after sync as usual.
+- `dialed_at` and `duration_seconds` stay `NULL` until the post-call popup's Submit click fills them from the call log, or the 1-hour janitor does. On a failed send the filled values stay saved on the row until the next bulk sync succeeds.
+- `outcome` is no longer written — the outcome flow is removed; the column stays from an older version of the app.
 - At 5 janitor attempts, an unfilled row is set to `dialed_at = intent_at` and `duration_seconds = 0` so the dial reaches the server and counts.
 
 ---

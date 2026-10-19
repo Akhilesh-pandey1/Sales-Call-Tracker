@@ -3,6 +3,7 @@ import type { ServedLead } from '../api/leads.api';
 import { useCallHangUpDetector } from './use-call-hang-up-detector';
 import { useLeadLoading } from './use-lead-loading';
 import { useLeadPostCall } from './use-lead-post-call';
+import type { PostCallDialogState } from './use-post-call-submit';
 
 export type AutomatedViewState =
   | { kind: 'start' }
@@ -12,11 +13,8 @@ export type AutomatedViewState =
   | { kind: 'dialing'; lead: ServedLead; callId: string | null }
   | { kind: 'finished'; lead: ServedLead; callId: string | null };
 
-export type UseAutomatedCallingResult = {
+export type UseAutomatedCallingResult = PostCallDialogState & {
   viewState: AutomatedViewState;
-  isPostCallDialogOpen: boolean;
-  isSubmittingPostCall: boolean;
-  postCallErrorMessage: string | null;
   startErrorMessage: string | null;
   startCalling: () => Promise<void>;
   dialCurrentLead: () => Promise<void>;
@@ -47,16 +45,11 @@ export function useAutomatedCalling(): UseAutomatedCallingResult {
   useCallHangUpDetector(viewState.kind === 'dialing', leadPostCall.showPostCallDialog);
 
   const automatedCalling: UseAutomatedCallingResult = {
+    ...leadPostCall,
     viewState,
-    isPostCallDialogOpen: leadPostCall.isPostCallDialogOpen,
-    isSubmittingPostCall: leadPostCall.isSubmittingPostCall,
-    postCallErrorMessage: leadPostCall.postCallErrorMessage,
     startErrorMessage,
     startCalling,
     dialCurrentLead,
-    openPostCallDialog: leadPostCall.openPostCallDialog,
-    closePostCallDialog: leadPostCall.closePostCallDialog,
-    submitPostCall: leadPostCall.submitPostCall,
   };
   return automatedCalling;
 }

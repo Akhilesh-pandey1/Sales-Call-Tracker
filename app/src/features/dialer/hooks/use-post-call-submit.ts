@@ -1,14 +1,18 @@
 import { useCallback, useRef, useState } from 'react';
 import { submitTrackedCall } from '@/features/tracking';
-import { readRequestErrorMessage } from './use-lead-loading';
+import { readRequestErrorMessage } from '../lib/request-error';
 
-export type UsePostCallSubmitResult = {
+export type PostCallDialogState = {
+  isPostCallDialogOpen: boolean;
   isSubmittingPostCall: boolean;
   postCallErrorMessage: string | null;
+};
+
+export type UsePostCallSubmitResult = Omit<PostCallDialogState, 'isPostCallDialogOpen'> & {
   clearPostCallErrorMessage: () => void;
   submitPostCall: (
     callId: string | null,
-    afterCallSent: () => Promise<void>,
+    afterCallSent: () => void | Promise<void>,
   ) => Promise<void>;
 };
 
@@ -24,7 +28,7 @@ export function usePostCallSubmit(): UsePostCallSubmitResult {
   const submitPostCall = useCallback(
     async (
       callId: string | null,
-      afterCallSent: () => Promise<void>,
+      afterCallSent: () => void | Promise<void>,
     ): Promise<void> => {
       if (isSubmittingPostCallRef.current) {
         return;

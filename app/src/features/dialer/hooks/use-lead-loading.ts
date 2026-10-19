@@ -1,11 +1,9 @@
 import { useCallback, useRef, useState } from 'react';
 import { ToastAndroid } from 'react-native';
-import { isAxiosError } from 'axios';
 import type { RefObject } from 'react';
-import { readResponseErrorMessage } from '@/shared/api/api-client';
-import { serverUnreachableMessage } from '@/shared/constants/messages';
 import { fetchNextLead, type ServedLead } from '../api/leads.api';
 import { callFailedMessage, launchTrackedCall } from '../lib/call-launcher';
+import { readRequestErrorMessage } from '../lib/request-error';
 import type { AutomatedViewState } from './use-automated-calling';
 
 export type UseLeadLoadingResult = {
@@ -14,16 +12,6 @@ export type UseLeadLoadingResult = {
   startCalling: () => Promise<void>;
   dialCurrentLead: () => Promise<void>;
 };
-
-function readRequestErrorMessage(requestError: unknown): string {
-  if (!isAxiosError(requestError) || !requestError.response) {
-    return serverUnreachableMessage;
-  }
-  const serverMessage = readResponseErrorMessage(requestError);
-  return serverMessage ?? serverUnreachableMessage;
-}
-
-export { readRequestErrorMessage };
 
 export function useLeadLoading(
   viewStateRef: RefObject<AutomatedViewState>,

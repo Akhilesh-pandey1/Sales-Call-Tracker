@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/shared/components/password-input";
 import { useEditAccountForm } from "../hooks/use-edit-account-form";
 import {
   accountCountries,
@@ -89,9 +90,8 @@ export function EditUserModal({
             <label htmlFor="edit-account-password" className="text-sm font-medium">
               New password
             </label>
-            <Input
+            <PasswordInput
               id="edit-account-password"
-              type="password"
               value={passwordValue}
               onChange={handlePasswordChange}
               placeholder="Leave blank to keep the current password"

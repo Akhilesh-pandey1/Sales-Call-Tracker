@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { AlertCircle, Phone } from 'lucide-react-native';
+import { PasswordInput } from '../components/password-input';
 import type { LoginResult } from '../hooks/use-auth';
 
 type LoginScreenProps = {
@@ -69,11 +70,10 @@ export function LoginScreen({ onLogin }: LoginScreenProps) {
         />
 
         <Text className="mt-4 text-sm font-medium">Password</Text>
-        <Input
+        <PasswordInput
           className="mt-1.5 h-12 rounded-xl px-4"
           placeholder="Your password"
           autoComplete="password"
-          secureTextEntry
           returnKeyType="done"
           value={userPassword}
           onChangeText={setUserPassword}

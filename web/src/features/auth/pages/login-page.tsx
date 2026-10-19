@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/shared/components/password-input";
 import { useAuthLogin } from "../hooks/use-auth";
 
 export function LoginPage() {
@@ -56,10 +57,9 @@ export function LoginPage() {
             <label htmlFor="login-password" className="text-sm font-medium">
               Password
             </label>
-            <Input
+            <PasswordInput
               id="login-password"
               name="password"
-              type="password"
               autoComplete="current-password"
               placeholder="Your password"
               value={password}

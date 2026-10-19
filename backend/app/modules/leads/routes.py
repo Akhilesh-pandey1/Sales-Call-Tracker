@@ -97,7 +97,10 @@ def get_next_lead() -> tuple[Response, int]:
 
     user_id: int = g.user.id
     schedule_model: ScheduleLeadRequest | None = validated_request.schedule
-    served_result: dict[str, Any] = serve_next_lead(user_id, schedule_model)
+    continue_calling_flag: bool = validated_request.continue_calling
+    served_result: dict[str, Any] = serve_next_lead(
+        user_id, continue_calling_flag, schedule_model
+    )
     validated_response: NextLeadResponse = NextLeadResponse.model_validate(
         served_result
     )

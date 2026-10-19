@@ -668,6 +668,104 @@ def test_next_lead_schedule_combined_with_next_fetch(
     assert lead_1.scheduled_by == salesperson.id
 
 
+def test_next_lead_continue_calling_false_serves_no_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    salesperson = create_user_fixture(name="SalesStop", role="salesperson", token="stop-token")
+
+    current_time: datetime = now_utc()
+    claimed_lead = create_lead_fixture(
+        phone_number="+919876543290",
+        status="waiting",
+        claimed_by=salesperson.id,
+        claimed_until=current_time + timedelta(minutes=5),
+    )
+    create_lead_fixture(phone_number="+919876543291", status="waiting")
+
+    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    payload: dict[str, Any] = {"continue_calling": False}
+
+    response = client.post("/api/leads/next", json=payload, headers=headers)
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["status"] is True
+    assert json_data["lead"] is None
+
+    db.session.refresh(claimed_lead)
+    assert claimed_lead.claimed_by is None
+    assert claimed_lead.claimed_until is None
+
+    pool_lead: Lead | None = Lead.query.filter_by(phone_number="+919876543291").first()
+    assert pool_lead is not None
+    assert pool_lead.claimed_by is None
+
+
+def test_next_lead_continue_calling_false_still_applies_schedule(
+    app: Flask, client: FlaskClient
+) -> None:
+    salesperson = create_user_fixture(name="SalesStopSched", role="salesperson", token="stop-sched-token")
+
+    current_time: datetime = now_utc()
+    claimed_lead = create_lead_fixture(
+        phone_number="+919876543292",
+        status="waiting",
+        claimed_by=salesperson.id,
+        claimed_until=current_time + timedelta(minutes=5),
+    )
+    create_lead_fixture(phone_number="+919876543293", status="waiting")
+
+    future_schedule: datetime = current_time + timedelta(days=2)
+    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    payload: dict[str, Any] = {
+        "continue_calling": False,
+        "schedule": {
+            "lead_id": claimed_lead.id,
+            "scheduled_at": future_schedule.isoformat(),
+        },
+    }
+
+    response = client.post("/api/leads/next", json=payload, headers=headers)
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["status"] is True
+    assert json_data["lead"] is None
+
+    db.session.refresh(claimed_lead)
+    assert claimed_lead.scheduled_by == salesperson.id
+    assert claimed_lead.scheduled_at is not None
+    assert claimed_lead.claimed_by is None
+    assert claimed_lead.claimed_until is None
+
+    untouched_lead: Lead | None = Lead.query.filter_by(
+        phone_number="+919876543293"
+    ).first()
+    assert untouched_lead is not None
+    assert untouched_lead.claimed_by is None
+
+
+def test_next_lead_continue_calling_true_serves_lead_as_before(
+    app: Flask, client: FlaskClient
+) -> None:
+    salesperson = create_user_fixture(name="SalesContinue", role="salesperson", token="continue-token")
+    pool_lead = create_lead_fixture(phone_number="+919876543294", status="waiting")
+
+    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    payload: dict[str, Any] = {"continue_calling": True}
+
+    response = client.post("/api/leads/next", json=payload, headers=headers)
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["lead"]["id"] == pool_lead.id
+    assert json_data["lead"]["phone_number"] == "+919876543294"
+
+    db.session.refresh(pool_lead)
+    assert pool_lead.claimed_by == salesperson.id
+    assert pool_lead.claimed_until is not None
+
+
 def test_next_lead_schedule_in_past_or_too_far_ahead_rejected(
     app: Flask, client: FlaskClient
 ) -> None:

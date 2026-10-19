@@ -22,15 +22,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `continue_calling` defaults to true — without the flag the endpoint behaves exactly as before
-- [ ] `continue_calling: false` still applies a supplied schedule and releases the active claim, then answers `lead: null`
-- [ ] The flag is covered in `backend/tests/modules/test_leads.py` per `testing.md`
+- [x] `continue_calling` defaults to true — without the flag the endpoint behaves exactly as before
+- [x] `continue_calling: false` still applies a supplied schedule and releases the active claim, then answers `lead: null`
+- [x] The flag is covered in `backend/tests/modules/test_leads.py` per `testing.md`
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest backend/tests/modules/test_leads.py` (from the project root)
+- [x] Tests pass: `python -m pytest backend/tests/modules/test_leads.py` (from the project root)
 
 ---
 

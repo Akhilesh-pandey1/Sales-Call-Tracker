@@ -35,6 +35,7 @@ class ScheduleLeadRequest(BaseModel):
 
 class NextLeadRequest(BaseModel):
     schedule: ScheduleLeadRequest | None = None
+    continue_calling: bool = True
 
 
 class ServedLead(BaseModel):

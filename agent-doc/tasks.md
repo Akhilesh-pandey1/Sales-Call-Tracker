@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Sync saves calls without reading an outcome field, and the `outcome` column stays empty on every saved row
-- [ ] `PATCH /api/calls/<call_id>/outcome` is gone, with its service and schema code
-- [ ] The outcome tests in `backend/tests/modules/test_calls.py` are replaced by the stays-empty case per `testing.md`
+- [x] Sync saves calls without reading an outcome field, and the `outcome` column stays empty on every saved row
+- [x] `PATCH /api/calls/<call_id>/outcome` is gone, with its service and schema code
+- [x] The outcome tests in `backend/tests/modules/test_calls.py` are replaced by the stays-empty case per `testing.md`
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest backend/tests/modules/test_calls.py` (from the project root)
+- [x] Tests pass: `python -m pytest backend/tests/modules/test_calls.py` (from the project root)
 
 ---
 

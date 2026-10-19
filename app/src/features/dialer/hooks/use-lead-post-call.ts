@@ -58,14 +58,14 @@ export function useLeadPostCall(
         return;
       }
       const leadSchedule = buildLeadScheduleRequest(scheduledAt, currentState.lead.id);
-      const nextLead = await fetchNextLead(leadSchedule);
+      const nextLead = await fetchNextLead(leadSchedule, shouldContinueToNextLead);
       updateDialogOpen(false);
-      if (nextLead === null) {
-        updateViewState({ kind: 'empty' });
+      if (!shouldContinueToNextLead) {
+        updateViewState({ kind: 'start' });
         return;
       }
-      if (!shouldContinueToNextLead) {
-        updateViewState({ kind: 'ready', lead: nextLead });
+      if (nextLead === null) {
+        updateViewState({ kind: 'empty' });
         return;
       }
       await dialLead(nextLead);

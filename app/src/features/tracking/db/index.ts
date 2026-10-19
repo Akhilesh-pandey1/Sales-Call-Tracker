@@ -4,9 +4,9 @@ export {
   countPendingCalls,
   deletePendingCall,
   getAllPendingCalls,
+  getPendingCallById,
   getUnfilledPendingCalls,
   insertPendingCall,
   markPendingCallFilled,
-  updatePendingCallOutcome,
 } from './pending-calls-db';
 export type { PendingCall, UnfilledPendingCall } from './pending-calls-db';

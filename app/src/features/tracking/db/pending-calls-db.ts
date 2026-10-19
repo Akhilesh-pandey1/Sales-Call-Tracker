@@ -1,5 +1,4 @@
 import SQLite, { type ResultSet, type SQLiteDatabase } from 'react-native-sqlite-storage';
-import type { CallOutcome } from '../types';
 
 const CREATE_PENDING_CALLS_TABLE = `CREATE TABLE IF NOT EXISTS pending_calls (
   call_id TEXT PRIMARY KEY,
@@ -13,7 +12,7 @@ const CREATE_PENDING_CALLS_TABLE = `CREATE TABLE IF NOT EXISTS pending_calls (
 
 const INSERT_PENDING_CALL = `INSERT INTO pending_calls (call_id, phone_number, intent_at) VALUES (?, ?, ?)`;
 
-const SELECT_ALL_PENDING_CALLS = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, outcome, attempts
+const SELECT_ALL_PENDING_CALLS = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, attempts
   FROM pending_calls
   ORDER BY intent_at ASC`;
 
@@ -22,13 +21,15 @@ const SELECT_UNFILLED_PENDING_CALLS = `SELECT call_id, phone_number, intent_at
   WHERE dialed_at IS NULL
   ORDER BY intent_at ASC`;
 
+const SELECT_PENDING_CALL_BY_ID = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, attempts
+  FROM pending_calls
+  WHERE call_id = ?`;
+
 const SELECT_PENDING_CALL_COUNT = `SELECT COUNT(*) AS pending_call_count FROM pending_calls`;
 
 const MARK_PENDING_CALL_FILLED = `UPDATE pending_calls
   SET dialed_at = ?, duration_seconds = ?
   WHERE call_id = ?`;
-
-const UPDATE_PENDING_CALL_OUTCOME = `UPDATE pending_calls SET outcome = ? WHERE call_id = ?`;
 
 const INCREMENT_PENDING_CALL_ATTEMPTS = `UPDATE pending_calls SET attempts = attempts + 1 WHERE call_id = ?`;
 
@@ -47,7 +48,6 @@ export interface PendingCall {
   intentAt: string;
   dialedAt: string | null;
   durationSeconds: number | null;
-  outcome: CallOutcome | null;
   attempts: number;
 }
 
@@ -57,7 +57,6 @@ interface PendingCallTableRow {
   intent_at: string;
   dialed_at: string | null;
   duration_seconds: number | null;
-  outcome: CallOutcome | null;
   attempts: number;
 }
 
@@ -138,7 +137,6 @@ function toPendingCall(row: PendingCallTableRow): PendingCall {
     intentAt: row.intent_at,
     dialedAt: row.dialed_at,
     durationSeconds: row.duration_seconds,
-    outcome: row.outcome,
     attempts: row.attempts,
   };
   return pendingCall;
@@ -176,21 +174,23 @@ export async function getUnfilledPendingCalls(): Promise<UnfilledPendingCall[]> 
   return unfilledPendingCalls;
 }
 
+export async function getPendingCallById(callId: string): Promise<PendingCall | null> {
+  const result = await runQuery(SELECT_PENDING_CALL_BY_ID, [callId]);
+  if (result.rows.length === 0) {
+    const noPendingCall = null;
+    return noPendingCall;
+  }
+  const pendingCallRow = result.rows.item(0) as PendingCallTableRow;
+  const pendingCall = toPendingCall(pendingCallRow);
+  return pendingCall;
+}
+
 export async function markPendingCallFilled(
   callId: string,
   dialedAt: string,
   durationSeconds: number,
 ): Promise<void> {
   await runQuery(MARK_PENDING_CALL_FILLED, [dialedAt, durationSeconds, callId]);
-}
-
-export async function updatePendingCallOutcome(
-  callId: string,
-  outcome: CallOutcome,
-): Promise<boolean> {
-  const result = await runQuery(UPDATE_PENDING_CALL_OUTCOME, [outcome, callId]);
-  const didUpdateRow = result.rowsAffected > 0;
-  return didUpdateRow;
 }
 
 export async function addPendingCallAttempt(callId: string): Promise<number> {

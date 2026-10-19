@@ -9,19 +9,19 @@ import { usePermissions } from '@/features/tracking';
 import { cn } from '@/lib/utils';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { ClipboardPaste, Delete, Inbox, Phone } from 'lucide-react-native';
-import { KeypadOutcomeDialog } from '../components/keypad-outcome-dialog';
 import { LeadCallCard } from '../components/lead-call-card';
 import { Keypad } from '../components/keypad';
 import { PermissionBanner } from '../components/permission-banner';
+import { PostCallDialog } from '../components/post-call-dialog';
 import {
   useAutomatedCalling,
   type UseAutomatedCallingResult,
 } from '../hooks/use-automated-calling';
 import { useDialer, type UseDialerResult } from '../hooks/use-dialer';
 import {
-  useKeypadCallOutcome,
-  type UseKeypadCallOutcomeResult,
-} from '../hooks/use-keypad-outcome';
+  useKeypadPostCall,
+  type UseKeypadPostCallResult,
+} from '../hooks/use-keypad-post-call';
 
 type DialerSubTab = 'keypad' | 'automated';
 
@@ -78,10 +78,10 @@ function DialerSubTabs({
 
 function KeypadView({
   dialer,
-  keypadCallOutcome,
+  keypadPostCall,
 }: {
   dialer: UseDialerResult;
-  keypadCallOutcome: UseKeypadCallOutcomeResult;
+  keypadPostCall: UseKeypadPostCallResult;
 }) {
   const isCallEnabled = dialer.isNumberValid && !dialer.isDialLocked;
   const callButtonClasses = cn(
@@ -97,9 +97,9 @@ function KeypadView({
   const callHintMessage = dialer.isNumberValid
     ? 'Calls are logged and sent to your manager automatically.'
     : 'Type a valid number to enable calling.';
-  const trackedCall = keypadCallOutcome.trackedCall;
-  const outcomeDialogKey = trackedCall?.callId ?? 'idle-keypad-outcome';
-  const outcomeDialogPhoneNumber = trackedCall === null
+  const trackedCall = keypadPostCall.trackedCall;
+  const postCallDialogKey = trackedCall?.callId ?? 'idle-keypad-post-call';
+  const postCallDialogPhoneNumber = trackedCall === null
     ? ''
     : formatInternationalPhoneNumber(trackedCall.phoneNumber);
 
@@ -108,7 +108,7 @@ function KeypadView({
   const handlePastePress = () => dialer.pasteNumberFromClipboard();
   const handleCallPress = async () => {
     const launchedCall = await dialer.startCall();
-    keypadCallOutcome.trackLaunchedCall(launchedCall);
+    keypadPostCall.trackLaunchedCall(launchedCall);
   };
 
   return (
@@ -156,14 +156,15 @@ function KeypadView({
         </Text>
       </View>
 
-      <KeypadOutcomeDialog
-        key={outcomeDialogKey}
-        isOpen={keypadCallOutcome.isOutcomeDialogOpen}
-        phoneNumber={outcomeDialogPhoneNumber}
-        isSubmitting={keypadCallOutcome.isSubmittingOutcome}
-        errorMessage={keypadCallOutcome.outcomeErrorMessage}
-        onClose={keypadCallOutcome.closeOutcomeDialog}
-        onSubmit={keypadCallOutcome.saveOutcome}
+      <PostCallDialog
+        key={postCallDialogKey}
+        variant="keypad"
+        isOpen={keypadPostCall.isPostCallDialogOpen}
+        phoneNumber={postCallDialogPhoneNumber}
+        isSubmitting={keypadPostCall.isSubmittingPostCall}
+        errorMessage={keypadPostCall.postCallErrorMessage}
+        onClose={keypadPostCall.closePostCallDialog}
+        onSubmit={keypadPostCall.submitKeypadPostCall}
       />
     </View>
   );
@@ -240,6 +241,43 @@ function AutomatedEmptyView({ onTryAgain }: { onTryAgain: () => void }) {
   );
 }
 
+function AutomatedFinishedView({
+  phoneNumber,
+  isPostCallDialogOpen,
+  onReopenPostCallDialog,
+}: {
+  phoneNumber: string;
+  isPostCallDialogOpen: boolean;
+  onReopenPostCallDialog: () => void;
+}) {
+  const handleReopenPress = () => onReopenPostCallDialog();
+
+  return (
+    <View className="flex-1 items-center justify-center px-3">
+      <Text className="text-xs font-semibold uppercase tracking-wider text-accent">
+        Call finished
+      </Text>
+      <Text className="mt-1 text-center text-2xl font-extrabold tabular-nums tracking-tight">
+        {phoneNumber}
+      </Text>
+      <View className="mt-3 rounded-full bg-muted px-3 py-1">
+        <Text className="text-xs font-semibold text-muted-foreground">Ended</Text>
+      </View>
+      {isPostCallDialogOpen ? null : (
+        <Button
+          variant="outline"
+          onPress={handleReopenPress}
+          className="mt-6 h-12 w-full max-w-xs rounded-xl"
+        >
+          <Text className="text-xs font-semibold text-primary">
+            Reopen call summary
+          </Text>
+        </Button>
+      )}
+    </View>
+  );
+}
+
 function AutomatedView({
   automatedCalling,
 }: {
@@ -261,21 +299,39 @@ function AutomatedView({
       />
     );
   }
+  if (viewState.kind === 'finished') {
+    const postCallDialogKey = viewState.callId ?? 'idle-lead-post-call';
+    const finishedPhoneNumber = formatInternationalPhoneNumber(
+      viewState.lead.phone_number,
+    );
+
+    return (
+      <View className="flex-1">
+        <AutomatedFinishedView
+          phoneNumber={finishedPhoneNumber}
+          isPostCallDialogOpen={automatedCalling.isPostCallDialogOpen}
+          onReopenPostCallDialog={automatedCalling.openPostCallDialog}
+        />
+        <PostCallDialog
+          key={postCallDialogKey}
+          variant="lead"
+          isOpen={automatedCalling.isPostCallDialogOpen}
+          phoneNumber={finishedPhoneNumber}
+          isSubmitting={automatedCalling.isSubmittingPostCall}
+          errorMessage={automatedCalling.postCallErrorMessage}
+          onClose={automatedCalling.closePostCallDialog}
+          onSubmit={automatedCalling.submitPostCall}
+        />
+      </View>
+    );
+  }
 
   return (
     <LeadCallCard
       variant={viewState.kind}
       phoneNumber={viewState.lead.phone_number}
       attemptCount={viewState.lead.attempt_count}
-      isOutcomeDialogOpen={automatedCalling.isOutcomeDialogOpen}
-      isSubmittingOutcome={automatedCalling.isSubmittingOutcome}
-      outcomeErrorMessage={automatedCalling.outcomeErrorMessage}
-      autoDialNextEnabled={automatedCalling.autoDialNextEnabled}
       onDialCurrentLead={automatedCalling.dialCurrentLead}
-      onOpenOutcomeDialog={automatedCalling.openOutcomeDialog}
-      onCloseOutcomeDialog={automatedCalling.closeOutcomeDialog}
-      onToggleAutoDialNext={automatedCalling.setAutoDialNextEnabled}
-      onSubmitOutcome={automatedCalling.submitOutcome}
     />
   );
 }
@@ -284,7 +340,7 @@ export function DialerScreen() {
   const missingPermissions = usePermissions();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
   const dialer = useDialer();
-  const keypadCallOutcome = useKeypadCallOutcome();
+  const keypadPostCall = useKeypadPostCall();
   const automatedCalling = useAutomatedCalling();
   const { top: topInset } = useSafeAreaInsets();
 
@@ -295,7 +351,7 @@ export function DialerScreen() {
       </View>
       <DialerSubTabs activeSubTab={activeSubTab} onSelectSubTab={setActiveSubTab} />
       {activeSubTab === 'keypad' ? (
-        <KeypadView dialer={dialer} keypadCallOutcome={keypadCallOutcome} />
+        <KeypadView dialer={dialer} keypadPostCall={keypadPostCall} />
       ) : (
         <AutomatedView automatedCalling={automatedCalling} />
       )}

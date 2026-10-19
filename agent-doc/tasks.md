@@ -40,16 +40,16 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The popup opens by itself when a call ends and is visible on the phone, carrying one Submit button — the keypad version shows the dialed number with OK; the lead version shows the schedule question with the date picker and the pre-checked "Go to next call" checkbox
-- [ ] Submit reads the call log at the click and sends first — server accepts → the row is deleted; send fails → the filled row is saved locally; no log entry yet → the row stays unfilled for the janitor
-- [ ] The dead outcome code is deleted (the outcome dialogs, `outcome-option.tsx`, the three outcome hooks, the PATCH client call, the sync outcome path), and the lead card's reopen button still reopens the popup after it was closed without Submit
+- [x] The popup opens by itself when a call ends and is visible on the phone, carrying one Submit button — the keypad version shows the dialed number with OK; the lead version shows the schedule question with the date picker and the pre-checked "Go to next call" checkbox
+- [x] Submit reads the call log at the click and sends first — server accepts → the row is deleted; send fails → the filled row is saved locally; no log entry yet → the row stays unfilled for the janitor
+- [x] The dead outcome code is deleted (the outcome dialogs, `outcome-option.tsx`, the three outcome hooks, the PATCH client call, the sync outcome path), and the lead card's reopen button still reopens the popup after it was closed without Submit
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

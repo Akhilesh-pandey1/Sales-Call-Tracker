@@ -163,7 +163,6 @@ function KeypadView({
         phoneNumber={postCallDialogPhoneNumber}
         isSubmitting={keypadPostCall.isSubmittingPostCall}
         errorMessage={keypadPostCall.postCallErrorMessage}
-        onClose={keypadPostCall.closePostCallDialog}
         onSubmit={keypadPostCall.submitKeypadPostCall}
       />
     </View>
@@ -241,17 +240,7 @@ function AutomatedEmptyView({ onTryAgain }: { onTryAgain: () => void }) {
   );
 }
 
-function AutomatedFinishedView({
-  phoneNumber,
-  isPostCallDialogOpen,
-  onReopenPostCallDialog,
-}: {
-  phoneNumber: string;
-  isPostCallDialogOpen: boolean;
-  onReopenPostCallDialog: () => void;
-}) {
-  const handleReopenPress = () => onReopenPostCallDialog();
-
+function AutomatedFinishedView({ phoneNumber }: { phoneNumber: string }) {
   return (
     <View className="flex-1 items-center justify-center px-3">
       <Text className="text-xs font-semibold uppercase tracking-wider text-accent">
@@ -263,17 +252,6 @@ function AutomatedFinishedView({
       <View className="mt-3 rounded-full bg-muted px-3 py-1">
         <Text className="text-xs font-semibold text-muted-foreground">Ended</Text>
       </View>
-      {isPostCallDialogOpen ? null : (
-        <Button
-          variant="outline"
-          onPress={handleReopenPress}
-          className="mt-6 h-12 w-full max-w-xs rounded-xl"
-        >
-          <Text className="text-xs font-semibold text-primary">
-            Reopen call summary
-          </Text>
-        </Button>
-      )}
     </View>
   );
 }
@@ -307,11 +285,7 @@ function AutomatedView({
 
     return (
       <View className="flex-1">
-        <AutomatedFinishedView
-          phoneNumber={finishedPhoneNumber}
-          isPostCallDialogOpen={automatedCalling.isPostCallDialogOpen}
-          onReopenPostCallDialog={automatedCalling.openPostCallDialog}
-        />
+        <AutomatedFinishedView phoneNumber={finishedPhoneNumber} />
         <PostCallDialog
           key={postCallDialogKey}
           variant="lead"
@@ -319,7 +293,6 @@ function AutomatedView({
           phoneNumber={finishedPhoneNumber}
           isSubmitting={automatedCalling.isSubmittingPostCall}
           errorMessage={automatedCalling.postCallErrorMessage}
-          onClose={automatedCalling.closePostCallDialog}
           onSubmit={automatedCalling.submitPostCall}
         />
       </View>

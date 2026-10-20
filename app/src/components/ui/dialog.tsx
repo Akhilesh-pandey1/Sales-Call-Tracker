@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 type DialogProps = {
   open: boolean;
   onOpenChange?: (open: boolean) => void;
+  isDismissalLocked?: boolean;
   children: React.ReactNode;
 };
 
@@ -37,8 +38,13 @@ function claimDialogCardTouch(): boolean {
   return true;
 }
 
-function Dialog({ open, onOpenChange, children }: DialogProps) {
-  const closeDialog = React.useCallback(() => onOpenChange?.(false), [onOpenChange]);
+function Dialog({ open, onOpenChange, isDismissalLocked = false, children }: DialogProps) {
+  const closeDialog = React.useCallback(() => {
+    if (isDismissalLocked) {
+      return;
+    }
+    onOpenChange?.(false);
+  }, [isDismissalLocked, onOpenChange]);
   const dialogContextValue = React.useMemo<DialogContextValue>(
     () => ({ isOpen: open, closeDialog }),
     [open, closeDialog],

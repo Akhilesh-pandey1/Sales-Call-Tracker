@@ -10,7 +10,6 @@ import {
 export type UseKeypadPostCallResult = PostCallDialogState & {
   trackedCall: LaunchedCall | null;
   trackLaunchedCall: (launchedCall: LaunchedCall | null) => void;
-  closePostCallDialog: () => void;
   submitKeypadPostCall: (scheduledAt: string | null) => Promise<void>;
 };
 
@@ -71,7 +70,6 @@ export function useKeypadPostCall(): UseKeypadPostCallResult {
     isSubmittingPostCall,
     postCallErrorMessage,
     trackLaunchedCall,
-    closePostCallDialog,
     submitKeypadPostCall,
   };
   return keypadPostCall;

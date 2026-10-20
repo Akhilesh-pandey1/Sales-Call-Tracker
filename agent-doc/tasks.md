@@ -97,16 +97,16 @@
 
 **Blocked by:** Task 4, Task 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Tapping outside the popup or pressing the Android back button does nothing — Submit is the only way through, for lead and keypad calls alike
-- [ ] Every other dialog keeps closing on outside tap and back button as before
-- [ ] The finished screen's reopen button is deleted with its now-dead wiring
+- [x] Tapping outside the popup or pressing the Android back button does nothing — Submit is the only way through, for lead and keypad calls alike
+- [x] Every other dialog keeps closing on outside tap and back button as before
+- [x] The finished screen's reopen button is deleted with its now-dead wiring
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

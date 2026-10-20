@@ -59,16 +59,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Tapping the follow-up field opens the native date dialog first, then the native time dialog, and the field shows the chosen moment as a readable label
-- [ ] The picker offers nothing before now or beyond 30 days ahead, and the default stays tomorrow at 9:00 AM
-- [ ] The free-text input and its date-parsing helpers are gone from `post-call-dialog.tsx`
+- [x] Tapping the follow-up field opens the native date dialog first, then the native time dialog, and the field shows the chosen moment as a readable label
+- [x] The picker offers nothing before now or beyond 30 days ahead, and the default stays tomorrow at 9:00 AM
+- [x] The free-text input and its date-parsing helpers are gone from `post-call-dialog.tsx`
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

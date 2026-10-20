@@ -11,7 +11,7 @@ export type UseKeypadPostCallResult = PostCallDialogState & {
   trackedCall: LaunchedCall | null;
   trackLaunchedCall: (launchedCall: LaunchedCall | null) => void;
   closePostCallDialog: () => void;
-  submitKeypadPostCall: () => Promise<void>;
+  submitKeypadPostCall: (scheduledAt: string | null) => Promise<void>;
 };
 
 export function useKeypadPostCall(): UseKeypadPostCallResult {
@@ -54,11 +54,14 @@ export function useKeypadPostCall(): UseKeypadPostCallResult {
     showDialog();
   }, [showDialog]);
 
-  const submitKeypadPostCall = useCallback(async (): Promise<void> => {
-    const trackedCallAtSubmit = trackedCallRef.current;
-    const keypadCallId = trackedCallAtSubmit === null ? null : trackedCallAtSubmit.callId;
-    await submitPostCall(keypadCallId, closePostCallDialog);
-  }, [closePostCallDialog, submitPostCall]);
+  const submitKeypadPostCall = useCallback(
+    async (scheduledAt: string | null): Promise<void> => {
+      const trackedCallAtSubmit = trackedCallRef.current;
+      const keypadCallId = trackedCallAtSubmit === null ? null : trackedCallAtSubmit.callId;
+      await submitPostCall(keypadCallId, closePostCallDialog, scheduledAt);
+    },
+    [closePostCallDialog, submitPostCall],
+  );
 
   useCallHangUpDetector(trackedCall !== null, showPostCallDialog);
 

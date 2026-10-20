@@ -16,7 +16,7 @@ async function deleteSentPendingCalls(sentCallIds: string[]): Promise<void> {
 async function sendFilledPendingCalls(): Promise<void> {
   const pendingCalls = await getAllPendingCalls();
   const syncCallList = pendingCalls
-    .map(toSyncCallOrNull)
+    .map(pendingCall => toSyncCallOrNull(pendingCall))
     .filter((syncCall): syncCall is SyncCall => syncCall !== null);
   if (syncCallList.length === 0) {
     return;

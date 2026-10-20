@@ -5,6 +5,7 @@ export type SyncCall = {
   phone_number: string;
   dialed_at: string;
   duration_seconds: number;
+  scheduled_at?: string;
 };
 
 async function syncCalls(calls: SyncCall[]): Promise<void> {

@@ -78,16 +78,16 @@
 
 **Blocked by:** Task 2, Task 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Keypad Submit with a schedule chosen sends the call item with `scheduled_at`; "Do not schedule" sends the item without the field
-- [ ] The `SyncCall` type carries the optional `scheduled_at` as `api.md` defines it, and the bulk-sync path still builds items without it
-- [ ] The lead flow still sends its schedule through `/api/leads/next`, untouched
+- [x] Keypad Submit with a schedule chosen sends the call item with `scheduled_at`; "Do not schedule" sends the item without the field
+- [x] The `SyncCall` type carries the optional `scheduled_at` as `api.md` defines it, and the bulk-sync path still builds items without it
+- [x] The lead flow still sends its schedule through `/api/leads/next`, untouched
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

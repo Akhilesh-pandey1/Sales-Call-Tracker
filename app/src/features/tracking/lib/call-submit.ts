@@ -34,8 +34,11 @@ async function findMatchingLogEntry(
   }
 }
 
-async function sendPendingCallToServer(pendingCall: PendingCall): Promise<void> {
-  const syncCall = toSyncCallOrNull(pendingCall);
+async function sendPendingCallToServer(
+  pendingCall: PendingCall,
+  scheduledAt: string | null = null,
+): Promise<void> {
+  const syncCall = toSyncCallOrNull(pendingCall, scheduledAt);
   if (syncCall === null) {
     return;
   }
@@ -48,13 +51,16 @@ async function sendPendingCallToServer(pendingCall: PendingCall): Promise<void> 
   await deletePendingCall(pendingCall.callId);
 }
 
-export async function submitTrackedCall(callId: string): Promise<void> {
+export async function submitTrackedCall(
+  callId: string,
+  scheduledAt: string | null = null,
+): Promise<void> {
   const pendingCall = await getPendingCallById(callId);
   if (pendingCall === null) {
     return;
   }
   if (pendingCall.durationSeconds !== null) {
-    await sendPendingCallToServer(pendingCall);
+    await sendPendingCallToServer(pendingCall, scheduledAt);
     return;
   }
   const matchedEntry = await findMatchingLogEntry(pendingCall);
@@ -71,5 +77,5 @@ export async function submitTrackedCall(callId: string): Promise<void> {
     dialedAt: matchedEntry.dialedAt,
     durationSeconds: matchedEntry.durationSeconds,
   };
-  await sendPendingCallToServer(filledPendingCall);
+  await sendPendingCallToServer(filledPendingCall, scheduledAt);
 }

@@ -7,7 +7,9 @@ import {
   Clock,
   CloudOff,
   Megaphone,
+  Percent,
   Phone,
+  PhoneCall,
 } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import type { ReactNode } from 'react';
@@ -221,11 +223,15 @@ function PeriodStatsRow({ periodLabel, periodStats, showsDivider }: PeriodStatsR
   );
 }
 
-function PerformanceColumnHeader({ label }: { label: string }) {
+type PerformanceColumnHeaderProps = {
+  icon: LucideIcon;
+};
+
+function PerformanceColumnHeader({ icon }: PerformanceColumnHeaderProps) {
   return (
-    <Text className="flex-1 text-right text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-      {label}
-    </Text>
+    <View className="flex-1 items-end">
+      <Icon as={icon} size={14} className="text-muted-foreground" />
+    </View>
   );
 }
 
@@ -249,10 +255,10 @@ function PerformanceTable({ periodStats }: PerformanceTableProps) {
       <View className="px-4 pb-1">
         <View className="mt-3 flex-row items-center gap-2 border-b border-border pb-2">
           <View className="w-20 shrink-0" />
-          <PerformanceColumnHeader label="Dials" />
-          <PerformanceColumnHeader label="Connected" />
-          <PerformanceColumnHeader label="Min" />
-          <PerformanceColumnHeader label="Conn. %" />
+          <PerformanceColumnHeader icon={Phone} />
+          <PerformanceColumnHeader icon={PhoneCall} />
+          <PerformanceColumnHeader icon={Clock} />
+          <PerformanceColumnHeader icon={Percent} />
         </View>
         {periodRows.map((periodRow, rowIndex) => (
           <PeriodStatsRow
@@ -262,6 +268,9 @@ function PerformanceTable({ periodStats }: PerformanceTableProps) {
             showsDivider={rowIndex !== lastRowIndex}
           />
         ))}
+        <Text className="border-t border-border pt-2 text-[10px] text-muted-foreground">
+          Dials · Connected · Minutes · Connected %
+        </Text>
       </View>
     </View>
   );
@@ -440,7 +449,7 @@ type CallsByHourChartProps = {
 };
 
 function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
-  const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('last_30_days');
+  const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('today');
   const selectedCallsByHour: CallsByHourStats = periodCallsByHour[selectedPeriod];
   const selectedPeriodInfo: ChartPeriodInfo = chartPeriodsInfo[selectedPeriod];
   const bestHour: number | null = selectedCallsByHour.best_hour;

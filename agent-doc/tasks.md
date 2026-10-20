@@ -116,16 +116,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Tapping Log out sends the unsent calls first; when the queue is empty the stored token is cleared and the app returns to the Login screen
-- [ ] With unsent calls and no internet, Log out refuses and says how many calls are waiting
-- [ ] No logout endpoint is called — only the phone's stored token is cleared
+- [x] Tapping Log out sends the unsent calls first; when the queue is empty the stored token is cleared and the app returns to the Login screen
+- [x] With unsent calls and no internet, Log out refuses and says how many calls are waiting
+- [x] No logout endpoint is called — only the phone's stored token is cleared
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 
@@ -135,14 +135,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The calls-by-hour chart opens on Today, and Yesterday and 30 days still switch on tap
+- [x] The calls-by-hour chart opens on Today, and Yesterday and 30 days still switch on tap
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 
@@ -152,12 +152,12 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The four column headings show icons — phone, connected-phone, clock, percent — and an annotation line under the table names each icon in words
-- [ ] The numbers, the three period rows, and the "—" marker are unchanged
+- [x] The four column headings show icons — phone, connected-phone, clock, percent — and an annotation line under the table names each icon in words
+- [x] The numbers, the three period rows, and the "—" marker are unchanged
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)

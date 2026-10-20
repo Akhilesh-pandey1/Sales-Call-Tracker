@@ -2,10 +2,11 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { ChevronRight, Trash2 } from 'lucide-react-native';
+import { ChevronRight, LogOut, Trash2 } from 'lucide-react-native';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useClearLocalData } from '../hooks/use-clear-local-data';
+import { useLogout } from '../hooks/use-logout';
 
 function SettingsHeader() {
   return (
@@ -34,6 +35,34 @@ function ClearDataRow({ onOpenClearDialog }: ClearDataRowProps) {
         <Text className="text-base font-bold">Clear local data</Text>
         <Text className="text-xs text-muted-foreground">
           Deletes only the calls on this phone that haven't reached the server yet.
+        </Text>
+      </View>
+      <Icon as={ChevronRight} size={20} className="shrink-0 text-muted-foreground" />
+    </Button>
+  );
+}
+
+type LogoutRowProps = {
+  isLoggingOut: boolean;
+  onLogout: () => Promise<void>;
+};
+
+function LogoutRow({ isLoggingOut, onLogout }: LogoutRowProps) {
+  return (
+    <Button
+      variant="outline"
+      size="none"
+      className="w-full shrink-0 justify-start gap-4 rounded-2xl border-border bg-card p-4 active:bg-muted"
+      onPress={onLogout}
+      disabled={isLoggingOut}
+    >
+      <View className="h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+        <Icon as={LogOut} size={24} className="text-primary" />
+      </View>
+      <View className="flex-1 items-start gap-0.5">
+        <Text className="text-base font-bold">{isLoggingOut ? 'Logging out…' : 'Log out'}</Text>
+        <Text className="text-xs text-muted-foreground">
+          Sends your unsent calls first, then signs you out.
         </Text>
       </View>
       <Icon as={ChevronRight} size={20} className="shrink-0 text-muted-foreground" />
@@ -118,6 +147,7 @@ export function SettingsScreen() {
     closeClearDialog,
     clearLocalData,
   } = useClearLocalData();
+  const { isLoggingOut, logoutErrorMessage, logout } = useLogout();
 
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
@@ -128,9 +158,15 @@ export function SettingsScreen() {
             Local data
           </Text>
           <ClearDataRow onOpenClearDialog={openClearDialog} />
+          <LogoutRow isLoggingOut={isLoggingOut} onLogout={logout} />
           {clearErrorMessage && !isClearDialogOpen ? (
             <Text role="alert" className="px-1 text-xs font-semibold text-destructive">
               {clearErrorMessage}
+            </Text>
+          ) : null}
+          {logoutErrorMessage ? (
+            <Text role="alert" className="px-1 text-xs font-semibold text-destructive">
+              {logoutErrorMessage}
             </Text>
           ) : null}
         </View>

@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792429454.034055,
-    "ast_hash": "767c8cefdd4182d7262e41f358d980ab",
+    "mtime": 1792490304.666001,
+    "ast_hash": "6f861042eba11edf3fc155cdcd5bcd31",
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {

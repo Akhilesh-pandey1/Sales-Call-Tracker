@@ -13,6 +13,7 @@ export type UsePostCallSubmitResult = Omit<PostCallDialogState, 'isPostCallDialo
   submitPostCall: (
     callId: string | null,
     afterCallSent: () => void | Promise<void>,
+    scheduledAt?: string | null,
   ) => Promise<void>;
 };
 
@@ -29,6 +30,7 @@ export function usePostCallSubmit(): UsePostCallSubmitResult {
     async (
       callId: string | null,
       afterCallSent: () => void | Promise<void>,
+      scheduledAt: string | null = null,
     ): Promise<void> => {
       if (isSubmittingPostCallRef.current) {
         return;
@@ -38,7 +40,7 @@ export function usePostCallSubmit(): UsePostCallSubmitResult {
       setPostCallErrorMessage(null);
       try {
         if (callId !== null) {
-          await submitTrackedCall(callId);
+          await submitTrackedCall(callId, scheduledAt);
         }
         await afterCallSent();
       } catch (submitError) {

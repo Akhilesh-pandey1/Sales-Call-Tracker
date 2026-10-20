@@ -152,12 +152,12 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The four column headings show icons — phone, connected-phone, clock, percent — and an annotation line under the table names each icon in words
-- [ ] The numbers, the three period rows, and the "—" marker are unchanged
+- [x] The four column headings show icons — phone, connected-phone, clock, percent — and an annotation line under the table names each icon in words
+- [x] The numbers, the three period rows, and the "—" marker are unchanged
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)

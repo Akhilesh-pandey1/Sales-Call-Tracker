@@ -36,6 +36,7 @@ def register_error_handlers(app: Flask) -> None:
 
     @app.errorhandler(Exception)
     def handle_generic_exception(error: Exception) -> tuple[Response, int]:
+        app.logger.exception(error)
         fallback_message: str = "An unexpected error occurred."
         response: Response = jsonify({"message": fallback_message})
         status: int = 500

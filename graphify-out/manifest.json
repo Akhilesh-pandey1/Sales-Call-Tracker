@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "backend/app/core/errors.py": {
-    "mtime": 1792039465.152206,
-    "ast_hash": "4fce864a92d09c4c6a5d88b49b70c249",
+    "mtime": 1792517572.0169475,
+    "ast_hash": "ea7650512cb2dab1468971df0a144801",
     "semantic_hash": ""
   },
   "backend/app/core/security.py": {

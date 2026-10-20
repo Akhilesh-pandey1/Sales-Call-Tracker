@@ -6,52 +6,13 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
-import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
-import { Check } from 'lucide-react-native';
+import { maxScheduleAheadDays } from '@/config/app-config';
+import { Calendar, Check } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { cn } from '@/lib/utils';
-
-function createDefaultScheduleDate(): Date {
-  const dayStepToTomorrow = 1;
-  const defaultStartHour = 9;
-  const defaultScheduleDate = new Date();
-  defaultScheduleDate.setDate(defaultScheduleDate.getDate() + dayStepToTomorrow);
-  defaultScheduleDate.setHours(defaultStartHour, 0, 0, 0);
-  return defaultScheduleDate;
-}
-
-function toDateTimeLocalInput(date: Date): string {
-  const twoDigitLength = 2;
-  const padToTwoDigits = (value: number): string =>
-    String(value).padStart(twoDigitLength, '0');
-  const monthNumber = date.getMonth() + 1;
-  const yearLabel = String(date.getFullYear());
-  const monthLabel = padToTwoDigits(monthNumber);
-  const dayLabel = padToTwoDigits(date.getDate());
-  const hourLabel = padToTwoDigits(date.getHours());
-  const minuteLabel = padToTwoDigits(date.getMinutes());
-  const dateTimeLocalInput = `${yearLabel}-${monthLabel}-${dayLabel}T${hourLabel}:${minuteLabel}`;
-  return dateTimeLocalInput;
-}
-
-function createDefaultScheduleInput(): string {
-  const defaultScheduleInput = toDateTimeLocalInput(createDefaultScheduleDate());
-  return defaultScheduleInput;
-}
-
-function readScheduleDateFromInput(scheduleInput: string): Date | null {
-  const minutePrecisionEnding = /T\d{2}:\d{2}$/;
-  const inputWithSeconds = minutePrecisionEnding.test(scheduleInput)
-    ? `${scheduleInput}:00`
-    : scheduleInput;
-  const parsedDate = new Date(inputWithSeconds);
-  if (Number.isNaN(parsedDate.getTime())) {
-    return null;
-  }
-  return parsedDate;
-}
+import { usePostCallSchedule } from '../hooks/use-post-call-schedule';
 
 type ScheduleChoiceRowProps = {
   label: string;
@@ -83,25 +44,29 @@ function ScheduleChoiceRow({ label, isSelected, onSelect }: ScheduleChoiceRowPro
   );
 }
 
-type ScheduleInputBoxProps = {
-  inputValue: string;
-  onInputChange: (nextInput: string) => void;
+type SchedulePickerFieldProps = {
+  scheduleLabel: string;
+  onOpenPicker: () => void;
 };
 
-function ScheduleInputBox({ inputValue, onInputChange }: ScheduleInputBoxProps) {
-  const handleScheduleInputChange = (nextInput: string) => onInputChange(nextInput);
-
+function SchedulePickerField({ scheduleLabel, onOpenPicker }: SchedulePickerFieldProps) {
   return (
     <View className="mt-2 rounded-xl border border-border bg-muted/40 p-3">
       <Text className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
         Follow-up time (IST)
       </Text>
-      <Input
-        value={inputValue}
-        onChangeText={handleScheduleInputChange}
+      <Pressable
+        accessibilityRole="button"
         accessibilityLabel="Follow-up time"
-        className="mt-1 w-full rounded-lg border-border bg-white px-2.5 py-1.5 text-xs font-medium"
-      />
+        onPress={onOpenPicker}
+        className="mt-1.5 flex-row items-center justify-between rounded-lg border border-border bg-white px-2.5 py-2"
+      >
+        <Text className="text-xs font-medium text-foreground">{scheduleLabel}</Text>
+        <Icon as={Calendar} size={16} className="text-muted-foreground" />
+      </Pressable>
+      <Text className="mt-1 text-[10px] text-muted-foreground">
+        Tap to pick — opens the date picker, then the time picker. Up to {maxScheduleAheadDays} days ahead.
+      </Text>
     </View>
   );
 }
@@ -127,9 +92,8 @@ function PostCallDialog({
   onClose,
   onSubmit,
 }: PostCallDialogProps) {
+  const { scheduleDate, scheduleLabel, openSchedulePicker } = usePostCallSchedule();
   const [isScheduleChosen, setIsScheduleChosen] = useState(false);
-  const [scheduleInput, setScheduleInput] = useState<string>(createDefaultScheduleInput);
-  const [scheduleDate, setScheduleDate] = useState<Date>(createDefaultScheduleDate);
   const [shouldContinueToNextLead, setShouldContinueToNextLead] = useState(true);
 
   const handleOpenChange = (nextIsOpen: boolean) => {
@@ -141,14 +105,6 @@ function PostCallDialog({
   const handleChooseNoSchedule = () => setIsScheduleChosen(false);
   const handleContinueToNextLeadToggle = () =>
     setShouldContinueToNextLead(!shouldContinueToNextLead);
-  const handleScheduleInputChange = (nextInput: string) => {
-    setScheduleInput(nextInput);
-    const parsedDate = readScheduleDateFromInput(nextInput);
-    if (parsedDate === null) {
-      return;
-    }
-    setScheduleDate(parsedDate);
-  };
   const handleSubmitPress = () => {
     const scheduledAt = isScheduleChosen ? scheduleDate.toISOString() : null;
     onSubmit(scheduledAt, shouldContinueToNextLead);
@@ -192,9 +148,9 @@ function PostCallDialog({
             onSelect={handleChooseSchedule}
           />
           {isScheduleChosen ? (
-            <ScheduleInputBox
-              inputValue={scheduleInput}
-              onInputChange={handleScheduleInputChange}
+            <SchedulePickerField
+              scheduleLabel={scheduleLabel}
+              onOpenPicker={openSchedulePicker}
             />
           ) : null}
         </View>

@@ -1,6 +1,7 @@
 import csv
 from datetime import datetime, timedelta, timezone
 import io
+import logging
 from typing import Any
 import phonenumbers
 from sqlalchemy import update, Update
@@ -17,6 +18,8 @@ from backend.app.extensions import db
 from backend.app.modules.calls import Call
 from backend.app.modules.leads.models import Lead
 from backend.app.modules.leads.schemas import ScheduleLeadRequest
+
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 def validate_and_format_e164(raw_phone: str, country_code: str) -> str | None:
@@ -318,6 +321,24 @@ def schedule_lead_callback(lead_id: int, user_id: int, scheduled_at_raw: str) ->
     target_lead.claimed_by = None
     target_lead.claimed_until = None
     db.session.flush()
+
+
+def schedule_resolved_lead_for_call(
+    phone_number: str, scheduled_by_user_id: int, scheduled_at_raw: str
+) -> None:
+    resolved_lead: Lead | None = Lead.query.filter_by(phone_number=phone_number).first()
+    if resolved_lead is None:
+        logger.warning("Skipping schedule for unknown lead %s", phone_number)
+        return
+
+    try:
+        schedule_lead_callback(resolved_lead.id, scheduled_by_user_id, scheduled_at_raw)
+    except AppException as schedule_error:
+        logger.warning(
+            "Skipping schedule for lead %s: %s",
+            phone_number,
+            schedule_error.message,
+        )
 
 
 def find_candidate_lead(user_id: int, current_utc: datetime) -> Lead | None:

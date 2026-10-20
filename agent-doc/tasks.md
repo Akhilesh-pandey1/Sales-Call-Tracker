@@ -22,15 +22,15 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A call item with `scheduled_at` inside 30 days schedules the resolved lead — created or matched — and the call is saved
-- [ ] A `scheduled_at` on a call that connects (lead ends `done`), and a past or beyond-30-days `scheduled_at`, are each skipped with a warning log while the call stays saved
-- [ ] The three schedule cases are covered in `backend/tests/modules/test_calls.py` per `testing.md`
+- [x] A call item with `scheduled_at` inside 30 days schedules the resolved lead — created or matched — and the call is saved
+- [x] A `scheduled_at` on a call that connects (lead ends `done`), and a past or beyond-30-days `scheduled_at`, are each skipped with a warning log while the call stays saved
+- [x] The three schedule cases are covered in `backend/tests/modules/test_calls.py` per `testing.md`
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest backend/tests/modules/test_calls.py backend/tests/modules/test_leads.py` (from the project root)
+- [x] Tests pass: `python -m pytest backend/tests/modules/test_calls.py backend/tests/modules/test_leads.py` (from the project root)
 
 ---
 

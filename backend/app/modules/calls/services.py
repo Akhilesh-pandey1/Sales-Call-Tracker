@@ -10,7 +10,10 @@ from backend.app.core.utils import (
 )
 from backend.app.extensions import db
 from backend.app.modules.calls.models import Call
-from backend.app.modules.leads import resolve_lead_for_call
+from backend.app.modules.leads import (
+    resolve_lead_for_call,
+    schedule_resolved_lead_for_call,
+)
 from backend.app.modules.settings import get_or_create_office_hours_window
 
 logger: logging.Logger = logging.getLogger(__name__)
@@ -39,7 +42,7 @@ def extract_valid_call(
     window_start_minute: int,
     window_end_minute: int,
     seen_call_ids: set[str],
-) -> tuple[str, str, datetime, int] | None:
+) -> tuple[str, str, datetime, int, str | None] | None:
     if not isinstance(item, dict):
         logger.warning("Discarding non-dict call item: %s", item)
         return None
@@ -87,11 +90,17 @@ def extract_valid_call(
 
     normalized_phone: str = normalize_phone_number(clean_phone, default_country)
 
-    parsed_record: tuple[str, str, datetime, int] = (
+    raw_scheduled_at: Any = item.get("scheduled_at")
+    scheduled_at_raw: str | None = None
+    if raw_scheduled_at is not None:
+        scheduled_at_raw = str(raw_scheduled_at)
+
+    parsed_record: tuple[str, str, datetime, int, str | None] = (
         call_id,
         normalized_phone,
         dialed_at_utc,
         raw_duration,
+        scheduled_at_raw,
     )
     return parsed_record
 
@@ -119,7 +128,7 @@ def sync_calls_batch(
         if call_data is None:
             continue
 
-        call_id, phone_number, dialed_at, duration = call_data
+        call_id, phone_number, dialed_at, duration, scheduled_at_raw = call_data
         call_record: Call = Call(
             call_id=call_id,
             user_id=user_id,
@@ -131,6 +140,9 @@ def sync_calls_batch(
         seen_call_ids.add(call_id)
 
         resolve_lead_for_call(phone_number, duration, dialed_at)
+
+        if scheduled_at_raw is not None:
+            schedule_resolved_lead_for_call(phone_number, user_id, scheduled_at_raw)
 
     db.session.commit()
 

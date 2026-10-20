@@ -18,8 +18,6 @@ export type UseAutomatedCallingResult = PostCallDialogState & {
   startErrorMessage: string | null;
   startCalling: () => Promise<void>;
   dialCurrentLead: () => Promise<void>;
-  openPostCallDialog: () => void;
-  closePostCallDialog: () => void;
   submitPostCall: (
     scheduledAt: string | null,
     shouldContinueToNextLead: boolean,

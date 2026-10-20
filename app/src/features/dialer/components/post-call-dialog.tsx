@@ -79,7 +79,6 @@ type PostCallDialogProps = {
   phoneNumber: string;
   isSubmitting: boolean;
   errorMessage: string | null;
-  onClose: () => void;
   onSubmit: (scheduledAt: string | null, shouldContinueToNextLead: boolean) => void;
 };
 
@@ -89,18 +88,12 @@ function PostCallDialog({
   phoneNumber,
   isSubmitting,
   errorMessage,
-  onClose,
   onSubmit,
 }: PostCallDialogProps) {
   const { scheduleDate, scheduleLabel, openSchedulePicker } = usePostCallSchedule();
   const [isScheduleChosen, setIsScheduleChosen] = useState(false);
   const [shouldContinueToNextLead, setShouldContinueToNextLead] = useState(true);
 
-  const handleOpenChange = (nextIsOpen: boolean) => {
-    if (!nextIsOpen) {
-      onClose();
-    }
-  };
   const handleChooseSchedule = () => setIsScheduleChosen(true);
   const handleChooseNoSchedule = () => setIsScheduleChosen(false);
   const handleContinueToNextLeadToggle = () =>
@@ -114,7 +107,7 @@ function PostCallDialog({
   const submitButtonLabel = isSubmitting ? 'Submitting…' : 'Submit';
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+    <Dialog open={isOpen} isDismissalLocked>
       <DialogContent
         className="max-w-sm rounded-3xl p-6"
         backdropClassName="bg-black/60 p-4"

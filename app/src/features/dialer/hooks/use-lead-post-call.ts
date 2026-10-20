@@ -9,8 +9,6 @@ import {
 } from './use-post-call-submit';
 
 export type UseLeadPostCallResult = PostCallDialogState & {
-  openPostCallDialog: () => void;
-  closePostCallDialog: () => void;
   showPostCallDialog: () => void;
   submitPostCall: (
     scheduledAt: string | null,
@@ -52,7 +50,6 @@ export function useLeadPostCall(
   const { isPostCallDialogOpen, showDialog, closeDialog: closePostCallDialog } =
     useDialogVisibility();
   const postCallSubmit = usePostCallSubmit();
-  const { clearPostCallErrorMessage } = postCallSubmit;
   const { submitPostCall: submitTrackedPostCall } = postCallSubmit;
 
   const continueAfterLeadSubmit = useCallback(
@@ -87,10 +84,6 @@ export function useLeadPostCall(
     updateViewState(finishedState);
     showDialog();
   }, [showDialog, updateViewState, viewStateRef]);
-  const openPostCallDialog = useCallback((): void => {
-    clearPostCallErrorMessage();
-    showDialog();
-  }, [clearPostCallErrorMessage, showDialog]);
   const submitPostCall = useCallback(
     async (
       scheduledAt: string | null,
@@ -110,8 +103,6 @@ export function useLeadPostCall(
     isPostCallDialogOpen,
     isSubmittingPostCall: postCallSubmit.isSubmittingPostCall,
     postCallErrorMessage: postCallSubmit.postCallErrorMessage,
-    openPostCallDialog,
-    closePostCallDialog,
     showPostCallDialog,
     submitPostCall,
   };

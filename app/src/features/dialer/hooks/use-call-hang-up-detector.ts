@@ -1,6 +1,14 @@
 import { useEffect } from 'react';
 import { AppState, type AppStateStatus } from 'react-native';
-import { subscribeToCallEnded } from '@/features/tracking';
+import { readLiveCallState, subscribeToCallEnded } from '@/features/tracking';
+
+async function callOnCallEndedWhenPhoneIsIdle(onCallEnded: () => void): Promise<void> {
+  const liveCallState = await readLiveCallState();
+  if (liveCallState !== 'IDLE') {
+    return;
+  }
+  onCallEnded();
+}
 
 function useCallHangUpDetector(
   isCallInProgress: boolean,
@@ -14,7 +22,14 @@ function useCallHangUpDetector(
       if (nextAppState !== 'active') {
         return;
       }
-      onCallEnded();
+      callOnCallEndedWhenPhoneIsIdle(onCallEnded).catch(
+        (callStateError: unknown): void => {
+          console.warn(
+            'Could not read the call state, so the popup stays closed.',
+            callStateError,
+          );
+        },
+      );
     }
     const appStateSubscription = AppState.addEventListener(
       'change',

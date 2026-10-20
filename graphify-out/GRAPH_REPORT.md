@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-20)
 
 ## Corpus Check
-- 293 files · ~453,978 words
+- 294 files · ~454,021 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2456 nodes · 4821 edges · 193 communities (155 shown, 38 thin omitted)
+- 2457 nodes · 4822 edges · 194 communities (156 shown, 38 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 30 edges (avg confidence: 0.61)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d4b8d846`
+- Built from commit: `928c38f4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -82,7 +82,7 @@
 - Requirements
 - API Specifications
 - test_production.py
-- react
+- _select_palette_for_mode
 - deny
 - call-log-matcher.ts
 - pending-calls-db.ts
@@ -122,7 +122,7 @@
 - seed_fake_data.py
 - lead-pool-stats.tsx
 - root-navigator.tsx
-- persist_design_system
+- _resolve_color_mode
 - search
 - react-native-svg
 - post-call-dialog.tsx
@@ -137,6 +137,7 @@
 - dashboard/types.ts
 - lead-daily-stats.tsx
 - react-native-worklets
+- react-native
 - calls/routes.py
 - use-lead-post-call.ts
 - cn
@@ -174,7 +175,6 @@
 - @rn-primitives/dialog
 - package.json
 - @rn-primitives/portal
-- generate_design_system
 - lucide-react-native
 - axios
 - native-only-animated-view.tsx
@@ -226,7 +226,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (193 total, 38 thin omitted)
+## Communities (194 total, 38 thin omitted)
 
 ### Community 0 - "server.cjs"
 Cohesion: 0.06
@@ -437,7 +437,7 @@ Cohesion: 0.29
 Nodes (7): 4. User Account Management (Manager Only), `DELETE /api/users/<id>`, `GET /api/users`, `POST /api/users`, `POST /api/users/<id>/activate`, `POST /api/users/<id>/deactivate`, `POST /api/users/<id>/update`
 
 ### Community 59 - "web/src/features/auth/hooks/use-auth.ts"
-Cohesion: 0.36
+Cohesion: 0.32
 Nodes (6): loginUser(), useAuthLogin(), UseAuthLoginResult, LoginApiResponse, LoginCredentials, apiClient
 
 ### Community 60 - "app/__init__.py"
@@ -471,6 +471,10 @@ Nodes (13): 1. Authentication, 2. Call Sync, 3. Dashboards, 5. Leads, API Specif
 ### Community 67 - "test_production.py"
 Cohesion: 0.47
 Nodes (9): Flask, FlaskClient, Path, test_api_route_not_found_returns_json(), test_missing_dist_returns_404(), test_missing_static_asset_returns_404(), test_serve_index_html_on_root(), test_serve_spa_client_route() (+1 more)
+
+### Community 68 - "_select_palette_for_mode"
+Cohesion: 0.22
+Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
 
 ### Community 69 - "deny"
 Cohesion: 0.11
@@ -577,8 +581,8 @@ Cohesion: 0.19
 Nodes (19): getAccounts(), updateUser(), EditUserModal(), EditUserModalProps, sortOwnAccountFirst(), useAccounts(), UseAccountsResult, getAccountCountry() (+11 more)
 
 ### Community 96 - "design_system.py"
-Cohesion: 0.09
-Nodes (31): ansi_ljust(), _contrast_ratio(), _derive_dark_palette(), format_ascii_box(), hex_to_ansi(), _palette_is_dark(), _query_wants_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable. (+23 more)
+Cohesion: 0.07
+Nodes (36): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+28 more)
 
 ### Community 97 - "use-janitor.ts"
 Cohesion: 0.30
@@ -620,9 +624,9 @@ Nodes (12): buildPoolStages(), getStageWidthPercent(), LeadPoolStage, LeadPoolSt
 Cohesion: 0.29
 Nodes (6): App(), displayName, name, RootNavigator(), useAuth(), LoginScreen()
 
-### Community 108 - "persist_design_system"
-Cohesion: 0.14
-Nodes (15): _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Format a page-specific override file with intelligent AI-generated content. (+7 more)
+### Community 108 - "_resolve_color_mode"
+Cohesion: 0.33
+Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
 
 ### Community 109 - "search"
 Cohesion: 0.14
@@ -634,7 +638,7 @@ Nodes (6): PostCallDialog(), PostCallDialogProps, PostCallDialogVariant, Schedul
 
 ### Community 114 - "dependencies"
 Cohesion: 0.22
-Nodes (9): dependencies, libphonenumber-js, react-native, @rn-primitives/slot, tailwind-merge, tailwind-merge, libphonenumber-js, react-native (+1 more)
+Nodes (9): dependencies, libphonenumber-js, react, @rn-primitives/slot, tailwind-merge, react, tailwind-merge, libphonenumber-js (+1 more)
 
 ### Community 117 - "stats.api.ts"
 Cohesion: 0.25
@@ -743,10 +747,6 @@ Nodes (17): ManagerGuard(), DashboardLayout(), getHighlightedSectionPath(), NavI
 ### Community 169 - "package.json"
 Cohesion: 0.22
 Nodes (8): name, private, scripts, build, dev, preview, type, version
-
-### Community 171 - "generate_design_system"
-Cohesion: 0.29
-Nodes (6): format_markdown(), generate_design_system(), Format design system as markdown., Main entry point for design system generation. Args: query: Search query (e.g.,…, format_output(), Format results for Claude consumption (token-optimized)
 
 ### Community 177 - "_suggest_identities"
 Cohesion: 0.33

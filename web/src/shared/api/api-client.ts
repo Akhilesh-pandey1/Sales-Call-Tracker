@@ -4,9 +4,14 @@ import axios, {
   type AxiosError,
   type AxiosResponse,
 } from "axios";
+import { backendBaseUrl } from "@/config/app-config";
+
+const isDevServer: boolean = import.meta.env.DEV;
+const devProxyBaseUrl: string = "/api";
+const apiBaseUrl: string = isDevServer ? devProxyBaseUrl : backendBaseUrl;
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "/api",
+  baseURL: apiBaseUrl,
   headers: {
     "Content-Type": "application/json",
   },

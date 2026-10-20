@@ -1,3 +1,4 @@
 {
-  "maxLeadUploadMb": 2
+  "maxLeadUploadMb": 2,
+  "backendBaseUrl": "https://sales-call-tracker.onrender.com/api"
 }

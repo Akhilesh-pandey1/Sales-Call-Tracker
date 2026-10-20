@@ -2,6 +2,7 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask
+from flask_cors import CORS
 from sqlalchemy import inspect, text
 
 load_dotenv()
@@ -79,6 +80,7 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
     app.config.from_object(active_config)
 
     db.init_app(app)
+    CORS(app)
     register_error_handlers(app)
     app.register_blueprint(api_blueprint)
     register_static_routes(app)

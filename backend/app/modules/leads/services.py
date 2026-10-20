@@ -58,14 +58,20 @@ def resolve_lead_for_call(
     duration_seconds: int,
     call_time: datetime,
 ) -> None:
-    target_lead: Lead | None = Lead.query.filter_by(phone_number=phone_number).first()
-    if target_lead is None:
-        return
-
-    connected_threshold: int = 0
     waiting_status: str = "waiting"
     done_status: str = "done"
     stopped_status: str = "stopped"
+    connected_threshold: int = 0
+
+    target_lead: Lead | None = Lead.query.filter_by(phone_number=phone_number).first()
+    if target_lead is None:
+        starting_attempt_count: int = 0
+        target_lead = Lead(
+            phone_number=phone_number,
+            status=waiting_status,
+            attempt_count=starting_attempt_count,
+        )
+        db.session.add(target_lead)
 
     if duration_seconds > connected_threshold:
         target_lead.status = done_status

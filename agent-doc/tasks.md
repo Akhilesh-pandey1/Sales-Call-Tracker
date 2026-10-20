@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A synced call to a number with no lead creates that lead as `waiting` and resolves it from the same call — connected marks it `done`, not connected burns attempt 1 and stops it at the attempt limit
-- [ ] A second sync for a number that already has a lead never creates a second lead
-- [ ] The create-and-resolve and no-double-create cases are covered in `backend/tests/modules/test_calls.py` per `testing.md`
+- [x] A synced call to a number with no lead creates that lead as `waiting` and resolves it from the same call — connected marks it `done`, not connected burns attempt 1 and stops it at the attempt limit
+- [x] A second sync for a number that already has a lead never creates a second lead
+- [x] The create-and-resolve and no-double-create cases are covered in `backend/tests/modules/test_calls.py` per `testing.md`
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest backend/tests/modules/test_calls.py backend/tests/modules/test_leads.py` (from the project root)
+- [x] Tests pass: `python -m pytest backend/tests/modules/test_calls.py backend/tests/modules/test_leads.py` (from the project root)
 
 ---
 

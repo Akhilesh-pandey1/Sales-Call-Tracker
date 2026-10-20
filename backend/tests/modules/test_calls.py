@@ -727,6 +727,153 @@ def test_lead_resolution_manual_keypad_call_resolves_lead(
         assert refreshed_lead.status == "done"
 
 
+def test_sync_call_to_new_number_creates_lead_and_marks_it_done(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-new-number-connected",
+                    "phone_number": "9876500011",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        created_lead: Lead | None = Lead.query.filter_by(
+            phone_number="+919876500011"
+        ).first()
+        assert created_lead is not None
+        assert created_lead.status == "done"
+        assert created_lead.attempt_count == 0
+        assert created_lead.last_attempted_at is not None
+
+
+def test_sync_call_to_new_number_burns_attempt_one_when_unconnected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-new-number-unconnected",
+                    "phone_number": "+919876500022",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 0,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        created_lead: Lead | None = Lead.query.filter_by(
+            phone_number="+919876500022"
+        ).first()
+        assert created_lead is not None
+        assert created_lead.status == "waiting"
+        assert created_lead.attempt_count == 1
+        assert created_lead.retry_locked_until is not None
+        assert created_lead.last_attempted_at is not None
+
+
+def test_sync_repeated_unconnected_calls_to_new_number_stop_lead_at_limit(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        limit_call_ids: list[str] = [
+            "call-limit-one",
+            "call-limit-two",
+            "call-limit-three",
+        ]
+        for limit_call_id in limit_call_ids:
+            payload: dict[str, Any] = {
+                "calls": [
+                    {
+                        "call_id": limit_call_id,
+                        "phone_number": "9876500033",
+                        "dialed_at": build_ist_dialed_at(0, 12, 0),
+                        "duration_seconds": 0,
+                    }
+                ]
+            }
+            sync_response: Response = client.post(
+                "/api/calls/sync", json=payload, headers=headers
+            )
+            assert sync_response.status_code == 200
+
+        created_lead: Lead | None = Lead.query.filter_by(
+            phone_number="+919876500033"
+        ).first()
+        assert created_lead is not None
+        assert created_lead.status == "stopped"
+        assert created_lead.attempt_count == MAX_LEAD_ATTEMPTS
+        assert created_lead.retry_locked_until is None
+
+
+def test_sync_second_call_to_existing_lead_number_never_creates_second_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        missed_call_payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-first-miss",
+                    "phone_number": "9876500044",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 0,
+                }
+            ]
+        }
+        first_response: Response = client.post(
+            "/api/calls/sync", json=missed_call_payload, headers=headers
+        )
+        assert first_response.status_code == 200
+
+        connected_call_payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-second-connected",
+                    "phone_number": "9876500044",
+                    "dialed_at": build_ist_dialed_at(0, 13, 0),
+                    "duration_seconds": 30,
+                }
+            ]
+        }
+        second_response: Response = client.post(
+            "/api/calls/sync", json=connected_call_payload, headers=headers
+        )
+        assert second_response.status_code == 200
+
+        lead_count: int = Lead.query.filter_by(phone_number="+919876500044").count()
+        expected_lead_count: int = 1
+        assert lead_count == expected_lead_count
+
+        resolved_lead: Lead | None = Lead.query.filter_by(
+            phone_number="+919876500044"
+        ).first()
+        assert resolved_lead is not None
+        assert resolved_lead.status == "done"
+        assert resolved_lead.attempt_count == 1
+
+
 def test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls(
     app: Flask, client: FlaskClient
 ) -> None:

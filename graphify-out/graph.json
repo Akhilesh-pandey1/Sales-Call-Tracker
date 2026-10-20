@@ -1330,8 +1330,8 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_relative_luminance",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_relative_luminance()"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_palette_is_dark",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_palette_is_dark()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_contrast_ratio",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_contrast_ratio()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_style_is_dark_primary",
-      "community": 142,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_style_is_dark_primary()"
     },
     {
@@ -1374,8 +1374,8 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_query_wants_dark",
-      "community": 142,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_query_wants_dark()"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_resolve_color_mode",
-      "community": 142,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_resolve_color_mode()"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_derive_dark_palette",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_derive_dark_palette()"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L220",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_select_palette_for_mode",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_select_palette_for_mode()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L791",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_markdown",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 171,
+      "community_name": "generate_design_system",
       "norm_label": "format_markdown()"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L919",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_design_system",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 171,
+      "community_name": "generate_design_system",
       "norm_label": "generate_design_system()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L961",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_safe_slug",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "safe_slug()"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L972",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_write_persisted_file",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "_write_persisted_file()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_py_path",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "path"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L995",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_persist_design_system",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "persist_design_system()"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L1076",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_master_md",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "format_master_md()"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L1381",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_page_override_md",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "format_page_override_md()"
     },
     {
@@ -1704,8 +1704,8 @@
       "source_location": "L1490",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_intelligent_overrides",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -1715,8 +1715,8 @@
       "source_location": "L1596",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_detect_page_type",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "_detect_page_type()"
     },
     {
@@ -1737,8 +1737,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_130",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "wcag relative luminance of a #rrggbb string, or none if unparseable."
     },
     {
@@ -1748,8 +1748,8 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_148",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "true when a colors.csv row's background is a dark surface."
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_154",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid."
     },
     {
@@ -1770,8 +1770,8 @@
       "source_location": "L165",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_165",
-      "community": 142,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "true when a styles.csv row describes itself as dark-first."
     },
     {
@@ -1781,8 +1781,8 @@
       "source_location": "L181",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_181",
-      "community": 142,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "true when the query explicitly asks for a dark theme."
     },
     {
@@ -1792,8 +1792,8 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_187",
-      "community": 142,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "resolve the mode the rest of the output has to agree with."
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L194",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_194",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "keep product brand tokens while deriving accessible dark surfaces."
     },
     {
@@ -1814,8 +1814,8 @@
       "source_location": "L222",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_222",
-      "community": 108,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case..."
     },
     {
@@ -1968,8 +1968,8 @@
       "source_location": "L792",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_792",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 171,
+      "community_name": "generate_design_system",
       "norm_label": "format design system as markdown."
     },
     {
@@ -1979,8 +1979,8 @@
       "source_location": "L923",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_923",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 171,
+      "community_name": "generate_design_system",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
     {
@@ -1990,8 +1990,8 @@
       "source_location": "L962",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_962",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "slugify a name into a single safe path segment. only [a-z0-9_-] survives; every..."
     },
     {
@@ -2001,8 +2001,8 @@
       "source_location": "L973",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_973",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "write fully to a temp file, then publish atomically."
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L997",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_997",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "persist design system to design-system/<project>/ folder using master +..."
     },
     {
@@ -2023,8 +2023,8 @@
       "source_location": "L1077",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1077",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "format design system as master.md with hierarchical override logic."
     },
     {
@@ -2034,8 +2034,8 @@
       "source_location": "L1382",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1382",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1491",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1491",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "generate intelligent overrides based on page type using layered search. uses..."
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L1597",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1597",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "persist_design_system",
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 171,
+      "community_name": "generate_design_system",
       "norm_label": "search.py"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_format_output",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 171,
+      "community_name": "generate_design_system",
       "norm_label": "format_output()"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_rationale_45",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 171,
+      "community_name": "generate_design_system",
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
@@ -4092,8 +4092,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "app_package_dependencies_lucide_react_native",
-      "community": 114,
-      "community_name": "dependencies",
+      "community": 172,
+      "community_name": "lucide-react-native",
       "norm_label": "lucide-react-native"
     },
     {
@@ -4103,8 +4103,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "lucide_react_native",
-      "community": 114,
-      "community_name": "dependencies",
+      "community": 172,
+      "community_name": "lucide-react-native",
       "norm_label": "lucide-react-native"
     },
     {
@@ -4136,8 +4136,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_package_dependencies_react",
-      "community": 178,
-      "community_name": "react",
+      "community": 114,
+      "community_name": "dependencies",
       "norm_label": "react"
     },
     {
@@ -4147,8 +4147,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_package_json_react",
-      "community": 178,
-      "community_name": "react",
+      "community": 114,
+      "community_name": "dependencies",
       "norm_label": "react"
     },
     {
@@ -8756,8 +8756,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_app_core_utils_get_ist_timezone",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "get_ist_timezone()"
     },
     {
@@ -8823,7 +8823,7 @@
       "_origin": "ast",
       "id": "backend_app_core_utils_normalize_phone_number",
       "community": 57,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "normalize_phone_number()"
     },
     {
@@ -9208,7 +9208,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services",
       "community": 57,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "calls/services.py"
     },
     {
@@ -9219,7 +9219,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_get_ist_start_minute_of_day",
       "community": 57,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "get_ist_start_minute_of_day()"
     },
     {
@@ -9230,7 +9230,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_datetime",
       "community": 57,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "datetime"
     },
     {
@@ -9241,7 +9241,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_has_invalid_call_duration",
       "community": 57,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "has_invalid_call_duration()"
     },
     {
@@ -9252,7 +9252,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_any",
       "community": 57,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "any"
     },
     {
@@ -9263,7 +9263,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_extract_valid_call",
       "community": 57,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "extract_valid_call()"
     },
     {
@@ -9274,7 +9274,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_sync_calls_batch",
       "community": 57,
-      "community_name": "test_foundation.py",
+      "community_name": "calls/services.py",
       "norm_label": "sync_calls_batch()"
     },
     {
@@ -13420,8 +13420,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_tests_test_foundation",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "test_foundation.py"
     },
     {
@@ -13431,8 +13431,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_app_creation",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "test_app_creation()"
     },
     {
@@ -13442,8 +13442,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_flask",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "flask"
     },
     {
@@ -13453,8 +13453,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_startup_adds_outcome_column_to_existing_database",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "test_startup_adds_outcome_column_to_existing_database()"
     },
     {
@@ -13464,8 +13464,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_path",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "path"
     },
     {
@@ -13475,8 +13475,8 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_user_model",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "test_user_model()"
     },
     {
@@ -13497,8 +13497,8 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_error_handler",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "test_error_handler()"
     },
     {
@@ -13508,8 +13508,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_flaskclient",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "flaskclient"
     },
     {
@@ -13519,8 +13519,8 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_utils_helpers",
-      "community": 57,
-      "community_name": "test_foundation.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "test_utils_helpers()"
     },
     {
@@ -15232,7 +15232,7 @@
       "label": "AccountFormField",
       "file_type": "code",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_add_user_modal_accountformfield",
       "community": 166,
@@ -15243,7 +15243,7 @@
       "label": "UserFormTextFieldProps",
       "file_type": "code",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_add_user_modal_userformtextfieldprops",
       "community": 166,
@@ -15254,7 +15254,7 @@
       "label": "UserFormTextField()",
       "file_type": "code",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_add_user_modal_userformtextfield",
       "community": 166,
@@ -15265,7 +15265,7 @@
       "label": "getFormFieldForServerMessage()",
       "file_type": "code",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L76",
+      "source_location": "L81",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_add_user_modal_getformfieldforservermessage",
       "community": 166,
@@ -15276,7 +15276,7 @@
       "label": "AddUserModal()",
       "file_type": "code",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L88",
+      "source_location": "L93",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_add_user_modal_addusermodal",
       "community": 166,
@@ -15906,8 +15906,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_api_dashboard_api",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "dashboard.api.ts"
     },
     {
@@ -15917,8 +15917,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_features_dashboard_api_dashboard_api_getteamdashboard",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "getteamdashboard()"
     },
     {
@@ -16104,8 +16104,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_period_switch",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 54,
+      "community_name": "cn",
       "norm_label": "period-switch.tsx"
     },
     {
@@ -16115,8 +16115,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_period_switch_periodswitchprops",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 54,
+      "community_name": "cn",
       "norm_label": "periodswitchprops"
     },
     {
@@ -16126,8 +16126,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_period_switch_periodswitch",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 54,
+      "community_name": "cn",
       "norm_label": "periodswitch()"
     },
     {
@@ -16302,8 +16302,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_team_dashboard",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "use-team-dashboard.ts"
     },
     {
@@ -16313,8 +16313,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_team_dashboard_useteamdashboardresult",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "useteamdashboardresult"
     },
     {
@@ -16324,8 +16324,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "web_src_features_dashboard_hooks_use_team_dashboard_useteamdashboard",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "useteamdashboard()"
     },
     {
@@ -16379,8 +16379,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_dashboard_page_buildmetricsubline",
-      "community": 124,
-      "community_name": "formatCount",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "buildmetricsubline()"
     },
     {
@@ -16445,8 +16445,8 @@
       "source_location": "L199",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_dashboard_page_dashboardpage",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 59,
+      "community_name": "team-page.tsx",
       "norm_label": "dashboardpage()"
     },
     {
@@ -16687,8 +16687,8 @@
       "source_location": "L300",
       "_origin": "ast",
       "id": "web_src_features_dashboard_pages_person_page_callsbyhoursectionprops",
-      "community": 87,
-      "community_name": "calls-by-hour-chart.tsx",
+      "community": 54,
+      "community_name": "cn",
       "norm_label": "callsbyhoursectionprops"
     },
     {
@@ -16731,8 +16731,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "dashboard/types.ts"
     },
     {
@@ -16742,8 +16742,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_dashboardperiod",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 54,
+      "community_name": "cn",
       "norm_label": "dashboardperiod"
     },
     {
@@ -16775,8 +16775,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamaverageperpersonperday",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "teamaverageperpersonperday"
     },
     {
@@ -16786,8 +16786,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamvsyesterday",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "teamvsyesterday"
     },
     {
@@ -16808,8 +16808,8 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_teamdashboard",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "teamdashboard"
     },
     {
@@ -16819,8 +16819,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "web_src_features_dashboard_types_personaverageperactiveday",
-      "community": 56,
-      "community_name": "person-page.tsx",
+      "community": 142,
+      "community_name": "dashboard/types.ts",
       "norm_label": "personaverageperactiveday"
     },
     {
@@ -16874,8 +16874,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format",
-      "community": 124,
-      "community_name": "formatCount",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "dashboard/utils/format.ts"
     },
     {
@@ -16896,8 +16896,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formataverageperpersonperdaylabel",
-      "community": 124,
-      "community_name": "formatCount",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "formataverageperpersonperdaylabel()"
     },
     {
@@ -16907,8 +16907,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formatyesterdaydeltalabel",
-      "community": 124,
-      "community_name": "formatCount",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "formatyesterdaydeltalabel()"
     },
     {
@@ -16918,8 +16918,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "web_src_features_dashboard_utils_format_formatactivedaysoutofperiod",
-      "community": 124,
-      "community_name": "formatCount",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "formatactivedaysoutofperiod()"
     },
     {
@@ -16974,7 +16974,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "lead-daily-stats.tsx"
     },
     {
@@ -16985,7 +16985,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_percentchangepilldata",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "percentchangepilldata"
     },
     {
@@ -16996,7 +16996,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_leaddailystatsprops",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "leaddailystatsprops"
     },
     {
@@ -17007,7 +17007,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_buildpercentchangepill",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "buildpercentchangepill()"
     },
     {
@@ -17018,7 +17018,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_buildcomparisonsubline",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "buildcomparisonsubline()"
     },
     {
@@ -17029,7 +17029,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_leaddailystats",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "leaddailystats()"
     },
     {
@@ -17414,7 +17414,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadsdailycount",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "leadsdailycount"
     },
     {
@@ -17480,7 +17480,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "leads/utils/format.ts"
     },
     {
@@ -17491,7 +17491,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format_getdayoverdaypercentchange",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "getdayoverdaypercentchange()"
     },
     {
@@ -17502,7 +17502,7 @@
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format_formatpercentchangelabel",
       "community": 124,
-      "community_name": "formatCount",
+      "community_name": "lead-daily-stats.tsx",
       "norm_label": "formatpercentchangelabel()"
     },
     {
@@ -18227,8 +18227,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_components_todays_date_action",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 59,
+      "community_name": "team-page.tsx",
       "norm_label": "todays-date-action.tsx"
     },
     {
@@ -18238,8 +18238,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_shared_components_todays_date_action_todaysdateaction",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 59,
+      "community_name": "team-page.tsx",
       "norm_label": "todaysdateaction()"
     },
     {
@@ -18271,8 +18271,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_format_count",
-      "community": 124,
-      "community_name": "formatCount",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "format-count.ts"
     },
     {
@@ -18282,8 +18282,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_format_count_formatcount",
-      "community": 124,
-      "community_name": "formatCount",
+      "community": 85,
+      "community_name": "dashboard-page.tsx",
       "norm_label": "formatcount()"
     },
     {
@@ -18315,8 +18315,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_todays_date",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 59,
+      "community_name": "team-page.tsx",
       "norm_label": "todays-date.ts"
     },
     {
@@ -18326,8 +18326,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_utils_todays_date_gettodaysdatelabel",
-      "community": 85,
-      "community_name": "dashboard-page.tsx",
+      "community": 59,
+      "community_name": "team-page.tsx",
       "norm_label": "gettodaysdatelabel()"
     },
     {
@@ -65602,7 +65602,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65613,7 +65613,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L88",
+      "source_location": "L93",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65624,7 +65624,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L76",
+      "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65635,7 +65635,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L30",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65646,7 +65646,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65658,7 +65658,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65670,7 +65670,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65682,7 +65682,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65694,7 +65694,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65706,7 +65706,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65718,7 +65718,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65734,7 +65734,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
-      "target": "web_src_shared_utils_cn",
+      "target": "web_src_shared_components_password_input",
       "confidence_score": 1.0
     },
     {
@@ -65743,6 +65743,30 @@
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
       "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "web_src_features_accounts_components_add_user_modal",
+      "target": "web_src_shared_components_password_input_passwordinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "web_src_features_accounts_components_add_user_modal",
+      "target": "web_src_shared_utils_cn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal",
@@ -65766,7 +65790,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal_userformtextfield",
@@ -65778,7 +65802,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L107",
+      "source_location": "L112",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal_addusermodal",
@@ -65791,7 +65815,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L99",
+      "source_location": "L104",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal_addusermodal",
@@ -65803,7 +65827,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "web/src/features/accounts/components/add-user-modal.tsx",
-      "source_location": "L211",
+      "source_location": "L216",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_accounts_components_add_user_modal_addusermodal",
@@ -81018,5 +81042,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7b5a2d706e8d75e8d0be3c8346139071a3e57bcc"
+  "built_at_commit": "89379bf5ca43b5454f72ef56bd0b9da4d69b8eac"
 }

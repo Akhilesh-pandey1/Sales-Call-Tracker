@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/shared/components/password-input";
 import { cn } from "@/shared/utils/cn";
 import { useCreateUser } from "../hooks/use-create-user";
 import { accountCountries, type AccountCountry, type CreateUserInput } from "../types";
@@ -18,7 +19,7 @@ type AccountFormField = "name" | "password" | "country";
 interface UserFormTextFieldProps {
   inputId: string;
   label: string;
-  inputType: string;
+  inputType: "text" | "password";
   placeholder: string;
   autoComplete: string;
   value: string;
@@ -44,23 +45,27 @@ function UserFormTextField({
     "mt-1.5 rounded-xl",
     isInvalid && "border-destructive focus-visible:ring-destructive"
   );
+  const sharedInputProps = {
+    id: inputId,
+    autoComplete,
+    placeholder,
+    value,
+    onChange: onValueChange,
+    "aria-invalid": isInvalid,
+    "aria-describedby": isInvalid ? errorId : undefined,
+    className: inputClassName,
+  };
 
   return (
     <div>
       <label htmlFor={inputId} className="text-sm font-medium">
         {label}
       </label>
-      <Input
-        id={inputId}
-        type={inputType}
-        autoComplete={autoComplete}
-        placeholder={placeholder}
-        value={value}
-        onChange={onValueChange}
-        aria-invalid={isInvalid}
-        aria-describedby={isInvalid ? errorId : undefined}
-        className={inputClassName}
-      />
+      {inputType === "password" ? (
+        <PasswordInput {...sharedInputProps} />
+      ) : (
+        <Input type={inputType} {...sharedInputProps} />
+      )}
       {helperText !== null && errorMessage === null && (
         <p className="mt-1 text-xs text-muted-foreground">{helperText}</p>
       )}

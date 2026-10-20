@@ -26,19 +26,15 @@ async function sendFilledPendingCalls(): Promise<void> {
   await deleteSentPendingCalls(sentCallIds);
 }
 
-async function sendFilledPendingCallsSafely(): Promise<void> {
-  try {
-    await sendFilledPendingCalls();
-  } catch (syncError: unknown) {
-    console.warn('Queued calls stay on the phone until the server is reachable.', syncError);
-  }
+function warnAboutFailedSync(syncError: unknown): void {
+  console.warn('Queued calls stay on the phone until the server is reachable.', syncError);
 }
 
 function syncPendingCalls(): Promise<void> {
   if (runningSync !== null) {
     return runningSync;
   }
-  const syncPromise = sendFilledPendingCallsSafely().then(() => {
+  const syncPromise = sendFilledPendingCalls().finally(() => {
     runningSync = null;
   });
   runningSync = syncPromise;
@@ -50,15 +46,23 @@ async function runJanitorThenSync(): Promise<void> {
   await syncPendingCalls();
 }
 
+export async function syncPendingCallsSafely(): Promise<void> {
+  try {
+    await runJanitorThenSync();
+  } catch (syncError: unknown) {
+    warnAboutFailedSync(syncError);
+  }
+}
+
 export function useSync(): void {
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus): void => {
       if (nextAppState !== 'active') {
         return;
       }
-      runJanitorThenSync();
+      syncPendingCallsSafely();
     };
-    runJanitorThenSync();
+    syncPendingCallsSafely();
     const appStateSubscription = AppState.addEventListener('change', handleAppStateChange);
     return () => {
       appStateSubscription.remove();

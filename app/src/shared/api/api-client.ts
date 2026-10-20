@@ -49,6 +49,11 @@ function notifyUnauthorizedHandlers(): void {
   }
 }
 
+async function clearStoredSession(): Promise<void> {
+  await clearStoredToken();
+  notifyUnauthorizedHandlers();
+}
+
 function readResponseErrorMessage(error: AxiosError): string | null {
   const responseData: unknown = error.response?.data;
   if (responseData && typeof responseData === 'object' && 'message' in responseData) {
@@ -98,8 +103,7 @@ apiClient.interceptors.response.use(
     const unauthorizedStatusCode = 401;
     const responseStatus: number | undefined = error.response?.status;
     if (responseStatus === unauthorizedStatusCode) {
-      await clearStoredToken();
-      notifyUnauthorizedHandlers();
+      await clearStoredSession();
     }
     return Promise.reject(error);
   },
@@ -112,5 +116,6 @@ export {
   writeStoredToken,
   readStoredUserId,
   writeStoredUserId,
+  clearStoredSession,
   registerUnauthorizedHandler,
 };

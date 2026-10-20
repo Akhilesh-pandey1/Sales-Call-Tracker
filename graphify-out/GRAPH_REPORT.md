@@ -1,7 +1,7 @@
-# Graph Report - sales-call-tracker  (2026-10-20)
+# Graph Report - sales-call-tracker  (2026-10-21)
 
 ## Corpus Check
-- 294 files · ~454,021 words
+- 294 files · ~454,140 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `928c38f4`
+- Built from commit: `4bcea54f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -82,7 +82,7 @@
 - Requirements
 - API Specifications
 - test_production.py
-- _select_palette_for_mode
+- persist_design_system
 - deny
 - call-log-matcher.ts
 - pending-calls-db.ts
@@ -122,7 +122,7 @@
 - seed_fake_data.py
 - lead-pool-stats.tsx
 - root-navigator.tsx
-- _resolve_color_mode
+- generate_design_system
 - search
 - react-native-svg
 - post-call-dialog.tsx
@@ -145,7 +145,7 @@
 - app/tailwind.config.js
 - react-native-reanimated
 - @tanstack/react-query
-- class-variance-authority
+- axios
 - Snap Screens
 - AGENTS.md
 - person-page.tsx
@@ -472,9 +472,9 @@ Nodes (13): 1. Authentication, 2. Call Sync, 3. Dashboards, 5. Leads, API Specif
 Cohesion: 0.47
 Nodes (9): Flask, FlaskClient, Path, test_api_route_not_found_returns_json(), test_missing_dist_returns_404(), test_missing_static_asset_returns_404(), test_serve_index_html_on_root(), test_serve_spa_client_route() (+1 more)
 
-### Community 68 - "_select_palette_for_mode"
-Cohesion: 0.22
-Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
+### Community 68 - "persist_design_system"
+Cohesion: 0.14
+Nodes (15): _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), persist_design_system(), Path, Format design system as MASTER.md with hierarchical override logic., Format a page-specific override file with intelligent AI-generated content. (+7 more)
 
 ### Community 69 - "deny"
 Cohesion: 0.11
@@ -581,8 +581,8 @@ Cohesion: 0.19
 Nodes (19): getAccounts(), updateUser(), EditUserModal(), EditUserModalProps, sortOwnAccountFirst(), useAccounts(), UseAccountsResult, getAccountCountry() (+11 more)
 
 ### Community 96 - "design_system.py"
-Cohesion: 0.07
-Nodes (36): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+28 more)
+Cohesion: 0.09
+Nodes (31): ansi_ljust(), _contrast_ratio(), _derive_dark_palette(), format_ascii_box(), hex_to_ansi(), _palette_is_dark(), _query_wants_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable. (+23 more)
 
 ### Community 97 - "use-janitor.ts"
 Cohesion: 0.30
@@ -624,9 +624,9 @@ Nodes (12): buildPoolStages(), getStageWidthPercent(), LeadPoolStage, LeadPoolSt
 Cohesion: 0.29
 Nodes (6): App(), displayName, name, RootNavigator(), useAuth(), LoginScreen()
 
-### Community 108 - "_resolve_color_mode"
-Cohesion: 0.33
-Nodes (6): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary()
+### Community 108 - "generate_design_system"
+Cohesion: 0.29
+Nodes (6): format_markdown(), generate_design_system(), Format design system as markdown., Main entry point for design system generation. Args: query: Search query (e.g.,…, format_output(), Format results for Claude consumption (token-optimized)
 
 ### Community 109 - "search"
 Cohesion: 0.14
@@ -734,7 +734,7 @@ Nodes (9): create_user_fixture(), Flask, FlaskClient, test_get_office_hours_fres
 
 ### Community 163 - "dependencies"
 Cohesion: 0.12
-Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, dependencies, axios, lucide-react (+9 more)
+Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, dependencies, class-variance-authority, lucide-react (+9 more)
 
 ### Community 166 - "add-user-modal.tsx"
 Cohesion: 0.12

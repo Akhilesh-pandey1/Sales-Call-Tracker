@@ -1330,8 +1330,8 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_relative_luminance",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_relative_luminance()"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_palette_is_dark",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_palette_is_dark()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_contrast_ratio",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_contrast_ratio()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_style_is_dark_primary",
-      "community": 108,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_style_is_dark_primary()"
     },
     {
@@ -1374,8 +1374,8 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_query_wants_dark",
-      "community": 108,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_query_wants_dark()"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_resolve_color_mode",
-      "community": 108,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_resolve_color_mode()"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_derive_dark_palette",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_derive_dark_palette()"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L220",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_select_palette_for_mode",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "_select_palette_for_mode()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L791",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_markdown",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "generate_design_system",
       "norm_label": "format_markdown()"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L919",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_design_system",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "generate_design_system",
       "norm_label": "generate_design_system()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L961",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_safe_slug",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "safe_slug()"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L972",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_write_persisted_file",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "_write_persisted_file()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_py_path",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "path"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L995",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_persist_design_system",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "persist_design_system()"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L1076",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_master_md",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "format_master_md()"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L1381",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_page_override_md",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "format_page_override_md()"
     },
     {
@@ -1704,8 +1704,8 @@
       "source_location": "L1490",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_intelligent_overrides",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -1715,8 +1715,8 @@
       "source_location": "L1596",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_detect_page_type",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "_detect_page_type()"
     },
     {
@@ -1737,8 +1737,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_130",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "wcag relative luminance of a #rrggbb string, or none if unparseable."
     },
     {
@@ -1748,8 +1748,8 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_148",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "true when a colors.csv row's background is a dark surface."
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_154",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid."
     },
     {
@@ -1770,8 +1770,8 @@
       "source_location": "L165",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_165",
-      "community": 108,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "true when a styles.csv row describes itself as dark-first."
     },
     {
@@ -1781,8 +1781,8 @@
       "source_location": "L181",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_181",
-      "community": 108,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "true when the query explicitly asks for a dark theme."
     },
     {
@@ -1792,8 +1792,8 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_187",
-      "community": 108,
-      "community_name": "_resolve_color_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "resolve the mode the rest of the output has to agree with."
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L194",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_194",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "keep product brand tokens while deriving accessible dark surfaces."
     },
     {
@@ -1814,8 +1814,8 @@
       "source_location": "L222",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_222",
-      "community": 68,
-      "community_name": "_select_palette_for_mode",
+      "community": 96,
+      "community_name": "design_system.py",
       "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case..."
     },
     {
@@ -1968,8 +1968,8 @@
       "source_location": "L792",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_792",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "generate_design_system",
       "norm_label": "format design system as markdown."
     },
     {
@@ -1979,8 +1979,8 @@
       "source_location": "L923",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_923",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "generate_design_system",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
     {
@@ -1990,8 +1990,8 @@
       "source_location": "L962",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_962",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "slugify a name into a single safe path segment. only [a-z0-9_-] survives; every..."
     },
     {
@@ -2001,8 +2001,8 @@
       "source_location": "L973",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_973",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "write fully to a temp file, then publish atomically."
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L997",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_997",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "persist design system to design-system/<project>/ folder using master +..."
     },
     {
@@ -2023,8 +2023,8 @@
       "source_location": "L1077",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1077",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "format design system as master.md with hierarchical override logic."
     },
     {
@@ -2034,8 +2034,8 @@
       "source_location": "L1382",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1382",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1491",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1491",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "generate intelligent overrides based on page type using layered search. uses..."
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L1597",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_1597",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 68,
+      "community_name": "persist_design_system",
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "generate_design_system",
       "norm_label": "search.py"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_format_output",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "generate_design_system",
       "norm_label": "format_output()"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_rationale_45",
-      "community": 96,
-      "community_name": "design_system.py",
+      "community": 108,
+      "community_name": "generate_design_system",
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
@@ -14179,8 +14179,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_package_dependencies_axios",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 138,
+      "community_name": "axios",
       "norm_label": "axios"
     },
     {
@@ -14190,8 +14190,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_package_json_axios",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 138,
+      "community_name": "axios",
       "norm_label": "axios"
     },
     {
@@ -14201,8 +14201,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_package_dependencies_class_variance_authority",
-      "community": 138,
-      "community_name": "class-variance-authority",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "class-variance-authority"
     },
     {
@@ -14212,8 +14212,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_package_json_class_variance_authority",
-      "community": 138,
-      "community_name": "class-variance-authority",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "class-variance-authority"
     },
     {
@@ -17553,7 +17553,7 @@
       "label": "CsvFileDropzone()",
       "file_type": "code",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L36",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_upload_card_csvfiledropzone",
       "community": 47,
@@ -17564,7 +17564,7 @@
       "label": "getUploadToastDescription()",
       "file_type": "code",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L89",
+      "source_location": "L123",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_upload_card_getuploadtoastdescription",
       "community": 47,
@@ -17575,7 +17575,7 @@
       "label": "LeadUploadCard()",
       "file_type": "code",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L97",
+      "source_location": "L131",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_upload_card_leaduploadcard",
       "community": 47,
@@ -72812,7 +72812,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L36",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_leads_components_lead_upload_card",
@@ -72845,7 +72845,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L89",
+      "source_location": "L123",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_leads_components_lead_upload_card",
@@ -72867,7 +72867,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L97",
+      "source_location": "L131",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_leads_components_lead_upload_card",
@@ -73023,7 +73023,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L68",
+      "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_leads_components_lead_upload_card_csvfiledropzone",
@@ -73035,7 +73035,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L50",
+      "source_location": "L83",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_leads_components_lead_upload_card_csvfiledropzone",
@@ -73047,7 +73047,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L166",
+      "source_location": "L198",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_leads_components_lead_upload_card_leaduploadcard",
@@ -73060,7 +73060,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L148",
+      "source_location": "L180",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_leads_components_lead_upload_card_leaduploadcard",
@@ -73072,7 +73072,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "web/src/features/leads/components/lead-upload-card.tsx",
-      "source_location": "L107",
+      "source_location": "L141",
       "weight": 1.0,
       "_origin": "ast",
       "source": "web_src_features_leads_components_lead_upload_card_leaduploadcard",
@@ -82942,5 +82942,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "928c38f45fb185c21ca5f5d1a566373a50412996"
+  "built_at_commit": "4bcea54fdba6d87df17d8c8b04b59cf579fa91b4"
 }

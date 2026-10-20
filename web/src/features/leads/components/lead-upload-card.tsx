@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type DragEvent } from "react";
 import { FileUp, UploadCloud } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -23,11 +23,17 @@ interface LeadCountryOption {
 interface CsvFileDropzoneProps {
   selectedFile: File | null;
   fileErrorMessage: string | null;
-  handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFilePicked: (pickedFile: File | null) => void;
 }
 
 function getFileSizeLabel(fileSizeInBytes: number): string {
-  const bytesPerMb: number = 1024 * 1024;
+  const bytesPerKb: number = 1024;
+  const bytesPerMb: number = bytesPerKb * 1024;
+  if (fileSizeInBytes < bytesPerMb) {
+    const fileSizeInKb: number = fileSizeInBytes / bytesPerKb;
+    const fileSizeInKbLabel: string = `${fileSizeInKb.toFixed(1)} KB`;
+    return fileSizeInKbLabel;
+  }
   const fileSizeInMb: number = fileSizeInBytes / bytesPerMb;
   const fileSizeLabel: string = `${fileSizeInMb.toFixed(1)} MB`;
   return fileSizeLabel;
@@ -36,9 +42,33 @@ function getFileSizeLabel(fileSizeInBytes: number): string {
 function CsvFileDropzone({
   selectedFile,
   fileErrorMessage,
-  handleFileChange,
+  onFilePicked,
 }: CsvFileDropzoneProps) {
   const hasFileError: boolean = fileErrorMessage !== null;
+  const [isDragActive, setIsDragActive] = useState<boolean>(false);
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const pickedFile: File | null = event.target.files?.[0] ?? null;
+    event.target.value = "";
+    onFilePicked(pickedFile);
+  };
+
+  const handleDragOver = (event: DragEvent<HTMLLabelElement>): void => {
+    event.preventDefault();
+    setIsDragActive(true);
+  };
+
+  const handleDragLeave = (): void => {
+    setIsDragActive(false);
+  };
+
+  const handleFileDrop = (event: DragEvent<HTMLLabelElement>): void => {
+    event.preventDefault();
+    setIsDragActive(false);
+    const droppedFiles: FileList = event.dataTransfer.files;
+    const droppedFile: File | null = droppedFiles.length > 0 ? droppedFiles[0] : null;
+    onFilePicked(droppedFile);
+  };
 
   return (
     <div>
@@ -47,9 +77,13 @@ function CsvFileDropzone({
       </span>
       <label
         htmlFor="lead-upload-file"
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleFileDrop}
         className={cn(
           "mt-1.5 flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed p-5 text-center hover:border-primary",
-          hasFileError ? "border-destructive bg-destructive/5" : "border-border bg-background"
+          hasFileError ? "border-destructive bg-destructive/5" : "border-border bg-background",
+          isDragActive && !hasFileError ? "border-primary bg-primary/5" : null
         )}
       >
         <input
@@ -75,9 +109,9 @@ function CsvFileDropzone({
           </>
         ) : (
           <>
-            <p className="mt-2 text-xs font-medium">Click to browse</p>
+            <p className="mt-2 text-xs font-medium">Click to browse or drag &amp; drop</p>
             <p className="text-[11px] text-muted-foreground">
-              Phone numbers in column 1 · UTF-8
+              One phone number per line · No header row · No extra columns
             </p>
           </>
         )}
@@ -136,9 +170,7 @@ export function LeadUploadCard() {
     }
   };
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const pickedFile: File | null = event.target.files?.[0] ?? null;
-    event.target.value = "";
+  const handlePickedFile = (pickedFile: File | null): void => {
     clearUploadState();
     if (!pickedFile) {
       resetFileSelection();
@@ -199,7 +231,7 @@ export function LeadUploadCard() {
           <CsvFileDropzone
             selectedFile={selectedFile}
             fileErrorMessage={fileErrorMessage}
-            handleFileChange={handleFileChange}
+            onFilePicked={handlePickedFile}
           />
 
           <div>

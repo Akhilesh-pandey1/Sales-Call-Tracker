@@ -48,6 +48,7 @@ output-metadata.json
 *.keystore
 *.jks
 *.pepk
+keystore.properties
 
 # React Native & Metro
 .metro/

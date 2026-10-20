@@ -149,12 +149,13 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
   - Keypad - 0–9, *, #, and backspace (tap deletes one character, holding it clears the whole number)
   - Paste button - fills the number field from clipboard
   - Call button - grey and unpressable until the number is valid for the country; green when valid; starts the call at once, no confirm step
-  - Post-call popup - opens by itself when a keypad call ends; same popup as the lead call - the dialed number, the schedule question with the date and time reveal below, and one Submit button - no "Go to next call"
+  - Post-call popup - opens by itself when a keypad call ends; same popup as the lead call - the dialed number, the schedule question with the follow-up time field below, and one Submit button - no "Go to next call"
 - **Automated view (lead calling)**:
   - Start Calling button - dials the next lead at once, one tap, no lead card step
-  - Post-call popup - opens by itself when the call ends: "Schedule this number for the next call?" with two choices - "Do not schedule" pre-selected and "Schedule", which reveals the date and time picker below in the same popup; a pre-checked "Go to next call" checkbox; one Submit button
+  - Post-call popup - opens by itself when the call ends: "Schedule this number for the next call?" with two choices - "Do not schedule" pre-selected and "Schedule", which reveals the follow-up time field below in the same popup; a pre-checked "Go to next call" checkbox; one Submit button
   - Submit - saves the chosen schedule and sends the call; with the box checked the next lead's call starts at once; with the box unchecked the flow pauses until Start Calling again
-  - Reopen button - brings the popup back when it was closed without Submit
+  - Follow-up time field (both popups) - tapping it opens the phone's date picker first, then the time picker; starts at tomorrow 9:00 AM; past dates and dates beyond 30 days cannot be picked
+  - Locked popup (both popups) - tapping outside or pressing the back button does nothing; Submit is the only way through
 - Red banner (both views when any call permission is off) - "Calls are not being logged", with a Fix button that opens Android app settings
 
 **Edge cases:**
@@ -163,8 +164,7 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 - Any of the three call permissions off: red banner shows; Fix opens Android settings; banner clears once all three are on
 - Call permission off: tapping Call hands the number to the phone's own dialer (one extra tap there) - that call is not recorded
 - Direct call fails to start: "Could not start the call. Please try again."
-- Schedule time in the past or more than 30 days ahead: refused - "Scheduled time must be in the future within 30 days."
-- Popup closed without Submit: the call still records at the next app open
+- Popup closed without Submit, or app killed with the popup open: the call still records at the next app open; the popup does not come back
 - No internet: dialing and lead calling work as always; calls sync on a later app open
 - Login ended (signed in on another phone, deactivated, or password changed): back to Screen 6 Login
 
@@ -172,8 +172,8 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 
 ### Screen 8: My Stats - second tab
 - "Last 30 days" KPI cards (4) - Active days (out of 30), Avg dials, Avg connected, Avg minutes; averages per active day, with the 30-day totals as small sub-lines
-- Calls by hour - the salesperson's own dials per hour; small period switch (Today | Yesterday | 30 days) drives only this chart; one line under it names the best hour
-- Performance table - three rows (Today, Yesterday, Last 30 days), each with Dials, Connected, Minutes, Connected %
+- Calls by hour - the salesperson's own dials per hour; small period switch (Today | Yesterday | 30 days) opens on Today and drives only this chart; one line under it names the best hour
+- Performance table - three rows (Today, Yesterday, Last 30 days); the four headings are icons (phone, connected phone, clock, percent) and one line under the table names them: Dials, Connected, Minutes, Connected %
 - No most-contacted-numbers table here - that lives only on the manager's Person View
 - Loads fresh on every tab open - no saved copy on the phone
 
@@ -190,6 +190,8 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 
 ### Screen 9: Settings - third tab
 - Plain "Settings" title - no back arrow; this is a top-level tab
+- Log out row - under the Clear local data row; icon, title, and a short description
+- Log out tap - first tries to send every unsent call; when none are left, clears the session and returns to the Login screen
 - Clear local data row - icon, title, and a short description of what it wipes, all shown in full
 - Confirmation dialog on tap - "This deletes N calls not yet sent to the server. Cannot be undone." (N is the real count of unsent calls on the phone)
 - Confirm - wipes only the unsent calls on the phone; server numbers stay untouched
@@ -197,5 +199,6 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 
 **Edge cases:**
 - No unsent calls: N shows 0 in the same message
+- Log out with unsent calls and no internet: refused - "You have N calls not sent yet. Connect to the internet and log out."
 
 → Flow ends

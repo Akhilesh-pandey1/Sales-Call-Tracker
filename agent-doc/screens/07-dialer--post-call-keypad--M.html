@@ -79,7 +79,7 @@
       </div>
     </main>
 
-    <!-- Keypad post-call popup: opens by itself when a keypad call ends. The number with one OK - no schedule question, no Go to next call. -->
+    <!-- Keypad post-call popup: opens by itself when a keypad call ends. The number, the schedule question, and one Submit - no Go to next call. Locked - Submit is the only way through. -->
     <div class="absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
       <div class="w-full max-w-sm rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
 
@@ -105,8 +105,17 @@
             </label>
           </div>
           <div id="keypad-schedule-input-box" class="mt-2 hidden rounded-xl border border-indigo-200 bg-indigo-50/40 p-3">
-            <label for="keypad-sched-dt" class="block text-[11px] font-semibold uppercase tracking-wider text-indigo-900">Follow-up time (IST)</label>
-            <input type="datetime-local" id="keypad-sched-dt" value="2026-10-21T11:00" class="mt-1 w-full rounded-lg border border-indigo-200 bg-white px-2.5 py-1.5 text-xs font-medium text-[var(--color-foreground)]">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-indigo-900">Follow-up time (IST)</p>
+            <button type="button" class="mt-1.5 flex w-full cursor-pointer items-center justify-between rounded-lg border border-indigo-200 bg-white px-2.5 py-2 text-left transition-colors duration-200 hover:bg-indigo-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              <span class="text-xs font-medium text-[var(--color-foreground)]">Tomorrow, 21 Oct 2026 · 9:00 AM</span>
+              <svg class="h-4 w-4 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </button>
+            <p class="mt-1 text-[10px] text-[var(--color-muted-foreground)]">Tap to pick — opens the date picker, then the time picker. Up to 30 days ahead.</p>
           </div>
         </div>
         <div class="mt-6">

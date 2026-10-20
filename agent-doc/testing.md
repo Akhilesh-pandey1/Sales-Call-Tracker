@@ -21,6 +21,11 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - After the manager updates the office hours window, the gate uses the new window on the next sync.
 - Malformed call rows are skipped while valid rows in the same batch are saved.
 - Calls sync without an outcome; the `outcome` column stays empty on every saved row.
+- A call to a number with no lead creates that lead as `waiting` and resolves it from the same call — connected marks it `done`, not connected burns attempt 1.
+- A second sync for a number that already has a lead never creates a second lead.
+- A call item with `scheduled_at` inside 30 days schedules the resolved lead; the call is saved.
+- A `scheduled_at` on a call that connects (lead ends `done`) is skipped with a log line; the call is still saved.
+- A past or beyond-30-days `scheduled_at` is skipped with a log line; the call is still saved.
 - Returns `{"status": true}` on success.
 
 ### `tests/modules/test_dashboard.py`
@@ -94,12 +99,16 @@ The tracking spike verifies the complete dialer and call-log pipeline on the old
 The app has no automated UI tests; the calling and navigation fixes are verified by hand on a real phone:
 - Tapping Call starts the call at once in the Android calling screen — no other dialer app, no second confirm tap.
 - With CALL_PHONE off, the Call button hands the number to the phone's own dialer (one extra tap there) and no intent row is written.
-- When a call ends, the post-call popup is already open on return to the app: a lead call shows the schedule question with "Do not schedule" pre-selected and "Go to next call" pre-checked; a keypad call shows the dialed number with OK only.
+- When a call ends, the post-call popup is already open on return to the app: a lead call shows the schedule question with "Do not schedule" pre-selected and "Go to next call" pre-checked; a keypad call shows the dialed number with the same schedule question.
+- Returning to the app while the call is still running shows no popup — it appears only after the call has ended.
+- Tapping the follow-up field opens the native date picker first, then the native time picker; past dates and dates beyond 30 days cannot be picked.
 - Tapping Submit sends the call, and a 15-second connected call shows 15 seconds of talk time on the dashboard — never 0.
 - With airplane mode on, Submit saves the row on the phone with its duration; with internet back, the next app open bulk-sends it and the row is deleted.
 - Unchecking "Go to next call" and submitting stops the automated loop — no new lead is served until Start calling is tapped again.
 - Submit with "Go to next call" checked starts the next lead's call immediately.
-- Closing the popup without Submit leaves the lead card with a button that reopens it.
+- Tapping outside the post-call popup or pressing the back button does nothing — Submit is the only way through, for lead and keypad calls alike.
+- Tapping Log out on the Settings screen sends any unsent calls first and returns to the Login screen; with airplane mode and unsent calls it shows how many are waiting and stays logged in.
+- The My Stats calls-by-hour chart opens on Today.
 - The tab bar shows three tabs with icons — Dialer (phone), My Stats (bar chart), Settings (gear) — and the My Stats header has no gear button.
 - No screen draws content under the status bar (Login, Dialer, My Stats, Settings).
 - The Settings "Clear local data" row shows its full title and description, and tapping it opens the confirm dialog.

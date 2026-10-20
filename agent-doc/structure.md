@@ -21,6 +21,7 @@ The system consists of three parts in a single repository:
   - `react-native-call-detection-android`
   - `react-native-call-log`
   - `react-native-intent-launcher` (Android direct-call intent, ACTION_CALL)
+- **Date & Time Picker**: `@react-native-community/datetimepicker` (native date then time dialogs behind the post-call popup's schedule field)
 - **Utilities**: `libphonenumber-js` (E.164 phone normalization), `axios` (API requests), `@react-native-clipboard/clipboard`
 
 ### 2. Web Dashboard (`web/`) — Manager Web App
@@ -213,7 +214,7 @@ app/
     │   │   ├── components/keypad.tsx
     │   │   ├── components/permission-banner.tsx
     │   │   ├── components/lead-call-card.tsx
-    │   │   ├── components/post-call-dialog.tsx  # Post-call popup: schedule question + Go-to-next checkbox + Submit; keypad version shows the number with OK
+    │   │   ├── components/post-call-dialog.tsx  # Post-call popup: native date/time picker + schedule question + Go-to-next checkbox + Submit; locked so only Submit closes it; keypad variant shows the number with the same schedule question
     │   │   ├── lib/call-launcher.ts     # Starts the call: ACTION_CALL direct dial; tel: hand-over without CALL_PHONE
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
@@ -224,7 +225,7 @@ app/
     │   │   ├── hooks/use-my-stats.ts
     │   │   └── screens/
     │   │       ├── my-stats-screen.tsx   # Salesperson stats: last-30-days KPI cards, performance table, calls-by-hour chart
-    │   │       └── settings-screen.tsx   # Settings tab: clear local data recovery button
+    │   │       └── settings-screen.tsx   # Settings tab: Log out row and Clear local data with its confirm dialog
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
     │       ├── hooks/use-permissions.ts  # Runtime permissions check, request, settings link

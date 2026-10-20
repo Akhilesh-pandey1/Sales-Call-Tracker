@@ -55,18 +55,22 @@ Receives a batch of completed calls from the salesperson's mobile app.
         "call_id": "d2a8c9e5-6f03-4b8c-82d3-4f5a6b7c8d9e",
         "phone_number": "+919812345678",
         "dialed_at": "2026-10-14T06:45:00Z",
-        "duration_seconds": 0
+        "duration_seconds": 0,
+        "scheduled_at": "2026-10-16T04:30:00Z"
       }
     ]
   }
   ```
+- `scheduled_at` — string, optional. ISO UTC follow-up time for the dialed number, chosen in the post-call popup. Omitted when no schedule was chosen.
 - **Processing Logic**:
   - Saves all valid call entries under the authenticated user's ID.
   - Calls carry no outcome — the salesperson is never asked for one; connected is derived from duration.
   - Silently ignores existing `call_id` values (idempotent unique key).
   - Skips and logs any call older than 3 days (`MAX_CALL_AGE_DAYS`).
   - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped.
-  - Automatically updates any matching lead in `leads`:
+  - A call whose normalized number has no lead in `leads` creates that lead as `waiting`, then resolves it like any uploaded lead.
+  - Applies an optional `scheduled_at` to the resolved lead (created or existing) under the standard schedule rules: the time must be in the future within 30 days and the lead must not be `done` or `stopped`. An invalid or inapplicable schedule is skipped with a server log line — the call itself is always saved.
+  - Automatically updates the lead matching the dialed number in `leads`:
     - If `duration_seconds > 0` (connected): marks `status = 'done'`, clears claims and schedules.
     - If `duration_seconds == 0` (not connected): increments `attempt_count`, sets `retry_locked_until = now() + 2 hours`. If attempts reach 3 (`MAX_LEAD_ATTEMPTS`), sets `status = 'stopped'`. Clears claims and schedules.
 - **Response 200**:

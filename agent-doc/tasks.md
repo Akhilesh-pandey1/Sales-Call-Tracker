@@ -40,7 +40,7 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] The back-to-app trigger reads the live call state through `getCallState()` and opens the popup only when it is IDLE — while a call is still live, returning to the app shows no popup

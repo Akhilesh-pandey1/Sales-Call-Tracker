@@ -43,13 +43,13 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The back-to-app trigger reads the live call state through `getCallState()` and opens the popup only when it is IDLE — while a call is still live, returning to the app shows no popup
-- [ ] The OFFHOOK→IDLE event still opens the popup at the real hang-up
-- [ ] No code persists or re-opens the popup across an app restart — the row waits for the janitor (Decision 171)
+- [x] The back-to-app trigger reads the live call state through `getCallState()` and opens the popup only when it is IDLE — while a call is still live, returning to the app shows no popup
+- [x] The OFFHOOK→IDLE event still opens the popup at the real hang-up
+- [x] No code persists or re-opens the popup across an app restart — the row waits for the janitor (Decision 171)
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

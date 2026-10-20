@@ -1,0 +1,457 @@
+{
+  ".eslintrc.js": {
+    "mtime": 1792502977.734506,
+    "ast_hash": "ee3839d010493015473712471d334665",
+    "semantic_hash": ""
+  },
+  ".prettierrc.js": {
+    "mtime": 1792502977.7370136,
+    "ast_hash": "80b4360aeba98788dc0856a7ba261108",
+    "semantic_hash": ""
+  },
+  "App.tsx": {
+    "mtime": 1792502977.7381487,
+    "ast_hash": "eafb8971f107b19e9509d0aeb5deb9db",
+    "semantic_hash": ""
+  },
+  "android/app/build.gradle": {
+    "mtime": 1792502977.7425728,
+    "ast_hash": "f28e960b92791860fcc7bca93be0bbb0",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/java/com/apexsalescall/MainActivity.kt": {
+    "mtime": 1792502977.7635376,
+    "ast_hash": "cf75e8780389125495ae9fc5b2e8008e",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/java/com/apexsalescall/MainApplication.kt": {
+    "mtime": 1792502977.769559,
+    "ast_hash": "e5f7605debaf0c6276056fc75ac4a497",
+    "semantic_hash": ""
+  },
+  "android/build.gradle": {
+    "mtime": 1792502977.7944808,
+    "ast_hash": "9293cb752b6b3b5280ff46a6f387a3d7",
+    "semantic_hash": ""
+  },
+  "android/gradlew": {
+    "mtime": 1792502977.801356,
+    "ast_hash": "2499a554dff111d1e3cba902f7147dc0",
+    "semantic_hash": ""
+  },
+  "android/settings.gradle": {
+    "mtime": 1792502977.8034532,
+    "ast_hash": "07a87e4388de42aa04c260aefd53e7c6",
+    "semantic_hash": ""
+  },
+  "app.json": {
+    "mtime": 1792502977.8034532,
+    "ast_hash": "7f4d74bc293b5fe5a837c0a4566122e4",
+    "semantic_hash": ""
+  },
+  "babel.config.js": {
+    "mtime": 1792502977.8044527,
+    "ast_hash": "ebc79aaf9f6553ad74658f9ea1815b46",
+    "semantic_hash": ""
+  },
+  "components.json": {
+    "mtime": 1792502977.8044527,
+    "ast_hash": "4bdaf7623bc5f3d35b23c4da469e1c51",
+    "semantic_hash": ""
+  },
+  "config.json": {
+    "mtime": 1792505245.6899407,
+    "ast_hash": "579dfb5fd411da9f4c906b6fa4b7222d",
+    "semantic_hash": ""
+  },
+  "index.js": {
+    "mtime": 1792502977.8044527,
+    "ast_hash": "c1bd49de5141c62bb3bc90859f93e4e1",
+    "semantic_hash": ""
+  },
+  "metro.config.js": {
+    "mtime": 1792502977.8059428,
+    "ast_hash": "8c4c150d70de446a9f0b834be9e03660",
+    "semantic_hash": ""
+  },
+  "nativewind-env.d.ts": {
+    "mtime": 1792502977.80739,
+    "ast_hash": "0074169ae7f73e00780027d9fb78fc29",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1792502977.8083901,
+    "ast_hash": "604382e73a4dd065f3f24fa108854bba",
+    "semantic_hash": ""
+  },
+  "src/app/navigation/app-navigator.tsx": {
+    "mtime": 1792502977.8095858,
+    "ast_hash": "7840d9551acbadaa4eea2d1c78e90f3e",
+    "semantic_hash": ""
+  },
+  "src/app/navigation/main-tabs-param-list.ts": {
+    "mtime": 1792502977.8095858,
+    "ast_hash": "1317a819d5a8101668311df3ccc7fc2b",
+    "semantic_hash": ""
+  },
+  "src/app/navigation/root-navigator.tsx": {
+    "mtime": 1792502977.810912,
+    "ast_hash": "8386b0bc409ff37e3488a5d79d059767",
+    "semantic_hash": ""
+  },
+  "src/components/ui/button.tsx": {
+    "mtime": 1792502977.810912,
+    "ast_hash": "b5535dd4aaec2aef7b354c13a4c045eb",
+    "semantic_hash": ""
+  },
+  "src/components/ui/card.tsx": {
+    "mtime": 1792502977.8120553,
+    "ast_hash": "a4fd64b066ede2cc42af1ea32ef95930",
+    "semantic_hash": ""
+  },
+  "src/components/ui/dialog.tsx": {
+    "mtime": 1792502977.8120553,
+    "ast_hash": "71ee2264e1e61cf06a73bb6204231632",
+    "semantic_hash": ""
+  },
+  "src/components/ui/icon.tsx": {
+    "mtime": 1792502977.8133483,
+    "ast_hash": "718146c68e788ab155372f38381390d8",
+    "semantic_hash": ""
+  },
+  "src/components/ui/input.tsx": {
+    "mtime": 1792502977.8133483,
+    "ast_hash": "009a29183749dc4fb78ccc1529293c83",
+    "semantic_hash": ""
+  },
+  "src/components/ui/native-only-animated-view.tsx": {
+    "mtime": 1792502977.8143487,
+    "ast_hash": "5feabbcec1f1d541b3637d9ba993c7f7",
+    "semantic_hash": ""
+  },
+  "src/components/ui/text.tsx": {
+    "mtime": 1792502977.8198545,
+    "ast_hash": "8475fe19beef0b5842446a9bf0126c10",
+    "semantic_hash": ""
+  },
+  "src/config/app-config.ts": {
+    "mtime": 1792505255.4220598,
+    "ast_hash": "4bba9a8d4af4ffc87aef4c58f98faccb",
+    "semantic_hash": ""
+  },
+  "src/features/auth/api/auth.api.ts": {
+    "mtime": 1792502977.8248367,
+    "ast_hash": "28ba05ede59702af30db5c3bb4d19e9f",
+    "semantic_hash": ""
+  },
+  "src/features/auth/components/password-input.tsx": {
+    "mtime": 1792502977.836114,
+    "ast_hash": "622bd747f1cd2f50dd0934bf9a6a5240",
+    "semantic_hash": ""
+  },
+  "src/features/auth/hooks/use-auth.ts": {
+    "mtime": 1792502977.837629,
+    "ast_hash": "4205f00b2c4ec833f570bd4fbf017547",
+    "semantic_hash": ""
+  },
+  "src/features/auth/index.ts": {
+    "mtime": 1792502977.8396213,
+    "ast_hash": "8d83e40c11dae73f2bf35bbcfe8f3352",
+    "semantic_hash": ""
+  },
+  "src/features/auth/screens/login-screen.tsx": {
+    "mtime": 1792502977.8406184,
+    "ast_hash": "f1563b0d600b07bc7ae63dae3f45f55b",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/api/leads.api.ts": {
+    "mtime": 1792502977.8420897,
+    "ast_hash": "19322ccb3b55d3f8db5c963d314f2e4e",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/components/keypad.tsx": {
+    "mtime": 1792502977.8420897,
+    "ast_hash": "fd2d725d741b27fce4250c0d3d5c2091",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/components/lead-call-card.tsx": {
+    "mtime": 1792502977.8431811,
+    "ast_hash": "f97a5317571d0903476c4eed852c6c45",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/components/permission-banner.tsx": {
+    "mtime": 1792502977.8431811,
+    "ast_hash": "5092db6584aa2c5a2d69affd1d890d84",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/components/post-call-dialog.tsx": {
+    "mtime": 1792502977.8444157,
+    "ast_hash": "7cca5ecbda60746150ea085d8f32ef3c",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-automated-calling.ts": {
+    "mtime": 1792502977.8444157,
+    "ast_hash": "230cf064eab6090937b4f4cab802230c",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-call-hang-up-detector.ts": {
+    "mtime": 1792502977.8456118,
+    "ast_hash": "152b36113a41170b456d0dc61944bcf9",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-dialer.ts": {
+    "mtime": 1792502977.8456118,
+    "ast_hash": "3ff267dd8f7509ccedbc1fa2a2d93bae",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-dialog-visibility.ts": {
+    "mtime": 1792502977.8456118,
+    "ast_hash": "ef3c3d30e4290f04680073c4c6befce5",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-keypad-post-call.ts": {
+    "mtime": 1792502977.8471043,
+    "ast_hash": "86285c8625f7cbf946171cf79eb54f5c",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-lead-loading.ts": {
+    "mtime": 1792502977.8471043,
+    "ast_hash": "7ee67b536bf18033c5b7d44bf2a50cb5",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-lead-post-call.ts": {
+    "mtime": 1792502977.8481047,
+    "ast_hash": "edce83eac45d8b40d63f602b3e4a785a",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-post-call-schedule.ts": {
+    "mtime": 1792502977.849101,
+    "ast_hash": "eb8f8c03bae12bd81396154113d5a70a",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/hooks/use-post-call-submit.ts": {
+    "mtime": 1792502977.850098,
+    "ast_hash": "55e66e0ce13b0ed51bb0f1f456eb3670",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/index.ts": {
+    "mtime": 1792502977.850098,
+    "ast_hash": "199a400cee68739bfd1069f2e6c8ab33",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/lib/call-launcher.ts": {
+    "mtime": 1792502977.8510945,
+    "ast_hash": "3f2a8b7b6ee878b7c33e5a3d176ab7f7",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/lib/request-error.ts": {
+    "mtime": 1792502977.8510945,
+    "ast_hash": "b3b784236f1fe28bcd0739e219bc9a26",
+    "semantic_hash": ""
+  },
+  "src/features/dialer/screens/dialer-screen.tsx": {
+    "mtime": 1792502977.852093,
+    "ast_hash": "a594079f1bf24adfcc7bf7e3e15874b8",
+    "semantic_hash": ""
+  },
+  "src/features/stats/api/stats.api.ts": {
+    "mtime": 1792502977.8530927,
+    "ast_hash": "37aa4f150beaedcab973d1a11c6310be",
+    "semantic_hash": ""
+  },
+  "src/features/stats/hooks/use-clear-local-data.ts": {
+    "mtime": 1792502977.8530927,
+    "ast_hash": "e49f0bce1ee44196fa71926ea8e0c4e3",
+    "semantic_hash": ""
+  },
+  "src/features/stats/hooks/use-logout.ts": {
+    "mtime": 1792502977.8540895,
+    "ast_hash": "f9bcc7cc2e073dc500b8736a297a6276",
+    "semantic_hash": ""
+  },
+  "src/features/stats/hooks/use-my-stats.ts": {
+    "mtime": 1792502977.8540895,
+    "ast_hash": "29722fb68eea7fb0e80a72fc01bbc2da",
+    "semantic_hash": ""
+  },
+  "src/features/stats/index.ts": {
+    "mtime": 1792502977.8540895,
+    "ast_hash": "df365d5d7fd41e7d2f162246becd715a",
+    "semantic_hash": ""
+  },
+  "src/features/stats/screens/my-stats-screen.tsx": {
+    "mtime": 1792502977.8555274,
+    "ast_hash": "5e1c38e8d07a7fd87cc8bc4877096bfc",
+    "semantic_hash": ""
+  },
+  "src/features/stats/screens/settings-screen.tsx": {
+    "mtime": 1792502977.8565247,
+    "ast_hash": "841e3cf1cefa7402158f67f03c4ec513",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/api/calls.api.ts": {
+    "mtime": 1792502977.857028,
+    "ast_hash": "4e031ddc2e18f11dc1ddf2dd738717b5",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/db/index.ts": {
+    "mtime": 1792502977.8580317,
+    "ast_hash": "261e9c57d73e02e9fd770d44c453c04b",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/db/pending-calls-db.ts": {
+    "mtime": 1792502977.8590257,
+    "ast_hash": "0419590937cb80fa3dbf9c65318a42ca",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/hooks/use-call-tracker.ts": {
+    "mtime": 1792502977.860022,
+    "ast_hash": "b71d500c508c5fa58dda0fe6a7040f13",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/hooks/use-janitor.ts": {
+    "mtime": 1792502977.860022,
+    "ast_hash": "6b79afb20323a1c84203bf9a2e076e07",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/hooks/use-permissions.ts": {
+    "mtime": 1792502977.8610191,
+    "ast_hash": "68b76d3dcafb223c323749e86cd4d399",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/hooks/use-sync.ts": {
+    "mtime": 1792502977.8610191,
+    "ast_hash": "9faee42aff5b48b69dcd7c0d7f16633a",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/index.ts": {
+    "mtime": 1792502977.862018,
+    "ast_hash": "f8c3dde8830a880b358d8693f3d85063",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/lib/call-log-matcher.ts": {
+    "mtime": 1792502977.862018,
+    "ast_hash": "52d1328d4ec5dcca91239545b188f3a7",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/lib/call-log-reader.ts": {
+    "mtime": 1792502977.863012,
+    "ast_hash": "355bb8520d3a5334d2f992dd4bc37431",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/lib/call-submit.ts": {
+    "mtime": 1792502977.864009,
+    "ast_hash": "d79250064b1883dd85dd09b3bc3b9aa4",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/lib/pending-call-filler.ts": {
+    "mtime": 1792502977.864009,
+    "ast_hash": "f4836106e4ac482611583770f363aead",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/lib/sync-call.ts": {
+    "mtime": 1792502977.8650062,
+    "ast_hash": "7731f7f8409316c53430e8f20cc0d47e",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/live-call-state.ts": {
+    "mtime": 1792502977.866002,
+    "ast_hash": "3b06660dfad5e72281b2ed3d37681d8a",
+    "semantic_hash": ""
+  },
+  "src/features/tracking/sync-events.ts": {
+    "mtime": 1792502977.866002,
+    "ast_hash": "51623567b9d3f64c5f367a0f5951483b",
+    "semantic_hash": ""
+  },
+  "src/lib/utils.ts": {
+    "mtime": 1792502977.866002,
+    "ast_hash": "a04f8d04422001647c72c8675f5c2359",
+    "semantic_hash": ""
+  },
+  "src/shared/api/api-client.ts": {
+    "mtime": 1792505265.577348,
+    "ast_hash": "81be638a57a97e85a530059b0817184f",
+    "semantic_hash": ""
+  },
+  "src/shared/constants/messages.ts": {
+    "mtime": 1792502977.8675056,
+    "ast_hash": "75ec71ebbd0bc8993527a36438ab8cf9",
+    "semantic_hash": ""
+  },
+  "src/shared/utils/phone-formatter.ts": {
+    "mtime": 1792502977.8675056,
+    "ast_hash": "fc41b1aba176aec56e37222a2987851b",
+    "semantic_hash": ""
+  },
+  "src/types/react-native-intent-launcher.d.ts": {
+    "mtime": 1792502977.8685052,
+    "ast_hash": "bb538f84d7c44719ef6bf4c7c6012985",
+    "semantic_hash": ""
+  },
+  "tailwind.config.js": {
+    "mtime": 1792502977.8685052,
+    "ast_hash": "9c9b5a91ec5cb8b332429453bd6ed27d",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1792502977.8685052,
+    "ast_hash": "8036c771272f15da4d22da64176e8e10",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1792505311.8598502,
+    "ast_hash": "c43cbeccfe77a4d8db2514cd0436b988",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-hdpi/ic_launcher.png": {
+    "mtime": 1792502977.7767565,
+    "ast_hash": "39370f3d8346edf24af4d811c7d6f70e",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png": {
+    "mtime": 1792502977.7780125,
+    "ast_hash": "20ccd3ed0e1f2ad24bb23bbe446bb3c4",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-mdpi/ic_launcher.png": {
+    "mtime": 1792502977.7793872,
+    "ast_hash": "3f9aaf70b3e144d576b065f053d99962",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png": {
+    "mtime": 1792502977.780388,
+    "ast_hash": "5a4b3e0b53eae065fff672aa4826aa85",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-xhdpi/ic_launcher.png": {
+    "mtime": 1792502977.7848656,
+    "ast_hash": "f5b91ea2d6be8be772010065f9dc1c8f",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png": {
+    "mtime": 1792502977.787162,
+    "ast_hash": "4cfea330328c6d01709e4ebc2424858a",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png": {
+    "mtime": 1792502977.788484,
+    "ast_hash": "7c297b3cf4de675ebeb2b65e031188be",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png": {
+    "mtime": 1792502977.788484,
+    "ast_hash": "3b83d51d2253266ab4b1ace9af265e6e",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": {
+    "mtime": 1792502977.7889867,
+    "ast_hash": "529bfacc3678dee05f8b0eb0ca0a0f96",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png": {
+    "mtime": 1792502977.7899864,
+    "ast_hash": "250b231d6a4989ba507ae9b02db6b0dd",
+    "semantic_hash": ""
+  }
+}

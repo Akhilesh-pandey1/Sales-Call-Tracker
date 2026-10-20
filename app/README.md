@@ -35,4 +35,4 @@ adb install app/android/app/build/outputs/apk/debug/app-debug.apk
 
 ## API base URL
 
-The backend URL lives in `app/config.json` under `apiBaseUrl`. Update it there if the backend URL changes. Never hard-code it in source files.
+The backend URL lives in `app/config.json` — `apiBaseUrlDev` for dev, `apiBaseUrlRelease` for the release APK. The app picks with the built-in `__DEV__` flag, so never hard-code it in source files.

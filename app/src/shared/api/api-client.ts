@@ -5,7 +5,7 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import appConfig from '../../../config.json';
+import { apiBaseUrl } from '../../config/app-config';
 
 const tokenStorageKey = 'token';
 const userIdStorageKey = 'user_id';
@@ -76,7 +76,7 @@ function registerUnauthorizedHandler(handler: UnauthorizedHandler): () => void {
 }
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: appConfig.apiBaseUrl,
+  baseURL: apiBaseUrl,
   headers: {
     'Content-Type': 'application/json',
   },

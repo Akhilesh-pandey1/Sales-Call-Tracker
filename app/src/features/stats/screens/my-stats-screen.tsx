@@ -440,7 +440,7 @@ type CallsByHourChartProps = {
 };
 
 function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
-  const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('last_30_days');
+  const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('today');
   const selectedCallsByHour: CallsByHourStats = periodCallsByHour[selectedPeriod];
   const selectedPeriodInfo: ChartPeriodInfo = chartPeriodsInfo[selectedPeriod];
   const bestHour: number | null = selectedCallsByHour.best_hour;

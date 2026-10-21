@@ -21,16 +21,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A schedule on a lead whose future booking belongs to another salesperson is refused: the call is saved, the lead keeps the owner's booking, and the call's id comes back in `schedule_refused_call_ids` (Decision 5; `api.md` §2 Response; `testing.md` — refused-schedule test).
-- [ ] The booking's owner re-books freely (a new time replaces the old); a `done` or `stopped` lead has no active booking, so anyone may book it — it lifts back to `waiting` owned by the scheduler (Decision 5).
-- [ ] Resolve on a call never clears another user's booking — after a refused call the lead still holds the owner's booking (`testing.md` — the lead keeps the owner's booking).
+- [x] A schedule on a lead whose future booking belongs to another salesperson is refused: the call is saved, the lead keeps the owner's booking, and the call's id comes back in `schedule_refused_call_ids` (Decision 5; `api.md` §2 Response; `testing.md` — refused-schedule test).
+- [x] The booking's owner re-books freely (a new time replaces the old); a `done` or `stopped` lead has no active booking, so anyone may book it — it lifts back to `waiting` owned by the scheduler (Decision 5).
+- [x] Resolve on a call never clears another user's booking — after a refused call the lead still holds the owner's booking (`testing.md` — the lead keeps the owner's booking).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_calls.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_calls.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 3: Server — expired bookings free before serving
 

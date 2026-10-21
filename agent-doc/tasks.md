@@ -140,15 +140,15 @@
 
 **Blocked by:** 2, 7
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `syncCalls` returns the sync response body and the post-call submit path reads `schedule_refused_call_ids` (`api.md` §2 Response).
-- [ ] The submitted call's id in the refused list shows the toast "This lead is already booked by someone else." — the call itself is still sent (`testing.md` — manual pass list).
+- [x] `syncCalls` returns the sync response body and the post-call submit path reads `schedule_refused_call_ids` (`api.md` §2 Response).
+- [x] The submitted call's id in the refused list shows the toast "This lead is already booked by someone else." — the call itself is still sent (`testing.md` — manual pass list).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 10: App — booked leads set a reminder alarm
 

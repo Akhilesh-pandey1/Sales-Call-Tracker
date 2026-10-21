@@ -38,16 +38,16 @@
 
 **Blocked by:** 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `SCHEDULE_EXPIRE_HOURS = 24` lives in `backend/app/config/base.py`; before serving, every `waiting` lead booked more than 24 hours past its `scheduled_at` gets `scheduled_at` and `scheduled_by` cleared, attempts untouched (Decision 4; `testing.md` — frees expired bookings before serving).
-- [ ] A booking inside the 24-hour window keeps the lead reserved; freed leads return to the newest-first pool (Decision 4).
-- [ ] The check never looks at the owner's active state, so a deactivated person's stuck bookings return to the pool through the same rule (Decision 4).
+- [x] `SCHEDULE_EXPIRE_HOURS = 24` lives in `backend/app/config/base.py`; before serving, every `waiting` lead booked more than 24 hours past its `scheduled_at` gets `scheduled_at` and `scheduled_by` cleared, attempts untouched (Decision 4; `testing.md` — frees expired bookings before serving).
+- [x] A booking inside the 24-hour window keeps the lead reserved; freed leads return to the newest-first pool (Decision 4).
+- [x] The check never looks at the owner's active state, so a deactivated person's stuck bookings return to the pool through the same rule (Decision 4).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_leads.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_leads.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 4: Server — team dashboard carries the split
 

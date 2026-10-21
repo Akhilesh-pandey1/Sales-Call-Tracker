@@ -9,8 +9,8 @@ from backend.app.modules.dashboard.schemas import (
     TeamDashboardResponse,
     TeamPeopleRow,
 )
+from backend.app.modules.dashboard.person_services import get_person_dashboard_data
 from backend.app.modules.dashboard.services import (
-    get_person_dashboard_data,
     get_team_dashboard_data,
     get_team_people_data,
 )

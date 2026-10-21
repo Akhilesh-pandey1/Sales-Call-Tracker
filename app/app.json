@@ -1,4 +1,5 @@
 {
   "name": "ApexSalesCall",
-  "displayName": "Apex Sales Call"
+  "displayName": "Apex Sales Call",
+  "userInterfaceStyle": "light"
 }

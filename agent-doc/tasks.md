@@ -40,12 +40,12 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The Android config declares light-only UI style and the app forces the light color scheme at startup
-- [ ] The app renders the light theme with the phone's dark mode turned on
+- [x] The Android config declares light-only UI style and the app forces the light color scheme at startup
+- [x] The app renders the light theme with the phone's dark mode turned on
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)

@@ -2,97 +2,16 @@ from datetime import datetime, timedelta, timezone
 from typing import Any
 from flask import Flask, Response
 from flask.testing import FlaskClient
-from backend.app.core.security import hash_password
 from backend.app.core.utils import now_ist
-from backend.app.extensions import db
-from backend.app.modules.calls import Call
 from backend.app.modules.users import User
-
-
-def create_user_fixture(
-    name: str = "testuser",
-    role: str = "salesperson",
-    is_active: bool = True,
-    token: str = "test-token",
-) -> User:
-    password_hash: str = hash_password("Password123")
-    user: User = User(
-        name=name,
-        password_hash=password_hash,
-        role=role,
-        country="IN",
-        is_active=is_active,
-        auth_token=token,
-    )
-    db.session.add(user)
-    db.session.commit()
-    return user
-
-
-def create_call_record(
-    call_id: str,
-    user_id: int,
-    phone_number: str,
-    dialed_at: datetime,
-    duration_seconds: int = 0,
-) -> Call:
-    call: Call = Call(
-        call_id=call_id,
-        user_id=user_id,
-        phone_number=phone_number,
-        dialed_at=dialed_at,
-        duration_seconds=duration_seconds,
-    )
-    db.session.add(call)
-    db.session.commit()
-    return call
-
-
-def create_call_records_bulk(
-    call_rows: list[tuple[str, int, str, datetime, int]],
-) -> None:
-    call_models: list[Call] = []
-    for call_id, user_id, phone_number, dialed_at, duration_seconds in call_rows:
-        call_models.append(
-            Call(
-                call_id=call_id,
-                user_id=user_id,
-                phone_number=phone_number,
-                dialed_at=dialed_at,
-                duration_seconds=duration_seconds,
-            )
-        )
-    db.session.add_all(call_models)
-    db.session.commit()
-
-
-def create_utc_call_time(days_ago: int, hour_of_day: int) -> datetime:
-    ist_today_midnight: datetime = now_ist().replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
-    ist_call_time: datetime = ist_today_midnight - timedelta(
-        days=days_ago
-    ) + timedelta(hours=hour_of_day)
-    utc_call_time: datetime = ist_call_time.astimezone(timezone.utc)
-    return utc_call_time
-
-
-def fetch_team_dashboard(
-    client: FlaskClient, manager_token: str
-) -> tuple[Response, dict[str, Any]]:
-    headers: dict[str, str] = {"Authorization": f"Bearer {manager_token}"}
-    response: Response = client.get("/api/dashboard/team", headers=headers)
-    response_json: dict[str, Any] = response.get_json()
-    return response, response_json
-
-
-def fetch_team_people(
-    client: FlaskClient, manager_token: str
-) -> tuple[Response, list[dict[str, Any]]]:
-    headers: dict[str, str] = {"Authorization": f"Bearer {manager_token}"}
-    response: Response = client.get("/api/dashboard/team/people", headers=headers)
-    response_json: list[dict[str, Any]] = response.get_json()
-    return response, response_json
+from backend.tests.modules.dashboard_test_helpers import (
+    create_call_record,
+    create_call_records_bulk,
+    create_utc_call_time,
+    create_user_fixture,
+    fetch_team_dashboard,
+    fetch_team_people,
+)
 
 
 def test_team_people_unauthenticated_rejected(client: FlaskClient) -> None:
@@ -199,6 +118,9 @@ def test_team_people_lists_every_active_salesperson_with_zeros(
             "pr-4", deactivated_rep.id, "+919876543204", today_time, 300
         )
         create_call_record("pr-5", manager.id, "+919876543205", today_time, 300)
+        create_call_record(
+            "pr-6", calling_rep.id, "+919876543206", today_time, 60, "incoming"
+        )
 
         response, data = fetch_team_people(client, "mgr-rows-token")
         expected_status: int = 200
@@ -218,6 +140,7 @@ def test_team_people_lists_every_active_salesperson_with_zeros(
         assert caller_row["name"] == "rep_caller"
         assert caller_row["today"]["dials"] == 2
         assert caller_row["today"]["connected"] == 1
+        assert caller_row["today"]["minutes"] == 2.67
         assert caller_row["yesterday"]["dials"] == 1
         assert caller_row["yesterday"]["connected"] == 1
 
@@ -247,7 +170,8 @@ def test_team_people_period_blocks_carry_only_dials_connected_minutes(
 
         create_call_record("pb-1", rep.id, "+919876543210", today_time, 115)
         create_call_record("pb-2", rep.id, "+919876543211", today_time, 115)
-        create_call_record("pb-3", rep.id, "+919876543212", yesterday_time, 45)
+        create_call_record("pb-3", rep.id, "+919876543212", today_time, 45, "incoming")
+        create_call_record("pb-4", rep.id, "+919876543213", yesterday_time, 45)
 
         response, data = fetch_team_people(client, "mgr-block-token")
         expected_status: int = 200
@@ -261,7 +185,7 @@ def test_team_people_period_blocks_carry_only_dials_connected_minutes(
         assert set(today_block.keys()) == expected_period_keys
         assert set(yesterday_block.keys()) == expected_period_keys
 
-        expected_today_minutes: float = 3.83
+        expected_today_minutes: float = 4.58
         expected_yesterday_minutes: float = 0.75
         assert today_block == {
             "dials": 2,
@@ -412,8 +336,17 @@ def test_team_dashboard_empty_response_shape(app: Flask, client: FlaskClient) ->
                 "minutes": 0,
             }
             assert period["calls_by_hour"]["hours"] == default_window_hours
-            assert period["calls_by_hour"]["dials"] == [0] * 10
+            assert period["calls_by_hour"]["outgoing"] == [0] * 10
+            assert period["calls_by_hour"]["incoming"] == [0] * 10
             assert period["calls_by_hour"]["best_hour"] is None
+            assert period["talk_totals"] == {
+                "outgoing_calls": 0,
+                "outgoing_minutes": 0,
+                "incoming_calls": 0,
+                "incoming_minutes": 0,
+                "outgoing_percent": 0,
+                "incoming_percent": 0,
+            }
             assert period["top_people"] == []
 
         assert data["today"]["vs_yesterday"] == {
@@ -499,6 +432,157 @@ def test_team_dashboard_period_kpis_and_vs_yesterday(
             "not_connected": 0,
             "minutes": 0.06,
         }
+
+
+def test_team_dashboard_incoming_calls_never_enter_dials_or_connected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_dir", role="manager", token="mgr-token-dir")
+        rep: User = create_user_fixture(
+            name="rep_dir", role="salesperson", token="rep-dir-token"
+        )
+        create_user_fixture(
+            name="rep_dir_silent", role="salesperson", token="rep-dir-silent-token"
+        )
+        create_user_fixture(
+            name="rep_dir_third", role="salesperson", token="rep-dir-third-token"
+        )
+
+        today_time: datetime = create_utc_call_time(0, 11)
+        yesterday_time: datetime = create_utc_call_time(1, 11)
+
+        create_call_record("dir-t-1", rep.id, "+919876543201", today_time, 120)
+        create_call_record("dir-t-2", rep.id, "+919876543202", today_time, 0)
+        create_call_record("dir-t-3", rep.id, "+919876543203", today_time, 90, "incoming")
+        create_call_record("dir-t-4", rep.id, "+919876543204", today_time, 30, "incoming")
+        create_call_record(
+            "dir-y-1", rep.id, "+919876543205", yesterday_time, 90, "incoming"
+        )
+
+        response, data = fetch_team_dashboard(client, "mgr-token-dir")
+        assert response.status_code == 200
+
+        today: dict[str, Any] = data["today"]
+        assert today["dials"] == 2
+        assert today["connected"] == 1
+        assert today["not_connected"] == 1
+        assert today["seconds"] == 240
+        assert today["minutes"] == 4
+        assert today["connected_percent"] == 50
+        assert today["avg_per_person_per_day"] == {
+            "dials": 1,
+            "connected": 0,
+            "not_connected": 0,
+            "minutes": 1.33,
+        }
+        assert today["vs_yesterday"] == {
+            "dials": 2,
+            "connected": 1,
+            "not_connected": 1,
+            "minutes": 2.5,
+        }
+
+        today_top: list[dict[str, Any]] = today["top_people"]
+        assert len(today_top) == 1
+        assert today_top[0]["id"] == rep.id
+        assert today_top[0]["seconds"] == 240
+        assert today_top[0]["minutes"] == 4
+
+        yesterday: dict[str, Any] = data["yesterday"]
+        assert yesterday["dials"] == 0
+        assert yesterday["connected"] == 0
+        assert yesterday["not_connected"] == 0
+        assert yesterday["seconds"] == 90
+        assert yesterday["minutes"] == 1.5
+        assert yesterday["connected_percent"] is None
+
+        thirty_days: dict[str, Any] = data["last_30_days"]
+        assert thirty_days["dials"] == 2
+        assert thirty_days["connected"] == 1
+        assert thirty_days["seconds"] == 330
+        assert thirty_days["minutes"] == 5.5
+
+
+def test_team_dashboard_talk_totals_split_on_every_period(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_talk", role="manager", token="mgr-token-talk")
+        rep: User = create_user_fixture(
+            name="rep_talk", role="salesperson", token="rep-talk-token"
+        )
+
+        today_time: datetime = create_utc_call_time(0, 11)
+        yesterday_time: datetime = create_utc_call_time(1, 11)
+
+        create_call_record("talk-t-1", rep.id, "+919876543201", today_time, 300)
+        create_call_record("talk-t-2", rep.id, "+919876543202", today_time, 100, "incoming")
+        create_call_record("talk-y-1", rep.id, "+919876543203", yesterday_time, 120)
+        create_call_record(
+            "talk-y-2", rep.id, "+919876543204", yesterday_time, 60, "incoming"
+        )
+
+        response, data = fetch_team_dashboard(client, "mgr-token-talk")
+        assert response.status_code == 200
+
+        assert data["today"]["talk_totals"] == {
+            "outgoing_calls": 1,
+            "outgoing_minutes": 5,
+            "incoming_calls": 1,
+            "incoming_minutes": 1.67,
+            "outgoing_percent": 75,
+            "incoming_percent": 25,
+        }
+        assert data["yesterday"]["talk_totals"] == {
+            "outgoing_calls": 1,
+            "outgoing_minutes": 2,
+            "incoming_calls": 1,
+            "incoming_minutes": 1,
+            "outgoing_percent": 67,
+            "incoming_percent": 33,
+        }
+        assert data["last_30_days"]["talk_totals"] == {
+            "outgoing_calls": 2,
+            "outgoing_minutes": 7,
+            "incoming_calls": 2,
+            "incoming_minutes": 2.67,
+            "outgoing_percent": 72,
+            "incoming_percent": 28,
+        }
+
+
+def test_team_dashboard_top_people_rank_by_total_talk_seconds(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_rank", role="manager", token="mgr-token-rank")
+        outgoing_only_rep: User = create_user_fixture(
+            name="rep_rank_out", role="salesperson", token="rep-rank-out-token"
+        )
+        mixed_rep: User = create_user_fixture(
+            name="rep_rank_mixed", role="salesperson", token="rep-rank-mixed-token"
+        )
+
+        call_time: datetime = create_utc_call_time(0, 11)
+        create_call_record(
+            "rank-1", outgoing_only_rep.id, "+919876543210", call_time, 100
+        )
+        create_call_record("rank-2", mixed_rep.id, "+919876543211", call_time, 60)
+        create_call_record(
+            "rank-3", mixed_rep.id, "+919876543212", call_time, 80, "incoming"
+        )
+
+        response, data = fetch_team_dashboard(client, "mgr-token-rank")
+        assert response.status_code == 200
+
+        today_top: list[dict[str, Any]] = data["today"]["top_people"]
+        expected_ranked_ids: list[int] = [mixed_rep.id, outgoing_only_rep.id]
+        returned_ranked_ids: list[int] = [person["id"] for person in today_top]
+        assert returned_ranked_ids == expected_ranked_ids
+        assert today_top[0]["seconds"] == 140
+        assert today_top[0]["minutes"] == 2.33
+        assert today_top[1]["seconds"] == 100
 
 
 def test_team_dashboard_short_call_shows_decimal_minutes(
@@ -686,16 +770,19 @@ def test_team_dashboard_calls_by_hour_window_buckets(
         today_hours: list[int] = data["today"]["calls_by_hour"]["hours"]
         assert today_hours == list(range(10, 20))
 
-        today_dials: list[int] = data["today"]["calls_by_hour"]["dials"]
-        assert len(today_dials) == 10
-        assert sum(today_dials) == 1
-        assert today_dials[afternoon_hour - 10] == 1
-        assert data["today"]["calls_by_hour"]["best_hour"] == afternoon_hour
+        today_calls_by_hour: dict[str, Any] = data["today"]["calls_by_hour"]
+        today_outgoing: list[int] = today_calls_by_hour["outgoing"]
+        assert len(today_outgoing) == 10
+        assert sum(today_outgoing) == 1
+        assert today_outgoing[afternoon_hour - 10] == 1
+        assert today_calls_by_hour["incoming"] == [0] * 10
+        assert today_calls_by_hour["best_hour"] == afternoon_hour
 
-        yesterday_dials: list[int] = data["yesterday"]["calls_by_hour"]["dials"]
-        assert sum(yesterday_dials) == 1
-        assert yesterday_dials[afternoon_hour - 10] == 1
-        assert data["yesterday"]["calls_by_hour"]["best_hour"] == afternoon_hour
+        yesterday_calls_by_hour: dict[str, Any] = data["yesterday"]["calls_by_hour"]
+        yesterday_outgoing: list[int] = yesterday_calls_by_hour["outgoing"]
+        assert sum(yesterday_outgoing) == 1
+        assert yesterday_outgoing[afternoon_hour - 10] == 1
+        assert yesterday_calls_by_hour["best_hour"] == afternoon_hour
 
 
 def test_team_dashboard_hours_follow_stored_office_window(
@@ -731,7 +818,8 @@ def test_team_dashboard_hours_follow_stored_office_window(
 
         today_calls_by_hour: dict[str, Any] = data["today"]["calls_by_hour"]
         assert today_calls_by_hour["hours"] == [8, 9, 10, 11, 12]
-        assert today_calls_by_hour["dials"] == [0, 1, 0, 0, 0]
+        assert today_calls_by_hour["outgoing"] == [0, 1, 0, 0, 0]
+        assert today_calls_by_hour["incoming"] == [0] * 5
         assert today_calls_by_hour["best_hour"] == in_window_hour
 
 
@@ -771,8 +859,9 @@ def test_team_dashboard_last_30_days_totals_include_deactivated_salesperson(
         assert data["last_30_days"]["seconds"] == 430
         assert data["last_30_days"]["minutes"] == 7.17
 
-        thirty_day_dials: list[int] = data["last_30_days"]["calls_by_hour"]["dials"]
-        assert thirty_day_dials == [0] * 10
+        thirty_day_calls_by_hour: dict[str, Any] = data["last_30_days"]["calls_by_hour"]
+        assert thirty_day_calls_by_hour["outgoing"] == [0] * 10
+        assert thirty_day_calls_by_hour["incoming"] == [0] * 10
 
         thirty_day_top: list[dict[str, Any]] = data["last_30_days"]["top_people"]
         assert len(thirty_day_top) == 1
@@ -781,7 +870,7 @@ def test_team_dashboard_last_30_days_totals_include_deactivated_salesperson(
         assert thirty_day_top[0]["minutes"] == 6.33
 
 
-def test_team_dashboard_last_30_days_dials_are_daily_averages(
+def test_team_dashboard_last_30_days_hourly_counts_are_daily_averages(
     app: Flask, client: FlaskClient
 ) -> None:
     with app.app_context():
@@ -794,42 +883,98 @@ def test_team_dashboard_last_30_days_dials_are_daily_averages(
 
         peak_hour: int = 12
         mid_hour: int = 15
-        low_hour: int = 18
 
-        peak_calls: int = 60
-        mid_calls: int = 30
-        low_calls: int = 14
+        peak_outgoing_calls: int = 60
+        mid_outgoing_calls: int = 30
+        mid_incoming_calls: int = 29
 
-        bulk_rows: list[tuple[str, int, str, datetime, int]] = []
+        outgoing_rows: list[tuple[str, int, str, datetime, int]] = []
+        incoming_rows: list[tuple[str, int, str, datetime, int]] = []
         row_counter: int = 1
 
-        hour_plan: list[tuple[int, int]] = [
-            (peak_hour, peak_calls),
-            (mid_hour, mid_calls),
-            (low_hour, low_calls),
-        ]
-        for hour_of_day, call_count in hour_plan:
-            hour_call_time: datetime = create_utc_call_time(0, hour_of_day)
-            for _ in range(call_count):
-                bulk_rows.append(
-                    (
-                        f"avg-h-{row_counter}",
-                        rep.id,
-                        "+919876543210",
-                        hour_call_time,
-                        30,
-                    )
+        peak_call_time: datetime = create_utc_call_time(0, peak_hour)
+        for _ in range(peak_outgoing_calls):
+            outgoing_rows.append(
+                (
+                    f"avg-h-{row_counter}",
+                    rep.id,
+                    "+919876543210",
+                    peak_call_time,
+                    30,
                 )
-                row_counter += 1
-        create_call_records_bulk(bulk_rows)
+            )
+            row_counter += 1
+
+        mid_call_time: datetime = create_utc_call_time(0, mid_hour)
+        for _ in range(mid_outgoing_calls):
+            outgoing_rows.append(
+                (
+                    f"avg-h-{row_counter}",
+                    rep.id,
+                    "+919876543211",
+                    mid_call_time,
+                    30,
+                )
+            )
+            row_counter += 1
+        for _ in range(mid_incoming_calls):
+            incoming_rows.append(
+                (
+                    f"avg-h-{row_counter}",
+                    rep.id,
+                    "+919876543212",
+                    mid_call_time,
+                    30,
+                )
+            )
+            row_counter += 1
+
+        create_call_records_bulk(outgoing_rows)
+        create_call_records_bulk(incoming_rows, "incoming")
 
         response, data = fetch_team_dashboard(client, "mgr-token-avg-hours")
         assert response.status_code == 200
 
-        thirty_day_dials: list[int] = data["last_30_days"]["calls_by_hour"]["dials"]
-        expected_averages: list[int] = [0, 0, 2, 0, 0, 1, 0, 0, 0, 0]
-        assert thirty_day_dials == expected_averages
-        assert data["last_30_days"]["calls_by_hour"]["best_hour"] == peak_hour
+        thirty_day_calls_by_hour: dict[str, Any] = data["last_30_days"]["calls_by_hour"]
+        expected_outgoing_averages: list[int] = [0, 0, 2, 0, 0, 1, 0, 0, 0, 0]
+        expected_incoming_averages: list[int] = [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+        assert thirty_day_calls_by_hour["outgoing"] == expected_outgoing_averages
+        assert thirty_day_calls_by_hour["incoming"] == expected_incoming_averages
+        assert thirty_day_calls_by_hour["best_hour"] == peak_hour
+
+
+def test_team_dashboard_calls_by_hour_split_arrays_and_best_hour_by_total(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_split", role="manager", token="mgr-token-split")
+        rep: User = create_user_fixture(
+            name="rep_split", role="salesperson", token="rep-split-token"
+        )
+
+        outgoing_only_hour: int = 12
+        mixed_hour: int = 15
+
+        outgoing_only_time: datetime = create_utc_call_time(0, outgoing_only_hour)
+        mixed_time: datetime = create_utc_call_time(0, mixed_hour)
+
+        create_call_record("sp-1", rep.id, "+919876543210", outgoing_only_time, 300)
+        create_call_record("sp-2", rep.id, "+919876543211", outgoing_only_time, 300)
+        create_call_record("sp-3", rep.id, "+919876543212", mixed_time, 300)
+        create_call_record("sp-4", rep.id, "+919876543213", mixed_time, 60, "incoming")
+        create_call_record("sp-5", rep.id, "+919876543214", mixed_time, 60, "incoming")
+        create_call_record("sp-6", rep.id, "+919876543215", mixed_time, 60, "incoming")
+
+        response, data = fetch_team_dashboard(client, "mgr-token-split")
+        assert response.status_code == 200
+
+        today_calls_by_hour: dict[str, Any] = data["today"]["calls_by_hour"]
+        assert today_calls_by_hour["hours"] == list(range(10, 20))
+        expected_outgoing: list[int] = [0, 0, 2, 0, 0, 1, 0, 0, 0, 0]
+        expected_incoming: list[int] = [0, 0, 0, 0, 0, 3, 0, 0, 0, 0]
+        assert today_calls_by_hour["outgoing"] == expected_outgoing
+        assert today_calls_by_hour["incoming"] == expected_incoming
+        assert today_calls_by_hour["best_hour"] == mixed_hour
 
 
 def test_team_dashboard_top_people_max_five_sorted_by_seconds(

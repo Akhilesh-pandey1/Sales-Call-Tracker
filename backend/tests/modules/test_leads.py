@@ -40,6 +40,7 @@ def create_lead_fixture(
     claimed_until: datetime | None = None,
     scheduled_by: int | None = None,
     scheduled_at: datetime | None = None,
+    retry_locked_until: datetime | None = None,
     created_at: datetime | None = None,
 ) -> Lead:
     lead: Lead = Lead(
@@ -50,6 +51,7 @@ def create_lead_fixture(
         claimed_until=claimed_until,
         scheduled_by=scheduled_by,
         scheduled_at=scheduled_at,
+        retry_locked_until=retry_locked_until,
     )
     if created_at is not None:
         lead.created_at = created_at
@@ -766,6 +768,40 @@ def test_next_lead_continue_calling_true_serves_lead_as_before(
     assert pool_lead.claimed_until is not None
 
 
+def test_next_lead_newest_schedule_wins_ownership(
+    app: Flask, client: FlaskClient
+) -> None:
+    first_salesperson = create_user_fixture(name="SalesFirst", role="salesperson", token="first-sched-token")
+    second_salesperson = create_user_fixture(name="SalesSecond", role="salesperson", token="second-sched-token")
+    lead = create_lead_fixture(phone_number="+919876543300", status="waiting")
+
+    headers_first: dict[str, str] = {"Authorization": f"Bearer {first_salesperson.auth_token}"}
+    headers_second: dict[str, str] = {"Authorization": f"Bearer {second_salesperson.auth_token}"}
+
+    first_payload: dict[str, Any] = {
+        "schedule": {
+            "lead_id": lead.id,
+            "scheduled_at": (now_utc() + timedelta(days=2)).isoformat(),
+        }
+    }
+    first_response = client.post("/api/leads/next", json=first_payload, headers=headers_first)
+    assert first_response.status_code == 200
+
+    second_payload: dict[str, Any] = {
+        "schedule": {
+            "lead_id": lead.id,
+            "scheduled_at": (now_utc() + timedelta(days=3)).isoformat(),
+        }
+    }
+    second_response = client.post("/api/leads/next", json=second_payload, headers=headers_second)
+    assert second_response.status_code == 200
+
+    db.session.refresh(lead)
+    assert lead.status == "waiting"
+    assert lead.scheduled_by == second_salesperson.id
+    assert lead.claimed_by is None
+
+
 def test_next_lead_schedule_in_past_or_too_far_ahead_rejected(
     app: Flask, client: FlaskClient
 ) -> None:
@@ -798,12 +834,25 @@ def test_next_lead_schedule_in_past_or_too_far_ahead_rejected(
     assert response_far.get_json()["message"] == "Scheduled time must be in the future within 30 days."
 
 
-def test_next_lead_done_or_stopped_cannot_be_scheduled(
+def test_next_lead_schedule_books_done_or_stopped_lead(
     app: Flask, client: FlaskClient
 ) -> None:
-    salesperson = create_user_fixture(name="SalesBlocked", role="salesperson", token="blocked-token")
-    done_lead = create_lead_fixture(phone_number="+919876543281", status="done")
-    stopped_lead = create_lead_fixture(phone_number="+919876543282", status="stopped")
+    salesperson = create_user_fixture(name="SalesRevive", role="salesperson", token="revive-token")
+
+    locked_time: datetime = now_utc() + timedelta(hours=1)
+    done_lead = create_lead_fixture(
+        phone_number="+919876543281",
+        status="done",
+        attempt_count=1,
+        claimed_by=salesperson.id,
+        retry_locked_until=locked_time,
+    )
+    stopped_lead = create_lead_fixture(
+        phone_number="+919876543282",
+        status="stopped",
+        attempt_count=3,
+        retry_locked_until=locked_time,
+    )
 
     future_time: str = (now_utc() + timedelta(days=2)).isoformat()
     headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
@@ -812,10 +861,20 @@ def test_next_lead_done_or_stopped_cannot_be_scheduled(
         "schedule": {"lead_id": done_lead.id, "scheduled_at": future_time}
     }
     done_response = client.post("/api/leads/next", json=done_payload, headers=headers)
-    assert done_response.status_code == 400
+    assert done_response.status_code == 200
 
     stopped_payload: dict[str, Any] = {
         "schedule": {"lead_id": stopped_lead.id, "scheduled_at": future_time}
     }
     stopped_response = client.post("/api/leads/next", json=stopped_payload, headers=headers)
-    assert stopped_response.status_code == 400
+    assert stopped_response.status_code == 200
+
+    db.session.refresh(done_lead)
+    db.session.refresh(stopped_lead)
+    for booked_lead in (done_lead, stopped_lead):
+        assert booked_lead.status == "waiting"
+        assert booked_lead.scheduled_by == salesperson.id
+        assert booked_lead.scheduled_at is not None
+        assert booked_lead.claimed_by is None
+        assert booked_lead.claimed_until is None
+        assert booked_lead.retry_locked_until is None

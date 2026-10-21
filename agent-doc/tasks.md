@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A call with `scheduled_at` — sync path and `/api/leads/next` path alike — leaves the lead `waiting` and scheduled to that salesperson even when the call connected or the lead was `done` or `stopped`, and the newest schedule wins the ownership
-- [ ] A past or beyond-30-days `scheduled_at` is still refused on both paths, and a not-connected call with a schedule still burns its attempt while booking
-- [ ] The new cases are covered in `backend/tests/modules/test_calls.py` and `backend/tests/modules/test_leads.py` per `testing.md`
+- [x] A call with `scheduled_at` — sync path and `/api/leads/next` path alike — leaves the lead `waiting` and scheduled to that salesperson even when the call connected or the lead was `done` or `stopped`, and the newest schedule wins the ownership
+- [x] A past or beyond-30-days `scheduled_at` is still refused on both paths, and a not-connected call with a schedule still burns its attempt while booking
+- [x] The new cases are covered in `backend/tests/modules/test_calls.py` and `backend/tests/modules/test_leads.py` per `testing.md`
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest backend/tests/modules/test_calls.py backend/tests/modules/test_leads.py` (from the project root)
+- [x] Tests pass: `python -m pytest backend/tests/modules/test_calls.py backend/tests/modules/test_leads.py` (from the project root)
 
 ---
 

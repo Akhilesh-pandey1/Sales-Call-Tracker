@@ -24,7 +24,9 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - A call to a number with no lead creates that lead as `waiting` and resolves it from the same call — connected marks it `done`, not connected burns attempt 1.
 - A second sync for a number that already has a lead never creates a second lead.
 - A call item with `scheduled_at` inside 30 days schedules the resolved lead; the call is saved.
-- A `scheduled_at` on a call that connects (lead ends `done`) is skipped with a log line; the call is still saved.
+- A `scheduled_at` on a call that connects still books the lead — the lead ends `waiting` and scheduled, never `done`; the call is saved.
+- A schedule lifts a `done` or `stopped` lead back to `waiting` with the schedule set, attempts untouched.
+- The newest schedule wins ownership of the lead, across salespeople.
 - A past or beyond-30-days `scheduled_at` is skipped with a log line; the call is still saved.
 - Returns `{"status": true}` on success.
 
@@ -66,7 +68,7 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
   - Serves due scheduled leads reserved for the calling salesperson before new pool leads.
   - Serves newest available leads (`created_at DESC`) when no due schedules exist.
   - Claims the served lead for 10 minutes (`CLAIM_MINUTES`).
-  - Supports scheduling current lead and fetching next in a single request.
+  - Supports scheduling current lead and fetching next in a single request; a schedule books the lead whatever its state — `done` and `stopped` included, ending `waiting` with the retry lock and claim cleared — and the newest schedule wins ownership.
   - `continue_calling: false` stores the schedule (if supplied) and releases the claim but serves and claims no lead — the response `lead` is `null`.
 - **Resolution via Call Sync**:
   - Connected call (`duration > 0`) marks lead `status = 'done'`.

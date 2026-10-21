@@ -18,6 +18,9 @@ from backend.app.modules.settings import get_or_create_office_hours_window
 
 logger: logging.Logger = logging.getLogger(__name__)
 
+OUTGOING_DIRECTION: str = "outgoing"
+INCOMING_DIRECTION: str = "incoming"
+
 
 def get_ist_start_minute_of_day(dialed_at_utc: datetime) -> int:
     ist_start_time = to_ist(dialed_at_utc)
@@ -35,6 +38,18 @@ def has_invalid_call_duration(raw_duration: Any) -> bool:
     return duration_is_negative
 
 
+def extract_call_direction(item: dict[str, Any]) -> str | None:
+    raw_direction: Any = item.get("direction")
+    if raw_direction is None:
+        return OUTGOING_DIRECTION
+    if raw_direction in (OUTGOING_DIRECTION, INCOMING_DIRECTION):
+        valid_direction: str = str(raw_direction)
+        return valid_direction
+
+    logger.warning("Discarding call item with invalid direction: %s", item)
+    return None
+
+
 def extract_valid_call(
     item: Any,
     default_country: str,
@@ -42,7 +57,7 @@ def extract_valid_call(
     window_start_minute: int,
     window_end_minute: int,
     seen_call_ids: set[str],
-) -> tuple[str, str, datetime, int, str | None] | None:
+) -> tuple[str, str, datetime, int, str | None, str] | None:
     if not isinstance(item, dict):
         logger.warning("Discarding non-dict call item: %s", item)
         return None
@@ -88,6 +103,10 @@ def extract_valid_call(
         logger.warning("Discarding call item with invalid duration: %s", item)
         return None
 
+    call_direction: str | None = extract_call_direction(item)
+    if call_direction is None:
+        return None
+
     normalized_phone: str = normalize_phone_number(clean_phone, default_country)
 
     raw_scheduled_at: Any = item.get("scheduled_at")
@@ -95,12 +114,13 @@ def extract_valid_call(
     if raw_scheduled_at is not None:
         scheduled_at_raw = str(raw_scheduled_at)
 
-    parsed_record: tuple[str, str, datetime, int, str | None] = (
+    parsed_record: tuple[str, str, datetime, int, str | None, str] = (
         call_id,
         normalized_phone,
         dialed_at_utc,
         raw_duration,
         scheduled_at_raw,
+        call_direction,
     )
     return parsed_record
 
@@ -128,21 +148,25 @@ def sync_calls_batch(
         if call_data is None:
             continue
 
-        call_id, phone_number, dialed_at, duration, scheduled_at_raw = call_data
+        call_id, phone_number, dialed_at, duration, scheduled_at_raw, direction = (
+            call_data
+        )
         call_record: Call = Call(
             call_id=call_id,
             user_id=user_id,
             phone_number=phone_number,
             dialed_at=dialed_at,
             duration_seconds=duration,
+            direction=direction,
         )
         db.session.add(call_record)
         seen_call_ids.add(call_id)
 
-        resolve_lead_for_call(phone_number, duration, dialed_at)
+        if direction == OUTGOING_DIRECTION:
+            resolve_lead_for_call(phone_number, duration, dialed_at)
 
-        if scheduled_at_raw is not None:
-            schedule_resolved_lead_for_call(phone_number, user_id, scheduled_at_raw)
+            if scheduled_at_raw is not None:
+                schedule_resolved_lead_for_call(phone_number, user_id, scheduled_at_raw)
 
     db.session.commit()
 

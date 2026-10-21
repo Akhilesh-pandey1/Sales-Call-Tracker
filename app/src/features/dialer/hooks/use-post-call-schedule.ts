@@ -7,16 +7,11 @@ import { useState } from 'react';
 
 function createTomorrowDate(): Date {
   const dayStepToTomorrow = 1;
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + dayStepToTomorrow);
-  return tomorrow;
-}
-
-function createDefaultScheduleDate(): Date {
-  const defaultStartHour = 9;
-  const defaultScheduleDate = createTomorrowDate();
-  defaultScheduleDate.setHours(defaultStartHour, 0, 0, 0);
-  return defaultScheduleDate;
+  const tomorrowAtCurrentMobileTime = new Date();
+  tomorrowAtCurrentMobileTime.setDate(
+    tomorrowAtCurrentMobileTime.getDate() + dayStepToTomorrow,
+  );
+  return tomorrowAtCurrentMobileTime;
 }
 
 function isTomorrow(scheduleDate: Date): boolean {
@@ -77,6 +72,35 @@ function formatScheduleLabel(scheduleDate: Date): string {
   return momentLabel;
 }
 
+function createCurrentTimeOnDate(date: Date): Date {
+  const currentTime = new Date();
+  const currentMoment = new Date(date);
+  currentMoment.setHours(
+    currentTime.getHours(),
+    currentTime.getMinutes(),
+    0,
+    0,
+  );
+  return currentMoment;
+}
+
+function isBeforeCurrentMinute(moment: Date): boolean {
+  const secondsPerMinute = 60;
+  const millisecondsPerSecond = 1000;
+  const millisecondsPerMinute =
+    secondsPerMinute * millisecondsPerSecond;
+  const currentMinuteStart =
+    Math.floor(Date.now() / millisecondsPerMinute) * millisecondsPerMinute;
+  return moment.getTime() < currentMinuteStart;
+}
+
+function createNotInPastMoment(chosenMoment: Date): Date {
+  if (chosenMoment.getTime() < Date.now()) {
+    return new Date();
+  }
+  return chosenMoment;
+}
+
 function createPickerWindow(): { minimumDate: Date; maximumDate: Date } {
   const now = new Date();
   const hoursPerDay = 24;
@@ -99,24 +123,23 @@ export type UsePostCallScheduleResult = {
 };
 
 export function usePostCallSchedule(): UsePostCallScheduleResult {
-  const [scheduleDate, setScheduleDate] = useState<Date>(
-    createDefaultScheduleDate,
-  );
+  const [scheduleDate, setScheduleDate] = useState<Date>(createTomorrowDate);
 
   const openTimeDialog = (chosenDate: Date): void => {
     const handleTimeChange = (event: DateTimePickerEvent, time?: Date): void => {
       if (event.type !== 'set' || time === undefined) {
         return;
       }
-      const isBeforeNow = time.getTime() < Date.now();
-      if (isBeforeNow) {
+      const chosenMoment = new Date(chosenDate);
+      chosenMoment.setHours(time.getHours(), time.getMinutes(), 0, 0);
+      if (isBeforeCurrentMinute(chosenMoment)) {
         openTimeDialog(chosenDate);
         return;
       }
-      setScheduleDate(time);
+      setScheduleDate(createNotInPastMoment(chosenMoment));
     };
     DateTimePickerAndroid.open({
-      value: chosenDate,
+      value: createCurrentTimeOnDate(chosenDate),
       mode: 'time',
       is24Hour: false,
       onChange: handleTimeChange,
@@ -132,7 +155,7 @@ export function usePostCallSchedule(): UsePostCallScheduleResult {
       openTimeDialog(date);
     };
     DateTimePickerAndroid.open({
-      value: scheduleDate,
+      value: new Date(),
       mode: 'date',
       minimumDate: pickerWindow.minimumDate,
       maximumDate: pickerWindow.maximumDate,

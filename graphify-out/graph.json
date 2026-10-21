@@ -615,8 +615,8 @@
       "source_location": "L273",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_normalize",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_normalize()"
     },
     {
@@ -791,8 +791,8 @@
       "source_location": "L504",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_suggest_identities",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 213,
+      "community_name": "_suggest_identities",
       "norm_label": "_suggest_identities()"
     },
     {
@@ -802,8 +802,8 @@
       "source_location": "L525",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_row_identities",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 213,
+      "community_name": "_suggest_identities",
       "norm_label": "_row_identities()"
     },
     {
@@ -868,8 +868,8 @@
       "source_location": "L664",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_style_identity",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_style_identity()"
     },
     {
@@ -879,8 +879,8 @@
       "source_location": "L695",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_exact_row_identity",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 213,
+      "community_name": "_suggest_identities",
       "norm_label": "_exact_row_identity()"
     },
     {
@@ -901,8 +901,8 @@
       "source_location": "L713",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_project_row",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_project_row()"
     },
     {
@@ -912,8 +912,8 @@
       "source_location": "L717",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_valid_max_results",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_valid_max_results()"
     },
     {
@@ -923,8 +923,8 @@
       "source_location": "L721",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_exact_match_diagnostic",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_exact_match_diagnostic()"
     },
     {
@@ -934,8 +934,8 @@
       "source_location": "L736",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_style_search_destination",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_style_search_destination()"
     },
     {
@@ -945,8 +945,8 @@
       "source_location": "L755",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_search",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "search()"
     },
     {
@@ -956,8 +956,8 @@
       "source_location": "L848",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_stack_query_requests_legacy",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_stack_query_requests_legacy()"
     },
     {
@@ -967,8 +967,8 @@
       "source_location": "L888",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_stack_row_filter",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_stack_row_filter()"
     },
     {
@@ -978,8 +978,8 @@
       "source_location": "L925",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_exact_stack_identifier",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_exact_stack_identifier()"
     },
     {
@@ -989,8 +989,8 @@
       "source_location": "L938",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_legacy_successor_guidance",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "_legacy_successor_guidance()"
     },
     {
@@ -1000,8 +1000,8 @@
       "source_location": "L951",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_search_stack",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "search_stack()"
     },
     {
@@ -1011,8 +1011,8 @@
       "source_location": "L274",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_274",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "apply longest-first synonym substitution at token boundaries."
     },
     {
@@ -1143,8 +1143,8 @@
       "source_location": "L505",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_505",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 213,
+      "community_name": "_suggest_identities",
       "norm_label": "suggest complete public identities so a retry can bypass score thresholds."
     },
     {
@@ -1154,8 +1154,8 @@
       "source_location": "L526",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_526",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 213,
+      "community_name": "_suggest_identities",
       "norm_label": "return non-empty public identities from ordinary and alias fields."
     },
     {
@@ -1198,8 +1198,8 @@
       "source_location": "L665",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_665",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "resolve an explicit style identity without opening generic variant ranking."
     },
     {
@@ -1209,8 +1209,8 @@
       "source_location": "L696",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_696",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 213,
+      "community_name": "_suggest_identities",
       "norm_label": "return one row whose stable public identity exactly matches the query."
     },
     {
@@ -1231,8 +1231,8 @@
       "source_location": "L737",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_737",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "resolve a deprecated in-domain alias, or expose a cross-domain redirect."
     },
     {
@@ -1242,8 +1242,8 @@
       "source_location": "L756",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_756",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "main search function with auto-domain detection"
     },
     {
@@ -1253,8 +1253,8 @@
       "source_location": "L849",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_849",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "whether a stack query explicitly targets an older framework generation."
     },
     {
@@ -1264,8 +1264,8 @@
       "source_location": "L889",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_889",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "choose one coherent applicability generation for stack retrieval."
     },
     {
@@ -1275,8 +1275,8 @@
       "source_location": "L926",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_926",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "resolve a standalone api identifier even when its bm25 idf is low."
     },
     {
@@ -1286,8 +1286,8 @@
       "source_location": "L939",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_939",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "prefer the explicit successor row for a brand-new app on legacy-only stacks."
     },
     {
@@ -1297,8 +1297,8 @@
       "source_location": "L952",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_952",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 73,
+      "community_name": "search",
       "norm_label": "search stack-specific guidelines"
     },
     {
@@ -1308,7 +1308,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system",
-      "community": 158,
+      "community": 168,
       "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": ".agents/skills/design-screens/uiux/scripts/design_system.py"
     },
@@ -1319,8 +1319,8 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_resolve_dial",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "_resolve_dial()"
     },
     {
@@ -1331,7 +1331,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_relative_luminance",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_relative_luminance()"
     },
     {
@@ -1342,7 +1342,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_palette_is_dark",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_palette_is_dark()"
     },
     {
@@ -1353,7 +1353,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_contrast_ratio",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_contrast_ratio()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_style_is_dark_primary",
-      "community": 213,
-      "community_name": "_resolve_color_mode",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_style_is_dark_primary()"
     },
     {
@@ -1374,8 +1374,8 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_query_wants_dark",
-      "community": 213,
-      "community_name": "_resolve_color_mode",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_query_wants_dark()"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_resolve_color_mode",
-      "community": 213,
-      "community_name": "_resolve_color_mode",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_resolve_color_mode()"
     },
     {
@@ -1397,7 +1397,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_derive_dark_palette",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_derive_dark_palette()"
     },
     {
@@ -1408,7 +1408,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_select_palette_for_mode",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_select_palette_for_mode()"
     },
     {
@@ -1418,8 +1418,8 @@
       "source_location": "L246",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_filter_anti_patterns_for_mode",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "_filter_anti_patterns_for_mode()"
     },
     {
@@ -1506,8 +1506,8 @@
       "source_location": "L319",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_multi_domain_search",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "._multi_domain_search()"
     },
     {
@@ -1517,8 +1517,8 @@
       "source_location": "L357",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_find_reasoning_rule",
-      "community": 143,
-      "community_name": "._apply_reasoning",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "._find_reasoning_rule()"
     },
     {
@@ -1528,8 +1528,8 @@
       "source_location": "L365",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_apply_reasoning",
-      "community": 143,
-      "community_name": "._apply_reasoning",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "._apply_reasoning()"
     },
     {
@@ -1550,8 +1550,8 @@
       "source_location": "L445",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_extract_results",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "._extract_results()"
     },
     {
@@ -1561,8 +1561,8 @@
       "source_location": "L449",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_generate",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": ".generate()"
     },
     {
@@ -1573,7 +1573,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_hex_to_ansi",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "hex_to_ansi()"
     },
     {
@@ -1584,7 +1584,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_ansi_ljust",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "ansi_ljust()"
     },
     {
@@ -1595,7 +1595,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_section_header",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "section_header()"
     },
     {
@@ -1606,7 +1606,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_format_ascii_box",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "format_ascii_box()"
     },
     {
@@ -1617,7 +1617,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_format_markdown",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "format_markdown()"
     },
     {
@@ -1628,7 +1628,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_generate_design_system",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "generate_design_system()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L961",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_safe_slug",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "safe_slug()"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L972",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_write_persisted_file",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_write_persisted_file()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_py_path",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "path"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L995",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_persist_design_system",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "persist_design_system()"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L1076",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_format_master_md",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format_master_md()"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L1381",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_format_page_override_md",
-      "community": 208,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format_page_override_md()"
     },
     {
@@ -1704,8 +1704,8 @@
       "source_location": "L1490",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_generate_intelligent_overrides",
-      "community": 208,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -1715,8 +1715,8 @@
       "source_location": "L1596",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_detect_page_type",
-      "community": 208,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_detect_page_type()"
     },
     {
@@ -1726,8 +1726,8 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_91",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "bucket a 1-10 dial value into its tier config. returns none if value is none."
     },
     {
@@ -1738,7 +1738,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_130",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "wcag relative luminance of a #rrggbb string, or none if unparseable."
     },
     {
@@ -1749,7 +1749,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_148",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "true when a colors.csv row's background is a dark surface."
     },
     {
@@ -1760,7 +1760,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_154",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid."
     },
     {
@@ -1770,8 +1770,8 @@
       "source_location": "L165",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_165",
-      "community": 213,
-      "community_name": "_resolve_color_mode",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "true when a styles.csv row describes itself as dark-first."
     },
     {
@@ -1781,8 +1781,8 @@
       "source_location": "L181",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_181",
-      "community": 213,
-      "community_name": "_resolve_color_mode",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "true when the query explicitly asks for a dark theme."
     },
     {
@@ -1792,8 +1792,8 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_187",
-      "community": 213,
-      "community_name": "_resolve_color_mode",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "resolve the mode the rest of the output has to agree with."
     },
     {
@@ -1804,7 +1804,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_194",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "keep product brand tokens while deriving accessible dark surfaces."
     },
     {
@@ -1815,7 +1815,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_222",
       "community": 168,
-      "community_name": "_select_palette_for_mode",
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case..."
     },
     {
@@ -1825,8 +1825,8 @@
       "source_location": "L247",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_247",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "drop \"avoid dark mode\" advice once dark mode is the resolved answer."
     },
     {
@@ -1858,8 +1858,8 @@
       "source_location": "L321",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_321",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "execute searches across multiple domains."
     },
     {
@@ -1869,8 +1869,8 @@
       "source_location": "L358",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_358",
-      "community": 143,
-      "community_name": "._apply_reasoning",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "find matching reasoning rule for a category."
     },
     {
@@ -1880,8 +1880,8 @@
       "source_location": "L366",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_366",
-      "community": 143,
-      "community_name": "._apply_reasoning",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "apply reasoning rules to search results."
     },
     {
@@ -1902,8 +1902,8 @@
       "source_location": "L446",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_446",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "extract results list from search result dict."
     },
     {
@@ -1913,8 +1913,8 @@
       "source_location": "L451",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_451",
-      "community": 68,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "generate complete design system recommendation. variance/motion/density are..."
     },
     {
@@ -1925,7 +1925,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_612",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "convert hex color to ansi true color swatch (\u2588\u2588) with fallback."
     },
     {
@@ -1936,7 +1936,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_626",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "like str.ljust but accounts for zero-width ansi escape sequences."
     },
     {
@@ -1947,7 +1947,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_634",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "create a unicode section separator: \u251c\u2500\u2500\u2500 name \u2500\u2500\u2500...\u2524"
     },
     {
@@ -1958,7 +1958,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_641",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "format design system as unicode box with ansi color swatches."
     },
     {
@@ -1969,7 +1969,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_792",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "format design system as markdown."
     },
     {
@@ -1980,7 +1980,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_923",
       "community": 158,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community_name": "generate_design_system",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
     {
@@ -1990,8 +1990,8 @@
       "source_location": "L962",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_962",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "slugify a name into a single safe path segment. only [a-z0-9_-] survives; every..."
     },
     {
@@ -2001,8 +2001,8 @@
       "source_location": "L973",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_973",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "write fully to a temp file, then publish atomically."
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L997",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_997",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "persist design system to design-system/<project>/ folder using master +..."
     },
     {
@@ -2023,8 +2023,8 @@
       "source_location": "L1077",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_1077",
-      "community": 97,
-      "community_name": "persist_design_system",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format design system as master.md with hierarchical override logic."
     },
     {
@@ -2034,8 +2034,8 @@
       "source_location": "L1382",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_1382",
-      "community": 208,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1491",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_1491",
-      "community": 208,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "generate intelligent overrides based on page type using layered search. uses..."
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L1597",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_1597",
-      "community": 208,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 168,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -2068,7 +2068,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_reasoning_contract",
       "community": 143,
-      "community_name": "._apply_reasoning",
+      "community_name": "parse_decision_rules",
       "norm_label": ".agents/skills/design-screens/uiux/scripts/reasoning_contract.py"
     },
     {
@@ -2079,7 +2079,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_reasoning_contract_object_without_duplicates",
       "community": 143,
-      "community_name": "._apply_reasoning",
+      "community_name": "parse_decision_rules",
       "norm_label": "_object_without_duplicates()"
     },
     {
@@ -2090,7 +2090,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_reasoning_contract_parse_decision_rules",
       "community": 143,
-      "community_name": "._apply_reasoning",
+      "community_name": "parse_decision_rules",
       "norm_label": "parse_decision_rules()"
     },
     {
@@ -2101,7 +2101,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_reasoning_contract_validate_action",
       "community": 143,
-      "community_name": "._apply_reasoning",
+      "community_name": "parse_decision_rules",
       "norm_label": "_validate_action()"
     },
     {
@@ -2112,7 +2112,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_reasoning_contract_apply_decision_rules",
       "community": 143,
-      "community_name": "._apply_reasoning",
+      "community_name": "parse_decision_rules",
       "norm_label": "apply_decision_rules()"
     },
     {
@@ -2123,7 +2123,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_reasoning_contract_rationale_68",
       "community": 143,
-      "community_name": "._apply_reasoning",
+      "community_name": "parse_decision_rules",
       "norm_label": "parse the canonical condition -> action-array representation."
     },
     {
@@ -2134,7 +2134,7 @@
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_reasoning_contract_rationale_102",
       "community": 143,
-      "community_name": "._apply_reasoning",
+      "community_name": "parse_decision_rules",
       "norm_label": "return deterministic mutations and an audit trail; never execute data."
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 158,
+      "community_name": "generate_design_system",
       "norm_label": ".agents/skills/design-screens/uiux/scripts/search.py"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search_format_output",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 158,
+      "community_name": "generate_design_system",
       "norm_label": "format_output()"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search_rationale_45",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 158,
+      "community_name": "generate_design_system",
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
@@ -8103,8 +8103,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "app_src_app_navigation_app_navigator_appnavigator",
-      "community": 9,
-      "community_name": "app-navigator.tsx",
+      "community": 107,
+      "community_name": "root-navigator.tsx",
       "norm_label": "appnavigator()"
     },
     {
@@ -8169,8 +8169,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_button",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "app/src/components/ui/button.tsx"
     },
     {
@@ -8180,8 +8180,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_src_components_ui_button_buttonvariants",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "buttonvariants"
     },
     {
@@ -8191,8 +8191,8 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "app_src_components_ui_button_buttontextvariants",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "buttontextvariants"
     },
     {
@@ -8202,8 +8202,8 @@
       "source_location": "L93",
       "_origin": "ast",
       "id": "app_src_components_ui_button_buttonprops",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "buttonprops"
     },
     {
@@ -8213,8 +8213,8 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "app_src_components_ui_button_button",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "button()"
     },
     {
@@ -8224,7 +8224,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_card",
-      "community": 74,
+      "community": 208,
       "community_name": "cn",
       "norm_label": "card.tsx"
     },
@@ -8235,7 +8235,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_src_components_ui_card_card",
-      "community": 74,
+      "community": 208,
       "community_name": "cn",
       "norm_label": "card()"
     },
@@ -8246,7 +8246,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_src_components_ui_card_cardheader",
-      "community": 74,
+      "community": 208,
       "community_name": "cn",
       "norm_label": "cardheader()"
     },
@@ -8257,7 +8257,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_components_ui_card_cardtitle",
-      "community": 74,
+      "community": 208,
       "community_name": "cn",
       "norm_label": "cardtitle()"
     },
@@ -8268,7 +8268,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "app_src_components_ui_card_carddescription",
-      "community": 74,
+      "community": 208,
       "community_name": "cn",
       "norm_label": "carddescription()"
     },
@@ -8279,7 +8279,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_components_ui_card_cardcontent",
-      "community": 74,
+      "community": 208,
       "community_name": "cn",
       "norm_label": "cardcontent()"
     },
@@ -8290,7 +8290,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "app_src_components_ui_card_cardfooter",
-      "community": 74,
+      "community": 208,
       "community_name": "cn",
       "norm_label": "cardfooter()"
     },
@@ -8434,7 +8434,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_icon",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "icon.tsx"
     },
     {
@@ -8445,7 +8445,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_icon_iconprops",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "iconprops"
     },
     {
@@ -8456,7 +8456,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_icon_iconimpl",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "iconimpl()"
     },
     {
@@ -8467,7 +8467,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_icon_icon",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "icon()"
     },
     {
@@ -8478,7 +8478,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_input",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "app/src/components/ui/input.tsx"
     },
     {
@@ -8489,7 +8489,7 @@
       "_origin": "ast",
       "id": "app_src_components_ui_input_input",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "input()"
     },
     {
@@ -8532,8 +8532,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_components_ui_text",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "text.tsx"
     },
     {
@@ -8543,8 +8543,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariants",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "textvariants"
     },
     {
@@ -8554,8 +8554,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariantprops",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "textvariantprops"
     },
     {
@@ -8565,8 +8565,8 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textvariant",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "textvariant"
     },
     {
@@ -8576,8 +8576,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "app_src_components_ui_text_role",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "role"
     },
     {
@@ -8587,8 +8587,8 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "app_src_components_ui_text_aria_level",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "aria_level"
     },
     {
@@ -8598,8 +8598,8 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "app_src_components_ui_text_textclasscontext",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "textclasscontext"
     },
     {
@@ -8609,8 +8609,8 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "app_src_components_ui_text_text",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "text()"
     },
     {
@@ -8620,8 +8620,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_config_app_config",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 77,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "app/src/config/app-config.ts"
     },
     {
@@ -8665,7 +8665,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_components_password_input",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "auth/components/password-input.tsx"
     },
     {
@@ -8676,7 +8676,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_components_password_input_passwordinputprops",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "passwordinputprops"
     },
     {
@@ -8687,7 +8687,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_components_password_input_passwordinput",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "passwordinput()"
     },
     {
@@ -8775,7 +8775,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_screens_login_screen",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "login-screen.tsx"
     },
     {
@@ -8786,7 +8786,7 @@
       "_origin": "ast",
       "id": "app_src_features_auth_screens_login_screen_loginscreenprops",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "loginscreenprops"
     },
     {
@@ -8895,8 +8895,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "keypad.tsx"
     },
     {
@@ -8906,8 +8906,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypadcharacters",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "keypadcharacters"
     },
     {
@@ -8917,8 +8917,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypadprops",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "keypadprops"
     },
     {
@@ -8928,8 +8928,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_keypad_keypad",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 97,
+      "community_name": "text.tsx",
       "norm_label": "keypad()"
     },
     {
@@ -9005,8 +9005,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "permission-banner.tsx"
     },
     {
@@ -9016,8 +9016,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner_permissionbannerprops",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "permissionbannerprops"
     },
     {
@@ -9027,8 +9027,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner_permissionbanner",
-      "community": 77,
-      "community_name": "dialer-screen.tsx",
+      "community": 179,
+      "community_name": "app/src/components/ui/button.tsx",
       "norm_label": "permissionbanner()"
     },
     {
@@ -9038,8 +9038,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog",
-      "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community": 87,
+      "community_name": "settings-screen.tsx",
       "norm_label": "post-call-dialog.tsx"
     },
     {
@@ -9049,8 +9049,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_schedulechoicerowprops",
-      "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community": 87,
+      "community_name": "settings-screen.tsx",
       "norm_label": "schedulechoicerowprops"
     },
     {
@@ -9060,8 +9060,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_schedulechoicerow",
-      "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community": 87,
+      "community_name": "settings-screen.tsx",
       "norm_label": "schedulechoicerow()"
     },
     {
@@ -9071,8 +9071,8 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_schedulepickerfieldprops",
-      "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community": 87,
+      "community_name": "settings-screen.tsx",
       "norm_label": "schedulepickerfieldprops"
     },
     {
@@ -9082,8 +9082,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_schedulepickerfield",
-      "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community": 87,
+      "community_name": "settings-screen.tsx",
       "norm_label": "schedulepickerfield()"
     },
     {
@@ -9093,8 +9093,8 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_postcalldialogvariant",
-      "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community": 87,
+      "community_name": "settings-screen.tsx",
       "norm_label": "postcalldialogvariant"
     },
     {
@@ -9104,8 +9104,8 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_postcalldialogprops",
-      "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community": 87,
+      "community_name": "settings-screen.tsx",
       "norm_label": "postcalldialogprops"
     },
     {
@@ -9116,7 +9116,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_postcalldialog",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "postcalldialog()"
     },
     {
@@ -9402,7 +9402,7 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "use-post-call-schedule.ts"
     },
     {
@@ -9413,106 +9413,128 @@
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_createtomorrowdate",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "createtomorrowdate()"
-    },
-    {
-      "label": "createDefaultScheduleDate()",
-      "file_type": "code",
-      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "app_src_features_dialer_hooks_use_post_call_schedule_createdefaultscheduledate",
-      "community": 145,
-      "community_name": "post-call-dialog.tsx",
-      "norm_label": "createdefaultscheduledate()"
     },
     {
       "label": "isTomorrow()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L22",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_istomorrow",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "istomorrow()"
     },
     {
       "label": "formatTwelveHourClock()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L30",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_formattwelvehourclock",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "formattwelvehourclock()"
     },
     {
       "label": "formatPaddedMinutes()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L39",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_formatpaddedminutes",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "formatpaddedminutes()"
     },
     {
       "label": "getMeridiemLabel()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L47",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_getmeridiemlabel",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "getmeridiemlabel()"
     },
     {
       "label": "formatScheduleLabel()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L52",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_formatschedulelabel",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "formatschedulelabel()"
+    },
+    {
+      "label": "createCurrentTimeOnDate()",
+      "file_type": "code",
+      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "app_src_features_dialer_hooks_use_post_call_schedule_createcurrenttimeondate",
+      "community": 145,
+      "community_name": "use-post-call-schedule.ts",
+      "norm_label": "createcurrenttimeondate()"
+    },
+    {
+      "label": "isBeforeCurrentMinute()",
+      "file_type": "code",
+      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
+      "source_location": "L87",
+      "_origin": "ast",
+      "id": "app_src_features_dialer_hooks_use_post_call_schedule_isbeforecurrentminute",
+      "community": 145,
+      "community_name": "use-post-call-schedule.ts",
+      "norm_label": "isbeforecurrentminute()"
+    },
+    {
+      "label": "createNotInPastMoment()",
+      "file_type": "code",
+      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
+      "source_location": "L97",
+      "_origin": "ast",
+      "id": "app_src_features_dialer_hooks_use_post_call_schedule_createnotinpastmoment",
+      "community": 145,
+      "community_name": "use-post-call-schedule.ts",
+      "norm_label": "createnotinpastmoment()"
     },
     {
       "label": "createPickerWindow()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L80",
+      "source_location": "L104",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_createpickerwindow",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "createpickerwindow()"
     },
     {
       "label": "UsePostCallScheduleResult",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L95",
+      "source_location": "L119",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_usepostcallscheduleresult",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "usepostcallscheduleresult"
     },
     {
       "label": "usePostCallSchedule()",
       "file_type": "code",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L101",
+      "source_location": "L125",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_post_call_schedule_usepostcallschedule",
       "community": 145,
-      "community_name": "post-call-dialog.tsx",
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "usepostcallschedule()"
     },
     {
@@ -9632,8 +9654,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_lib_request_error",
-      "community": 125,
-      "community_name": "use-lead-post-call.ts",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "request-error.ts"
     },
     {
@@ -9643,8 +9665,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_src_features_dialer_lib_request_error_readrequesterrormessage",
-      "community": 125,
-      "community_name": "use-lead-post-call.ts",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "readrequesterrormessage()"
     },
     {
@@ -9984,8 +10006,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_stats_index",
-      "community": 87,
-      "community_name": "settings-screen.tsx",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "stats/index.ts"
     },
     {
@@ -10523,8 +10545,8 @@
       "source_location": "L139",
       "_origin": "ast",
       "id": "app_src_features_stats_screens_settings_screen_settingsscreen",
-      "community": 87,
-      "community_name": "settings-screen.tsx",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "settingsscreen()"
     },
     {
@@ -10743,8 +10765,8 @@
       "source_location": "L174",
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_deletependingcall",
-      "community": 71,
-      "community_name": "pending-calls-db.ts",
+      "community": 57,
+      "community_name": "call-submit.ts",
       "norm_label": "deletependingcall()"
     },
     {
@@ -10919,8 +10941,8 @@
       "source_location": "L162",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_janitor_runjanitorsweep",
-      "community": 57,
-      "community_name": "call-submit.ts",
+      "community": 70,
+      "community_name": "use-janitor.ts",
       "norm_label": "runjanitorsweep()"
     },
     {
@@ -10930,8 +10952,8 @@
       "source_location": "L178",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_janitor_usejanitor",
-      "community": 9,
-      "community_name": "app-navigator.tsx",
+      "community": 70,
+      "community_name": "use-janitor.ts",
       "norm_label": "usejanitor()"
     },
     {
@@ -11073,8 +11095,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "call-log-matcher.ts"
     },
     {
@@ -11084,8 +11106,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_calllogentry",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "calllogentry"
     },
     {
@@ -11095,8 +11117,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_pendingcalltomatch",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "pendingcalltomatch"
     },
     {
@@ -11117,8 +11139,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_toentrytimems",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "toentrytimems()"
     },
     {
@@ -11128,8 +11150,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_isoutgoingcallentry",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "isoutgoingcallentry()"
     },
     {
@@ -11139,8 +11161,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_isentrywithinmatchwindow",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "isentrywithinmatchwindow()"
     },
     {
@@ -11150,8 +11172,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_doesentrymatchpendingcall",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "doesentrymatchpendingcall()"
     },
     {
@@ -11161,8 +11183,8 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_tomatchedpendingcall",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "tomatchedpendingcall()"
     },
     {
@@ -11172,8 +11194,8 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_findmatchingentryindex",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "findmatchingentryindex()"
     },
     {
@@ -11183,8 +11205,8 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_matcher_matchpendingcallstologentries",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "matchpendingcallstologentries()"
     },
     {
@@ -11194,8 +11216,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_lib_call_log_reader",
-      "community": 70,
-      "community_name": "use-janitor.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "call-log-reader.ts"
     },
     {
@@ -11382,7 +11404,7 @@
       "_origin": "ast",
       "id": "app_src_lib_utils",
       "community": 74,
-      "community_name": "cn",
+      "community_name": "icon.tsx",
       "norm_label": "utils.ts"
     },
     {
@@ -11392,7 +11414,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_src_lib_utils_cn",
-      "community": 74,
+      "community": 208,
       "community_name": "cn",
       "norm_label": "cn()"
     },
@@ -11524,8 +11546,8 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "app_src_shared_api_api_client_registerunauthorizedhandler",
-      "community": 107,
-      "community_name": "root-navigator.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "registerunauthorizedhandler()"
     },
     {
@@ -11557,8 +11579,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_shared_utils_phone_formatter",
-      "community": 155,
-      "community_name": "use-dialer.ts",
+      "community": 77,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "phone-formatter.ts"
     },
     {
@@ -11579,8 +11601,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_shared_utils_phone_formatter_normalizephonenumber",
-      "community": 155,
-      "community_name": "use-dialer.ts",
+      "community": 85,
+      "community_name": "call-log-matcher.ts",
       "norm_label": "normalizephonenumber()"
     },
     {
@@ -11865,8 +11887,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_api_init",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 53,
+      "community_name": "extensions.py",
       "norm_label": "api/__init__.py"
     },
     {
@@ -11953,8 +11975,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_core_errors",
-      "community": 124,
-      "community_name": "errors.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "errors.py"
     },
     {
@@ -12008,8 +12030,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "backend_app_core_errors_register_error_handlers",
-      "community": 124,
-      "community_name": "errors.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "register_error_handlers()"
     },
     {
@@ -12019,8 +12041,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_errors_py_flask",
-      "community": 124,
-      "community_name": "errors.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "flask"
     },
     {
@@ -12041,8 +12063,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "backend_app_core_permissions_require_auth",
-      "community": 53,
-      "community_name": "settings/routes.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "require_auth()"
     },
     {
@@ -12052,8 +12074,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_permissions_py_any",
-      "community": 53,
-      "community_name": "settings/routes.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "any"
     },
     {
@@ -12074,8 +12096,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_core_security",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 154,
+      "community_name": "User",
       "norm_label": "security.py"
     },
     {
@@ -12129,8 +12151,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_core_utils",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "utils.py"
     },
     {
@@ -12140,8 +12162,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_app_core_utils_get_ist_timezone",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "get_ist_timezone()"
     },
     {
@@ -12173,8 +12195,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_utils_py_datetime",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "datetime"
     },
     {
@@ -12195,8 +12217,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "backend_app_core_utils_to_ist",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "to_ist()"
     },
     {
@@ -12206,8 +12228,8 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "backend_app_core_utils_normalize_phone_number",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "normalize_phone_number()"
     },
     {
@@ -12228,8 +12250,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_extensions",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 53,
+      "community_name": "extensions.py",
       "norm_label": "extensions.py"
     },
     {
@@ -12239,8 +12261,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_auth_init",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 53,
+      "community_name": "extensions.py",
       "norm_label": "auth/__init__.py"
     },
     {
@@ -12504,7 +12526,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes",
       "community": 124,
-      "community_name": "errors.py",
+      "community_name": "test_foundation.py",
       "norm_label": "calls/routes.py"
     },
     {
@@ -12515,7 +12537,7 @@
       "_origin": "ast",
       "id": "route",
       "community": 124,
-      "community_name": "errors.py",
+      "community_name": "test_foundation.py",
       "norm_label": "route"
     },
     {
@@ -12526,7 +12548,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_sync_calls",
       "community": 124,
-      "community_name": "errors.py",
+      "community_name": "test_foundation.py",
       "norm_label": "sync_calls()"
     },
     {
@@ -12537,7 +12559,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_py_response",
       "community": 124,
-      "community_name": "errors.py",
+      "community_name": "test_foundation.py",
       "norm_label": "response"
     },
     {
@@ -12548,7 +12570,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas",
       "community": 124,
-      "community_name": "errors.py",
+      "community_name": "test_foundation.py",
       "norm_label": "calls/schemas.py"
     },
     {
@@ -12559,7 +12581,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_synccallsrequest",
       "community": 124,
-      "community_name": "errors.py",
+      "community_name": "test_foundation.py",
       "norm_label": "synccallsrequest"
     },
     {
@@ -12570,7 +12592,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_py_basemodel",
       "community": 124,
-      "community_name": "errors.py",
+      "community_name": "test_foundation.py",
       "norm_label": "basemodel"
     },
     {
@@ -12581,7 +12603,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_synccallsresponse",
       "community": 124,
-      "community_name": "errors.py",
+      "community_name": "test_foundation.py",
       "norm_label": "synccallsresponse"
     },
     {
@@ -12591,8 +12613,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "calls/services.py"
     },
     {
@@ -12602,8 +12624,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_get_ist_start_minute_of_day",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "get_ist_start_minute_of_day()"
     },
     {
@@ -12613,8 +12635,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_datetime",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "datetime"
     },
     {
@@ -12624,8 +12646,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_has_invalid_call_duration",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "has_invalid_call_duration()"
     },
     {
@@ -12635,8 +12657,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_any",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "any"
     },
     {
@@ -12646,8 +12668,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_extract_valid_call",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "extract_valid_call()"
     },
     {
@@ -12657,8 +12679,8 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_sync_calls_batch",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "sync_calls_batch()"
     },
     {
@@ -12668,8 +12690,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_init",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 53,
+      "community_name": "extensions.py",
       "norm_label": "dashboard/__init__.py"
     },
     {
@@ -12679,8 +12701,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "dashboard/routes.py"
     },
     {
@@ -12690,8 +12712,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_require_dashboard_manager",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "require_dashboard_manager()"
     },
     {
@@ -12701,8 +12723,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_py_any",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "any"
     },
     {
@@ -12712,8 +12734,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_py_get",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get"
     },
     {
@@ -12723,8 +12745,8 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_get_team_dashboard",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get_team_dashboard()"
     },
     {
@@ -12734,8 +12756,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_py_response",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "response"
     },
     {
@@ -12745,8 +12767,8 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_get_team_people",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get_team_people()"
     },
     {
@@ -12756,8 +12778,8 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_get_person_dashboard",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get_person_dashboard()"
     },
     {
@@ -12767,8 +12789,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "dashboard/schemas.py"
     },
     {
@@ -12778,8 +12800,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_avgperpersonperday",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "avgperpersonperday"
     },
     {
@@ -12789,8 +12811,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_py_basemodel",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "basemodel"
     },
     {
@@ -12800,8 +12822,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_vsyesterdaydelta",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "vsyesterdaydelta"
     },
     {
@@ -12811,8 +12833,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_callsbyhourblock",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "callsbyhourblock"
     },
     {
@@ -12822,8 +12844,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_toppersonsummary",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "toppersonsummary"
     },
     {
@@ -12833,8 +12855,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_teamperiodblock",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "teamperiodblock"
     },
     {
@@ -12844,8 +12866,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_teamdashboardresponse",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "teamdashboardresponse"
     },
     {
@@ -12855,8 +12877,8 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_peopleperiodblock",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "peopleperiodblock"
     },
     {
@@ -12866,8 +12888,8 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_teampeoplerow",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "teampeoplerow"
     },
     {
@@ -12877,8 +12899,8 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_avgperactiveday",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "avgperactiveday"
     },
     {
@@ -12888,8 +12910,8 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_topnumberitem",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "topnumberitem"
     },
     {
@@ -12899,8 +12921,8 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_personperiodstats",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "personperiodstats"
     },
     {
@@ -12910,8 +12932,8 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_personthirtydaystats",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "personthirtydaystats"
     },
     {
@@ -12921,8 +12943,8 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_persondashboardresponse",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 68,
+      "community_name": "dashboard/routes.py",
       "norm_label": "persondashboardresponse"
     },
     {
@@ -13471,8 +13493,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "leads/routes.py"
     },
     {
@@ -13482,8 +13504,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_post",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "post"
     },
     {
@@ -13493,8 +13515,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_upload_leads",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "upload_leads()"
     },
     {
@@ -13504,8 +13526,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_response",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "response"
     },
     {
@@ -13515,8 +13537,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_get",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "get"
     },
     {
@@ -13526,8 +13548,8 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_get_summary",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "get_summary()"
     },
     {
@@ -13537,8 +13559,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_get_next_lead",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "get_next_lead()"
     },
     {
@@ -13548,8 +13570,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "leads/schemas.py"
     },
     {
@@ -13559,8 +13581,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_uploadleadsresponse",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "uploadleadsresponse"
     },
     {
@@ -13570,8 +13592,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_py_basemodel",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "basemodel"
     },
     {
@@ -13581,8 +13603,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_leadpoolbucketcounts",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "leadpoolbucketcounts"
     },
     {
@@ -13592,8 +13614,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_daycounts",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "daycounts"
     },
     {
@@ -13603,8 +13625,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_leadssummaryresponse",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "leadssummaryresponse"
     },
     {
@@ -13614,8 +13636,8 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_scheduleleadrequest",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "scheduleleadrequest"
     },
     {
@@ -13625,8 +13647,8 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_nextleadrequest",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "nextleadrequest"
     },
     {
@@ -13636,8 +13658,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_servedlead",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "servedlead"
     },
     {
@@ -13647,8 +13669,8 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_nextleadresponse",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "nextleadresponse"
     },
     {
@@ -13713,8 +13735,8 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_import_leads_csv",
-      "community": 73,
-      "community_name": "leads/routes.py",
+      "community": 105,
+      "community_name": "test_leads.py",
       "norm_label": "import_leads_csv()"
     },
     {
@@ -13812,8 +13834,8 @@
       "source_location": "L322",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_schedule_resolved_lead_for_call",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "schedule_resolved_lead_for_call()"
     },
     {
@@ -13857,7 +13879,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_init",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "settings/__init__.py"
     },
     {
@@ -13868,7 +13890,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_models",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "settings/models.py"
     },
     {
@@ -13879,7 +13901,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_models_officehours",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "officehours"
     },
     {
@@ -13890,7 +13912,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_routes",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "settings/routes.py"
     },
     {
@@ -13901,7 +13923,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_routes_refuse_non_manager",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "refuse_non_manager()"
     },
     {
@@ -13912,7 +13934,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_routes_py_get",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "get"
     },
     {
@@ -13923,7 +13945,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_routes_get_office_hours",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "get_office_hours()"
     },
     {
@@ -13934,7 +13956,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_routes_py_response",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "response"
     },
     {
@@ -13945,7 +13967,7 @@
       "_origin": "ast",
       "id": "put",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "put"
     },
     {
@@ -13956,7 +13978,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_routes_update_office_hours",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "update_office_hours()"
     },
     {
@@ -13967,7 +13989,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_schemas",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "settings/schemas.py"
     },
     {
@@ -13978,7 +14000,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_schemas_officehoursresponse",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "officehoursresponse"
     },
     {
@@ -13989,7 +14011,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_schemas_py_basemodel",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "basemodel"
     },
     {
@@ -14000,7 +14022,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_schemas_updateofficehoursrequest",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "updateofficehoursrequest"
     },
     {
@@ -14011,7 +14033,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_schemas_py_field_validator",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "field_validator"
     },
     {
@@ -14022,7 +14044,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_schemas_updateofficehoursrequest_require_hhmm_format",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": ".require_hhmm_format()"
     },
     {
@@ -14033,7 +14055,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_services",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "settings/services.py"
     },
     {
@@ -14044,7 +14066,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_services_format_minute_of_day",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "format_minute_of_day()"
     },
     {
@@ -14055,7 +14077,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_services_parse_time_to_minute",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "parse_time_to_minute()"
     },
     {
@@ -14066,7 +14088,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_services_get_or_create_office_hours_window",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "get_or_create_office_hours_window()"
     },
     {
@@ -14077,7 +14099,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_services_get_office_hours_view",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "get_office_hours_view()"
     },
     {
@@ -14088,7 +14110,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_settings_services_update_office_hours_window",
       "community": 53,
-      "community_name": "settings/routes.py",
+      "community_name": "extensions.py",
       "norm_label": "update_office_hours_window()"
     },
     {
@@ -14098,8 +14120,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_users_init",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 53,
+      "community_name": "extensions.py",
       "norm_label": "users/__init__.py"
     },
     {
@@ -14109,8 +14131,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_users_models",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 53,
+      "community_name": "extensions.py",
       "norm_label": "users/models.py"
     },
     {
@@ -16980,8 +17002,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_tests_test_foundation",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "test_foundation.py"
     },
     {
@@ -16991,8 +17013,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_app_creation",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "test_app_creation()"
     },
     {
@@ -17002,8 +17024,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_flask",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "flask"
     },
     {
@@ -17013,8 +17035,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_startup_adds_outcome_column_to_existing_database",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "test_startup_adds_outcome_column_to_existing_database()"
     },
     {
@@ -17024,8 +17046,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_path",
-      "community": 60,
-      "community_name": "app/__init__.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "path"
     },
     {
@@ -17057,8 +17079,8 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_error_handler",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "test_error_handler()"
     },
     {
@@ -17068,8 +17090,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_py_flaskclient",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "flaskclient"
     },
     {
@@ -17079,8 +17101,8 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_utils_helpers",
-      "community": 105,
-      "community_name": "test_leads.py",
+      "community": 124,
+      "community_name": "test_foundation.py",
       "norm_label": "test_utils_helpers()"
     },
     {
@@ -17332,8 +17354,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "web_package_dependencies_radix_ui_react_dialog",
-      "community": 179,
-      "community_name": "@radix-ui/react-dialog",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "@radix-ui/react-dialog"
     },
     {
@@ -17343,8 +17365,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "radix_ui_react_dialog",
-      "community": 179,
-      "community_name": "@radix-ui/react-dialog",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "@radix-ui/react-dialog"
     },
     {
@@ -17398,8 +17420,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_package_dependencies_axios",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 233,
+      "community_name": "axios",
       "norm_label": "axios"
     },
     {
@@ -17409,8 +17431,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_package_json_axios",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 233,
+      "community_name": "axios",
       "norm_label": "axios"
     },
     {
@@ -31175,113 +31197,102 @@
       "norm_label": "agents.md"
     },
     {
-      "label": "CLAUDE.md",
-      "file_type": "document",
-      "source_file": "CLAUDE.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "claude",
-      "community": 85,
-      "community_name": "CLAUDE.md",
-      "norm_label": "claude.md"
-    },
-    {
       "label": "Rules",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "claude_rules",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_rules",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "rules"
     },
     {
       "label": "Language",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "claude_language",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_language",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "language"
     },
     {
       "label": "Source of Truth (No Guessing)",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "claude_source_of_truth_no_guessing",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_source_of_truth_no_guessing",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "source of truth (no guessing)"
     },
     {
       "label": "Tasks",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "claude_tasks",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_tasks",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "tasks"
     },
     {
       "label": "Search",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L32",
       "_origin": "ast",
-      "id": "claude_search",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_search",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "search"
     },
     {
       "label": "Timelines",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L40",
       "_origin": "ast",
-      "id": "claude_timelines",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_timelines",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "timelines"
     },
     {
       "label": "Working Directory",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L47",
       "_origin": "ast",
-      "id": "claude_working_directory",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_working_directory",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "working directory"
     },
     {
       "label": "Env Files",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L54",
       "_origin": "ast",
-      "id": "claude_env_files",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_env_files",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "env files"
     },
     {
       "label": "Private Folder",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L59",
       "_origin": "ast",
-      "id": "claude_private_folder",
-      "community": 85,
-      "community_name": "CLAUDE.md",
+      "id": "d_company_projects_sales_call_tracker_agents_private_folder",
+      "community": 140,
+      "community_name": "AGENTS.md",
       "norm_label": "private folder"
     },
     {
@@ -51123,18 +51134,29 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L15",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
-      "target": "app_src_features_dialer_hooks_use_post_call_schedule_createdefaultscheduledate",
+      "target": "app_src_features_dialer_hooks_use_post_call_schedule_createcurrenttimeondate",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L80",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_dialer_hooks_use_post_call_schedule",
+      "target": "app_src_features_dialer_hooks_use_post_call_schedule_createnotinpastmoment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
+      "source_location": "L104",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
@@ -51156,7 +51178,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L39",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
@@ -51167,7 +51189,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L52",
+      "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
@@ -51178,7 +51200,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L30",
+      "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
@@ -51189,7 +51211,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L47",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
@@ -51200,7 +51222,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L22",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_dialer_hooks_use_post_call_schedule",
+      "target": "app_src_features_dialer_hooks_use_post_call_schedule_isbeforecurrentminute",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
+      "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
@@ -51211,7 +51244,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L101",
+      "source_location": "L125",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
@@ -51222,7 +51255,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L95",
+      "source_location": "L119",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule",
@@ -51234,19 +51267,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_features_dialer_hooks_use_post_call_schedule_createdefaultscheduledate",
-      "target": "app_src_features_dialer_hooks_use_post_call_schedule_createtomorrowdate",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L23",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule_istomorrow",
@@ -51258,11 +51279,11 @@
       "context": "argument",
       "confidence": "INFERRED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L103",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule_usepostcallschedule",
-      "target": "app_src_features_dialer_hooks_use_post_call_schedule_createdefaultscheduledate",
+      "target": "app_src_features_dialer_hooks_use_post_call_schedule_createtomorrowdate",
       "confidence_score": 0.5
     },
     {
@@ -51270,7 +51291,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L74",
+      "source_location": "L69",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule_formatschedulelabel",
@@ -51282,7 +51303,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L69",
+      "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule_formatschedulelabel",
@@ -51294,7 +51315,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L70",
+      "source_location": "L65",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule_formatschedulelabel",
@@ -51306,7 +51327,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L71",
+      "source_location": "L66",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule_formatschedulelabel",
@@ -51318,7 +51339,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L143",
+      "source_location": "L166",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule_usepostcallschedule",
@@ -51330,7 +51351,43 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
-      "source_location": "L127",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_dialer_hooks_use_post_call_schedule_usepostcallschedule",
+      "target": "app_src_features_dialer_hooks_use_post_call_schedule_createcurrenttimeondate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_dialer_hooks_use_post_call_schedule_usepostcallschedule",
+      "target": "app_src_features_dialer_hooks_use_post_call_schedule_isbeforecurrentminute",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_features_dialer_hooks_use_post_call_schedule_usepostcallschedule",
+      "target": "app_src_features_dialer_hooks_use_post_call_schedule_createnotinpastmoment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/features/dialer/hooks/use-post-call-schedule.ts",
+      "source_location": "L150",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_features_dialer_hooks_use_post_call_schedule_usepostcallschedule",
@@ -97035,100 +97092,100 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L54",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_env_files",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_env_files",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_language",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_language",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_private_folder",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_private_folder",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_rules",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_rules",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_search",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_search",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_source_of_truth_no_guessing",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_source_of_truth_no_guessing",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_tasks",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_tasks",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_timelines",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_timelines",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "claude",
-      "target": "claude_working_directory",
+      "source": "agents",
+      "target": "d_company_projects_sales_call_tracker_agents_working_directory",
       "confidence_score": 1.0
     },
     {
@@ -100576,5 +100633,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "cb0244953512c7d4b6ebb03277ef7c5f06a29ba3"
+  "built_at_commit": "571034b28717462a3b7d3fa6a07c78eca0668457"
 }

@@ -6,13 +6,16 @@ interface ErrorStateProps {
 
 export function ErrorState({ onRetry }: ErrorStateProps) {
   return (
-    <div className="flex flex-col items-center rounded-2xl border bg-card px-6 py-10 text-center shadow-sm">
-      <p role="alert" className="text-sm font-medium text-destructive">
-        Could not load data.
-      </p>
-      <Button variant="outline" onClick={onRetry} className="mt-4 rounded-xl">
-        Retry
-      </Button>
+    <div className="flex flex-1 items-center justify-center">
+      <div
+        role="alert"
+        className="w-full max-w-md rounded-lg border bg-card p-6 text-center shadow-sm"
+      >
+        <p className="text-sm text-muted-foreground">Could not load data.</p>
+        <Button variant="outline" className="mt-4" onClick={onRetry}>
+          Retry
+        </Button>
+      </div>
     </div>
   );
 }

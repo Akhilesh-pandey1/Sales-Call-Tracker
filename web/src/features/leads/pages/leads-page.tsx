@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/shared/components/page-header";
 import { PageLoader } from "@/shared/components/page-loader";
+import { ErrorState } from "@/shared/components/error-state";
 import { LeadUploadCard } from "../components/lead-upload-card";
 import { LeadDailyStats } from "../components/lead-daily-stats";
 import { LeadPoolStats } from "../components/lead-pool-stats";
@@ -14,21 +14,10 @@ export function LeadsPage() {
     refetch,
   } = useLeads();
 
-  const handleRetryClick = (): void => {
-    refetch();
-  };
-
   if (isError) {
     return (
       <PageHeader title="Leads">
-        <div className="flex min-h-[60vh] items-center justify-center">
-          <div className="w-full max-w-md rounded-lg border bg-card p-6 text-center shadow-sm">
-            <p className="text-sm text-muted-foreground">Could not load data.</p>
-            <Button variant="outline" className="mt-4" onClick={handleRetryClick}>
-              Retry
-            </Button>
-          </div>
-        </div>
+        <ErrorState onRetry={refetch} />
       </PageHeader>
     );
   }

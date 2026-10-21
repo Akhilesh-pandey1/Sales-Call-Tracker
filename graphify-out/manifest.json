@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "web/src/features/leads/pages/leads-page.tsx": {
-    "mtime": 1792579718.3336794,
-    "ast_hash": "536967bd632d19ab1d60f8ef0fe061ec",
+    "mtime": 1792580894.5567229,
+    "ast_hash": "20592372ab83677b125c87f1d27c4513",
     "semantic_hash": ""
   },
   "web/src/main.tsx": {
@@ -1420,8 +1420,8 @@
     "semantic_hash": ""
   },
   "web/src/shared/components/error-state.tsx": {
-    "mtime": 1792502978.0340142,
-    "ast_hash": "857f0c9f386fa3884695c08c4a634435",
+    "mtime": 1792580894.5463061,
+    "ast_hash": "73d1527793f22319cc7861c9998fac63",
     "semantic_hash": ""
   },
   "web/src/shared/utils/format-count.ts": {

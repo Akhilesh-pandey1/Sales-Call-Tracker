@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import { ToastAndroid } from 'react-native';
 import { submitTrackedCall } from '@/features/tracking';
 import { readRequestErrorMessage } from '../lib/request-error';
 
@@ -38,9 +39,13 @@ export function usePostCallSubmit(): UsePostCallSubmitResult {
       isSubmittingPostCallRef.current = true;
       setIsSubmittingPostCall(true);
       setPostCallErrorMessage(null);
+      const refusedScheduleToastMessage = 'This lead is already booked by someone else.';
       try {
         if (callId !== null) {
-          await submitTrackedCall(callId, scheduledAt);
+          const scheduleWasRefused = await submitTrackedCall(callId, scheduledAt);
+          if (scheduleWasRefused) {
+            ToastAndroid.show(refusedScheduleToastMessage, ToastAndroid.SHORT);
+          }
         }
         await afterCallSent();
       } catch (submitError) {

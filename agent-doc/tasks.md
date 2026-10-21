@@ -106,16 +106,16 @@
 
 **Blocked by:** 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `pending_calls` gains `direction` and `synced` columns (in-place migration via the existing PRAGMA pattern), `sweep_state` is created with its one row seeded at the install moment — nothing historical uploads (Decision 7; `database.md` §2).
-- [ ] The sweep reads answered INCOMING and OUTGOING entries newer than `last_swept_at`, normalizes numbers to E.164 with the login country, skips entries matching existing rows (synced or pending) by normalized number inside the match window, and moves the line in the SAME SQLite transaction that inserts the rows (Decisions 6–7).
-- [ ] The app-open pipeline runs janitor → sweep → sync; a successful sync MARKS rows `synced = 1` instead of deleting (submit path and batch push alike); cleanup after a successful push deletes synced rows behind the sweep line, never inside the window (Decisions 8, 10, 12).
+- [x] `pending_calls` gains `direction` and `synced` columns (in-place migration via the existing PRAGMA pattern), `sweep_state` is created with its one row seeded at the install moment — nothing historical uploads (Decision 7; `database.md` §2).
+- [x] The sweep reads answered INCOMING and OUTGOING entries newer than `last_swept_at`, normalizes numbers to E.164 with the login country, skips entries matching existing rows (synced or pending) by normalized number inside the match window, and moves the line in the SAME SQLite transaction that inserts the rows (Decisions 6–7).
+- [x] The app-open pipeline runs janitor → sweep → sync; a successful sync MARKS rows `synced = 1` instead of deleting (submit path and batch push alike); cleanup after a successful push deletes synced rows behind the sweep line, never inside the window (Decisions 8, 10, 12).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 8: App — do-not-track numbers never count as work
 

@@ -22,15 +22,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Tapping the field opens the date dialog on today's date and the time dialog on the phone's current time
-- [ ] Submitting without opening the picker books tomorrow at the current mobile time, still inside the future-only and 30-day rules
+- [x] Tapping the field opens the date dialog on today's date and the time dialog on the phone's current time
+- [x] Submitting without opening the picker books tomorrow at the current mobile time, still inside the future-only and 30-day rules
 
 **Verification:**
-- [ ] Typecheck passes: `npx tsc --noEmit` (from `app/`)
-- [ ] Lint passes: `npm run lint` (from `app/`)
+- [x] Typecheck passes: `npx tsc --noEmit` (from `app/`)
+- [x] Lint passes: `npm run lint` (from `app/`)
 
 ---
 

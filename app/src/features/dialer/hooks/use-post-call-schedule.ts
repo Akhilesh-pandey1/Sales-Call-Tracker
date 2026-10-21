@@ -94,6 +94,13 @@ function isBeforeCurrentMinute(moment: Date): boolean {
   return moment.getTime() < currentMinuteStart;
 }
 
+function createNotInPastMoment(chosenMoment: Date): Date {
+  if (chosenMoment.getTime() < Date.now()) {
+    return new Date();
+  }
+  return chosenMoment;
+}
+
 function createPickerWindow(): { minimumDate: Date; maximumDate: Date } {
   const now = new Date();
   const hoursPerDay = 24;
@@ -129,7 +136,7 @@ export function usePostCallSchedule(): UsePostCallScheduleResult {
         openTimeDialog(chosenDate);
         return;
       }
-      setScheduleDate(chosenMoment);
+      setScheduleDate(createNotInPastMoment(chosenMoment));
     };
     DateTimePickerAndroid.open({
       value: createCurrentTimeOnDate(chosenDate),

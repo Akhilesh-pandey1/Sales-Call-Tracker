@@ -1,9 +1,9 @@
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Spinner } from "@/components/ui/spinner";
 import { ErrorAlert } from "@/shared/components/error-alert";
 import { ErrorState } from "@/shared/components/error-state";
+import { PageLoader } from "@/shared/components/page-loader";
 import { useOfficeHours } from "../hooks/use-office-hours";
 import { useOfficeHoursForm } from "../hooks/use-office-hours-form";
 
@@ -31,6 +31,10 @@ export function OfficeHoursEditor() {
     return <ErrorState onRetry={refetch} />;
   }
 
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
   return (
     <section
       aria-label="Office hours"
@@ -43,66 +47,58 @@ export function OfficeHoursEditor() {
         </span>
       </div>
       <div className="px-5 pb-5 sm:px-6">
-        {isLoading ? (
-          <div className="flex justify-center py-8">
-            <Spinner className="size-5" />
+        <p className="mt-1 text-sm text-muted-foreground">
+          Current window:{" "}
+          <span className="font-semibold tabular-nums text-foreground">
+            {storedStartTime} – {storedEndTime} IST
+          </span>{" "}
+          · calls that start outside this window are not counted.
+        </p>
+        <div className="mt-4 flex flex-wrap items-end gap-3">
+          <div>
+            <label
+              htmlFor="office-hours-start"
+              className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+            >
+              Start time
+            </label>
+            <Input
+              id="office-hours-start"
+              type="time"
+              value={startValue}
+              onChange={handleStartChange}
+              className="mt-1.5 w-28 rounded-xl"
+            />
           </div>
-        ) : (
-          <>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Current window:{" "}
-              <span className="font-semibold tabular-nums text-foreground">
-                {storedStartTime} – {storedEndTime} IST
-              </span>{" "}
-              · calls that start outside this window are not counted.
-            </p>
-            <div className="mt-4 flex flex-wrap items-end gap-3">
-              <div>
-                <label
-                  htmlFor="office-hours-start"
-                  className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                >
-                  Start time
-                </label>
-                <Input
-                  id="office-hours-start"
-                  type="time"
-                  value={startValue}
-                  onChange={handleStartChange}
-                  className="mt-1.5 w-28 rounded-xl"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="office-hours-end"
-                  className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                >
-                  End time
-                </label>
-                <Input
-                  id="office-hours-end"
-                  type="time"
-                  value={endValue}
-                  onChange={handleEndChange}
-                  className="mt-1.5 w-28 rounded-xl"
-                />
-              </div>
-              <Button
-                type="button"
-                className="rounded-xl text-sm font-semibold"
-                disabled={isSavePending}
-                onClick={handleSaveClick}
-              >
-                {isSavePending ? "Saving..." : "Save"}
-              </Button>
-            </div>
-            {saveErrorMessage ? (
-              <div className="mt-3">
-                <ErrorAlert message={saveErrorMessage} />
-              </div>
-            ) : null}
-          </>
-        )}
+          <div>
+            <label
+              htmlFor="office-hours-end"
+              className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+            >
+              End time
+            </label>
+            <Input
+              id="office-hours-end"
+              type="time"
+              value={endValue}
+              onChange={handleEndChange}
+              className="mt-1.5 w-28 rounded-xl"
+            />
+          </div>
+          <Button
+            type="button"
+            className="rounded-xl text-sm font-semibold"
+            disabled={isSavePending}
+            onClick={handleSaveClick}
+          >
+            {isSavePending ? "Saving..." : "Save"}
+          </Button>
+        </div>
+        {saveErrorMessage ? (
+          <div className="mt-3">
+            <ErrorAlert message={saveErrorMessage} />
+          </div>
+        ) : null}
       </div>
     </section>
   );

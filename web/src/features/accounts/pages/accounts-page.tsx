@@ -57,9 +57,11 @@ export function AccountsPage() {
 
   return (
     <PageHeader title="Accounts" action={<TodaysDateAction />}>
-      <div className="flex justify-end">
-        <AddUserModal />
-      </div>
+      {!isLoading && (
+        <div className="flex justify-end">
+          <AddUserModal />
+        </div>
+      )}
       {isLoading && <PageLoader />}
       {!isLoading && (
         <AccountsTable

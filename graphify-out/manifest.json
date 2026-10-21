@@ -640,8 +640,8 @@
     "semantic_hash": ""
   },
   "web/src/features/accounts/pages/accounts-page.tsx": {
-    "mtime": 1792579718.3188741,
-    "ast_hash": "4c01bfacc09a0a8631c2d1cf08f34823",
+    "mtime": 1792581084.9952304,
+    "ast_hash": "49645f3a3fb9d6ae7c41b8c01f6cb5c4",
     "semantic_hash": ""
   },
   "web/src/features/auth/index.ts": {
@@ -1655,8 +1655,8 @@
     "semantic_hash": ""
   },
   "web/src/features/settings/components/office-hours-editor.tsx": {
-    "mtime": 1792579735.8459961,
-    "ast_hash": "905f443a75478a22947eb867aaa2f5dc",
+    "mtime": 1792581140.8161376,
+    "ast_hash": "3b301360eed3865f2b736c2dc060e504",
     "semantic_hash": ""
   },
   "web/src/features/settings/hooks/use-office-hours-form.ts": {
@@ -2227,11 +2227,6 @@
   ".claude/rules/rust-code-style.md": {
     "mtime": 1792496317.7330966,
     "ast_hash": "7ca1e629ed1dfce8ceab64dbdd09d8df",
-    "semantic_hash": ""
-  },
-  "web/src/components/ui/spinner.tsx": {
-    "mtime": 1792579695.3620744,
-    "ast_hash": "dc0086ad5e3d2ed9ef396392d9b72895",
     "semantic_hash": ""
   },
   "web/src/shared/components/page-loader.tsx": {

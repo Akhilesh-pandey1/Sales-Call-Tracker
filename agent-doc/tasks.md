@@ -4,16 +4,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The `calls` model and the sync path carry an optional `direction` (`outgoing` is the default, so old rows read outgoing); incoming calls save under the token owner's ID (`api.md` §2; `database.md` — `calls.direction`).
-- [ ] An incoming call never creates or resolves a lead and never burns an attempt (`api.md` §2 Processing; `testing.md` — `test_calls.py` incoming tests).
-- [ ] The office-hours gate drops outside-window calls in both directions and still answers success (`api.md` §2).
+- [x] The `calls` model and the sync path carry an optional `direction` (`outgoing` is the default, so old rows read outgoing); incoming calls save under the token owner's ID (`api.md` §2; `database.md` — `calls.direction`).
+- [x] An incoming call never creates or resolves a lead and never burns an attempt (`api.md` §2 Processing; `testing.md` — `test_calls.py` incoming tests).
+- [x] The office-hours gate drops outside-window calls in both directions and still answers success (`api.md` §2).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_calls.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_calls.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 2: Server — a future booking locks its lead
 

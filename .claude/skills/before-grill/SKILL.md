@@ -1,6 +1,6 @@
 ---
 name: before-grill
-description: The problem gate — runs BEFORE any grill skill when the user shows up with a raw build request ("I want to build an AI notes app") and no problem definition. FIRSTMATE takes the senior chair and refuses to start: walks the decision-tree ladder one question at a time (problem, what gets easier, user, outcome, boundaries, unknowns, simplest architecture), every question with exactly 4 colored options and a senior recommendation tied to earlier answers, logging each agreed decision to agent-doc/decisions.md in the same turn. Use when the user asks to build, create, or start something new and cannot yet answer "who has what problem?"
+description: "The problem gate — runs BEFORE any grill skill when the user shows up with a raw build request (\"I want to build an AI notes app\") and no problem definition. FIRSTMATE takes the senior chair and refuses to start: walks the decision-tree ladder one question at a time (problem, what gets easier, user, outcome, boundaries, unknowns, simplest architecture), every question with exactly 4 colored options and a senior recommendation tied to earlier answers, logging each agreed decision to agent-doc/decisions.md in the same turn. Use when the user asks to build, create, or start something new and cannot yet answer \"who has what problem?\""
 ---
 
 # Before Grill — the problem gate

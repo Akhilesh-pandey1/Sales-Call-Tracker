@@ -101,6 +101,5 @@ backend/
 - Only generate a raw exception for purely technical errors that are not user-facing.
 
 ## Libraries & Dependencies
-- Always check for an existing well-maintained npm package before building anything from scratch. Suggest the package to the developer — do not reinvent the wheel.
-- Never run npm install/uninstall commands directly. Always tell the developer what to run and why.
-- Never write to `package.json` directly. Always tell the developer what to add and let them confirm.
+- Use pnpm as the package manager — one global store on disk, so every project and worktree shares packages instead of copying them. The lock file is `pnpm-lock.yaml`.
+- Always check for an existing well-maintained npm package before building anything from scratch. Do not reinvent the wheel.

@@ -1,0 +1,49 @@
+# Code Style & Standards
+
+## Code Quality
+
+- Follow SOLID Principles in all code design decisions.
+- Write code that any developer can read and understand a year later without asking anyone.
+- Always prefer simple solutions over clever ones. Keep the codebase clean and organized.
+- Follow DRY — Do Not Repeat Yourself.
+- Delete all dead code, unused variables, and unused imports.
+- Never write comments in code.
+- Import statements always go at top of the file, never inside functions or conditions.
+
+## Parameters, Returns & Data Flow
+
+- Only take and pass what is actually needed — never pass entire objects when only one field is required.
+- Function parameters: accept only the data required to do the work, nothing extra.
+- Return values: return only what the caller needs, not the entire object or response.
+- Database queries: select only the fields you actually use, not alway SELECT *.
+- Child functions should receive only the parameters they need, not parent data.
+- If data is unused after receiving it, remove it from the parameter list.
+
+## Naming & Constants
+
+- Variable and function names must be readable and describe exactly what they hold or do. No abbreviations or vague names.
+- Never use magic numbers or raw hardcoded values inline. Assign the value to a clearly named local variable inside the function and use that variable.
+- Avoid constants at the top of the file. Target zero. A module-level constant is allowed only when truly unavoidable — a fixed value genuinely needed by many functions in the same file.
+- Anything that can change in the future — pricing, rates, limits, timeouts, retry counts, URLs, thresholds, anything time- or money-related — never goes in code. Put it in `config.json` and read it from there.
+
+## Function Length & Structure
+
+- Use Guard Clauses — throw or return early for invalid states at the top of the function. Never nest logic inside `if` conditions to handle errors.
+- Avoid small or single line meaningless functions that just wrap or call another function.
+- User-facing success and error messages must be written from the end user's point of view — short, clear, and non-technical.
+
+## Bug Fixes & Refactoring
+
+- When fixing a bug, always exhaust all options within the existing implementation first.
+- Never introduce a new pattern or library just to fix one issue without exhausting existing options.
+- If a better approach is adopted, remove the old implementation completely — no duplicate logic ever.
+
+## Starting a New Feature
+
+- Always check for existing libraries before building from scratch — don't reinvent the wheel.
+
+## Server-First — Backend Owns the Logic
+
+- Every project is server-first: the backend computes everything and sends ready-to-display data.
+- The frontend only shows what the backend sends and collects user input. No business logic there.
+- The backend sends final values — totals, KPIs, labels, statuses — ready to render. No math left for the frontend.

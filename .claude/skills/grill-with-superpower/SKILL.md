@@ -60,6 +60,8 @@ digraph brainstorming {
 - If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
 - For appropriately-scoped projects, ask questions one at a time to refine the idea
 - Prefer multiple choice questions when possible, but open-ended is fine too
+- Ask with the AskUserQuestion tool when there are clear choices — one question per call, recommended option first
+- Before asking the user a question, first explain the topic the wait-what way — one line "What is this about", then short numbered flow points. Then ask
 - Only one question per message - if a topic needs more exploration, break it into multiple questions
 - Focus on understanding: purpose, constraints, success criteria
 

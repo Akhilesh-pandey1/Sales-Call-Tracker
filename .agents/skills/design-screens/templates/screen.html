@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SCREEN_TITLE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- THEME-FONTS: paste the Google Fonts link from THEME.md, replace the font-family below -->
+  <link href="THEME_FONTS_URL" rel="stylesheet">
+  <style>
+    /* THEME-TOKENS: paste the color table from THEME.md (Role -> Hex -> CSS Variable) */
+    :root {
+      --color-primary: #2563EB;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #3B82F6;
+      --color-on-secondary: #000000;
+      --color-accent: #059669;
+      --color-on-accent: #000000;
+      --color-background: #F8FAFC;
+      --color-foreground: #0F172A;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #0F172A;
+      --color-muted: #F1F5FD;
+      --color-muted-foreground: #475569;
+      --color-border: #E4ECFC;
+      --color-destructive: #DC2626;
+      --color-on-destructive: #FFFFFF;
+      --color-ring: #2563EB;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+  <!-- SCREEN-CONTENT: build the screen from agent-doc/screen.md, sections top to bottom.
+       Use theme tokens everywhere (bg-[var(--color-card)] etc).
+       Icons: inline SVG, stroke="currentColor", 24px, stroke-width="2".
+       Inline JavaScript only for same-page interactions. Never link to or load another screen. -->
+  <script>
+    // Same-page interactions only: tabs, toggles, date ranges, dropdowns, modals.
+    // Never navigate to or load another screen file - the runner flips screens.
+  </script>
+</body>
+</html>

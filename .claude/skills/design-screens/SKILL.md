@@ -50,6 +50,7 @@ python "<this skill's folder>/uiux/scripts/search.py" "<product type> <industry>
 - Use tokens everywhere: `bg-[var(--color-card)]`, `text-[var(--color-muted-foreground)]`, `border-[var(--color-border)]`. No raw hex in classes.
 - Do not reinvent the wheel: before hand-writing a big piece, check if a known library already does it — via CDN, web search if needed, no install. Examples: Lucide CDN for icons instead of SVG, Chart.js CDN for charts.
 - For a small variation of an existing screen, copy that screen's file and edit only the parts that differ — never rebuild it.
+- Write `screens/INDEX.md` — a markdown table, one row per screen: Screen | File | What it is for. One plain line each — e.g. "Keypad — salesperson logs a call from here", "Schedule — book a visit date and time", "Dashboard — today's numbers at a glance".
 - `<script>` tags: the Tailwind CDN line plus one inline script for same-page interactions only. Never navigate to, link to, or load another screen file.
 - Responsive with Tailwind breakpoints - correct at 375, 768, 1024, 1440. Mobile app screens (screen.md says "Mobile app") design at 375 only.
 - Realistic sample content in the product's own language - never "Lorem ipsum".

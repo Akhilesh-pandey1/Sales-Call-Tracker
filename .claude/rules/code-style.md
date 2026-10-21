@@ -15,7 +15,7 @@
 - Only take and pass what is actually needed — never pass entire objects when only one field is required.
 - Function parameters: accept only the data required to do the work, nothing extra.
 - Return values: return only what the caller needs, not the entire object or response.
-- Database queries: select only the fields you actually use, never SELECT *.
+- Database queries: select only the fields you actually use, not alway SELECT *.
 - Child functions should receive only the parameters they need, not parent data.
 - If data is unused after receiving it, remove it from the parameter list.
 
@@ -40,6 +40,10 @@
 
 ## Starting a New Feature
 
-- Before writing any code, explain the plan briefly in plain terms as if describing it to a non-technical person.
-- Always suggest the simplest and most efficient solution considering we are a small team running both SaaS and Services projects.
 - Always check for existing libraries before building from scratch — don't reinvent the wheel.
+
+## Server-First — Backend Owns the Logic
+
+- Every project is server-first: the backend computes everything and sends ready-to-display data.
+- The frontend only shows what the backend sends and collects user input. No business logic there.
+- The backend sends final values — totals, KPIs, labels, statuses — ready to render. No math left for the frontend.

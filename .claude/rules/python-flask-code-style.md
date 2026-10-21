@@ -90,6 +90,7 @@ backend/
 
 ## Naming Conventions
 - Name all functions and variables in a way that clearly describes what they hold or do. No abbreviations or vague names.
+- No private functions — never prefix a name with `_` or `__`. Every function is a plain public function.
 
 ## Type Hints & Validation
 - Every function declares type hints for its parameters and its return type.
@@ -108,6 +109,8 @@ backend/
 - Only generate a raw exception for purely technical errors that are not user-facing.
 
 ## Libraries & Dependencies
+- Use `uv` as the package and environment manager — one global cache on disk, so every project's `.venv` shares packages instead of copying them. The lock file is `uv.lock`.
+- The virtual environment folder is always `.venv` in the project root — never `venv`, `env`, or any other name.
 - Always check for an existing library before building anything from scratch. Suggest the library to the developer — do not reinvent the wheel.
 - Never overwrite `requirements.txt` or `pyproject.toml` without first asking and getting explicit confirmation from the developer.
 

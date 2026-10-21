@@ -110,6 +110,7 @@ CONTEXT POINTERS (read these before starting):
 - Spec: agent-doc/specs/<relevant-spec>.md
 - API contract: agent-doc/api.md (if relevant)
 - Database schema: agent-doc/database.md (if relevant)
+- If your task touches screens or UI: zero design decisions. Open the design folder's screens/INDEX.md, find your screen, and make it look as designed. The screen's HTML file and its PNG are the reference; use both as needed.
 
 HOW TO IMPLEMENT:
 1. cd into your worktree: .worktrees/task-<N>

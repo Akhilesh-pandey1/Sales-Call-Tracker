@@ -95,6 +95,7 @@ On the explicit yes:
 
 | Rule | Detail |
 |---|---|
+| **Explain before asking** | Before each question, first explain the topic the wait-what way — one line "What is this about", then short numbered flow points |
 | **One question per message** | Batching buries hypotheses and gets surface answers |
 | **Every question carries a guess** | A question without a guess is surveying, not interviewing |
 | **Never accept buzzwords as goals** | "Modern / scalable / robust" → run the Step 3 probe |

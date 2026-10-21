@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "autoMemoryEnabled": false,
+  "disableBundledSkills": true,
+  "disableWorkflows": false,
+  "disableArtifact": true,
+  "disableRemoteControl": true,
+  "disableClaudeAiConnectors": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const fs=require('fs');if(fs.existsSync('graphify-out/graph.json'))console.log(JSON.stringify({hookSpecificOutput:{hookEventName:'PreToolUse',additionalContext:'graphify: the code graph exists. For a where/how/what question, run graphify query first, then grep.'}}))\""
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "View",
+      "Edit",
+      "Replace",
+      "Write",
+      "LS",
+      "Grep",
+      "Glob",
+      "WebSearch",
+      "Agent",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(graphify:*)",
+      "PowerShell(git status:*)",
+      "PowerShell(git diff:*)",
+      "PowerShell(git log:*)",
+      "PowerShell(git show:*)",
+      "PowerShell(git add:*)",
+      "PowerShell(git commit:*)",
+      "PowerShell(graphify:*)"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "PowerShell(git push:*)",
+      "Read(./.env)",
+      "Read(**/.env)",
+      "NotebookEdit",
+      "EnterWorktree",
+      "ExitWorktree",
+      "CronCreate",
+      "CronDelete",
+      "CronList",
+      "ScheduleWakeup",
+      "TaskCreate",
+      "TaskUpdate",
+      "TaskList",
+      "TaskGet",
+      "TaskOutput",
+      "TaskStop",
+      "EnterPlanMode",
+      "ExitPlanMode"
+    ]
+  }
+}

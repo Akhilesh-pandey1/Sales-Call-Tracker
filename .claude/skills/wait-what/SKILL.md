@@ -1,10 +1,9 @@
 ---
 name: wait-what
-description: Stop. That last message did not land: explain it again as a simple flow.
-disable-model-invocation: true
+description: Explain anything as a simple flow — one line "What is this about", then short numbered points in easy English. Use when the user says "wait what", or before asking a question so the topic is clear first.
 ---
 
-Wait, I don't understand. Explain that again as a flow.
+Explain it as a simple flow.
 
 Rules:
 

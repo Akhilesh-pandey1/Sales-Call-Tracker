@@ -8,5 +8,8 @@ export { subscribeToCallEnded } from './sync-events';
 export {
   clearAllPendingCalls,
   countUnsyncedPendingCalls,
+  deleteDoNotTrackNumber,
+  insertDoNotTrackNumber,
   insertPendingCall,
+  readDoNotTrackNumbers,
 } from './db';

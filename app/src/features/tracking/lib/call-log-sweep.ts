@@ -4,6 +4,7 @@ import { createCallId } from '@/shared/utils/call-id';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import {
   getAllPendingCalls,
+  readDoNotTrackNumbers,
   readLastSweptAt,
   saveSweptCallsAndMoveSweepLine,
   type PendingCall,
@@ -75,6 +76,7 @@ function collectSweptCalls(
   callLogEntries: CallLogEntry[],
   lastSweptAtMs: number,
   trackedCallGuards: TrackedCallGuard[],
+  doNotTrackNumbers: Set<string>,
   countryCode: string,
 ): SweptCall[] {
   const sweptCalls: SweptCall[] = [];
@@ -87,6 +89,10 @@ function collectSweptCalls(
       continue;
     }
     const normalizedEntryNumber = normalizePhoneNumber(callLogEntry.phoneNumber, countryCode);
+    const isDoNotTrackNumber = doNotTrackNumbers.has(normalizedEntryNumber);
+    if (isDoNotTrackNumber) {
+      continue;
+    }
     const alreadyTracked = trackedCallGuards.some(
       trackedCallGuard =>
         trackedCallGuard.normalizedPhoneNumber === normalizedEntryNumber &&
@@ -133,15 +139,20 @@ export async function runCallLogSweep(): Promise<void> {
     return;
   }
 
-  const trackedCalls = await getAllPendingCalls();
+  const [trackedCalls, doNotTrackNumbers] = await Promise.all([
+    getAllPendingCalls(),
+    readDoNotTrackNumbers(),
+  ]);
   const trackedCallGuards = trackedCalls
     .map(trackedCall => toTrackedCallGuard(trackedCall, countryCode))
     .filter((trackedCallGuard): trackedCallGuard is TrackedCallGuard => trackedCallGuard !== null);
+  const doNotTrackNumberSet = new Set(doNotTrackNumbers);
 
   const sweptCalls = collectSweptCalls(
     callLogEntries,
     lastSweptAtMs,
     trackedCallGuards,
+    doNotTrackNumberSet,
     countryCode,
   );
 

@@ -130,14 +130,14 @@ interface PeriodHeadingLabels {
 
 function getPeriodHeadingLabels(period: DashboardPeriod): PeriodHeadingLabels {
   const chartHeadingLabelsByPeriod: Record<DashboardPeriod, string> = {
-    today: "Dials per hour · Today (IST)",
-    yesterday: "Dials per hour · Yesterday (IST)",
-    last_30_days: "Avg dials per hour · 30 days (IST)",
+    today: "Calls per hour · Today (IST)",
+    yesterday: "Calls per hour · Yesterday (IST)",
+    last_30_days: "Avg calls per hour · 30 days (IST)",
   };
   const topPeopleHeadingLabelsByPeriod: Record<DashboardPeriod, string> = {
-    today: "Talk time · Today",
-    yesterday: "Talk time · Yesterday",
-    last_30_days: "Talk time · 30 days",
+    today: "Total talk time · Today",
+    yesterday: "Total talk time · Yesterday",
+    last_30_days: "Total talk time · 30 days",
   };
 
   const periodHeadingLabels: PeriodHeadingLabels = {
@@ -185,6 +185,7 @@ function TeamPerformanceSection({
         <CallsByHourChart
           className="lg:col-span-2"
           callsByHour={periodBlock.calls_by_hour}
+          talkTotals={periodBlock.talk_totals}
           usesDailyAverageWording={usesDailyAverageWording}
           headingLabel={headingLabels.chart}
         />

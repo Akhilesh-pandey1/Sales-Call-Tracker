@@ -62,21 +62,23 @@ Receives a batch of completed calls from the salesperson's mobile app.
   }
   ```
 - `scheduled_at` — string, optional. ISO UTC follow-up time for the dialed number, chosen in the post-call popup. Omitted when no schedule was chosen.
+- `direction` — string, optional, `outgoing` by default. `incoming` marks an answered incoming call caught by the phone's call-log sweep.
 - **Processing Logic**:
   - Saves all valid call entries under the authenticated user's ID.
   - Calls carry no outcome — the salesperson is never asked for one; connected is derived from duration.
   - Silently ignores existing `call_id` values (idempotent unique key).
   - Skips and logs any call older than 3 days (`MAX_CALL_AGE_DAYS`).
-  - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped.
-  - A call whose normalized number has no lead in `leads` creates that lead as `waiting`, then resolves it like any uploaded lead.
+  - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped. The gate applies to both directions.
+  - Lead creation and resolution run on OUTGOING calls only: a call whose normalized number has no lead in `leads` creates that lead as `waiting`, then resolves it like any uploaded lead. Incoming calls never create or resolve leads and never burn attempts.
   - Automatically updates the lead matching the dialed number in `leads`:
     - If `duration_seconds > 0` (connected): marks `status = 'done'`, clears claims and schedules.
     - If `duration_seconds == 0` (not connected): increments `attempt_count`, sets `retry_locked_until = now() + 2 hours`. If attempts reach 3 (`MAX_LEAD_ATTEMPTS`), sets `status = 'stopped'`. Clears claims and schedules.
-  - Applies an optional `scheduled_at` to the resolved lead (created or existing) after resolution, whatever the lead's new state: the lead ends `status = 'waiting'` with `scheduled_by` and `scheduled_at` set and the retry lock and claim cleared — a schedule books a connected lead back and lifts a `done` or `stopped` lead, and the last schedule wins ownership. Only a bad time is refused — past or beyond 30 days (`MAX_SCHEDULE_AHEAD_DAYS`): it is skipped with a server log line and the call itself is always saved.
+  - Applies an optional `scheduled_at` to the resolved lead (created or existing) after resolution, whatever the lead's new state, unless another salesperson holds the booking — a future booking locks the lead to its owner. When the schedule is refused, the lead keeps the owner's booking and the call's id is listed in `schedule_refused_call_ids`. A schedule by the booking's owner replaces their old booking. The lead ends `status = 'waiting'` with `scheduled_by` and `scheduled_at` set and the retry lock and claim cleared — a schedule books a connected lead back and lifts a `done` or `stopped` lead. Only a bad time is refused — past or beyond 30 days (`MAX_SCHEDULE_AHEAD_DAYS`): it is skipped with a server log line and the call itself is always saved.
 - **Response 200**:
   ```json
-  { "status": true }
+  { "status": true, "schedule_refused_call_ids": [] }
   ```
+- `schedule_refused_call_ids` — array of strings. The call ids whose `scheduled_at` was refused because another salesperson holds the booking. Empty when nothing was refused. The app shows "This lead is already booked by someone else." when the submitted call is in this list.
 - **Error Responses**:
   - `400 Bad Request`: `{"message": "Invalid request format: 'calls' array required."}`
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
@@ -114,25 +116,35 @@ Returns team call aggregates for today, yesterday, and the last 30 days. Each pe
       },
       "calls_by_hour": {
         "hours": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-        "dials": [0, 5, 25, 38, 15, 20, 12, 3, 1, 1],
+        "outgoing": [0, 5, 25, 38, 15, 20, 12, 3, 1, 1],
+        "incoming": [0, 1, 3, 2, 1, 1, 0, 0, 0, 0],
         "best_hour": 12
+      },
+      "talk_totals": {
+        "outgoing_calls": 120,
+        "outgoing_minutes": 310,
+        "incoming_calls": 8,
+        "incoming_minutes": 5.4,
+        "outgoing_percent": 98,
+        "incoming_percent": 2
       },
       "top_people": [
         { "id": 3, "name": "Ramesh", "seconds": 2280, "minutes": 38 }
       ]
     },
     "yesterday": { "...": "same shape as today, with \"vs_yesterday\": null" },
-    "last_30_days": { "...": "same shape as today, with \"vs_yesterday\": null; calls_by_hour.dials holds per-day averages" }
+    "last_30_days": { "...": "same shape as today, with \"vs_yesterday\": null; calls_by_hour holds per-day averages" }
   }
   ```
 - **Rules**:
-  - Each period object holds every number its screen shows: raw counts (`dials`, `connected`, `not_connected`, `seconds`, `minutes`) and the computed KPIs (`connected_percent`, `avg_per_person_per_day`, `vs_yesterday`).
-  - `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60, 2)` — decimal minutes, so short calls count (20 seconds shows as `0.33`).
+  - Each period object holds every number its screen shows: raw counts (`dials`, `connected`, `not_connected`, `seconds`, `minutes`), the computed KPIs (`connected_percent`, `avg_per_person_per_day`, `vs_yesterday`), and `talk_totals`.
+  - `dials`, `connected`, and `not_connected` count OUTGOING calls only, from the app and from outside dialers alike. `seconds` and `minutes` hold TOTAL talk time — outgoing and incoming together. `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60, 2)` — decimal minutes, so short calls count (20 seconds shows as `0.33`).
   - `connected_percent` is `round(connected / dials * 100)`, `null` when dials is 0.
   - `avg_per_person_per_day` divides each metric by the period day count (1 or 30) and the active salesperson count, then rounds — count metrics to whole numbers, minutes to 2 decimals.
   - `vs_yesterday` exists only on `today`; each value is today minus yesterday in the displayed unit (`minutes` against yesterday's `minutes`). It is `null` on the other two periods.
-  - `calls_by_hour.hours` lists the IST hours of the office hours window, start to end inclusive. `calls_by_hour.dials` holds one count per hour; for `last_30_days` it holds `round(total / 30)` per hour. `best_hour` is the hour number with the highest count, `null` when the period has no calls.
-  - `top_people` holds at most 5 active salespeople by talk seconds in the period, highest first.
+  - `calls_by_hour.hours` lists the IST hours of the office hours window, start to end inclusive. `calls_by_hour.outgoing` and `calls_by_hour.incoming` hold one count per hour — the screen draws ONE stacked bar per hour from the pair; for `last_30_days` both hold `round(total / 30)` per hour. `best_hour` is the hour number with the highest total (outgoing + incoming), `null` when the period has no calls.
+  - `talk_totals` carries the outgoing/incoming calls and minutes for the period and the two percentages of total talk minutes, rounded. The summary line under the chart reads from it.
+  - `top_people` holds at most 5 active salespeople by TOTAL talk seconds in the period, highest first.
   - Period totals count every stored call in those IST windows, including calls made by currently deactivated salespeople.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
@@ -155,7 +167,7 @@ Returns one row per active salesperson for the Team page table: today and yester
   ```
 - **Rules**:
   - One row per active salesperson; a person with no calls still lists with zeros. Deactivated salespeople never appear.
-  - Each period block carries only `dials`, `connected`, and `minutes`; `minutes` is `round(seconds / 60, 2)` computed on the server. No `seconds` field is returned.
+  - Each period block carries only `dials`, `connected`, and `minutes`; `dials` and `connected` count outgoing calls only, and `minutes` is TOTAL talk time (outgoing + incoming) as `round(seconds / 60, 2)` computed on the server. No `seconds` field is returned.
   - Rows are sorted by today's dials, highest first.
   - Today and yesterday are IST calendar days over UTC call timestamps, same as the team endpoint.
 - **Error Responses**:
@@ -179,8 +191,17 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
       "connected_percent": 58,
       "calls_by_hour": {
         "hours": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-        "dials": [0, 1, 2, 3, 1, 2, 1, 1, 0, 1],
+        "outgoing": [0, 1, 2, 3, 1, 2, 1, 1, 0, 1],
+        "incoming": [0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
         "best_hour": 13
+      },
+      "talk_totals": {
+        "outgoing_calls": 12,
+        "outgoing_minutes": 36.2,
+        "incoming_calls": 4,
+        "incoming_minutes": 1.8,
+        "outgoing_percent": 95,
+        "incoming_percent": 5
       }
     },
     "yesterday": { "...": "same shape as today" },
@@ -197,7 +218,8 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
         "connected": 8,
         "minutes": 39
       },
-      "calls_by_hour": { "...": "same shape; dials holds per-day averages" }
+      "calls_by_hour": { "...": "same shape; both series hold per-day averages" },
+      "talk_totals": { "...": "same shape as today" }
     },
     "top_numbers": [
       {
@@ -210,12 +232,13 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
   }
   ```
 - **Rules**:
-  - `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60, 2)` — decimal minutes, so short calls count (20 seconds shows as `0.33`).
+  - `dials`, `connected`, and `not_connected` count OUTGOING calls only; `seconds` and `minutes` hold TOTAL talk time — outgoing and incoming together. `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60, 2)` — decimal minutes, so short calls count (20 seconds shows as `0.33`).
   - `connected_percent` is `round(connected / dials * 100)`, `null` if dials equal 0 in that period.
-  - `active_days` counts the days with at least one dial inside the last 30 IST days.
-  - `avg_per_active_day` divides dials, connected, and exact talk minutes by `active_days`, then rounds — counts to whole numbers, minutes to 2 decimals; it is `null` when `active_days` is 0.
-  - `calls_by_hour` follows the same rules as the team endpoint: office-hours `hours`, one count per hour (per-day averages for `last_30_days`), and `best_hour` as the hour number or `null`.
-  - `top_numbers` includes at most 5 phone numbers with the highest talk seconds in the last 30 days.
+  - `active_days` counts the days with at least one outgoing dial inside the last 30 IST days — answering an incoming call alone never makes a day active.
+  - `avg_per_active_day` divides dials, connected, and exact total talk minutes by `active_days`, then rounds — counts to whole numbers, minutes to 2 decimals; it is `null` when `active_days` is 0.
+  - `calls_by_hour` follows the same rules as the team endpoint: office-hours `hours`, an `outgoing` and an `incoming` count per hour (per-day averages for `last_30_days`) drawn as ONE stacked bar, and `best_hour` as the hour number or `null` by total calls.
+  - `talk_totals` carries the outgoing/incoming calls and minutes for the period and the two percentages of total talk minutes, rounded — the donut chart and its numbers line render only these.
+  - `top_numbers` includes at most 5 phone numbers with the highest TOTAL talk seconds (outgoing and incoming together) in the last 30 days.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
   - `403 Forbidden`: `{"message": "Access denied: you can only view your own statistics."}`
@@ -414,13 +437,14 @@ Retrieves and claims the next lead for automated calling, with an optional lead 
 - **Processing Logic**:
   1. If `schedule` is supplied:
      - Validates `scheduled_at` is in the future and within 30 days (`MAX_SCHEDULE_AHEAD_DAYS`) — a past or too-far time is refused with 400 and nothing is booked.
-     - Whatever the lead's state (`waiting`, `done`, or `stopped`), the lead ends `waiting` with `scheduled_by = user_id`, `scheduled_at = scheduled_at`, and the retry lock and active claim cleared — the last salesperson to schedule owns the reservation.
+     - Whatever the lead's state (`waiting`, `done`, or `stopped`), the lead ends `waiting` with `scheduled_by = user_id`, `scheduled_at = scheduled_at`, and the retry lock and active claim cleared — the scheduler owns the reservation. A `/leads/next` schedule always targets a lead the server served to this salesperson, so the booking lock never refuses it.
   2. If `continue_calling` is `false`: skips serving and claiming and responds `lead: null` — the salesperson who stopped the automated loop is assigned nothing.
-  3. Prioritizes serving:
+  3. Frees expired bookings first: any lead still `waiting` whose booking is more than 24 hours past its time (`SCHEDULE_EXPIRE_HOURS`) gets `scheduled_at` and `scheduled_by` cleared and becomes an ordinary pool lead.
+  4. Prioritizes serving:
      - Current unexpired claim for this user (if one already exists).
      - Due scheduled leads reserved for this user (`scheduled_by == user_id`, `scheduled_at <= now()`).
      - Newest available pool lead (`created_at DESC`, `status == 'waiting'`, retry lock expired, unreserved).
-  4. Claims the served lead for 10 minutes (`CLAIM_MINUTES`): `claimed_by = user_id`, `claimed_until = now() + 10 minutes`.
+  5. Claims the served lead for 10 minutes (`CLAIM_MINUTES`): `claimed_by = user_id`, `claimed_until = now() + 10 minutes`.
 - **Response 200** (lead available):
   ```json
   {

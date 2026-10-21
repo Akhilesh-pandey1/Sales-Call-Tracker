@@ -15,12 +15,13 @@ The system consists of three parts in a single repository:
 - **Styling**: NativeWind (Tailwind CSS for React Native)
 - **UI Components**: React Native Reusables (`react-native-reusables` — shadcn/ui for React Native in `components/ui/`)
 - **Navigation**: React Navigation (`@react-navigation/bottom-tabs`)
-- **Local Storage**: `react-native-sqlite-storage` (pending call queue) + `@react-native-async-storage/async-storage`
+- **Local Storage**: `react-native-sqlite-storage` (local tracking database: `pending_calls`, `do_not_track`, `sweep_state`, `scheduled_reminders`) + `@react-native-async-storage/async-storage`
 - **Telephony & Permissions**:
   - `react-native-permissions`
   - `react-native-call-detection-android`
   - `react-native-call-log`
   - `react-native-intent-launcher` (Android direct-call intent, ACTION_CALL)
+- **Notifications**: `@notifee` (local reminders for booked leads — exact alarms set on the phone at booking time, no server push)
 - **Date & Time Picker**: `@react-native-community/datetimepicker` (native date then time dialogs behind the post-call popup's schedule field)
 - **Utilities**: `libphonenumber-js` (E.164 phone normalization), `axios` (API requests), `@react-native-clipboard/clipboard`
 

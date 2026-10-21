@@ -176,10 +176,10 @@
 
       <!-- Calls by hour + Top 5 by minutes -->
       <section class="mt-4 grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-3">
-        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5 lg:col-span-2">
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5 lg:col-span-2" style="min-height: 17rem;">
           <div class="flex items-center justify-between gap-3">
             <h2 class="text-base font-bold tracking-tight">Calls by hour</h2>
-            <span id="chart-hint" class="text-xs text-[var(--color-muted-foreground)]">Avg dials per hour · 30 days (IST)</span>
+            <span id="chart-hint" class="text-xs text-[var(--color-muted-foreground)]">Avg calls per hour · 30 days (IST)</span>
           </div>
           <div id="hour-chart" class="mt-5 flex h-44 items-end gap-1.5 sm:gap-2.5">
             <div class="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
@@ -234,7 +234,7 @@
         <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm sm:p-5">
           <div class="flex items-center justify-between gap-3">
             <h2 class="text-base font-bold tracking-tight">Top 5 by minutes</h2>
-            <span id="top-five-hint" class="text-xs text-[var(--color-muted-foreground)]">Talk time · 30 days</span>
+            <span id="top-five-hint" class="text-xs text-[var(--color-muted-foreground)]">Total talk time · 30 days</span>
           </div>
           <ol id="top-five" class="mt-3">
             <li class="flex items-center gap-3 border-b border-[var(--color-border)] py-2.5">
@@ -272,8 +272,8 @@
   <script>
     const periodData = {
       today: {
-        hint: "Dials per hour · today (IST)",
-        note: "Best hour: 11 AM — 41 dials. Slowest: 12 PM and after 4 PM.",
+        hint: "Calls per hour · today (IST)",
+        note: "212 outgoing · 15 incoming · Best hour: 11 AM (45 calls)",
         kpis: {
           dials: ["210", "Yesterday 219"],
           connected: ["67", "32% connected · yesterday 72"],
@@ -281,11 +281,12 @@
           minutes: ["304", "Yesterday 342"],
         },
         hours: [18, 34, 41, 12, 22, 35, 26, 14, 8],
+        incoming: [1, 2, 4, 0, 2, 3, 2, 1, 0],
         topFive: [["Priya Sharma", "96"], ["Arjun Mehta", "88"], ["Sneha Iyer", "55"], ["Rahul Verma", "41"], ["Ananya Gupta", "17"]],
       },
       yesterday: {
-        hint: "Dials per hour · yesterday (IST)",
-        note: "Best hour: 11 AM — 38 dials. Slowest: 9 AM and after 4 PM.",
+        hint: "Calls per hour · yesterday (IST)",
+        note: "219 outgoing · 17 incoming · Best hour: 11 AM (41 calls)",
         kpis: {
           dials: ["219", "avg 37/person/day"],
           connected: ["72", "33% connected · avg 12/person/day"],
@@ -293,11 +294,12 @@
           minutes: ["342", "avg 57/person/day"],
         },
         hours: [15, 31, 38, 14, 25, 33, 29, 17, 17],
+        incoming: [1, 2, 3, 1, 2, 3, 2, 2, 1],
         topFive: [["Arjun Mehta", "102"], ["Priya Sharma", "74"], ["Rahul Verma", "66"], ["Sneha Iyer", "49"], ["Ananya Gupta", "28"]],
       },
       days30: {
-        hint: "Avg dials per hour · 30 days (IST)",
-        note: "Best hour: 11 AM — 38 dials a day on average. Slowest: 12 PM and after 4 PM.",
+        hint: "Avg calls per hour · 30 days (IST)",
+        note: "Outgoing 195 · Incoming 6 per hour on average · Best hour: 11 AM",
         kpis: {
           dials: ["5,847", "avg 33/person/day"],
           connected: ["1,872", "32% connected · avg 10/person/day"],
@@ -305,6 +307,7 @@
           minutes: ["8,742", "avg 49/person/day"],
         },
         hours: [17, 32, 38, 11, 21, 33, 24, 12, 7],
+        incoming: [0, 1, 2, 0, 1, 2, 1, 1, 0],
         topFive: [["Priya Sharma", "2,410"], ["Arjun Mehta", "2,205"], ["Sneha Iyer", "1,650"], ["Rahul Verma", "1,230"], ["Ananya Gupta", "890"]],
       },
     };
@@ -317,19 +320,45 @@
     const topFiveHint = document.getElementById("top-five-hint");
     const switchButtons = document.querySelectorAll("[data-period]");
 
-    function renderChart(hours) {
-      const peak = Math.max.apply(null, hours);
+    function renderChart(hours, incoming) {
+      const totals = hours.map(function (outgoingCount, index) { return outgoingCount + incoming[index]; });
+      const peak = Math.max.apply(null, totals);
       chart.textContent = "";
-      hours.forEach(function (value, index) {
-        const isPeak = value === peak;
+      totals.forEach(function (total, index) {
+        const outgoingCount = hours[index];
+        const incomingCount = incoming[index];
+        const isPeak = total === peak;
         const column = document.createElement("div");
         column.className = "flex h-full flex-1 flex-col items-center justify-end gap-1.5";
         const valueLabel = document.createElement("span");
         valueLabel.className = "text-[10px] tabular-nums " + (isPeak ? "font-semibold text-[var(--color-primary)]" : "text-[var(--color-muted-foreground)]");
-        valueLabel.textContent = value;
+        valueLabel.textContent = total;
         const bar = document.createElement("div");
-        bar.className = "w-full rounded-t-md " + (isPeak ? "bg-[var(--color-primary)]" : value >= peak / 2 ? "bg-[var(--color-secondary)]" : "bg-[var(--color-muted)]");
-        bar.style.height = Math.round((value / peak) * 100) + "%";
+        bar.className = "flex w-full flex-col justify-end overflow-hidden rounded-t-md";
+        bar.style.height = Math.round((total / peak) * 100) + "%";
+        if (outgoingCount > 0) {
+          const outgoingSegment = document.createElement("div");
+          outgoingSegment.className = "flex w-full items-start justify-center bg-[var(--color-primary)]";
+          outgoingSegment.style.height = Math.round((outgoingCount / total) * 100) + "%";
+          if (outgoingCount >= peak / 8) {
+            const outgoingCountLabel = document.createElement("span");
+            outgoingCountLabel.className = "pt-0.5 text-[9px] font-semibold tabular-nums text-[var(--color-on-primary)]";
+            outgoingCountLabel.textContent = outgoingCount;
+            outgoingSegment.appendChild(outgoingCountLabel);
+          }
+          bar.appendChild(outgoingSegment);
+        }
+        if (incomingCount > 0) {
+          const incomingSegment = document.createElement("div");
+          incomingSegment.className = "flex w-full flex-1 items-start justify-center bg-[var(--color-accent)]";
+          if (incomingCount >= peak / 8) {
+            const incomingCountLabel = document.createElement("span");
+            incomingCountLabel.className = "pt-0.5 text-[9px] font-semibold tabular-nums text-[var(--color-on-accent)]";
+            incomingCountLabel.textContent = incomingCount;
+            incomingSegment.appendChild(incomingCountLabel);
+          }
+          bar.appendChild(incomingSegment);
+        }
         const hourLabel = document.createElement("span");
         hourLabel.className = "text-[10px] " + (isPeak ? "font-semibold text-[var(--color-foreground)]" : "text-[var(--color-muted-foreground)]");
         hourLabel.textContent = hourLabels[index];
@@ -377,8 +406,8 @@
       document.getElementById("kpi-minutes-sub").textContent = data.kpis.minutes[1];
       chartHint.textContent = data.hint;
       chartNote.textContent = data.note;
-      renderChart(data.hours);
-      topFiveHint.textContent = "Talk time · " + (period === "days30" ? "30 days" : period);
+      renderChart(data.hours, data.incoming);
+      topFiveHint.textContent = "Total talk time · " + (period === "days30" ? "30 days" : period);
       renderTopFive(data.topFive);
     }
 

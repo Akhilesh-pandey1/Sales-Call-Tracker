@@ -21,28 +21,34 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - After the manager updates the office hours window, the gate uses the new window on the next sync.
 - Malformed call rows are skipped while valid rows in the same batch are saved.
 - Calls sync without an outcome; the `outcome` column stays empty on every saved row.
+- A sync item with `direction: 'incoming'` is saved with direction incoming; it never creates or resolves a lead and never burns an attempt.
+- The office-hours gate applies to incoming calls the same as outgoing — an outside-window incoming call is discarded with a log line.
 - A call to a number with no lead creates that lead as `waiting` and resolves it from the same call — connected marks it `done`, not connected burns attempt 1.
 - A second sync for a number that already has a lead never creates a second lead.
 - A call item with `scheduled_at` inside 30 days schedules the resolved lead; the call is saved.
 - A `scheduled_at` on a call that connects still books the lead — the lead ends `waiting` and scheduled, never `done`; the call is saved.
 - A schedule lifts a `done` or `stopped` lead back to `waiting` with the schedule set, attempts untouched.
-- The newest schedule wins ownership of the lead, across salespeople.
+- A `scheduled_at` from a salesperson other than the booking's owner is refused: the call is saved, the lead keeps the owner's booking, and the refused call's id comes back in `schedule_refused_call_ids`.
+- The booking's owner re-schedules their own lead freely — the new time replaces the old.
 - A past or beyond-30-days `scheduled_at` is skipped with a log line; the call is still saved.
-- Returns `{"status": true}` on success.
+- Returns `{"status": true, "schedule_refused_call_ids": []}` on success.
 
 ### `tests/modules/test_dashboard.py`
 - All date boundaries for "today", "yesterday", and "last_30_days" match IST (Asia/Kolkata) calendar days over UTC call timestamps.
 - Each period object carries its own totals, computed KPIs, `calls_by_hour`, and `top_people`; the team response has no `people` array.
-- `not_connected` equals `dials - connected`; `minutes` equals `round(seconds / 60)`.
+- `not_connected` equals `dials - connected`; `minutes` equals `round(seconds / 60, 2)` where `seconds` is TOTAL talk time — outgoing plus incoming.
+- `dials`, `connected`, and `not_connected` count outgoing calls only; incoming calls never enter them.
 - `connected_percent` returns `null` when a period has 0 dials, otherwise the rounded percent.
 - `avg_per_person_per_day` divides each metric by the period day count and the active salesperson count, then rounds.
 - `vs_yesterday` exists only on `today`, holds today minus yesterday in the displayed unit, and is `null` on the other two periods.
-- `calls_by_hour.hours` spans the office hours window start-to-end inclusive; `best_hour` is `null` when the period has no calls.
-- The `last_30_days` `calls_by_hour.dials` holds `round(total / 30)` per hour.
+- `calls_by_hour.hours` spans the office hours window start-to-end inclusive; `outgoing` and `incoming` hold one count per hour; `best_hour` follows total calls and is `null` when the period has no calls.
+- `talk_totals` carries the outgoing/incoming calls and minutes plus the two rounded percentages of total talk minutes, on every period of the team and person responses.
+- The `last_30_days` `calls_by_hour` holds `round(total / 30)` per hour in both series.
 - Calls by deactivated salespeople stay counted in every period total.
-- `avg_per_active_day` is `null` when `active_days` is 0, otherwise the rounded per-active-day averages.
-- Top 5 numbers return the highest talk-time numbers with `minutes` alongside `seconds`.
-- `GET /api/dashboard/team/people` returns one row per active salesperson with today and yesterday blocks holding only `dials`, `connected`, and `minutes` — no `seconds` anywhere.
+- `active_days` counts days with at least one OUTGOING dial; a day with only incoming calls is not active.
+- `avg_per_active_day` is `null` when `active_days` is 0, otherwise the rounded per-active-day averages over total talk minutes.
+- Top 5 numbers return the highest TOTAL talk-time numbers (both directions) with `minutes` alongside `seconds`.
+- `GET /api/dashboard/team/people` returns one row per active salesperson with today and yesterday blocks holding only `dials`, `connected`, and `minutes` — dials and connected outgoing-only, minutes total talk, no `seconds` anywhere.
 - People rows include zero-call salespeople, exclude deactivated salespeople, and arrive sorted by today's dials highest first.
 - A salesperson token gets 403 on `GET /api/dashboard/team/people`.
 
@@ -68,7 +74,8 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
   - Serves due scheduled leads reserved for the calling salesperson before new pool leads.
   - Serves newest available leads (`created_at DESC`) when no due schedules exist.
   - Claims the served lead for 10 minutes (`CLAIM_MINUTES`).
-  - Supports scheduling current lead and fetching next in a single request; a schedule books the lead whatever its state — `done` and `stopped` included, ending `waiting` with the retry lock and claim cleared — the newest schedule wins ownership, and a schedule clears a claim held by a different salesperson.
+  - Supports scheduling current lead and fetching next in a single request; a schedule books the lead whatever its state — `done` and `stopped` included, ending `waiting` with the retry lock and claim cleared — the scheduler owns the reservation, and a schedule clears a claim held by a different salesperson.
+  - Frees expired bookings before serving: a lead still `waiting` booked more than 24 hours past its time (`SCHEDULE_EXPIRE_HOURS`) returns to the pool with attempts untouched; a booking inside the 24-hour window keeps the lead reserved.
   - `continue_calling: false` stores the schedule (if supplied) and releases the claim but serves and claims no lead — the response `lead` is `null`.
 - **Resolution via Call Sync**:
   - Connected call (`duration > 0`) marks lead `status = 'done'`.
@@ -117,3 +124,14 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - Holding the dialer backspace clears the whole typed number; a single tap still deletes one character.
 - My Stats shows the Last-30-days KPI cards, the performance table, and the Calls-by-hour chart with its period switch — and no most-contacted-numbers table.
 - Every screen keeps a slim 12px side margin.
+- Booking a lead shows the notification-permission ask once on Android 13+; declining keeps booking working with no reminders.
+- With the app closed, the phone shows "Time to call" with the lead's number at the booked time; tapping it opens the booked lead's card ready to call.
+- After a phone reboot, opening the app restores reminders for still-future bookings.
+- Submitting a call to the booked number cancels that lead's reminder.
+- Submitting a schedule on a lead booked by another salesperson shows "This lead is already booked by someone else." and the call itself is still sent.
+- With the app closed, an answered incoming call and a call made from the phone's own dialer both appear on the dashboards at the next app open — the sweep caught both.
+- A number on the Do-not-track list produces no row in either direction; removing it from the list lets the sweep track it again.
+- A call dialed from our app is never counted twice by the sweep.
+- With airplane mode, swept calls wait on the phone and arrive at the next open with internet; after a successful push, synced rows behind the sweep line are gone from the phone.
+- A number typed as 10 digits in the Do-not-track list saves in international format (+91...) and can be removed again.
+- My Stats shows the donut with its numbers line and ONE stacked two-color bar per hour; the counts are written inside the segments, and Minutes on the table means total talk.

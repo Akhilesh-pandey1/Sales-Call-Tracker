@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Do not track numbers — Apex Sales Call</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #6366F1;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #818CF8;
+      --color-on-secondary: #0F172A;
+      --color-accent: #059669;
+      --color-on-accent: #FFFFFF;
+      --color-background: #F5F3FF;
+      --color-foreground: #1E1B4B;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #1E1B4B;
+      --color-muted: #EBEFF9;
+      --color-muted-foreground: #475569;
+      --color-border: #E0E7FF;
+      --color-destructive: #DC2626;
+      --color-on-destructive: #FFFFFF;
+      --color-ring: #6366F1;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+
+  <div class="mx-auto flex min-h-screen w-full max-w-md flex-col">
+
+    <!-- Header: back on the left, Add number on the right -->
+    <header class="sticky top-0 z-20 border-b border-[var(--color-border)] bg-[var(--color-card)]">
+      <div class="flex items-center gap-2 px-3 py-3">
+        <button type="button" aria-label="Back to Settings" class="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <h1 class="flex-1 text-lg font-bold tracking-tight leading-tight">Do not track numbers</h1>
+        <button id="open-add-dialog" type="button" class="shrink-0 cursor-pointer rounded-xl bg-[var(--color-primary)] px-3.5 py-2 text-sm font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">Add number</button>
+      </div>
+    </header>
+
+    <main class="flex-1 px-5 pb-6 pt-4">
+
+      <p class="px-1 text-xs text-[var(--color-muted-foreground)]">Calls to or from these numbers are never recorded. This list stays on your phone only.</p>
+
+      <!-- Numbers table: row number, the number in +91 format, Remove per row -->
+      <div class="mt-3 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] shadow-sm">
+        <div class="grid grid-cols-[2.5rem_1fr_5rem] items-center gap-x-2 border-b border-[var(--color-border)] bg-[var(--color-muted)] px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">
+          <span>#</span>
+          <span>Phone number</span>
+          <span class="text-right">Action</span>
+        </div>
+        <div id="dnt-rows">
+          <div class="dnt-row grid grid-cols-[2.5rem_1fr_5rem] items-center gap-x-2 border-b border-[var(--color-border)] px-4 py-3">
+            <span class="dnt-index text-sm tabular-nums text-[var(--color-muted-foreground)]">1</span>
+            <span class="text-sm font-semibold tabular-nums">+91 98220 12345</span>
+            <span class="text-right">
+              <button type="button" class="remove-row cursor-pointer rounded-lg px-2 py-1.5 text-xs font-semibold text-[var(--color-destructive)] transition-colors duration-200 hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Remove</button>
+            </span>
+          </div>
+          <div class="dnt-row grid grid-cols-[2.5rem_1fr_5rem] items-center gap-x-2 px-4 py-3">
+            <span class="dnt-index text-sm tabular-nums text-[var(--color-muted-foreground)]">2</span>
+            <span class="text-sm font-semibold tabular-nums">+91 90045 67890</span>
+            <span class="text-right">
+              <button type="button" class="remove-row cursor-pointer rounded-lg px-2 py-1.5 text-xs font-semibold text-[var(--color-destructive)] transition-colors duration-200 hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Remove</button>
+            </span>
+          </div>
+        </div>
+        <p id="dnt-empty" class="hidden px-4 py-6 text-center text-sm text-[var(--color-muted-foreground)]">No numbers yet. Use Add number to keep a personal number private.</p>
+      </div>
+
+    </main>
+
+    <!-- Bottom tab bar: 3 tabs - Dialer | My Stats | Settings -->
+    <nav class="sticky bottom-0 z-20 border-t border-[var(--color-border)] bg-[var(--color-card)]" aria-label="App tabs">
+      <div class="grid grid-cols-3">
+        <a href="#" class="flex cursor-pointer flex-col items-center gap-1 py-2.5 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-ring)]">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Dialer
+        </a>
+        <a href="#" class="flex cursor-pointer flex-col items-center gap-1 py-2.5 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-ring)]">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 3v18h18"/>
+            <path d="M18 17V9"/>
+            <path d="M13 17V5"/>
+            <path d="M8 17v-3"/>
+          </svg>
+          My Stats
+        </a>
+        <a href="#" aria-current="page" class="flex flex-col items-center gap-1 py-2.5 text-xs font-semibold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-ring)]">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          Settings
+        </a>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- Add number pop-up: one field, numbers only - 10 digits save in +91 format -->
+  <div id="add-dialog" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/50 p-5">
+    <div role="dialog" aria-modal="true" aria-labelledby="add-dialog-title" class="w-full max-w-sm rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-xl">
+      <h2 id="add-dialog-title" class="text-base font-bold tracking-tight">Add number</h2>
+      <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">This number will never be recorded - incoming or outgoing.</p>
+      <form id="add-form" class="mt-4" novalidate>
+        <label for="add-number" class="text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Phone number</label>
+        <input id="add-number" type="text" inputmode="tel" placeholder="10-digit number" class="mt-1.5 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2.5 text-sm tabular-nums placeholder:text-[var(--color-muted-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+        <p id="add-error" class="mt-2 hidden text-xs font-medium text-[var(--color-destructive)]"></p>
+        <div class="mt-4 flex justify-end gap-2">
+          <button id="cancel-add" type="button" class="cursor-pointer rounded-xl border border-[var(--color-border)] px-4 py-2.5 text-sm font-semibold text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Cancel</button>
+          <button type="submit" class="cursor-pointer rounded-xl bg-[var(--color-primary)] px-4 py-2.5 text-sm font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const addDialog = document.getElementById("add-dialog");
+    const openAddButton = document.getElementById("open-add-dialog");
+    const cancelAddButton = document.getElementById("cancel-add");
+    const addForm = document.getElementById("add-form");
+    const addNumberInput = document.getElementById("add-number");
+    const addError = document.getElementById("add-error");
+    const rowsContainer = document.getElementById("dnt-rows");
+    const emptyNote = document.getElementById("dnt-empty");
+
+    function showAddError(message) {
+      addError.textContent = message;
+      addError.classList.remove("hidden");
+    }
+
+    function openAddDialog() {
+      addNumberInput.value = "";
+      addError.classList.add("hidden");
+      addDialog.classList.remove("hidden");
+      addDialog.classList.add("flex");
+      addNumberInput.focus();
+    }
+
+    function closeAddDialog() {
+      addDialog.classList.add("hidden");
+      addDialog.classList.remove("flex");
+    }
+
+    function refreshRowIndexes() {
+      const rows = rowsContainer.querySelectorAll(".dnt-row");
+      rows.forEach(function (row, index) {
+        row.querySelector(".dnt-index").textContent = index + 1;
+      });
+      emptyNote.classList.toggle("hidden", rows.length > 0);
+    }
+
+    function removeRow(event) {
+      event.currentTarget.closest(".dnt-row").remove();
+      refreshRowIndexes();
+    }
+
+    function buildRow(numberText) {
+      const row = document.createElement("div");
+      row.className = "dnt-row grid grid-cols-[2.5rem_1fr_5rem] items-center gap-x-2 border-b border-[var(--color-border)] px-4 py-3";
+      const index = document.createElement("span");
+      index.className = "dnt-index text-sm tabular-nums text-[var(--color-muted-foreground)]";
+      const numberSpan = document.createElement("span");
+      numberSpan.className = "text-sm font-semibold tabular-nums";
+      numberSpan.textContent = numberText;
+      const action = document.createElement("span");
+      action.className = "text-right";
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "remove-row cursor-pointer rounded-lg px-2 py-1.5 text-xs font-semibold text-[var(--color-destructive)] transition-colors duration-200 hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]";
+      removeButton.textContent = "Remove";
+      removeButton.addEventListener("click", removeRow);
+      action.appendChild(removeButton);
+      row.appendChild(index);
+      row.appendChild(numberSpan);
+      row.appendChild(action);
+      return row;
+    }
+
+    function handleAddSubmit(event) {
+      event.preventDefault();
+      const digits = addNumberInput.value.replace(/\D/g, "");
+      if (digits.length < 10) {
+        showAddError("Enter a valid phone number.");
+        return;
+      }
+      const internationalNumber = "+91 " + digits.slice(-10, -5) + " " + digits.slice(-5);
+      const existing = Array.from(rowsContainer.querySelectorAll(".dnt-row span:nth-child(2)")).map(function (element) { return element.textContent; });
+      if (existing.indexOf(internationalNumber) !== -1) {
+        showAddError("This number is already on the list.");
+        return;
+      }
+      const lastRow = rowsContainer.querySelector(".dnt-row:last-child");
+      if (lastRow) lastRow.classList.add("border-b", "border-[var(--color-border)]");
+      rowsContainer.appendChild(buildRow(internationalNumber));
+      refreshRowIndexes();
+      closeAddDialog();
+    }
+
+    openAddButton.addEventListener("click", openAddDialog);
+    cancelAddButton.addEventListener("click", closeAddDialog);
+    addForm.addEventListener("submit", handleAddSubmit);
+    rowsContainer.querySelectorAll(".remove-row").forEach(function (button) {
+      button.addEventListener("click", removeRow);
+    });
+  </script>
+
+</body>
+</html>

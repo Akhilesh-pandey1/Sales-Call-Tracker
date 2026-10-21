@@ -166,62 +166,114 @@
 
       <!-- Calls by hour: always last. Defaults to Today; the switch offers Yesterday and 30 days too -->
       <section aria-label="Calls by hour" class="mt-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm">
-        <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <div class="flex items-center justify-between gap-2">
           <h2 class="text-base font-bold tracking-tight">Calls by hour</h2>
-          <div class="inline-flex rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-1" role="group" aria-label="Period for calls by hour">
-            <button type="button" aria-pressed="true" class="cursor-pointer rounded-lg bg-[var(--color-primary)] px-2.5 py-1 text-xs font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Today</button>
-            <button type="button" aria-pressed="false" class="cursor-pointer rounded-lg px-2.5 py-1 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Yesterday</button>
-            <button type="button" aria-pressed="false" class="cursor-pointer rounded-lg px-2.5 py-1 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">30 days</button>
+          <div class="inline-flex shrink-0 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-0.5" role="group" aria-label="Period for calls by hour">
+            <button type="button" aria-pressed="true" class="cursor-pointer rounded-lg bg-[var(--color-primary)] px-2 py-1 text-[11px] font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Today</button>
+            <button type="button" aria-pressed="false" class="cursor-pointer rounded-lg px-2 py-1 text-[11px] font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Yesterday</button>
+            <button type="button" aria-pressed="false" class="cursor-pointer rounded-lg px-2 py-1 text-[11px] font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">30 days</button>
           </div>
         </div>
         <div class="mt-4 flex h-32 items-end gap-1.5">
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">17</span>
-            <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:45%"></div>
+            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">4</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:31%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:100%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">4</span></div>
+            </div>
             <span class="text-[9px] text-[var(--color-muted-foreground)]">9 AM</span>
           </div>
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">32</span>
-            <div class="w-full rounded-t-md bg-[var(--color-secondary)]" style="height:84%"></div>
+            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">10</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:77%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:90%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">9</span></div>
+              <div class="w-full flex-1 bg-[var(--color-accent)]"></div>
+            </div>
             <span class="text-[9px] text-[var(--color-muted-foreground)]">10</span>
           </div>
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] font-semibold tabular-nums text-[var(--color-primary)]">38</span>
-            <div class="w-full rounded-t-md bg-[var(--color-primary)]" style="height:100%"></div>
+            <span class="text-[9px] font-semibold tabular-nums text-[var(--color-primary)]">13</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:100%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:85%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">11</span></div>
+              <div class="flex w-full flex-1 items-start justify-center bg-[var(--color-accent)]"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-accent)]">2</span></div>
+            </div>
             <span class="text-[9px] font-semibold text-[var(--color-foreground)]">11</span>
           </div>
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">11</span>
-            <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:29%"></div>
+            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">3</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:23%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:100%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">3</span></div>
+            </div>
             <span class="text-[9px] text-[var(--color-muted-foreground)]">12 PM</span>
           </div>
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">21</span>
-            <div class="w-full rounded-t-md bg-[var(--color-secondary)]" style="height:55%"></div>
+            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">7</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:54%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:86%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">6</span></div>
+              <div class="w-full flex-1 bg-[var(--color-accent)]"></div>
+            </div>
             <span class="text-[9px] text-[var(--color-muted-foreground)]">1 PM</span>
           </div>
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">33</span>
-            <div class="w-full rounded-t-md bg-[var(--color-secondary)]" style="height:87%"></div>
+            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">12</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:92%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:83%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">10</span></div>
+              <div class="flex w-full flex-1 items-start justify-center bg-[var(--color-accent)]"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-accent)]">2</span></div>
+            </div>
             <span class="text-[9px] text-[var(--color-muted-foreground)]">2</span>
           </div>
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">24</span>
-            <div class="w-full rounded-t-md bg-[var(--color-secondary)]" style="height:63%"></div>
+            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">8</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:62%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:88%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">7</span></div>
+              <div class="w-full flex-1 bg-[var(--color-accent)]"></div>
+            </div>
             <span class="text-[9px] text-[var(--color-muted-foreground)]">3</span>
           </div>
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">12</span>
-            <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:32%"></div>
+            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">5</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:38%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:80%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">4</span></div>
+              <div class="w-full flex-1 bg-[var(--color-accent)]"></div>
+            </div>
             <span class="text-[9px] text-[var(--color-muted-foreground)]">4</span>
           </div>
           <div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">7</span>
-            <div class="w-full rounded-t-md bg-[var(--color-muted)]" style="height:18%"></div>
+            <span class="text-[9px] tabular-nums text-[var(--color-muted-foreground)]">4</span>
+            <div class="flex w-full flex-col justify-end overflow-hidden rounded-t-md" style="height:31%">
+              <div class="flex w-full items-start justify-center bg-[var(--color-primary)]" style="height:100%"><span class="pt-0.5 text-[8px] font-semibold tabular-nums text-[var(--color-on-primary)]">4</span></div>
+            </div>
             <span class="text-[9px] text-[var(--color-muted-foreground)]">5 PM</span>
           </div>
         </div>
-        <p class="mt-2 text-xs text-[var(--color-muted-foreground)]">Avg dials per hour · Today (IST). Best hour: 11 AM.</p>
+        <p class="mt-2 text-xs text-[var(--color-muted-foreground)]">58 outgoing · 8 incoming · Best hour: 11 AM.</p>
+      </section>
+
+      <!-- Call split: the donut, minutes only - total sits inside the ring -->
+      <section aria-label="Call split" class="mt-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm">
+        <div class="flex items-center justify-between gap-2">
+          <h2 class="text-base font-bold tracking-tight">Call Split</h2>
+          <div class="inline-flex shrink-0 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-0.5" role="group" aria-label="Split period">
+            <button type="button" aria-pressed="false" class="cursor-pointer rounded-lg px-2 py-1 text-[11px] font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Today</button>
+            <button type="button" aria-pressed="false" class="cursor-pointer rounded-lg px-2 py-1 text-[11px] font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Yesterday</button>
+            <button type="button" aria-pressed="true" class="cursor-pointer rounded-lg bg-[var(--color-primary)] px-2 py-1 text-[11px] font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">30 days</button>
+          </div>
+        </div>
+        <div class="mt-4 flex justify-center">
+          <div class="relative h-36 w-36">
+            <svg viewBox="0 0 120 120" class="h-36 w-36 -rotate-90" role="img" aria-label="Donut chart of outgoing versus incoming talk minutes">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="var(--color-accent)" stroke-width="14" stroke-dasharray="24.5 301.6" transform="rotate(330.8 60 60)"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="var(--color-primary)" stroke-width="14" stroke-dasharray="277.1 301.6"/>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="text-xl font-bold tabular-nums tracking-tight">2,890</span>
+              <span class="text-[11px] text-[var(--color-muted-foreground)]">total min</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3 flex flex-col gap-1.5 border-t border-[var(--color-border)] pt-3">
+          <span class="inline-flex items-center justify-between gap-2 text-sm font-medium"><span class="inline-flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-[var(--color-primary)]"></span>Outgoing</span><span class="tabular-nums">2,655 min</span></span>
+          <span class="inline-flex items-center justify-between gap-2 text-sm font-medium"><span class="inline-flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-[var(--color-accent)]"></span>Incoming</span><span class="tabular-nums">235 min</span></span>
+        </div>
       </section>
 
     </main>

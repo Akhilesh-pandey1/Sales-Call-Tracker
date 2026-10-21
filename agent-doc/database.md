@@ -2,7 +2,7 @@
 
 ## Overview
 - **Server Database**: Neon PostgreSQL (Singapore region).
-- **Client Queue**: SQLite on Android phones (`pending_calls` table only, temporary buffer).
+- **Client Database**: SQLite on Android phones — `pending_calls`, `do_not_track`, `sweep_state`, `scheduled_reminders`.
 - **Timezone**: All timestamps are stored in UTC.
 
 ---
@@ -29,7 +29,7 @@ CREATE INDEX idx_users_auth_token ON users(auth_token);
 ```
 
 ### `calls`
-Stores completed calls synced from salesperson devices.
+Stores completed calls synced from salesperson devices — outgoing calls dialed from the app or caught by the call-log sweep, and answered incoming calls caught by the sweep.
 
 ```sql
 CREATE TABLE calls (
@@ -38,6 +38,7 @@ CREATE TABLE calls (
     phone_number VARCHAR(30) NOT NULL,
     dialed_at TIMESTAMP WITH TIME ZONE NOT NULL,
     duration_seconds INTEGER NOT NULL DEFAULT 0,
+    direction VARCHAR(10) NOT NULL DEFAULT 'outgoing',
     outcome VARCHAR(20)
 );
 
@@ -45,7 +46,9 @@ CREATE UNIQUE INDEX idx_calls_call_id ON calls(call_id);
 CREATE INDEX idx_calls_user_dialed ON calls(user_id, dialed_at);
 ```
 
+- `direction` is `outgoing` or `incoming`; rows from before the column existed are `outgoing`.
 - `outcome` is unused: the app never asks for an outcome, so every call syncs without one and the column stays empty on every row. The nullable column remains in place for a future decision.
+- Incoming rows never create or resolve leads and never increment `leads.attempt_count`.
 
 ### `leads`
 Stores shared lead numbers, call outcomes, retry locks, claims, and scheduling.
@@ -89,7 +92,7 @@ CREATE TABLE office_hours (
 ## 2. Android Local Phone Database (SQLite)
 
 ### `pending_calls`
-Temporary queue living only on the salesperson's phone. A row is deleted as soon as the server accepts its call — at the post-call Submit send or on a later bulk sync.
+Holds every tracked call on the salesperson's phone — dialed from the app or caught by the call-log sweep — until the server accepts it. A successful sync MARKS the row (`synced_at` set) instead of deleting it; cleanup removes synced rows behind the sweep line at every successful push.
 
 ```sql
 CREATE TABLE pending_calls (
@@ -98,14 +101,56 @@ CREATE TABLE pending_calls (
     intent_at TEXT NOT NULL,
     dialed_at TEXT,
     duration_seconds INTEGER,
+    direction TEXT NOT NULL DEFAULT 'outgoing',
+    synced INTEGER NOT NULL DEFAULT 0,
     outcome TEXT,
     attempts INTEGER NOT NULL DEFAULT 0
 );
 ```
 
-- `dialed_at` and `duration_seconds` stay `NULL` until the post-call popup's Submit click fills them from the call log, or the 1-hour janitor does. On a failed send the filled values stay saved on the row until the next bulk sync succeeds.
+- `direction` is `outgoing` or `incoming`. Sweep-caught rows are born filled (`dialed_at`, `duration_seconds` from the call log) with `direction = 'incoming'` for answered incoming calls; missed and rejected calls are never recorded.
+- For app-dialed calls, `dialed_at` and `duration_seconds` stay `NULL` until the post-call popup's Submit click fills them from the call log, or the 1-hour janitor does. On a failed send the filled values stay saved on the row until the next bulk sync succeeds.
+- `synced` 0 = not yet accepted by the server; 1 = the server has the call and it must never be sent again. The flag is what stops the sweep from ever re-counting an app-dialed call.
+- Cleanup deletes synced rows whose call time is behind the sweep line, at every successful push; three days is the worst-case backstop (the server refuses calls older than that anyway).
 - `outcome` is no longer written — the outcome flow is removed; the column stays from an older version of the app.
 - At 5 janitor attempts, an unfilled row is set to `dialed_at = intent_at` and `duration_seconds = 0` so the dial reaches the server and counts.
+
+### `do_not_track`
+The salesperson's excluded numbers — local only, never synced. The sweep checks it BEFORE inserting, in both directions: a listed number never enters `pending_calls` and never counts as work in any direction.
+
+```sql
+CREATE TABLE do_not_track (
+    phone_number TEXT PRIMARY KEY,
+    created_at TEXT
+);
+```
+
+- `phone_number` is stored in E.164 (`+919876543210`), normalized on save with the same libphonenumber-js call and the login country used everywhere else; the salesperson may type 10 digits. No name is stored — numbers only.
+
+### `sweep_state`
+One row holding the call-log sweep's resume point.
+
+```sql
+CREATE TABLE sweep_state (
+    id INTEGER PRIMARY KEY DEFAULT 1,
+    last_swept_at TEXT
+);
+```
+
+- The sweep reads call-log entries newer than `last_swept_at` and moves the value in the SAME SQLite transaction that inserts the sweep's rows, so the app can never crash between saving rows and moving the line. The first-ever sweep starts at the install moment.
+
+### `scheduled_reminders`
+One row per booked lead with a reminder set. The reminder alarms are rebuilt from this table at every app open, so they survive a reboot.
+
+```sql
+CREATE TABLE scheduled_reminders (
+    lead_id INTEGER PRIMARY KEY,
+    phone_number TEXT NOT NULL,
+    scheduled_at TEXT NOT NULL
+);
+```
+
+- Submitting a call to the booked number deletes the row, matched by normalized phone number.
 
 ---
 

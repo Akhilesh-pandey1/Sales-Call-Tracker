@@ -1008,17 +1008,17 @@ def test_sync_scheduled_at_books_lead_even_when_call_connects(
     app: Flask, client: FlaskClient
 ) -> None:
     with app.app_context():
-        user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        user = create_user_fixture()
+        headers = {"Authorization": f"Bearer {user.auth_token}"}
 
-        lead: Lead = create_lead_fixture(
+        lead = create_lead_fixture(
             phone_number="+919876500200",
             status="waiting",
             attempt_count=0,
         )
-        schedule_days_ahead: int = 5
+        schedule_days_ahead = 5
 
-        payload: dict[str, Any] = {
+        payload = {
             "calls": [
                 {
                     "call_id": "call-connect-with-schedule",
@@ -1030,29 +1030,31 @@ def test_sync_scheduled_at_books_lead_even_when_call_connects(
             ]
         }
 
-        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
-        status_code: int = response.status_code
-        response_json: dict[str, Any] = response.get_json()
+        response = client.post(
+            "/api/calls/sync", json=payload, headers=headers
+        )
+        status_code = response.status_code
+        response_json = response.get_json()
 
-        expected_code: int = 200
+        expected_code = 200
         assert status_code == expected_code
         assert response_json.get("status") is True
 
-        saved_call: Call | None = db.session.get(Call, "call-connect-with-schedule")
+        saved_call = db.session.get(Call, "call-connect-with-schedule")
         assert saved_call is not None
 
-        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        refreshed_lead = db.session.get(Lead, lead.id)
         assert refreshed_lead is not None
         assert refreshed_lead.status == "waiting"
         assert refreshed_lead.scheduled_by == user.id
 
-        booked_scheduled_at: datetime = refreshed_lead.scheduled_at
+        booked_scheduled_at = refreshed_lead.scheduled_at
         if booked_scheduled_at.tzinfo is None:
             booked_scheduled_at = booked_scheduled_at.replace(tzinfo=timezone.utc)
-        expected_scheduled_at: datetime = now_utc() + timedelta(
+        expected_scheduled_at = now_utc() + timedelta(
             days=schedule_days_ahead
         )
-        schedule_tolerance_seconds: float = 5
+        schedule_tolerance_seconds = 5
         assert abs(
             (booked_scheduled_at - expected_scheduled_at).total_seconds()
         ) < schedule_tolerance_seconds
@@ -1062,21 +1064,21 @@ def test_sync_schedule_lifts_done_or_stopped_lead_back_to_waiting(
     app: Flask, client: FlaskClient
 ) -> None:
     with app.app_context():
-        user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        user = create_user_fixture()
+        headers = {"Authorization": f"Bearer {user.auth_token}"}
 
-        done_lead: Lead = create_lead_fixture(
+        done_lead = create_lead_fixture(
             phone_number="+919876500210",
             status="done",
             attempt_count=1,
         )
-        stopped_lead: Lead = create_lead_fixture(
+        stopped_lead = create_lead_fixture(
             phone_number="+919876500211",
             status="stopped",
             attempt_count=3,
         )
 
-        payload: dict[str, Any] = {
+        payload = {
             "calls": [
                 {
                     "call_id": "call-lift-done",
@@ -1095,17 +1097,17 @@ def test_sync_schedule_lifts_done_or_stopped_lead_back_to_waiting(
             ]
         }
 
-        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        response = client.post("/api/calls/sync", json=payload, headers=headers)
         assert response.status_code == 200
 
-        refreshed_done: Lead | None = db.session.get(Lead, done_lead.id)
+        refreshed_done = db.session.get(Lead, done_lead.id)
         assert refreshed_done is not None
         assert refreshed_done.status == "waiting"
         assert refreshed_done.scheduled_by == user.id
         assert refreshed_done.scheduled_at is not None
         assert refreshed_done.attempt_count == 1
 
-        refreshed_stopped: Lead | None = db.session.get(Lead, stopped_lead.id)
+        refreshed_stopped = db.session.get(Lead, stopped_lead.id)
         assert refreshed_stopped is not None
         assert refreshed_stopped.status == "waiting"
         assert refreshed_stopped.scheduled_by == user.id
@@ -1117,22 +1119,22 @@ def test_sync_newest_schedule_wins_ownership(
     app: Flask, client: FlaskClient
 ) -> None:
     with app.app_context():
-        first_user: User = create_user_fixture(name="salesperson1", token="first-token")
-        second_user: User = create_user_fixture(name="salesperson2", token="second-token")
-        first_headers: dict[str, str] = {
+        first_user = create_user_fixture(name="salesperson1", token="first-token")
+        second_user = create_user_fixture(name="salesperson2", token="second-token")
+        first_headers = {
             "Authorization": f"Bearer {first_user.auth_token}"
         }
-        second_headers: dict[str, str] = {
+        second_headers = {
             "Authorization": f"Bearer {second_user.auth_token}"
         }
 
-        lead: Lead = create_lead_fixture(
+        lead = create_lead_fixture(
             phone_number="+919876500220",
             status="waiting",
             attempt_count=0,
         )
 
-        first_payload: dict[str, Any] = {
+        first_payload = {
             "calls": [
                 {
                     "call_id": "call-first-schedule",
@@ -1143,18 +1145,18 @@ def test_sync_newest_schedule_wins_ownership(
                 }
             ]
         }
-        first_response: Response = client.post(
+        first_response = client.post(
             "/api/calls/sync", json=first_payload, headers=first_headers
         )
         assert first_response.status_code == 200
 
-        lead_after_first: Lead | None = db.session.get(Lead, lead.id)
+        lead_after_first = db.session.get(Lead, lead.id)
         assert lead_after_first is not None
         assert lead_after_first.scheduled_by == first_user.id
         assert lead_after_first.attempt_count == 1
         assert lead_after_first.retry_locked_until is None
 
-        second_payload: dict[str, Any] = {
+        second_payload = {
             "calls": [
                 {
                     "call_id": "call-second-schedule",
@@ -1165,12 +1167,12 @@ def test_sync_newest_schedule_wins_ownership(
                 }
             ]
         }
-        second_response: Response = client.post(
+        second_response = client.post(
             "/api/calls/sync", json=second_payload, headers=second_headers
         )
         assert second_response.status_code == 200
 
-        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        refreshed_lead = db.session.get(Lead, lead.id)
         assert refreshed_lead is not None
         assert refreshed_lead.status == "waiting"
         assert refreshed_lead.scheduled_by == second_user.id

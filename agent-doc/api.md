@@ -127,9 +127,9 @@ Returns team call aggregates for today, yesterday, and the last 30 days. Each pe
   ```
 - **Rules**:
   - Each period object holds every number its screen shows: raw counts (`dials`, `connected`, `not_connected`, `seconds`, `minutes`) and the computed KPIs (`connected_percent`, `avg_per_person_per_day`, `vs_yesterday`).
-  - `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60)`.
+  - `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60, 2)` — decimal minutes, so short calls count (20 seconds shows as `0.33`).
   - `connected_percent` is `round(connected / dials * 100)`, `null` when dials is 0.
-  - `avg_per_person_per_day` divides each metric by the period day count (1 or 30) and the active salesperson count, then rounds.
+  - `avg_per_person_per_day` divides each metric by the period day count (1 or 30) and the active salesperson count, then rounds — count metrics to whole numbers, minutes to 2 decimals.
   - `vs_yesterday` exists only on `today`; each value is today minus yesterday in the displayed unit (`minutes` against yesterday's `minutes`). It is `null` on the other two periods.
   - `calls_by_hour.hours` lists the IST hours of the office hours window, start to end inclusive. `calls_by_hour.dials` holds one count per hour; for `last_30_days` it holds `round(total / 30)` per hour. `best_hour` is the hour number with the highest count, `null` when the period has no calls.
   - `top_people` holds at most 5 active salespeople by talk seconds in the period, highest first.
@@ -155,7 +155,7 @@ Returns one row per active salesperson for the Team page table: today and yester
   ```
 - **Rules**:
   - One row per active salesperson; a person with no calls still lists with zeros. Deactivated salespeople never appear.
-  - Each period block carries only `dials`, `connected`, and `minutes`; `minutes` is `round(seconds / 60)` computed on the server. No `seconds` field is returned.
+  - Each period block carries only `dials`, `connected`, and `minutes`; `minutes` is `round(seconds / 60, 2)` computed on the server. No `seconds` field is returned.
   - Rows are sorted by today's dials, highest first.
   - Today and yesterday are IST calendar days over UTC call timestamps, same as the team endpoint.
 - **Error Responses**:
@@ -210,10 +210,10 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
   }
   ```
 - **Rules**:
-  - `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60)`.
+  - `not_connected` is `dials - connected`; `minutes` is `round(seconds / 60, 2)` — decimal minutes, so short calls count (20 seconds shows as `0.33`).
   - `connected_percent` is `round(connected / dials * 100)`, `null` if dials equal 0 in that period.
   - `active_days` counts the days with at least one dial inside the last 30 IST days.
-  - `avg_per_active_day` divides dials, connected, and exact talk minutes by `active_days`, then rounds; it is `null` when `active_days` is 0.
+  - `avg_per_active_day` divides dials, connected, and exact talk minutes by `active_days`, then rounds — counts to whole numbers, minutes to 2 decimals; it is `null` when `active_days` is 0.
   - `calls_by_hour` follows the same rules as the team endpoint: office-hours `hours`, one count per hour (per-day averages for `last_30_days`), and `best_hour` as the hour number or `null`.
   - `top_numbers` includes at most 5 phone numbers with the highest talk seconds in the last 30 days.
 - **Error Responses**:

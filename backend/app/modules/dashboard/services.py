@@ -89,9 +89,10 @@ def calculate_connected_percentage(dials: int, connected: int) -> int | None:
     return calculated_percent
 
 
-def calculate_talk_minutes(talk_seconds: int) -> int:
+def calculate_talk_minutes(talk_seconds: int) -> float:
     seconds_per_minute: int = 60
-    talk_minutes: int = int(round(talk_seconds / seconds_per_minute))
+    decimal_places: int = 2
+    talk_minutes: float = round(talk_seconds / seconds_per_minute, decimal_places)
     return talk_minutes
 
 
@@ -106,6 +107,16 @@ def calculate_rounded_average(total_value: float, divisor: int) -> int:
         return zero_divisor
     rounded_average: int = int(round(total_value / divisor))
     return rounded_average
+
+
+def calculate_decimal_average(total_value: float, divisor: int) -> float:
+    zero_divisor: int = 0
+    decimal_places: int = 2
+    zero_average: float = 0.0
+    if divisor == zero_divisor:
+        return zero_average
+    decimal_average: float = round(total_value / divisor, decimal_places)
+    return decimal_average
 
 
 def create_empty_period_metrics() -> dict[str, int]:
@@ -240,13 +251,13 @@ def accumulate_team_call_records(
 
 def build_avg_per_person_per_day(
     period_totals: dict[str, int], person_day_divisor: int
-) -> dict[str, int]:
+) -> dict[str, float]:
     seconds_per_minute: int = 60
     not_connected_total: int = calculate_not_connected(
         period_totals["dials"], period_totals["connected"]
     )
     exact_talk_minutes: float = period_totals["seconds"] / seconds_per_minute
-    average_block: dict[str, int] = {
+    average_block: dict[str, float] = {
         "dials": calculate_rounded_average(
             period_totals["dials"], person_day_divisor
         ),
@@ -256,7 +267,7 @@ def build_avg_per_person_per_day(
         "not_connected": calculate_rounded_average(
             not_connected_total, person_day_divisor
         ),
-        "minutes": calculate_rounded_average(
+        "minutes": calculate_decimal_average(
             exact_talk_minutes, person_day_divisor
         ),
     }
@@ -296,14 +307,14 @@ def build_calls_by_hour_block(hourly_inputs: PeriodHourlyInputs) -> dict[str, An
 
 def calculate_vs_yesterday(
     today_totals: dict[str, int], yesterday_totals: dict[str, int]
-) -> dict[str, int]:
+) -> dict[str, float]:
     today_not_connected: int = calculate_not_connected(
         today_totals["dials"], today_totals["connected"]
     )
     yesterday_not_connected: int = calculate_not_connected(
         yesterday_totals["dials"], yesterday_totals["connected"]
     )
-    delta_block: dict[str, int] = {
+    delta_block: dict[str, float] = {
         "dials": today_totals["dials"] - yesterday_totals["dials"],
         "connected": today_totals["connected"] - yesterday_totals["connected"],
         "not_connected": today_not_connected - yesterday_not_connected,
@@ -341,12 +352,12 @@ def build_team_period_block(
     active_salesperson_count: int,
     hourly_inputs: PeriodHourlyInputs,
     period_top_people: list[dict[str, Any]],
-    vs_yesterday: dict[str, int] | None,
+    vs_yesterday: dict[str, float] | None,
 ) -> dict[str, Any]:
     not_connected_total: int = calculate_not_connected(
         period_totals["dials"], period_totals["connected"]
     )
-    talk_minutes: int = calculate_talk_minutes(period_totals["seconds"])
+    talk_minutes: float = calculate_talk_minutes(period_totals["seconds"])
     connected_percent: int | None = calculate_connected_percentage(
         period_totals["dials"], period_totals["connected"]
     )
@@ -477,7 +488,7 @@ def accumulate_people_call_records(
 
 
 def build_people_row_period_block(period_metrics: dict[str, int]) -> dict[str, Any]:
-    talk_minutes: int = calculate_talk_minutes(period_metrics["seconds"])
+    talk_minutes: float = calculate_talk_minutes(period_metrics["seconds"])
     period_block: dict[str, Any] = {
         "dials": period_metrics["dials"],
         "connected": period_metrics["connected"],
@@ -630,7 +641,7 @@ def build_person_period_block(
     not_connected_total: int = calculate_not_connected(
         period_totals["dials"], period_totals["connected"]
     )
-    talk_minutes: int = calculate_talk_minutes(period_totals["seconds"])
+    talk_minutes: float = calculate_talk_minutes(period_totals["seconds"])
     connected_percent: int | None = calculate_connected_percentage(
         period_totals["dials"], period_totals["connected"]
     )
@@ -649,21 +660,21 @@ def build_person_period_block(
 
 def build_avg_per_active_day(
     thirty_day_totals: dict[str, int], active_day_count: int
-) -> dict[str, int] | None:
+) -> dict[str, float] | None:
     zero_active_days: int = 0
     seconds_per_minute: int = 60
     if active_day_count == zero_active_days:
         return None
 
     exact_talk_minutes: float = thirty_day_totals["seconds"] / seconds_per_minute
-    average_block: dict[str, int] = {
+    average_block: dict[str, float] = {
         "dials": calculate_rounded_average(
             thirty_day_totals["dials"], active_day_count
         ),
         "connected": calculate_rounded_average(
             thirty_day_totals["connected"], active_day_count
         ),
-        "minutes": calculate_rounded_average(
+        "minutes": calculate_decimal_average(
             exact_talk_minutes, active_day_count
         ),
     }

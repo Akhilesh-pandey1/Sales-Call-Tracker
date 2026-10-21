@@ -6,7 +6,7 @@ class AvgPerPersonPerDay(BaseModel):
     dials: int
     connected: int
     not_connected: int
-    minutes: int
+    minutes: float
 
 
 class VsYesterdayDelta(BaseModel):
@@ -14,7 +14,7 @@ class VsYesterdayDelta(BaseModel):
     dials: int
     connected: int
     not_connected: int
-    minutes: int
+    minutes: float
 
 
 class CallsByHourBlock(BaseModel):
@@ -29,7 +29,7 @@ class TopPersonSummary(BaseModel):
     id: int
     name: str
     seconds: int
-    minutes: int
+    minutes: float
 
 
 class TeamPeriodBlock(BaseModel):
@@ -38,7 +38,7 @@ class TeamPeriodBlock(BaseModel):
     connected: int
     not_connected: int
     seconds: int
-    minutes: int
+    minutes: float
     connected_percent: int | None
     avg_per_person_per_day: AvgPerPersonPerDay
     vs_yesterday: VsYesterdayDelta | None
@@ -57,7 +57,7 @@ class PeoplePeriodBlock(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     dials: int
     connected: int
-    minutes: int
+    minutes: float
 
 
 class TeamPeopleRow(BaseModel):
@@ -72,14 +72,14 @@ class AvgPerActiveDay(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     dials: int
     connected: int
-    minutes: int
+    minutes: float
 
 
 class TopNumberItem(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     phone_number: str
     seconds: int
-    minutes: int
+    minutes: float
     calls: int
 
 
@@ -89,7 +89,7 @@ class PersonPeriodStats(BaseModel):
     connected: int
     not_connected: int
     seconds: int
-    minutes: int
+    minutes: float
     connected_percent: int | None
     calls_by_hour: CallsByHourBlock
 

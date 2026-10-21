@@ -261,8 +261,8 @@ def test_team_people_period_blocks_carry_only_dials_connected_minutes(
         assert set(today_block.keys()) == expected_period_keys
         assert set(yesterday_block.keys()) == expected_period_keys
 
-        expected_today_minutes: int = 4
-        expected_yesterday_minutes: int = 1
+        expected_today_minutes: float = 3.83
+        expected_yesterday_minutes: float = 0.75
         assert today_block == {
             "dials": 2,
             "connected": 2,
@@ -354,9 +354,34 @@ def test_team_people_ist_day_boundary_respected(
 
         rep_row: dict[str, Any] = data[0]
         assert rep_row["today"]["dials"] == 1
-        assert rep_row["today"]["minutes"] == 1
+        assert rep_row["today"]["minutes"] == 1.33
         assert rep_row["yesterday"]["dials"] == 1
-        assert rep_row["yesterday"]["minutes"] == 1
+        assert rep_row["yesterday"]["minutes"] == 0.67
+
+
+def test_team_people_short_call_shows_decimal_minutes(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="people_mgr_short", role="manager", token="mgr-people-short-token"
+        )
+        rep: User = create_user_fixture(
+            name="rep_people_short",
+            role="salesperson",
+            token="rep-people-short-token",
+        )
+
+        call_time: datetime = create_utc_call_time(0, 12)
+        create_call_record("people-short-1", rep.id, "+919876543210", call_time, 20)
+
+        response, data = fetch_team_people(client, "mgr-people-short-token")
+        expected_status: int = 200
+        assert response.status_code == expected_status
+
+        rep_row: dict[str, Any] = data[0]
+        assert rep_row["today"]["dials"] == 1
+        assert rep_row["today"]["minutes"] == 0.33
 
 
 def test_team_dashboard_empty_response_shape(app: Flask, client: FlaskClient) -> None:
@@ -429,21 +454,21 @@ def test_team_dashboard_period_kpis_and_vs_yesterday(
         assert today["connected"] == 2
         assert today["not_connected"] == 1
         assert today["seconds"] == 140
-        assert today["minutes"] == 2
+        assert today["minutes"] == 2.33
         assert today["connected_percent"] == 67
 
         assert today["vs_yesterday"] == {
             "dials": 2,
             "connected": 1,
             "not_connected": 1,
-            "minutes": 1,
+            "minutes": 1.33,
         }
 
         assert today["avg_per_person_per_day"] == {
             "dials": 2,
             "connected": 1,
             "not_connected": 0,
-            "minutes": 1,
+            "minutes": 1.17,
         }
 
         today_top_ids: list[int] = [person["id"] for person in today["top_people"]]
@@ -464,7 +489,7 @@ def test_team_dashboard_period_kpis_and_vs_yesterday(
         assert thirty_days["connected"] == 3
         assert thirty_days["not_connected"] == 1
         assert thirty_days["seconds"] == 200
-        assert thirty_days["minutes"] == 3
+        assert thirty_days["minutes"] == 3.33
         assert thirty_days["connected_percent"] == 75
         assert thirty_days["vs_yesterday"] is None
 
@@ -472,8 +497,33 @@ def test_team_dashboard_period_kpis_and_vs_yesterday(
             "dials": 0,
             "connected": 0,
             "not_connected": 0,
-            "minutes": 0,
+            "minutes": 0.06,
         }
+
+
+def test_team_dashboard_short_call_shows_decimal_minutes(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_short", role="manager", token="mgr-short-token")
+        rep: User = create_user_fixture(
+            name="rep_short", role="salesperson", token="rep-short-token"
+        )
+
+        call_time: datetime = create_utc_call_time(0, 12)
+        create_call_record("short-1", rep.id, "+919876543210", call_time, 20)
+
+        response, data = fetch_team_dashboard(client, "mgr-short-token")
+        expected_status: int = 200
+        assert response.status_code == expected_status
+
+        assert data["today"]["connected"] == 1
+        assert data["today"]["minutes"] == 0.33
+        assert data["today"]["vs_yesterday"]["minutes"] == 0.33
+
+        today_top: list[dict[str, Any]] = data["today"]["top_people"]
+        assert today_top[0]["seconds"] == 20
+        assert today_top[0]["minutes"] == 0.33
 
 
 def test_team_dashboard_avg_per_person_per_day_counts_all_active(
@@ -595,10 +645,10 @@ def test_team_dashboard_ist_day_boundary_respected(
 
         assert data["today"]["dials"] == 1
         assert data["today"]["seconds"] == 100
-        assert data["today"]["minutes"] == 2
+        assert data["today"]["minutes"] == 1.67
         assert data["yesterday"]["dials"] == 1
         assert data["yesterday"]["seconds"] == 45
-        assert data["yesterday"]["minutes"] == 1
+        assert data["yesterday"]["minutes"] == 0.75
 
         assert data["last_30_days"]["dials"] == 2
         assert data["last_30_days"]["seconds"] == 145
@@ -719,7 +769,7 @@ def test_team_dashboard_last_30_days_totals_include_deactivated_salesperson(
         assert data["last_30_days"]["dials"] == 4
         assert data["last_30_days"]["connected"] == 4
         assert data["last_30_days"]["seconds"] == 430
-        assert data["last_30_days"]["minutes"] == 7
+        assert data["last_30_days"]["minutes"] == 7.17
 
         thirty_day_dials: list[int] = data["last_30_days"]["calls_by_hour"]["dials"]
         assert thirty_day_dials == [0] * 10
@@ -728,7 +778,7 @@ def test_team_dashboard_last_30_days_totals_include_deactivated_salesperson(
         assert len(thirty_day_top) == 1
         assert thirty_day_top[0]["id"] == active_rep.id
         assert thirty_day_top[0]["seconds"] == 380
-        assert thirty_day_top[0]["minutes"] == 6
+        assert thirty_day_top[0]["minutes"] == 6.33
 
 
 def test_team_dashboard_last_30_days_dials_are_daily_averages(
@@ -820,9 +870,9 @@ def test_team_dashboard_top_people_max_five_sorted_by_seconds(
         today_top: list[dict[str, Any]] = data["today"]["top_people"]
         assert len(today_top) == top_people_limit
         expected_seconds_order: list[int] = [600, 500, 400, 300, 200]
-        expected_minutes_order: list[int] = [10, 8, 7, 5, 3]
+        expected_minutes_order: list[float] = [10, 8.33, 6.67, 5, 3.33]
         returned_seconds: list[int] = [person["seconds"] for person in today_top]
-        returned_minutes: list[int] = [person["minutes"] for person in today_top]
+        returned_minutes: list[float] = [person["minutes"] for person in today_top]
         assert returned_seconds == expected_seconds_order
         assert returned_minutes == expected_minutes_order
         assert today_top[0]["id"] == reps_by_name["rep_a"].id

@@ -269,7 +269,7 @@ def test_person_dashboard_top_five_numbers(app: Flask, client: FlaskClient) -> N
         returned_numbers: list[str] = [item["phone_number"] for item in top_numbers]
         assert returned_numbers == expected_first_five
         assert top_numbers[0]["seconds"] == 500
-        assert top_numbers[0]["minutes"] == 8
+        assert top_numbers[0]["minutes"] == 8.33
         assert top_numbers[0]["calls"] == 2
 
 
@@ -295,11 +295,11 @@ def test_person_dashboard_fewer_than_five_numbers(
         assert len(top_numbers) == 2
         assert top_numbers[0]["phone_number"] == "+919876543211"
         assert top_numbers[0]["seconds"] == 250
-        assert top_numbers[0]["minutes"] == 4
+        assert top_numbers[0]["minutes"] == 4.17
         assert top_numbers[0]["calls"] == 1
         assert top_numbers[1]["phone_number"] == "+919876543212"
         assert top_numbers[1]["seconds"] == 150
-        assert top_numbers[1]["minutes"] == 2
+        assert top_numbers[1]["minutes"] == 2.5
         assert top_numbers[1]["calls"] == 1
 
 
@@ -375,6 +375,29 @@ def test_person_dashboard_no_calls_returns_zero_active_days(
         assert data["today"]["calls_by_hour"]["best_hour"] is None
         assert data["yesterday"]["dials"] == 0
         assert data["top_numbers"] == []
+
+
+def test_person_dashboard_short_call_shows_decimal_minutes(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        rep: User = create_user_fixture(
+            name="rep_person_short", role="salesperson", token="rep-person-short-token"
+        )
+
+        call_time: datetime = now_ist().astimezone(timezone.utc)
+        create_call_record("person-short-1", rep.id, "+919876543210", call_time, 20)
+
+        headers: dict[str, str] = {"Authorization": "Bearer rep-person-short-token"}
+        target_url: str = f"/api/dashboard/person/{rep.id}"
+        response: Response = client.get(target_url, headers=headers)
+        assert response.status_code == 200
+        data: dict[str, Any] = response.get_json()
+
+        assert data["today"]["connected"] == 1
+        assert data["today"]["minutes"] == 0.33
+        assert data["top_numbers"][0]["minutes"] == 0.33
+        assert data["last_30_days"]["avg_per_active_day"]["minutes"] == 0.33
 
 
 def test_person_dashboard_active_days_counts_distinct_ist_days(
@@ -482,19 +505,19 @@ def test_person_dashboard_period_blocks_carry_minutes_and_not_connected(
         assert data["today"]["connected"] == 2
         assert data["today"]["not_connected"] == 1
         assert data["today"]["seconds"] == 140
-        assert data["today"]["minutes"] == 2
+        assert data["today"]["minutes"] == 2.33
 
         assert data["yesterday"]["dials"] == 1
         assert data["yesterday"]["connected"] == 1
         assert data["yesterday"]["not_connected"] == 0
         assert data["yesterday"]["seconds"] == 45
-        assert data["yesterday"]["minutes"] == 1
+        assert data["yesterday"]["minutes"] == 0.75
 
         assert data["last_30_days"]["dials"] == 4
         assert data["last_30_days"]["connected"] == 3
         assert data["last_30_days"]["not_connected"] == 1
         assert data["last_30_days"]["seconds"] == 185
-        assert data["last_30_days"]["minutes"] == 3
+        assert data["last_30_days"]["minutes"] == 3.08
 
 
 def test_person_dashboard_period_calls_by_hour_buckets(
@@ -657,7 +680,7 @@ def test_person_dashboard_avg_per_active_day_computed(
         assert data["last_30_days"]["avg_per_active_day"] == {
             "dials": 2,
             "connected": 1,
-            "minutes": 1,
+            "minutes": 0.58,
         }
         assert "avg_per_active_day" not in data["today"]
         assert "avg_per_active_day" not in data["yesterday"]

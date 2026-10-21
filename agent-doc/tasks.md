@@ -55,16 +55,16 @@
 
 **Blocked by:** 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Every team period carries `dials`/`connected`/`not_connected` counting OUTGOING calls only, `seconds`/`minutes` as TOTAL talk (`round(seconds/60, 2)`), `connected_percent`, `avg_per_person_per_day`, and `vs_yesterday` only on today (`api.md` §3 team Rules).
-- [ ] `talk_totals` and `calls_by_hour` carry `hours`, `outgoing`, `incoming`, and `best_hour` by total calls; `last_30_days` holds per-day averages; `top_people` ranks by TOTAL talk seconds (`api.md` §3; `testing.md` — test_dashboard.py list).
-- [ ] `GET /api/dashboard/team/people` returns one row per active salesperson with only `dials`, `connected`, `minutes` — dials/connected outgoing-only, minutes total talk, no `seconds`; zero-call salespeople included, deactivated excluded, sorted by today's dials (`api.md` §3 team/people).
+- [x] Every team period carries `dials`/`connected`/`not_connected` counting OUTGOING calls only, `seconds`/`minutes` as TOTAL talk (`round(seconds/60, 2)`), `connected_percent`, `avg_per_person_per_day`, and `vs_yesterday` only on today (`api.md` §3 team Rules).
+- [x] `talk_totals` and `calls_by_hour` carry `hours`, `outgoing`, `incoming`, and `best_hour` by total calls; `last_30_days` holds per-day averages; `top_people` ranks by TOTAL talk seconds (`api.md` §3; `testing.md` — test_dashboard.py list).
+- [x] `GET /api/dashboard/team/people` returns one row per active salesperson with only `dials`, `connected`, `minutes` — dials/connected outgoing-only, minutes total talk, no `seconds`; zero-call salespeople included, deactivated excluded, sorted by today's dials (`api.md` §3 team/people).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 5: Server — person dashboard carries the split
 
@@ -140,15 +140,15 @@
 
 **Blocked by:** 2, 7
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `syncCalls` returns the sync response body and the post-call submit path reads `schedule_refused_call_ids` (`api.md` §2 Response).
-- [ ] The submitted call's id in the refused list shows the toast "This lead is already booked by someone else." — the call itself is still sent (`testing.md` — manual pass list).
+- [x] `syncCalls` returns the sync response body and the post-call submit path reads `schedule_refused_call_ids` (`api.md` §2 Response).
+- [x] The submitted call's id in the refused list shows the toast "This lead is already booked by someone else." — the call itself is still sent (`testing.md` — manual pass list).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 10: App — booked leads set a reminder alarm
 

@@ -1,9 +1,7 @@
 from dataclasses import dataclass
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
-from backend.app.core.errors import AppException
 from backend.app.core.utils import now_ist, parse_utc_datetime, to_ist
-from backend.app.extensions import db
 from backend.app.modules.calls import Call
 from backend.app.modules.settings import OfficeHours, get_or_create_office_hours_window
 from backend.app.modules.users import User
@@ -18,16 +16,18 @@ class DashboardTimeWindows:
 
 
 @dataclass(frozen=True)
+class TeamPeriodAggregates:
+    call_metrics: dict[str, int]
+    talk_seconds_by_user: dict[int, int]
+    outgoing_by_hour: dict[int, int]
+    incoming_by_hour: dict[int, int]
+
+
+@dataclass(frozen=True)
 class TeamCallAggregates:
-    team_today: dict[str, int]
-    team_yesterday: dict[str, int]
-    team_thirty_days: dict[str, int]
-    seconds_today_by_user: dict[int, int]
-    seconds_yesterday_by_user: dict[int, int]
-    seconds_thirty_days_by_user: dict[int, int]
-    dials_today_by_hour: dict[int, int]
-    dials_yesterday_by_hour: dict[int, int]
-    dials_thirty_days_by_hour: dict[int, int]
+    team_today: TeamPeriodAggregates
+    team_yesterday: TeamPeriodAggregates
+    team_thirty_days: TeamPeriodAggregates
 
 
 @dataclass(frozen=True)
@@ -39,15 +39,12 @@ class PeriodHourlyInputs:
 
 
 @dataclass(frozen=True)
-class PersonCallAggregates:
-    person_today: dict[str, int]
-    person_yesterday: dict[str, int]
-    person_thirty_days: dict[str, int]
-    active_day_dates: set[date]
-    phone_summary: dict[str, dict[str, int]]
-    dials_today_by_hour: dict[int, int]
-    dials_yesterday_by_hour: dict[int, int]
-    dials_thirty_days_by_hour: dict[int, int]
+class TeamHourlyInputs:
+    outgoing_by_hour: dict[int, int]
+    incoming_by_hour: dict[int, int]
+    office_hours: list[int]
+    period_day_count: int
+    counts_hold_daily_averages: bool
 
 
 @dataclass(frozen=True)
@@ -124,6 +121,32 @@ def create_empty_period_metrics() -> dict[str, int]:
     return metrics
 
 
+def create_empty_team_period_metrics() -> dict[str, int]:
+    metrics: dict[str, int] = {
+        "dials": 0,
+        "connected": 0,
+        "seconds": 0,
+        "incoming_calls": 0,
+        "incoming_seconds": 0,
+    }
+    return metrics
+
+
+def apply_direction_call_to_metrics(
+    period_metrics: dict[str, int], direction: str, duration_seconds: int
+) -> None:
+    outgoing_direction: str = "outgoing"
+    zero_duration: int = 0
+    period_metrics["seconds"] += duration_seconds
+    if direction != outgoing_direction:
+        period_metrics["incoming_calls"] += 1
+        period_metrics["incoming_seconds"] += duration_seconds
+        return
+    period_metrics["dials"] += 1
+    if duration_seconds > zero_duration:
+        period_metrics["connected"] += 1
+
+
 def apply_call_to_metrics(
     target_dict: dict[str, int], duration_seconds: int
 ) -> None:
@@ -161,6 +184,24 @@ def apply_call_to_hourly_bucket(
         hourly_counts[call_hour] += 1
 
 
+def apply_direction_call_to_hourly_bucket(
+    outgoing_counts_by_hour: dict[int, int],
+    incoming_counts_by_hour: dict[int, int],
+    direction: str,
+    dialed_at_utc: datetime,
+    office_hour_set: set[int],
+) -> None:
+    outgoing_direction: str = "outgoing"
+    ist_dialed_at: datetime = to_ist(dialed_at_utc)
+    call_hour: int = ist_dialed_at.hour
+    if call_hour not in office_hour_set:
+        return
+    if direction == outgoing_direction:
+        outgoing_counts_by_hour[call_hour] += 1
+        return
+    incoming_counts_by_hour[call_hour] += 1
+
+
 def add_user_talk_seconds(
     user_seconds_by_user: dict[int, int], user_id: int, duration_seconds: int
 ) -> None:
@@ -179,7 +220,7 @@ def fetch_team_call_records(
             Call.dialed_at >= window_start_utc,
             Call.dialed_at < windows.tomorrow_start_utc,
         )
-        .with_entities(Call.user_id, Call.dialed_at, Call.duration_seconds)
+        .with_entities(Call.user_id, Call.dialed_at, Call.duration_seconds, Call.direction)
         .all()
     )
     return team_call_records
@@ -195,19 +236,48 @@ def fetch_active_salespeople() -> list[Any]:
     return active_salespeople
 
 
+def create_empty_team_period_aggregates(
+    office_hours: list[int],
+) -> TeamPeriodAggregates:
+    period_aggregates: TeamPeriodAggregates = TeamPeriodAggregates(
+        call_metrics=create_empty_team_period_metrics(),
+        talk_seconds_by_user={},
+        outgoing_by_hour=create_empty_hourly_counts(office_hours),
+        incoming_by_hour=create_empty_hourly_counts(office_hours),
+    )
+    return period_aggregates
+
+
 def create_empty_team_aggregates(office_hours: list[int]) -> TeamCallAggregates:
     aggregates: TeamCallAggregates = TeamCallAggregates(
-        team_today=create_empty_period_metrics(),
-        team_yesterday=create_empty_period_metrics(),
-        team_thirty_days=create_empty_period_metrics(),
-        seconds_today_by_user={},
-        seconds_yesterday_by_user={},
-        seconds_thirty_days_by_user={},
-        dials_today_by_hour=create_empty_hourly_counts(office_hours),
-        dials_yesterday_by_hour=create_empty_hourly_counts(office_hours),
-        dials_thirty_days_by_hour=create_empty_hourly_counts(office_hours),
+        team_today=create_empty_team_period_aggregates(office_hours),
+        team_yesterday=create_empty_team_period_aggregates(office_hours),
+        team_thirty_days=create_empty_team_period_aggregates(office_hours),
     )
     return aggregates
+
+
+def apply_team_call_to_period_aggregates(
+    period_aggregates: TeamPeriodAggregates,
+    user_id: int,
+    direction: str,
+    duration_seconds: int,
+    dialed_at: datetime,
+    office_hour_set: set[int],
+) -> None:
+    apply_direction_call_to_metrics(
+        period_aggregates.call_metrics, direction, duration_seconds
+    )
+    add_user_talk_seconds(
+        period_aggregates.talk_seconds_by_user, user_id, duration_seconds
+    )
+    apply_direction_call_to_hourly_bucket(
+        period_aggregates.outgoing_by_hour,
+        period_aggregates.incoming_by_hour,
+        direction,
+        dialed_at,
+        office_hour_set,
+    )
 
 
 def accumulate_team_call_records(
@@ -218,32 +288,35 @@ def accumulate_team_call_records(
     office_hour_set: set[int] = set(office_hours)
     aggregates: TeamCallAggregates = create_empty_team_aggregates(office_hours)
 
-    for user_id, raw_dialed_at, duration_seconds in call_records:
+    for user_id, raw_dialed_at, duration_seconds, direction in call_records:
         dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
 
-        apply_call_to_metrics(aggregates.team_thirty_days, duration_seconds)
-        add_user_talk_seconds(
-            aggregates.seconds_thirty_days_by_user, user_id, duration_seconds
-        )
-        apply_call_to_hourly_bucket(
-            aggregates.dials_thirty_days_by_hour, dialed_at, office_hour_set
+        apply_team_call_to_period_aggregates(
+            aggregates.team_thirty_days,
+            user_id,
+            direction,
+            duration_seconds,
+            dialed_at,
+            office_hour_set,
         )
 
         if dialed_at >= windows.today_start_utc:
-            apply_call_to_metrics(aggregates.team_today, duration_seconds)
-            add_user_talk_seconds(
-                aggregates.seconds_today_by_user, user_id, duration_seconds
-            )
-            apply_call_to_hourly_bucket(
-                aggregates.dials_today_by_hour, dialed_at, office_hour_set
+            apply_team_call_to_period_aggregates(
+                aggregates.team_today,
+                user_id,
+                direction,
+                duration_seconds,
+                dialed_at,
+                office_hour_set,
             )
         elif dialed_at >= windows.yesterday_start_utc:
-            apply_call_to_metrics(aggregates.team_yesterday, duration_seconds)
-            add_user_talk_seconds(
-                aggregates.seconds_yesterday_by_user, user_id, duration_seconds
-            )
-            apply_call_to_hourly_bucket(
-                aggregates.dials_yesterday_by_hour, dialed_at, office_hour_set
+            apply_team_call_to_period_aggregates(
+                aggregates.team_yesterday,
+                user_id,
+                direction,
+                duration_seconds,
+                dialed_at,
+                office_hour_set,
             )
 
     return aggregates
@@ -305,21 +378,71 @@ def build_calls_by_hour_block(hourly_inputs: PeriodHourlyInputs) -> dict[str, An
     return calls_by_hour_block
 
 
+def build_team_calls_by_hour_block(
+    team_hourly_inputs: TeamHourlyInputs,
+) -> dict[str, Any]:
+    outgoing_counts: list[int] = []
+    incoming_counts: list[int] = []
+    for window_hour in team_hourly_inputs.office_hours:
+        outgoing_hour_total: int = team_hourly_inputs.outgoing_by_hour[window_hour]
+        incoming_hour_total: int = team_hourly_inputs.incoming_by_hour[window_hour]
+        if team_hourly_inputs.counts_hold_daily_averages:
+            outgoing_hour_total = calculate_rounded_average(
+                outgoing_hour_total, team_hourly_inputs.period_day_count
+            )
+            incoming_hour_total = calculate_rounded_average(
+                incoming_hour_total, team_hourly_inputs.period_day_count
+            )
+        outgoing_counts.append(outgoing_hour_total)
+        incoming_counts.append(incoming_hour_total)
+
+    in_window_call_total: int = sum(
+        team_hourly_inputs.outgoing_by_hour[window_hour]
+        + team_hourly_inputs.incoming_by_hour[window_hour]
+        for window_hour in team_hourly_inputs.office_hours
+    )
+
+    best_hour: int | None = None
+    if in_window_call_total > 0:
+        highest_total: int = -1
+        for window_hour in team_hourly_inputs.office_hours:
+            hour_total: int = (
+                team_hourly_inputs.outgoing_by_hour[window_hour]
+                + team_hourly_inputs.incoming_by_hour[window_hour]
+            )
+            if hour_total > highest_total:
+                highest_total = hour_total
+                best_hour = window_hour
+
+    calls_by_hour_block: dict[str, Any] = {
+        "hours": team_hourly_inputs.office_hours,
+        "outgoing": outgoing_counts,
+        "incoming": incoming_counts,
+        "best_hour": best_hour,
+    }
+    return calls_by_hour_block
+
+
 def calculate_vs_yesterday(
     today_totals: dict[str, int], yesterday_totals: dict[str, int]
 ) -> dict[str, float]:
+    decimal_places: int = 2
     today_not_connected: int = calculate_not_connected(
         today_totals["dials"], today_totals["connected"]
     )
     yesterday_not_connected: int = calculate_not_connected(
         yesterday_totals["dials"], yesterday_totals["connected"]
     )
+    today_talk_minutes: float = calculate_talk_minutes(today_totals["seconds"])
+    yesterday_talk_minutes: float = calculate_talk_minutes(yesterday_totals["seconds"])
+    minutes_delta: float = round(
+        today_talk_minutes - yesterday_talk_minutes, decimal_places
+    )
     delta_block: dict[str, float] = {
         "dials": today_totals["dials"] - yesterday_totals["dials"],
         "connected": today_totals["connected"] - yesterday_totals["connected"],
         "not_connected": today_not_connected - yesterday_not_connected,
-        "minutes": calculate_talk_minutes(today_totals["seconds"])
-        - calculate_talk_minutes(yesterday_totals["seconds"]),
+        "minutes": minutes_delta,
     }
     return delta_block
 
@@ -347,10 +470,38 @@ def build_top_people_list(
     return ranked_people[:top_people_limit]
 
 
+def calculate_talk_percent(part_seconds: int, total_seconds: int) -> int:
+    zero_seconds: int = 0
+    percent_multiplier: float = 100.0
+    if total_seconds <= zero_seconds:
+        return zero_seconds
+    talk_percent: int = int(round((part_seconds / total_seconds) * percent_multiplier))
+    return talk_percent
+
+
+def build_talk_totals_block(period_metrics: dict[str, int]) -> dict[str, Any]:
+    total_talk_seconds: int = period_metrics["seconds"]
+    incoming_talk_seconds: int = period_metrics["incoming_seconds"]
+    outgoing_talk_seconds: int = total_talk_seconds - incoming_talk_seconds
+    talk_totals_block: dict[str, Any] = {
+        "outgoing_calls": period_metrics["dials"],
+        "outgoing_minutes": calculate_talk_minutes(outgoing_talk_seconds),
+        "incoming_calls": period_metrics["incoming_calls"],
+        "incoming_minutes": calculate_talk_minutes(incoming_talk_seconds),
+        "outgoing_percent": calculate_talk_percent(
+            outgoing_talk_seconds, total_talk_seconds
+        ),
+        "incoming_percent": calculate_talk_percent(
+            incoming_talk_seconds, total_talk_seconds
+        ),
+    }
+    return talk_totals_block
+
+
 def build_team_period_block(
     period_totals: dict[str, int],
     active_salesperson_count: int,
-    hourly_inputs: PeriodHourlyInputs,
+    team_hourly_inputs: TeamHourlyInputs,
     period_top_people: list[dict[str, Any]],
     vs_yesterday: dict[str, float] | None,
 ) -> dict[str, Any]:
@@ -361,11 +512,16 @@ def build_team_period_block(
     connected_percent: int | None = calculate_connected_percentage(
         period_totals["dials"], period_totals["connected"]
     )
-    person_day_divisor: int = active_salesperson_count * hourly_inputs.period_day_count
+    person_day_divisor: int = (
+        active_salesperson_count * team_hourly_inputs.period_day_count
+    )
     average_block: dict[str, int] = build_avg_per_person_per_day(
         period_totals, person_day_divisor
     )
-    calls_by_hour_block: dict[str, Any] = build_calls_by_hour_block(hourly_inputs)
+    calls_by_hour_block: dict[str, Any] = build_team_calls_by_hour_block(
+        team_hourly_inputs
+    )
+    talk_totals_block: dict[str, Any] = build_talk_totals_block(period_totals)
     period_block: dict[str, Any] = {
         "dials": period_totals["dials"],
         "connected": period_totals["connected"],
@@ -376,6 +532,7 @@ def build_team_period_block(
         "avg_per_person_per_day": average_block,
         "vs_yesterday": vs_yesterday,
         "calls_by_hour": calls_by_hour_block,
+        "talk_totals": talk_totals_block,
         "top_people": period_top_people,
     }
     return period_block
@@ -410,37 +567,61 @@ def build_team_period_blocks(
     single_day_count: int = 1
     thirty_day_count: int = 30
 
-    vs_yesterday_delta: dict[str, int] = calculate_vs_yesterday(
-        aggregates.team_today, aggregates.team_yesterday
+    vs_yesterday_delta: dict[str, float] = calculate_vs_yesterday(
+        aggregates.team_today.call_metrics, aggregates.team_yesterday.call_metrics
     )
-    today_top_people: list[dict[str, Any]] = build_top_people_list(active_salespeople, aggregates.seconds_today_by_user)
-    yesterday_top_people: list[dict[str, Any]] = build_top_people_list(active_salespeople, aggregates.seconds_yesterday_by_user)
-    thirty_day_top_people: list[dict[str, Any]] = build_top_people_list(active_salespeople, aggregates.seconds_thirty_days_by_user)
+    today_top_people: list[dict[str, Any]] = build_top_people_list(
+        active_salespeople, aggregates.team_today.talk_seconds_by_user
+    )
+    yesterday_top_people: list[dict[str, Any]] = build_top_people_list(
+        active_salespeople, aggregates.team_yesterday.talk_seconds_by_user
+    )
+    thirty_day_top_people: list[dict[str, Any]] = build_top_people_list(
+        active_salespeople, aggregates.team_thirty_days.talk_seconds_by_user
+    )
 
-    today_hourly_inputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_today_by_hour, office_hours=office_hours,
-        period_day_count=single_day_count, dials_hold_daily_averages=False,
+    today_hourly_inputs: TeamHourlyInputs = TeamHourlyInputs(
+        outgoing_by_hour=aggregates.team_today.outgoing_by_hour,
+        incoming_by_hour=aggregates.team_today.incoming_by_hour,
+        office_hours=office_hours,
+        period_day_count=single_day_count,
+        counts_hold_daily_averages=False,
     )
-    yesterday_hourly_inputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_yesterday_by_hour, office_hours=office_hours,
-        period_day_count=single_day_count, dials_hold_daily_averages=False,
+    yesterday_hourly_inputs: TeamHourlyInputs = TeamHourlyInputs(
+        outgoing_by_hour=aggregates.team_yesterday.outgoing_by_hour,
+        incoming_by_hour=aggregates.team_yesterday.incoming_by_hour,
+        office_hours=office_hours,
+        period_day_count=single_day_count,
+        counts_hold_daily_averages=False,
     )
-    thirty_day_hourly_inputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_thirty_days_by_hour, office_hours=office_hours,
-        period_day_count=thirty_day_count, dials_hold_daily_averages=True,
+    thirty_day_hourly_inputs: TeamHourlyInputs = TeamHourlyInputs(
+        outgoing_by_hour=aggregates.team_thirty_days.outgoing_by_hour,
+        incoming_by_hour=aggregates.team_thirty_days.incoming_by_hour,
+        office_hours=office_hours,
+        period_day_count=thirty_day_count,
+        counts_hold_daily_averages=True,
     )
 
     today_block: dict[str, Any] = build_team_period_block(
-        aggregates.team_today, active_salesperson_count,
-        today_hourly_inputs, today_top_people, vs_yesterday_delta,
+        aggregates.team_today.call_metrics,
+        active_salesperson_count,
+        today_hourly_inputs,
+        today_top_people,
+        vs_yesterday_delta,
     )
     yesterday_block: dict[str, Any] = build_team_period_block(
-        aggregates.team_yesterday, active_salesperson_count,
-        yesterday_hourly_inputs, yesterday_top_people, None,
+        aggregates.team_yesterday.call_metrics,
+        active_salesperson_count,
+        yesterday_hourly_inputs,
+        yesterday_top_people,
+        None,
     )
     thirty_days_block: dict[str, Any] = build_team_period_block(
-        aggregates.team_thirty_days, active_salesperson_count,
-        thirty_day_hourly_inputs, thirty_day_top_people, None,
+        aggregates.team_thirty_days.call_metrics,
+        active_salesperson_count,
+        thirty_day_hourly_inputs,
+        thirty_day_top_people,
+        None,
     )
 
     period_blocks: dict[str, dict[str, Any]] = {
@@ -464,8 +645,8 @@ def get_team_dashboard_data() -> dict[str, Any]:
 
 def create_empty_people_metrics() -> PeopleCallMetrics:
     empty_metrics: PeopleCallMetrics = PeopleCallMetrics(
-        today=create_empty_period_metrics(),
-        yesterday=create_empty_period_metrics(),
+        today=create_empty_team_period_metrics(),
+        yesterday=create_empty_team_period_metrics(),
     )
     return empty_metrics
 
@@ -475,15 +656,19 @@ def accumulate_people_call_records(
     windows: DashboardTimeWindows,
 ) -> dict[int, PeopleCallMetrics]:
     metrics_by_user: dict[int, PeopleCallMetrics] = {}
-    for user_id, raw_dialed_at, duration_seconds in call_records:
+    for user_id, raw_dialed_at, duration_seconds, direction in call_records:
         dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
         if user_id not in metrics_by_user:
             metrics_by_user[user_id] = create_empty_people_metrics()
         user_metrics: PeopleCallMetrics = metrics_by_user[user_id]
         if dialed_at >= windows.today_start_utc:
-            apply_call_to_metrics(user_metrics.today, duration_seconds)
+            apply_direction_call_to_metrics(
+                user_metrics.today, direction, duration_seconds
+            )
         elif dialed_at >= windows.yesterday_start_utc:
-            apply_call_to_metrics(user_metrics.yesterday, duration_seconds)
+            apply_direction_call_to_metrics(
+                user_metrics.yesterday, direction, duration_seconds
+            )
     return metrics_by_user
 
 
@@ -537,224 +722,3 @@ def get_team_people_data() -> list[dict[str, Any]]:
     )
     return people_rows
 
-
-def build_top_numbers_list(
-    phone_summary: dict[str, dict[str, int]]
-) -> list[dict[str, Any]]:
-    top_numbers_raw: list[dict[str, Any]] = [
-        {
-            "phone_number": phone,
-            "seconds": item["seconds"],
-            "minutes": calculate_talk_minutes(item["seconds"]),
-            "calls": item["calls"],
-        }
-        for phone, item in phone_summary.items()
-    ]
-    top_five_limit: int = 5
-    sorted_top_numbers: list[dict[str, Any]] = sorted(
-        top_numbers_raw,
-        key=lambda entry: entry["seconds"],
-        reverse=True,
-    )[:top_five_limit]
-    return sorted_top_numbers
-
-
-def fetch_person_call_records(
-    user_id: int, windows: DashboardTimeWindows
-) -> list[Any]:
-    person_call_records: list[Any] = (
-        Call.query.filter(
-            Call.user_id == user_id,
-            Call.dialed_at >= windows.thirty_days_start_utc,
-            Call.dialed_at < windows.tomorrow_start_utc,
-        )
-        .with_entities(Call.phone_number, Call.dialed_at, Call.duration_seconds)
-        .all()
-    )
-    return person_call_records
-
-
-def create_empty_person_aggregates(office_hours: list[int]) -> PersonCallAggregates:
-    aggregates: PersonCallAggregates = PersonCallAggregates(
-        person_today=create_empty_period_metrics(),
-        person_yesterday=create_empty_period_metrics(),
-        person_thirty_days=create_empty_period_metrics(),
-        active_day_dates=set(),
-        phone_summary={},
-        dials_today_by_hour=create_empty_hourly_counts(office_hours),
-        dials_yesterday_by_hour=create_empty_hourly_counts(office_hours),
-        dials_thirty_days_by_hour=create_empty_hourly_counts(office_hours),
-    )
-    return aggregates
-
-
-def add_phone_call_totals(
-    phone_summary: dict[str, dict[str, int]],
-    phone_number: str,
-    duration_seconds: int,
-) -> None:
-    if phone_number not in phone_summary:
-        phone_summary[phone_number] = {"seconds": 0, "calls": 0}
-    phone_summary[phone_number]["seconds"] += duration_seconds
-    phone_summary[phone_number]["calls"] += 1
-
-
-def accumulate_person_call_records(
-    call_records: list[Any],
-    windows: DashboardTimeWindows,
-    office_hours: list[int],
-) -> PersonCallAggregates:
-    office_hour_set: set[int] = set(office_hours)
-    aggregates: PersonCallAggregates = create_empty_person_aggregates(office_hours)
-
-    for phone_number, raw_dialed_at, duration_seconds in call_records:
-        dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
-        active_ist_date: date = to_ist(dialed_at).date()
-        aggregates.active_day_dates.add(active_ist_date)
-
-        apply_call_to_metrics(aggregates.person_thirty_days, duration_seconds)
-        add_phone_call_totals(
-            aggregates.phone_summary, phone_number, duration_seconds
-        )
-        apply_call_to_hourly_bucket(
-            aggregates.dials_thirty_days_by_hour, dialed_at, office_hour_set
-        )
-
-        if dialed_at >= windows.today_start_utc:
-            apply_call_to_metrics(aggregates.person_today, duration_seconds)
-            apply_call_to_hourly_bucket(
-                aggregates.dials_today_by_hour, dialed_at, office_hour_set
-            )
-        elif dialed_at >= windows.yesterday_start_utc:
-            apply_call_to_metrics(aggregates.person_yesterday, duration_seconds)
-            apply_call_to_hourly_bucket(
-                aggregates.dials_yesterday_by_hour, dialed_at, office_hour_set
-            )
-
-    return aggregates
-
-
-def build_person_period_block(
-    period_totals: dict[str, int],
-    hourly_inputs: PeriodHourlyInputs,
-) -> dict[str, Any]:
-    not_connected_total: int = calculate_not_connected(
-        period_totals["dials"], period_totals["connected"]
-    )
-    talk_minutes: float = calculate_talk_minutes(period_totals["seconds"])
-    connected_percent: int | None = calculate_connected_percentage(
-        period_totals["dials"], period_totals["connected"]
-    )
-    calls_by_hour_block: dict[str, Any] = build_calls_by_hour_block(hourly_inputs)
-    period_block: dict[str, Any] = {
-        "dials": period_totals["dials"],
-        "connected": period_totals["connected"],
-        "not_connected": not_connected_total,
-        "seconds": period_totals["seconds"],
-        "minutes": talk_minutes,
-        "connected_percent": connected_percent,
-        "calls_by_hour": calls_by_hour_block,
-    }
-    return period_block
-
-
-def build_avg_per_active_day(
-    thirty_day_totals: dict[str, int], active_day_count: int
-) -> dict[str, float] | None:
-    zero_active_days: int = 0
-    seconds_per_minute: int = 60
-    if active_day_count == zero_active_days:
-        return None
-
-    exact_talk_minutes: float = thirty_day_totals["seconds"] / seconds_per_minute
-    average_block: dict[str, float] = {
-        "dials": calculate_rounded_average(
-            thirty_day_totals["dials"], active_day_count
-        ),
-        "connected": calculate_rounded_average(
-            thirty_day_totals["connected"], active_day_count
-        ),
-        "minutes": calculate_decimal_average(
-            exact_talk_minutes, active_day_count
-        ),
-    }
-    return average_block
-
-
-def build_person_period_blocks(
-    aggregates: PersonCallAggregates, office_hours: list[int]
-) -> dict[str, dict[str, Any]]:
-    single_day_count: int = 1
-    thirty_day_count: int = 30
-    today_hourly_inputs: PeriodHourlyInputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_today_by_hour,
-        office_hours=office_hours,
-        period_day_count=single_day_count,
-        dials_hold_daily_averages=False,
-    )
-    yesterday_hourly_inputs: PeriodHourlyInputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_yesterday_by_hour,
-        office_hours=office_hours,
-        period_day_count=single_day_count,
-        dials_hold_daily_averages=False,
-    )
-    thirty_day_hourly_inputs: PeriodHourlyInputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_thirty_days_by_hour,
-        office_hours=office_hours,
-        period_day_count=thirty_day_count,
-        dials_hold_daily_averages=True,
-    )
-
-    today_block: dict[str, Any] = build_person_period_block(
-        aggregates.person_today, today_hourly_inputs
-    )
-    yesterday_block: dict[str, Any] = build_person_period_block(
-        aggregates.person_yesterday, yesterday_hourly_inputs
-    )
-    thirty_day_base_block: dict[str, Any] = build_person_period_block(
-        aggregates.person_thirty_days, thirty_day_hourly_inputs
-    )
-
-    active_day_count: int = len(aggregates.active_day_dates)
-    avg_per_active_day_block: dict[str, int] | None = build_avg_per_active_day(
-        aggregates.person_thirty_days, active_day_count
-    )
-    thirty_days_block: dict[str, Any] = {
-        **thirty_day_base_block,
-        "active_days": active_day_count,
-        "avg_per_active_day": avg_per_active_day_block,
-    }
-    period_blocks: dict[str, dict[str, Any]] = {
-        "today": today_block,
-        "yesterday": yesterday_block,
-        "last_30_days": thirty_days_block,
-    }
-    return period_blocks
-
-
-def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
-    target_user: User | None = db.session.get(User, user_id)
-    if target_user is None:
-        not_found_code: int = 404
-        raise AppException("User not found.", not_found_code)
-
-    office_hours: list[int] = get_office_hour_range()
-    windows: DashboardTimeWindows = calculate_dashboard_time_windows()
-    call_records: list[Any] = fetch_person_call_records(user_id, windows)
-    aggregates: PersonCallAggregates = accumulate_person_call_records(
-        call_records, windows, office_hours
-    )
-    period_blocks: dict[str, dict[str, Any]] = build_person_period_blocks(
-        aggregates, office_hours
-    )
-    sorted_top_numbers: list[dict[str, Any]] = build_top_numbers_list(
-        aggregates.phone_summary
-    )
-    response_payload: dict[str, Any] = {
-        "name": target_user.name,
-        "today": period_blocks["today"],
-        "yesterday": period_blocks["yesterday"],
-        "last_30_days": period_blocks["last_30_days"],
-        "top_numbers": sorted_top_numbers,
-    }
-    return response_payload

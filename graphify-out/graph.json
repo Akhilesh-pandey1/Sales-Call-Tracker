@@ -615,8 +615,8 @@
       "source_location": "L273",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_normalize",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_normalize()"
     },
     {
@@ -791,8 +791,8 @@
       "source_location": "L504",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_suggest_identities",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 179,
+      "community_name": "_suggest_identities",
       "norm_label": "_suggest_identities()"
     },
     {
@@ -802,8 +802,8 @@
       "source_location": "L525",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_row_identities",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 179,
+      "community_name": "_suggest_identities",
       "norm_label": "_row_identities()"
     },
     {
@@ -868,8 +868,8 @@
       "source_location": "L664",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_style_identity",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_style_identity()"
     },
     {
@@ -879,8 +879,8 @@
       "source_location": "L695",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_exact_row_identity",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 179,
+      "community_name": "_suggest_identities",
       "norm_label": "_exact_row_identity()"
     },
     {
@@ -901,8 +901,8 @@
       "source_location": "L713",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_project_row",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_project_row()"
     },
     {
@@ -912,8 +912,8 @@
       "source_location": "L717",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_valid_max_results",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_valid_max_results()"
     },
     {
@@ -923,8 +923,8 @@
       "source_location": "L721",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_exact_match_diagnostic",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_exact_match_diagnostic()"
     },
     {
@@ -934,8 +934,8 @@
       "source_location": "L736",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_style_search_destination",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_style_search_destination()"
     },
     {
@@ -945,8 +945,8 @@
       "source_location": "L755",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_search",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "search()"
     },
     {
@@ -956,8 +956,8 @@
       "source_location": "L848",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_stack_query_requests_legacy",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_stack_query_requests_legacy()"
     },
     {
@@ -967,8 +967,8 @@
       "source_location": "L888",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_stack_row_filter",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_stack_row_filter()"
     },
     {
@@ -978,8 +978,8 @@
       "source_location": "L925",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_exact_stack_identifier",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_exact_stack_identifier()"
     },
     {
@@ -989,8 +989,8 @@
       "source_location": "L938",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_legacy_successor_guidance",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "_legacy_successor_guidance()"
     },
     {
@@ -1000,8 +1000,8 @@
       "source_location": "L951",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_search_stack",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "search_stack()"
     },
     {
@@ -1011,8 +1011,8 @@
       "source_location": "L274",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_274",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "apply longest-first synonym substitution at token boundaries."
     },
     {
@@ -1143,8 +1143,8 @@
       "source_location": "L505",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_505",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 179,
+      "community_name": "_suggest_identities",
       "norm_label": "suggest complete public identities so a retry can bypass score thresholds."
     },
     {
@@ -1154,8 +1154,8 @@
       "source_location": "L526",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_526",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 179,
+      "community_name": "_suggest_identities",
       "norm_label": "return non-empty public identities from ordinary and alias fields."
     },
     {
@@ -1198,8 +1198,8 @@
       "source_location": "L665",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_665",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "resolve an explicit style identity without opening generic variant ranking."
     },
     {
@@ -1209,8 +1209,8 @@
       "source_location": "L696",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_696",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 179,
+      "community_name": "_suggest_identities",
       "norm_label": "return one row whose stable public identity exactly matches the query."
     },
     {
@@ -1231,8 +1231,8 @@
       "source_location": "L737",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_737",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "resolve a deprecated in-domain alias, or expose a cross-domain redirect."
     },
     {
@@ -1242,8 +1242,8 @@
       "source_location": "L756",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_756",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "main search function with auto-domain detection"
     },
     {
@@ -1253,8 +1253,8 @@
       "source_location": "L849",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_849",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "whether a stack query explicitly targets an older framework generation."
     },
     {
@@ -1264,8 +1264,8 @@
       "source_location": "L889",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_889",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "choose one coherent applicability generation for stack retrieval."
     },
     {
@@ -1275,8 +1275,8 @@
       "source_location": "L926",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_926",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "resolve a standalone api identifier even when its bm25 idf is low."
     },
     {
@@ -1286,8 +1286,8 @@
       "source_location": "L939",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_939",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "prefer the explicit successor row for a brand-new app on legacy-only stacks."
     },
     {
@@ -1297,8 +1297,8 @@
       "source_location": "L952",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_core_rationale_952",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "search stack-specific guidelines"
     },
     {
@@ -1319,8 +1319,8 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_resolve_dial",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "_resolve_dial()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_style_is_dark_primary",
-      "community": 238,
-      "community_name": "_resolve_color_mode",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_style_is_dark_primary()"
     },
     {
@@ -1374,8 +1374,8 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_query_wants_dark",
-      "community": 238,
-      "community_name": "_resolve_color_mode",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_query_wants_dark()"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_resolve_color_mode",
-      "community": 238,
-      "community_name": "_resolve_color_mode",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_resolve_color_mode()"
     },
     {
@@ -1418,8 +1418,8 @@
       "source_location": "L246",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_filter_anti_patterns_for_mode",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "_filter_anti_patterns_for_mode()"
     },
     {
@@ -1506,8 +1506,8 @@
       "source_location": "L319",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_multi_domain_search",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "._multi_domain_search()"
     },
     {
@@ -1550,8 +1550,8 @@
       "source_location": "L445",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_extract_results",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "._extract_results()"
     },
     {
@@ -1561,8 +1561,8 @@
       "source_location": "L449",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_generate",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": ".generate()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L961",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_safe_slug",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "safe_slug()"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L972",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_write_persisted_file",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_write_persisted_file()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_py_path",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "path"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L995",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_persist_design_system",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "persist_design_system()"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L1076",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_format_master_md",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format_master_md()"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L1381",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_format_page_override_md",
-      "community": 237,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format_page_override_md()"
     },
     {
@@ -1704,8 +1704,8 @@
       "source_location": "L1490",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_generate_intelligent_overrides",
-      "community": 237,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -1715,8 +1715,8 @@
       "source_location": "L1596",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_detect_page_type",
-      "community": 237,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_detect_page_type()"
     },
     {
@@ -1726,8 +1726,8 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_91",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "bucket a 1-10 dial value into its tier config. returns none if value is none."
     },
     {
@@ -1770,8 +1770,8 @@
       "source_location": "L165",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_165",
-      "community": 238,
-      "community_name": "_resolve_color_mode",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "true when a styles.csv row describes itself as dark-first."
     },
     {
@@ -1781,8 +1781,8 @@
       "source_location": "L181",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_181",
-      "community": 238,
-      "community_name": "_resolve_color_mode",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "true when the query explicitly asks for a dark theme."
     },
     {
@@ -1792,8 +1792,8 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_187",
-      "community": 238,
-      "community_name": "_resolve_color_mode",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "resolve the mode the rest of the output has to agree with."
     },
     {
@@ -1825,8 +1825,8 @@
       "source_location": "L247",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_247",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "drop \"avoid dark mode\" advice once dark mode is the resolved answer."
     },
     {
@@ -1858,8 +1858,8 @@
       "source_location": "L321",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_321",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "execute searches across multiple domains."
     },
     {
@@ -1902,8 +1902,8 @@
       "source_location": "L446",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_446",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "extract results list from search result dict."
     },
     {
@@ -1913,8 +1913,8 @@
       "source_location": "L451",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_451",
-      "community": 235,
-      "community_name": ".generate",
+      "community": 111,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "generate complete design system recommendation. variance/motion/density are..."
     },
     {
@@ -1990,8 +1990,8 @@
       "source_location": "L962",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_962",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "slugify a name into a single safe path segment. only [a-z0-9_-] survives; every..."
     },
     {
@@ -2001,8 +2001,8 @@
       "source_location": "L973",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_973",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "write fully to a temp file, then publish atomically."
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L997",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_997",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "persist design system to design-system/<project>/ folder using master +..."
     },
     {
@@ -2023,8 +2023,8 @@
       "source_location": "L1077",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_1077",
-      "community": 236,
-      "community_name": "persist_design_system",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format design system as master.md with hierarchical override logic."
     },
     {
@@ -2034,8 +2034,8 @@
       "source_location": "L1382",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_1382",
-      "community": 237,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1491",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_1491",
-      "community": 237,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "generate intelligent overrides based on page type using layered search. uses..."
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L1597",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_1597",
-      "community": 237,
-      "community_name": "_generate_intelligent_overrides",
+      "community": 158,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": ".agents/skills/design-screens/uiux/scripts/search.py"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search_format_output",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "format_output()"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search_rationale_45",
-      "community": 59,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/core.py",
+      "community": 97,
+      "community_name": "search",
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
@@ -6317,7 +6317,7 @@
       "_origin": "ast",
       "id": "app_app_tsx_app_app",
       "community": 107,
-      "community_name": "app.json",
+      "community_name": "root-navigator.tsx",
       "norm_label": "app.tsx"
     },
     {
@@ -6328,7 +6328,7 @@
       "_origin": "ast",
       "id": "app_app_app",
       "community": 107,
-      "community_name": "app.json",
+      "community_name": "root-navigator.tsx",
       "norm_label": "app()"
     },
     {
@@ -6564,7 +6564,7 @@
       "_origin": "ast",
       "id": "app_app_json_app_app",
       "community": 107,
-      "community_name": "app.json",
+      "community_name": "root-navigator.tsx",
       "norm_label": "app.json"
     },
     {
@@ -6575,7 +6575,7 @@
       "_origin": "ast",
       "id": "app_app_name",
       "community": 107,
-      "community_name": "app.json",
+      "community_name": "root-navigator.tsx",
       "norm_label": "name"
     },
     {
@@ -6586,7 +6586,7 @@
       "_origin": "ast",
       "id": "app_app_displayname",
       "community": 107,
-      "community_name": "app.json",
+      "community_name": "root-navigator.tsx",
       "norm_label": "displayname"
     },
     {
@@ -6597,7 +6597,7 @@
       "_origin": "ast",
       "id": "app_app_userinterfacestyle",
       "community": 107,
-      "community_name": "app.json",
+      "community_name": "root-navigator.tsx",
       "norm_label": "userinterfacestyle"
     },
     {
@@ -6795,7 +6795,7 @@
       "_origin": "ast",
       "id": "app_index",
       "community": 107,
-      "community_name": "app.json",
+      "community_name": "root-navigator.tsx",
       "norm_label": "index.js"
     },
     {
@@ -7179,8 +7179,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_package_dependencies_axios",
-      "community": 178,
-      "community_name": "axios",
+      "community": 114,
+      "community_name": "dependencies",
       "norm_label": "axios"
     },
     {
@@ -7190,8 +7190,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_package_json_axios",
-      "community": 178,
-      "community_name": "axios",
+      "community": 114,
+      "community_name": "dependencies",
       "norm_label": "axios"
     },
     {
@@ -7311,8 +7311,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_package_dependencies_react",
-      "community": 114,
-      "community_name": "dependencies",
+      "community": 208,
+      "community_name": "react",
       "norm_label": "react"
     },
     {
@@ -7322,8 +7322,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_package_json_react",
-      "community": 114,
-      "community_name": "dependencies",
+      "community": 208,
+      "community_name": "react",
       "norm_label": "react"
     },
     {
@@ -8147,8 +8147,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_app_navigation_root_navigator",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 107,
+      "community_name": "root-navigator.tsx",
       "norm_label": "root-navigator.tsx"
     },
     {
@@ -8158,8 +8158,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_app_navigation_root_navigator_authenticatedapp",
-      "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community": 107,
+      "community_name": "root-navigator.tsx",
       "norm_label": "authenticatedapp()"
     },
     {
@@ -8169,8 +8169,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_src_app_navigation_root_navigator_rootnavigator",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 107,
+      "community_name": "root-navigator.tsx",
       "norm_label": "rootnavigator()"
     },
     {
@@ -8730,8 +8730,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_src_features_auth_hooks_use_auth_loginresult",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 74,
+      "community_name": "cn",
       "norm_label": "loginresult"
     },
     {
@@ -8741,8 +8741,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_src_features_auth_hooks_use_auth_readstoredcountry",
-      "community": 57,
-      "community_name": "call-submit.ts",
+      "community": 70,
+      "community_name": "use-janitor.ts",
       "norm_label": "readstoredcountry()"
     },
     {
@@ -8752,8 +8752,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_src_features_auth_hooks_use_auth_getloginerrormessage",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 125,
+      "community_name": "use-lead-post-call.ts",
       "norm_label": "getloginerrormessage()"
     },
     {
@@ -8763,8 +8763,8 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "app_src_features_auth_hooks_use_auth_useauth",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 107,
+      "community_name": "root-navigator.tsx",
       "norm_label": "useauth()"
     },
     {
@@ -8774,8 +8774,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_auth_index",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 107,
+      "community_name": "root-navigator.tsx",
       "norm_label": "app/src/features/auth/index.ts"
     },
     {
@@ -8807,8 +8807,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_src_features_auth_screens_login_screen_loginscreen",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 107,
+      "community_name": "root-navigator.tsx",
       "norm_label": "loginscreen()"
     },
     {
@@ -9071,8 +9071,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_schedulechoicerow",
-      "community": 87,
-      "community_name": "settings-screen.tsx",
+      "community": 74,
+      "community_name": "cn",
       "norm_label": "schedulechoicerow()"
     },
     {
@@ -9126,8 +9126,8 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_post_call_dialog_postcalldialog",
-      "community": 87,
-      "community_name": "settings-screen.tsx",
+      "community": 145,
+      "community_name": "use-post-call-schedule.ts",
       "norm_label": "postcalldialog()"
     },
     {
@@ -9159,8 +9159,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_automated_calling_useautomatedcallingresult",
-      "community": 125,
-      "community_name": "use-lead-post-call.ts",
+      "community": 77,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "useautomatedcallingresult"
     },
     {
@@ -9302,8 +9302,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_src_features_dialer_hooks_use_keypad_post_call_usekeypadpostcallresult",
-      "community": 125,
-      "community_name": "use-lead-post-call.ts",
+      "community": 77,
+      "community_name": "dialer-screen.tsx",
       "norm_label": "usekeypadpostcallresult"
     },
     {
@@ -9819,8 +9819,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_stats_api_stats_api",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "stats.api.ts"
     },
     {
@@ -9830,8 +9830,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "app_src_features_stats_api_stats_api_callsbyhourstats",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "callsbyhourstats"
     },
     {
@@ -9841,8 +9841,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_src_features_stats_api_stats_api_periodstats",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "periodstats"
     },
     {
@@ -9852,8 +9852,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_features_stats_api_stats_api_averageperactivedaystats",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "averageperactivedaystats"
     },
     {
@@ -9863,8 +9863,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_features_stats_api_stats_api_last30daysstats",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "last30daysstats"
     },
     {
@@ -9874,8 +9874,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_features_stats_api_stats_api_personstats",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "personstats"
     },
     {
@@ -9885,8 +9885,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "app_src_features_stats_api_stats_api_fetchmystats",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "fetchmystats()"
     },
     {
@@ -9897,7 +9897,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "use-clear-local-data.ts"
     },
     {
@@ -9908,7 +9908,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data_clearlocaldatastate",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "clearlocaldatastate"
     },
     {
@@ -9919,7 +9919,7 @@
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_clear_local_data_useclearlocaldata",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "useclearlocaldata()"
     },
     {
@@ -9929,8 +9929,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_logout",
-      "community": 97,
-      "community_name": "use-logout.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "use-logout.ts"
     },
     {
@@ -9940,8 +9940,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_logout_logoutstate",
-      "community": 97,
-      "community_name": "use-logout.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "logoutstate"
     },
     {
@@ -9951,8 +9951,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_logout_buildlogoutrefusalmessage",
-      "community": 97,
-      "community_name": "use-logout.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "buildlogoutrefusalmessage()"
     },
     {
@@ -9962,8 +9962,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_logout_countunsentcallsaftersyncattempt",
-      "community": 97,
-      "community_name": "use-logout.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "countunsentcallsaftersyncattempt()"
     },
     {
@@ -9973,8 +9973,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_logout_uselogout",
-      "community": 97,
-      "community_name": "use-logout.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "uselogout()"
     },
     {
@@ -9984,8 +9984,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_my_stats",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "use-my-stats.ts"
     },
     {
@@ -9995,8 +9995,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_my_stats_mystatsstate",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "mystatsstate"
     },
     {
@@ -10006,8 +10006,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "app_src_features_stats_hooks_use_my_stats_usemystats",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "usemystats()"
     },
     {
@@ -10601,7 +10601,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_index",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "db/index.ts"
     },
     {
@@ -10612,7 +10612,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "pending-calls-db.ts"
     },
     {
@@ -10634,7 +10634,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_pendingcalltablerow",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "pendingcalltablerow"
     },
     {
@@ -10645,7 +10645,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_readrowlist",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "readrowlist()"
     },
     {
@@ -10656,7 +10656,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_pendingcalltablecolumn",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "pendingcalltablecolumn"
     },
     {
@@ -10667,7 +10667,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_addoutcomecolumnwhenmissing",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "addoutcomecolumnwhenmissing()"
     },
     {
@@ -10678,7 +10678,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_preparependingcallsdatabase",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "preparependingcallsdatabase()"
     },
     {
@@ -10689,7 +10689,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_opendatabase",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "opendatabase()"
     },
     {
@@ -10700,7 +10700,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_runquery",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "runquery()"
     },
     {
@@ -10711,7 +10711,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_topendingcall",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "topendingcall()"
     },
     {
@@ -10722,7 +10722,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_insertpendingcall",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "insertpendingcall()"
     },
     {
@@ -10733,7 +10733,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_getallpendingcalls",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "getallpendingcalls()"
     },
     {
@@ -10744,7 +10744,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_getpendingcallbyid",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "getpendingcallbyid()"
     },
     {
@@ -10766,7 +10766,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_addpendingcallattempt",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "addpendingcallattempt()"
     },
     {
@@ -10788,7 +10788,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_countpendingcalls",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "countpendingcalls()"
     },
     {
@@ -10799,7 +10799,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_db_pending_calls_db_clearallpendingcalls",
       "community": 71,
-      "community_name": "tracking/index.ts",
+      "community_name": "pending-calls-db.ts",
       "norm_label": "clearallpendingcalls()"
     },
     {
@@ -10810,7 +10810,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "use-call-tracker.ts"
     },
     {
@@ -10821,7 +10821,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_startcalltracking",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "startcalltracking()"
     },
     {
@@ -10832,7 +10832,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_stopcalltracking",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "stopcalltracking()"
     },
     {
@@ -10843,7 +10843,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_call_tracker_usecalltracker",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "usecalltracker()"
     },
     {
@@ -10975,7 +10975,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_permissions",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "use-permissions.ts"
     },
     {
@@ -10986,7 +10986,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_permissions_findmissingpermissions",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "findmissingpermissions()"
     },
     {
@@ -10997,7 +10997,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_permissions_usepermissions",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "usepermissions()"
     },
     {
@@ -11040,8 +11040,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_sync_warnaboutfailedsync",
-      "community": 97,
-      "community_name": "use-logout.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "warnaboutfailedsync()"
     },
     {
@@ -11073,8 +11073,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "app_src_features_tracking_hooks_use_sync_syncpendingcallssafely",
-      "community": 97,
-      "community_name": "use-logout.ts",
+      "community": 9,
+      "community_name": "app-navigator.tsx",
       "norm_label": "syncpendingcallssafely()"
     },
     {
@@ -11095,7 +11095,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_tracking_index",
-      "community": 71,
+      "community": 89,
       "community_name": "tracking/index.ts",
       "norm_label": "tracking/index.ts"
     },
@@ -11360,7 +11360,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "sync-events.ts"
     },
     {
@@ -11371,7 +11371,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_synclistener",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "synclistener"
     },
     {
@@ -11382,7 +11382,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_syncevent",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "syncevent"
     },
     {
@@ -11393,7 +11393,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_createsyncevent",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "createsyncevent()"
     },
     {
@@ -11404,7 +11404,7 @@
       "_origin": "ast",
       "id": "app_src_features_tracking_sync_events_callendedevent",
       "community": 89,
-      "community_name": "use-call-tracker.ts",
+      "community_name": "tracking/index.ts",
       "norm_label": "callendedevent"
     },
     {
@@ -11502,8 +11502,8 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "app_src_shared_api_api_client_readstoreduserid",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "readstoreduserid()"
     },
     {
@@ -11546,8 +11546,8 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "app_src_shared_api_api_client_readresponseerrormessage",
-      "community": 50,
-      "community_name": "app/src/shared/api/api-client.ts",
+      "community": 125,
+      "community_name": "use-lead-post-call.ts",
       "norm_label": "readresponseerrormessage()"
     },
     {
@@ -11568,8 +11568,8 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "app_src_shared_api_api_client_apiclient",
-      "community": 57,
-      "community_name": "call-submit.ts",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "apiclient"
     },
     {
@@ -11579,8 +11579,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_shared_constants_messages",
-      "community": 46,
-      "community_name": "my-stats-screen.tsx",
+      "community": 50,
+      "community_name": "app/src/shared/api/api-client.ts",
       "norm_label": "messages.ts"
     },
     {
@@ -12074,8 +12074,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "backend_app_core_permissions_require_auth",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 124,
+      "community_name": "require_auth",
       "norm_label": "require_auth()"
     },
     {
@@ -12085,8 +12085,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_permissions_py_any",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 124,
+      "community_name": "require_auth",
       "norm_label": "any"
     },
     {
@@ -12162,8 +12162,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_core_utils",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "utils.py"
     },
     {
@@ -12173,8 +12173,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_app_core_utils_get_ist_timezone",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "get_ist_timezone()"
     },
     {
@@ -12206,8 +12206,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_core_utils_py_datetime",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "datetime"
     },
     {
@@ -12228,8 +12228,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "backend_app_core_utils_to_ist",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "to_ist()"
     },
     {
@@ -12239,8 +12239,8 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "backend_app_core_utils_normalize_phone_number",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "normalize_phone_number()"
     },
     {
@@ -12250,8 +12250,8 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "backend_app_core_utils_parse_utc_datetime",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "parse_utc_datetime()"
     },
     {
@@ -12537,7 +12537,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes",
       "community": 124,
-      "community_name": "calls/services.py",
+      "community_name": "require_auth",
       "norm_label": "calls/routes.py"
     },
     {
@@ -12548,7 +12548,7 @@
       "_origin": "ast",
       "id": "route",
       "community": 124,
-      "community_name": "calls/services.py",
+      "community_name": "require_auth",
       "norm_label": "route"
     },
     {
@@ -12559,7 +12559,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_sync_calls",
       "community": 124,
-      "community_name": "calls/services.py",
+      "community_name": "require_auth",
       "norm_label": "sync_calls()"
     },
     {
@@ -12570,7 +12570,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_routes_py_response",
       "community": 124,
-      "community_name": "calls/services.py",
+      "community_name": "require_auth",
       "norm_label": "response"
     },
     {
@@ -12581,7 +12581,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas",
       "community": 124,
-      "community_name": "calls/services.py",
+      "community_name": "require_auth",
       "norm_label": "calls/schemas.py"
     },
     {
@@ -12592,7 +12592,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_synccallsrequest",
       "community": 124,
-      "community_name": "calls/services.py",
+      "community_name": "require_auth",
       "norm_label": "synccallsrequest"
     },
     {
@@ -12603,7 +12603,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_py_basemodel",
       "community": 124,
-      "community_name": "calls/services.py",
+      "community_name": "require_auth",
       "norm_label": "basemodel"
     },
     {
@@ -12614,7 +12614,7 @@
       "_origin": "ast",
       "id": "backend_app_modules_calls_schemas_synccallsresponse",
       "community": 124,
-      "community_name": "calls/services.py",
+      "community_name": "require_auth",
       "norm_label": "synccallsresponse"
     },
     {
@@ -12624,8 +12624,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "calls/services.py"
     },
     {
@@ -12635,8 +12635,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_get_ist_start_minute_of_day",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "get_ist_start_minute_of_day()"
     },
     {
@@ -12646,8 +12646,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_datetime",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "datetime"
     },
     {
@@ -12657,8 +12657,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_has_invalid_call_duration",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "has_invalid_call_duration()"
     },
     {
@@ -12668,8 +12668,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_py_any",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "any"
     },
     {
@@ -12679,8 +12679,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_extract_valid_call",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "extract_valid_call()"
     },
     {
@@ -12690,8 +12690,8 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "backend_app_modules_calls_services_sync_calls_batch",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "sync_calls_batch()"
     },
     {
@@ -12712,8 +12712,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "dashboard/routes.py"
     },
     {
@@ -12723,8 +12723,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_require_dashboard_manager",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "require_dashboard_manager()"
     },
     {
@@ -12734,8 +12734,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_py_any",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "any"
     },
     {
@@ -12745,8 +12745,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_py_get",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get"
     },
     {
@@ -12756,8 +12756,8 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_get_team_dashboard",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get_team_dashboard()"
     },
     {
@@ -12767,8 +12767,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_py_response",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "response"
     },
     {
@@ -12778,8 +12778,8 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_get_team_people",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get_team_people()"
     },
     {
@@ -12789,8 +12789,8 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_routes_get_person_dashboard",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "get_person_dashboard()"
     },
     {
@@ -12800,8 +12800,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "dashboard/schemas.py"
     },
     {
@@ -12811,8 +12811,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_avgperpersonperday",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "avgperpersonperday"
     },
     {
@@ -12822,8 +12822,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_py_basemodel",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "basemodel"
     },
     {
@@ -12833,8 +12833,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_vsyesterdaydelta",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "vsyesterdaydelta"
     },
     {
@@ -12844,8 +12844,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_callsbyhourblock",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "callsbyhourblock"
     },
     {
@@ -12855,8 +12855,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_toppersonsummary",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "toppersonsummary"
     },
     {
@@ -12866,8 +12866,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_teamperiodblock",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "teamperiodblock"
     },
     {
@@ -12877,8 +12877,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_teamdashboardresponse",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "teamdashboardresponse"
     },
     {
@@ -12888,8 +12888,8 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_peopleperiodblock",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "peopleperiodblock"
     },
     {
@@ -12899,8 +12899,8 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_teampeoplerow",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "teampeoplerow"
     },
     {
@@ -12910,8 +12910,8 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_avgperactiveday",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "avgperactiveday"
     },
     {
@@ -12921,8 +12921,8 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_topnumberitem",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "topnumberitem"
     },
     {
@@ -12932,8 +12932,8 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_personperiodstats",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "personperiodstats"
     },
     {
@@ -12943,8 +12943,8 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_personthirtydaystats",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "personthirtydaystats"
     },
     {
@@ -12954,8 +12954,8 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "backend_app_modules_dashboard_schemas_persondashboardresponse",
-      "community": 78,
-      "community_name": "dashboard/services.py",
+      "community": 105,
+      "community_name": "dashboard/routes.py",
       "norm_label": "persondashboardresponse"
     },
     {
@@ -13471,8 +13471,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_leads_init",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "leads/__init__.py"
     },
     {
@@ -13482,8 +13482,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_leads_models",
-      "community": 73,
-      "community_name": "seed_fake_data.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "leads/models.py"
     },
     {
@@ -13493,8 +13493,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "backend_app_modules_leads_models_lead",
-      "community": 73,
-      "community_name": "seed_fake_data.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "lead"
     },
     {
@@ -13504,8 +13504,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "leads/routes.py"
     },
     {
@@ -13515,8 +13515,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_post",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "post"
     },
     {
@@ -13526,8 +13526,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_upload_leads",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "upload_leads()"
     },
     {
@@ -13537,8 +13537,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_response",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "response"
     },
     {
@@ -13548,8 +13548,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_py_get",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get"
     },
     {
@@ -13559,8 +13559,8 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_get_summary",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_summary()"
     },
     {
@@ -13570,8 +13570,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "backend_app_modules_leads_routes_get_next_lead",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_next_lead()"
     },
     {
@@ -13581,8 +13581,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "leads/schemas.py"
     },
     {
@@ -13592,8 +13592,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_uploadleadsresponse",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "uploadleadsresponse"
     },
     {
@@ -13603,8 +13603,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_py_basemodel",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "basemodel"
     },
     {
@@ -13614,8 +13614,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_leadpoolbucketcounts",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "leadpoolbucketcounts"
     },
     {
@@ -13625,8 +13625,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_daycounts",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "daycounts"
     },
     {
@@ -13636,8 +13636,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_leadssummaryresponse",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "leadssummaryresponse"
     },
     {
@@ -13647,8 +13647,8 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_scheduleleadrequest",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "scheduleleadrequest"
     },
     {
@@ -13658,8 +13658,8 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_nextleadrequest",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "nextleadrequest"
     },
     {
@@ -13669,8 +13669,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_servedlead",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "servedlead"
     },
     {
@@ -13680,8 +13680,8 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "backend_app_modules_leads_schemas_nextleadresponse",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "nextleadresponse"
     },
     {
@@ -13691,8 +13691,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "leads/services.py"
     },
     {
@@ -13702,8 +13702,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_validate_and_format_e164",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "validate_and_format_e164()"
     },
     {
@@ -13713,8 +13713,8 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_ist_day_utc_range",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_ist_day_utc_range()"
     },
     {
@@ -13724,30 +13724,41 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_py_datetime",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "datetime"
+    },
+    {
+      "label": "booking_belongs_to_another_user()",
+      "file_type": "code",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "backend_app_modules_leads_services_booking_belongs_to_another_user",
+      "community": 35,
+      "community_name": "test_leads.py",
+      "norm_label": "booking_belongs_to_another_user()"
     },
     {
       "label": "resolve_lead_for_call()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L59",
+      "source_location": "L67",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_resolve_lead_for_call",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "resolve_lead_for_call()"
     },
     {
       "label": "import_leads_csv()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L110",
+      "source_location": "L126",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_import_leads_csv",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "import_leads_csv()"
     },
     {
@@ -13757,129 +13768,129 @@
       "source_location": "",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_py_any",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "any"
     },
     {
       "label": "get_waiting_by_attempt_counts()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L175",
+      "source_location": "L191",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_waiting_by_attempt_counts",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_waiting_by_attempt_counts()"
     },
     {
       "label": "get_pool_bucket_counts()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L196",
+      "source_location": "L212",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_pool_bucket_counts",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_pool_bucket_counts()"
     },
     {
       "label": "get_daily_ist_utc_ranges()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L219",
+      "source_location": "L235",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_daily_ist_utc_ranges",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_daily_ist_utc_ranges()"
     },
     {
       "label": "get_uploaded_day_counts()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L229",
+      "source_location": "L245",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_uploaded_day_counts",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_uploaded_day_counts()"
     },
     {
       "label": "get_tackled_day_counts()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L245",
+      "source_location": "L261",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_tackled_day_counts",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_tackled_day_counts()"
     },
     {
       "label": "get_leads_summary()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L274",
+      "source_location": "L290",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_get_leads_summary",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "get_leads_summary()"
     },
     {
       "label": "schedule_lead_callback()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L288",
+      "source_location": "L304",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_schedule_lead_callback",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "schedule_lead_callback()"
     },
     {
       "label": "schedule_resolved_lead_for_call()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L322",
+      "source_location": "L338",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_schedule_resolved_lead_for_call",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "schedule_resolved_lead_for_call()"
     },
     {
       "label": "find_candidate_lead()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L340",
+      "source_location": "L368",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_find_candidate_lead",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "find_candidate_lead()"
     },
     {
       "label": "release_active_claim()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L379",
+      "source_location": "L407",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_release_active_claim",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "release_active_claim()"
     },
     {
       "label": "serve_next_lead()",
       "file_type": "code",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L389",
+      "source_location": "L417",
       "_origin": "ast",
       "id": "backend_app_modules_leads_services_serve_next_lead",
-      "community": 105,
-      "community_name": "leads/services.py",
+      "community": 35,
+      "community_name": "test_leads.py",
       "norm_label": "serve_next_lead()"
     },
     {
@@ -15412,21 +15423,54 @@
       "norm_label": "test_sync_schedule_lifts_done_or_stopped_lead_back_to_waiting()"
     },
     {
-      "label": "test_sync_newest_schedule_wins_ownership()",
+      "label": "test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking()",
       "file_type": "code",
       "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L1118",
       "_origin": "ast",
-      "id": "backend_tests_modules_test_calls_test_sync_newest_schedule_wins_ownership",
+      "id": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "community": 14,
       "community_name": "test_calls.py",
-      "norm_label": "test_sync_newest_schedule_wins_ownership()"
+      "norm_label": "test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking()"
+    },
+    {
+      "label": "test_sync_call_that_stops_a_booked_lead_frees_the_booking()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1181",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_call_that_stops_a_booked_lead_frees_the_booking",
+      "community": 14,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_call_that_stops_a_booked_lead_frees_the_booking()"
+    },
+    {
+      "label": "test_sync_owner_rebooks_own_lead_and_new_time_replaces_old()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1231",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "community": 14,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_owner_rebooks_own_lead_and_new_time_replaces_old()"
+    },
+    {
+      "label": "test_sync_success_returns_empty_refused_call_ids()",
+      "file_type": "code",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1294",
+      "_origin": "ast",
+      "id": "backend_tests_modules_test_calls_test_sync_success_returns_empty_refused_call_ids",
+      "community": 14,
+      "community_name": "test_calls.py",
+      "norm_label": "test_sync_success_returns_empty_refused_call_ids()"
     },
     {
       "label": "test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved()",
       "file_type": "code",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1184",
+      "source_location": "L1320",
       "_origin": "ast",
       "id": "backend_tests_modules_test_calls_test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved",
       "community": 14,
@@ -15437,7 +15481,7 @@
       "label": "test_sync_requires_authentication()",
       "file_type": "code",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1246",
+      "source_location": "L1382",
       "_origin": "ast",
       "id": "backend_tests_modules_test_calls_test_sync_requires_authentication",
       "community": 14,
@@ -15448,7 +15492,7 @@
       "label": "test_sync_refuses_deactivated_user()",
       "file_type": "code",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1254",
+      "source_location": "L1390",
       "_origin": "ast",
       "id": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
       "community": 14,
@@ -15459,7 +15503,7 @@
       "label": "test_sync_missing_calls_payload()",
       "file_type": "code",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1271",
+      "source_location": "L1407",
       "_origin": "ast",
       "id": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
       "community": 14,
@@ -17123,8 +17167,8 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "backend_tests_test_foundation_test_utils_helpers",
-      "community": 124,
-      "community_name": "calls/services.py",
+      "community": 78,
+      "community_name": "dashboard/services.py",
       "norm_label": "test_utils_helpers()"
     },
     {
@@ -17255,8 +17299,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_wsgi",
-      "community": 67,
-      "community_name": "test_production.py",
+      "community": 60,
+      "community_name": "app/__init__.py",
       "norm_label": "wsgi.py"
     },
     {
@@ -17398,8 +17442,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_package_dependencies_radix_ui_react_slot",
-      "community": 209,
-      "community_name": "@radix-ui/react-slot",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "@radix-ui/react-slot"
     },
     {
@@ -17409,8 +17453,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "radix_ui_react_slot",
-      "community": 209,
-      "community_name": "@radix-ui/react-slot",
+      "community": 163,
+      "community_name": "dependencies",
       "norm_label": "@radix-ui/react-slot"
     },
     {
@@ -17486,8 +17530,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_package_dependencies_clsx",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 209,
+      "community_name": "clsx",
       "norm_label": "clsx"
     },
     {
@@ -17497,8 +17541,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_package_json_clsx",
-      "community": 163,
-      "community_name": "dependencies",
+      "community": 209,
+      "community_name": "clsx",
       "norm_label": "clsx"
     },
     {
@@ -19675,8 +19719,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "kpi-card.tsx"
     },
     {
@@ -19686,8 +19730,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card_kpicardprops",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "kpicardprops"
     },
     {
@@ -19697,8 +19741,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_dashboard_components_kpi_card_kpicard",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "kpicard()"
     },
     {
@@ -19939,8 +19983,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_dashboard_index",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "dashboard/index.ts"
     },
     {
@@ -20577,8 +20621,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "lead-daily-stats.tsx"
     },
     {
@@ -20588,8 +20632,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_percentchangepilldata",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "percentchangepilldata"
     },
     {
@@ -20599,8 +20643,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_leaddailystatsprops",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leaddailystatsprops"
     },
     {
@@ -20610,8 +20654,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_buildpercentchangepill",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "buildpercentchangepill()"
     },
     {
@@ -20621,8 +20665,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_buildcomparisonsubline",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "buildcomparisonsubline()"
     },
     {
@@ -20632,8 +20676,8 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "web_src_features_leads_components_lead_daily_stats_leaddailystats",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leaddailystats()"
     },
     {
@@ -21017,8 +21061,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_src_features_leads_types_leadsdailycount",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leadsdailycount"
     },
     {
@@ -21083,8 +21127,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "leads/utils/format.ts"
     },
     {
@@ -21094,8 +21138,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format_getdayoverdaypercentchange",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "getdayoverdaypercentchange()"
     },
     {
@@ -21105,8 +21149,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_src_features_leads_utils_format_formatpercentchangelabel",
-      "community": 234,
-      "community_name": "lead-daily-stats.tsx",
+      "community": 47,
+      "community_name": "lead-pool-stats.tsx",
       "norm_label": "formatpercentchangelabel()"
     },
     {
@@ -31219,102 +31263,113 @@
       "norm_label": "agents.md"
     },
     {
-      "label": "Rules",
+      "label": "CLAUDE.md",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_rules",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude",
+      "community": 178,
+      "community_name": "CLAUDE.md",
+      "norm_label": "claude.md"
+    },
+    {
+      "label": "Rules",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "claude_rules",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "rules"
     },
     {
       "label": "Language",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_language",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude_language",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "language"
     },
     {
       "label": "Source of Truth (No Guessing)",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_source_of_truth_no_guessing",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude_source_of_truth_no_guessing",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "source of truth (no guessing)"
     },
     {
       "label": "Tasks",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_tasks",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude_tasks",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "tasks"
     },
     {
       "label": "Search",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L32",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_search",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude_search",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "search"
     },
     {
       "label": "Timelines",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L40",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_timelines",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude_timelines",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "timelines"
     },
     {
       "label": "Working Directory",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L47",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_working_directory",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude_working_directory",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "working directory"
     },
     {
       "label": "Env Files",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L54",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_env_files",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude_env_files",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "env files"
     },
     {
       "label": "Private Folder",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L59",
       "_origin": "ast",
-      "id": "d_company_projects_sales_call_tracker_agents_private_folder",
-      "community": 140,
-      "community_name": "AGENTS.md",
+      "id": "claude_private_folder",
+      "community": 178,
+      "community_name": "CLAUDE.md",
       "norm_label": "private folder"
     },
     {
@@ -57732,7 +57787,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L114",
+      "source_location": "L130",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_import_leads_csv",
@@ -57744,7 +57799,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L294",
+      "source_location": "L310",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_schedule_lead_callback",
@@ -59868,7 +59923,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/calls/services.py",
-      "source_location": "L112",
+      "source_location": "L113",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_calls_services_sync_calls_batch",
@@ -59892,7 +59947,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L380",
+      "source_location": "L408",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_release_active_claim",
@@ -59904,7 +59959,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L303",
+      "source_location": "L319",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_schedule_lead_callback",
@@ -59916,7 +59971,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L405",
+      "source_location": "L433",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_serve_next_lead",
@@ -59980,6 +60035,30 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_old_call_dropped",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1284",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "target": "backend_app_core_utils_now_utc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1171",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "target": "backend_app_core_utils_now_utc",
       "confidence_score": 1.0
     },
@@ -60444,7 +60523,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L297",
+      "source_location": "L313",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_schedule_lead_callback",
@@ -61294,7 +61373,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/calls/services.py",
-      "source_location": "L132",
+      "source_location": "L133",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_calls_services_sync_calls_batch",
@@ -61837,7 +61916,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/calls/services.py",
-      "source_location": "L120",
+      "source_location": "L121",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_calls_services_sync_calls_batch",
@@ -61849,7 +61928,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/calls/services.py",
-      "source_location": "L142",
+      "source_location": "L143",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_calls_services_sync_calls_batch",
@@ -61861,7 +61940,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/calls/services.py",
-      "source_location": "L145",
+      "source_location": "L146",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_calls_services_sync_calls_batch",
@@ -61873,7 +61952,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/calls/services.py",
-      "source_location": "L115",
+      "source_location": "L116",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_calls_services_sync_calls_batch",
@@ -64400,10 +64479,22 @@
     },
     {
       "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services_booking_belongs_to_another_user",
+      "target": "backend_app_modules_leads_models_lead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L340",
+      "source_location": "L368",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_find_candidate_lead",
@@ -64415,7 +64506,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L160",
+      "source_location": "L176",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_import_leads_csv",
@@ -64427,7 +64518,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L72",
+      "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_resolve_lead_for_call",
@@ -65080,7 +65171,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L389",
+      "source_location": "L417",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_serve_next_lead",
@@ -65091,7 +65182,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L340",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services",
+      "target": "backend_app_modules_leads_services_booking_belongs_to_another_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L368",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65102,7 +65204,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L219",
+      "source_location": "L235",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65124,7 +65226,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L274",
+      "source_location": "L290",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65135,7 +65237,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L196",
+      "source_location": "L212",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65146,7 +65248,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L245",
+      "source_location": "L261",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65157,7 +65259,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L229",
+      "source_location": "L245",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65168,7 +65270,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L175",
+      "source_location": "L191",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65179,7 +65281,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L110",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65202,7 +65304,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L379",
+      "source_location": "L407",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65213,7 +65315,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L59",
+      "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65224,7 +65326,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L288",
+      "source_location": "L304",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65235,7 +65337,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L322",
+      "source_location": "L338",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65246,7 +65348,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L389",
+      "source_location": "L417",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services",
@@ -65281,7 +65383,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L140",
+      "source_location": "L156",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_import_leads_csv",
@@ -65317,7 +65419,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L223",
+      "source_location": "L239",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_daily_ist_utc_ranges",
@@ -65341,7 +65443,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L340",
+      "source_location": "L368",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_find_candidate_lead",
@@ -65353,7 +65455,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L219",
+      "source_location": "L235",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_daily_ist_utc_ranges",
@@ -65365,7 +65467,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L59",
+      "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_resolve_lead_for_call",
@@ -65373,11 +65475,35 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services_resolve_lead_for_call",
+      "target": "backend_app_modules_leads_services_booking_belongs_to_another_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/modules/leads/services.py",
+      "source_location": "L346",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_app_modules_leads_services_schedule_resolved_lead_for_call",
+      "target": "backend_app_modules_leads_services_booking_belongs_to_another_user",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L110",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_import_leads_csv",
@@ -65389,7 +65515,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L274",
+      "source_location": "L290",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_leads_summary",
@@ -65401,7 +65527,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L196",
+      "source_location": "L212",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_pool_bucket_counts",
@@ -65413,7 +65539,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L389",
+      "source_location": "L417",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_serve_next_lead",
@@ -65425,7 +65551,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L201",
+      "source_location": "L217",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_pool_bucket_counts",
@@ -65437,7 +65563,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L275",
+      "source_location": "L291",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_leads_summary",
@@ -65449,7 +65575,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L246",
+      "source_location": "L262",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_tackled_day_counts",
@@ -65461,7 +65587,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L230",
+      "source_location": "L246",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_uploaded_day_counts",
@@ -65473,7 +65599,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L276",
+      "source_location": "L292",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_leads_summary",
@@ -65485,7 +65611,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L277",
+      "source_location": "L293",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_get_leads_summary",
@@ -65497,7 +65623,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L331",
+      "source_location": "L358",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_schedule_resolved_lead_for_call",
@@ -65509,7 +65635,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L395",
+      "source_location": "L423",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_serve_next_lead",
@@ -65521,7 +65647,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L406",
+      "source_location": "L434",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_serve_next_lead",
@@ -65533,7 +65659,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/modules/leads/services.py",
-      "source_location": "L400",
+      "source_location": "L428",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_app_modules_leads_services_serve_next_lead",
@@ -68852,6 +68978,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1181",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_call_that_stops_a_booked_lead_frees_the_booking",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L766",
       "weight": 1.0,
       "_origin": "ast",
@@ -68907,22 +69044,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1271",
+      "source_location": "L1407",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls",
       "target": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1118",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "backend_tests_modules_test_calls",
-      "target": "backend_tests_modules_test_calls_test_sync_newest_schedule_wins_ownership",
       "confidence_score": 1.0
     },
     {
@@ -68951,7 +69077,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1184",
+      "source_location": "L1231",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1320",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls",
@@ -68962,7 +69099,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1254",
+      "source_location": "L1390",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls",
@@ -68984,11 +69121,22 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1246",
+      "source_location": "L1382",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls",
       "target": "backend_tests_modules_test_calls_test_sync_requires_authentication",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1118",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "confidence_score": 1.0
     },
     {
@@ -69044,6 +69192,17 @@
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls",
       "target": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1294",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls",
+      "target": "backend_tests_modules_test_calls_test_sync_success_returns_empty_refused_call_ids",
       "confidence_score": 1.0
     },
     {
@@ -69180,6 +69339,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1185",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_call_that_stops_a_booked_lead_frees_the_booking",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L770",
       "weight": 1.0,
       "_origin": "ast",
@@ -69240,22 +69411,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1273",
+      "source_location": "L1409",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
-      "target": "backend_tests_modules_test_calls_create_user_fixture",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1122",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "backend_tests_modules_test_calls_test_sync_newest_schedule_wins_ownership",
       "target": "backend_tests_modules_test_calls_create_user_fixture",
       "confidence_score": 1.0
     },
@@ -69288,7 +69447,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1188",
+      "source_location": "L1235",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1324",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved",
@@ -69300,7 +69471,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1256",
+      "source_location": "L1392",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
@@ -69316,6 +69487,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_repeated_unconnected_calls_to_new_number_stop_lead_at_limit",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1122",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "target": "backend_tests_modules_test_calls_create_user_fixture",
       "confidence_score": 1.0
     },
@@ -69376,6 +69559,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "target": "backend_tests_modules_test_calls_create_user_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1298",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_success_returns_empty_refused_call_ids",
       "target": "backend_tests_modules_test_calls_create_user_fixture",
       "confidence_score": 1.0
     },
@@ -69480,10 +69675,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1131",
+      "source_location": "L1190",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "backend_tests_modules_test_calls_test_sync_newest_schedule_wins_ownership",
+      "source": "backend_tests_modules_test_calls_test_sync_call_that_stops_a_booked_lead_frees_the_booking",
       "target": "backend_tests_modules_test_calls_create_lead_fixture",
       "confidence_score": 1.0
     },
@@ -69492,10 +69687,34 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1191",
+      "source_location": "L1238",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "target": "backend_tests_modules_test_calls_create_lead_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1327",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved",
+      "target": "backend_tests_modules_test_calls_create_lead_fixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1127",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "target": "backend_tests_modules_test_calls_create_lead_fixture",
       "confidence_score": 1.0
     },
@@ -69636,6 +69855,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1202",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_call_that_stops_a_booked_lead_frees_the_booking",
+      "target": "backend_tests_modules_test_calls_build_ist_dialed_at",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L778",
       "weight": 1.0,
       "_origin": "ast",
@@ -69696,18 +69927,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1142",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "backend_tests_modules_test_calls_test_sync_newest_schedule_wins_ownership",
-      "target": "backend_tests_modules_test_calls_build_ist_dialed_at",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L153",
       "weight": 1.0,
       "_origin": "ast",
@@ -69732,7 +69951,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1202",
+      "source_location": "L1251",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "target": "backend_tests_modules_test_calls_build_ist_dialed_at",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1338",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved",
@@ -69748,6 +69979,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_repeated_unconnected_calls_to_new_number_stop_lead_at_limit",
+      "target": "backend_tests_modules_test_calls_build_ist_dialed_at",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1139",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "target": "backend_tests_modules_test_calls_build_ist_dialed_at",
       "confidence_score": 1.0
     },
@@ -69816,6 +70059,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1306",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_success_returns_empty_refused_call_ids",
+      "target": "backend_tests_modules_test_calls_build_ist_dialed_at",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L325",
       "weight": 1.0,
       "_origin": "ast",
@@ -69852,10 +70107,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1144",
+      "source_location": "L1204",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "backend_tests_modules_test_calls_test_sync_newest_schedule_wins_ownership",
+      "source": "backend_tests_modules_test_calls_test_sync_call_that_stops_a_booked_lead_frees_the_booking",
       "target": "backend_tests_modules_test_calls_build_utc_iso_days_from_now",
       "confidence_score": 1.0
     },
@@ -69864,10 +70119,34 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1204",
+      "source_location": "L1253",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "target": "backend_tests_modules_test_calls_build_utc_iso_days_from_now",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1340",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved",
+      "target": "backend_tests_modules_test_calls_build_utc_iso_days_from_now",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1141",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "target": "backend_tests_modules_test_calls_build_utc_iso_days_from_now",
       "confidence_score": 1.0
     },
@@ -70032,6 +70311,18 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1181",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_call_that_stops_a_booked_lead_frees_the_booking",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L766",
       "weight": 1.0,
       "_origin": "ast",
@@ -70092,22 +70383,10 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1271",
+      "source_location": "L1407",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
-      "target": "backend_tests_modules_test_calls_py_flask",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1118",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "backend_tests_modules_test_calls_test_sync_newest_schedule_wins_ownership",
       "target": "backend_tests_modules_test_calls_py_flask",
       "confidence_score": 1.0
     },
@@ -70140,7 +70419,19 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1184",
+      "source_location": "L1231",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1320",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved",
@@ -70152,7 +70443,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1254",
+      "source_location": "L1390",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
@@ -70168,6 +70459,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_repeated_unconnected_calls_to_new_number_stop_lead_at_limit",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1118",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "target": "backend_tests_modules_test_calls_py_flask",
       "confidence_score": 1.0
     },
@@ -70228,6 +70531,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_server_deduplicates_retried_rows",
+      "target": "backend_tests_modules_test_calls_py_flask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1294",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_success_returns_empty_refused_call_ids",
       "target": "backend_tests_modules_test_calls_py_flask",
       "confidence_score": 1.0
     },
@@ -70356,6 +70671,18 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1181",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_call_that_stops_a_booked_lead_frees_the_booking",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L766",
       "weight": 1.0,
       "_origin": "ast",
@@ -70416,22 +70743,10 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1271",
+      "source_location": "L1407",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_missing_calls_payload",
-      "target": "backend_tests_modules_test_calls_py_flaskclient",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1118",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "backend_tests_modules_test_calls_test_sync_newest_schedule_wins_ownership",
       "target": "backend_tests_modules_test_calls_py_flaskclient",
       "confidence_score": 1.0
     },
@@ -70464,7 +70779,19 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1184",
+      "source_location": "L1231",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_owner_rebooks_own_lead_and_new_time_replaces_old",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1320",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved",
@@ -70476,7 +70803,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1254",
+      "source_location": "L1390",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_refuses_deactivated_user",
@@ -70500,10 +70827,22 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1246",
+      "source_location": "L1382",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_requires_authentication",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1118",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking",
       "target": "backend_tests_modules_test_calls_py_flaskclient",
       "confidence_score": 1.0
     },
@@ -70572,6 +70911,18 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
+      "source_location": "L1294",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "backend_tests_modules_test_calls_test_sync_success_returns_empty_refused_call_ids",
+      "target": "backend_tests_modules_test_calls_py_flaskclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/modules/test_calls.py",
       "source_location": "L300",
       "weight": 1.0,
       "_origin": "ast",
@@ -70608,7 +70959,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/modules/test_calls.py",
-      "source_location": "L1184",
+      "source_location": "L1320",
       "weight": 1.0,
       "_origin": "ast",
       "source": "backend_tests_modules_test_calls_test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved",
@@ -97383,100 +97734,100 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L54",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_env_files",
+      "source": "claude",
+      "target": "claude_env_files",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_language",
+      "source": "claude",
+      "target": "claude_language",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_private_folder",
+      "source": "claude",
+      "target": "claude_private_folder",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_rules",
+      "source": "claude",
+      "target": "claude_rules",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_search",
+      "source": "claude",
+      "target": "claude_search",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_source_of_truth_no_guessing",
+      "source": "claude",
+      "target": "claude_source_of_truth_no_guessing",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_tasks",
+      "source": "claude",
+      "target": "claude_tasks",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_timelines",
+      "source": "claude",
+      "target": "claude_timelines",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "agents",
-      "target": "d_company_projects_sales_call_tracker_agents_working_directory",
+      "source": "claude",
+      "target": "claude_working_directory",
       "confidence_score": 1.0
     },
     {
@@ -101089,5 +101440,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a5e42f612abfed8c41f89953d3c80c552183645c"
+  "built_at_commit": "b0321c6f4db0b818229eca540271c8145530c9cb"
 }

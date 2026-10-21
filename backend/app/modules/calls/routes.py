@@ -28,7 +28,7 @@ def sync_calls() -> tuple[Response, int]:
 
     current_user_id: int = g.user.id
     current_user_country: str = g.user.country
-    result: dict[str, bool] = sync_calls_batch(
+    result: dict[str, Any] = sync_calls_batch(
         validated_request.calls, current_user_id, current_user_country
     )
 

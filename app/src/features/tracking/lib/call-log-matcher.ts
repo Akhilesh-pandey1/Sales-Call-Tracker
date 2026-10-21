@@ -1,3 +1,4 @@
+import { matchWindowMs } from '@/config/app-config';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 
 export interface CallLogEntry {
@@ -24,14 +25,24 @@ function toEntryTimeMs(callLogEntry: CallLogEntry): number {
   return entryTimeMs;
 }
 
-function isOutgoingCallEntry(callLogEntry: CallLogEntry): boolean {
+function toEntryType(callLogEntry: CallLogEntry): string {
+  const entryType = callLogEntry.type.toUpperCase();
+  return entryType;
+}
+
+export function isOutgoingCallEntry(callLogEntry: CallLogEntry): boolean {
   const outgoingCallType = 'OUTGOING';
-  const isOutgoing = callLogEntry.type.toUpperCase() === outgoingCallType;
+  const isOutgoing = toEntryType(callLogEntry) === outgoingCallType;
   return isOutgoing;
 }
 
-function isEntryWithinMatchWindow(entryTimeMs: number, intentTimeMs: number): boolean {
-  const matchWindowMs = 60 * 1000;
+export function isIncomingCallEntry(callLogEntry: CallLogEntry): boolean {
+  const incomingCallType = 'INCOMING';
+  const isIncoming = toEntryType(callLogEntry) === incomingCallType;
+  return isIncoming;
+}
+
+export function isEntryWithinMatchWindow(entryTimeMs: number, intentTimeMs: number): boolean {
   const isAfterIntent = entryTimeMs >= intentTimeMs;
   const isInsideWindow = entryTimeMs <= intentTimeMs + matchWindowMs;
   const isWithinWindow = isAfterIntent && isInsideWindow;

@@ -4,6 +4,7 @@
   "maxLeadAttempts": 3,
   "maxScheduleAheadDays": 30,
   "stalePendingCallAgeMs": 3600000,
+  "matchWindowMs": 60000,
   "maxJanitorAttempts": 5,
   "minMsBetweenJanitorSweeps": 5000,
   "directCallStartTimeoutMs": 8000,

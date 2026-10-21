@@ -261,6 +261,51 @@ def test_sync_out_of_window_call_dropped_with_warning(
         assert "after-window" in caplog.text
 
 
+def test_sync_office_hours_gate_applies_to_incoming_calls(
+    app: Flask, client: FlaskClient, caplog: pytest.LogCaptureFixture
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "incoming-after-window",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 19, 1),
+                    "duration_seconds": 120,
+                    "direction": "incoming",
+                },
+                {
+                    "call_id": "incoming-inside-window",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 120,
+                    "direction": "incoming",
+                },
+            ]
+        }
+
+        services_logger_name: str = "backend.app.modules.calls.services"
+        with caplog.at_level(logging.WARNING, logger=services_logger_name):
+            response: Response = client.post(
+                "/api/calls/sync", json=payload, headers=headers
+            )
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        assert db.session.get(Call, "incoming-after-window") is None
+        saved_inside_call: Call | None = db.session.get(Call, "incoming-inside-window")
+        assert saved_inside_call is not None
+        assert saved_inside_call.direction == "incoming"
+        assert "incoming-after-window" in caplog.text
+
+
 def test_sync_judges_call_own_start_time_not_sync_moment(
     app: Flask, client: FlaskClient
 ) -> None:
@@ -438,6 +483,160 @@ def test_sync_leaves_outcome_column_empty_on_every_saved_row(
         assert len(saved_rows) == expected_saved_count
         for saved_row in saved_rows:
             assert saved_row.outcome is None
+
+
+def test_sync_incoming_call_saved_without_touching_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        existing_lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=0,
+            claimed_by=user.id,
+            scheduled_by=user.id,
+        )
+        schedule_days_ahead: int = 5
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-incoming-answered",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                    "direction": "incoming",
+                    "scheduled_at": build_utc_iso_days_from_now(schedule_days_ahead),
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        saved_call: Call | None = db.session.get(Call, "call-incoming-answered")
+        assert saved_call is not None
+        assert saved_call.user_id == user.id
+        assert saved_call.direction == "incoming"
+
+        refreshed_lead: Lead | None = db.session.get(Lead, existing_lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.status == "waiting"
+        assert refreshed_lead.attempt_count == 0
+        assert refreshed_lead.last_attempted_at is None
+        assert refreshed_lead.claimed_by == user.id
+        assert refreshed_lead.scheduled_by == user.id
+        assert refreshed_lead.scheduled_at is not None
+
+
+def test_sync_incoming_call_never_creates_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-incoming-unknown-number",
+                    "phone_number": "9876500044",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                    "direction": "incoming",
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        saved_call: Call | None = db.session.get(Call, "call-incoming-unknown-number")
+        assert saved_call is not None
+        assert saved_call.direction == "incoming"
+
+        lead_count: int = Lead.query.filter_by(phone_number="+919876500044").count()
+        expected_lead_count: int = 0
+        assert lead_count == expected_lead_count
+
+
+def test_sync_call_without_direction_saves_as_outgoing(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-no-direction-field",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        saved_call: Call | None = db.session.get(Call, "call-no-direction-field")
+        assert saved_call is not None
+        assert saved_call.direction == "outgoing"
+
+
+def test_sync_invalid_direction_row_skipped_while_valid_saved(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-bad-direction",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                    "direction": "missed",
+                },
+                {
+                    "call_id": "call-good-direction",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 12, 5),
+                    "duration_seconds": 45,
+                    "direction": "outgoing",
+                },
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        assert db.session.get(Call, "call-bad-direction") is None
+        saved_good_call: Call | None = db.session.get(Call, "call-good-direction")
+        assert saved_good_call is not None
+        assert saved_good_call.direction == "outgoing"
 
 
 def test_sync_server_deduplicates_retried_rows(

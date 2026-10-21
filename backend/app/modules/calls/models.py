@@ -15,6 +15,9 @@ class Call(db.Model):
     duration_seconds = db.Column(
         db.Integer, nullable=False, default=0, server_default="0"
     )
+    direction = db.Column(
+        db.String(10), nullable=False, default="outgoing", server_default="outgoing"
+    )
     outcome = db.Column(db.String(20), nullable=True)
 
     __table_args__ = (

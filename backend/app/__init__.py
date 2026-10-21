@@ -45,25 +45,35 @@ def create_initial_manager(app: Flask) -> None:
     db.session.commit()
 
 
-def ensure_calls_outcome_column() -> None:
+def ensure_calls_column(column_name: str, column_definition: str) -> None:
     database_inspector = inspect(db.engine)
     existing_column_names: list[str] = [
         column["name"] for column in database_inspector.get_columns("calls")
     ]
-    if "outcome" in existing_column_names:
+    if column_name in existing_column_names:
         return
 
     is_postgres_database: bool = db.engine.dialect.name == "postgresql"
     if is_postgres_database:
-        add_outcome_column_statement = text(
-            "ALTER TABLE calls ADD COLUMN IF NOT EXISTS outcome VARCHAR(20)"
+        add_column_statement = text(
+            f"ALTER TABLE calls ADD COLUMN IF NOT EXISTS {column_name} {column_definition}"
         )
     else:
-        add_outcome_column_statement = text(
-            "ALTER TABLE calls ADD COLUMN outcome VARCHAR(20)"
+        add_column_statement = text(
+            f"ALTER TABLE calls ADD COLUMN {column_name} {column_definition}"
         )
-    db.session.execute(add_outcome_column_statement)
+    db.session.execute(add_column_statement)
     db.session.commit()
+
+
+def ensure_calls_outcome_column() -> None:
+    outcome_column_definition: str = "VARCHAR(20)"
+    ensure_calls_column("outcome", outcome_column_definition)
+
+
+def ensure_calls_direction_column() -> None:
+    direction_column_definition: str = "VARCHAR(10) NOT NULL DEFAULT 'outgoing'"
+    ensure_calls_column("direction", direction_column_definition)
 
 
 def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
@@ -88,6 +98,7 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
     with app.app_context():
         db.create_all()
         ensure_calls_outcome_column()
+        ensure_calls_direction_column()
         get_or_create_office_hours_window()
         create_initial_manager(app)
 

@@ -69,10 +69,10 @@ Receives a batch of completed calls from the salesperson's mobile app.
   - Skips and logs any call older than 3 days (`MAX_CALL_AGE_DAYS`).
   - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped.
   - A call whose normalized number has no lead in `leads` creates that lead as `waiting`, then resolves it like any uploaded lead.
-  - Applies an optional `scheduled_at` to the resolved lead (created or existing) under the standard schedule rules: the time must be in the future within 30 days and the lead must not be `done` or `stopped`. An invalid or inapplicable schedule is skipped with a server log line — the call itself is always saved.
   - Automatically updates the lead matching the dialed number in `leads`:
     - If `duration_seconds > 0` (connected): marks `status = 'done'`, clears claims and schedules.
     - If `duration_seconds == 0` (not connected): increments `attempt_count`, sets `retry_locked_until = now() + 2 hours`. If attempts reach 3 (`MAX_LEAD_ATTEMPTS`), sets `status = 'stopped'`. Clears claims and schedules.
+  - Applies an optional `scheduled_at` to the resolved lead (created or existing) after resolution, whatever the lead's new state: the lead ends `status = 'waiting'` with `scheduled_by` and `scheduled_at` set and the retry lock and claim cleared — a schedule books a connected lead back and lifts a `done` or `stopped` lead, and the last schedule wins ownership. Only a bad time is refused — past or beyond 30 days (`MAX_SCHEDULE_AHEAD_DAYS`): it is skipped with a server log line and the call itself is always saved.
 - **Response 200**:
   ```json
   { "status": true }
@@ -413,9 +413,8 @@ Retrieves and claims the next lead for automated calling, with an optional lead 
   - `continue_calling` — boolean, optional, default `true`. When `false`, no lead is served or claimed in this request.
 - **Processing Logic**:
   1. If `schedule` is supplied:
-     - Verifies `lead_id` is neither `done` nor `stopped`.
-     - Validates `scheduled_at` is in the future and within 30 days (`MAX_SCHEDULE_AHEAD_DAYS`).
-     - Sets `scheduled_by = user_id`, `scheduled_at = scheduled_at`, and releases active claim.
+     - Validates `scheduled_at` is in the future and within 30 days (`MAX_SCHEDULE_AHEAD_DAYS`) — a past or too-far time is refused with 400 and nothing is booked.
+     - Whatever the lead's state (`waiting`, `done`, or `stopped`), the lead ends `waiting` with `scheduled_by = user_id`, `scheduled_at = scheduled_at`, and the retry lock and active claim cleared — the last salesperson to schedule owns the reservation.
   2. If `continue_calling` is `false`: skips serving and claiming and responds `lead: null` — the salesperson who stopped the automated loop is assigned nothing.
   3. Prioritizes serving:
      - Current unexpired claim for this user (if one already exists).

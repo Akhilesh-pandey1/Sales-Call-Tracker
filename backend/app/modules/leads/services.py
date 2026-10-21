@@ -293,13 +293,6 @@ def schedule_lead_callback(lead_id: int, user_id: int, scheduled_at_raw: str) ->
     if target_lead is None:
         raise AppException("Lead not found.", not_found_code)
 
-    done_status: str = "done"
-    stopped_status: str = "stopped"
-    if target_lead.status in (done_status, stopped_status):
-        raise AppException(
-            "Cannot schedule a completed or stopped lead.", bad_request_code
-        )
-
     try:
         scheduled_datetime: datetime = parse_utc_datetime(scheduled_at_raw)
     except Exception:
@@ -316,10 +309,13 @@ def schedule_lead_callback(lead_id: int, user_id: int, scheduled_at_raw: str) ->
             "Scheduled time must be in the future within 30 days.", bad_request_code
         )
 
+    waiting_status: str = "waiting"
+    target_lead.status = waiting_status
     target_lead.scheduled_by = user_id
     target_lead.scheduled_at = scheduled_datetime
     target_lead.claimed_by = None
     target_lead.claimed_until = None
+    target_lead.retry_locked_until = None
     db.session.flush()
 
 

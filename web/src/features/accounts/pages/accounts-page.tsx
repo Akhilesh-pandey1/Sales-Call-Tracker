@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageHeader } from "@/shared/components/page-header";
+import { PageLoader } from "@/shared/components/page-loader";
 import { ErrorState } from "@/shared/components/error-state";
 import { TodaysDateAction } from "@/shared/components/todays-date-action";
 import { AddUserModal } from "../components/add-user-modal";
@@ -59,7 +60,7 @@ export function AccountsPage() {
       <div className="flex justify-end">
         <AddUserModal />
       </div>
-      {isLoading && <p className="text-sm text-muted-foreground">Loading accounts…</p>}
+      {isLoading && <PageLoader />}
       {!isLoading && (
         <AccountsTable
           accounts={accounts}

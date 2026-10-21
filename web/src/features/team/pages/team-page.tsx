@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ErrorState } from "@/shared/components/error-state";
 import { PageHeader } from "@/shared/components/page-header";
+import { PageLoader } from "@/shared/components/page-loader";
 import { TodaysDateAction } from "@/shared/components/todays-date-action";
 import { TeamEmptyState } from "../components/team-empty-state";
 import { TeamPeopleTable } from "../components/team-people-table";
@@ -30,7 +31,7 @@ export function TeamPage() {
 
   return (
     <PageHeader title="Team" action={<TodaysDateAction />}>
-      {isLoading && <p className="text-sm text-muted-foreground">Loading team…</p>}
+      {isLoading && <PageLoader />}
       {!isLoading && hasNoSalespeople && <TeamEmptyState />}
       {!isLoading && !hasNoSalespeople && (
         <TeamPeopleTable people={teamPeople} onOpenPerson={handleOpenPerson} />

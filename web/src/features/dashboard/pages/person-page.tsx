@@ -13,6 +13,7 @@ import {
 import { cn } from "@/shared/utils/cn";
 import { ErrorState } from "@/shared/components/error-state";
 import { PageHeader } from "@/shared/components/page-header";
+import { PageLoader } from "@/shared/components/page-loader";
 import { formatCount } from "@/shared/utils/format-count";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { CallsByHourChart } from "../components/calls-by-hour-chart";
@@ -391,7 +392,7 @@ export function PersonPage() {
         </Button>
       </div>
 
-      {isLoading && <p className="text-sm text-muted-foreground">Loading stats…</p>}
+      {isLoading && <PageLoader />}
       {personStats && (
         <>
           <Last30DaysKpiSection last30DaysStats={personStats.last_30_days} />

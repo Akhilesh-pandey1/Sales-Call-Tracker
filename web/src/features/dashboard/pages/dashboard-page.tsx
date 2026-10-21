@@ -1,6 +1,7 @@
 import { useMemo, useState, type ComponentType } from "react";
 import { Clock, Megaphone, PhoneIncoming, PhoneMissed } from "lucide-react";
 import { PageHeader } from "@/shared/components/page-header";
+import { PageLoader } from "@/shared/components/page-loader";
 import { formatCount } from "@/shared/utils/format-count";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { CallsByHourChart } from "../components/calls-by-hour-chart";
@@ -219,7 +220,7 @@ export function DashboardPage() {
 
   return (
     <PageHeader title="Team Dashboard" action={dateAction}>
-      {isLoading && <p className="text-sm text-muted-foreground">Loading dashboard…</p>}
+      {isLoading && <PageLoader />}
       {teamDashboard && (
         <TeamPerformanceSection
           periodBlock={teamDashboard[selectedPeriod]}

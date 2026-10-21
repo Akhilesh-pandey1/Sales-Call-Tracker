@@ -1,6 +1,7 @@
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { ErrorAlert } from "@/shared/components/error-alert";
 import { ErrorState } from "@/shared/components/error-state";
 import { useOfficeHours } from "../hooks/use-office-hours";
@@ -43,7 +44,9 @@ export function OfficeHoursEditor() {
       </div>
       <div className="px-5 pb-5 sm:px-6">
         {isLoading ? (
-          <p className="mt-1 text-sm text-muted-foreground">Loading office hours…</p>
+          <div className="flex justify-center py-8">
+            <Spinner className="size-5" />
+          </div>
         ) : (
           <>
             <p className="mt-1 text-sm text-muted-foreground">

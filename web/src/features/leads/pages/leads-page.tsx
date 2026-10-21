@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/shared/components/page-header";
+import { PageLoader } from "@/shared/components/page-loader";
 import { LeadUploadCard } from "../components/lead-upload-card";
 import { LeadDailyStats } from "../components/lead-daily-stats";
 import { LeadPoolStats } from "../components/lead-pool-stats";
@@ -35,8 +36,7 @@ export function LeadsPage() {
   if (isPending) {
     return (
       <PageHeader title="Leads">
-        <div className="h-40 animate-pulse rounded-xl bg-muted" />
-        <div className="h-64 animate-pulse rounded-xl bg-muted" />
+        <PageLoader />
       </PageHeader>
     );
   }

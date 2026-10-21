@@ -640,8 +640,8 @@
     "semantic_hash": ""
   },
   "web/src/features/accounts/pages/accounts-page.tsx": {
-    "mtime": 1792502977.9777248,
-    "ast_hash": "c083494ce426abfe698b679aaf8fbfe7",
+    "mtime": 1792579718.3188741,
+    "ast_hash": "4c01bfacc09a0a8631c2d1cf08f34823",
     "semantic_hash": ""
   },
   "web/src/features/auth/index.ts": {
@@ -660,8 +660,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/pages/person-page.tsx": {
-    "mtime": 1792502978.0167081,
-    "ast_hash": "183f5116c34b0e17e54b70a97fd206c4",
+    "mtime": 1792579735.8459961,
+    "ast_hash": "833113351cfff22e6f7e16b5d449f264",
     "semantic_hash": ""
   },
   "web/src/features/leads/index.ts": {
@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "web/src/features/leads/pages/leads-page.tsx": {
-    "mtime": 1792502978.0247886,
-    "ast_hash": "8b9a4d0fe0710215fa472173e8f58f14",
+    "mtime": 1792579718.3336794,
+    "ast_hash": "536967bd632d19ab1d60f8ef0fe061ec",
     "semantic_hash": ""
   },
   "web/src/main.tsx": {
@@ -1655,8 +1655,8 @@
     "semantic_hash": ""
   },
   "web/src/features/settings/components/office-hours-editor.tsx": {
-    "mtime": 1792502978.026782,
-    "ast_hash": "2788bb8a16128871f5072078c57fe968",
+    "mtime": 1792579735.8459961,
+    "ast_hash": "905f443a75478a22947eb867aaa2f5dc",
     "semantic_hash": ""
   },
   "web/src/features/settings/hooks/use-office-hours-form.ts": {
@@ -1700,8 +1700,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/pages/dashboard-page.tsx": {
-    "mtime": 1792502978.0057237,
-    "ast_hash": "c1aaec9064a507bee38492cdcf245895",
+    "mtime": 1792579718.3149917,
+    "ast_hash": "eb68cc199d0d738f158ce581f0f066f7",
     "semantic_hash": ""
   },
   "web/src/features/settings/pages/settings-page.tsx": {
@@ -1735,8 +1735,8 @@
     "semantic_hash": ""
   },
   "web/src/features/team/pages/team-page.tsx": {
-    "mtime": 1792502978.032017,
-    "ast_hash": "800b9868ecaee1e9ca5646be131a1d9c",
+    "mtime": 1792579718.3149917,
+    "ast_hash": "e1cc97c179739b1832eaae7ad2353b23",
     "semantic_hash": ""
   },
   "web/src/features/team/types.ts": {
@@ -2227,6 +2227,16 @@
   ".claude/rules/rust-code-style.md": {
     "mtime": 1792496317.7330966,
     "ast_hash": "7ca1e629ed1dfce8ceab64dbdd09d8df",
+    "semantic_hash": ""
+  },
+  "web/src/components/ui/spinner.tsx": {
+    "mtime": 1792579695.3620744,
+    "ast_hash": "dc0086ad5e3d2ed9ef396392d9b72895",
+    "semantic_hash": ""
+  },
+  "web/src/shared/components/page-loader.tsx": {
+    "mtime": 1792579695.3620744,
+    "ast_hash": "b68207131cc67f81f8dabd9eedb9e4a9",
     "semantic_hash": ""
   }
 }

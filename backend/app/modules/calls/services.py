@@ -127,8 +127,9 @@ def extract_valid_call(
 
 def sync_calls_batch(
     raw_calls: list[dict[str, Any]], user_id: int, user_country: str
-) -> dict[str, bool]:
+) -> dict[str, Any]:
     seen_call_ids: set[str] = set()
+    refused_call_ids: list[str] = []
     current_time: datetime = now_utc()
     age_limit_days: int = MAX_CALL_AGE_DAYS
     cutoff_time: datetime = current_time - timedelta(days=age_limit_days)
@@ -163,12 +164,19 @@ def sync_calls_batch(
         seen_call_ids.add(call_id)
 
         if direction == OUTGOING_DIRECTION:
-            resolve_lead_for_call(phone_number, duration, dialed_at)
+            resolve_lead_for_call(phone_number, duration, dialed_at, user_id)
 
             if scheduled_at_raw is not None:
-                schedule_resolved_lead_for_call(phone_number, user_id, scheduled_at_raw)
+                schedule_refused: bool = schedule_resolved_lead_for_call(
+                    phone_number, user_id, scheduled_at_raw
+                )
+                if schedule_refused:
+                    refused_call_ids.append(call_id)
 
     db.session.commit()
 
-    response_data: dict[str, bool] = {"status": True}
-    return response_data
+    sync_result: dict[str, Any] = {
+        "status": True,
+        "schedule_refused_call_ids": refused_call_ids,
+    }
+    return sync_result

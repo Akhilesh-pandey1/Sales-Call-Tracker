@@ -8,3 +8,4 @@ class SyncCallsRequest(BaseModel):
 
 class SyncCallsResponse(BaseModel):
     status: bool
+    schedule_refused_call_ids: list[str] = []

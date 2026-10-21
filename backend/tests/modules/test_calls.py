@@ -1314,70 +1314,206 @@ def test_sync_schedule_lifts_done_or_stopped_lead_back_to_waiting(
         assert refreshed_stopped.attempt_count == 3
 
 
-def test_sync_newest_schedule_wins_ownership(
+def test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking(
     app: Flask, client: FlaskClient
 ) -> None:
     with app.app_context():
-        first_user = create_user_fixture(name="salesperson1", token="first-token")
-        second_user = create_user_fixture(name="salesperson2", token="second-token")
-        first_headers = {
-            "Authorization": f"Bearer {first_user.auth_token}"
-        }
-        second_headers = {
-            "Authorization": f"Bearer {second_user.auth_token}"
-        }
+        owner_user = create_user_fixture(name="booking-owner", token="owner-token")
+        other_user = create_user_fixture(name="other-caller", token="other-token")
+        other_headers = {"Authorization": f"Bearer {other_user.auth_token}"}
 
+        booked_days_ahead = 1
         lead = create_lead_fixture(
             phone_number="+919876500220",
             status="waiting",
             attempt_count=0,
+            scheduled_by=owner_user.id,
         )
 
-        first_payload = {
+        payload = {
             "calls": [
                 {
-                    "call_id": "call-first-schedule",
+                    "call_id": "call-refused-schedule",
                     "phone_number": "9876500220",
                     "dialed_at": build_ist_dialed_at(0, 12, 0),
-                    "duration_seconds": 0,
-                    "scheduled_at": build_utc_iso_days_from_now(2),
-                }
-            ]
-        }
-        first_response = client.post(
-            "/api/calls/sync", json=first_payload, headers=first_headers
-        )
-        assert first_response.status_code == 200
-
-        lead_after_first = db.session.get(Lead, lead.id)
-        assert lead_after_first is not None
-        assert lead_after_first.scheduled_by == first_user.id
-        assert lead_after_first.attempt_count == 1
-        assert lead_after_first.retry_locked_until is None
-
-        second_payload = {
-            "calls": [
-                {
-                    "call_id": "call-second-schedule",
-                    "phone_number": "9876500220",
-                    "dialed_at": build_ist_dialed_at(0, 13, 0),
                     "duration_seconds": 0,
                     "scheduled_at": build_utc_iso_days_from_now(4),
                 }
             ]
         }
-        second_response = client.post(
-            "/api/calls/sync", json=second_payload, headers=second_headers
-        )
-        assert second_response.status_code == 200
+
+        response = client.post("/api/calls/sync", json=payload, headers=other_headers)
+        status_code = response.status_code
+        response_json = response.get_json()
+
+        expected_code = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+        assert response_json.get("schedule_refused_call_ids") == [
+            "call-refused-schedule"
+        ]
+
+        saved_call = db.session.get(Call, "call-refused-schedule")
+        assert saved_call is not None
+        assert saved_call.user_id == other_user.id
 
         refreshed_lead = db.session.get(Lead, lead.id)
         assert refreshed_lead is not None
         assert refreshed_lead.status == "waiting"
-        assert refreshed_lead.scheduled_by == second_user.id
+        assert refreshed_lead.scheduled_by == owner_user.id
+        assert refreshed_lead.attempt_count == 1
+        assert refreshed_lead.claimed_by is None
+
+        owner_scheduled_at = refreshed_lead.scheduled_at
+        if owner_scheduled_at.tzinfo is None:
+            owner_scheduled_at = owner_scheduled_at.replace(tzinfo=timezone.utc)
+        expected_owner_time = now_utc() + timedelta(days=booked_days_ahead)
+        schedule_tolerance_seconds = 5
+        assert (
+            abs(
+                (owner_scheduled_at - expected_owner_time).total_seconds()
+            )
+            < schedule_tolerance_seconds
+        )
+
+
+def test_sync_call_that_stops_a_booked_lead_frees_the_booking(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        owner_user = create_user_fixture(name="stop-owner", token="stop-owner-token")
+        other_user = create_user_fixture(name="stop-caller", token="stop-caller-token")
+        other_headers = {"Authorization": f"Bearer {other_user.auth_token}"}
+
+        attempts_before_final: int = MAX_LEAD_ATTEMPTS - 1
+        lead = create_lead_fixture(
+            phone_number="+919876500250",
+            status="waiting",
+            attempt_count=attempts_before_final,
+            scheduled_by=owner_user.id,
+        )
+
+        payload = {
+            "calls": [
+                {
+                    "call_id": "call-stop-booked",
+                    "phone_number": "9876500250",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 0,
+                    "scheduled_at": build_utc_iso_days_from_now(4),
+                }
+            ]
+        }
+
+        response = client.post("/api/calls/sync", json=payload, headers=other_headers)
+        status_code = response.status_code
+        response_json = response.get_json()
+
+        expected_code = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+        assert response_json.get("schedule_refused_call_ids") == []
+
+        saved_call = db.session.get(Call, "call-stop-booked")
+        assert saved_call is not None
+        assert saved_call.user_id == other_user.id
+
+        refreshed_lead = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.attempt_count == MAX_LEAD_ATTEMPTS
+        assert refreshed_lead.status == "waiting"
+        assert refreshed_lead.scheduled_by == other_user.id
+        assert refreshed_lead.scheduled_at is not None
+        assert refreshed_lead.retry_locked_until is None
+
+
+def test_sync_owner_rebooks_own_lead_and_new_time_replaces_old(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        owner_user = create_user_fixture(name="rebooking-owner", token="rebook-token")
+        owner_headers = {"Authorization": f"Bearer {owner_user.auth_token}"}
+
+        lead = create_lead_fixture(
+            phone_number="+919876500230",
+            status="waiting",
+            attempt_count=0,
+            scheduled_by=owner_user.id,
+        )
+
+        new_schedule_days_ahead = 5
+        payload = {
+            "calls": [
+                {
+                    "call_id": "call-owner-rebook",
+                    "phone_number": "9876500230",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 0,
+                    "scheduled_at": build_utc_iso_days_from_now(
+                        new_schedule_days_ahead
+                    ),
+                }
+            ]
+        }
+
+        response = client.post("/api/calls/sync", json=payload, headers=owner_headers)
+        status_code = response.status_code
+        response_json = response.get_json()
+
+        expected_code = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+        assert response_json.get("schedule_refused_call_ids") == []
+
+        saved_call = db.session.get(Call, "call-owner-rebook")
+        assert saved_call is not None
+        assert saved_call.user_id == owner_user.id
+
+        refreshed_lead = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.status == "waiting"
+        assert refreshed_lead.scheduled_by == owner_user.id
+        assert refreshed_lead.attempt_count == 1
         assert refreshed_lead.retry_locked_until is None
         assert refreshed_lead.claimed_by is None
-        assert refreshed_lead.attempt_count == 2
+
+        new_scheduled_at = refreshed_lead.scheduled_at
+        if new_scheduled_at.tzinfo is None:
+            new_scheduled_at = new_scheduled_at.replace(tzinfo=timezone.utc)
+        expected_new_time = now_utc() + timedelta(days=new_schedule_days_ahead)
+        schedule_tolerance_seconds = 5
+        assert (
+            abs(
+                (new_scheduled_at - expected_new_time).total_seconds()
+            )
+            < schedule_tolerance_seconds
+        )
+
+
+def test_sync_success_returns_empty_refused_call_ids(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user = create_user_fixture()
+        headers = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload = {
+            "calls": [
+                {
+                    "call_id": "call-plain-success",
+                    "phone_number": "9876500240",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 10,
+                }
+            ]
+        }
+
+        response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+        assert response.get_json() == {
+            "status": True,
+            "schedule_refused_call_ids": [],
+        }
 
 
 def test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved(

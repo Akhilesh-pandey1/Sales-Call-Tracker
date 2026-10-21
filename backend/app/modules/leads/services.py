@@ -11,6 +11,7 @@ from backend.app.config.base import (
     MAX_LEAD_UPLOAD_MB,
     MAX_SCHEDULE_AHEAD_DAYS,
     RETRY_LOCK_HOURS,
+    SCHEDULE_EXPIRE_HOURS,
 )
 from backend.app.core.errors import AppException
 from backend.app.core.utils import now_ist, now_utc, parse_utc_datetime
@@ -414,11 +415,27 @@ def release_active_claim(user_id: int) -> None:
     db.session.execute(release_claim_statement)
 
 
+def release_expired_bookings() -> None:
+    waiting_status: str = "waiting"
+    current_utc: datetime = now_utc()
+    expire_delta: timedelta = timedelta(hours=SCHEDULE_EXPIRE_HOURS)
+    expire_cutoff: datetime = current_utc - expire_delta
+    release_booking_statement: Update = (
+        update(Lead)
+        .where(Lead.status == waiting_status, Lead.scheduled_at < expire_cutoff)
+        .values(scheduled_by=None, scheduled_at=None)
+        .execution_options(synchronize_session=False)
+    )
+    db.session.execute(release_booking_statement)
+
+
 def serve_next_lead(
     user_id: int,
     continue_calling: bool,
     schedule_data: ScheduleLeadRequest | None = None,
 ) -> dict[str, Any]:
+    release_expired_bookings()
+
     if schedule_data is not None:
         schedule_lead_callback(
             schedule_data.lead_id, user_id, schedule_data.scheduled_at

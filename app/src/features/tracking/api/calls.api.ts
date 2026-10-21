@@ -10,8 +10,15 @@ export type SyncCall = {
   scheduled_at?: string;
 };
 
-async function syncCalls(calls: SyncCall[]): Promise<void> {
-  await apiClient.post('/calls/sync', { calls });
+export type SyncCallsResponse = {
+  status: boolean;
+  schedule_refused_call_ids: string[];
+};
+
+async function syncCalls(calls: SyncCall[]): Promise<SyncCallsResponse> {
+  const syncResponse = await apiClient.post<SyncCallsResponse>('/calls/sync', { calls });
+  const syncResponseBody = syncResponse.data;
+  return syncResponseBody;
 }
 
 export { syncCalls };

@@ -4,7 +4,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { DialerScreen } from '@/features/dialer';
 import { MyStatsScreen, SettingsScreen } from '@/features/stats';
-import { useJanitor, useSync } from '@/features/tracking';
+import { useSync } from '@/features/tracking';
 import { Icon } from '@/components/ui/icon';
 import { ChartColumn, Phone, Settings } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
@@ -31,7 +31,6 @@ const MyStatsTabIcon = createTabIcon(ChartColumn);
 const SettingsTabIcon = createTabIcon(Settings);
 
 export function AppNavigator() {
-  useJanitor();
   useSync();
 
   return (

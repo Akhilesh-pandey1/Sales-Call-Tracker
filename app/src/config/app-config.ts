@@ -7,6 +7,7 @@ const apiBaseUrl: string = __DEV__
 const maxLeadAttempts: number = appConfigJson.maxLeadAttempts;
 const maxScheduleAheadDays: number = appConfigJson.maxScheduleAheadDays;
 const stalePendingCallAgeMs: number = appConfigJson.stalePendingCallAgeMs;
+const matchWindowMs: number = appConfigJson.matchWindowMs;
 const maxJanitorAttempts: number = appConfigJson.maxJanitorAttempts;
 const minMsBetweenJanitorSweeps: number = appConfigJson.minMsBetweenJanitorSweeps;
 const directCallStartTimeoutMs: number = appConfigJson.directCallStartTimeoutMs;
@@ -17,6 +18,7 @@ export {
   apiBaseUrl,
   backspaceLongPressClearMs,
   directCallStartTimeoutMs,
+  matchWindowMs,
   maxJanitorAttempts,
   maxLeadAttempts,
   maxScheduleAheadDays,

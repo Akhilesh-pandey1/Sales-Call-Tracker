@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { countPendingCalls, syncPendingCallsSafely } from '@/features/tracking';
+import { countUnsyncedPendingCalls, syncPendingCallsSafely } from '@/features/tracking';
 import { clearStoredSession } from '@/shared/api/api-client';
 
 export type LogoutState = {
@@ -20,7 +20,7 @@ function buildLogoutRefusalMessage(unsentCallCount: number): string {
 
 async function countUnsentCallsAfterSyncAttempt(): Promise<number> {
   await syncPendingCallsSafely();
-  const unsentCallCount: number = await countPendingCalls();
+  const unsentCallCount: number = await countUnsyncedPendingCalls();
   return unsentCallCount;
 }
 

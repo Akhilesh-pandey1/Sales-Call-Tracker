@@ -11,6 +11,7 @@ from backend.app.config.base import (
     MAX_LEAD_UPLOAD_MB,
     MAX_SCHEDULE_AHEAD_DAYS,
     RETRY_LOCK_HOURS,
+    SCHEDULE_EXPIRE_HOURS,
 )
 from backend.app.core.errors import AppException
 from backend.app.core.utils import now_ist, now_utc, parse_utc_datetime
@@ -56,10 +57,19 @@ def get_ist_day_utc_range(days_back: int) -> tuple[datetime, datetime]:
     return result_range
 
 
+def booking_belongs_to_another_user(target_lead: Lead, user_id: int) -> bool:
+    booking_owner_id: int | None = target_lead.scheduled_by
+    owner_is_someone_else: bool = (
+        booking_owner_id is not None and booking_owner_id != user_id
+    )
+    return owner_is_someone_else
+
+
 def resolve_lead_for_call(
     phone_number: str,
     duration_seconds: int,
     call_time: datetime,
+    caller_user_id: int,
 ) -> None:
     waiting_status: str = "waiting"
     done_status: str = "done"
@@ -90,8 +100,6 @@ def resolve_lead_for_call(
 
     target_lead.claimed_by = None
     target_lead.claimed_until = None
-    target_lead.scheduled_by = None
-    target_lead.scheduled_at = None
     target_lead.last_attempted_at = call_time
 
     increment_step: int = 1
@@ -100,7 +108,16 @@ def resolve_lead_for_call(
     if target_lead.attempt_count >= MAX_LEAD_ATTEMPTS:
         target_lead.status = stopped_status
         target_lead.retry_locked_until = None
+        target_lead.scheduled_by = None
+        target_lead.scheduled_at = None
         return
+
+    booking_is_clearable_by_caller: bool = not booking_belongs_to_another_user(
+        target_lead, caller_user_id
+    )
+    if booking_is_clearable_by_caller:
+        target_lead.scheduled_by = None
+        target_lead.scheduled_at = None
 
     current_time: datetime = datetime.now(timezone.utc)
     lock_duration: timedelta = timedelta(hours=RETRY_LOCK_HOURS)
@@ -321,11 +338,22 @@ def schedule_lead_callback(lead_id: int, user_id: int, scheduled_at_raw: str) ->
 
 def schedule_resolved_lead_for_call(
     phone_number: str, scheduled_by_user_id: int, scheduled_at_raw: str
-) -> None:
+) -> bool:
     resolved_lead: Lead | None = Lead.query.filter_by(phone_number=phone_number).first()
     if resolved_lead is None:
         logger.warning("Skipping schedule for unknown lead %s", phone_number)
-        return
+        return False
+
+    booking_held_by_another_user: bool = booking_belongs_to_another_user(
+        resolved_lead, scheduled_by_user_id
+    )
+    if booking_held_by_another_user:
+        logger.warning(
+            "Refusing schedule for lead %s already booked by user %s",
+            phone_number,
+            resolved_lead.scheduled_by,
+        )
+        return True
 
     try:
         schedule_lead_callback(resolved_lead.id, scheduled_by_user_id, scheduled_at_raw)
@@ -335,6 +363,7 @@ def schedule_resolved_lead_for_call(
             phone_number,
             schedule_error.message,
         )
+    return False
 
 
 def find_candidate_lead(user_id: int, current_utc: datetime) -> Lead | None:
@@ -386,11 +415,27 @@ def release_active_claim(user_id: int) -> None:
     db.session.execute(release_claim_statement)
 
 
+def release_expired_bookings() -> None:
+    waiting_status: str = "waiting"
+    current_utc: datetime = now_utc()
+    expire_delta: timedelta = timedelta(hours=SCHEDULE_EXPIRE_HOURS)
+    expire_cutoff: datetime = current_utc - expire_delta
+    release_booking_statement: Update = (
+        update(Lead)
+        .where(Lead.status == waiting_status, Lead.scheduled_at < expire_cutoff)
+        .values(scheduled_by=None, scheduled_at=None)
+        .execution_options(synchronize_session=False)
+    )
+    db.session.execute(release_booking_statement)
+
+
 def serve_next_lead(
     user_id: int,
     continue_calling: bool,
     schedule_data: ScheduleLeadRequest | None = None,
 ) -> dict[str, Any]:
+    release_expired_bookings()
+
     if schedule_data is not None:
         schedule_lead_callback(
             schedule_data.lead_id, user_id, schedule_data.scheduled_at

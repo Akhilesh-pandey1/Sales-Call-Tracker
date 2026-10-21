@@ -771,12 +771,20 @@ def test_next_lead_continue_calling_true_serves_lead_as_before(
 def test_next_lead_newest_schedule_wins_ownership(
     app: Flask, client: FlaskClient
 ) -> None:
-    first_salesperson = create_user_fixture(name="SalesFirst", role="salesperson", token="first-sched-token")
-    second_salesperson = create_user_fixture(name="SalesSecond", role="salesperson", token="second-sched-token")
+    first_salesperson = create_user_fixture(
+        name="SalesFirst", role="salesperson", token="first-sched-token"
+    )
+    second_salesperson = create_user_fixture(
+        name="SalesSecond", role="salesperson", token="second-sched-token"
+    )
     lead = create_lead_fixture(phone_number="+919876543300", status="waiting")
 
-    headers_first: dict[str, str] = {"Authorization": f"Bearer {first_salesperson.auth_token}"}
-    headers_second: dict[str, str] = {"Authorization": f"Bearer {second_salesperson.auth_token}"}
+    headers_first: dict[str, str] = {
+        "Authorization": f"Bearer {first_salesperson.auth_token}"
+    }
+    headers_second: dict[str, str] = {
+        "Authorization": f"Bearer {second_salesperson.auth_token}"
+    }
 
     first_payload: dict[str, Any] = {
         "schedule": {
@@ -878,3 +886,37 @@ def test_next_lead_schedule_books_done_or_stopped_lead(
         assert booked_lead.claimed_by is None
         assert booked_lead.claimed_until is None
         assert booked_lead.retry_locked_until is None
+
+
+def test_next_lead_schedule_clears_claim_held_by_different_user(
+    app: Flask, client: FlaskClient
+) -> None:
+    scheduler = create_user_fixture(
+        name="SalesCross", role="salesperson", token="cross-sched-token"
+    )
+    claim_holder = create_user_fixture(
+        name="SalesHolder", role="salesperson", token="holder-token"
+    )
+
+    locked_time = now_utc() + timedelta(hours=1)
+    claimed_lead = create_lead_fixture(
+        phone_number="+919876543295",
+        status="waiting",
+        claimed_by=claim_holder.id,
+        claimed_until=locked_time,
+    )
+
+    future_time = (now_utc() + timedelta(days=2)).isoformat()
+    headers = {"Authorization": f"Bearer {scheduler.auth_token}"}
+    payload = {
+        "schedule": {"lead_id": claimed_lead.id, "scheduled_at": future_time}
+    }
+
+    response = client.post("/api/leads/next", json=payload, headers=headers)
+    assert response.status_code == 200
+
+    db.session.refresh(claimed_lead)
+    assert claimed_lead.scheduled_by == scheduler.id
+    assert claimed_lead.scheduled_at is not None
+    assert claimed_lead.claimed_by is None
+    assert claimed_lead.claimed_until is None

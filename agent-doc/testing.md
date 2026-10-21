@@ -68,7 +68,7 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
   - Serves due scheduled leads reserved for the calling salesperson before new pool leads.
   - Serves newest available leads (`created_at DESC`) when no due schedules exist.
   - Claims the served lead for 10 minutes (`CLAIM_MINUTES`).
-  - Supports scheduling current lead and fetching next in a single request; a schedule books the lead whatever its state — `done` and `stopped` included, ending `waiting` with the retry lock and claim cleared — and the newest schedule wins ownership.
+  - Supports scheduling current lead and fetching next in a single request; a schedule books the lead whatever its state — `done` and `stopped` included, ending `waiting` with the retry lock and claim cleared — the newest schedule wins ownership, and a schedule clears a claim held by a different salesperson.
   - `continue_calling: false` stores the schedule (if supplied) and releases the claim but serves and claims no lead — the response `lead` is `null`.
 - **Resolution via Call Sync**:
   - Connected call (`duration > 0`) marks lead `status = 'done'`.

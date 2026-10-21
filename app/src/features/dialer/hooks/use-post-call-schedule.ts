@@ -95,8 +95,14 @@ function isBeforeCurrentMinute(moment: Date): boolean {
 }
 
 function createNotInPastMoment(chosenMoment: Date): Date {
-  if (chosenMoment.getTime() < Date.now()) {
-    return new Date();
+  const safetyMarginMinutes = 2;
+  const secondsPerMinute = 60;
+  const millisecondsPerSecond = 1000;
+  const safetyMarginMs =
+    safetyMarginMinutes * secondsPerMinute * millisecondsPerSecond;
+  const currentMomentMs = Date.now();
+  if (chosenMoment.getTime() <= currentMomentMs) {
+    return new Date(currentMomentMs + safetyMarginMs);
   }
   return chosenMoment;
 }

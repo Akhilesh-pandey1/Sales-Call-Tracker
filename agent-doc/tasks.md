@@ -55,16 +55,16 @@
 
 **Blocked by:** 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Every team period carries `dials`/`connected`/`not_connected` counting OUTGOING calls only, `seconds`/`minutes` as TOTAL talk (`round(seconds/60, 2)`), `connected_percent`, `avg_per_person_per_day`, and `vs_yesterday` only on today (`api.md` §3 team Rules).
-- [ ] `talk_totals` and `calls_by_hour` carry `hours`, `outgoing`, `incoming`, and `best_hour` by total calls; `last_30_days` holds per-day averages; `top_people` ranks by TOTAL talk seconds (`api.md` §3; `testing.md` — test_dashboard.py list).
-- [ ] `GET /api/dashboard/team/people` returns one row per active salesperson with only `dials`, `connected`, `minutes` — dials/connected outgoing-only, minutes total talk, no `seconds`; zero-call salespeople included, deactivated excluded, sorted by today's dials (`api.md` §3 team/people).
+- [x] Every team period carries `dials`/`connected`/`not_connected` counting OUTGOING calls only, `seconds`/`minutes` as TOTAL talk (`round(seconds/60, 2)`), `connected_percent`, `avg_per_person_per_day`, and `vs_yesterday` only on today (`api.md` §3 team Rules).
+- [x] `talk_totals` and `calls_by_hour` carry `hours`, `outgoing`, `incoming`, and `best_hour` by total calls; `last_30_days` holds per-day averages; `top_people` ranks by TOTAL talk seconds (`api.md` §3; `testing.md` — test_dashboard.py list).
+- [x] `GET /api/dashboard/team/people` returns one row per active salesperson with only `dials`, `connected`, `minutes` — dials/connected outgoing-only, minutes total talk, no `seconds`; zero-call salespeople included, deactivated excluded, sorted by today's dials (`api.md` §3 team/people).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 5: Server — person dashboard carries the split
 

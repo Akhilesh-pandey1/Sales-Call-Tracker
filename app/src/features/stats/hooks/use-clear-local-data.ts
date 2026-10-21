@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { clearAllPendingCalls, countPendingCalls } from '@/features/tracking';
+import { clearAllPendingCalls, countUnsyncedPendingCalls } from '@/features/tracking';
 
 export type ClearLocalDataState = {
   pendingCallCount: number;
@@ -21,7 +21,7 @@ export function useClearLocalData(): ClearLocalDataState {
   const [clearErrorMessage, setClearErrorMessage] = useState<string | null>(null);
 
   const refreshPendingCallCount = useCallback(async (): Promise<void> => {
-    const freshPendingCallCount: number = await countPendingCalls();
+    const freshPendingCallCount: number = await countUnsyncedPendingCalls();
     setPendingCallCount(freshPendingCallCount);
   }, []);
 
@@ -55,7 +55,7 @@ export function useClearLocalData(): ClearLocalDataState {
     setClearErrorMessage(null);
     try {
       await clearAllPendingCalls();
-      const remainingCallCount: number = await countPendingCalls();
+      const remainingCallCount: number = await countUnsyncedPendingCalls();
       setPendingCallCount(remainingCallCount);
       setIsClearDialogOpen(false);
     } catch {

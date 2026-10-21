@@ -14,6 +14,7 @@ function toSyncCallOrNull(
     phone_number: pendingCall.phoneNumber,
     dialed_at: pendingCall.dialedAt,
     duration_seconds: pendingCall.durationSeconds,
+    direction: pendingCall.direction,
   };
   if (scheduledAt !== null) {
     syncCall.scheduled_at = scheduledAt;

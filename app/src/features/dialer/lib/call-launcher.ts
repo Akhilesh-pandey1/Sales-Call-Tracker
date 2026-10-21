@@ -2,6 +2,7 @@ import { Linking, PermissionsAndroid } from 'react-native';
 import intentLauncher, { IntentConstant } from 'react-native-intent-launcher';
 import { directCallStartTimeoutMs } from '@/config/app-config';
 import { insertPendingCall } from '@/features/tracking';
+import { createCallId } from '@/shared/utils/call-id';
 
 const callFailedMessage = 'Could not start the call. Please try again.';
 
@@ -9,11 +10,6 @@ type LaunchedCall = {
   callId: string;
   phoneNumber: string;
 };
-
-function createCallId(): string {
-  const callId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  return callId;
-}
 
 function rejectAfterTimeout(
   timeoutMs: number,

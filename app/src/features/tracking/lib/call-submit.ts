@@ -1,16 +1,18 @@
 import { readStoredCountry } from '@/features/auth';
 import { syncCalls } from '../api/calls.api';
 import {
-  deletePendingCall,
   getPendingCallById,
   markPendingCallFilled,
+  markPendingCallsSynced,
   type PendingCall,
 } from '../db';
-import { readCallLogEntriesSince } from './call-log-reader';
+import { safeReadCallLogEntries } from './call-log-reader';
+
 import {
   matchPendingCallsToLogEntries,
   type MatchedPendingCall,
 } from './call-log-matcher';
+import { deleteSyncedCallsBehindSweepLine } from './synced-call-cleanup';
 import { toSyncCallOrNull } from './sync-call';
 
 async function findMatchingLogEntry(
@@ -21,17 +23,21 @@ async function findMatchingLogEntry(
     const noCountryMatch = null;
     return noCountryMatch;
   }
-  try {
-    const intentTimeMs = new Date(pendingCall.intentAt).getTime();
-    const callLogEntries = await readCallLogEntriesSince(intentTimeMs);
-    const matches = matchPendingCallsToLogEntries([pendingCall], callLogEntries, countryCode);
-    const firstMatch = matches.length === 0 ? null : matches[0];
-    return firstMatch;
-  } catch (callLogError: unknown) {
-    console.warn('Could not read the call log on this phone.', callLogError);
-    const noLogMatch = null;
-    return noLogMatch;
+  const intentTimeMs = new Date(pendingCall.intentAt).getTime();
+  const readUntilTimeMs = Date.now();
+  const submitWarnMessage = 'Could not read the call log on this phone.';
+  const callLogEntries = await safeReadCallLogEntries(
+    intentTimeMs,
+    readUntilTimeMs,
+    submitWarnMessage,
+  );
+  if (callLogEntries === null) {
+    const noLogEntries = null;
+    return noLogEntries;
   }
+  const matches = matchPendingCallsToLogEntries([pendingCall], callLogEntries, countryCode);
+  const firstMatch = matches.length === 0 ? null : matches[0];
+  return firstMatch;
 }
 
 async function sendPendingCallToServer(
@@ -48,7 +54,8 @@ async function sendPendingCallToServer(
     console.warn('The call stays saved on the phone until the server is reachable.', sendError);
     return;
   }
-  await deletePendingCall(pendingCall.callId);
+  await markPendingCallsSynced([pendingCall.callId]);
+  await deleteSyncedCallsBehindSweepLine();
 }
 
 export async function submitTrackedCall(

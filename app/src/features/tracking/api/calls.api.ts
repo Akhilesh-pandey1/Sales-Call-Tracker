@@ -1,10 +1,12 @@
 import { apiClient } from '@/shared/api/api-client';
+import type { CallDirection } from '../types';
 
 export type SyncCall = {
   call_id: string;
   phone_number: string;
   dialed_at: string;
   duration_seconds: number;
+  direction: CallDirection;
   scheduled_at?: string;
 };
 

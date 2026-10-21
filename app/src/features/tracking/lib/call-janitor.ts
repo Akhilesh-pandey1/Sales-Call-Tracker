@@ -1,10 +1,4 @@
-import { useEffect } from 'react';
-import {
-  AppState,
-  PermissionsAndroid,
-  type AppStateStatus,
-} from 'react-native';
-import CallLogs, { type CallLog } from 'react-native-call-log';
+import { PermissionsAndroid } from 'react-native';
 import {
   maxJanitorAttempts,
   minMsBetweenJanitorSweeps,
@@ -17,10 +11,9 @@ import {
   markPendingCallFilled,
   type PendingCall,
 } from '@/features/tracking/db';
-import { matchPendingCallsToLogEntries } from '@/features/tracking/lib/call-log-matcher';
-import { fillMatchedPendingCalls } from '@/features/tracking/lib/pending-call-filler';
-
-const NO_LOAD_LIMIT = -1;
+import { matchPendingCallsToLogEntries, type CallLogEntry } from './call-log-matcher';
+import { safeReadCallLogEntries } from './call-log-reader';
+import { fillMatchedPendingCalls } from './pending-call-filler';
 
 let janitorSweepPromise: Promise<void> | null = null;
 let lastSweepStartedAtMs = 0;
@@ -55,22 +48,6 @@ function getOldestIntentTimeMs(stalePendingCalls: PendingCall[]): number {
   return oldestIntentTimeMs;
 }
 
-async function loadCallLogEntriesSince(
-  oldestIntentAtMs: number,
-  nowMs: number,
-): Promise<CallLog[] | null> {
-  try {
-    const callLogEntries = await CallLogs.load(NO_LOAD_LIMIT, {
-      minTimestamp: oldestIntentAtMs,
-      maxTimestamp: nowMs,
-    });
-    return callLogEntries;
-  } catch (loadError: unknown) {
-    console.warn('Could not read the call log for the janitor.', loadError);
-    return null;
-  }
-}
-
 async function strikeUnmatchedPendingCalls(
   stalePendingCalls: PendingCall[],
   matchedCallIds: Set<string>,
@@ -93,7 +70,7 @@ async function strikeUnmatchedPendingCalls(
 
 async function completeStalePendingCalls(
   stalePendingCalls: PendingCall[],
-  callLogEntries: CallLog[],
+  callLogEntries: CallLogEntry[],
   countryCode: string,
 ): Promise<void> {
   const matches = matchPendingCallsToLogEntries(
@@ -131,9 +108,11 @@ async function sweepStalePendingCalls(): Promise<void> {
   }
 
   const oldestIntentAtMs = getOldestIntentTimeMs(stalePendingCalls);
-  const callLogEntries = await loadCallLogEntriesSince(
+  const janitorWarnMessage = 'Could not read the call log for the janitor.';
+  const callLogEntries = await safeReadCallLogEntries(
     oldestIntentAtMs,
     nowMs,
+    janitorWarnMessage,
   );
   if (callLogEntries === null) {
     return;
@@ -173,23 +152,4 @@ export async function runJanitorSweep(): Promise<void> {
   const activeSweepPromise = startJanitorSweep();
   janitorSweepPromise = activeSweepPromise;
   await activeSweepPromise;
-}
-
-export function useJanitor(): void {
-  useEffect(() => {
-    runJanitorSweep();
-  }, []);
-
-  useEffect(() => {
-    const handleAppStateChange = (nextAppState: AppStateStatus): void => {
-      if (nextAppState === 'active') {
-        runJanitorSweep();
-      }
-    };
-    const stateSubscription = AppState.addEventListener(
-      'change',
-      handleAppStateChange,
-    );
-    return () => stateSubscription.remove();
-  }, []);
 }

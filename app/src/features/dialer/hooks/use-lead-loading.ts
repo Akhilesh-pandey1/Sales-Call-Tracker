@@ -1,8 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
-import { ToastAndroid } from 'react-native';
 import type { RefObject } from 'react';
 import { fetchNextLead, type ServedLead } from '../api/leads.api';
-import { launchTrackedCall, readCallLaunchErrorMessage } from '../lib/call-launcher';
+import { launchTrackedCall, showCallLaunchErrorToast } from '../lib/call-launcher';
 import { readRequestErrorMessage } from '../lib/request-error';
 import type { AutomatedViewState } from './use-automated-calling';
 
@@ -32,8 +31,7 @@ export function useLeadLoading(
         updateViewState({ kind: 'dialing', lead, callId: launchedCallId });
       } catch (dialError) {
         updateViewState({ kind: 'ready', lead });
-        const launchErrorMessage = readCallLaunchErrorMessage(dialError);
-        ToastAndroid.show(launchErrorMessage, ToastAndroid.SHORT);
+        showCallLaunchErrorToast(dialError);
       } finally {
         isDialLaunchLockedRef.current = false;
       }

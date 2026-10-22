@@ -1,4 +1,9 @@
-import { Linking, PermissionsAndroid } from 'react-native';
+import {
+  Linking,
+  PermissionsAndroid,
+  Platform,
+  ToastAndroid,
+} from 'react-native';
 import intentLauncher, { IntentConstant } from 'react-native-intent-launcher';
 import { directCallStartTimeoutMs } from '@/config/app-config';
 import { readStoredCountry } from '@/features/auth';
@@ -12,18 +17,15 @@ import {
 
 const callFailedMessage = 'Could not start the call. Please try again.';
 const directCallTimeoutMessage = 'Starting the call took too long.';
+const simNotInPhoneMessage = 'This SIM number is not in the phone.';
+const simNotFoundErrorCode = 'SIM_NUMBER_NOT_FOUND';
 
 type LaunchedCall = {
   callId: string;
   phoneNumber: string;
 };
 
-class SimNotInPhoneError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'SimNotInPhoneError';
-  }
-}
+type NativeCallError = Error & { code?: string };
 
 async function raceWithTimeout<T>(
   operation: Promise<T>,
@@ -79,8 +81,7 @@ async function startCallOnChosenSim(
       ? null
       : findMatchingSimNumber(simNumberList, chosenNumber, countryCode);
   if (matchingSimNumber === null) {
-    const simNotInPhoneMessage = 'This SIM number is not in the phone.';
-    throw new SimNotInPhoneError(simNotInPhoneMessage);
+    throw new Error(simNotInPhoneMessage);
   }
   const placementPromise = placeCallOnMatchingSim(
     phoneNumber,
@@ -97,12 +98,27 @@ async function startCallOnChosenSim(
   return launchedCall;
 }
 
+function isSimNumberNotInPhone(caughtError: unknown): boolean {
+  if (!(caughtError instanceof Error)) {
+    return false;
+  }
+  const nativeCallError = caughtError as NativeCallError;
+  const matchesNativeNotFoundCode =
+    nativeCallError.code === simNotFoundErrorCode;
+  const matchesMandatedMessage = caughtError.message === simNotInPhoneMessage;
+  return matchesNativeNotFoundCode || matchesMandatedMessage;
+}
+
 function readCallLaunchErrorMessage(caughtError: unknown): string {
-  if (caughtError instanceof SimNotInPhoneError) {
-    const simNotInPhoneMessage = caughtError.message;
+  if (isSimNumberNotInPhone(caughtError)) {
     return simNotInPhoneMessage;
   }
   return callFailedMessage;
+}
+
+function showCallLaunchErrorToast(caughtError: unknown): void {
+  const launchErrorMessage = readCallLaunchErrorMessage(caughtError);
+  ToastAndroid.show(launchErrorMessage, ToastAndroid.SHORT);
 }
 
 async function launchTrackedCall(phoneNumber: string): Promise<LaunchedCall | null> {
@@ -119,7 +135,11 @@ async function launchTrackedCall(phoneNumber: string): Promise<LaunchedCall | nu
     const noLaunchedCall = null;
     return noLaunchedCall;
   }
-  if (chosenNumber === null) {
+  const minimumAndroidApiLevelForSimChoice = 26;
+  const isSimChoiceSupportedByDevice =
+    Platform.OS === 'android' &&
+    Platform.Version >= minimumAndroidApiLevelForSimChoice;
+  if (chosenNumber === null || !isSimChoiceSupportedByDevice) {
     const defaultSimCall = await startDefaultSimCall(phoneNumber);
     return defaultSimCall;
   }
@@ -127,5 +147,5 @@ async function launchTrackedCall(phoneNumber: string): Promise<LaunchedCall | nu
   return chosenSimCall;
 }
 
-export { launchTrackedCall, readCallLaunchErrorMessage };
+export { launchTrackedCall, showCallLaunchErrorToast };
 export type { LaunchedCall };

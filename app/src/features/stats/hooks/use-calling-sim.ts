@@ -20,12 +20,19 @@ export type CallingSimState = {
   choosePhoneDefault: () => Promise<void>;
 };
 
-export function useCallingSim(): CallingSimState {
+type CallingSimData = {
+  simCards: SimCard[];
+  chosenCallingNumber: string | null;
+  countryCode: string | null;
+  isLoading: boolean;
+  storeChosenCallingNumber: (nextCallingNumber: string | null) => void;
+};
+
+function useCallingSimData(): CallingSimData {
   const [simCards, setSimCards] = useState<SimCard[]>([]);
   const [chosenCallingNumber, setChosenCallingNumber] = useState<string | null>(null);
   const [countryCode, setCountryCode] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [saveErrorMessage, setSaveErrorMessage] = useState<string | null>(null);
 
   const readCallingSimData = useCallback(async (): Promise<void> => {
     try {
@@ -48,17 +55,39 @@ export function useCallingSim(): CallingSimState {
     readCallingSimData();
   }, [readCallingSimData]);
 
+  const callingSimData: CallingSimData = {
+    simCards,
+    chosenCallingNumber,
+    countryCode,
+    isLoading,
+    storeChosenCallingNumber: setChosenCallingNumber,
+  };
+  return callingSimData;
+}
+
+function isSimNumberMatchingChoice(
+  simNumber: string,
+  chosenCallingNumber: string | null,
+  countryCode: string | null,
+): boolean {
+  if (chosenCallingNumber === null) {
+    return false;
+  }
+  if (countryCode === null) {
+    return simNumber === chosenCallingNumber;
+  }
+  const normalizedSimNumber = normalizePhoneNumber(simNumber, countryCode);
+  return normalizedSimNumber === chosenCallingNumber;
+}
+
+export function useCallingSim(): CallingSimState {
+  const { simCards, chosenCallingNumber, countryCode, isLoading, storeChosenCallingNumber } =
+    useCallingSimData();
+  const [saveErrorMessage, setSaveErrorMessage] = useState<string | null>(null);
+
   const isSimNumberChosen = useCallback(
-    (simNumber: string): boolean => {
-      if (chosenCallingNumber === null) {
-        return false;
-      }
-      if (countryCode === null) {
-        return simNumber === chosenCallingNumber;
-      }
-      const normalizedSimNumber = normalizePhoneNumber(simNumber, countryCode);
-      return normalizedSimNumber === chosenCallingNumber;
-    },
+    (simNumber: string): boolean =>
+      isSimNumberMatchingChoice(simNumber, chosenCallingNumber, countryCode),
     [chosenCallingNumber, countryCode],
   );
 
@@ -72,27 +101,27 @@ export function useCallingSim(): CallingSimState {
       try {
         await saveChosenCallingNumber(simNumber, countryCode);
         const savedCallingNumber = normalizePhoneNumber(simNumber, countryCode);
-        setChosenCallingNumber(savedCallingNumber);
+        storeChosenCallingNumber(savedCallingNumber);
       } catch {
         setSaveErrorMessage(saveFailedMessage);
       }
     },
-    [countryCode],
+    [countryCode, storeChosenCallingNumber],
   );
 
   const choosePhoneDefault = useCallback(async (): Promise<void> => {
     setSaveErrorMessage(null);
     try {
       await clearChosenCallingNumber();
-      setChosenCallingNumber(null);
+      storeChosenCallingNumber(null);
     } catch {
       setSaveErrorMessage(saveFailedMessage);
     }
-  }, []);
+  }, [storeChosenCallingNumber]);
 
   const isPhoneDefaultChosen: boolean = chosenCallingNumber === null;
 
-  return {
+  const callingSimState: CallingSimState = {
     simCards,
     isLoading,
     saveErrorMessage,
@@ -101,4 +130,5 @@ export function useCallingSim(): CallingSimState {
     chooseCallingNumber,
     choosePhoneDefault,
   };
+  return callingSimState;
 }

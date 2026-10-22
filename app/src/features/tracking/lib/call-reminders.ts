@@ -1,15 +1,16 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import notifee, {
   AlarmType,
   AndroidImportance,
   AndroidNotificationSetting,
-  AuthorizationStatus,
   TriggerType,
-  type NotificationSettings,
   type TimestampTrigger,
 } from '@notifee/react-native';
 import { readStoredCountry } from '@/features/auth';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
+import {
+  ensureRemindersAreReady,
+  readAreNotificationsEnabled,
+} from './reminder-settings';
 import {
   deleteScheduledRemindersByLeadIdList,
   readAllScheduledReminders,
@@ -44,35 +45,6 @@ async function createReminderChannel(): Promise<string> {
   };
   const channelId = await notifee.createChannel(reminderChannel);
   return channelId;
-}
-
-function readIsNotificationAuthorized(
-  notificationSettings: NotificationSettings,
-): boolean {
-  const authorizationStatus = notificationSettings.authorizationStatus;
-  const isAuthorized =
-    authorizationStatus === AuthorizationStatus.AUTHORIZED ||
-    authorizationStatus === AuthorizationStatus.PROVISIONAL;
-  return isAuthorized;
-}
-
-async function readAreNotificationsEnabled(): Promise<boolean> {
-  const notificationSettings = await notifee.getNotificationSettings();
-  const areEnabled = readIsNotificationAuthorized(notificationSettings);
-  return areEnabled;
-}
-
-async function readAreNotificationsEnabledAfterAskingOnce(): Promise<boolean> {
-  const reminderPermissionAskedKey = 'reminder_permission_asked';
-  const askedFlag = await AsyncStorage.getItem(reminderPermissionAskedKey);
-  if (askedFlag !== null) {
-    const alreadyAskedEnabled = await readAreNotificationsEnabled();
-    return alreadyAskedEnabled;
-  }
-  await AsyncStorage.setItem(reminderPermissionAskedKey, 'asked');
-  const settingsAfterRequest = await notifee.requestPermission();
-  const isAuthorizedAfterAsk = readIsNotificationAuthorized(settingsAfterRequest);
-  return isAuthorizedAfterAsk;
 }
 
 async function showReminderTriggerWhenFuture(
@@ -121,8 +93,8 @@ export async function setBookedLeadReminder(
     scheduledReminder.phoneNumber,
     scheduledReminder.scheduledAt,
   );
-  const areNotificationsEnabled = await readAreNotificationsEnabledAfterAskingOnce();
-  if (!areNotificationsEnabled) {
+  const areRemindersReady = await ensureRemindersAreReady();
+  if (!areRemindersReady) {
     return;
   }
   try {

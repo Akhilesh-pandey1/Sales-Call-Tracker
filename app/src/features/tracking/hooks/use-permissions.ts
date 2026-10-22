@@ -5,6 +5,7 @@ import {
   type AppStateStatus,
   type Permission,
 } from 'react-native';
+import { ensureRemindersAreReady } from '../lib/reminder-settings';
 
 export const findMissingPermissions = async (): Promise<Permission[]> => {
   const requiredCallPermissions: Permission[] = [
@@ -35,14 +36,14 @@ export function usePermissions(): Permission[] {
   const requestMissingPermissions = useCallback(async (): Promise<void> => {
     const missing = await findMissingPermissions();
     setMissingPermissions(missing);
-    if (missing.length === 0) {
-      return;
+    if (missing.length > 0) {
+      const requestResults = await PermissionsAndroid.requestMultiple(missing);
+      const stillMissingPermissions = missing.filter(
+        permission => requestResults[permission] !== 'granted',
+      );
+      setMissingPermissions(stillMissingPermissions);
     }
-    const requestResults = await PermissionsAndroid.requestMultiple(missing);
-    const stillMissingPermissions = missing.filter(
-      permission => requestResults[permission] !== 'granted',
-    );
-    setMissingPermissions(stillMissingPermissions);
+    await ensureRemindersAreReady();
   }, []);
 
   useEffect(() => {

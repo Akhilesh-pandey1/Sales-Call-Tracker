@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-permissions.ts": {
-    "mtime": 1792502977.8610191,
-    "ast_hash": "68b76d3dcafb223c323749e86cd4d399",
+    "mtime": 1792686107.119333,
+    "ast_hash": "e27b40a6f9c2492fc05cc0ef5b83c247",
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-sync.ts": {
@@ -2365,8 +2365,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-reminders.ts": {
-    "mtime": 1792675218.607763,
-    "ast_hash": "e7210364eb099acff17519dd29694650",
+    "mtime": 1792676638.6662145,
+    "ast_hash": "d29b9f267357196415bf1cc0e2c1551c",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/reminder-press-events.ts": {
@@ -2404,9 +2404,9 @@
     "ast_hash": "4a825d37913f15c6f6777fa1fbb22c81",
     "semantic_hash": ""
   },
-  "app/src/features/tracking/lib/battery-optimization.ts": {
-    "mtime": 1792675259.7800992,
-    "ast_hash": "467cb999c769e877dc81bd521534bd80",
+  "app/src/features/tracking/lib/reminder-settings.ts": {
+    "mtime": 1792685194.4178398,
+    "ast_hash": "af4ffd98de5167ba3f44c003c93bd47f",
     "semantic_hash": ""
   }
 }

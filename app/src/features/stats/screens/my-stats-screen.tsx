@@ -462,13 +462,12 @@ type ChartPeriod = 'today' | 'yesterday' | 'last_30_days';
 
 type ChartPeriodInfo = {
   switchLabel: string;
-  callsWord: string;
 };
 
 const chartPeriodsInfo: Record<ChartPeriod, ChartPeriodInfo> = {
-  today: { switchLabel: 'Today', callsWord: 'Calls' },
-  yesterday: { switchLabel: 'Yesterday', callsWord: 'Calls' },
-  last_30_days: { switchLabel: '30 days', callsWord: 'Avg calls' },
+  today: { switchLabel: 'Today' },
+  yesterday: { switchLabel: 'Yesterday' },
+  last_30_days: { switchLabel: '30 days' },
 };
 
 type ChartPeriodSwitchProps = {
@@ -514,24 +513,16 @@ function ChartPeriodSwitch({
 
 type CallsByHourChartProps = {
   periodCallsByHour: Record<ChartPeriod, CallsByHourStats>;
-  periodStats: Record<ChartPeriod, PeriodStats>;
 };
 
-function CallsByHourChart({ periodCallsByHour, periodStats }: CallsByHourChartProps) {
+function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('today');
   const selectedCallsByHour: CallsByHourStats = periodCallsByHour[selectedPeriod];
-  const selectedPeriodInfo: ChartPeriodInfo = chartPeriodsInfo[selectedPeriod];
-  const selectedTalkTotals: TalkTotalsStats = periodStats[selectedPeriod].talk_totals;
   const bestHour: number | null = selectedCallsByHour.best_hour;
   const isChartEmpty: boolean = bestHour === null;
   const hourBars: HourBar[] = isChartEmpty ? [] : buildHourBars(selectedCallsByHour);
-  const outgoingCallsLabel: string = formatCount(selectedTalkTotals.outgoing_calls);
-  const incomingCallsLabel: string = formatCount(selectedTalkTotals.incoming_calls);
-  const directionSplitLabel: string = `${outgoingCallsLabel} outgoing · ${incomingCallsLabel} incoming`;
-  const chartFooterText: string =
-    bestHour === null
-      ? ''
-      : `${selectedPeriodInfo.callsWord} per hour · ${selectedPeriodInfo.switchLabel} (IST). ${directionSplitLabel} · Best hour: ${formatHourLabel(bestHour)}.`;
+  const bestHourFooterText: string =
+    bestHour === null ? '' : `Best hour: ${formatHourLabel(bestHour)}.`;
 
   const handlePeriodPress = (period: ChartPeriod): void => {
     setSelectedPeriod(period);
@@ -552,7 +543,7 @@ function CallsByHourChart({ periodCallsByHour, periodStats }: CallsByHourChartPr
       ) : (
         <>
           <HourBarsChart hourBars={hourBars} />
-          <Text className="mt-2 text-xs text-muted-foreground">{chartFooterText}</Text>
+          <Text className="mt-2 text-xs text-muted-foreground">{bestHourFooterText}</Text>
         </>
       )}
     </View>
@@ -568,12 +559,26 @@ function buildDirectionSplitLabel(
   return directionSplitLabel;
 }
 
+type SplitLegendRowProps = {
+  dotClassName: string;
+  splitLabel: string;
+};
+
+function SplitLegendRow({ dotClassName, splitLabel }: SplitLegendRowProps) {
+  return (
+    <View className="flex-row items-center gap-2">
+      <View className={`h-3 w-3 rounded-full ${dotClassName}`} />
+      <Text className="text-sm font-medium">{splitLabel}</Text>
+    </View>
+  );
+}
+
 type CallSplitCardProps = {
   periodStats: Record<ChartPeriod, PeriodStats>;
 };
 
 function CallSplitCard({ periodStats }: CallSplitCardProps) {
-  const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('last_30_days');
+  const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('today');
   const selectedPeriodStats: PeriodStats = periodStats[selectedPeriod];
   const selectedTalkTotals: TalkTotalsStats = selectedPeriodStats.talk_totals;
   const totalMinutes: number = selectedPeriodStats.minutes;
@@ -610,12 +615,9 @@ function CallSplitCard({ periodStats }: CallSplitCardProps) {
       ) : (
         <>
           <CallSplitDonut talkTotals={selectedTalkTotals} totalMinutesLabel={totalMinutesLabel} />
-          <View className="mt-3 flex-row flex-wrap items-center gap-x-2 gap-y-1 border-t border-border pt-3">
-            <View className="h-3 w-3 rounded-full bg-primary" />
-            <Text className="text-sm font-medium">{outgoingSplitLabel}</Text>
-            <Text className="text-sm font-medium">—</Text>
-            <View className="h-3 w-3 rounded-full bg-accent" />
-            <Text className="text-sm font-medium">{incomingSplitLabel}</Text>
+          <View className="mt-3 gap-2 border-t border-border pt-3">
+            <SplitLegendRow dotClassName="bg-primary" splitLabel={outgoingSplitLabel} />
+            <SplitLegendRow dotClassName="bg-accent" splitLabel={incomingSplitLabel} />
           </View>
         </>
       )}
@@ -655,7 +657,7 @@ function MyStatsContent({ myStats }: MyStatsContentProps) {
     <ScrollView className="flex-1" contentContainerClassName="gap-4 px-3 pb-6 pt-4">
       <Last30DaysCards last30DaysStats={myStats.last_30_days} />
       <PerformanceTable periodStats={periodStats} />
-      <CallsByHourChart periodCallsByHour={periodCallsByHour} periodStats={periodStats} />
+      <CallsByHourChart periodCallsByHour={periodCallsByHour} />
       <CallSplitCard periodStats={periodStats} />
     </ScrollView>
   );

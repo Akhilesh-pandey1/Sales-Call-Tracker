@@ -420,8 +420,8 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/my-stats-screen.tsx": {
-    "mtime": 1792661454.3804224,
-    "ast_hash": "a08b576b6712bf444a21e5a43ef58aaa",
+    "mtime": 1792673866.5564182,
+    "ast_hash": "68ef540c6b1d3f782b764d764942391c",
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/settings-screen.tsx": {
@@ -1010,8 +1010,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/dashboard-card.tsx": {
-    "mtime": 1792669721.0513709,
-    "ast_hash": "1c98b282446bc95f4ff3052c9e8e1197",
+    "mtime": 1792672809.9836156,
+    "ast_hash": "074a54bde7b0291f43069177c298044f",
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/kpi-card.tsx": {
@@ -1055,8 +1055,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/pages/person-page.tsx": {
-    "mtime": 1792670987.7946153,
-    "ast_hash": "b42a4541b96c55dcb6ee0e7260a07433",
+    "mtime": 1792673425.9877644,
+    "ast_hash": "0f83263eb50ea62b638ad56a7e5404d1",
     "semantic_hash": ""
   },
   "web/src/features/dashboard/types.ts": {

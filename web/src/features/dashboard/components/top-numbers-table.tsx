@@ -1,3 +1,4 @@
+import { Phone } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -73,9 +74,15 @@ export function TopNumbersTable({ numbers }: TopNumbersTableProps) {
             <Table>
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
-                  <TableHead>Phone number</TableHead>
-                  <TableHead className="text-right">Minutes</TableHead>
-                  <TableHead className="text-right">Calls</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wider">
+                    Phone number
+                  </TableHead>
+                  <TableHead className="text-right text-xs font-semibold uppercase tracking-wider">
+                    Minutes
+                  </TableHead>
+                  <TableHead className="text-right text-xs font-semibold uppercase tracking-wider">
+                    Calls
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -95,9 +102,12 @@ export function TopNumbersTable({ numbers }: TopNumbersTableProps) {
           </div>
         </>
       ) : (
-        <p className="px-5 pb-5 pt-3 text-sm text-muted-foreground sm:px-6">
-          No calls in the last 30 days.
-        </p>
+        <div className="flex flex-col items-center gap-2 px-6 py-10">
+          <Phone className="h-8 w-8 text-muted-foreground" />
+          <p className="text-center text-sm text-muted-foreground">
+            No calls in the last 30 days.
+          </p>
+        </div>
       )}
     </section>
   );

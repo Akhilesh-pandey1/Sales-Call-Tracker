@@ -22,7 +22,7 @@ export function PageHeader({ title, icon, action, children }: PageHeaderProps) {
         {hasAction ? <div className="flex shrink-0 items-center gap-3">{action}</div> : null}
       </header>
       {hasChildren ? (
-        <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col space-y-6 p-4 sm:p-6 lg:p-8">{children}</div>
+        <div className="mx-auto flex w-full max-w-6xl grow flex-col space-y-6 p-4 sm:p-6 lg:p-8">{children}</div>
       ) : null}
     </>
   );

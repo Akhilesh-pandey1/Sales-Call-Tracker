@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ChartColumn } from "lucide-react";
 import { cn } from "@/shared/utils/cn";
 
 interface DashboardCardProps {
@@ -11,7 +12,7 @@ interface DashboardCardProps {
 
 export function DashboardCard({ title, headingLabel, headingAction, className, children }: DashboardCardProps) {
   const cardClass: string = cn(
-    "h-full rounded-2xl border bg-card p-4 shadow-sm sm:p-5",
+    "rounded-2xl border bg-card p-4 shadow-sm sm:p-5",
     className
   );
   const hasHeadingAction: boolean = headingAction !== undefined;
@@ -35,6 +36,9 @@ export function EmptyPeriodNote() {
   const emptyPeriodMessage: string = "No calls in this period.";
 
   return (
-    <p className="py-14 text-center text-sm text-muted-foreground">{emptyPeriodMessage}</p>
+    <div className="mt-4 flex flex-col items-center gap-2 rounded-xl border border-dashed px-6 py-10">
+      <ChartColumn className="h-8 w-8 text-muted-foreground" />
+      <p className="text-center text-sm text-muted-foreground">{emptyPeriodMessage}</p>
+    </div>
   );
 }

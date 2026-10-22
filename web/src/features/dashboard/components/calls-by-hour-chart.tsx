@@ -8,6 +8,7 @@ import type { CallsByHourBlock, TalkTotals } from "../types";
 
 interface HourlyCallBar {
   hourLabel: string;
+  axisLabel: string;
   outgoing: number;
   incoming: number;
   total: number;
@@ -51,8 +52,26 @@ function getTwelveHourLabel(hour: number): string {
   return hourLabel;
 }
 
+function buildAxisHourLabel(
+  hour: number,
+  hourIndex: number,
+  lastHourIndex: number
+): string {
+  const noonHour: number = 12;
+  const onePmHour: number = 13;
+  const showsMeridiem: boolean =
+    hourIndex === 0 || hour === noonHour || hour === onePmHour || hourIndex === lastHourIndex;
+  if (showsMeridiem) {
+    const meridiemHourLabel: string = getTwelveHourLabel(hour);
+    return meridiemHourLabel;
+  }
+  const plainHourLabel: string = String(hour % noonHour === 0 ? noonHour : hour % noonHour);
+  return plainHourLabel;
+}
+
 function buildHourlyCallBars(callsByHour: CallsByHourBlock): HourlyCallBar[] {
   const bestHour: number | null = callsByHour.best_hour;
+  const lastHourIndex: number = callsByHour.hours.length - 1;
   const hourlyBars: HourlyCallBar[] = callsByHour.hours.map(
     (hour: number, hourIndex: number) => {
       const outgoingCount: number = callsByHour.outgoing[hourIndex];
@@ -60,6 +79,7 @@ function buildHourlyCallBars(callsByHour: CallsByHourBlock): HourlyCallBar[] {
       const totalCalls: number = outgoingCount + incomingCount;
       const hourlyBar: HourlyCallBar = {
         hourLabel: getTwelveHourLabel(hour),
+        axisLabel: buildAxisHourLabel(hour, hourIndex, lastHourIndex),
         outgoing: outgoingCount,
         incoming: incomingCount,
         total: totalCalls,
@@ -84,13 +104,12 @@ function buildChartSummaryLine(
 ): string {
   const outgoingCallsLabel: string = formatCount(talkTotals.outgoing_calls);
   const incomingCallsLabel: string = formatCount(talkTotals.incoming_calls);
-  const splitLine: string = `${outgoingCallsLabel} outgoing · ${incomingCallsLabel} incoming`;
   if (usesDailyAverageWording) {
-    const averageWordingLine: string = `${splitLine} · Best hour: ${bestHourBar.hourLabel}`;
-    return averageWordingLine;
+    const averageSummaryLine: string = `Outgoing ${outgoingCallsLabel} · Incoming ${incomingCallsLabel} per day on average · Best hour: ${bestHourBar.hourLabel}`;
+    return averageSummaryLine;
   }
   const bestHourCallsLabel: string = formatCount(bestHourBar.total);
-  const summaryLine: string = `${splitLine} · Best hour: ${bestHourBar.hourLabel} (${bestHourCallsLabel} calls)`;
+  const summaryLine: string = `Outgoing ${outgoingCallsLabel} · Incoming ${incomingCallsLabel} · Best hour: ${bestHourBar.hourLabel} (${bestHourCallsLabel} calls)`;
   return summaryLine;
 }
 
@@ -247,10 +266,10 @@ export function CallsByHourChart({
   const outgoingInsideLabelFill: string = "hsl(var(--primary-foreground))";
   const incomingInsideLabelFill: string = "hsl(var(--primary-foreground))";
 
-  const maxBarWidth: number = 28;
+  const maxBarWidth: number = 48;
   const chartTopMargin: number = 20;
   const xAxisTickMargin: number = 8;
-  const showTickLabelEveryNthHour: number = 2;
+  const showTickLabelEveryNthHour: number = 0;
   const barCornerRadius: [number, number, number, number] = [4, 4, 0, 0];
   const insideLabelShareDivisor: number = 8;
   const highestCallTotal: number = getHighestCallTotal(hourlyBars);
@@ -272,13 +291,13 @@ export function CallsByHourChart({
           margin={{ top: chartTopMargin, right: 0, bottom: 0, left: 0 }}
         >
           <XAxis
-            dataKey="hourLabel"
+            dataKey="axisLabel"
             interval={showTickLabelEveryNthHour}
             axisLine={false}
             tickLine={false}
             tickMargin={xAxisTickMargin}
             tick={(tickProps: HourAxisTickProps) =>
-              renderHourAxisTick(tickProps, bestHourBar.hourLabel)
+              renderHourAxisTick(tickProps, bestHourBar.axisLabel)
             }
           />
           <Bar

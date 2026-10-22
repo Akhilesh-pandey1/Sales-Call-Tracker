@@ -43,36 +43,43 @@ async function findMatchingLogEntry(
 async function sendPendingCallToServer(
   pendingCall: PendingCall,
   scheduledAt: string | null = null,
-): Promise<void> {
+): Promise<boolean> {
   const syncCall = toSyncCallOrNull(pendingCall, scheduledAt);
   if (syncCall === null) {
-    return;
+    const scheduleWasRefused = false;
+    return scheduleWasRefused;
   }
+  let scheduleWasRefused = false;
   try {
-    await syncCalls([syncCall]);
+    const syncResponse = await syncCalls([syncCall]);
+    const refusedCallIds = syncResponse.schedule_refused_call_ids;
+    scheduleWasRefused = refusedCallIds.includes(pendingCall.callId);
   } catch (sendError: unknown) {
     console.warn('The call stays saved on the phone until the server is reachable.', sendError);
-    return;
+    return scheduleWasRefused;
   }
   await markPendingCallsSynced([pendingCall.callId]);
   await deleteSyncedCallsBehindSweepLine();
+  return scheduleWasRefused;
 }
 
 export async function submitTrackedCall(
   callId: string,
   scheduledAt: string | null = null,
-): Promise<void> {
+): Promise<boolean> {
   const pendingCall = await getPendingCallById(callId);
   if (pendingCall === null) {
-    return;
+    const scheduleWasRefused = false;
+    return scheduleWasRefused;
   }
   if (pendingCall.durationSeconds !== null) {
-    await sendPendingCallToServer(pendingCall, scheduledAt);
-    return;
+    const scheduleWasRefused = await sendPendingCallToServer(pendingCall, scheduledAt);
+    return scheduleWasRefused;
   }
   const matchedEntry = await findMatchingLogEntry(pendingCall);
   if (matchedEntry === null) {
-    return;
+    const scheduleWasRefused = false;
+    return scheduleWasRefused;
   }
   await markPendingCallFilled(
     pendingCall.callId,
@@ -84,5 +91,6 @@ export async function submitTrackedCall(
     dialedAt: matchedEntry.dialedAt,
     durationSeconds: matchedEntry.durationSeconds,
   };
-  await sendPendingCallToServer(filledPendingCall, scheduledAt);
+  const scheduleWasRefused = await sendPendingCallToServer(filledPendingCall, scheduledAt);
+  return scheduleWasRefused;
 }

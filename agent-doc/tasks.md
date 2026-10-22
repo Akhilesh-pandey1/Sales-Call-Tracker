@@ -4,16 +4,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `backend/app/tasks/lead_expiry.py` starts the scheduler from `create_app()` — the job runs once the moment the server starts, then every hour, clearing `scheduled_by` and `scheduled_at` on every `waiting` lead booked more than `SCHEDULE_EXPIRE_HOURS` (24) hours past its time, attempts untouched — and never starts under pytest (`decisions.md` Decision 1; `structure.md` — `tasks/lead_expiry.py`).
-- [ ] `serve_next_lead` no longer calls `release_expired_bookings()` — the hourly job is the only release point (`decisions.md` Decision 1).
-- [ ] Tests prove the job frees expired bookings, a booking inside the 24-hour window stays reserved, and serving no longer frees anything (`testing.md` — `test_leads.py`).
+- [x] `backend/app/tasks/lead_expiry.py` starts the scheduler from `create_app()` — the job runs once the moment the server starts, then every hour, clearing `scheduled_by` and `scheduled_at` on every `waiting` lead booked more than `SCHEDULE_EXPIRE_HOURS` (24) hours past its time, attempts untouched — and never starts under pytest (`decisions.md` Decision 1; `structure.md` — `tasks/lead_expiry.py`).
+- [x] `serve_next_lead` no longer calls `release_expired_bookings()` — the hourly job is the only release point (`decisions.md` Decision 1).
+- [x] Tests prove the job frees expired bookings, a booking inside the 24-hour window stays reserved, and serving no longer frees anything (`testing.md` — `test_leads.py`).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_leads.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_leads.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 2: App — hour chart centers the segment counts
 

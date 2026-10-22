@@ -17,6 +17,7 @@ from backend.app.extensions import db
 from backend.app.modules.settings import get_or_create_office_hours_window
 from backend.app.modules.users.models import User
 from backend.app.static_routes import register_static_routes
+from backend.app.tasks.lead_expiry import start_lead_expiry_scheduler
 
 
 def create_initial_manager(app: Flask) -> None:
@@ -99,5 +100,7 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
         ensure_calls_column("direction")
         get_or_create_office_hours_window()
         create_initial_manager(app)
+
+    start_lead_expiry_scheduler(app)
 
     return app

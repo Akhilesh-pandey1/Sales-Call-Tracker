@@ -434,8 +434,6 @@ def serve_next_lead(
     continue_calling: bool,
     schedule_data: ScheduleLeadRequest | None = None,
 ) -> dict[str, Any]:
-    release_expired_bookings()
-
     if schedule_data is not None:
         schedule_lead_callback(
             schedule_data.lead_id, user_id, schedule_data.scheduled_at

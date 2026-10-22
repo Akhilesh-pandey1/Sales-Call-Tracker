@@ -19,6 +19,7 @@ import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { CallsByHourChart } from "../components/calls-by-hour-chart";
 import { KpiCard } from "../components/kpi-card";
 import { PeriodSwitch } from "../components/period-switch";
+import { TalkSplitCard } from "../components/talk-split-card";
 import { TopNumbersTable } from "../components/top-numbers-table";
 import { isValidPersonId, usePersonStats } from "../hooks/use-person-stats";
 import type {
@@ -345,6 +346,8 @@ export function PersonPage() {
   const hasValidPersonId: boolean = isValidPersonId(personId);
   const { personStats, isLoading, hasError, refetch } = usePersonStats(personId);
   const [selectedPeriod, setSelectedPeriod] = useState<DashboardPeriod>("last_30_days");
+  const [selectedSplitPeriod, setSelectedSplitPeriod] =
+    useState<DashboardPeriod>("last_30_days");
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
   const fromSectionPath: string | null = searchParams.get("from");
   const backTargetPath: string = getPersonPageBackTarget(fromSectionPath);
@@ -359,6 +362,10 @@ export function PersonPage() {
 
   const handleSelectPeriod = (period: DashboardPeriod): void => {
     setSelectedPeriod(period);
+  };
+
+  const handleSelectSplitPeriod = (period: DashboardPeriod): void => {
+    setSelectedSplitPeriod(period);
   };
 
   const fallbackPageTitle: string = "Person";
@@ -406,6 +413,17 @@ export function PersonPage() {
             talkTotals={personStats[selectedPeriod].talk_totals}
             selectedPeriod={selectedPeriod}
             onSelectPeriod={handleSelectPeriod}
+          />
+          <TalkSplitCard
+            talkTotals={personStats[selectedSplitPeriod].talk_totals}
+            totalMinutes={personStats[selectedSplitPeriod].minutes}
+            headingAction={
+              <PeriodSwitch
+                selectedPeriod={selectedSplitPeriod}
+                onSelectPeriod={handleSelectSplitPeriod}
+                ariaLabel="Split period"
+              />
+            }
           />
           <TopNumbersTable numbers={personStats.top_numbers} />
         </>

@@ -413,23 +413,23 @@ function HourBarColumn({ hourBar }: HourBarColumnProps) {
           style={{ height: hourBar.heightPercent }}
         >
           <View
-            className="w-full items-center bg-primary"
+            className="w-full items-center justify-center bg-primary"
             style={{ height: hourBar.outgoingSharePercent }}
           >
             {hourBar.outgoingSegment.showsCountLabel ? (
               <Text
                 numberOfLines={1}
-                className="pt-0.5 text-[8px] font-semibold tabular-nums text-primary-foreground"
+                className="text-[8px] font-semibold tabular-nums text-primary-foreground"
               >
                 {hourBar.outgoingSegment.countLabel}
               </Text>
             ) : null}
           </View>
-          <View className="w-full flex-1 items-center bg-accent">
+          <View className="w-full flex-1 items-center justify-center bg-accent">
             {hourBar.incomingSegment.showsCountLabel ? (
               <Text
                 numberOfLines={1}
-                className="pt-0.5 text-[8px] font-semibold tabular-nums text-accent-foreground"
+                className="text-[8px] font-semibold tabular-nums text-accent-foreground"
               >
                 {hourBar.incomingSegment.countLabel}
               </Text>

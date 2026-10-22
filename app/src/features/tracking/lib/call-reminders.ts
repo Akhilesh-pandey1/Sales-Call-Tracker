@@ -67,6 +67,8 @@ async function showReminderTriggerWhenFuture(
   const reminderNotificationId = toReminderNotificationId(scheduledReminder.leadId);
   const reminderTitle = 'Time to call';
   const pressActionDefaultId = 'default';
+  const reminderSmallIconName = 'ic_reminder_icon';
+  const reminderLargeIconName = 'ic_launcher';
   const reminderNotification = {
     id: reminderNotificationId,
     title: reminderTitle,
@@ -74,6 +76,8 @@ async function showReminderTriggerWhenFuture(
     data: { phone_number: scheduledReminder.phoneNumber },
     android: {
       channelId,
+      smallIcon: reminderSmallIconName,
+      largeIcon: reminderLargeIconName,
       pressAction: { id: pressActionDefaultId },
     },
   };

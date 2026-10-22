@@ -3,6 +3,7 @@ import { ActivityIndicator, View } from 'react-native';
 import { LoginScreen, useAuth } from '@/features/auth';
 import { useCallTracker } from '@/features/tracking';
 import { AppNavigator } from './app-navigator';
+import { navigationRef } from './navigation-ref';
 
 function AuthenticatedApp() {
   useCallTracker();
@@ -21,7 +22,7 @@ export function RootNavigator() {
   }
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       {authStatus === 'logged-in' ? (
         <AuthenticatedApp />
       ) : (

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { ToastAndroid } from 'react-native';
 import { readStoredCountry } from '@/features/auth';
+import { subscribeToReminderPress } from '@/features/tracking';
 import {
   isValidPhoneNumber,
   normalizePhoneNumber,
@@ -49,6 +50,13 @@ export function useDialer(): UseDialerResult {
   const [isDialLocked, setIsDialLocked] = useState(false);
   const isDialLockHeld = useRef(false);
   const countryCode = useStoredCountry();
+
+  useEffect(() => {
+    const unsubscribe = subscribeToReminderPress(pressedPhoneNumber => {
+      setDialedNumberInput(pressedPhoneNumber);
+    });
+    return unsubscribe;
+  }, []);
 
   const appendKeypadCharacter = useCallback((character: string): void => {
     setDialedNumberInput(currentInput => currentInput + character);

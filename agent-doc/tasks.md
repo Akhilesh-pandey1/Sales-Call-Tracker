@@ -51,14 +51,14 @@
 
 **Blocked by:** 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The app hour chart shows a blue dot "Outgoing" and a green dot "Incoming" in a row under the bars — `bg-primary` and `bg-accent`, the Call Split card colors (`decisions.md` Decision 2).
+- [x] The app hour chart shows a blue dot "Outgoing" and a green dot "Incoming" in a row under the bars — `bg-primary` and `bg-accent`, the Call Split card colors (`decisions.md` Decision 2).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 5: App — calling-SIM foundation
 

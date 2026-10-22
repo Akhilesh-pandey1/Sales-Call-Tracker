@@ -60,18 +60,20 @@ export function useLeadPostCall(
     async (
       scheduledAt: string | null,
       shouldContinueToNextLead: boolean,
+      scheduleWasRefused: boolean,
     ): Promise<void> => {
       const currentState = viewStateRef.current;
       if (currentState.kind !== 'finished') {
         return;
       }
-      const leadSchedule = buildLeadScheduleRequest(scheduledAt, currentState.lead.id);
+      const scheduledAtToBook: string | null = scheduleWasRefused ? null : scheduledAt;
+      const leadSchedule = buildLeadScheduleRequest(scheduledAtToBook, currentState.lead.id);
       const nextLead = await fetchNextLead(leadSchedule, shouldContinueToNextLead);
-      if (scheduledAt !== null) {
+      if (scheduledAtToBook !== null) {
         const bookedLeadReminder: ScheduledReminder = {
           leadId: currentState.lead.id,
           phoneNumber: currentState.lead.phone_number,
-          scheduledAt,
+          scheduledAt: scheduledAtToBook,
         };
         await setBookedLeadReminder(bookedLeadReminder);
       }
@@ -104,8 +106,8 @@ export function useLeadPostCall(
       const currentState = viewStateRef.current;
       const finishedCallId =
         currentState.kind === 'finished' ? currentState.callId : null;
-      await submitTrackedPostCall(finishedCallId, () =>
-        continueAfterLeadSubmit(scheduledAt, shouldContinueToNextLead),
+      await submitTrackedPostCall(finishedCallId, (scheduleWasRefused: boolean) =>
+        continueAfterLeadSubmit(scheduledAt, shouldContinueToNextLead, scheduleWasRefused),
       );
     },
     [continueAfterLeadSubmit, submitTrackedPostCall, viewStateRef],

@@ -3,7 +3,7 @@ from flask import Blueprint, Response, g, jsonify, request
 from pydantic import ValidationError
 from backend.app.core.errors import AppException
 from backend.app.core.permissions import require_auth
-from backend.app.modules.calls.schemas import SyncCallsRequest
+from backend.app.modules.calls.schemas import SyncCallsRequest, SyncCallsResponse
 from backend.app.modules.calls.services import sync_calls_batch
 
 calls_blueprint: Blueprint = Blueprint("calls", __name__, url_prefix="/calls")
@@ -31,6 +31,7 @@ def sync_calls() -> tuple[Response, int]:
     result: dict[str, Any] = sync_calls_batch(
         validated_request.calls, current_user_id, current_user_country
     )
+    validated_response: SyncCallsResponse = SyncCallsResponse.model_validate(result)
 
-    response: Response = jsonify(result)
+    response: Response = jsonify(validated_response.model_dump())
     return response, success_code

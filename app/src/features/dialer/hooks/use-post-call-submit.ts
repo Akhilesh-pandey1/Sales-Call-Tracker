@@ -13,7 +13,7 @@ export type UsePostCallSubmitResult = Omit<PostCallDialogState, 'isPostCallDialo
   clearPostCallErrorMessage: () => void;
   submitPostCall: (
     callId: string | null,
-    afterCallSent: () => void | Promise<void>,
+    afterCallSent: (scheduleWasRefused: boolean) => void | Promise<void>,
     scheduledAt?: string | null,
   ) => Promise<void>;
 };
@@ -30,7 +30,7 @@ export function usePostCallSubmit(): UsePostCallSubmitResult {
   const submitPostCall = useCallback(
     async (
       callId: string | null,
-      afterCallSent: () => void | Promise<void>,
+      afterCallSent: (scheduleWasRefused: boolean) => void | Promise<void>,
       scheduledAt: string | null = null,
     ): Promise<void> => {
       if (isSubmittingPostCallRef.current) {
@@ -40,14 +40,15 @@ export function usePostCallSubmit(): UsePostCallSubmitResult {
       setIsSubmittingPostCall(true);
       setPostCallErrorMessage(null);
       const refusedScheduleToastMessage = 'This lead is already booked by someone else.';
+      let scheduleWasRefused = false;
       try {
         if (callId !== null) {
-          const scheduleWasRefused = await submitTrackedCall(callId, scheduledAt);
+          scheduleWasRefused = await submitTrackedCall(callId, scheduledAt);
           if (scheduleWasRefused) {
             ToastAndroid.show(refusedScheduleToastMessage, ToastAndroid.SHORT);
           }
         }
-        await afterCallSent();
+        await afterCallSent(scheduleWasRefused);
       } catch (submitError) {
         setPostCallErrorMessage(readRequestErrorMessage(submitError));
       } finally {

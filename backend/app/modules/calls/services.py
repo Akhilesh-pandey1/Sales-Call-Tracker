@@ -163,15 +163,21 @@ def sync_calls_batch(
         db.session.add(call_record)
         seen_call_ids.add(call_id)
 
-        if direction == OUTGOING_DIRECTION:
-            resolve_lead_for_call(phone_number, duration, dialed_at, user_id)
+        is_incoming_call: bool = direction != OUTGOING_DIRECTION
+        if is_incoming_call:
+            continue
 
-            if scheduled_at_raw is not None:
-                schedule_refused: bool = schedule_resolved_lead_for_call(
-                    phone_number, user_id, scheduled_at_raw
-                )
-                if schedule_refused:
-                    refused_call_ids.append(call_id)
+        resolve_lead_for_call(phone_number, duration, dialed_at, user_id)
+
+        is_unscheduled_call: bool = scheduled_at_raw is None
+        if is_unscheduled_call:
+            continue
+
+        schedule_refused: bool = schedule_resolved_lead_for_call(
+            phone_number, user_id, scheduled_at_raw
+        )
+        if schedule_refused:
+            refused_call_ids.append(call_id)
 
     db.session.commit()
 

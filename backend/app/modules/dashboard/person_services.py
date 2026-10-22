@@ -4,7 +4,7 @@ from typing import Any
 from backend.app.core.errors import AppException
 from backend.app.core.utils import parse_utc_datetime, to_ist
 from backend.app.extensions import db
-from backend.app.modules.calls import Call
+from backend.app.modules.calls import Call, OUTGOING_DIRECTION
 from backend.app.modules.dashboard.services import (
     DashboardTimeWindows,
     PeriodHourlyInputs,
@@ -115,8 +115,7 @@ def add_phone_call_totals(
 def add_outgoing_date_to_active_days(
     active_day_dates: set[date], direction: str, dialed_at_utc: datetime
 ) -> None:
-    outgoing_direction: str = "outgoing"
-    if direction == outgoing_direction:
+    if direction == OUTGOING_DIRECTION:
         active_day_dates.add(to_ist(dialed_at_utc).date())
 
 

@@ -21,15 +21,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The outgoing count sits centered in the outgoing segment and the incoming count centered in the incoming segment; the total label stays above the bar (`decisions.md` Decision 2).
-- [ ] A count still shows only when its segment holds at least one eighth of the tallest bar's calls, with fonts and colors unchanged (`decisions.md` Decision 2).
+- [x] The outgoing count sits centered in the outgoing segment and the incoming count centered in the incoming segment; the total label stays above the bar (`decisions.md` Decision 2).
+- [x] A count still shows only when its segment holds at least one eighth of the tallest bar's calls, with fonts and colors unchanged (`decisions.md` Decision 2).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 3: Web — hour chart gains the direction dot legend
 
@@ -40,10 +40,10 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The web hour chart shows the dot legend in the same colors as its segments — `hsl(var(--primary))` for outgoing, `INCOMING_COLOR` for incoming — with the summary line untouched below it (`decisions.md` Decision 2).
+- [x] The web hour chart shows the dot legend in the same colors as its segments — `hsl(var(--primary))` for outgoing, `INCOMING_COLOR` for incoming — with the summary line untouched below it (`decisions.md` Decision 2).
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 4: App — hour chart gains the direction dot legend
 
@@ -66,15 +66,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `SimCallModule.kt` reads the active SIMs with their numbers and carrier names, and places a call on the slot matching a given number through `TelecomManager.placeCall` with that SIM's account handle; the JS bridge (`sim-module.ts`) exposes both (`decisions.md` Decision 3; `structure.md` — `SimCallModule.kt`, `sim-module.ts`).
-- [ ] The chosen number saves, reads, and clears in AsyncStorage in international format, and matching normalizes both sides (+91 vs 0) with the login country (`decisions.md` Decision 3).
+- [x] `SimCallModule.kt` reads the active SIMs with their numbers and carrier names, and places a call on the slot matching a given number through `TelecomManager.placeCall` with that SIM's account handle; the JS bridge (`sim-module.ts`) exposes both (`decisions.md` Decision 3; `structure.md` — `SimCallModule.kt`, `sim-module.ts`).
+- [x] The chosen number saves, reads, and clears in AsyncStorage in international format, and matching normalizes both sides (+91 vs 0) with the login country (`decisions.md` Decision 3).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 6: App — every dial leaves on the chosen number
 
@@ -115,12 +115,12 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `ic_reminder_icon` exists at all five densities — a white phone shape on a transparent background — and the reminder notification sets it as `smallIcon` with the launcher icon as `largeIcon` (`decisions.md` Decision 4).
-- [ ] Nothing else in the reminder notification changes — same channel, title, body, and press action (`decisions.md` Decision 4).
+- [x] `ic_reminder_icon` exists at all five densities — a white phone shape on a transparent background — and the reminder notification sets it as `smallIcon` with the launcher icon as `largeIcon` (`decisions.md` Decision 4).
+- [x] Nothing else in the reminder notification changes — same channel, title, body, and press action (`decisions.md` Decision 4).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`

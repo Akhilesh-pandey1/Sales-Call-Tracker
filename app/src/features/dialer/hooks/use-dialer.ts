@@ -7,7 +7,11 @@ import {
   isValidPhoneNumber,
   normalizePhoneNumber,
 } from '@/shared/utils/phone-formatter';
-import { callFailedMessage, launchTrackedCall, type LaunchedCall } from '../lib/call-launcher';
+import {
+  launchTrackedCall,
+  readCallLaunchErrorMessage,
+  type LaunchedCall,
+} from '../lib/call-launcher';
 
 const emptyClipboardMessage = 'Nothing copied.';
 
@@ -98,8 +102,9 @@ export function useDialer(): UseDialerResult {
         countryCode,
       );
       launchedCall = await launchTrackedCall(normalizedPhoneNumber);
-    } catch {
-      ToastAndroid.show(callFailedMessage, ToastAndroid.SHORT);
+    } catch (callStartError) {
+      const launchErrorMessage = readCallLaunchErrorMessage(callStartError);
+      ToastAndroid.show(launchErrorMessage, ToastAndroid.SHORT);
     } finally {
       isDialLockHeld.current = false;
       setIsDialLocked(false);

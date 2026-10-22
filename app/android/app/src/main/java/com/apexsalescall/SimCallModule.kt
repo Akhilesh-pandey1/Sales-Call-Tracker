@@ -134,7 +134,7 @@ class SimCallModule(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod
-    fun placeCallOnMatchingSim(phoneNumber: String, promise: Promise) {
+    fun placeCallOnMatchingSim(dialedPhoneNumber: String, simPhoneNumber: String, promise: Promise) {
         if (!isSimChoosingSupported()) {
             promise.reject(simUnsupportedCode, simUnsupportedMessage)
             return
@@ -147,7 +147,7 @@ class SimCallModule(reactContext: ReactApplicationContext) :
             promise.reject(phoneStatePermissionCode, phoneStatePermissionMessage)
             return
         }
-        val dialedDigitCount: Int = phoneNumber.count { character -> character.isDigit() }
+        val dialedDigitCount: Int = dialedPhoneNumber.count { character -> character.isDigit() }
         if (
             dialedDigitCount < minimumDialedDigitCount ||
             dialedDigitCount > maximumDialedDigitCount
@@ -161,7 +161,7 @@ class SimCallModule(reactContext: ReactApplicationContext) :
             return
         }
         val matchingSubscription: SubscriptionInfo? =
-            findSubscriptionMatchingNumber(phoneNumber)
+            findSubscriptionMatchingNumber(simPhoneNumber)
         if (matchingSubscription == null) {
             promise.reject(simNotFoundCode, simNotFoundMessage)
             return
@@ -173,7 +173,7 @@ class SimCallModule(reactContext: ReactApplicationContext) :
             return
         }
         try {
-            placeCallOnSlot(telecomManager, accountHandle, phoneNumber)
+            placeCallOnSlot(telecomManager, accountHandle, dialedPhoneNumber)
         } catch (callError: Exception) {
             promise.reject(callFailedCode, callFailedMessage, callError)
             return

@@ -7,7 +7,10 @@ export type SimCard = {
 
 type SimCallNativeModule = {
   readSimNumbers(): Promise<SimCard[]>;
-  placeCallOnMatchingSim(phoneNumber: string): Promise<boolean>;
+  placeCallOnMatchingSim(
+    dialedPhoneNumber: string,
+    simPhoneNumber: string,
+  ): Promise<boolean>;
 };
 
 const missingModuleMessage = 'This phone cannot choose a calling SIM.';
@@ -25,8 +28,13 @@ export async function readSimCards(): Promise<SimCard[]> {
   return simCards;
 }
 
-export async function placeCallOnMatchingSim(phoneNumber: string): Promise<boolean> {
-  const wasCallPlaced: boolean =
-    await readSimCallNativeModule().placeCallOnMatchingSim(phoneNumber);
+export async function placeCallOnMatchingSim(
+  dialedPhoneNumber: string,
+  simPhoneNumber: string,
+): Promise<boolean> {
+  const wasCallPlaced: boolean = await readSimCallNativeModule().placeCallOnMatchingSim(
+    dialedPhoneNumber,
+    simPhoneNumber,
+  );
   return wasCallPlaced;
 }

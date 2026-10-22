@@ -458,6 +458,28 @@ function HourBarsChart({ hourBars }: HourBarsChartProps) {
   );
 }
 
+type DirectionDotLegendEntry = {
+  directionLabel: string;
+  dotClassName: string;
+};
+
+type DirectionDotLegendProps = {
+  entries: DirectionDotLegendEntry[];
+};
+
+function DirectionDotLegend({ entries }: DirectionDotLegendProps) {
+  return (
+    <View className="mt-3 flex-row items-center gap-4">
+      {entries.map((entry: DirectionDotLegendEntry) => (
+        <View key={entry.directionLabel} className="flex-row items-center gap-1.5">
+          <View className={`h-2.5 w-2.5 rounded-full ${entry.dotClassName}`} />
+          <Text className="text-xs font-medium text-foreground">{entry.directionLabel}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
 type ChartPeriod = 'today' | 'yesterday' | 'last_30_days';
 
 type ChartPeriodInfo = {
@@ -523,6 +545,10 @@ function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
   const hourBars: HourBar[] = isChartEmpty ? [] : buildHourBars(selectedCallsByHour);
   const bestHourFooterText: string =
     bestHour === null ? '' : `Best hour: ${formatHourLabel(bestHour)}.`;
+  const directionLegendEntries: DirectionDotLegendEntry[] = [
+    { directionLabel: 'Outgoing', dotClassName: 'bg-primary' },
+    { directionLabel: 'Incoming', dotClassName: 'bg-accent' },
+  ];
 
   const handlePeriodPress = (period: ChartPeriod): void => {
     setSelectedPeriod(period);
@@ -543,6 +569,7 @@ function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
       ) : (
         <>
           <HourBarsChart hourBars={hourBars} />
+          <DirectionDotLegend entries={directionLegendEntries} />
           <Text className="mt-2 text-xs text-muted-foreground">{bestHourFooterText}</Text>
         </>
       )}

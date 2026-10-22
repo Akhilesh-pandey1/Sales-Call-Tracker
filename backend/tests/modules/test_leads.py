@@ -3,13 +3,16 @@ import io
 from typing import Any
 from flask import Flask
 from flask.testing import FlaskClient
-from backend.app.config.base import MAX_SCHEDULE_AHEAD_DAYS, SCHEDULE_EXPIRE_HOURS
+import pytest
+from backend.app import create_app
+from backend.app.config.base import MAX_SCHEDULE_AHEAD_DAYS, SCHEDULE_EXPIRE_HOURS, BaseConfig
 from backend.app.core.security import hash_password
 from backend.app.core.utils import now_ist, now_utc
 from backend.app.extensions import db
 from backend.app.modules.calls import Call
 from backend.app.modules.leads.models import Lead
 from backend.app.modules.users import User
+from backend.app.tasks.lead_expiry import run_lead_expiry_job
 
 
 def create_user_fixture(
@@ -922,7 +925,7 @@ def test_next_lead_schedule_clears_claim_held_by_different_user(
     assert claimed_lead.claimed_until is None
 
 
-def test_next_lead_frees_expired_booking_into_newest_first_pool(
+def test_expiry_job_frees_expired_booking_into_newest_first_pool(
     app: Flask, client: FlaskClient
 ) -> None:
     salesperson = create_user_fixture(
@@ -947,6 +950,14 @@ def test_next_lead_frees_expired_booking_into_newest_first_pool(
         created_at=current_time - two_hours_ago,
     )
 
+    run_lead_expiry_job(app)
+
+    db.session.refresh(freed_lead)
+    assert freed_lead.status == "waiting"
+    assert freed_lead.scheduled_by is None
+    assert freed_lead.scheduled_at is None
+    assert freed_lead.attempt_count == 1
+
     headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
     response = client.post("/api/leads/next", json={}, headers=headers)
 
@@ -955,11 +966,96 @@ def test_next_lead_frees_expired_booking_into_newest_first_pool(
     assert json_data["lead"]["id"] == freed_lead.id
     assert json_data["lead"]["is_scheduled"] is False
 
-    db.session.refresh(freed_lead)
-    assert freed_lead.status == "waiting"
-    assert freed_lead.scheduled_by is None
-    assert freed_lead.scheduled_at is None
-    assert freed_lead.attempt_count == 1
+
+def test_expiry_job_keeps_booking_inside_window_still_reserved(
+    app: Flask,
+) -> None:
+    owner = create_user_fixture(name="SalesFresh", role="salesperson", token="fresh-token")
+
+    current_time: datetime = now_utc()
+    one_hour_ago: timedelta = timedelta(hours=1)
+    inside_window_time: datetime = current_time - one_hour_ago
+    two_days_ahead: timedelta = timedelta(days=2)
+    future_booking_time: datetime = current_time + two_days_ahead
+    due_booking_lead = create_lead_fixture(
+        phone_number="+919876543316",
+        status="waiting",
+        attempt_count=1,
+        scheduled_by=owner.id,
+        scheduled_at=inside_window_time,
+    )
+    future_booking_lead = create_lead_fixture(
+        phone_number="+919876543317",
+        status="waiting",
+        scheduled_by=owner.id,
+        scheduled_at=future_booking_time,
+    )
+
+    run_lead_expiry_job(app)
+
+    db.session.refresh(due_booking_lead)
+    assert due_booking_lead.status == "waiting"
+    assert due_booking_lead.scheduled_by == owner.id
+    assert due_booking_lead.scheduled_at is not None
+    assert due_booking_lead.attempt_count == 1
+
+    db.session.refresh(future_booking_lead)
+    assert future_booking_lead.scheduled_by == owner.id
+    assert future_booking_lead.scheduled_at is not None
+
+
+def test_scheduler_never_starts_under_pytest(
+    app: Flask, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    scheduler_extension_key: str = "lead_expiry_scheduler"
+
+    assert scheduler_extension_key not in app.extensions
+
+    monkeypatch.setenv("MANAGER_NAME", "GateManager")
+    monkeypatch.setenv("MANAGER_PASSWORD", "Password123")
+
+    class NonTestingConfig(BaseConfig):
+        TESTING: bool = False
+        SQLALCHEMY_DATABASE_URI: str = "sqlite:///:memory:"
+
+    non_testing_app: Flask = create_app(NonTestingConfig)
+
+    assert scheduler_extension_key not in non_testing_app.extensions
+
+
+def test_next_lead_serving_never_frees_expired_booking(
+    app: Flask, client: FlaskClient
+) -> None:
+    booking_owner = create_user_fixture(
+        name="SalesBooked", role="salesperson", token="booked-token"
+    )
+    other_salesperson = create_user_fixture(
+        name="SalesServing", role="salesperson", token="serving-token"
+    )
+
+    current_time: datetime = now_utc()
+    one_hour_past_expiry: timedelta = timedelta(hours=SCHEDULE_EXPIRE_HOURS + 1)
+    expired_booking_time: datetime = current_time - one_hour_past_expiry
+    expired_booking_lead = create_lead_fixture(
+        phone_number="+919876543318",
+        status="waiting",
+        attempt_count=1,
+        scheduled_by=booking_owner.id,
+        scheduled_at=expired_booking_time,
+        created_at=current_time,
+    )
+
+    headers: dict[str, str] = {"Authorization": f"Bearer {other_salesperson.auth_token}"}
+    response = client.post("/api/leads/next", json={}, headers=headers)
+
+    assert response.status_code == 200
+    assert response.get_json()["lead"] is None
+
+    db.session.refresh(expired_booking_lead)
+    assert expired_booking_lead.status == "waiting"
+    assert expired_booking_lead.scheduled_by == booking_owner.id
+    assert expired_booking_lead.scheduled_at is not None
+    assert expired_booking_lead.attempt_count == 1
 
 
 def test_next_lead_booking_inside_window_keeps_lead_reserved(
@@ -1006,7 +1102,7 @@ def test_next_lead_booking_inside_window_keeps_lead_reserved(
     assert owner_json_data["lead"]["is_scheduled"] is True
 
 
-def test_next_lead_frees_deactivated_owner_booking(
+def test_expiry_job_frees_deactivated_owner_booking(
     app: Flask, client: FlaskClient
 ) -> None:
     deactivated_owner = create_user_fixture(
@@ -1034,6 +1130,14 @@ def test_next_lead_frees_deactivated_owner_booking(
         created_at=current_time - three_hours_ago,
     )
 
+    run_lead_expiry_job(app)
+
+    db.session.refresh(stuck_lead)
+    assert stuck_lead.status == "waiting"
+    assert stuck_lead.scheduled_by is None
+    assert stuck_lead.scheduled_at is None
+    assert stuck_lead.attempt_count == 2
+
     headers: dict[str, str] = {"Authorization": f"Bearer {active_salesperson.auth_token}"}
     response = client.post("/api/leads/next", json={}, headers=headers)
 
@@ -1041,8 +1145,4 @@ def test_next_lead_frees_deactivated_owner_booking(
     json_data = response.get_json()
     assert json_data["lead"]["id"] == stuck_lead.id
     assert json_data["lead"]["is_scheduled"] is False
-
-    db.session.refresh(stuck_lead)
-    assert stuck_lead.scheduled_by is None
-    assert stuck_lead.scheduled_at is None
     assert stuck_lead.attempt_count == 2

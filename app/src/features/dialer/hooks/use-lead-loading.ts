@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import { ToastAndroid } from 'react-native';
 import type { RefObject } from 'react';
 import { fetchNextLead, type ServedLead } from '../api/leads.api';
-import { callFailedMessage, launchTrackedCall } from '../lib/call-launcher';
+import { launchTrackedCall, readCallLaunchErrorMessage } from '../lib/call-launcher';
 import { readRequestErrorMessage } from '../lib/request-error';
 import type { AutomatedViewState } from './use-automated-calling';
 
@@ -30,9 +30,10 @@ export function useLeadLoading(
         const launchedCall = await launchTrackedCall(lead.phone_number);
         const launchedCallId = launchedCall === null ? null : launchedCall.callId;
         updateViewState({ kind: 'dialing', lead, callId: launchedCallId });
-      } catch {
+      } catch (dialError) {
         updateViewState({ kind: 'ready', lead });
-        ToastAndroid.show(callFailedMessage, ToastAndroid.SHORT);
+        const launchErrorMessage = readCallLaunchErrorMessage(dialError);
+        ToastAndroid.show(launchErrorMessage, ToastAndroid.SHORT);
       } finally {
         isDialLaunchLockedRef.current = false;
       }

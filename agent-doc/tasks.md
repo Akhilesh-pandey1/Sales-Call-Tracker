@@ -4,16 +4,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `backend/app/tasks/lead_expiry.py` starts the scheduler from `create_app()` — the job runs once the moment the server starts, then every hour, clearing `scheduled_by` and `scheduled_at` on every `waiting` lead booked more than `SCHEDULE_EXPIRE_HOURS` (24) hours past its time, attempts untouched — and never starts under pytest (`decisions.md` Decision 1; `structure.md` — `tasks/lead_expiry.py`).
-- [ ] `serve_next_lead` no longer calls `release_expired_bookings()` — the hourly job is the only release point (`decisions.md` Decision 1).
-- [ ] Tests prove the job frees expired bookings, a booking inside the 24-hour window stays reserved, and serving no longer frees anything (`testing.md` — `test_leads.py`).
+- [x] `backend/app/tasks/lead_expiry.py` starts the scheduler from `create_app()` — the job runs once the moment the server starts, then every hour, clearing `scheduled_by` and `scheduled_at` on every `waiting` lead booked more than `SCHEDULE_EXPIRE_HOURS` (24) hours past its time, attempts untouched — and never starts under pytest (`decisions.md` Decision 1; `structure.md` — `tasks/lead_expiry.py`).
+- [x] `serve_next_lead` no longer calls `release_expired_bookings()` — the hourly job is the only release point (`decisions.md` Decision 1).
+- [x] Tests prove the job frees expired bookings, a booking inside the 24-hour window stays reserved, and serving no longer frees anything (`testing.md` — `test_leads.py`).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_leads.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_leads.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 2: App — hour chart centers the segment counts
 
@@ -51,14 +51,14 @@
 
 **Blocked by:** 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The app hour chart shows a blue dot "Outgoing" and a green dot "Incoming" in a row under the bars — `bg-primary` and `bg-accent`, the Call Split card colors (`decisions.md` Decision 2).
+- [x] The app hour chart shows a blue dot "Outgoing" and a green dot "Incoming" in a row under the bars — `bg-primary` and `bg-accent`, the Call Split card colors (`decisions.md` Decision 2).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 5: App — calling-SIM foundation
 
@@ -82,16 +82,16 @@
 
 **Blocked by:** 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] With a number chosen, keypad and lead dials place the call on the matching slot with no SIM picker, and the pending-call row is written only after the SIM is found (`decisions.md` Decision 3).
-- [ ] With no number chosen, or CALL_PHONE off, the call keeps today's path on Android's default SIM (`decisions.md` Decision 3).
-- [ ] A stored number not present in any slot blocks the call with "This SIM number is not in the phone." — nothing dialed, nothing recorded (`decisions.md` Decision 3).
+- [x] With a number chosen, keypad and lead dials place the call on the matching slot with no SIM picker, and the pending-call row is written only after the SIM is found (`decisions.md` Decision 3).
+- [x] With no number chosen, or CALL_PHONE off, the call keeps today's path on Android's default SIM (`decisions.md` Decision 3).
+- [x] A stored number not present in any slot blocks the call with "This SIM number is not in the phone." — nothing dialed, nothing recorded (`decisions.md` Decision 3).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 7: App — Settings picks the calling number
 

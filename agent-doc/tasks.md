@@ -40,10 +40,10 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The web hour chart shows the dot legend in the same colors as its segments — `hsl(var(--primary))` for outgoing, `INCOMING_COLOR` for incoming — with the summary line untouched below it (`decisions.md` Decision 2).
+- [x] The web hour chart shows the dot legend in the same colors as its segments — `hsl(var(--primary))` for outgoing, `INCOMING_COLOR` for incoming — with the summary line untouched below it (`decisions.md` Decision 2).
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 4: App — hour chart gains the direction dot legend
 

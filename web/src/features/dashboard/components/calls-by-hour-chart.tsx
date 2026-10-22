@@ -37,6 +37,15 @@ interface LabelPlacement {
   segmentHeight: number;
 }
 
+interface DirectionLegendEntry {
+  directionLabel: string;
+  dotColor: string;
+}
+
+interface DirectionDotLegendProps {
+  entries: DirectionLegendEntry[];
+}
+
 interface CallsByHourChartProps {
   callsByHour: CallsByHourBlock;
   talkTotals: TalkTotals;
@@ -226,6 +235,25 @@ function renderHourAxisTick(
   );
 }
 
+function DirectionDotLegend({ entries }: DirectionDotLegendProps) {
+  return (
+    <div className="mt-3 flex items-center gap-4">
+      {entries.map((entry: DirectionLegendEntry) => (
+        <span
+          key={entry.directionLabel}
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground"
+        >
+          <span
+            className="h-2.5 w-2.5 rounded-full"
+            style={{ backgroundColor: entry.dotColor }}
+          />
+          {entry.directionLabel}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export function CallsByHourChart({
   callsByHour,
   talkTotals,
@@ -279,6 +307,10 @@ export function CallsByHourChart({
   const insideLabelShareDivisor: number = 8;
   const highestCallTotal: number = getHighestCallTotal(hourlyBars);
   const minimumInsideLabelCount: number = highestCallTotal / insideLabelShareDivisor;
+  const directionLegendEntries: DirectionLegendEntry[] = [
+    { directionLabel: "Outgoing", dotColor: outgoingSegmentFill },
+    { directionLabel: "Incoming", dotColor: incomingSegmentFill },
+  ];
 
   return (
     <DashboardCard
@@ -343,6 +375,7 @@ export function CallsByHourChart({
           </Bar>
         </BarChart>
       </ChartContainer>
+      <DirectionDotLegend entries={directionLegendEntries} />
       <p className="mt-3 text-xs text-muted-foreground sm:text-sm">{chartSummaryLine}</p>
     </DashboardCard>
   );

@@ -99,15 +99,15 @@
 
 **Blocked by:** 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The Settings fourth row opens `calling-sim-screen.tsx`: readable SIM numbers with carrier names, the current choice checkmarked, and "Use phone default" restoring the default path (`decisions.md` Decision 3; `structure.md` — `calling-sim-screen.tsx`).
-- [ ] A pick saves at once and shows on the next open; when the phone hides all SIM numbers, the screen says so and keeps the salesperson on phone default (`decisions.md` Decision 3).
+- [x] The Settings fourth row opens `calling-sim-screen.tsx`: readable SIM numbers with carrier names, the current choice checkmarked, and "Use phone default" restoring the default path (`decisions.md` Decision 3; `structure.md` — `calling-sim-screen.tsx`).
+- [x] A pick saves at once and shows on the next open; when the phone hides all SIM numbers, the screen says so and keeps the salesperson on phone default (`decisions.md` Decision 3).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 8: App — the reminder notification shows the app icon
 

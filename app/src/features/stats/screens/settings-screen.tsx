@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/compone
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import {
+  CardSim,
   ChevronRight,
   LogOut,
   ShieldMinus,
@@ -14,6 +15,7 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useClearLocalData } from '../hooks/use-clear-local-data';
 import { useLogout } from '../hooks/use-logout';
+import { CallingSimScreen } from './calling-sim-screen';
 import { DoNotTrackScreen } from './do-not-track-screen';
 
 function SettingsHeader() {
@@ -134,6 +136,7 @@ function ClearConfirmDialog({
 export function SettingsScreen() {
   const { top: topInset } = useSafeAreaInsets();
   const [isDoNotTrackListOpen, setIsDoNotTrackListOpen] = useState(false);
+  const [isCallingSimPickerOpen, setIsCallingSimPickerOpen] = useState(false);
   const {
     pendingCallCount,
     isClearDialogOpen,
@@ -153,8 +156,20 @@ export function SettingsScreen() {
     setIsDoNotTrackListOpen(false);
   };
 
+  const openCallingSimPicker = (): void => {
+    setIsCallingSimPickerOpen(true);
+  };
+
+  const closeCallingSimPicker = (): void => {
+    setIsCallingSimPickerOpen(false);
+  };
+
   if (isDoNotTrackListOpen) {
     return <DoNotTrackScreen onBack={closeDoNotTrackList} />;
+  }
+
+  if (isCallingSimPickerOpen) {
+    return <CallingSimScreen onBack={closeCallingSimPicker} />;
   }
 
   return (
@@ -180,6 +195,14 @@ export function SettingsScreen() {
             title="Do not track numbers"
             subtitle="Numbers never recorded as work - incoming or outgoing."
             onPress={openDoNotTrackList}
+          />
+          <SettingsMenuRow
+            icon={CardSim}
+            iconContainerClassName="bg-primary/10"
+            iconClassName="text-primary"
+            title="Calling SIM"
+            subtitle="The number every call goes out from."
+            onPress={openCallingSimPicker}
           />
           <SettingsMenuRow
             icon={LogOut}

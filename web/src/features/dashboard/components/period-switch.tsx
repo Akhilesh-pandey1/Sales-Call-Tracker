@@ -4,9 +4,12 @@ import type { DashboardPeriod } from "../types";
 interface PeriodSwitchProps {
   selectedPeriod: DashboardPeriod;
   onSelectPeriod: (period: DashboardPeriod) => void;
+  ariaLabel?: string;
 }
 
-export function PeriodSwitch({ selectedPeriod, onSelectPeriod }: PeriodSwitchProps) {
+export function PeriodSwitch({ selectedPeriod, onSelectPeriod, ariaLabel }: PeriodSwitchProps) {
+  const defaultAriaLabel: string = "Dashboard period";
+  const groupAriaLabel: string = ariaLabel ?? defaultAriaLabel;
   const periodOptions: Array<{ value: DashboardPeriod; label: string }> = [
     { value: "today", label: "Today" },
     { value: "yesterday", label: "Yesterday" },
@@ -16,7 +19,7 @@ export function PeriodSwitch({ selectedPeriod, onSelectPeriod }: PeriodSwitchPro
   return (
     <div
       role="group"
-      aria-label="Dashboard period"
+      aria-label={groupAriaLabel}
       className="inline-flex rounded-full border bg-card p-1 shadow-sm"
     >
       {periodOptions.map((periodOption) => {

@@ -72,16 +72,16 @@
 
 **Blocked by:** 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Every person period carries outgoing-only dials/connected, total-talk `seconds`/`minutes`, `connected_percent`, `talk_totals`, and `calls_by_hour` with `outgoing`/`incoming` arrays + `best_hour` by total (`api.md` §3 person; Decision 14).
-- [ ] `active_days` counts only days with at least one outgoing dial; `avg_per_active_day` divides exact total talk minutes by `active_days` and is `null` at 0 active days (`api.md` §3 person Rules).
-- [ ] `top_numbers` ranks by TOTAL talk seconds in the last 30 days with `minutes` alongside `seconds` (`api.md` §3; `testing.md` — top-numbers test).
+- [x] Every person period carries outgoing-only dials/connected, total-talk `seconds`/`minutes`, `connected_percent`, `talk_totals`, and `calls_by_hour` with `outgoing`/`incoming` arrays + `best_hour` by total (`api.md` §3 person; Decision 14).
+- [x] `active_days` counts only days with at least one outgoing dial; `avg_per_active_day` divides exact total talk minutes by `active_days` and is `null` at 0 active days (`api.md` §3 person Rules).
+- [x] `top_numbers` ranks by TOTAL talk seconds in the last 30 days with `minutes` alongside `seconds` (`api.md` §3; `testing.md` — top-numbers test).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard_person.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard_person.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 6: App — My Stats shows the incoming/outgoing split
 

@@ -2,8 +2,18 @@ export type DashboardPeriod = "today" | "yesterday" | "last_30_days";
 
 export interface CallsByHourBlock {
   hours: number[];
-  dials: number[];
+  outgoing: number[];
+  incoming: number[];
   best_hour: number | null;
+}
+
+export interface TalkTotals {
+  outgoing_calls: number;
+  outgoing_minutes: number;
+  incoming_calls: number;
+  incoming_minutes: number;
+  outgoing_percent: number;
+  incoming_percent: number;
 }
 
 export interface TeamTopPerson {
@@ -37,6 +47,7 @@ export interface TeamPeriodBlock {
   avg_per_person_per_day: TeamAveragePerPersonPerDay;
   vs_yesterday: TeamVsYesterday | null;
   calls_by_hour: CallsByHourBlock;
+  talk_totals: TalkTotals;
   top_people: TeamTopPerson[];
 }
 
@@ -60,6 +71,7 @@ export interface PersonPeriodStats {
   minutes: number;
   connected_percent: number | null;
   calls_by_hour: CallsByHourBlock;
+  talk_totals: TalkTotals;
 }
 
 export interface PersonLast30DaysStats extends PersonPeriodStats {

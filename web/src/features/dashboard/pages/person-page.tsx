@@ -28,6 +28,7 @@ import type {
   PersonDashboard,
   PersonLast30DaysStats,
   PersonPeriodStats,
+  TalkTotals,
 } from "../types";
 import {
   formatActiveDaysOutOfPeriod,
@@ -300,12 +301,14 @@ function Last30DaysKpiSection({ last30DaysStats }: Last30DaysKpiSectionProps) {
 
 interface CallsByHourSectionProps {
   callsByHour: CallsByHourBlock;
+  talkTotals: TalkTotals;
   selectedPeriod: DashboardPeriod;
   onSelectPeriod: (period: DashboardPeriod) => void;
 }
 
 function CallsByHourSection({
   callsByHour,
+  talkTotals,
   selectedPeriod,
   onSelectPeriod,
 }: CallsByHourSectionProps) {
@@ -314,6 +317,7 @@ function CallsByHourSection({
   return (
     <CallsByHourChart
       callsByHour={callsByHour}
+      talkTotals={talkTotals}
       usesDailyAverageWording={usesDailyAverageWording}
       headingAction={
         <PeriodSwitch selectedPeriod={selectedPeriod} onSelectPeriod={onSelectPeriod} />
@@ -399,6 +403,7 @@ export function PersonPage() {
           <PerformanceSection personStats={personStats} />
           <CallsByHourSection
             callsByHour={personStats[selectedPeriod].calls_by_hour}
+            talkTotals={personStats[selectedPeriod].talk_totals}
             selectedPeriod={selectedPeriod}
             onSelectPeriod={handleSelectPeriod}
           />

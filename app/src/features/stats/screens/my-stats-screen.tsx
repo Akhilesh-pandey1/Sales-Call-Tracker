@@ -636,6 +636,26 @@ function collectPeriodCallsByHour(myStats: PersonStats): Record<ChartPeriod, Cal
   return periodCallsByHour;
 }
 
+type MyStatsContentProps = {
+  myStats: PersonStats;
+};
+
+function MyStatsContent({ myStats }: MyStatsContentProps) {
+  const periodStats: Record<ChartPeriod, PeriodStats> = collectPeriodStats(myStats);
+  const periodCallsByHour: Record<ChartPeriod, CallsByHourStats> = collectPeriodCallsByHour(
+    myStats,
+  );
+
+  return (
+    <ScrollView className="flex-1" contentContainerClassName="gap-4 px-3 pb-6 pt-4">
+      <Last30DaysCards last30DaysStats={myStats.last_30_days} />
+      <PerformanceTable periodStats={periodStats} />
+      <CallsByHourChart periodCallsByHour={periodCallsByHour} />
+      <CallSplitCard periodStats={periodStats} />
+    </ScrollView>
+  );
+}
+
 export function MyStatsScreen() {
   const { isLoading, myStats, errorMessage, reloadMyStats } = useMyStats();
   const { top: topInset } = useSafeAreaInsets();
@@ -647,14 +667,7 @@ export function MyStatsScreen() {
       {!isLoading && errorMessage ? (
         <StatsErrorCard message={errorMessage} onRetryPress={reloadMyStats} />
       ) : null}
-      {!isLoading && !errorMessage && myStats ? (
-        <ScrollView className="flex-1" contentContainerClassName="gap-4 px-3 pb-6 pt-4">
-          <Last30DaysCards last30DaysStats={myStats.last_30_days} />
-          <PerformanceTable periodStats={collectPeriodStats(myStats)} />
-          <CallsByHourChart periodCallsByHour={collectPeriodCallsByHour(myStats)} />
-          <CallSplitCard periodStats={collectPeriodStats(myStats)} />
-        </ScrollView>
-      ) : null}
+      {!isLoading && !errorMessage && myStats ? <MyStatsContent myStats={myStats} /> : null}
     </View>
   );
 }

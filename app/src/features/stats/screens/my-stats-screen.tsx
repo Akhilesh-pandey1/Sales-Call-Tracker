@@ -21,7 +21,9 @@ import type {
   Last30DaysStats,
   PersonStats,
   PeriodStats,
+  TalkTotalsStats,
 } from '../api/stats.api';
+import { CallSplitDonut } from '../components/call-split-donut';
 import { useMyStats } from '../hooks/use-my-stats';
 
 function formatCount(count: number): string {
@@ -70,45 +72,66 @@ function getAxisHourLabel(hourNumber: number, hourIndex: number, lastHourIndex: 
   return plainHourLabel;
 }
 
+type HourBarSegment = {
+  countLabel: string;
+  showsCountLabel: boolean;
+};
+
 type HourBar = {
   hour: number;
   heightPercent: string;
-  valueLabel: string;
-  valueClassName: string;
-  barClassName: string;
+  outgoingSharePercent: string;
+  outgoingSegment: HourBarSegment;
+  incomingSegment: HourBarSegment;
+  totalLabel: string;
+  isBestHour: boolean;
   axisLabel: string;
-  axisLabelClassName: string;
 };
 
+function getHourCallCount(callsByHour: CallsByHourStats, hourIndex: number): number {
+  const outgoingCount: number = callsByHour.outgoing[hourIndex];
+  const incomingCount: number = callsByHour.incoming[hourIndex];
+  const totalCalls: number = outgoingCount + incomingCount;
+  return totalCalls;
+}
+
+function getHighestHourCallCount(callsByHour: CallsByHourStats): number {
+  const highestCallCount: number = Math.max(
+    ...callsByHour.hours.map((hour, hourIndex) => getHourCallCount(callsByHour, hourIndex)),
+  );
+  return highestCallCount;
+}
+
+function buildHourBarSegment(callCount: number, minimumLabelCount: number): HourBarSegment {
+  const showsCountLabel: boolean = callCount >= minimumLabelCount;
+  const segment: HourBarSegment = {
+    countLabel: formatCount(callCount),
+    showsCountLabel,
+  };
+  return segment;
+}
+
 function buildHourBars(callsByHour: CallsByHourStats): HourBar[] {
-  const highestDialCount: number = Math.max(...callsByHour.dials);
-  const halfOfHighestDialCount: number = highestDialCount / 2;
+  const labelShareCountOfTallestBar = 8;
+  const highestCallCount: number = getHighestHourCallCount(callsByHour);
+  const minimumInsideLabelCount: number = highestCallCount / labelShareCountOfTallestBar;
   const lastHourIndex: number = callsByHour.hours.length - 1;
   return callsByHour.hours.map((hour, hourIndex) => {
-    const dialCount: number = callsByHour.dials[hourIndex];
+    const outgoingCount: number = callsByHour.outgoing[hourIndex];
+    const incomingCount: number = callsByHour.incoming[hourIndex];
+    const totalCalls: number = getHourCallCount(callsByHour, hourIndex);
+    const heightRatio: number = highestCallCount === 0 ? 0 : totalCalls / highestCallCount;
+    const outgoingShareRatio: number = totalCalls === 0 ? 0 : outgoingCount / totalCalls;
     const isBestHour: boolean = hour === callsByHour.best_hour;
-    const heightRatio: number = highestDialCount === 0 ? 0 : dialCount / highestDialCount;
-    const heightPercent: string = `${heightRatio * 100}%`;
-    let barClassName: string = 'bg-muted';
-    if (isBestHour) {
-      barClassName = 'bg-primary';
-    } else if (dialCount >= halfOfHighestDialCount) {
-      barClassName = 'bg-secondary';
-    }
-    let valueClassName: string = 'text-muted-foreground';
-    let axisLabelClassName: string = 'text-muted-foreground';
-    if (isBestHour) {
-      valueClassName = 'font-semibold text-primary';
-      axisLabelClassName = 'font-semibold text-foreground';
-    }
     const hourBar: HourBar = {
       hour,
-      heightPercent,
-      valueLabel: formatCount(dialCount),
-      valueClassName,
-      barClassName,
+      heightPercent: `${heightRatio * 100}%`,
+      outgoingSharePercent: `${outgoingShareRatio * 100}%`,
+      outgoingSegment: buildHourBarSegment(outgoingCount, minimumInsideLabelCount),
+      incomingSegment: buildHourBarSegment(incomingCount, minimumInsideLabelCount),
+      totalLabel: formatCount(totalCalls),
+      isBestHour,
       axisLabel: getAxisHourLabel(hour, hourIndex, lastHourIndex),
-      axisLabelClassName,
     };
     return hourBar;
   });
@@ -365,6 +388,62 @@ function ChartEmptyNote() {
   );
 }
 
+type HourBarColumnProps = {
+  hourBar: HourBar;
+};
+
+function HourBarColumn({ hourBar }: HourBarColumnProps) {
+  const totalLabelClassName: string = hourBar.isBestHour
+    ? 'font-semibold text-primary'
+    : 'text-muted-foreground';
+  const axisLabelClassName: string = hourBar.isBestHour
+    ? 'font-semibold text-foreground'
+    : 'text-muted-foreground';
+  return (
+    <View className="h-full flex-1 items-center gap-1">
+      <View className="h-full w-full flex-1 justify-end">
+        <Text
+          numberOfLines={1}
+          className={`mb-1 text-center text-[9px] tabular-nums ${totalLabelClassName}`}
+        >
+          {hourBar.totalLabel}
+        </Text>
+        <View
+          className="w-full overflow-hidden rounded-t-md"
+          style={{ height: hourBar.heightPercent }}
+        >
+          <View
+            className="w-full items-center bg-primary"
+            style={{ height: hourBar.outgoingSharePercent }}
+          >
+            {hourBar.outgoingSegment.showsCountLabel ? (
+              <Text
+                numberOfLines={1}
+                className="pt-0.5 text-[8px] font-semibold tabular-nums text-primary-foreground"
+              >
+                {hourBar.outgoingSegment.countLabel}
+              </Text>
+            ) : null}
+          </View>
+          <View className="w-full flex-1 items-center bg-accent">
+            {hourBar.incomingSegment.showsCountLabel ? (
+              <Text
+                numberOfLines={1}
+                className="pt-0.5 text-[8px] font-semibold tabular-nums text-accent-foreground"
+              >
+                {hourBar.incomingSegment.countLabel}
+              </Text>
+            ) : null}
+          </View>
+        </View>
+      </View>
+      <Text numberOfLines={1} className={`text-[9px] ${axisLabelClassName}`}>
+        {hourBar.axisLabel}
+      </Text>
+    </View>
+  );
+}
+
 type HourBarsChartProps = {
   hourBars: HourBar[];
 };
@@ -373,23 +452,7 @@ function HourBarsChart({ hourBars }: HourBarsChartProps) {
   return (
     <View className="mt-4 h-32 flex-row items-end gap-1.5">
       {hourBars.map(hourBar => (
-        <View key={hourBar.hour} className="h-full flex-1 items-center gap-1">
-          <View className="w-full flex-1 justify-end">
-            <Text
-              numberOfLines={1}
-              className={`mb-1 text-center text-[9px] tabular-nums ${hourBar.valueClassName}`}
-            >
-              {hourBar.valueLabel}
-            </Text>
-            <View
-              className={`w-full rounded-t-md ${hourBar.barClassName}`}
-              style={{ height: hourBar.heightPercent }}
-            />
-          </View>
-          <Text numberOfLines={1} className={`text-[9px] ${hourBar.axisLabelClassName}`}>
-            {hourBar.axisLabel}
-          </Text>
-        </View>
+        <HourBarColumn key={hourBar.hour} hourBar={hourBar} />
       ))}
     </View>
   );
@@ -399,25 +462,30 @@ type ChartPeriod = 'today' | 'yesterday' | 'last_30_days';
 
 type ChartPeriodInfo = {
   switchLabel: string;
-  dialsWord: string;
+  callsWord: string;
 };
 
 const chartPeriodsInfo: Record<ChartPeriod, ChartPeriodInfo> = {
-  today: { switchLabel: 'Today', dialsWord: 'Dials' },
-  yesterday: { switchLabel: 'Yesterday', dialsWord: 'Dials' },
-  last_30_days: { switchLabel: '30 days', dialsWord: 'Avg dials' },
+  today: { switchLabel: 'Today', callsWord: 'Calls' },
+  yesterday: { switchLabel: 'Yesterday', callsWord: 'Calls' },
+  last_30_days: { switchLabel: '30 days', callsWord: 'Avg calls' },
 };
 
 type ChartPeriodSwitchProps = {
   selectedPeriod: ChartPeriod;
   onPeriodPress: (period: ChartPeriod) => void;
+  switchAccessibilityLabel: string;
 };
 
-function ChartPeriodSwitch({ selectedPeriod, onPeriodPress }: ChartPeriodSwitchProps) {
+function ChartPeriodSwitch({
+  selectedPeriod,
+  onPeriodPress,
+  switchAccessibilityLabel,
+}: ChartPeriodSwitchProps) {
   const switchPeriodOrder: ChartPeriod[] = ['today', 'yesterday', 'last_30_days'];
   return (
     <View
-      accessibilityLabel="Period for calls by hour"
+      accessibilityLabel={switchAccessibilityLabel}
       className="flex-row rounded-xl border border-border bg-card p-1"
     >
       {switchPeriodOrder.map(period => {
@@ -458,7 +526,7 @@ function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
   const chartFooterText: string =
     bestHour === null
       ? ''
-      : `${selectedPeriodInfo.dialsWord} per hour · ${selectedPeriodInfo.switchLabel} (IST). Best hour: ${formatHourLabel(bestHour)}.`;
+      : `${selectedPeriodInfo.callsWord} per hour · ${selectedPeriodInfo.switchLabel} (IST). Best hour: ${formatHourLabel(bestHour)}.`;
 
   const handlePeriodPress = (period: ChartPeriod): void => {
     setSelectedPeriod(period);
@@ -468,7 +536,11 @@ function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
     <View className="rounded-2xl border border-border bg-card p-4 shadow-sm shadow-black/5">
       <View className="flex-row flex-wrap items-center justify-between gap-x-3 gap-y-2">
         <Text className="text-base font-bold tracking-tight">Calls by hour</Text>
-        <ChartPeriodSwitch selectedPeriod={selectedPeriod} onPeriodPress={handlePeriodPress} />
+        <ChartPeriodSwitch
+          selectedPeriod={selectedPeriod}
+          onPeriodPress={handlePeriodPress}
+          switchAccessibilityLabel="Period for calls by hour"
+        />
       </View>
       {isChartEmpty ? (
         <ChartEmptyNote />
@@ -476,6 +548,70 @@ function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
         <>
           <HourBarsChart hourBars={hourBars} />
           <Text className="mt-2 text-xs text-muted-foreground">{chartFooterText}</Text>
+        </>
+      )}
+    </View>
+  );
+}
+
+function buildDirectionSplitLabel(
+  directionLabel: string,
+  callCount: number,
+  talkMinutes: number,
+): string {
+  const directionSplitLabel: string = `${directionLabel} ${formatCount(callCount)} calls · ${formatCount(talkMinutes)} min`;
+  return directionSplitLabel;
+}
+
+type CallSplitCardProps = {
+  periodStats: Record<ChartPeriod, PeriodStats>;
+};
+
+function CallSplitCard({ periodStats }: CallSplitCardProps) {
+  const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('last_30_days');
+  const selectedPeriodStats: PeriodStats = periodStats[selectedPeriod];
+  const selectedTalkTotals: TalkTotalsStats = selectedPeriodStats.talk_totals;
+  const totalMinutes: number = selectedPeriodStats.minutes;
+  const isSplitEmpty: boolean =
+    selectedTalkTotals.outgoing_calls === 0 && selectedTalkTotals.incoming_calls === 0;
+  const totalMinutesLabel: string = formatCount(totalMinutes);
+  const outgoingSplitLabel: string = buildDirectionSplitLabel(
+    'Outgoing',
+    selectedTalkTotals.outgoing_calls,
+    selectedTalkTotals.outgoing_minutes,
+  );
+  const incomingSplitLabel: string = buildDirectionSplitLabel(
+    'Incoming',
+    selectedTalkTotals.incoming_calls,
+    selectedTalkTotals.incoming_minutes,
+  );
+
+  const handlePeriodPress = (period: ChartPeriod): void => {
+    setSelectedPeriod(period);
+  };
+
+  return (
+    <View className="rounded-2xl border border-border bg-card p-4 shadow-sm shadow-black/5">
+      <View className="flex-row items-center justify-between gap-2">
+        <Text className="text-base font-bold tracking-tight">Call Split</Text>
+        <ChartPeriodSwitch
+          selectedPeriod={selectedPeriod}
+          onPeriodPress={handlePeriodPress}
+          switchAccessibilityLabel="Period for call split"
+        />
+      </View>
+      {isSplitEmpty ? (
+        <ChartEmptyNote />
+      ) : (
+        <>
+          <CallSplitDonut talkTotals={selectedTalkTotals} totalMinutesLabel={totalMinutesLabel} />
+          <View className="mt-3 flex-row flex-wrap items-center gap-x-2 gap-y-1 border-t border-border pt-3">
+            <View className="h-3 w-3 rounded-full bg-primary" />
+            <Text className="text-sm font-medium">{outgoingSplitLabel}</Text>
+            <Text className="text-sm font-medium">—</Text>
+            <View className="h-3 w-3 rounded-full bg-accent" />
+            <Text className="text-sm font-medium">{incomingSplitLabel}</Text>
+          </View>
         </>
       )}
     </View>
@@ -516,6 +652,7 @@ export function MyStatsScreen() {
           <Last30DaysCards last30DaysStats={myStats.last_30_days} />
           <PerformanceTable periodStats={collectPeriodStats(myStats)} />
           <CallsByHourChart periodCallsByHour={collectPeriodCallsByHour(myStats)} />
+          <CallSplitCard periodStats={collectPeriodStats(myStats)} />
         </ScrollView>
       ) : null}
     </View>

@@ -2,8 +2,18 @@ import { apiClient } from '@/shared/api/api-client';
 
 export type CallsByHourStats = {
   hours: number[];
-  dials: number[];
+  outgoing: number[];
+  incoming: number[];
   best_hour: number | null;
+};
+
+export type TalkTotalsStats = {
+  outgoing_calls: number;
+  outgoing_minutes: number;
+  incoming_calls: number;
+  incoming_minutes: number;
+  outgoing_percent: number;
+  incoming_percent: number;
 };
 
 export type PeriodStats = {
@@ -12,6 +22,7 @@ export type PeriodStats = {
   minutes: number;
   connected_percent: number | null;
   calls_by_hour: CallsByHourStats;
+  talk_totals: TalkTotalsStats;
 };
 
 export type AveragePerActiveDayStats = {

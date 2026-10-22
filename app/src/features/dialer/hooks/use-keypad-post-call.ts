@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import { setBookedNumberReminder } from '@/features/tracking';
 import type { LaunchedCall } from '../lib/call-launcher';
 import { useCallHangUpDetector } from './use-call-hang-up-detector';
 import { useDialogVisibility } from './use-dialog-visibility';
@@ -57,7 +58,17 @@ export function useKeypadPostCall(): UseKeypadPostCallResult {
     async (scheduledAt: string | null): Promise<void> => {
       const trackedCallAtSubmit = trackedCallRef.current;
       const keypadCallId = trackedCallAtSubmit === null ? null : trackedCallAtSubmit.callId;
-      await submitPostCall(keypadCallId, closePostCallDialog, scheduledAt);
+      const finishKeypadPostCall = async (scheduleWasRefused: boolean): Promise<void> => {
+        const canBookReminder =
+          trackedCallAtSubmit !== null &&
+          scheduledAt !== null &&
+          !scheduleWasRefused;
+        if (canBookReminder) {
+          await setBookedNumberReminder(trackedCallAtSubmit.phoneNumber, scheduledAt);
+        }
+        closePostCallDialog();
+      };
+      await submitPostCall(keypadCallId, finishKeypadPostCall, scheduledAt);
     },
     [closePostCallDialog, submitPostCall],
   );

@@ -140,7 +140,7 @@ CREATE TABLE sweep_state (
 - The sweep reads call-log entries newer than `last_swept_at` and moves the value in the SAME SQLite transaction that inserts the sweep's rows, so the app can never crash between saving rows and moving the line. The first-ever sweep starts at the install moment.
 
 ### `scheduled_reminders`
-One row per booked lead with a reminder set. The reminder alarms are rebuilt from this table at every app open, so they survive a reboot.
+One row per booked reminder — a booked lead, or a number booked from the keypad post-call popup. The reminder alarms are rebuilt from this table at every app open, so they survive a reboot.
 
 ```sql
 CREATE TABLE scheduled_reminders (
@@ -150,6 +150,7 @@ CREATE TABLE scheduled_reminders (
 );
 ```
 
+- `lead_id` is the reminder's key: the lead's id for lead bookings, or a stable negative key derived from the phone number for keypad bookings — so a keypad key can never collide with a real lead id. Rebooking the same number replaces the row.
 - Submitting a call to the booked number deletes the row, matched by normalized phone number.
 
 ---

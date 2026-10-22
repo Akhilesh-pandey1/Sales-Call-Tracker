@@ -22,6 +22,18 @@ function toReminderNotificationId(leadId: number): string {
   return `${reminderIdPrefix}${leadId}`;
 }
 
+function toBookedNumberReminderKey(phoneNumber: string): number {
+  const hashMultiplier = 31;
+  const hashModulus = 2147483647;
+  let hash = 0;
+  for (const digit of phoneNumber) {
+    const digitCode = digit.charCodeAt(0);
+    hash = (hash * hashMultiplier + digitCode) % hashModulus;
+  }
+  const numberReminderKey = -(hash + 1);
+  return numberReminderKey;
+}
+
 async function createReminderChannel(): Promise<string> {
   const reminderChannelId = 'reminder-channel';
   const reminderChannelName = 'Call reminders';
@@ -121,6 +133,19 @@ export async function setBookedLeadReminder(
       reminderError,
     );
   }
+}
+
+export async function setBookedNumberReminder(
+  phoneNumber: string,
+  scheduledAt: string,
+): Promise<void> {
+  const numberReminderKey = toBookedNumberReminderKey(phoneNumber);
+  const bookedNumberReminder: ScheduledReminder = {
+    leadId: numberReminderKey,
+    phoneNumber,
+    scheduledAt,
+  };
+  await setBookedLeadReminder(bookedNumberReminder);
 }
 
 export async function cancelReminderForCalledNumber(

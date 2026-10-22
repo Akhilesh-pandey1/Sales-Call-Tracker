@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard, EmptyPeriodNote } from "./dashboard-card";
+import { INCOMING_COLOR } from "./chart-colors";
 import type { TalkTotals } from "../types";
 
 interface TalkSplitCardProps {
@@ -74,7 +75,7 @@ export function TalkSplitCard({ talkTotals, totalMinutes, headingAction }: TalkS
   const ringRadius: number = 48;
   const ringStrokeWidth: number = 14;
   const donutCircumference: number = 2 * Math.PI * ringRadius;
-  const incomingColor: string = "#059669";
+  const incomingColor: string = INCOMING_COLOR;
   const outgoingColor: string = "hsl(var(--primary))";
   const arcGeometry: SplitArcGeometry = buildSplitArcGeometry(
     talkTotals.incoming_percent,

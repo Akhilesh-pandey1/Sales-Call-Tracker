@@ -3,6 +3,7 @@ import { Bar, BarChart, LabelList, XAxis } from "recharts";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard, EmptyPeriodNote } from "./dashboard-card";
+import { INCOMING_COLOR } from "./chart-colors";
 import type { CallsByHourBlock, TalkTotals } from "../types";
 
 interface HourlyCallBar {
@@ -242,9 +243,9 @@ export function CallsByHourChart({
   };
 
   const outgoingSegmentFill: string = "hsl(var(--primary))";
-  const incomingSegmentFill: string = "#059669";
+  const incomingSegmentFill: string = INCOMING_COLOR;
   const outgoingInsideLabelFill: string = "hsl(var(--primary-foreground))";
-  const incomingInsideLabelFill: string = "#000000";
+  const incomingInsideLabelFill: string = "hsl(var(--primary-foreground))";
 
   const maxBarWidth: number = 28;
   const chartTopMargin: number = 20;

@@ -156,16 +156,16 @@
 
 **Blocked by:** 9
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `@notifee/react-native` is installed (Decision 1 names it); a post-call Submit carrying a schedule inserts a `scheduled_reminders` row and sets ONE exact timestamp trigger — "Time to call" with the lead's number (Decisions 1, 3; `database.md` §2 `scheduled_reminders`).
-- [ ] Submitting a call to the booked number cancels that lead's alarm, matched by normalized number; alarms rebuild at every app open from `scheduled_reminders`, so they survive reboot (Decision 2).
-- [ ] Android 13+ POST_NOTIFICATIONS is asked once at the first booking; declined keeps bookings working with no reminders and no nagging; tapping the notification opens the dialer with the booked lead's number ready to call (Decisions 1, 3).
+- [x] `@notifee/react-native` is installed (Decision 1 names it); a post-call Submit carrying a schedule inserts a `scheduled_reminders` row and sets ONE exact timestamp trigger — "Time to call" with the lead's number (Decisions 1, 3; `database.md` §2 `scheduled_reminders`).
+- [x] Submitting a call to the booked number cancels that lead's alarm, matched by normalized number; alarms rebuild at every app open from `scheduled_reminders`, so they survive reboot (Decision 2).
+- [x] Android 13+ POST_NOTIFICATIONS is asked once at the first booking; declined keeps bookings working with no reminders and no nagging; tapping the notification opens the dialer with the booked lead's number ready to call (Decisions 1, 3).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 11: Web — team dashboard shows the split
 

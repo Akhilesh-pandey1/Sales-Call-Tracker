@@ -4,11 +4,12 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { DialerScreen } from '@/features/dialer';
 import { MyStatsScreen, SettingsScreen } from '@/features/stats';
-import { useSync } from '@/features/tracking';
+import { useReminderPress, useSync } from '@/features/tracking';
 import { Icon } from '@/components/ui/icon';
 import { ChartColumn, Phone, Settings } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import type { MainTabsParamList } from './main-tabs-param-list';
+import { useReminderPressNavigation } from './use-reminder-press-navigation';
 
 const MainTabs = createBottomTabNavigator<MainTabsParamList>();
 
@@ -32,6 +33,8 @@ const SettingsTabIcon = createTabIcon(Settings);
 
 export function AppNavigator() {
   useSync();
+  useReminderPress();
+  useReminderPressNavigation();
 
   return (
     <MainTabs.Navigator screenOptions={{ headerShown: false }}>

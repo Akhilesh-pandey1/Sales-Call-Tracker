@@ -56,6 +56,11 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
     last_swept_at TEXT
   )`;
   const seedSweepStateRowSql = 'INSERT OR IGNORE INTO sweep_state (id, last_swept_at) VALUES (1, ?)';
+  const createScheduledRemindersTableSql = `CREATE TABLE IF NOT EXISTS scheduled_reminders (
+    lead_id INTEGER PRIMARY KEY,
+    phone_number TEXT NOT NULL,
+    scheduled_at TEXT NOT NULL
+  )`;
 
   await database.executeSql(createPendingCallsTableSql);
   await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'outcome', addOutcomeColumnSql);
@@ -64,6 +69,7 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
   await database.executeSql(createSweepStateTableSql);
   const installMomentIso = new Date().toISOString();
   await database.executeSql(seedSweepStateRowSql, [installMomentIso]);
+  await database.executeSql(createScheduledRemindersTableSql);
   return database;
 }
 

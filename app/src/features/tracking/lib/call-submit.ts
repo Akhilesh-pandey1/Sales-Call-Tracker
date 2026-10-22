@@ -7,6 +7,7 @@ import {
   type PendingCall,
 } from '../db';
 import { safeReadCallLogEntries } from './call-log-reader';
+import { cancelReminderForCalledNumber } from './call-reminders';
 
 import {
   matchPendingCallsToLogEntries,
@@ -72,6 +73,7 @@ export async function submitTrackedCall(
     const scheduleWasRefused = false;
     return scheduleWasRefused;
   }
+  await cancelReminderForCalledNumber(pendingCall.phoneNumber);
   if (pendingCall.durationSeconds !== null) {
     const scheduleWasRefused = await sendPendingCallToServer(pendingCall, scheduledAt);
     return scheduleWasRefused;

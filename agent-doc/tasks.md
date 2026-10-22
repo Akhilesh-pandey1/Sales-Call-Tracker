@@ -115,12 +115,12 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `ic_reminder_icon` exists at all five densities — a white phone shape on a transparent background — and the reminder notification sets it as `smallIcon` with the launcher icon as `largeIcon` (`decisions.md` Decision 4).
-- [ ] Nothing else in the reminder notification changes — same channel, title, body, and press action (`decisions.md` Decision 4).
+- [x] `ic_reminder_icon` exists at all five densities — a white phone shape on a transparent background — and the reminder notification sets it as `smallIcon` with the launcher icon as `largeIcon` (`decisions.md` Decision 4).
+- [x] Nothing else in the reminder notification changes — same channel, title, body, and press action (`decisions.md` Decision 4).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`

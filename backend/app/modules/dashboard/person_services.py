@@ -8,9 +8,10 @@ from backend.app.modules.calls import Call
 from backend.app.modules.dashboard.services import (
     DashboardTimeWindows,
     PeriodHourlyInputs,
-    apply_call_to_hourly_bucket,
-    apply_call_to_metrics,
+    apply_direction_call_to_hourly_bucket,
+    apply_direction_call_to_metrics,
     build_calls_by_hour_block,
+    build_talk_totals_block,
     calculate_connected_percentage,
     calculate_dashboard_time_windows,
     calculate_decimal_average,
@@ -25,15 +26,41 @@ from backend.app.modules.users import User
 
 
 @dataclass(frozen=True)
+class PersonPeriodAggregates:
+    call_metrics: dict[str, int]
+    outgoing_by_hour: dict[int, int]
+    incoming_by_hour: dict[int, int]
+
+
+@dataclass(frozen=True)
 class PersonCallAggregates:
-    person_today: dict[str, int]
-    person_yesterday: dict[str, int]
-    person_thirty_days: dict[str, int]
+    person_today: PersonPeriodAggregates
+    person_yesterday: PersonPeriodAggregates
+    person_thirty_days: PersonPeriodAggregates
     active_day_dates: set[date]
     phone_summary: dict[str, dict[str, int]]
-    dials_today_by_hour: dict[int, int]
-    dials_yesterday_by_hour: dict[int, int]
-    dials_thirty_days_by_hour: dict[int, int]
+
+
+def create_empty_person_period_aggregates(
+    office_hours: list[int],
+) -> PersonPeriodAggregates:
+    period_aggregates: PersonPeriodAggregates = PersonPeriodAggregates(
+        call_metrics=create_empty_period_metrics(),
+        outgoing_by_hour=create_empty_hourly_counts(office_hours),
+        incoming_by_hour=create_empty_hourly_counts(office_hours),
+    )
+    return period_aggregates
+
+
+def create_empty_person_aggregates(office_hours: list[int]) -> PersonCallAggregates:
+    aggregates: PersonCallAggregates = PersonCallAggregates(
+        person_today=create_empty_person_period_aggregates(office_hours),
+        person_yesterday=create_empty_person_period_aggregates(office_hours),
+        person_thirty_days=create_empty_person_period_aggregates(office_hours),
+        active_day_dates=set(),
+        phone_summary={},
+    )
+    return aggregates
 
 
 def build_top_numbers_list(
@@ -66,24 +93,12 @@ def fetch_person_call_records(
             Call.dialed_at >= windows.thirty_days_start_utc,
             Call.dialed_at < windows.tomorrow_start_utc,
         )
-        .with_entities(Call.phone_number, Call.dialed_at, Call.duration_seconds)
+        .with_entities(
+            Call.phone_number, Call.dialed_at, Call.duration_seconds, Call.direction
+        )
         .all()
     )
     return person_call_records
-
-
-def create_empty_person_aggregates(office_hours: list[int]) -> PersonCallAggregates:
-    aggregates: PersonCallAggregates = PersonCallAggregates(
-        person_today=create_empty_period_metrics(),
-        person_yesterday=create_empty_period_metrics(),
-        person_thirty_days=create_empty_period_metrics(),
-        active_day_dates=set(),
-        phone_summary={},
-        dials_today_by_hour=create_empty_hourly_counts(office_hours),
-        dials_yesterday_by_hour=create_empty_hourly_counts(office_hours),
-        dials_thirty_days_by_hour=create_empty_hourly_counts(office_hours),
-    )
-    return aggregates
 
 
 def add_phone_call_totals(
@@ -97,6 +112,33 @@ def add_phone_call_totals(
     phone_summary[phone_number]["calls"] += 1
 
 
+def add_outgoing_date_to_active_days(
+    active_day_dates: set[date], direction: str, dialed_at_utc: datetime
+) -> None:
+    outgoing_direction: str = "outgoing"
+    if direction == outgoing_direction:
+        active_day_dates.add(to_ist(dialed_at_utc).date())
+
+
+def apply_person_call_to_period(
+    period_aggregates: PersonPeriodAggregates,
+    direction: str,
+    duration_seconds: int,
+    dialed_at_utc: datetime,
+    office_hour_set: set[int],
+) -> None:
+    apply_direction_call_to_metrics(
+        period_aggregates.call_metrics, direction, duration_seconds
+    )
+    apply_direction_call_to_hourly_bucket(
+        period_aggregates.outgoing_by_hour,
+        period_aggregates.incoming_by_hour,
+        direction,
+        dialed_at_utc,
+        office_hour_set,
+    )
+
+
 def accumulate_person_call_records(
     call_records: list[Any],
     windows: DashboardTimeWindows,
@@ -105,31 +147,56 @@ def accumulate_person_call_records(
     office_hour_set: set[int] = set(office_hours)
     aggregates: PersonCallAggregates = create_empty_person_aggregates(office_hours)
 
-    for phone_number, raw_dialed_at, duration_seconds in call_records:
+    for phone_number, raw_dialed_at, duration_seconds, direction in call_records:
         dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
-        active_ist_date: date = to_ist(dialed_at).date()
-        aggregates.active_day_dates.add(active_ist_date)
-
-        apply_call_to_metrics(aggregates.person_thirty_days, duration_seconds)
+        add_outgoing_date_to_active_days(
+            aggregates.active_day_dates, direction, dialed_at
+        )
         add_phone_call_totals(
             aggregates.phone_summary, phone_number, duration_seconds
         )
-        apply_call_to_hourly_bucket(
-            aggregates.dials_thirty_days_by_hour, dialed_at, office_hour_set
+        apply_person_call_to_period(
+            aggregates.person_thirty_days,
+            direction,
+            duration_seconds,
+            dialed_at,
+            office_hour_set,
         )
 
         if dialed_at >= windows.today_start_utc:
-            apply_call_to_metrics(aggregates.person_today, duration_seconds)
-            apply_call_to_hourly_bucket(
-                aggregates.dials_today_by_hour, dialed_at, office_hour_set
+            apply_person_call_to_period(
+                aggregates.person_today,
+                direction,
+                duration_seconds,
+                dialed_at,
+                office_hour_set,
             )
         elif dialed_at >= windows.yesterday_start_utc:
-            apply_call_to_metrics(aggregates.person_yesterday, duration_seconds)
-            apply_call_to_hourly_bucket(
-                aggregates.dials_yesterday_by_hour, dialed_at, office_hour_set
+            apply_person_call_to_period(
+                aggregates.person_yesterday,
+                direction,
+                duration_seconds,
+                dialed_at,
+                office_hour_set,
             )
 
     return aggregates
+
+
+def build_person_period_hourly_inputs(
+    period_aggregates: PersonPeriodAggregates,
+    office_hours: list[int],
+    period_day_count: int,
+    counts_hold_daily_averages: bool,
+) -> PeriodHourlyInputs:
+    hourly_inputs: PeriodHourlyInputs = PeriodHourlyInputs(
+        outgoing_by_hour=period_aggregates.outgoing_by_hour,
+        incoming_by_hour=period_aggregates.incoming_by_hour,
+        office_hours=office_hours,
+        period_day_count=period_day_count,
+        counts_hold_daily_averages=counts_hold_daily_averages,
+    )
+    return hourly_inputs
 
 
 def build_person_period_block(
@@ -144,6 +211,7 @@ def build_person_period_block(
         period_totals["dials"], period_totals["connected"]
     )
     calls_by_hour_block: dict[str, Any] = build_calls_by_hour_block(hourly_inputs)
+    talk_totals_block: dict[str, Any] = build_talk_totals_block(period_totals)
     period_block: dict[str, Any] = {
         "dials": period_totals["dials"],
         "connected": period_totals["connected"],
@@ -152,6 +220,7 @@ def build_person_period_block(
         "minutes": talk_minutes,
         "connected_percent": connected_percent,
         "calls_by_hour": calls_by_hour_block,
+        "talk_totals": talk_totals_block,
     }
     return period_block
 
@@ -184,38 +253,38 @@ def build_person_period_blocks(
 ) -> dict[str, dict[str, Any]]:
     single_day_count: int = 1
     thirty_day_count: int = 30
-    today_hourly_inputs: PeriodHourlyInputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_today_by_hour,
-        office_hours=office_hours,
-        period_day_count=single_day_count,
-        dials_hold_daily_averages=False,
+    today_hourly_inputs: PeriodHourlyInputs = build_person_period_hourly_inputs(
+        aggregates.person_today,
+        office_hours,
+        single_day_count,
+        counts_hold_daily_averages=False,
     )
-    yesterday_hourly_inputs: PeriodHourlyInputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_yesterday_by_hour,
-        office_hours=office_hours,
-        period_day_count=single_day_count,
-        dials_hold_daily_averages=False,
+    yesterday_hourly_inputs: PeriodHourlyInputs = build_person_period_hourly_inputs(
+        aggregates.person_yesterday,
+        office_hours,
+        single_day_count,
+        counts_hold_daily_averages=False,
     )
-    thirty_day_hourly_inputs: PeriodHourlyInputs = PeriodHourlyInputs(
-        hourly_dials=aggregates.dials_thirty_days_by_hour,
-        office_hours=office_hours,
-        period_day_count=thirty_day_count,
-        dials_hold_daily_averages=True,
+    thirty_day_hourly_inputs: PeriodHourlyInputs = build_person_period_hourly_inputs(
+        aggregates.person_thirty_days,
+        office_hours,
+        thirty_day_count,
+        counts_hold_daily_averages=True,
     )
 
     today_block: dict[str, Any] = build_person_period_block(
-        aggregates.person_today, today_hourly_inputs
+        aggregates.person_today.call_metrics, today_hourly_inputs
     )
     yesterday_block: dict[str, Any] = build_person_period_block(
-        aggregates.person_yesterday, yesterday_hourly_inputs
+        aggregates.person_yesterday.call_metrics, yesterday_hourly_inputs
     )
     thirty_day_base_block: dict[str, Any] = build_person_period_block(
-        aggregates.person_thirty_days, thirty_day_hourly_inputs
+        aggregates.person_thirty_days.call_metrics, thirty_day_hourly_inputs
     )
 
     active_day_count: int = len(aggregates.active_day_dates)
-    avg_per_active_day_block: dict[str, int] | None = build_avg_per_active_day(
-        aggregates.person_thirty_days, active_day_count
+    avg_per_active_day_block: dict[str, float] | None = build_avg_per_active_day(
+        aggregates.person_thirty_days.call_metrics, active_day_count
     )
     thirty_days_block: dict[str, Any] = {
         **thirty_day_base_block,

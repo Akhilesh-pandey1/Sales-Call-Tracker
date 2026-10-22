@@ -9,7 +9,7 @@ import {
 } from '@/shared/utils/phone-formatter';
 import {
   launchTrackedCall,
-  readCallLaunchErrorMessage,
+  showCallLaunchErrorToast,
   type LaunchedCall,
 } from '../lib/call-launcher';
 
@@ -103,8 +103,7 @@ export function useDialer(): UseDialerResult {
       );
       launchedCall = await launchTrackedCall(normalizedPhoneNumber);
     } catch (callStartError) {
-      const launchErrorMessage = readCallLaunchErrorMessage(callStartError);
-      ToastAndroid.show(launchErrorMessage, ToastAndroid.SHORT);
+      showCallLaunchErrorToast(callStartError);
     } finally {
       isDialLockHeld.current = false;
       setIsDialLocked(false);

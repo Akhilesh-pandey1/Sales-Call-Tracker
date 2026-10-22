@@ -8,6 +8,8 @@ from backend.app.config.base import LEAD_EXPIRY_INTERVAL_HOURS
 from backend.app.extensions import db
 from backend.app.modules.leads import release_expired_bookings
 
+LEAD_EXPIRY_SCHEDULER_EXTENSION_KEY = "lead_expiry_scheduler"
+
 
 def run_lead_expiry_job(app: Flask) -> None:
     with app.app_context():
@@ -21,7 +23,6 @@ def start_lead_expiry_scheduler(app: Flask) -> None:
 
     scheduler_timezone: str = "UTC"
     scheduler_job_id: str = "lead_expiry_job"
-    scheduler_extension_key: str = "lead_expiry_scheduler"
     first_run_time: datetime = datetime.now(timezone.utc)
     expiry_scheduler: BackgroundScheduler = BackgroundScheduler(
         timezone=scheduler_timezone
@@ -35,4 +36,4 @@ def start_lead_expiry_scheduler(app: Flask) -> None:
         id=scheduler_job_id,
     )
     expiry_scheduler.start()
-    app.extensions[scheduler_extension_key] = expiry_scheduler
+    app.extensions[LEAD_EXPIRY_SCHEDULER_EXTENSION_KEY] = expiry_scheduler

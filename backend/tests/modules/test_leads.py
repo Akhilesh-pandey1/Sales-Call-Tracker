@@ -12,7 +12,10 @@ from backend.app.extensions import db
 from backend.app.modules.calls import Call
 from backend.app.modules.leads.models import Lead
 from backend.app.modules.users import User
-from backend.app.tasks.lead_expiry import run_lead_expiry_job
+from backend.app.tasks.lead_expiry import (
+    LEAD_EXPIRY_SCHEDULER_EXTENSION_KEY,
+    run_lead_expiry_job,
+)
 
 
 def create_user_fixture(
@@ -1007,9 +1010,7 @@ def test_expiry_job_keeps_booking_inside_window_still_reserved(
 def test_scheduler_never_starts_under_pytest(
     app: Flask, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    scheduler_extension_key: str = "lead_expiry_scheduler"
-
-    assert scheduler_extension_key not in app.extensions
+    assert LEAD_EXPIRY_SCHEDULER_EXTENSION_KEY not in app.extensions
 
     monkeypatch.setenv("MANAGER_NAME", "GateManager")
     monkeypatch.setenv("MANAGER_PASSWORD", "Password123")
@@ -1020,7 +1021,7 @@ def test_scheduler_never_starts_under_pytest(
 
     non_testing_app: Flask = create_app(NonTestingConfig)
 
-    assert scheduler_extension_key not in non_testing_app.extensions
+    assert LEAD_EXPIRY_SCHEDULER_EXTENSION_KEY not in non_testing_app.extensions
 
 
 def test_next_lead_serving_never_frees_expired_booking(

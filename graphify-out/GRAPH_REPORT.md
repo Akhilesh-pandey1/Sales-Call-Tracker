@@ -1,16 +1,16 @@
 # Graph Report - sales-call-tracker  (2026-10-22)
 
 ## Corpus Check
-- 377 files · ~659,986 words
+- 377 files · ~660,004 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3334 nodes · 6291 edges · 240 communities (204 shown, 36 thin omitted)
+- 3334 nodes · 6291 edges · 239 communities (203 shown, 36 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 39 edges (avg confidence: 0.58)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `dc8c31ec`
+- Built from commit: `7d1ec033`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -117,7 +117,6 @@
 - test_settings.py
 - .generate
 - React + TypeScript Code Style & Standards
-- use-logout.ts
 - API Specifications
 - 1. PostgreSQL Tables
 - Sales Call Tracker - Decision Log
@@ -258,19 +257,19 @@
 ## Surprising Connections (you probably didn't know these)
 - `useAuth()` --indirect_call--> `loginUser()`  [INFERRED]
   app/src/features/auth/hooks/use-auth.ts → web/src/features/auth/api/auth.api.ts
-- `AuthenticatedApp()` --calls--> `useCallTracker()`  [EXTRACTED]
-  app/src/app/navigation/root-navigator.tsx → app/src/features/tracking/hooks/use-call-tracker.ts
 - `ScheduleChoiceRow()` --calls--> `cn()`  [EXTRACTED]
   app/src/features/dialer/components/post-call-dialog.tsx → app/src/lib/utils.ts
 - `SubTabButton()` --calls--> `cn()`  [EXTRACTED]
   app/src/features/dialer/screens/dialer-screen.tsx → app/src/lib/utils.ts
 - `TestConfig` --uses--> `BaseConfig`  [INFERRED]
   backend/tests/conftest.py → backend/app/config/base.py
+- `PersonCallAggregates` --uses--> `AppException`  [INFERRED]
+  backend/app/modules/dashboard/person_services.py → backend/app/core/errors.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (240 total, 36 thin omitted)
+## Communities (239 total, 36 thin omitted)
 
 ### Community 0 - "lead-daily-stats.tsx"
 Cohesion: 0.23
@@ -397,8 +396,8 @@ Cohesion: 0.15
 Nodes (24): Any, require_auth(), get_person_dashboard(), get_team_dashboard(), get_team_people(), Any, get, Response (+16 more)
 
 ### Community 31 - "tracking/index.ts"
-Cohesion: 0.14
-Nodes (17): callOnCallEndedWhenPhoneIsIdle(), startCallTracking(), stopCallTracking(), useCallTracker(), findMissingPermissions(), usePermissions(), emitReminderPressFromInitialNotification(), emitReminderPressFromNotifeeEvent() (+9 more)
+Cohesion: 0.11
+Nodes (23): callOnCallEndedWhenPhoneIsIdle(), ClearLocalDataState, useClearLocalData(), buildLogoutRefusalMessage(), countUnsentCallsAfterSyncAttempt(), LogoutState, useLogout(), clearAllPendingCalls() (+15 more)
 
 ### Community 32 - "settings-screen.tsx"
 Cohesion: 0.10
@@ -409,8 +408,8 @@ Cohesion: 0.18
 Nodes (16): OfficeHours, get_office_hours(), get, Response, refuse_non_manager(), update_office_hours(), OfficeHoursResponse, BaseModel (+8 more)
 
 ### Community 34 - "call-log-sweep.ts"
-Cohesion: 0.23
-Nodes (17): doesEntryMatchPendingCall(), findMatchingEntryIndex(), isEntryWithinMatchWindow(), isIncomingCallEntry(), isOutgoingCallEntry(), MatchedPendingCall, matchPendingCallsToLogEntries(), PendingCallToMatch (+9 more)
+Cohesion: 0.25
+Nodes (16): doesEntryMatchPendingCall(), findMatchingEntryIndex(), isEntryWithinMatchWindow(), isIncomingCallEntry(), isOutgoingCallEntry(), matchPendingCallsToLogEntries(), PendingCallToMatch, toEntryTimeMs() (+8 more)
 
 ### Community 35 - "What You Must Do When Invoked"
 Cohesion: 0.07
@@ -545,8 +544,8 @@ Cohesion: 0.12
 Nodes (16): A. Find the Frontier, B. For Each Frontier Task — Create Worktree + Dispatch Subagent, C. Wait for Subagents to Report, Checkpoints, Chief of Staff, D. Merge Completed Worktree → Integration Branch, Final Phase, Quick Reference (+8 more)
 
 ### Community 68 - "call-submit.ts"
-Cohesion: 0.20
-Nodes (18): SyncCall, syncCalls(), SyncCallsResponse, readLastSweptAt(), deleteSyncedPendingCallsBehindSweepLine(), markPendingCallsSynced(), PendingCall, useSync() (+10 more)
+Cohesion: 0.25
+Nodes (15): SyncCall, syncCalls(), SyncCallsResponse, readLastSweptAt(), deleteSyncedPendingCallsBehindSweepLine(), markPendingCallsSynced(), PendingCall, findMatchingLogEntry() (+7 more)
 
 ### Community 69 - "Chief of Staff"
 Cohesion: 0.12
@@ -573,8 +572,8 @@ Cohesion: 0.16
 Nodes (13): AccountsTable(), EditUserModal(), AccountsPage(), SettingsPage(), TeamEmptyState(), TeamPeopleTable(), useTeamPeople(), TeamPage() (+5 more)
 
 ### Community 75 - "app/src/features/auth/index.ts"
-Cohesion: 0.23
-Nodes (7): App(), displayName, name, userInterfaceStyle, AuthenticatedApp(), RootNavigator(), LoginScreen()
+Cohesion: 0.16
+Nodes (12): App(), displayName, name, userInterfaceStyle, AuthenticatedApp(), RootNavigator(), LoginScreen(), startCallTracking() (+4 more)
 
 ### Community 76 - "app-navigator.tsx"
 Cohesion: 0.15
@@ -680,10 +679,6 @@ Nodes (7): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once 
 Cohesion: 0.20
 Nodes (9): File & Component Structure, Folder Rules, Folder Structure, Language, Naming Conventions, React + TypeScript Code Style & Standards, Responsive Design, State & Logic Separation (+1 more)
 
-### Community 102 - "use-logout.ts"
-Cohesion: 0.31
-Nodes (8): ClearLocalDataState, useClearLocalData(), buildLogoutRefusalMessage(), countUnsentCallsAfterSyncAttempt(), LogoutState, useLogout(), clearAllPendingCalls(), countUnsyncedPendingCalls()
-
 ### Community 103 - "API Specifications"
 Cohesion: 0.22
 Nodes (8): 1. Authentication, 2. Call Sync, 6. Office Hours Settings (Manager Only), API Specifications, `GET /api/settings/office-hours`, `POST /api/calls/sync`, `POST /api/login`, `PUT /api/settings/office-hours`
@@ -773,8 +768,8 @@ Cohesion: 0.25
 Nodes (7): Checklist before reporting done, Design Screens, Guardrails, Screen file rules, Steps, The design brain, Thinking rules (apply while designing)
 
 ### Community 125 - "call-janitor.ts"
-Cohesion: 0.27
-Nodes (13): addPendingCallAttempt(), markPendingCallFilled(), completeStalePendingCalls(), getIntentTimeMs(), getOldestIntentTimeMs(), isStaleUnfilledPendingCall(), runJanitorSweep(), startJanitorSweep() (+5 more)
+Cohesion: 0.24
+Nodes (14): addPendingCallAttempt(), markPendingCallFilled(), completeStalePendingCalls(), getIntentTimeMs(), getOldestIntentTimeMs(), isStaleUnfilledPendingCall(), runJanitorSweep(), startJanitorSweep() (+6 more)
 
 ### Community 126 - "Brainstorming Ideas Into Designs"
 Cohesion: 0.25

@@ -20,6 +20,7 @@ interface ChartLabelProps {
   x?: number | string;
   y?: number | string;
   width?: number | string;
+  height?: number | string;
   value?: string | number | boolean | null;
   index?: number;
 }
@@ -33,6 +34,7 @@ interface HourAxisTickProps {
 interface LabelPlacement {
   centerX: number;
   y: number;
+  segmentHeight: number;
 }
 
 interface CallsByHourChartProps {
@@ -123,9 +125,11 @@ function getLabelPlacement(labelProps: ChartLabelProps): LabelPlacement | null {
   }
   const leftEdge: number = Number(labelProps.x);
   const labelWidth: number = Number(labelProps.width);
+  const segmentTop: number = Number(labelProps.y);
   const placement: LabelPlacement = {
     centerX: leftEdge + labelWidth / 2,
-    y: Number(labelProps.y),
+    y: segmentTop,
+    segmentHeight: Number(labelProps.height ?? 0),
   };
   return placement;
 }
@@ -177,11 +181,12 @@ function renderSegmentInsideLabel(
     return null;
   }
   const labelFontSize: number = 9;
-  const insideLabelTopGap: number = 10;
+  const centeredLabelY: number = placement.y + placement.segmentHeight / 2;
   return (
     <text
       x={placement.centerX}
-      y={placement.y + insideLabelTopGap}
+      y={centeredLabelY}
+      dominantBaseline="central"
       textAnchor="middle"
       fontSize={labelFontSize}
       fontWeight={600}

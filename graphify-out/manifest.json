@@ -1005,8 +1005,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/calls-by-hour-chart.tsx": {
-    "mtime": 1792671040.2038577,
-    "ast_hash": "20a17c681d2fd721de58cae000a4f146",
+    "mtime": 1792674398.0718036,
+    "ast_hash": "5cf539fd5e443dde1af815e577321924",
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/dashboard-card.tsx": {

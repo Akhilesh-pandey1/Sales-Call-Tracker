@@ -1,199 +1,126 @@
-## Task 1: Server — the sync accepts direction
+## Task 1: Server — the hourly job frees expired bookings
 
-**Description:** The `calls` table and the sync endpoint learn the `direction` column (`outgoing` / `incoming`), so an answered incoming call is stored as work but never moves a lead.
-
-**Blocked by:** None
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] The `calls` model and the sync path carry an optional `direction` (`outgoing` is the default, so old rows read outgoing); incoming calls save under the token owner's ID (`api.md` §2; `database.md` — `calls.direction`).
-- [x] An incoming call never creates or resolves a lead and never burns an attempt (`api.md` §2 Processing; `testing.md` — `test_calls.py` incoming tests).
-- [x] The office-hours gate drops outside-window calls in both directions and still answers success (`api.md` §2).
-
-**Verification:**
-- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_calls.py -q`
-- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
-
-## Task 2: Server — a future booking locks its lead
-
-**Description:** A lead booked by one salesperson refuses another person's schedule submitted through the sync: the call is saved, the booking stays, and the refused call's id returns in `schedule_refused_call_ids`.
+**Description:** An APScheduler job inside the Flask process frees expired bookings — once at startup, then every hour — and becomes the only place that releases them; the lazy check inside serving is removed.
 
 **Blocked by:** None
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] A schedule on a lead whose future booking belongs to another salesperson is refused: the call is saved, the lead keeps the owner's booking, and the call's id comes back in `schedule_refused_call_ids` (Decision 5; `api.md` §2 Response; `testing.md` — refused-schedule test).
-- [x] The booking's owner re-books freely (a new time replaces the old); a `done` or `stopped` lead has no active booking, so anyone may book it — it lifts back to `waiting` owned by the scheduler (Decision 5).
-- [x] Resolve on a call never clears another user's booking — after a refused call the lead still holds the owner's booking (`testing.md` — the lead keeps the owner's booking).
+- [ ] `backend/app/tasks/lead_expiry.py` starts the scheduler from `create_app()` — the job runs once the moment the server starts, then every hour, clearing `scheduled_by` and `scheduled_at` on every `waiting` lead booked more than `SCHEDULE_EXPIRE_HOURS` (24) hours past its time, attempts untouched — and never starts under pytest (`decisions.md` Decision 1; `structure.md` — `tasks/lead_expiry.py`).
+- [ ] `serve_next_lead` no longer calls `release_expired_bookings()` — the hourly job is the only release point (`decisions.md` Decision 1).
+- [ ] Tests prove the job frees expired bookings, a booking inside the 24-hour window stays reserved, and serving no longer frees anything (`testing.md` — `test_leads.py`).
 
 **Verification:**
-- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_calls.py -q`
-- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_leads.py -q`
+- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
-## Task 3: Server — expired bookings free before serving
+## Task 2: App — hour chart centers the segment counts
 
-**Description:** A `waiting` lead whose booking is more than `SCHEDULE_EXPIRE_HOURS` = 24 hours past its time returns to the pool before any lead is served — the lazy check, same pattern as the 10-minute claim.
+**Description:** On My Stats, each hour bar's outgoing and incoming counts move to the vertical middle of their own colored segments, matching the web chart; the total stays on top.
+
+**Blocked by:** None
+
+**Status:** Not started
+
+**Acceptance criteria:**
+- [ ] The outgoing count sits centered in the outgoing segment and the incoming count centered in the incoming segment; the total label stays above the bar (`decisions.md` Decision 2).
+- [ ] A count still shows only when its segment holds at least one eighth of the tallest bar's calls, with fonts and colors unchanged (`decisions.md` Decision 2).
+
+**Verification:**
+- [ ] Lint passes: `npm run lint` in `app/`
+- [ ] Types pass: `npx tsc --noEmit` in `app/`
+
+## Task 3: Web — hour chart gains the direction dot legend
+
+**Description:** The manager's calls-by-hour chart shows a one-row legend — blue dot "Outgoing", green dot "Incoming" — between the chart and its summary line.
+
+**Blocked by:** None
+
+**Status:** Not started
+
+**Acceptance criteria:**
+- [ ] The web hour chart shows the dot legend in the same colors as its segments — `hsl(var(--primary))` for outgoing, `INCOMING_COLOR` for incoming — with the summary line untouched below it (`decisions.md` Decision 2).
+
+**Verification:**
+- [ ] Build succeeds: `npm run build` in `web/`
+
+## Task 4: App — hour chart gains the direction dot legend
+
+**Description:** The salesperson's calls-by-hour chart shows the same one-row legend under the bars, in the colors the Call Split card already uses.
 
 **Blocked by:** 2
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] `SCHEDULE_EXPIRE_HOURS = 24` lives in `backend/app/config/base.py`; before serving, every `waiting` lead booked more than 24 hours past its `scheduled_at` gets `scheduled_at` and `scheduled_by` cleared, attempts untouched (Decision 4; `testing.md` — frees expired bookings before serving).
-- [x] A booking inside the 24-hour window keeps the lead reserved; freed leads return to the newest-first pool (Decision 4).
-- [x] The check never looks at the owner's active state, so a deactivated person's stuck bookings return to the pool through the same rule (Decision 4).
+- [ ] The app hour chart shows a blue dot "Outgoing" and a green dot "Incoming" in a row under the bars — `bg-primary` and `bg-accent`, the Call Split card colors (`decisions.md` Decision 2).
 
 **Verification:**
-- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_leads.py -q`
-- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [ ] Lint passes: `npm run lint` in `app/`
+- [ ] Types pass: `npx tsc --noEmit` in `app/`
 
-## Task 4: Server — team dashboard carries the split
+## Task 5: App — calling-SIM foundation
 
-**Description:** The team endpoints compute every number with direction: outgoing-only dials/connected, total-talk minutes, the `talk_totals` split, and stacked chart arrays — the web only formats them.
+**Description:** A small Kotlin module reads the phone's active SIM numbers and places a call on the slot matching a chosen number; the chosen number saves on the phone only. No UI and no dial change yet.
 
-**Blocked by:** 1
+**Blocked by:** None
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] Every team period carries `dials`/`connected`/`not_connected` counting OUTGOING calls only, `seconds`/`minutes` as TOTAL talk (`round(seconds/60, 2)`), `connected_percent`, `avg_per_person_per_day`, and `vs_yesterday` only on today (`api.md` §3 team Rules).
-- [x] `talk_totals` and `calls_by_hour` carry `hours`, `outgoing`, `incoming`, and `best_hour` by total calls; `last_30_days` holds per-day averages; `top_people` ranks by TOTAL talk seconds (`api.md` §3; `testing.md` — test_dashboard.py list).
-- [x] `GET /api/dashboard/team/people` returns one row per active salesperson with only `dials`, `connected`, `minutes` — dials/connected outgoing-only, minutes total talk, no `seconds`; zero-call salespeople included, deactivated excluded, sorted by today's dials (`api.md` §3 team/people).
+- [ ] `SimCallModule.kt` reads the active SIMs with their numbers and carrier names, and places a call on the slot matching a given number through `TelecomManager.placeCall` with that SIM's account handle; the JS bridge (`sim-module.ts`) exposes both (`decisions.md` Decision 3; `structure.md` — `SimCallModule.kt`, `sim-module.ts`).
+- [ ] The chosen number saves, reads, and clears in AsyncStorage in international format, and matching normalizes both sides (+91 vs 0) with the login country (`decisions.md` Decision 3).
 
 **Verification:**
-- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard.py -q`
-- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [ ] Lint passes: `npm run lint` in `app/`
+- [ ] Types pass: `npx tsc --noEmit` in `app/`
 
-## Task 5: Server — person dashboard carries the split
+## Task 6: App — every dial leaves on the chosen number
 
-**Description:** The person endpoint computes the same direction-aware numbers for one user — the single source My Stats and the manager's person view both render.
-
-**Blocked by:** 4
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] Every person period carries outgoing-only dials/connected, total-talk `seconds`/`minutes`, `connected_percent`, `talk_totals`, and `calls_by_hour` with `outgoing`/`incoming` arrays + `best_hour` by total (`api.md` §3 person; Decision 14).
-- [x] `active_days` counts only days with at least one outgoing dial; `avg_per_active_day` divides exact total talk minutes by `active_days` and is `null` at 0 active days (`api.md` §3 person Rules).
-- [x] `top_numbers` ranks by TOTAL talk seconds in the last 30 days with `minutes` alongside `seconds` (`api.md` §3; `testing.md` — top-numbers test).
-
-**Verification:**
-- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard_person.py -q`
-- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
-
-## Task 6: App — My Stats shows the incoming/outgoing split
-
-**Description:** My Stats renders the server's new numbers: the donut with its numbers line, ONE stacked two-color bar per hour, and total-talk KPI wording — the phone only draws.
+**Description:** The call launcher branches through the SIM module: a chosen number places the call on its slot with no picker; no choice keeps today's default behavior; a missing number blocks the call.
 
 **Blocked by:** 5
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] `stats.api.ts` types carry `talk_totals` and the chart's `outgoing`/`incoming` arrays; the donut renders `talk_totals` with its numbers line, e.g. "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min" (Decision 14; screen `08-my-stats--M.html`).
-- [x] The hour chart draws ONE stacked bar per hour — total height = all calls that hour, two color segments sized by share, counts written inside the segments — and the best-hour highlight follows total calls (Decision 14).
-- [x] The Avg minutes card holds total talk per active day and the performance table's Minutes column holds total talk — all values come from the server, the screen formats only (Decision 14).
+- [ ] With a number chosen, keypad and lead dials place the call on the matching slot with no SIM picker, and the pending-call row is written only after the SIM is found (`decisions.md` Decision 3).
+- [ ] With no number chosen, or CALL_PHONE off, the call keeps today's path on Android's default SIM (`decisions.md` Decision 3).
+- [ ] A stored number not present in any slot blocks the call with "This SIM number is not in the phone." — nothing dialed, nothing recorded (`decisions.md` Decision 3).
 
 **Verification:**
-- [x] Lint passes: `npm run lint` in `app/`
-- [x] Types pass: `npx tsc --noEmit` in `app/`
+- [ ] Lint passes: `npm run lint` in `app/`
+- [ ] Types pass: `npx tsc --noEmit` in `app/`
 
-## Task 7: App — the call-log sweep tracks outside calls
+## Task 7: App — Settings picks the calling number
 
-**Description:** At every app open the app sweeps Android's call log past the sweep line, saves answered incoming and outgoing calls it did not already count, pushes them, and cleans up behind itself — nothing counted twice.
+**Description:** Settings gains a fourth row opening a picker screen: the phone's readable SIM numbers with carrier names, a checkmark on the chosen one, and a "Use phone default" item.
 
-**Blocked by:** 1
+**Blocked by:** 5
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] `pending_calls` gains `direction` and `synced` columns (in-place migration via the existing PRAGMA pattern), `sweep_state` is created with its one row seeded at the install moment — nothing historical uploads (Decision 7; `database.md` §2).
-- [x] The sweep reads answered INCOMING and OUTGOING entries newer than `last_swept_at`, normalizes numbers to E.164 with the login country, skips entries matching existing rows (synced or pending) by normalized number inside the match window, and moves the line in the SAME SQLite transaction that inserts the rows (Decisions 6–7).
-- [x] The app-open pipeline runs janitor → sweep → sync; a successful sync MARKS rows `synced = 1` instead of deleting (submit path and batch push alike); cleanup after a successful push deletes synced rows behind the sweep line, never inside the window (Decisions 8, 10, 12).
+- [ ] The Settings fourth row opens `calling-sim-screen.tsx`: readable SIM numbers with carrier names, the current choice checkmarked, and "Use phone default" restoring the default path (`decisions.md` Decision 3; `structure.md` — `calling-sim-screen.tsx`).
+- [ ] A pick saves at once and shows on the next open; when the phone hides all SIM numbers, the screen says so and keeps the salesperson on phone default (`decisions.md` Decision 3).
 
 **Verification:**
-- [x] Lint passes: `npm run lint` in `app/`
-- [x] Types pass: `npx tsc --noEmit` in `app/`
+- [ ] Lint passes: `npm run lint` in `app/`
+- [ ] Types pass: `npx tsc --noEmit` in `app/`
 
-## Task 8: App — do-not-track numbers never count as work
+## Task 8: App — the reminder notification shows the app icon
 
-**Description:** The salesperson lists numbers in Settings; the sweep checks the list before inserting in both directions, so a listed number never counts in any direction.
+**Description:** The reminder notification gains a white phone glyph for the status bar and the full-color app icon for the drawer — the blank shape today is gone.
 
-**Blocked by:** 7
+**Blocked by:** None
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
-- [x] The `do_not_track` table and its db helpers exist; numbers save in E.164 via the same libphonenumber-js call and login country — 10 typed digits are allowed (Decision 9; `database.md` §2).
-- [x] The sweep checks the list BEFORE inserting in both directions — a listed number never enters `pending_calls`, so no dial, minute, or active day (Decision 8).
-- [x] Settings gains the "Do not track numbers" row opening the list screen per `09b-do-not-track--M.html`: add a number (with normalize-on-save) and remove from the list.
+- [ ] `ic_reminder_icon` exists at all five densities — a white phone shape on a transparent background — and the reminder notification sets it as `smallIcon` with the launcher icon as `largeIcon` (`decisions.md` Decision 4).
+- [ ] Nothing else in the reminder notification changes — same channel, title, body, and press action (`decisions.md` Decision 4).
 
 **Verification:**
-- [x] Lint passes: `npm run lint` in `app/`
-- [x] Types pass: `npx tsc --noEmit` in `app/`
-
-## Task 9: App — refused booking shows a toast
-
-**Description:** When the sync refuses this salesperson's schedule because someone else holds the booking, the app says so at the Submit moment.
-
-**Blocked by:** 2, 7
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] `syncCalls` returns the sync response body and the post-call submit path reads `schedule_refused_call_ids` (`api.md` §2 Response).
-- [x] The submitted call's id in the refused list shows the toast "This lead is already booked by someone else." — the call itself is still sent (`testing.md` — manual pass list).
-
-**Verification:**
-- [x] Lint passes: `npm run lint` in `app/`
-- [x] Types pass: `npx tsc --noEmit` in `app/`
-
-## Task 10: App — booked leads set a reminder alarm
-
-**Description:** The moment a booking is made at Submit, the phone sets one exact local alarm with @notifee; the alarm cancels when that number is called and rebuilds at every app open.
-
-**Blocked by:** 9
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] `@notifee/react-native` is installed (Decision 1 names it); a post-call Submit carrying a schedule inserts a `scheduled_reminders` row and sets ONE exact timestamp trigger — "Time to call" with the lead's number (Decisions 1, 3; `database.md` §2 `scheduled_reminders`).
-- [x] Submitting a call to the booked number cancels that lead's alarm, matched by normalized number; alarms rebuild at every app open from `scheduled_reminders`, so they survive reboot (Decision 2).
-- [x] Android 13+ POST_NOTIFICATIONS is asked once at the first booking; declined keeps bookings working with no reminders and no nagging; tapping the notification opens the dialer with the booked lead's number ready to call (Decisions 1, 3).
-
-**Verification:**
-- [x] Lint passes: `npm run lint` in `app/`
-- [x] Types pass: `npx tsc --noEmit` in `app/`
-
-## Task 11: Web — team dashboard shows the split
-
-**Description:** The manager's web dashboard renders the server's split numbers: total talk minutes, stacked hour bars with the split summary line, and Top 5 by total talk.
-
-**Blocked by:** 4
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] The dashboard types carry `talk_totals` and the chart's `outgoing`/`incoming` arrays; the Talk minutes card and Top 5 render total talk, ranking by total talk minutes (Decision 15).
-- [x] The hour chart draws ONE stacked two-color bar per hour and its summary line shows the split, e.g. "142 outgoing · 37 incoming", per screen `02-dashboard--P.html` (Decision 15).
-- [x] Team rows keep dials · connected · minutes with minutes as total talk — all rendered from server values (Decision 15).
-
-**Verification:**
-- [x] Build succeeds: `npm run build` in `web/`
-
-## Task 12: Web — person view shows the split
-
-**Description:** The manager's person view renders the same person endpoint as My Stats: donut with numbers line, stacked hour chart, total-talk KPIs.
-
-**Blocked by:** 5, 11
-
-**Status:** Done
-
-**Acceptance criteria:**
-- [x] The person view renders the `talk_totals` donut with its numbers line and the stacked hour chart through the shared chart component, per screen `04-person-view--P.html` (Decision 15).
-- [x] KPI cards, the performance table, and top numbers render server values only — the web computes nothing (Proposal — the web only formats what it receives).
-
-**Verification:**
-- [x] Build succeeds: `npm run build` in `web/`
+- [ ] Lint passes: `npm run lint` in `app/`
+- [ ] Types pass: `npx tsc --noEmit` in `app/`

@@ -40,6 +40,7 @@ The system consists of three parts in a single repository:
 - **Database**: PostgreSQL (hosted on Neon)
 - **WSGI Production Server**: Gunicorn
 - **Validation & Tools**: `phonenumbers` (Python phone parsing), `pytest` (automated tests)
+- **Background Jobs**: APScheduler 3.11.3 (in-process scheduler — the hourly job that frees expired lead bookings)
 - **Hosting & Serving**: Render (Flask also serves the built `web/dist` static assets)
 
 ---
@@ -61,7 +62,7 @@ backend/
 │   │   └── utils.py                 # Timezone and phone normalization utilities
 │   ├── api/
 │   │   └── __init__.py              # Blueprint registration for all /api endpoints
-│   └── modules/
+│   ├── modules/
 │       ├── auth/
 │       │   ├── routes.py            # POST /api/login
 │       │   ├── schemas.py           # Login request and response validation
@@ -96,6 +97,9 @@ backend/
 │           ├── services.py          # Office hours read, update, and window validation
 │           ├── models.py            # OfficeHours SQLAlchemy database model
 │           └── __init__.py
+│   └── tasks/
+│       ├── __init__.py              # Marks the tasks package
+│       └── lead_expiry.py           # Hourly APScheduler job: fires once at startup, then hourly, freeing expired lead bookings
 ├── tests/
 │   ├── conftest.py                  # Pytest fixtures and test database setup
 │   └── modules/
@@ -106,7 +110,7 @@ backend/
 │       ├── test_leads.py            # CSV upload, serving order, claims, and resolution
 │       └── test_settings.py         # Office hours read, update, and permission tests
 ├── wsgi.py                          # Gunicorn WSGI production entry point
-└── requirements.txt                 # flask, flask-sqlalchemy, gunicorn, psycopg2-binary, pytest, phonenumbers
+└── requirements.txt                 # flask, flask-sqlalchemy, gunicorn, psycopg2-binary, apscheduler, pytest, phonenumbers
 ```
 
 ---
@@ -199,6 +203,9 @@ app/
 ├── App.tsx                          # Root container: Auth check → Tab navigation
 ├── index.js                         # React Native app registry entry point
 ├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE)
+│   └── app/src/main/
+│       ├── java/com/apexsalescall/SimCallModule.kt   # Kotlin bridge: reads the SIM numbers, places the call on the matching SIM
+│       └── res/drawable-*dpi/ic_reminder_icon.png     # White notification glyph on transparent background, five densities
 └── src/
     ├── app/
     │   └── navigation/
@@ -216,7 +223,7 @@ app/
     │   │   ├── components/permission-banner.tsx
     │   │   ├── components/lead-call-card.tsx
     │   │   ├── components/post-call-dialog.tsx  # Post-call popup: native date/time picker + schedule question + Go-to-next checkbox + Submit; locked so only Submit closes it; keypad variant shows the number with the same schedule question
-    │   │   ├── lib/call-launcher.ts     # Starts the call: ACTION_CALL direct dial; tel: hand-over without CALL_PHONE
+    │   │   ├── lib/call-launcher.ts     # Starts the call: chosen-SIM placement through TelecomManager; Android default SIM when none picked or CALL_PHONE off
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
     │   │   ├── hooks/use-post-call-submit.ts  # Submit click: read call log, send to server, delete or save the row
@@ -226,6 +233,7 @@ app/
     │   │   ├── hooks/use-my-stats.ts
     │   │   └── screens/
     │   │       ├── my-stats-screen.tsx   # Salesperson stats: last-30-days KPI cards, performance table, calls-by-hour chart
+    │   │       ├── calling-sim-screen.tsx # Pick the calling number: readable SIM numbers with carrier names, plus Use phone default
     │   │       └── settings-screen.tsx   # Settings tab: Log out row and Clear local data with its confirm dialog
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
@@ -234,6 +242,10 @@ app/
     │       ├── hooks/use-janitor.ts      # 1-hour check and 5-strike give-up filler
     │       └── hooks/use-sync.ts         # Janitor-first bulk sync on foreground; rows saved only on failed sends
     └── shared/
-        ├── api/api-client.ts             # Axios HTTP client with token header
-        └── utils/phone-formatter.ts      # libphonenumber-js E.164 normalization
+        ├── api/
+        │   ├── api-client.ts             # Axios HTTP client with token header
+        │   └── sim-module.ts             # Kotlin module bridge: read SIM numbers, place the call on the matching SIM
+        └── utils/
+            ├── phone-formatter.ts        # libphonenumber-js E.164 normalization
+            └── calling-sim.ts            # The chosen calling number on this phone (AsyncStorage)
 ```

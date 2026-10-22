@@ -1780,13 +1780,13 @@
     "semantic_hash": ""
   },
   "agent-doc/decisions.md": {
-    "mtime": 1792671033.3565853,
-    "ast_hash": "e917b9b2d5904c15ada44444244cb0d4",
+    "mtime": 1792692974.6825228,
+    "ast_hash": "b78d9bf98a382f30cc3138f3bb0a0745",
     "semantic_hash": ""
   },
   "agent-doc/old-decisions.md": {
-    "mtime": 1792606857.289232,
-    "ast_hash": "2a3eb9dac0b79d8078ea8998db116b2d",
+    "mtime": 1792693211.2098172,
+    "ast_hash": "0d7eed9ea1963e9c0838d1c6d29301c0",
     "semantic_hash": ""
   },
   "agent-doc/proposal.md": {
@@ -1805,8 +1805,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/02-dashboard--P.html": {
-    "mtime": 1792614319.7891972,
-    "ast_hash": "34ffbb4a78dcd60738e991db29067ee7",
+    "mtime": 1792694220.8765383,
+    "ast_hash": "04feb6e98f4a2fc8a706d8396d4e295c",
     "semantic_hash": ""
   },
   "agent-doc/screens/02-team--P.html": {
@@ -1840,8 +1840,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/04-person-view--P.html": {
-    "mtime": 1792614257.8686318,
-    "ast_hash": "55aef0a7becad16412a971130276e1d9",
+    "mtime": 1792694234.7022948,
+    "ast_hash": "535da9c6a2fbd009dc344cf09572aa2d",
     "semantic_hash": ""
   },
   "agent-doc/screens/04-person-view--error--P.html": {
@@ -1855,8 +1855,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/04-person-view--no-incoming--P.html": {
-    "mtime": 1792614307.5389347,
-    "ast_hash": "8ec9860bd70f76df6f2f92d2ad98317e",
+    "mtime": 1792694262.8353112,
+    "ast_hash": "fb134dca1be19ddba20777fccd71d4f4",
     "semantic_hash": ""
   },
   "agent-doc/screens/05-accounts--P.html": {
@@ -1940,13 +1940,13 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/08-my-stats--M.html": {
-    "mtime": 1792614346.6254406,
-    "ast_hash": "7fa48a0272c30d2db92ddf55bd7adfbc",
+    "mtime": 1792694198.063116,
+    "ast_hash": "bdcabfa618cdbaca4c6331472477b9b5",
     "semantic_hash": ""
   },
   "agent-doc/screens/08-my-stats--no-incoming--M.html": {
-    "mtime": 1792614354.2684834,
-    "ast_hash": "3248f6a4c3939b1ec376e80695523fa4",
+    "mtime": 1792694256.5142295,
+    "ast_hash": "a823ec8699635966f21b8c04019738e5",
     "semantic_hash": ""
   },
   "agent-doc/screens/08-my-stats--offline--M.html": {
@@ -1955,8 +1955,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/09-settings--M.html": {
-    "mtime": 1792614989.684146,
-    "ast_hash": "127090b950b06342503bd3d295d54981",
+    "mtime": 1792694207.925067,
+    "ast_hash": "154df8bcedc708be7444d4acbce75f15",
     "semantic_hash": ""
   },
   "agent-doc/screens/09-settings--confirm-dialog--M.html": {
@@ -1980,8 +1980,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/INDEX.md": {
-    "mtime": 1792615144.8668191,
-    "ast_hash": "b537f9679f1b6ad7ef385106d6bbdd7e",
+    "mtime": 1792694457.3314478,
+    "ast_hash": "f44e09f323ab0fab030185de12309167",
     "semantic_hash": ""
   },
   "agent-doc/screens/THEME.md": {
@@ -1990,8 +1990,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/index.html": {
-    "mtime": 1792615142.3583598,
-    "ast_hash": "400e8f4d08a26255786b82863863bba0",
+    "mtime": 1792694455.3334424,
+    "ast_hash": "d721bcb90665ed65aa0367930c3ad1ab",
     "semantic_hash": ""
   },
   "agent-doc/specs/authentication.md": {
@@ -2025,18 +2025,18 @@
     "semantic_hash": ""
   },
   "agent-doc/structure.md": {
-    "mtime": 1792609571.83594,
-    "ast_hash": "13e4cb3f72fe12e7667d60768d28a591",
+    "mtime": 1792693409.9021387,
+    "ast_hash": "d2d46e0141604e4513e1a6ae98296774",
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792658737.4324014,
-    "ast_hash": "a864f5dbd6a8f3ee48db3e33c9ee0ac5",
+    "mtime": 1792694677.2660842,
+    "ast_hash": "28cd3abcad5b8e35db273dc93a7f0655",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
-    "mtime": 1792609570.724081,
-    "ast_hash": "c02c97770c1ca74490343086a25a8e71",
+    "mtime": 1792693250.6261842,
+    "ast_hash": "934f8d8f01a9eda2383fc9a629970b81",
     "semantic_hash": ""
   },
   "app/docs/build-apk.md": {
@@ -2407,6 +2407,21 @@
   "app/src/features/tracking/lib/reminder-settings.ts": {
     "mtime": 1792685194.4178398,
     "ast_hash": "af4ffd98de5167ba3f44c003c93bd47f",
+    "semantic_hash": ""
+  },
+  "agent-doc/PRD.md": {
+    "mtime": 1792689747.4435923,
+    "ast_hash": "9fa35e39208f6a3c70d337358ca88ef0",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/09c-calling-sim--M.html": {
+    "mtime": 1792694353.2069151,
+    "ast_hash": "841152371d970eb199d281a0e8a6b7c4",
+    "semantic_hash": ""
+  },
+  "agent-doc/screens/09c-calling-sim--none-readable--M.html": {
+    "mtime": 1792694441.4150894,
+    "ast_hash": "0ed2076dbdd3fcbf44658c07c898eeeb",
     "semantic_hash": ""
   }
 }

@@ -75,7 +75,9 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
   - Serves newest available leads (`created_at DESC`) when no due schedules exist.
   - Claims the served lead for 10 minutes (`CLAIM_MINUTES`).
   - Supports scheduling current lead and fetching next in a single request; a schedule books the lead whatever its state — `done` and `stopped` included, ending `waiting` with the retry lock and claim cleared — the scheduler owns the reservation, and a schedule clears a claim held by a different salesperson.
-  - Frees expired bookings before serving: a lead still `waiting` booked more than 24 hours past its time (`SCHEDULE_EXPIRE_HOURS`) returns to the pool with attempts untouched; a booking inside the 24-hour window keeps the lead reserved.
+  - The hourly expiry job frees expired bookings: a lead still `waiting` booked more than 24 hours past its time (`SCHEDULE_EXPIRE_HOURS`) returns to the pool with attempts untouched; a booking inside the 24-hour window stays reserved.
+  - Serving a lead never frees expired bookings — a lead whose booking just expired stays invisible in the pool until the job runs.
+  - The scheduler never starts under pytest.
   - `continue_calling: false` stores the schedule (if supplied) and releases the claim but serves and claims no lead — the response `lead` is `null`.
 - **Resolution via Call Sync**:
   - Connected call (`duration > 0`) marks lead `status = 'done'`.
@@ -134,4 +136,10 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - A call dialed from our app is never counted twice by the sweep.
 - With airplane mode, swept calls wait on the phone and arrive at the next open with internet; after a successful push, synced rows behind the sweep line are gone from the phone.
 - A number typed as 10 digits in the Do-not-track list saves in international format (+91...) and can be removed again.
-- My Stats shows the donut with its numbers line and ONE stacked two-color bar per hour; the counts are written inside the segments, and Minutes on the table means total talk.
+- My Stats shows the donut with its numbers line and ONE stacked two-color bar per hour; the counts sit centered inside their segments, and Minutes on the table means total talk.
+- Both hour charts — web and app — show the dot legend under the bars: blue dot = outgoing, green dot = incoming.
+- Settings shows the fourth row listing the phone's SIM numbers; picking one saves it, marks it with a checkmark, and every later call leaves on that number with no SIM picker.
+- With no number picked, a call goes out on Android's default SIM.
+- After the SIMs are swapped between slots, the next call still leaves on the stored number.
+- Removing the chosen SIM from the phone blocks the call with "This SIM number is not in the phone." — nothing is dialed or recorded; picking again in Settings fixes it.
+- The reminder notification shows the white phone icon in the status bar and the full-color app icon in the notification drawer.

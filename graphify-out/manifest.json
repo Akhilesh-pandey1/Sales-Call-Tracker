@@ -2365,8 +2365,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-reminders.ts": {
-    "mtime": 1792670634.782623,
-    "ast_hash": "a335b95c6df3d8bb8414a42dbd857931",
+    "mtime": 1792675218.607763,
+    "ast_hash": "e7210364eb099acff17519dd29694650",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/reminder-press-events.ts": {
@@ -2390,8 +2390,8 @@
     "semantic_hash": ""
   },
   "web/src/features/dashboard/components/talk-split-card.tsx": {
-    "mtime": 1792670949.5275984,
-    "ast_hash": "7117342ee31db5e0b47cc9eb410cd271",
+    "mtime": 1792675167.9509861,
+    "ast_hash": "6a92f22b0a4ed7c6409a88ab8c37c256",
     "semantic_hash": ""
   },
   "app/src/features/stats/components/call-split-donut.tsx": {
@@ -2402,6 +2402,11 @@
   "web/src/features/dashboard/components/chart-colors.ts": {
     "mtime": 1792661454.4183352,
     "ast_hash": "4a825d37913f15c6f6777fa1fbb22c81",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/battery-optimization.ts": {
+    "mtime": 1792675259.7800992,
+    "ast_hash": "467cb999c769e877dc81bd521534bd80",
     "semantic_hash": ""
   }
 }

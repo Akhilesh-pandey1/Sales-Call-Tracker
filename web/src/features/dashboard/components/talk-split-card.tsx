@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { Cell, Pie, PieChart } from "recharts";
+import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard, EmptyPeriodNote } from "./dashboard-card";
 import { INCOMING_COLOR } from "./chart-colors";
@@ -10,26 +12,10 @@ interface TalkSplitCardProps {
   headingAction?: ReactNode;
 }
 
-interface SplitArcGeometry {
-  outgoingArcLength: number;
-  incomingArcLength: number;
-  incomingArcStartRotation: number;
-}
-
-function buildSplitArcGeometry(
-  incomingPercent: number,
-  donutCircumference: number
-): SplitArcGeometry {
-  const totalPercent: number = 100;
-  const fullCircleDegrees: number = 360;
-  const incomingShare: number = incomingPercent / totalPercent;
-  const outgoingShare: number = 1 - incomingShare;
-  const arcGeometry: SplitArcGeometry = {
-    outgoingArcLength: donutCircumference * outgoingShare,
-    incomingArcLength: donutCircumference * incomingShare,
-    incomingArcStartRotation: fullCircleDegrees * outgoingShare,
-  };
-  return arcGeometry;
+interface TalkSplitSegment {
+  directionName: string;
+  percent: number;
+  fill: string;
 }
 
 interface TalkDirectionLegendRowProps {
@@ -70,50 +56,50 @@ export function TalkSplitCard({ talkTotals, totalMinutes, headingAction }: TalkS
     );
   }
 
-  const viewBoxSize: number = 120;
-  const ringCenter: number = 60;
-  const ringRadius: number = 48;
-  const ringStrokeWidth: number = 14;
-  const donutCircumference: number = 2 * Math.PI * ringRadius;
   const incomingColor: string = INCOMING_COLOR;
   const outgoingColor: string = "hsl(var(--primary))";
-  const arcGeometry: SplitArcGeometry = buildSplitArcGeometry(
-    talkTotals.incoming_percent,
-    donutCircumference
-  );
+  const donutOuterRadius: number = 73;
+  const donutInnerRadius: number = 54;
   const totalMinutesLabel: string = formatCount(totalMinutes);
+  const talkSplitSegments: TalkSplitSegment[] = [
+    { directionName: "Outgoing", percent: talkTotals.outgoing_percent, fill: outgoingColor },
+    { directionName: "Incoming", percent: talkTotals.incoming_percent, fill: incomingColor },
+  ];
+  const talkSplitChartConfig: ChartConfig = {
+    outgoing: { label: "Outgoing" },
+    incoming: { label: "Incoming" },
+  };
 
   return (
     <DashboardCard title="Call Split" headingAction={headingAction}>
       <div className="mt-5 flex flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-12">
-        <div className="relative h-40 w-40">
-          <svg
-            viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
-            className="h-40 w-40 -rotate-90"
-            role="img"
-            aria-label="Donut chart of outgoing versus incoming talk minutes"
-          >
-            <circle
-              cx={ringCenter}
-              cy={ringCenter}
-              r={ringRadius}
-              fill="none"
-              stroke={incomingColor}
-              strokeWidth={ringStrokeWidth}
-              strokeDasharray={`${arcGeometry.incomingArcLength} ${donutCircumference}`}
-              transform={`rotate(${arcGeometry.incomingArcStartRotation} ${ringCenter} ${ringCenter})`}
-            />
-            <circle
-              cx={ringCenter}
-              cy={ringCenter}
-              r={ringRadius}
-              fill="none"
-              stroke={outgoingColor}
-              strokeWidth={ringStrokeWidth}
-              strokeDasharray={`${arcGeometry.outgoingArcLength} ${donutCircumference}`}
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div
+          className="relative h-40 w-40"
+          role="img"
+          aria-label="Donut chart of outgoing versus incoming talk minutes"
+        >
+          <ChartContainer config={talkSplitChartConfig} className="h-40 w-40">
+            <PieChart>
+              <Pie
+                data={talkSplitSegments}
+                dataKey="percent"
+                nameKey="directionName"
+                startAngle={90}
+                endAngle={-270}
+                innerRadius={donutInnerRadius}
+                outerRadius={donutOuterRadius}
+                strokeWidth={0}
+              >
+                {talkSplitSegments.map((talkSplitSegment: TalkSplitSegment) => (
+                  <Cell
+                    key={talkSplitSegment.directionName}
+                    fill={talkSplitSegment.fill}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </ChartContainer>
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-2xl font-bold tabular-nums tracking-tight">
               {totalMinutesLabel}
             </span>

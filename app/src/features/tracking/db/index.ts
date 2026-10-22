@@ -12,6 +12,11 @@ export {
 } from './pending-calls-db';
 export type { PendingCall } from './pending-calls-db';
 export {
+  deleteDoNotTrackNumber,
+  insertDoNotTrackNumber,
+  readDoNotTrackNumbers,
+} from './do-not-track-db';
+export {
   readLastSweptAt,
   saveSweptCallsAndMoveSweepLine,
 } from './call-sweep-db';

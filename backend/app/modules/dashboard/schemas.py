@@ -20,13 +20,6 @@ class VsYesterdayDelta(BaseModel):
 class CallsByHourBlock(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     hours: list[int]
-    dials: list[int]
-    best_hour: int | None
-
-
-class TeamCallsByHourBlock(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
-    hours: list[int]
     outgoing: list[int]
     incoming: list[int]
     best_hour: int | None
@@ -60,7 +53,7 @@ class TeamPeriodBlock(BaseModel):
     connected_percent: int | None
     avg_per_person_per_day: AvgPerPersonPerDay
     vs_yesterday: VsYesterdayDelta | None
-    calls_by_hour: TeamCallsByHourBlock
+    calls_by_hour: CallsByHourBlock
     talk_totals: TalkTotals
     top_people: list[TopPersonSummary]
 
@@ -111,6 +104,7 @@ class PersonPeriodStats(BaseModel):
     minutes: float
     connected_percent: int | None
     calls_by_hour: CallsByHourBlock
+    talk_totals: TalkTotals
 
 
 class PersonThirtyDayStats(PersonPeriodStats):

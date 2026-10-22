@@ -97,3 +97,14 @@ def fetch_team_people(
     response: Response = client.get("/api/dashboard/team/people", headers=headers)
     response_json: list[dict[str, Any]] = response.get_json()
     return response, response_json
+
+
+def fetch_person_dashboard(
+    client: FlaskClient, auth_token: str, user_id: int
+) -> tuple[Response, dict[str, Any]]:
+    headers: dict[str, str] = {"Authorization": f"Bearer {auth_token}"}
+    response: Response = client.get(
+        f"/api/dashboard/person/{user_id}", headers=headers
+    )
+    response_json: dict[str, Any] = response.get_json()
+    return response, response_json

@@ -2,11 +2,19 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { ChevronRight, LogOut, Trash2 } from 'lucide-react-native';
+import {
+  ChevronRight,
+  LogOut,
+  ShieldMinus,
+  Trash2,
+  type LucideIcon,
+} from 'lucide-react-native';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useClearLocalData } from '../hooks/use-clear-local-data';
 import { useLogout } from '../hooks/use-logout';
+import { DoNotTrackScreen } from './do-not-track-screen';
 
 function SettingsHeader() {
   return (
@@ -16,54 +24,41 @@ function SettingsHeader() {
   );
 }
 
-type ClearDataRowProps = {
-  onOpenClearDialog: () => void;
+type SettingsMenuRowProps = {
+  icon: LucideIcon;
+  iconContainerClassName: string;
+  iconClassName: string;
+  title: string;
+  subtitle: string;
+  onPress: () => void;
+  disabled?: boolean;
 };
 
-function ClearDataRow({ onOpenClearDialog }: ClearDataRowProps) {
+function SettingsMenuRow({
+  icon,
+  iconContainerClassName,
+  iconClassName,
+  title,
+  subtitle,
+  onPress,
+  disabled,
+}: SettingsMenuRowProps) {
   return (
     <Button
       variant="outline"
       size="none"
       className="w-full shrink-0 justify-start gap-4 rounded-2xl border-border bg-card p-4 active:bg-muted"
-      onPress={onOpenClearDialog}
+      onPress={onPress}
+      disabled={disabled}
     >
-      <View className="h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-destructive/10">
-        <Icon as={Trash2} size={24} className="text-destructive" />
+      <View
+        className={`h-11 w-11 shrink-0 items-center justify-center rounded-xl ${iconContainerClassName}`}
+      >
+        <Icon as={icon} size={24} className={iconClassName} />
       </View>
       <View className="flex-1 items-start gap-0.5">
-        <Text className="text-base font-bold">Clear local data</Text>
-        <Text className="text-xs text-muted-foreground">
-          Deletes only the calls on this phone that haven't reached the server yet.
-        </Text>
-      </View>
-      <Icon as={ChevronRight} size={20} className="shrink-0 text-muted-foreground" />
-    </Button>
-  );
-}
-
-type LogoutRowProps = {
-  isLoggingOut: boolean;
-  onLogout: () => Promise<void>;
-};
-
-function LogoutRow({ isLoggingOut, onLogout }: LogoutRowProps) {
-  return (
-    <Button
-      variant="outline"
-      size="none"
-      className="w-full shrink-0 justify-start gap-4 rounded-2xl border-border bg-card p-4 active:bg-muted"
-      onPress={onLogout}
-      disabled={isLoggingOut}
-    >
-      <View className="h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-        <Icon as={LogOut} size={24} className="text-primary" />
-      </View>
-      <View className="flex-1 items-start gap-0.5">
-        <Text className="text-base font-bold">{isLoggingOut ? 'Logging out…' : 'Log out'}</Text>
-        <Text className="text-xs text-muted-foreground">
-          Sends your unsent calls first, then signs you out.
-        </Text>
+        <Text className="text-base font-bold">{title}</Text>
+        <Text className="text-xs text-muted-foreground">{subtitle}</Text>
       </View>
       <Icon as={ChevronRight} size={20} className="shrink-0 text-muted-foreground" />
     </Button>
@@ -138,6 +133,7 @@ function ClearConfirmDialog({
 
 export function SettingsScreen() {
   const { top: topInset } = useSafeAreaInsets();
+  const [isDoNotTrackListOpen, setIsDoNotTrackListOpen] = useState(false);
   const {
     pendingCallCount,
     isClearDialogOpen,
@@ -149,6 +145,18 @@ export function SettingsScreen() {
   } = useClearLocalData();
   const { isLoggingOut, logoutErrorMessage, logout } = useLogout();
 
+  const openDoNotTrackList = (): void => {
+    setIsDoNotTrackListOpen(true);
+  };
+
+  const closeDoNotTrackList = (): void => {
+    setIsDoNotTrackListOpen(false);
+  };
+
+  if (isDoNotTrackListOpen) {
+    return <DoNotTrackScreen onBack={closeDoNotTrackList} />;
+  }
+
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
       <SettingsHeader />
@@ -157,8 +165,31 @@ export function SettingsScreen() {
           <Text className="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Local data
           </Text>
-          <ClearDataRow onOpenClearDialog={openClearDialog} />
-          <LogoutRow isLoggingOut={isLoggingOut} onLogout={logout} />
+          <SettingsMenuRow
+            icon={Trash2}
+            iconContainerClassName="bg-destructive/10"
+            iconClassName="text-destructive"
+            title="Clear local data"
+            subtitle="Deletes only the calls on this phone that haven't reached the server yet."
+            onPress={openClearDialog}
+          />
+          <SettingsMenuRow
+            icon={ShieldMinus}
+            iconContainerClassName="bg-primary/10"
+            iconClassName="text-primary"
+            title="Do not track numbers"
+            subtitle="Numbers never recorded as work - incoming or outgoing."
+            onPress={openDoNotTrackList}
+          />
+          <SettingsMenuRow
+            icon={LogOut}
+            iconContainerClassName="bg-primary/10"
+            iconClassName="text-primary"
+            title={isLoggingOut ? 'Logging out…' : 'Log out'}
+            subtitle="Sends your unsent calls first, then signs you out."
+            onPress={logout}
+            disabled={isLoggingOut}
+          />
           {clearErrorMessage && !isClearDialogOpen ? (
             <Text role="alert" className="px-1 text-xs font-semibold text-destructive">
               {clearErrorMessage}

@@ -72,16 +72,16 @@
 
 **Blocked by:** 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Every person period carries outgoing-only dials/connected, total-talk `seconds`/`minutes`, `connected_percent`, `talk_totals`, and `calls_by_hour` with `outgoing`/`incoming` arrays + `best_hour` by total (`api.md` §3 person; Decision 14).
-- [ ] `active_days` counts only days with at least one outgoing dial; `avg_per_active_day` divides exact total talk minutes by `active_days` and is `null` at 0 active days (`api.md` §3 person Rules).
-- [ ] `top_numbers` ranks by TOTAL talk seconds in the last 30 days with `minutes` alongside `seconds` (`api.md` §3; `testing.md` — top-numbers test).
+- [x] Every person period carries outgoing-only dials/connected, total-talk `seconds`/`minutes`, `connected_percent`, `talk_totals`, and `calls_by_hour` with `outgoing`/`incoming` arrays + `best_hour` by total (`api.md` §3 person; Decision 14).
+- [x] `active_days` counts only days with at least one outgoing dial; `avg_per_active_day` divides exact total talk minutes by `active_days` and is `null` at 0 active days (`api.md` §3 person Rules).
+- [x] `top_numbers` ranks by TOTAL talk seconds in the last 30 days with `minutes` alongside `seconds` (`api.md` §3; `testing.md` — top-numbers test).
 
 **Verification:**
-- [ ] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard_person.py -q`
-- [ ] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
+- [x] Focused tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests/modules/test_dashboard_person.py -q`
+- [x] All backend tests pass: `backend/venv/Scripts/python.exe -m pytest backend/tests -q`
 
 ## Task 6: App — My Stats shows the incoming/outgoing split
 
@@ -123,16 +123,16 @@
 
 **Blocked by:** 7
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The `do_not_track` table and its db helpers exist; numbers save in E.164 via the same libphonenumber-js call and login country — 10 typed digits are allowed (Decision 9; `database.md` §2).
-- [ ] The sweep checks the list BEFORE inserting in both directions — a listed number never enters `pending_calls`, so no dial, minute, or active day (Decision 8).
-- [ ] Settings gains the "Do not track numbers" row opening the list screen per `09b-do-not-track--M.html`: add a number (with normalize-on-save) and remove from the list.
+- [x] The `do_not_track` table and its db helpers exist; numbers save in E.164 via the same libphonenumber-js call and login country — 10 typed digits are allowed (Decision 9; `database.md` §2).
+- [x] The sweep checks the list BEFORE inserting in both directions — a listed number never enters `pending_calls`, so no dial, minute, or active day (Decision 8).
+- [x] Settings gains the "Do not track numbers" row opening the list screen per `09b-do-not-track--M.html`: add a number (with normalize-on-save) and remove from the list.
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 9: App — refused booking shows a toast
 
@@ -173,15 +173,15 @@
 
 **Blocked by:** 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The dashboard types carry `talk_totals` and the chart's `outgoing`/`incoming` arrays; the Talk minutes card and Top 5 render total talk, ranking by total talk minutes (Decision 15).
-- [ ] The hour chart draws ONE stacked two-color bar per hour and its summary line shows the split, e.g. "142 outgoing · 37 incoming", per screen `02-dashboard--P.html` (Decision 15).
-- [ ] Team rows keep dials · connected · minutes with minutes as total talk — all rendered from server values (Decision 15).
+- [x] The dashboard types carry `talk_totals` and the chart's `outgoing`/`incoming` arrays; the Talk minutes card and Top 5 render total talk, ranking by total talk minutes (Decision 15).
+- [x] The hour chart draws ONE stacked two-color bar per hour and its summary line shows the split, e.g. "142 outgoing · 37 incoming", per screen `02-dashboard--P.html` (Decision 15).
+- [x] Team rows keep dials · connected · minutes with minutes as total talk — all rendered from server values (Decision 15).
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 12: Web — person view shows the split
 

@@ -514,19 +514,24 @@ function ChartPeriodSwitch({
 
 type CallsByHourChartProps = {
   periodCallsByHour: Record<ChartPeriod, CallsByHourStats>;
+  periodStats: Record<ChartPeriod, PeriodStats>;
 };
 
-function CallsByHourChart({ periodCallsByHour }: CallsByHourChartProps) {
+function CallsByHourChart({ periodCallsByHour, periodStats }: CallsByHourChartProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<ChartPeriod>('today');
   const selectedCallsByHour: CallsByHourStats = periodCallsByHour[selectedPeriod];
   const selectedPeriodInfo: ChartPeriodInfo = chartPeriodsInfo[selectedPeriod];
+  const selectedTalkTotals: TalkTotalsStats = periodStats[selectedPeriod].talk_totals;
   const bestHour: number | null = selectedCallsByHour.best_hour;
   const isChartEmpty: boolean = bestHour === null;
   const hourBars: HourBar[] = isChartEmpty ? [] : buildHourBars(selectedCallsByHour);
+  const outgoingCallsLabel: string = formatCount(selectedTalkTotals.outgoing_calls);
+  const incomingCallsLabel: string = formatCount(selectedTalkTotals.incoming_calls);
+  const directionSplitLabel: string = `${outgoingCallsLabel} outgoing · ${incomingCallsLabel} incoming`;
   const chartFooterText: string =
     bestHour === null
       ? ''
-      : `${selectedPeriodInfo.callsWord} per hour · ${selectedPeriodInfo.switchLabel} (IST). Best hour: ${formatHourLabel(bestHour)}.`;
+      : `${selectedPeriodInfo.callsWord} per hour · ${selectedPeriodInfo.switchLabel} (IST). ${directionSplitLabel} · Best hour: ${formatHourLabel(bestHour)}.`;
 
   const handlePeriodPress = (period: ChartPeriod): void => {
     setSelectedPeriod(period);
@@ -650,7 +655,7 @@ function MyStatsContent({ myStats }: MyStatsContentProps) {
     <ScrollView className="flex-1" contentContainerClassName="gap-4 px-3 pb-6 pt-4">
       <Last30DaysCards last30DaysStats={myStats.last_30_days} />
       <PerformanceTable periodStats={periodStats} />
-      <CallsByHourChart periodCallsByHour={periodCallsByHour} />
+      <CallsByHourChart periodCallsByHour={periodCallsByHour} periodStats={periodStats} />
       <CallSplitCard periodStats={periodStats} />
     </ScrollView>
   );

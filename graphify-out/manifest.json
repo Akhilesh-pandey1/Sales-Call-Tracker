@@ -420,8 +420,8 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/my-stats-screen.tsx": {
-    "mtime": 1792660872.6659493,
-    "ast_hash": "f74da0bfd1ef634aa99034d5cffb5b76",
+    "mtime": 1792660970.7264605,
+    "ast_hash": "a08b576b6712bf444a21e5a43ef58aaa",
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/settings-screen.tsx": {

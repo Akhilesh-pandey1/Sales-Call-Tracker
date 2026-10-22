@@ -66,15 +66,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `SimCallModule.kt` reads the active SIMs with their numbers and carrier names, and places a call on the slot matching a given number through `TelecomManager.placeCall` with that SIM's account handle; the JS bridge (`sim-module.ts`) exposes both (`decisions.md` Decision 3; `structure.md` — `SimCallModule.kt`, `sim-module.ts`).
-- [ ] The chosen number saves, reads, and clears in AsyncStorage in international format, and matching normalizes both sides (+91 vs 0) with the login country (`decisions.md` Decision 3).
+- [x] `SimCallModule.kt` reads the active SIMs with their numbers and carrier names, and places a call on the slot matching a given number through `TelecomManager.placeCall` with that SIM's account handle; the JS bridge (`sim-module.ts`) exposes both (`decisions.md` Decision 3; `structure.md` — `SimCallModule.kt`, `sim-module.ts`).
+- [x] The chosen number saves, reads, and clears in AsyncStorage in international format, and matching normalizes both sides (+91 vs 0) with the login country (`decisions.md` Decision 3).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 6: App — every dial leaves on the chosen number
 

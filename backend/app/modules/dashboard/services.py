@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any
 from backend.app.core.utils import now_ist, parse_utc_datetime, to_ist
-from backend.app.modules.calls import Call
+from backend.app.modules.calls import Call, OUTGOING_DIRECTION
 from backend.app.modules.settings import OfficeHours, get_or_create_office_hours_window
 from backend.app.modules.users import User
 
@@ -122,10 +122,9 @@ def create_empty_period_metrics() -> dict[str, int]:
 def apply_direction_call_to_metrics(
     period_metrics: dict[str, int], direction: str, duration_seconds: int
 ) -> None:
-    outgoing_direction: str = "outgoing"
     zero_duration: int = 0
     period_metrics["seconds"] += duration_seconds
-    if direction != outgoing_direction:
+    if direction != OUTGOING_DIRECTION:
         period_metrics["incoming_calls"] += 1
         period_metrics["incoming_seconds"] += duration_seconds
         return
@@ -157,12 +156,11 @@ def apply_direction_call_to_hourly_bucket(
     dialed_at_utc: datetime,
     office_hour_set: set[int],
 ) -> None:
-    outgoing_direction: str = "outgoing"
     ist_dialed_at: datetime = to_ist(dialed_at_utc)
     call_hour: int = ist_dialed_at.hour
     if call_hour not in office_hour_set:
         return
-    if direction == outgoing_direction:
+    if direction == OUTGOING_DIRECTION:
         outgoing_counts_by_hour[call_hour] += 1
         return
     incoming_counts_by_hour[call_hour] += 1

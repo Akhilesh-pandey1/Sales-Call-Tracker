@@ -45,7 +45,15 @@ def create_initial_manager(app: Flask) -> None:
     db.session.commit()
 
 
-def ensure_calls_column(column_name: str, column_definition: str) -> None:
+def ensure_calls_column(column_name: str) -> None:
+    allowed_calls_columns: dict[str, str] = {
+        "outcome": "VARCHAR(20)",
+        "direction": "VARCHAR(10) NOT NULL DEFAULT 'outgoing'",
+    }
+    if column_name not in allowed_calls_columns:
+        raise ValueError(f"Column {column_name} is not allowed on the calls table.")
+    column_definition: str = allowed_calls_columns[column_name]
+
     database_inspector = inspect(db.engine)
     existing_column_names: list[str] = [
         column["name"] for column in database_inspector.get_columns("calls")
@@ -64,16 +72,6 @@ def ensure_calls_column(column_name: str, column_definition: str) -> None:
         )
     db.session.execute(add_column_statement)
     db.session.commit()
-
-
-def ensure_calls_outcome_column() -> None:
-    outcome_column_definition: str = "VARCHAR(20)"
-    ensure_calls_column("outcome", outcome_column_definition)
-
-
-def ensure_calls_direction_column() -> None:
-    direction_column_definition: str = "VARCHAR(10) NOT NULL DEFAULT 'outgoing'"
-    ensure_calls_column("direction", direction_column_definition)
 
 
 def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
@@ -97,8 +95,8 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
 
     with app.app_context():
         db.create_all()
-        ensure_calls_outcome_column()
-        ensure_calls_direction_column()
+        ensure_calls_column("outcome")
+        ensure_calls_column("direction")
         get_or_create_office_hours_window()
         create_initial_manager(app)
 

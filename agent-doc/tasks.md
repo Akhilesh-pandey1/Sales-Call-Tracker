@@ -173,15 +173,15 @@
 
 **Blocked by:** 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The dashboard types carry `talk_totals` and the chart's `outgoing`/`incoming` arrays; the Talk minutes card and Top 5 render total talk, ranking by total talk minutes (Decision 15).
-- [ ] The hour chart draws ONE stacked two-color bar per hour and its summary line shows the split, e.g. "142 outgoing · 37 incoming", per screen `02-dashboard--P.html` (Decision 15).
-- [ ] Team rows keep dials · connected · minutes with minutes as total talk — all rendered from server values (Decision 15).
+- [x] The dashboard types carry `talk_totals` and the chart's `outgoing`/`incoming` arrays; the Talk minutes card and Top 5 render total talk, ranking by total talk minutes (Decision 15).
+- [x] The hour chart draws ONE stacked two-color bar per hour and its summary line shows the split, e.g. "142 outgoing · 37 incoming", per screen `02-dashboard--P.html` (Decision 15).
+- [x] Team rows keep dials · connected · minutes with minutes as total talk — all rendered from server values (Decision 15).
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 12: Web — person view shows the split
 

@@ -189,11 +189,11 @@
 
 **Blocked by:** 5, 11
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The person view renders the `talk_totals` donut with its numbers line and the stacked hour chart through the shared chart component, per screen `04-person-view--P.html` (Decision 15).
-- [ ] KPI cards, the performance table, and top numbers render server values only — the web computes nothing (Proposal — the web only formats what it receives).
+- [x] The person view renders the `talk_totals` donut with its numbers line and the stacked hour chart through the shared chart component, per screen `04-person-view--P.html` (Decision 15).
+- [x] KPI cards, the performance table, and top numbers render server values only — the web computes nothing (Proposal — the web only formats what it receives).
 
 **Verification:**
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Build succeeds: `npm run build` in `web/`

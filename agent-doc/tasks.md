@@ -89,16 +89,16 @@
 
 **Blocked by:** 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `stats.api.ts` types carry `talk_totals` and the chart's `outgoing`/`incoming` arrays; the donut renders `talk_totals` with its numbers line, e.g. "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min" (Decision 14; screen `08-my-stats--M.html`).
-- [ ] The hour chart draws ONE stacked bar per hour — total height = all calls that hour, two color segments sized by share, counts written inside the segments — and the best-hour highlight follows total calls (Decision 14).
-- [ ] The Avg minutes card holds total talk per active day and the performance table's Minutes column holds total talk — all values come from the server, the screen formats only (Decision 14).
+- [x] `stats.api.ts` types carry `talk_totals` and the chart's `outgoing`/`incoming` arrays; the donut renders `talk_totals` with its numbers line, e.g. "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min" (Decision 14; screen `08-my-stats--M.html`).
+- [x] The hour chart draws ONE stacked bar per hour — total height = all calls that hour, two color segments sized by share, counts written inside the segments — and the best-hour highlight follows total calls (Decision 14).
+- [x] The Avg minutes card holds total talk per active day and the performance table's Minutes column holds total talk — all values come from the server, the screen formats only (Decision 14).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 7: App — the call-log sweep tracks outside calls
 

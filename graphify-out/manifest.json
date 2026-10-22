@@ -220,13 +220,13 @@
     "semantic_hash": ""
   },
   "app/package.json": {
-    "mtime": 1792655754.2074258,
-    "ast_hash": "604382e73a4dd065f3f24fa108854bba",
+    "mtime": 1792657321.090485,
+    "ast_hash": "80625ce65c7d5b6b837c0c7abe19095d",
     "semantic_hash": ""
   },
   "app/src/app/navigation/app-navigator.tsx": {
-    "mtime": 1792655754.2096214,
-    "ast_hash": "36b20e921a2392f66a717f2f02c66bf4",
+    "mtime": 1792657321.0909886,
+    "ast_hash": "1e9fbbe3cfcb3764b79f19d998902579",
     "semantic_hash": ""
   },
   "app/src/app/navigation/main-tabs-param-list.ts": {
@@ -235,8 +235,8 @@
     "semantic_hash": ""
   },
   "app/src/app/navigation/root-navigator.tsx": {
-    "mtime": 1792655754.2096214,
-    "ast_hash": "8386b0bc409ff37e3488a5d79d059767",
+    "mtime": 1792657321.0919895,
+    "ast_hash": "77c51220fdf5c7656e1239003066b647",
     "semantic_hash": ""
   },
   "app/src/components/ui/button.tsx": {
@@ -340,8 +340,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-dialer.ts": {
-    "mtime": 1792655754.2175672,
-    "ast_hash": "3ff267dd8f7509ccedbc1fa2a2d93bae",
+    "mtime": 1792657321.0919895,
+    "ast_hash": "ae1dfa6fa399e87d4bcc618fd03da06e",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-dialog-visibility.ts": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-lead-post-call.ts": {
-    "mtime": 1792655754.2185638,
-    "ast_hash": "edce83eac45d8b40d63f602b3e4a785a",
+    "mtime": 1792657321.0933366,
+    "ast_hash": "e70d8d9a228a64532f134768aee4d208",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-post-call-schedule.ts": {
@@ -440,13 +440,13 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/database.ts": {
-    "mtime": 1792655754.2244024,
-    "ast_hash": "a34905c99d88320137c920dd54b16f10",
+    "mtime": 1792657321.0933366,
+    "ast_hash": "02c300761ce8c601ccb4e182a2ea8d06",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/index.ts": {
-    "mtime": 1792655754.2255101,
-    "ast_hash": "0b49d78045150da93b3b9041ca55dc01",
+    "mtime": 1792657321.0933366,
+    "ast_hash": "2a1cc5fe547bde6e605faa79873aaed8",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/pending-calls-db.ts": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/index.ts": {
-    "mtime": 1792655754.2265098,
-    "ast_hash": "38cf483683edf3bc30c660b922cbf2a8",
+    "mtime": 1792657321.0952759,
+    "ast_hash": "0d47a945952acf315b01de635b86befe",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-janitor.ts": {
@@ -495,8 +495,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-submit.ts": {
-    "mtime": 1792655754.2285035,
-    "ast_hash": "032723753a673f6ac04781ce9d1439aa",
+    "mtime": 1792657321.096278,
+    "ast_hash": "f2ea13ab20c0d97d1c204fd51cd555d7",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/pending-call-filler.ts": {
@@ -515,8 +515,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/tracking-pipeline.ts": {
-    "mtime": 1792655754.2294998,
-    "ast_hash": "f02fe69e589df7c70611205a174b3f3e",
+    "mtime": 1792657321.096278,
+    "ast_hash": "de4a2618fcafaf6f6a8a2612007f6705",
     "semantic_hash": ""
   },
   "app/src/features/tracking/live-call-state.ts": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/sync-events.ts": {
-    "mtime": 1792655754.2294998,
-    "ast_hash": "51623567b9d3f64c5f367a0f5951483b",
+    "mtime": 1792657321.0972726,
+    "ast_hash": "ee1184b9046d446cfc3e4403c4d368df",
     "semantic_hash": ""
   },
   "app/src/features/tracking/types.ts": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792655754.1545794,
-    "ast_hash": "79f2714091813aeac1724ff53f4c0c21",
+    "mtime": 1792657321.0890067,
+    "ast_hash": "cdbb6bacea90629e8031ee42d765851a",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2337,6 +2337,41 @@
   "backend/tests/modules/dashboard_test_helpers.py": {
     "mtime": 1792655754.2457764,
     "ast_hash": "751fe861c25c4138eb26e1cb943236be",
+    "semantic_hash": ""
+  },
+  "app/src/app/navigation/navigation-ref.ts": {
+    "mtime": 1792657321.0909886,
+    "ast_hash": "8d37dea431e242b1a28274e575ccb3bf",
+    "semantic_hash": ""
+  },
+  "app/src/app/navigation/use-reminder-press-navigation.ts": {
+    "mtime": 1792657321.0919895,
+    "ast_hash": "9887897f1a4d4a561ea2484f8889dbcc",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/db/scheduled-reminders-db.ts": {
+    "mtime": 1792657321.0933366,
+    "ast_hash": "d616237127cba1754b99d96f10926508",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/hooks/use-reminder-press.ts": {
+    "mtime": 1792657321.0947723,
+    "ast_hash": "367be7d4effd68ddc5c39b7c1ada5155",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/app-event.ts": {
+    "mtime": 1792657321.0952759,
+    "ast_hash": "96e02df26ca7bd0aaff79244a96df8b8",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/call-reminders.ts": {
+    "mtime": 1792657321.0952759,
+    "ast_hash": "38126487ca6c81f362bf056d1fa8d348",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/reminder-press-events.ts": {
+    "mtime": 1792657321.096278,
+    "ast_hash": "f682bc666e3e5e029cb2aa8f493b48aa",
     "semantic_hash": ""
   },
   "app/src/features/stats/hooks/use-do-not-track.ts": {

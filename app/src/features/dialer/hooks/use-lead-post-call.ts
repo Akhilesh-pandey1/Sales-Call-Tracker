@@ -1,5 +1,9 @@
 import { useCallback } from 'react';
 import type { RefObject } from 'react';
+import {
+  setBookedLeadReminder,
+  type ScheduledReminder,
+} from '@/features/tracking';
 import { fetchNextLead, type LeadScheduleRequest, type ServedLead } from '../api/leads.api';
 import { useDialogVisibility } from './use-dialog-visibility';
 import type { AutomatedViewState } from './use-automated-calling';
@@ -63,6 +67,14 @@ export function useLeadPostCall(
       }
       const leadSchedule = buildLeadScheduleRequest(scheduledAt, currentState.lead.id);
       const nextLead = await fetchNextLead(leadSchedule, shouldContinueToNextLead);
+      if (scheduledAt !== null) {
+        const bookedLeadReminder: ScheduledReminder = {
+          leadId: currentState.lead.id,
+          phoneNumber: currentState.lead.phone_number,
+          scheduledAt,
+        };
+        await setBookedLeadReminder(bookedLeadReminder);
+      }
       closePostCallDialog();
       if (!shouldContinueToNextLead) {
         updateViewState({ kind: 'start' });

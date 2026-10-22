@@ -5,44 +5,53 @@ import {
   type AppStateStatus,
   type Permission,
 } from 'react-native';
+import { requestPermissionIfMissing } from '@/shared/utils/phone-permissions';
 import { ensureRemindersAreReady } from '../lib/reminder-settings';
 
-export const findMissingPermissions = async (): Promise<Permission[]> => {
+export async function findMissingPermissions(): Promise<Permission[]> {
   const requiredCallPermissions: Permission[] = [
     PermissionsAndroid.PERMISSIONS.CALL_PHONE,
     PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
     PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE,
   ];
-  const checkResults = await Promise.all(
-    requiredCallPermissions.map(async permission => ({
-      permission,
-      isGranted: await PermissionsAndroid.check(permission),
-    })),
-  );
-  const missingPermissions = checkResults
-    .filter(checkResult => !checkResult.isGranted)
-    .map(checkResult => checkResult.permission);
+  const missingPermissions: Permission[] = [];
+  for (const permission of requiredCallPermissions) {
+    const isPermissionGranted = await PermissionsAndroid.check(permission);
+    if (!isPermissionGranted) {
+      missingPermissions.push(permission);
+    }
+  }
   return missingPermissions;
-};
+}
+
+export async function requestCallPermissionsStepwise(
+  permissions: Permission[],
+): Promise<Permission[]> {
+  const stillMissingPermissions: Permission[] = [];
+  for (const permission of permissions) {
+    const isPermissionGranted = await requestPermissionIfMissing(permission);
+    if (!isPermissionGranted) {
+      stillMissingPermissions.push(permission);
+    }
+  }
+  return stillMissingPermissions;
+}
 
 export function usePermissions(): Permission[] {
   const [missingPermissions, setMissingPermissions] = useState<Permission[]>([]);
 
   const checkMissingPermissions = useCallback(async (): Promise<void> => {
-    const missing = await findMissingPermissions();
-    setMissingPermissions(missing);
+    const foundMissingPermissions = await findMissingPermissions();
+    setMissingPermissions(foundMissingPermissions);
   }, []);
 
   const requestMissingPermissions = useCallback(async (): Promise<void> => {
-    const missing = await findMissingPermissions();
-    setMissingPermissions(missing);
-    if (missing.length > 0) {
-      const requestResults = await PermissionsAndroid.requestMultiple(missing);
-      const stillMissingPermissions = missing.filter(
-        permission => requestResults[permission] !== 'granted',
-      );
-      setMissingPermissions(stillMissingPermissions);
-    }
+    const missingPermissionsBeforeRequest = await findMissingPermissions();
+    setMissingPermissions(missingPermissionsBeforeRequest);
+    const missingPermissionsAfterRequest = await requestCallPermissionsStepwise(
+      missingPermissionsBeforeRequest,
+    );
+    setMissingPermissions(missingPermissionsAfterRequest);
     await ensureRemindersAreReady();
   }, []);
 

@@ -113,15 +113,35 @@ function CallingSimRow({ simNumber, carrierName, isChosen, onSelect }: CallingSi
   );
 }
 
-function UnreadableSimNote() {
+type SimNoteCardProps = {
+  title: string;
+  description: string;
+};
+
+function SimNoteCard({ title, description }: SimNoteCardProps) {
   return (
     <View className="gap-1 rounded-2xl border border-border bg-muted p-4">
-      <Text className="text-sm font-semibold">SIM numbers cannot be read on this phone.</Text>
-      <Text className="text-xs text-muted-foreground">
-        Calls use the phone's default SIM. When the numbers can be read again, this page lists them
-        for picking.
-      </Text>
+      <Text className="text-sm font-semibold">{title}</Text>
+      <Text className="text-xs text-muted-foreground">{description}</Text>
     </View>
+  );
+}
+
+function UnreadableSimNote() {
+  return (
+    <SimNoteCard
+      title="SIM numbers cannot be read on this phone."
+      description="Calls use the phone's default SIM. When the numbers can be read again, this page lists them for picking."
+    />
+  );
+}
+
+function PhonePermissionNote() {
+  return (
+    <SimNoteCard
+      title="Phone permission is off."
+      description="Allow it to see your SIM numbers. Calls use the phone's default SIM until then."
+    />
   );
 }
 
@@ -130,6 +150,7 @@ export function CallingSimScreen({ onBack }: CallingSimScreenProps) {
   const {
     simCards,
     isLoading,
+    isPhonePermissionDenied,
     saveErrorMessage,
     isPhoneDefaultChosen,
     isSimNumberChosen,
@@ -157,7 +178,11 @@ export function CallingSimScreen({ onBack }: CallingSimScreenProps) {
         </Text>
         {isLoading ? null : (
           <View className="mt-3 gap-3">
-            {hasReadableSims ? null : <UnreadableSimNote />}
+            {isPhonePermissionDenied ? (
+              <PhonePermissionNote />
+            ) : hasReadableSims ? null : (
+              <UnreadableSimNote />
+            )}
             {simCards.map(simCard => (
               <CallingSimRow
                 key={simCard.number}

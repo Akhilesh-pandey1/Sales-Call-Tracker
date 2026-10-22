@@ -6,13 +6,16 @@ import {
   saveChosenCallingNumber,
 } from '@/shared/utils/calling-sim';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
+import { requestPermissionIfMissing } from '@/shared/utils/phone-permissions';
 import { useCallback, useEffect, useState } from 'react';
+import { PermissionsAndroid } from 'react-native';
 
 const saveFailedMessage = 'Could not save your choice. Try again.';
 
 export type CallingSimState = {
   simCards: SimCard[];
   isLoading: boolean;
+  isPhonePermissionDenied: boolean;
   saveErrorMessage: string | null;
   isPhoneDefaultChosen: boolean;
   isSimNumberChosen: (simNumber: string) => boolean;
@@ -25,6 +28,7 @@ type CallingSimData = {
   chosenCallingNumber: string | null;
   countryCode: string | null;
   isLoading: boolean;
+  isPhonePermissionDenied: boolean;
   storeChosenCallingNumber: (nextCallingNumber: string | null) => void;
 };
 
@@ -33,9 +37,16 @@ function useCallingSimData(): CallingSimData {
   const [chosenCallingNumber, setChosenCallingNumber] = useState<string | null>(null);
   const [countryCode, setCountryCode] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPhonePermissionDenied, setIsPhonePermissionDenied] = useState(false);
 
   const readCallingSimData = useCallback(async (): Promise<void> => {
     try {
+      const phoneStatePermission = PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE;
+      const isPhonePermissionGranted = await requestPermissionIfMissing(phoneStatePermission);
+      if (!isPhonePermissionGranted) {
+        setIsPhonePermissionDenied(true);
+        return;
+      }
       const [readableSimCards, storedCallingNumber, storedCountryCode] = await Promise.all([
         readSimCards(),
         readChosenCallingNumber(),
@@ -60,6 +71,7 @@ function useCallingSimData(): CallingSimData {
     chosenCallingNumber,
     countryCode,
     isLoading,
+    isPhonePermissionDenied,
     storeChosenCallingNumber: setChosenCallingNumber,
   };
   return callingSimData;
@@ -81,8 +93,14 @@ function isSimNumberMatchingChoice(
 }
 
 export function useCallingSim(): CallingSimState {
-  const { simCards, chosenCallingNumber, countryCode, isLoading, storeChosenCallingNumber } =
-    useCallingSimData();
+  const {
+    simCards,
+    chosenCallingNumber,
+    countryCode,
+    isLoading,
+    isPhonePermissionDenied,
+    storeChosenCallingNumber,
+  } = useCallingSimData();
   const [saveErrorMessage, setSaveErrorMessage] = useState<string | null>(null);
 
   const isSimNumberChosen = useCallback(
@@ -124,6 +142,7 @@ export function useCallingSim(): CallingSimState {
   const callingSimState: CallingSimState = {
     simCards,
     isLoading,
+    isPhonePermissionDenied,
     saveErrorMessage,
     isPhoneDefaultChosen,
     isSimNumberChosen,

@@ -82,16 +82,16 @@
 
 **Blocked by:** 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] With a number chosen, keypad and lead dials place the call on the matching slot with no SIM picker, and the pending-call row is written only after the SIM is found (`decisions.md` Decision 3).
-- [ ] With no number chosen, or CALL_PHONE off, the call keeps today's path on Android's default SIM (`decisions.md` Decision 3).
-- [ ] A stored number not present in any slot blocks the call with "This SIM number is not in the phone." — nothing dialed, nothing recorded (`decisions.md` Decision 3).
+- [x] With a number chosen, keypad and lead dials place the call on the matching slot with no SIM picker, and the pending-call row is written only after the SIM is found (`decisions.md` Decision 3).
+- [x] With no number chosen, or CALL_PHONE off, the call keeps today's path on Android's default SIM (`decisions.md` Decision 3).
+- [x] A stored number not present in any slot blocks the call with "This SIM number is not in the phone." — nothing dialed, nothing recorded (`decisions.md` Decision 3).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 7: App — Settings picks the calling number
 

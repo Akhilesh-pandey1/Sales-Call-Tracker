@@ -42,10 +42,14 @@ function useCallingSimData(): CallingSimData {
   const readCallingSimData = useCallback(async (): Promise<void> => {
     try {
       const phoneStatePermission = PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE;
-      const isPhonePermissionGranted = await requestPermissionIfMissing(phoneStatePermission);
-      if (!isPhonePermissionGranted) {
-        setIsPhonePermissionDenied(true);
-        return;
+      const phoneNumberPermission = PermissionsAndroid.PERMISSIONS.READ_PHONE_NUMBERS;
+      const requiredSimPermissions = [phoneStatePermission, phoneNumberPermission];
+      for (const requiredPermission of requiredSimPermissions) {
+        const isPermissionGranted = await requestPermissionIfMissing(requiredPermission);
+        if (!isPermissionGranted) {
+          setIsPhonePermissionDenied(true);
+          return;
+        }
       }
       const [readableSimCards, storedCallingNumber, storedCountryCode] = await Promise.all([
         readSimCards(),

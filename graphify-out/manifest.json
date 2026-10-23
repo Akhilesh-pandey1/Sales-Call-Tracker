@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/lib/call-launcher.ts": {
-    "mtime": 1792699612.6056209,
-    "ast_hash": "b17afc334d0e41b4791651fb304a7e18",
+    "mtime": 1792751943.2834263,
+    "ast_hash": "6d7d554eb2ec64c8da7285ed430e143a",
     "semantic_hash": ""
   },
   "app/src/features/dialer/lib/request-error.ts": {
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/settings-screen.tsx": {
-    "mtime": 1792698083.5162287,
-    "ast_hash": "26e735634064b16ccd97919b8f7976d6",
+    "mtime": 1792751989.3958669,
+    "ast_hash": "b29d1bde0c528f3a34c42e3e43391f10",
     "semantic_hash": ""
   },
   "app/src/features/tracking/api/calls.api.ts": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-permissions.ts": {
-    "mtime": 1792706121.2815232,
-    "ast_hash": "5f07bb6e842705daaf91cc58f935b712",
+    "mtime": 1792751906.7313335,
+    "ast_hash": "9311cbdc856360c4f2178d05ab021f5f",
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-sync.ts": {
@@ -1780,8 +1780,8 @@
     "semantic_hash": ""
   },
   "agent-doc/decisions.md": {
-    "mtime": 1792692974.6825228,
-    "ast_hash": "b78d9bf98a382f30cc3138f3bb0a0745",
+    "mtime": 1792752005.1470425,
+    "ast_hash": "54ca4e4ed902d6615a30cf4bd9d2bc93",
     "semantic_hash": ""
   },
   "agent-doc/old-decisions.md": {
@@ -2450,28 +2450,28 @@
     "semantic_hash": ""
   },
   "app/android/app/src/main/java/com/apexsalescall/SimCallModule.kt": {
-    "mtime": 1792697756.8571885,
-    "ast_hash": "46aa634a0f56575425b65a0e94901208",
+    "mtime": 1792752336.179273,
+    "ast_hash": "94f1e1957f4bff27bac533bf3a319744",
     "semantic_hash": ""
   },
   "app/src/shared/api/sim-module.ts": {
-    "mtime": 1792697756.8585393,
-    "ast_hash": "723d990a332023a728b06870fd5f665f",
+    "mtime": 1792751805.7043574,
+    "ast_hash": "a4ee95efce4a720f123845314c6c56d5",
     "semantic_hash": ""
   },
   "app/src/shared/utils/calling-sim.ts": {
-    "mtime": 1792696441.6557157,
-    "ast_hash": "5fcf99c6b4c8d01e31257de3ca638a6b",
+    "mtime": 1792752237.0718484,
+    "ast_hash": "5d526f87db5977012f3cbdd1d7fd348e",
     "semantic_hash": ""
   },
   "app/src/features/stats/hooks/use-calling-sim.ts": {
-    "mtime": 1792749061.729788,
-    "ast_hash": "491aeb8c26aa89bd5cc6b848c1f2a082",
+    "mtime": 1792751867.8961792,
+    "ast_hash": "b4462a609c85a0896cda0c34a7a28cc4",
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/calling-sim-screen.tsx": {
-    "mtime": 1792706121.280524,
-    "ast_hash": "ea7dd1bc706b16b076dbb552eef7a99a",
+    "mtime": 1792751901.4847476,
+    "ast_hash": "2a926309de60f3f33a8cd2a91de13d1d",
     "semantic_hash": ""
   },
   "app/src/shared/utils/phone-permissions.ts": {

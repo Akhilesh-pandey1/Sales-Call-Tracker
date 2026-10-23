@@ -89,24 +89,34 @@ function SimChoiceRow({
 }
 
 type CallingSimRowProps = {
-  simNumber: string;
+  simSlotIndex: number;
   carrierName: string;
+  simNumber: string;
   isChosen: boolean;
-  onSelect: (simNumber: string) => void;
+  onSelect: (simSlotIndex: number) => void;
 };
 
-function CallingSimRow({ simNumber, carrierName, isChosen, onSelect }: CallingSimRowProps) {
-  const displayNumber = formatInternationalPhoneNumber(simNumber);
+function CallingSimRow({
+  simSlotIndex,
+  carrierName,
+  simNumber,
+  isChosen,
+  onSelect,
+}: CallingSimRowProps) {
+  const slotTitle = `SIM ${simSlotIndex + 1}`;
+  const readableSimNumber =
+    simNumber === '' ? null : formatInternationalPhoneNumber(simNumber);
+  const rowSubtitle = [carrierName, readableSimNumber].filter(Boolean).join(' · ');
   const handleSelectSim = (): void => {
-    onSelect(simNumber);
+    onSelect(simSlotIndex);
   };
   return (
     <SimChoiceRow
       icon={CardSim}
       iconContainerClassName="bg-primary/10"
       iconClassName="text-primary"
-      title={displayNumber}
-      subtitle={carrierName}
+      title={slotTitle}
+      subtitle={rowSubtitle}
       isChosen={isChosen}
       onSelect={handleSelectSim}
     />
@@ -130,8 +140,8 @@ function SimNoteCard({ title, description }: SimNoteCardProps) {
 function UnreadableSimNote() {
   return (
     <SimNoteCard
-      title="SIM numbers cannot be read on this phone."
-      description="Calls use the phone's default SIM. When the numbers can be read again, this page lists them for picking."
+      title="SIMs cannot be read on this phone."
+      description="Calls use the phone's default SIM. When the SIMs can be read again, this page lists them for picking."
     />
   );
 }
@@ -140,7 +150,7 @@ function PhonePermissionNote() {
   return (
     <SimNoteCard
       title="Phone permission is off."
-      description="Allow it to see your SIM numbers. Calls use the phone's default SIM until then."
+      description="Allow it in Android settings to see your SIMs. Calls use the phone's default SIM until then."
     />
   );
 }
@@ -153,13 +163,13 @@ export function CallingSimScreen({ onBack }: CallingSimScreenProps) {
     isPhonePermissionDenied,
     saveErrorMessage,
     isPhoneDefaultChosen,
-    isSimNumberChosen,
-    chooseCallingNumber,
+    isSimSlotChosen,
+    chooseSimSlot,
     choosePhoneDefault,
   } = useCallingSim();
 
-  const handleSelectSim = (simNumber: string): void => {
-    chooseCallingNumber(simNumber);
+  const handleSelectSim = (simSlotIndex: number): void => {
+    chooseSimSlot(simSlotIndex);
   };
 
   const handleSelectPhoneDefault = (): void => {
@@ -174,7 +184,7 @@ export function CallingSimScreen({ onBack }: CallingSimScreenProps) {
       <CallingSimHeader onBack={onBack} />
       <View className="flex-1 px-5 pb-6 pt-4">
         <Text className="px-1 text-xs text-muted-foreground">
-          Every call goes out from the number you pick. The choice stays on your phone only.
+          Every call goes out from the SIM you pick. The choice stays on your phone only.
         </Text>
         {isLoading ? null : (
           <View className="mt-3 gap-3">
@@ -185,10 +195,11 @@ export function CallingSimScreen({ onBack }: CallingSimScreenProps) {
             )}
             {simCards.map(simCard => (
               <CallingSimRow
-                key={simCard.number}
-                simNumber={simCard.number}
+                key={simCard.simSlotIndex}
+                simSlotIndex={simCard.simSlotIndex}
                 carrierName={simCard.carrierName}
-                isChosen={isSimNumberChosen(simCard.number)}
+                simNumber={simCard.number}
+                isChosen={isSimSlotChosen(simCard.simSlotIndex)}
                 onSelect={handleSelectSim}
               />
             ))}

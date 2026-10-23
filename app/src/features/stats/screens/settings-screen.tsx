@@ -201,7 +201,7 @@ export function SettingsScreen() {
             iconContainerClassName="bg-primary/10"
             iconClassName="text-primary"
             title="Calling SIM"
-            subtitle="The number every call goes out from."
+            subtitle="The SIM every call goes out from."
             onPress={openCallingSimPicker}
           />
           <SettingsMenuRow

@@ -1,12 +1,9 @@
-import { readStoredCountry } from '@/features/auth';
 import { readSimCards, type SimCard } from '@/shared/api/sim-module';
 import {
-  clearChosenCallingNumber,
-  readChosenCallingNumber,
-  saveChosenCallingNumber,
+  clearChosenSimSlot,
+  readChosenSimSlot,
+  saveChosenSimSlot,
 } from '@/shared/utils/calling-sim';
-import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
-import { requestPermissionIfMissing } from '@/shared/utils/phone-permissions';
 import { useCallback, useEffect, useState } from 'react';
 import { PermissionsAndroid } from 'react-native';
 
@@ -18,47 +15,39 @@ export type CallingSimState = {
   isPhonePermissionDenied: boolean;
   saveErrorMessage: string | null;
   isPhoneDefaultChosen: boolean;
-  isSimNumberChosen: (simNumber: string) => boolean;
-  chooseCallingNumber: (simNumber: string) => Promise<void>;
+  isSimSlotChosen: (simSlotIndex: number) => boolean;
+  chooseSimSlot: (simSlotIndex: number) => Promise<void>;
   choosePhoneDefault: () => Promise<void>;
 };
 
 type CallingSimData = {
   simCards: SimCard[];
-  chosenCallingNumber: string | null;
-  countryCode: string | null;
+  chosenSimSlot: number | null;
   isLoading: boolean;
   isPhonePermissionDenied: boolean;
-  storeChosenCallingNumber: (nextCallingNumber: string | null) => void;
+  storeChosenSimSlot: (nextChosenSimSlot: number | null) => void;
 };
 
 function useCallingSimData(): CallingSimData {
   const [simCards, setSimCards] = useState<SimCard[]>([]);
-  const [chosenCallingNumber, setChosenCallingNumber] = useState<string | null>(null);
-  const [countryCode, setCountryCode] = useState<string | null>(null);
+  const [chosenSimSlot, setChosenSimSlot] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isPhonePermissionDenied, setIsPhonePermissionDenied] = useState(false);
 
   const readCallingSimData = useCallback(async (): Promise<void> => {
     try {
       const phoneStatePermission = PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE;
-      const phoneNumberPermission = PermissionsAndroid.PERMISSIONS.READ_PHONE_NUMBERS;
-      const requiredSimPermissions = [phoneStatePermission, phoneNumberPermission];
-      for (const requiredPermission of requiredSimPermissions) {
-        const isPermissionGranted = await requestPermissionIfMissing(requiredPermission);
-        if (!isPermissionGranted) {
-          setIsPhonePermissionDenied(true);
-          return;
-        }
+      const isPhonePermissionGranted = await PermissionsAndroid.check(phoneStatePermission);
+      if (!isPhonePermissionGranted) {
+        setIsPhonePermissionDenied(true);
+        return;
       }
-      const [readableSimCards, storedCallingNumber, storedCountryCode] = await Promise.all([
+      const [readableSimCards, storedSimSlot] = await Promise.all([
         readSimCards(),
-        readChosenCallingNumber(),
-        readStoredCountry(),
+        readChosenSimSlot(),
       ]);
       setSimCards(readableSimCards);
-      setChosenCallingNumber(storedCallingNumber);
-      setCountryCode(storedCountryCode);
+      setChosenSimSlot(storedSimSlot);
     } catch {
       setSimCards([]);
     } finally {
@@ -72,76 +61,51 @@ function useCallingSimData(): CallingSimData {
 
   const callingSimData: CallingSimData = {
     simCards,
-    chosenCallingNumber,
-    countryCode,
+    chosenSimSlot,
     isLoading,
     isPhonePermissionDenied,
-    storeChosenCallingNumber: setChosenCallingNumber,
+    storeChosenSimSlot: setChosenSimSlot,
   };
   return callingSimData;
 }
 
-function isSimNumberMatchingChoice(
-  simNumber: string,
-  chosenCallingNumber: string | null,
-  countryCode: string | null,
-): boolean {
-  if (chosenCallingNumber === null) {
-    return false;
-  }
-  if (countryCode === null) {
-    return simNumber === chosenCallingNumber;
-  }
-  const normalizedSimNumber = normalizePhoneNumber(simNumber, countryCode);
-  return normalizedSimNumber === chosenCallingNumber;
-}
-
 export function useCallingSim(): CallingSimState {
-  const {
-    simCards,
-    chosenCallingNumber,
-    countryCode,
-    isLoading,
-    isPhonePermissionDenied,
-    storeChosenCallingNumber,
-  } = useCallingSimData();
+  const { simCards, chosenSimSlot, isLoading, isPhonePermissionDenied, storeChosenSimSlot } =
+    useCallingSimData();
   const [saveErrorMessage, setSaveErrorMessage] = useState<string | null>(null);
 
-  const isSimNumberChosen = useCallback(
-    (simNumber: string): boolean =>
-      isSimNumberMatchingChoice(simNumber, chosenCallingNumber, countryCode),
-    [chosenCallingNumber, countryCode],
+  const isSimSlotChosen = useCallback(
+    (simSlotIndex: number): boolean => {
+      const isSlotTheChosenOne: boolean = simSlotIndex === chosenSimSlot;
+      return isSlotTheChosenOne;
+    },
+    [chosenSimSlot],
   );
 
-  const chooseCallingNumber = useCallback(
-    async (simNumber: string): Promise<void> => {
-      if (countryCode === null) {
-        setSaveErrorMessage(saveFailedMessage);
-        return;
-      }
+  const chooseSimSlot = useCallback(
+    async (simSlotIndex: number): Promise<void> => {
       setSaveErrorMessage(null);
       try {
-        await saveChosenCallingNumber(simNumber, countryCode);
-        const savedCallingNumber = normalizePhoneNumber(simNumber, countryCode);
-        storeChosenCallingNumber(savedCallingNumber);
+        await saveChosenSimSlot(simSlotIndex);
+        storeChosenSimSlot(simSlotIndex);
       } catch {
         setSaveErrorMessage(saveFailedMessage);
       }
     },
-    [countryCode, storeChosenCallingNumber],
+    [storeChosenSimSlot],
   );
 
   const choosePhoneDefault = useCallback(async (): Promise<void> => {
     setSaveErrorMessage(null);
     try {
-      await clearChosenCallingNumber();
-      storeChosenCallingNumber(null);
+      await clearChosenSimSlot();
+      storeChosenSimSlot(null);
     } catch {
       setSaveErrorMessage(saveFailedMessage);
     }
-  }, [storeChosenCallingNumber]);
+  }, [storeChosenSimSlot]);
 
-  const isPhoneDefaultChosen: boolean = chosenCallingNumber === null;
+  const isPhoneDefaultChosen: boolean = chosenSimSlot === null;
 
   const callingSimState: CallingSimState = {
     simCards,
@@ -149,8 +113,8 @@ export function useCallingSim(): CallingSimState {
     isPhonePermissionDenied,
     saveErrorMessage,
     isPhoneDefaultChosen,
-    isSimNumberChosen,
-    chooseCallingNumber,
+    isSimSlotChosen,
+    chooseSimSlot,
     choosePhoneDefault,
   };
   return callingSimState;

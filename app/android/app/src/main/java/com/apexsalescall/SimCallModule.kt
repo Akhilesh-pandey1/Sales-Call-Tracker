@@ -53,36 +53,6 @@ class SimCallModule(reactContext: ReactApplicationContext) :
         return activeSubscriptions ?: emptyList()
     }
 
-    private fun toComparableDigits(rawNumber: String): String {
-        val digitsOnly: String = rawNumber.filter { character -> character.isDigit() }
-        val comparableDigits: String = digitsOnly.removePrefix(trunkPrefix)
-        return comparableDigits
-    }
-
-    private fun isSamePhoneNumber(firstNumber: String, secondNumber: String): Boolean {
-        val firstDigits: String = toComparableDigits(firstNumber)
-        val secondDigits: String = toComparableDigits(secondNumber)
-        if (
-            firstDigits.length < minimumComparableDigits ||
-            secondDigits.length < minimumComparableDigits
-        ) {
-            return false
-        }
-        val isSameNumber: Boolean =
-            firstDigits.endsWith(secondDigits) || secondDigits.endsWith(firstDigits)
-        return isSameNumber
-    }
-
-    private fun findSubscriptionMatchingNumber(rawPhoneNumber: String): SubscriptionInfo? {
-        val activeSubscriptions: List<SubscriptionInfo> = readActiveSubscriptions()
-        val matchingSubscription: SubscriptionInfo? = activeSubscriptions.firstOrNull {
-            subscription ->
-            val simNumber: String? = subscription.number
-            simNumber != null && isSamePhoneNumber(simNumber, rawPhoneNumber)
-        }
-        return matchingSubscription
-    }
-
     private fun findAccountHandle(
         telecomManager: TelecomManager,
         subscriptionId: Int,
@@ -109,13 +79,13 @@ class SimCallModule(reactContext: ReactApplicationContext) :
     private fun toSimList(activeSubscriptions: List<SubscriptionInfo>): WritableArray {
         val simList: WritableArray = Arguments.createArray()
         for (subscription in activeSubscriptions) {
-            val simNumber: String? = subscription.number
-            if (simNumber == null || simNumber.isBlank()) {
+            if (subscription.simSlotIndex < 0) {
                 continue
             }
             val simDetails: WritableMap = Arguments.createMap()
-            simDetails.putString(simNumberKey, simNumber)
+            simDetails.putInt(simSlotIndexKey, subscription.simSlotIndex)
             simDetails.putString(simCarrierNameKey, subscription.carrierName?.toString() ?: "")
+            simDetails.putString(simNumberKey, subscription.number ?: "")
             simList.pushMap(simDetails)
         }
         return simList
@@ -134,7 +104,7 @@ class SimCallModule(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod
-    fun placeCallOnMatchingSim(dialedPhoneNumber: String, simPhoneNumber: String, promise: Promise) {
+    fun placeCallOnSim(dialedPhoneNumber: String, simSlotIndex: Double, promise: Promise) {
         if (!isSimChoosingSupported()) {
             promise.reject(simUnsupportedCode, simUnsupportedMessage)
             return
@@ -160,14 +130,18 @@ class SimCallModule(reactContext: ReactApplicationContext) :
             promise.reject(simUnsupportedCode, simUnsupportedMessage)
             return
         }
-        val matchingSubscription: SubscriptionInfo? =
-            findSubscriptionMatchingNumber(simPhoneNumber)
-        if (matchingSubscription == null) {
-            promise.reject(simNotFoundCode, simNotFoundMessage)
+        val chosenSimSlotIndex: Int = simSlotIndex.toInt()
+        val activeSubscriptions: List<SubscriptionInfo> = readActiveSubscriptions()
+        val subscriptionOnChosenSlot: SubscriptionInfo? = activeSubscriptions.firstOrNull {
+            subscription ->
+            subscription.simSlotIndex == chosenSimSlotIndex
+        }
+        if (subscriptionOnChosenSlot == null) {
+            promise.reject(simSlotNotFoundCode, simSlotNotFoundMessage)
             return
         }
         val accountHandle: PhoneAccountHandle? =
-            findAccountHandle(telecomManager, matchingSubscription.subscriptionId)
+            findAccountHandle(telecomManager, subscriptionOnChosenSlot.subscriptionId)
         if (accountHandle == null) {
             promise.reject(simSlotNotFoundCode, simSlotNotFoundMessage)
             return
@@ -184,10 +158,9 @@ class SimCallModule(reactContext: ReactApplicationContext) :
 
     companion object {
         private const val moduleName = "SimCall"
+        private const val simSlotIndexKey = "simSlotIndex"
         private const val simNumberKey = "number"
         private const val simCarrierNameKey = "carrierName"
-        private const val trunkPrefix = "0"
-        private const val minimumComparableDigits = 8
         private const val minimumDialedDigitCount = 8
         private const val maximumDialedDigitCount = 15
         private const val simUnsupportedCode = "SIM_CALL_UNSUPPORTED"
@@ -198,11 +171,9 @@ class SimCallModule(reactContext: ReactApplicationContext) :
             "Allow the Calls permission to place calls."
         private const val phoneStatePermissionCode = "PHONE_STATE_PERMISSION_MISSING"
         private const val phoneStatePermissionMessage =
-            "Allow the Phone permission to read SIM numbers."
+            "Allow the Phone permission to place the call on your SIM."
         private const val invalidNumberCode = "INVALID_PHONE_NUMBER"
         private const val invalidNumberMessage = "This number cannot be dialed."
-        private const val simNotFoundCode = "SIM_NUMBER_NOT_FOUND"
-        private const val simNotFoundMessage = "This SIM number is not in the phone."
         private const val simSlotNotFoundCode = "SIM_SLOT_NOT_FOUND"
         private const val simSlotNotFoundMessage = "Could not place the call on this SIM."
         private const val callFailedCode = "CALL_PLACEMENT_FAILED"

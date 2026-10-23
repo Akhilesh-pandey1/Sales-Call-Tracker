@@ -1,16 +1,14 @@
 import { NativeModules } from 'react-native';
 
 export type SimCard = {
-  number: string;
+  simSlotIndex: number;
   carrierName: string;
+  number: string;
 };
 
 type SimCallNativeModule = {
   readSimNumbers(): Promise<SimCard[]>;
-  placeCallOnMatchingSim(
-    dialedPhoneNumber: string,
-    simPhoneNumber: string,
-  ): Promise<boolean>;
+  placeCallOnSim(dialedPhoneNumber: string, simSlotIndex: number): Promise<boolean>;
 };
 
 const missingModuleMessage = 'This phone cannot choose a calling SIM.';
@@ -28,13 +26,13 @@ export async function readSimCards(): Promise<SimCard[]> {
   return simCards;
 }
 
-export async function placeCallOnMatchingSim(
+export async function placeCallOnSim(
   dialedPhoneNumber: string,
-  simPhoneNumber: string,
+  simSlotIndex: number,
 ): Promise<boolean> {
-  const wasCallPlaced: boolean = await readSimCallNativeModule().placeCallOnMatchingSim(
+  const wasCallPlaced: boolean = await readSimCallNativeModule().placeCallOnSim(
     dialedPhoneNumber,
-    simPhoneNumber,
+    simSlotIndex,
   );
   return wasCallPlaced;
 }

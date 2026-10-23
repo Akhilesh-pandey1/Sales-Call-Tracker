@@ -3,6 +3,10 @@ import notifee, {
   type NotificationSettings,
 } from '@notifee/react-native';
 import { Alert, Linking, Platform } from 'react-native';
+import {
+  isBatteryOptimizationEnabled,
+  requestIgnoreBatteryOptimization,
+} from './battery-module';
 
 function readIsNotificationAuthorized(
   notificationSettings: NotificationSettings,
@@ -31,10 +35,6 @@ async function openAppNotificationSettings(): Promise<void> {
   await Linking.openSettings();
 }
 
-async function openBatteryOptimizationScreen(): Promise<void> {
-  await notifee.openBatteryOptimizationSettings();
-}
-
 function showNotificationsOffAlert(): void {
   Alert.alert(
     'Reminders are off',
@@ -46,33 +46,24 @@ function showNotificationsOffAlert(): void {
   );
 }
 
-function showBatteryAlert(): void {
-  Alert.alert(
-    'Keep reminders coming',
-    "Your phone stops this app to save battery. On the next screen, pick 'All apps', tap this app, and choose 'Don't optimize'.",
-    [
-      { text: 'Later', style: 'cancel' },
-      { text: 'Open settings', onPress: openBatteryOptimizationScreen },
-    ],
-  );
+async function requestBatteryExemptionWhenOptimized(): Promise<void> {
+  const isBatteryOptimizationOn = await isBatteryOptimizationEnabled();
+  if (isBatteryOptimizationOn) {
+    await requestIgnoreBatteryOptimization();
+  }
 }
 
-export async function ensureRemindersAreReady(): Promise<boolean> {
+export async function ensureRemindersAreReady(): Promise<void> {
   if (Platform.OS !== 'android') {
-    return true;
+    return;
   }
   const areNotificationsEnabled = await readAreNotificationsEnabled();
-  let areRemindersReady = areNotificationsEnabled;
-  if (!areRemindersReady) {
-    areRemindersReady = await readAreNotificationsEnabledAfterRequesting();
+  if (!areNotificationsEnabled) {
+    const areEnabledAfterRequest = await readAreNotificationsEnabledAfterRequesting();
+    if (!areEnabledAfterRequest) {
+      showNotificationsOffAlert();
+      return;
+    }
   }
-  if (!areRemindersReady) {
-    showNotificationsOffAlert();
-    return false;
-  }
-  const isBatterySavingOn = await notifee.isBatteryOptimizationEnabled();
-  if (isBatterySavingOn) {
-    showBatteryAlert();
-  }
-  return true;
+  await requestBatteryExemptionWhenOptimized();
 }

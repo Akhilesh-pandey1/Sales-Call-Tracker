@@ -7,10 +7,7 @@ import notifee, {
 } from '@notifee/react-native';
 import { readStoredCountry } from '@/features/auth';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
-import {
-  ensureRemindersAreReady,
-  readAreNotificationsEnabled,
-} from './reminder-settings';
+import { readAreNotificationsEnabled } from './reminder-settings';
 import {
   deleteScheduledRemindersByLeadIdList,
   readAllScheduledReminders,
@@ -97,8 +94,8 @@ export async function setBookedLeadReminder(
     scheduledReminder.phoneNumber,
     scheduledReminder.scheduledAt,
   );
-  const areRemindersReady = await ensureRemindersAreReady();
-  if (!areRemindersReady) {
+  const areNotificationsEnabled = await readAreNotificationsEnabled();
+  if (!areNotificationsEnabled) {
     return;
   }
   try {

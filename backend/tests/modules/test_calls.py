@@ -455,7 +455,7 @@ def test_sync_saves_outcome_choices_on_call_row(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         call_note: str = "Asked to call after 6 pm"
         payload: dict[str, Any] = {
@@ -540,7 +540,7 @@ def test_sync_interested_choice_alone_saves_on_call_row(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -569,7 +569,7 @@ def test_sync_incoming_call_saves_outcome_choices(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         incoming_note: str = "Customer called back, will join demo"
         payload: dict[str, Any] = {
@@ -602,7 +602,7 @@ def test_sync_invalid_outcome_value_discards_row_saves_valid_ones(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -1244,6 +1244,242 @@ def test_sync_second_call_to_existing_lead_number_never_creates_second_lead(
         assert resolved_lead is not None
         assert resolved_lead.status == "done"
         assert resolved_lead.attempt_count == 1
+
+
+def test_lead_resolution_do_not_call_stops_lead_and_clears_claims_and_schedules(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=1,
+            claimed_by=user.id,
+            scheduled_by=user.id,
+        )
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-do-not-call",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 0,
+                    "do_not_call": True,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.status == "stopped"
+        assert refreshed_lead.do_not_call is True
+        assert refreshed_lead.attempt_count == 1
+        assert refreshed_lead.claimed_by is None
+        assert refreshed_lead.claimed_until is None
+        assert refreshed_lead.scheduled_by is None
+        assert refreshed_lead.scheduled_at is None
+
+
+def test_lead_resolution_do_not_call_stops_lead_even_when_call_connects(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=0,
+        )
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-connected-do-not-call",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                    "do_not_call": True,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.status == "stopped"
+        assert refreshed_lead.do_not_call is True
+
+
+def test_lead_resolution_interested_stored_as_label_with_normal_retry_rules(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=1,
+            claimed_by=user.id,
+        )
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-interested-unconnected",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 0,
+                    "interested": True,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.status == "waiting"
+        assert refreshed_lead.interested is True
+        assert refreshed_lead.attempt_count == 2
+        assert refreshed_lead.retry_locked_until is not None
+        assert refreshed_lead.claimed_by is None
+        assert refreshed_lead.claimed_until is None
+
+
+def test_lead_resolution_call_note_copied_onto_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=0,
+        )
+
+        call_note: str = "Asked to call after 6 pm"
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-with-note",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 30,
+                    "notes": call_note,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.status == "done"
+        assert refreshed_lead.notes == call_note
+        assert refreshed_lead.interested is False
+        assert refreshed_lead.do_not_call is False
+
+
+def test_lead_resolution_no_outcome_resolves_as_before_and_keeps_prior_label(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        interested_payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-first-interested",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 0,
+                    "interested": True,
+                }
+            ]
+        }
+        first_response: Response = client.post(
+            "/api/calls/sync", json=interested_payload, headers=headers
+        )
+        assert first_response.status_code == 200
+
+        plain_payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-second-no-outcome",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 13, 0),
+                    "duration_seconds": 0,
+                }
+            ]
+        }
+        second_response: Response = client.post(
+            "/api/calls/sync", json=plain_payload, headers=headers
+        )
+        assert second_response.status_code == 200
+
+        refreshed_lead: Lead | None = Lead.query.filter_by(
+            phone_number="+919876543210"
+        ).first()
+        assert refreshed_lead is not None
+        assert refreshed_lead.status == "waiting"
+        assert refreshed_lead.interested is True
+        assert refreshed_lead.do_not_call is False
+        assert refreshed_lead.notes is None
+        assert refreshed_lead.attempt_count == 2
+        assert refreshed_lead.retry_locked_until is not None
+
+
+def test_lead_resolution_do_not_call_stops_even_an_already_done_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="done",
+            attempt_count=1,
+        )
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-do-not-call-done-lead",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 0,
+                    "do_not_call": True,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.status == "stopped"
+        assert refreshed_lead.do_not_call is True
+        assert refreshed_lead.attempt_count == 1
 
 
 def test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_calls(

@@ -8,6 +8,7 @@ from backend.tests.modules.dashboard_test_helpers import (
     create_call_record,
     create_call_records_bulk,
     create_utc_call_time,
+    create_utc_call_time_at_minute,
     create_user_fixture,
     fetch_person_dashboard,
 )
@@ -159,8 +160,8 @@ def test_person_dashboard_outgoing_counts_exclude_incoming(
         assert today_block["connected_percent"] == 50
 
         today_hours: dict[str, Any] = today_block["calls_by_hour"]
-        assert today_hours["outgoing"] == [0, 2, 0, 0, 0, 0, 0, 0, 0, 0]
-        assert today_hours["incoming"] == [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+        assert today_hours["outgoing"] == [0, 2, 0, 0, 0, 0, 0, 0, 0]
+        assert today_hours["incoming"] == [0, 1, 0, 0, 0, 0, 0, 0, 0]
         assert today_hours["best_hour"] == 11
 
         assert data["last_30_days"]["dials"] == 2
@@ -320,9 +321,9 @@ def test_person_dashboard_no_calls_returns_zero_active_days(
         assert data["last_30_days"]["seconds"] == 0
         assert data["last_30_days"]["connected_percent"] is None
         assert data["last_30_days"]["avg_per_active_day"] is None
-        assert data["last_30_days"]["calls_by_hour"]["hours"] == list(range(10, 20))
-        assert data["last_30_days"]["calls_by_hour"]["outgoing"] == [0] * 10
-        assert data["last_30_days"]["calls_by_hour"]["incoming"] == [0] * 10
+        assert data["last_30_days"]["calls_by_hour"]["hours"] == list(range(10, 19))
+        assert data["last_30_days"]["calls_by_hour"]["outgoing"] == [0] * 9
+        assert data["last_30_days"]["calls_by_hour"]["incoming"] == [0] * 9
         assert data["last_30_days"]["calls_by_hour"]["best_hour"] is None
         assert data["today"]["dials"] == 0
         assert data["today"]["not_connected"] == 0
@@ -560,20 +561,20 @@ def test_person_dashboard_period_calls_by_hour_buckets(
         response, data = fetch_person_dashboard(client, "rep-hours-p-token", rep.id)
         assert response.status_code == 200
 
-        default_window_hours: list[int] = list(range(10, 20))
+        default_window_hours: list[int] = list(range(10, 19))
 
         today_block: dict[str, Any] = data["today"]
         assert today_block["dials"] == 3
         assert today_block["seconds"] == 150
         today_hours: dict[str, Any] = today_block["calls_by_hour"]
         assert today_hours["hours"] == default_window_hours
-        assert today_hours["outgoing"] == [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
-        assert today_hours["incoming"] == [0, 2, 0, 0, 0, 0, 0, 0, 0, 0]
+        assert today_hours["outgoing"] == [0, 0, 0, 0, 1, 0, 0, 0, 0]
+        assert today_hours["incoming"] == [0, 2, 0, 0, 0, 0, 0, 0, 0]
         assert today_hours["best_hour"] == 11
 
         yesterday_hours: dict[str, Any] = data["yesterday"]["calls_by_hour"]
-        assert yesterday_hours["outgoing"] == [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
-        assert yesterday_hours["incoming"] == [0] * 10
+        assert yesterday_hours["outgoing"] == [0, 0, 0, 0, 1, 0, 0, 0, 0]
+        assert yesterday_hours["incoming"] == [0] * 9
         assert yesterday_hours["best_hour"] == afternoon_hour
 
 
@@ -637,9 +638,9 @@ def test_person_dashboard_hours_follow_stored_office_window(
         today_block: dict[str, Any] = data["today"]
         assert today_block["dials"] == 3
         today_hours: dict[str, Any] = today_block["calls_by_hour"]
-        assert today_hours["hours"] == [8, 9, 10, 11, 12]
-        assert today_hours["outgoing"] == [0, 1, 1, 0, 0]
-        assert today_hours["incoming"] == [0, 0, 1, 0, 0]
+        assert today_hours["hours"] == [8, 9, 10, 11]
+        assert today_hours["outgoing"] == [0, 1, 1, 0]
+        assert today_hours["incoming"] == [0, 0, 1, 0]
         assert today_hours["best_hour"] == inside_late_hour
 
 
@@ -702,14 +703,54 @@ def test_person_dashboard_last_30_days_calls_by_hour_daily_averages(
         assert response.status_code == 200
 
         today_hours: dict[str, Any] = data["today"]["calls_by_hour"]
-        assert today_hours["outgoing"] == [0, 0, 60, 0, 0, 30, 0, 0, 14, 0]
-        assert today_hours["incoming"] == [0, 0, 0, 45, 0, 0, 0, 0, 0, 0]
+        assert today_hours["outgoing"] == [0, 0, 60, 0, 0, 30, 0, 0, 14]
+        assert today_hours["incoming"] == [0, 0, 0, 45, 0, 0, 0, 0, 0]
         assert today_hours["best_hour"] == peak_hour
 
         thirty_day_hours: dict[str, Any] = data["last_30_days"]["calls_by_hour"]
-        assert thirty_day_hours["outgoing"] == [0, 0, 2, 0, 0, 1, 0, 0, 0, 0]
-        assert thirty_day_hours["incoming"] == [0, 0, 0, 2, 0, 0, 0, 0, 0, 0]
+        assert thirty_day_hours["outgoing"] == [0, 0, 2, 0, 0, 1, 0, 0, 0]
+        assert thirty_day_hours["incoming"] == [0, 0, 0, 2, 0, 0, 0, 0, 0]
         assert thirty_day_hours["best_hour"] == peak_hour
+
+
+def test_person_dashboard_end_minute_call_counts_in_last_bucket(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        rep: User = create_user_fixture(
+            name="rep_end_minute_p",
+            role="salesperson",
+            token="rep-end-minute-p-token",
+        )
+
+        window_end_hour: int = 19
+        end_minute_of_hour: int = 0
+        minute_after_window: int = 1
+        last_bucket_index: int = 8
+
+        end_minute_call: datetime = create_utc_call_time_at_minute(
+            0, window_end_hour, end_minute_of_hour
+        )
+        call_just_after_window: datetime = create_utc_call_time_at_minute(
+            0, window_end_hour, minute_after_window
+        )
+
+        create_call_record("pem-1", rep.id, "+919876543201", end_minute_call, 30)
+        create_call_record(
+            "pem-2", rep.id, "+919876543202", call_just_after_window, 30
+        )
+
+        response, data = fetch_person_dashboard(
+            client, "rep-end-minute-p-token", rep.id
+        )
+        assert response.status_code == 200
+
+        today_calls_by_hour: dict[str, Any] = data["today"]["calls_by_hour"]
+        assert today_calls_by_hour["hours"] == list(range(10, 19))
+        today_outgoing: list[int] = today_calls_by_hour["outgoing"]
+        assert sum(today_outgoing) == 1
+        assert today_outgoing[last_bucket_index] == 1
+        assert today_calls_by_hour["best_hour"] == window_end_hour - 1
 
 
 def test_person_dashboard_top_numbers_rank_by_total_talk(
@@ -765,6 +806,80 @@ def test_person_dashboard_top_numbers_rank_by_total_talk(
 
         assert data["last_30_days"]["dials"] == 6
         assert data["last_30_days"]["seconds"] == 1560
+
+
+def test_person_dashboard_carries_office_hours_window_and_label(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        salesperson: User = create_user_fixture(
+            name="rep_window", role="salesperson", token="rep-window-token"
+        )
+        response, data = fetch_person_dashboard(
+            client, "rep-window-token", salesperson.id
+        )
+        assert response.status_code == 200
+        assert data["office_hours"] == {"start_time": "10:00", "end_time": "19:00"}
+        assert data["office_hours_label"] == "10 to 7"
+
+
+def test_person_dashboard_label_follows_window_saved_earlier(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_window", role="manager", token="mgr-window-token")
+        salesperson: User = create_user_fixture(
+            name="rep_saved_window", role="salesperson", token="rep-saved-token"
+        )
+        manager_headers: dict[str, str] = {"Authorization": "Bearer mgr-window-token"}
+        saved_window: dict[str, str] = {"start_time": "09:30", "end_time": "18:15"}
+
+        save_response: Response = client.put(
+            "/api/settings/office-hours", json=saved_window, headers=manager_headers
+        )
+        assert save_response.status_code == 200
+
+        response, data = fetch_person_dashboard(
+            client, "rep-saved-token", salesperson.id
+        )
+        assert response.status_code == 200
+        assert data["office_hours"] == {"start_time": "09:30", "end_time": "18:15"}
+        assert data["office_hours_label"] == "9:30 to 6:15"
+
+
+def test_person_dashboard_label_uses_twelve_hour_minutes_only(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_clock", role="manager", token="mgr-clock-token")
+        salesperson: User = create_user_fixture(
+            name="rep_clock", role="salesperson", token="rep-clock-token"
+        )
+        manager_headers: dict[str, str] = {"Authorization": "Bearer mgr-clock-token"}
+        saved_window: dict[str, str] = {"start_time": "12:45", "end_time": "21:05"}
+
+        save_response: Response = client.put(
+            "/api/settings/office-hours", json=saved_window, headers=manager_headers
+        )
+        assert save_response.status_code == 200
+
+        response, data = fetch_person_dashboard(
+            client, "rep-clock-token", salesperson.id
+        )
+        assert response.status_code == 200
+        assert data["office_hours_label"] == "12:45 to 9:05"
+
+        midnight_window: dict[str, str] = {"start_time": "00:30", "end_time": "10:00"}
+        midnight_response: Response = client.put(
+            "/api/settings/office-hours", json=midnight_window, headers=manager_headers
+        )
+        assert midnight_response.status_code == 200
+
+        midnight_fetch, midnight_data = fetch_person_dashboard(
+            client, "rep-clock-token", salesperson.id
+        )
+        assert midnight_fetch.status_code == 200
+        assert midnight_data["office_hours_label"] == "12:30 to 10"
 
 
 def test_person_dashboard_fewer_than_five_numbers(

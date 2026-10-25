@@ -15,6 +15,11 @@ const backspaceLongPressClearMs: number =
   appConfigJson.backspaceLongPressClearMs;
 const callHistoryMaxRows: number = appConfigJson.callHistoryMaxRows;
 const callHistoryPageSize: number = appConfigJson.callHistoryPageSize;
+const officeHoursDefaultStartTime: string =
+  appConfigJson.officeHoursDefaultStartTime;
+const officeHoursDefaultEndTime: string =
+  appConfigJson.officeHoursDefaultEndTime;
+const istOffsetMinutes: number = appConfigJson.istOffsetMinutes;
 const myListMaxNumbers: number = appConfigJson.my_list_max_numbers;
 const scheduleExpireHours: number = appConfigJson.schedule_expire_hours;
 const millisecondsPerHour: number = 60 * 60 * 1000;
@@ -26,12 +31,15 @@ export {
   callHistoryMaxRows,
   callHistoryPageSize,
   directCallStartTimeoutMs,
+  istOffsetMinutes,
   myListMaxNumbers,
   matchWindowMs,
   maxJanitorAttempts,
   maxLeadAttempts,
   maxScheduleAheadDays,
   minMsBetweenJanitorSweeps,
+  officeHoursDefaultEndTime,
+  officeHoursDefaultStartTime,
   scheduleExpireMs,
   stalePendingCallAgeMs,
 };

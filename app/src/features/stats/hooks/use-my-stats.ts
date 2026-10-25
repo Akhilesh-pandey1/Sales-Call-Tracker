@@ -1,5 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useRef, useState } from 'react';
+import { writeStoredOfficeHoursWindow } from '@/features/auth';
 import { readStoredUserId } from '@/shared/api/api-client';
 import { serverUnreachableMessage } from '@/shared/constants/messages';
 import { fetchMyStats, type PersonStats } from '../api/stats.api';
@@ -35,6 +36,12 @@ export function useMyStats(): MyStatsState {
         return;
       }
       setMyStats(fetchedStats);
+      const windowSaveWarnMessage = 'Could not save the office-hours window.';
+      try {
+        await writeStoredOfficeHoursWindow(fetchedStats.office_hours);
+      } catch (windowSaveError: unknown) {
+        console.warn(windowSaveWarnMessage, windowSaveError);
+      }
     } catch {
       if (latestRequestIdRef.current !== requestId) {
         return;

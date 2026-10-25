@@ -1,4 +1,5 @@
 import { apiClient } from '@/shared/api/api-client';
+import type { OfficeHoursWindow } from '@/features/auth';
 
 export type CallsByHourStats = {
   hours: number[];
@@ -38,6 +39,7 @@ export type Last30DaysStats = PeriodStats & {
 
 export type PersonStats = {
   name: string;
+  office_hours: OfficeHoursWindow;
   today: PeriodStats;
   yesterday: PeriodStats;
   last_30_days: Last30DaysStats;

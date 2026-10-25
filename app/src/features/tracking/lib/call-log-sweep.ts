@@ -1,5 +1,9 @@
 import { PermissionsAndroid } from 'react-native';
-import { readStoredCountry } from '@/features/auth';
+import {
+  readStoredCountry,
+  readStoredOfficeHoursWindow,
+  type OfficeHoursWindow,
+} from '@/features/auth';
 import { createCallId } from '@/shared/utils/call-id';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import {
@@ -17,6 +21,7 @@ import {
   toEntryTimeMs,
   type CallLogEntry,
 } from './call-log-matcher';
+import { isCallStartInsideOfficeHoursWindow } from './office-hours-window-check';
 import { safeReadCallLogEntries } from './call-log-reader';
 
 interface TrackedCallGuard {
@@ -58,6 +63,7 @@ function collectSweptCalls(
   trackedCallGuards: TrackedCallGuard[],
   doNotTrackNumbers: Set<string>,
   countryCode: string,
+  officeHoursWindow: OfficeHoursWindow,
 ): SweptCall[] {
   const sweptCalls: SweptCall[] = [];
   for (const callLogEntry of callLogEntries) {
@@ -71,6 +77,13 @@ function collectSweptCalls(
     const normalizedEntryNumber = normalizePhoneNumber(callLogEntry.phoneNumber, countryCode);
     const isDoNotTrackNumber = doNotTrackNumbers.has(normalizedEntryNumber);
     if (isDoNotTrackNumber) {
+      continue;
+    }
+    const isOutsideOfficeHoursWindow = !isCallStartInsideOfficeHoursWindow(
+      entryTimeMs,
+      officeHoursWindow,
+    );
+    if (isOutsideOfficeHoursWindow) {
       continue;
     }
     const alreadyTracked = trackedCallGuards.some(
@@ -119,9 +132,10 @@ export async function runCallLogSweep(): Promise<void> {
     return;
   }
 
-  const [trackedCalls, doNotTrackNumbers] = await Promise.all([
+  const [trackedCalls, doNotTrackNumbers, officeHoursWindow] = await Promise.all([
     getAllPendingCalls(),
     readDoNotTrackNumbers(),
+    readStoredOfficeHoursWindow(),
   ]);
   const trackedCallGuards = trackedCalls
     .map(trackedCall => toTrackedCallGuard(trackedCall, countryCode))
@@ -134,6 +148,7 @@ export async function runCallLogSweep(): Promise<void> {
     trackedCallGuards,
     doNotTrackNumberSet,
     countryCode,
+    officeHoursWindow,
   );
 
   const sweptToAt = new Date(nowMs).toISOString();

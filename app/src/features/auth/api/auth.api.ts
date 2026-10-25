@@ -1,4 +1,5 @@
 import { apiClient } from '@/shared/api/api-client';
+import type { OfficeHoursWindow } from '../office-hours-window';
 
 type LoginResponse = {
   token: string;
@@ -6,6 +7,7 @@ type LoginResponse = {
   role: string;
   name: string;
   country: string;
+  office_hours: OfficeHoursWindow;
 };
 
 async function requestLogin(userName: string, userPassword: string): Promise<LoginResponse> {

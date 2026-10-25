@@ -11,6 +11,9 @@
   "backspaceLongPressClearMs": 500,
   "callHistoryMaxRows": 1000,
   "callHistoryPageSize": 50,
+  "officeHoursDefaultStartTime": "10:00",
+  "officeHoursDefaultEndTime": "19:00",
+  "istOffsetMinutes": 330,
   "my_list_max_numbers": 10000,
   "schedule_expire_hours": 24
 }

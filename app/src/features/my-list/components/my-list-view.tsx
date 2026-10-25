@@ -60,6 +60,7 @@ type MyListHeaderProps = {
   onPressUpload: () => void;
   onPressDownload: () => void;
   onPressClear: () => void;
+  onPressStartCalling: () => void;
 };
 
 function MyListHeader({
@@ -68,6 +69,7 @@ function MyListHeader({
   onPressUpload,
   onPressDownload,
   onPressClear,
+  onPressStartCalling,
 }: MyListHeaderProps) {
   return (
     <View className="px-5 pt-4">
@@ -93,7 +95,10 @@ function MyListHeader({
               onPress={onPressClear}
             />
           </View>
-          <Button className="mt-2 h-12 rounded-2xl bg-accent active:bg-accent/90">
+          <Button
+            onPress={onPressStartCalling}
+            className="mt-2 h-12 rounded-2xl bg-accent active:bg-accent/90"
+          >
             <Icon as={Play} size={20} className="text-accent-foreground" />
             <Text className="text-base font-bold text-accent-foreground">Start Calling</Text>
           </Button>
@@ -130,7 +135,11 @@ function NumberRowSeparator() {
   return <View className="h-2" />;
 }
 
-export function MyListView() {
+type MyListViewProps = {
+  onStartCalling: () => void;
+};
+
+export function MyListView({ onStartCalling }: MyListViewProps) {
   const { numberRows, counts, isLoading, errorMessage, reloadListNumbers } = useMyList();
   const upload = useMyListUpload();
   const download = useMyListDownload();
@@ -173,6 +182,7 @@ export function MyListView() {
             onPressUpload={handleOpenUploadDialog}
             onPressDownload={handleDownloadPress}
             onPressClear={clearList.openClearDialog}
+            onPressStartCalling={onStartCalling}
           />
         }
         ListEmptyComponent={listEmptyView}

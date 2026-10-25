@@ -17,6 +17,7 @@ import {
 } from './call-log-matcher';
 import { deleteSyncedCallsBehindSweepLine } from './synced-call-cleanup';
 import { fillPendingCallAndRecordHistory } from './pending-call-filler';
+import { markCalledMyListRowForNumber } from './my-list-called-marker';
 import { toSyncCallOrNull } from './sync-call';
 
 async function findMatchingLogEntry(
@@ -92,6 +93,8 @@ export async function submitTrackedCall(
     return scheduleWasRefused;
   }
   if (pendingCall.durationSeconds !== null) {
+    const recordedCallAt = pendingCall.dialedAt ?? pendingCall.intentAt;
+    await markCalledMyListRowForNumber(pendingCall.phoneNumber, outcome, recordedCallAt);
     const scheduleWasRefused = await sendPendingCallToServer(pendingCallWithOutcome, scheduledAt);
     return scheduleWasRefused;
   }
@@ -104,6 +107,7 @@ export async function submitTrackedCall(
     pendingCall,
     matchedEntry.dialedAt,
     matchedEntry.durationSeconds,
+    outcome,
   );
   const filledPendingCall: PendingCall = {
     ...pendingCallWithOutcome,

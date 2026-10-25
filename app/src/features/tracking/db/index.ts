@@ -21,6 +21,7 @@ export {
   readLastSweptAt,
   saveSweptCallsAndMoveSweepLine,
 } from './call-sweep-db';
+export { insertCallHistoryRow } from './call-history-db';
 export type { SweptCall } from './call-sweep-db';
 export {
   deleteScheduledRemindersByLeadIdList,
@@ -28,3 +29,4 @@ export {
   saveScheduledReminder,
 } from './scheduled-reminders-db';
 export type { ScheduledReminder } from './scheduled-reminders-db';
+export { replaceMyListNumbers } from './my-list-db';

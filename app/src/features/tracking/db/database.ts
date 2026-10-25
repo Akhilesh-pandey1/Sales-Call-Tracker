@@ -66,6 +66,23 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
     phone_number TEXT PRIMARY KEY,
     created_at TEXT
   )`;
+  const createCallHistoryTableSql = `CREATE TABLE IF NOT EXISTS call_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    phone_number TEXT NOT NULL,
+    direction TEXT NOT NULL,
+    call_at TEXT NOT NULL,
+    duration_seconds INTEGER NOT NULL DEFAULT 0
+  )`;
+  const createMyListNumbersTableSql = `CREATE TABLE IF NOT EXISTS my_list_numbers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    phone_number TEXT NOT NULL UNIQUE,
+    status TEXT NOT NULL DEFAULT 'left',
+    interested INTEGER NOT NULL DEFAULT 0,
+    do_not_call INTEGER NOT NULL DEFAULT 0,
+    notes TEXT,
+    uploaded_at TEXT NOT NULL,
+    called_at TEXT
+  )`;
 
   await database.executeSql(createPendingCallsTableSql);
   await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'direction', addDirectionColumnSql);
@@ -83,6 +100,8 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
   await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'interested', addInterestedColumnSql);
   await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'do_not_call', addDoNotCallColumnSql);
   await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'notes', addNotesColumnSql);
+  await database.executeSql(createCallHistoryTableSql);
+  await database.executeSql(createMyListNumbersTableSql);
   return database;
 }
 

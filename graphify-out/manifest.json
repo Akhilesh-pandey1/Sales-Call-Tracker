@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "app/config.json": {
-    "mtime": 1792925943.8493018,
-    "ast_hash": "c3d5d6c2bd420b3b8febf2cf6ba7bfe3",
+    "mtime": 1792927005.5890987,
+    "ast_hash": "c66b95ad5feb0e3ece1a30994da4cac9",
     "semantic_hash": ""
   },
   "app/index.js": {
@@ -275,8 +275,8 @@
     "semantic_hash": ""
   },
   "app/src/config/app-config.ts": {
-    "mtime": 1792925943.8581073,
-    "ast_hash": "9e2bce48a7f26d915ff2add2ba38db9f",
+    "mtime": 1792927005.5890987,
+    "ast_hash": "3cbd4c435979b6dac58bb1bdfb94601f",
     "semantic_hash": ""
   },
   "app/src/features/auth/api/auth.api.ts": {
@@ -435,18 +435,18 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/call-sweep-db.ts": {
-    "mtime": 1792925943.8847163,
-    "ast_hash": "ba50a057bfde9358248361193864fc8f",
+    "mtime": 1792927005.5911016,
+    "ast_hash": "b953e925421b176ac4aa7a2345fd681a",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/database.ts": {
-    "mtime": 1792925943.8847163,
-    "ast_hash": "8f2fbf76adff7ebc16cb498349c89852",
+    "mtime": 1792927005.5911016,
+    "ast_hash": "8e80bd91bc87b3c8a2d23f8621e2b992",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/index.ts": {
-    "mtime": 1792925943.8857162,
-    "ast_hash": "8f33f0fd1aa91103f7bfbb939c91d2a0",
+    "mtime": 1792927005.5911016,
+    "ast_hash": "1b674fedbe84182cafa3da055ee74dcc",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/pending-calls-db.ts": {
@@ -470,13 +470,13 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/index.ts": {
-    "mtime": 1792925943.8891037,
-    "ast_hash": "b63b988d3167afe1ac46b6ca5f838c44",
+    "mtime": 1792927005.592229,
+    "ast_hash": "6aa0dd8c99c8b748fdde0da4ec779c42",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-janitor.ts": {
-    "mtime": 1792925943.8891037,
-    "ast_hash": "a8b354ce9438294db3362fff0031f9bf",
+    "mtime": 1792927005.5932314,
+    "ast_hash": "883d19942b56184219b29627b2b9f72f",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-log-matcher.ts": {
@@ -495,13 +495,13 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-submit.ts": {
-    "mtime": 1792925943.891432,
-    "ast_hash": "b91bf0a3f550f978610a5f723f789e9c",
+    "mtime": 1792927005.5932314,
+    "ast_hash": "429529f655d40ba9fc586e78266b29f0",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/pending-call-filler.ts": {
-    "mtime": 1792925943.8924294,
-    "ast_hash": "f4836106e4ac482611583770f363aead",
+    "mtime": 1792927005.5943196,
+    "ast_hash": "69c8e455c36f0cf3d4158341e6892076",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/sync-call.ts": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792926657.9981153,
-    "ast_hash": "3205dda176cfffc6f19cbb0648548cda",
+    "mtime": 1792927005.5890987,
+    "ast_hash": "15c91766afcf50315e294bb089a62b96",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2714,6 +2714,21 @@
     "ast_hash": "713013708a94157dbd8bc1b73cf1bf38",
     "semantic_hash": ""
   },
+  "app/src/features/my-list/hooks/use-my-list-upload.ts": {
+    "mtime": 1792927005.5900984,
+    "ast_hash": "efe0dea8dd7b73b1de704346d8abc64f",
+    "semantic_hash": ""
+  },
+  "app/src/features/my-list/index.ts": {
+    "mtime": 1792927005.5900984,
+    "ast_hash": "2e86f4cc5c74f4a7af69fedf546a08d4",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/db/my-list-db.ts": {
+    "mtime": 1792927005.592229,
+    "ast_hash": "e4e8d4c1a546ce292434971156b337ff",
+    "semantic_hash": ""
+  },
   "app/android/app/src/main/java/com/apexsalescall/WhatsAppModule.kt": {
     "mtime": 1792925943.7954,
     "ast_hash": "2f6c63fc2a413f220267ffc435a006b7",
@@ -2722,6 +2737,21 @@
   "app/src/features/dialer/types.ts": {
     "mtime": 1792925943.8785937,
     "ast_hash": "c60c0ad6de3a30aefb2b3a734eff908c",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/db/call-history-db.ts": {
+    "mtime": 1792927005.5900984,
+    "ast_hash": "44f238251151237a9a9f1562ebf7b7b3",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/call-history-recorder.ts": {
+    "mtime": 1792927005.592229,
+    "ast_hash": "894b4a5eea0e2616dfc82480aefb4e08",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/do-not-track-check.ts": {
+    "mtime": 1792927005.5932314,
+    "ast_hash": "26b5e34a412b3a39317a1da4a13f24e2",
     "semantic_hash": ""
   },
   "app/src/shared/api/whatsapp-module.ts": {

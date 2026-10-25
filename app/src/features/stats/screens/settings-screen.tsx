@@ -208,9 +208,6 @@ export function SettingsScreen() {
       <SettingsHeader />
       <View className="flex-1 px-3 pb-6 pt-4">
         <View className="my-auto gap-2">
-          <Text className="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Local data
-          </Text>
           <SettingsMenuRow
             icon={MessageCircle}
             iconContainerClassName="bg-primary/10"

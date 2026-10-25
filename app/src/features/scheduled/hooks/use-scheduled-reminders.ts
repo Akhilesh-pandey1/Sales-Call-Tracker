@@ -1,8 +1,9 @@
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   readAllScheduledReminders,
   removeScheduledReminderForNumber,
+  subscribeToBookingsChanged,
   type ScheduledReminder,
 } from '@/features/tracking';
 import {
@@ -119,6 +120,13 @@ export function useScheduledReminders(): UseScheduledRemindersResult {
     },
     [reloadBookings],
   );
+
+  useEffect(() => {
+    const unsubscribeFromBookingsChanged = subscribeToBookingsChanged(() => {
+      reloadBookings();
+    });
+    return unsubscribeFromBookingsChanged;
+  }, [reloadBookings]);
 
   const dueBookingCount = bookings.filter(
     booking => booking.state === 'Due',

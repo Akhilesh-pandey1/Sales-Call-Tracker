@@ -192,14 +192,14 @@
 
 **Blocked by:** 11
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Download produces one CSV of the whole list — number, status, interested, do-not-call, notes, called date — through Android's share sheet (`specs/my-list.md` — Download exports the whole list).
-- [ ] Each row keeps its own called date, so today's slice is a filter in the spreadsheet app (`specs/my-list.md` — Rows keep their dates).
+- [x] Download produces one CSV of the whole list — number, status, interested, do-not-call, notes, called date — through Android's share sheet (`specs/my-list.md` — Download exports the whole list).
+- [x] Each row keeps its own called date, so today's slice is a filter in the spreadsheet app (`specs/my-list.md` — Rows keep their dates).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 14: App — Clear wipes the list after a counted confirmation
 

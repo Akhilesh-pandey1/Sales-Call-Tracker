@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useClearMyList } from '../hooks/use-clear-my-list';
 import { useMyList } from '../hooks/use-my-list';
+import { useMyListDownload } from '../hooks/use-my-list-download';
 import { useMyListUpload } from '../hooks/use-my-list-upload';
 import type { MyListCounts, MyListNumberItem } from '../types';
 import { ClearListDialog } from './clear-list-dialog';
@@ -57,10 +58,17 @@ type MyListHeaderProps = {
   counts: MyListCounts;
   hasNumbers: boolean;
   onPressUpload: () => void;
+  onPressDownload: () => void;
   onPressClear: () => void;
 };
 
-function MyListHeader({ counts, hasNumbers, onPressUpload, onPressClear }: MyListHeaderProps) {
+function MyListHeader({
+  counts,
+  hasNumbers,
+  onPressUpload,
+  onPressDownload,
+  onPressClear,
+}: MyListHeaderProps) {
   return (
     <View className="px-5 pt-4">
       {hasNumbers ? (
@@ -72,7 +80,12 @@ function MyListHeader({ counts, hasNumbers, onPressUpload, onPressClear }: MyLis
               iconClass="text-primary"
               onPress={onPressUpload}
             />
-            <MyListActionButton label="Download" icon={Download} iconClass="text-primary" />
+            <MyListActionButton
+              label="Download"
+              icon={Download}
+              iconClass="text-primary"
+              onPress={onPressDownload}
+            />
             <MyListActionButton
               label="Clear"
               icon={Trash2}
@@ -120,6 +133,7 @@ function NumberRowSeparator() {
 export function MyListView() {
   const { numberRows, counts, isLoading, errorMessage, reloadListNumbers } = useMyList();
   const upload = useMyListUpload();
+  const download = useMyListDownload();
   const clearList = useClearMyList(reloadListNumbers);
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
 
@@ -129,6 +143,7 @@ export function MyListView() {
     setIsUploadDialogOpen(false);
     reloadListNumbers();
   };
+  const handleDownloadPress = () => download.exportListToCsv();
 
   const listEmptyView = isLoading ? (
     <MyListLoadingView />
@@ -156,6 +171,7 @@ export function MyListView() {
             counts={counts}
             hasNumbers={numberRows.length > 0}
             onPressUpload={handleOpenUploadDialog}
+            onPressDownload={handleDownloadPress}
             onPressClear={clearList.openClearDialog}
           />
         }

@@ -9,6 +9,8 @@ export type MyListNumber = {
   status: MyListNumberStatus;
   isInterested: boolean;
   isDoNotCall: boolean;
+  notes: string | null;
+  calledAt: string | null;
 };
 
 interface ListCountRow {
@@ -21,6 +23,8 @@ interface MyListNumberDbRow {
   status: string;
   interested: number;
   do_not_call: number;
+  notes: string | null;
+  called_at: string | null;
 }
 
 function toMyListNumber(dbRow: MyListNumberDbRow): MyListNumber {
@@ -32,6 +36,8 @@ function toMyListNumber(dbRow: MyListNumberDbRow): MyListNumber {
     status,
     isInterested: dbRow.interested === 1,
     isDoNotCall: dbRow.do_not_call === 1,
+    notes: dbRow.notes,
+    calledAt: dbRow.called_at,
   };
   return listNumber;
 }
@@ -43,7 +49,7 @@ export async function clearMyListNumbers(): Promise<void> {
 
 export async function readMyListNumbers(): Promise<MyListNumber[]> {
   const readListNumbersSql =
-    'SELECT id, phone_number, status, interested, do_not_call ' +
+    'SELECT id, phone_number, status, interested, do_not_call, notes, called_at ' +
     'FROM my_list_numbers ORDER BY id ASC';
   const queryResult = await runQuery(readListNumbersSql, []);
   const listNumbers: MyListNumber[] = [];

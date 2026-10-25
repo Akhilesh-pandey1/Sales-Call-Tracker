@@ -50,6 +50,34 @@ def extract_call_direction(item: dict[str, Any]) -> str | None:
     return None
 
 
+def extract_call_outcome_choices(item: dict[str, Any]) -> tuple[bool, bool, str] | None:
+    raw_interested: Any = item.get("interested")
+    if raw_interested is not None and not isinstance(raw_interested, bool):
+        logger.warning("Discarding call item with invalid interested value: %s", item)
+        return None
+    interested_choice: bool = raw_interested is True
+
+    raw_do_not_call: Any = item.get("do_not_call")
+    if raw_do_not_call is not None and not isinstance(raw_do_not_call, bool):
+        logger.warning("Discarding call item with invalid do_not_call value: %s", item)
+        return None
+    do_not_call_choice: bool = raw_do_not_call is True
+
+    raw_notes: Any = item.get("notes")
+    if raw_notes is not None and not isinstance(raw_notes, str):
+        logger.warning("Discarding call item with invalid notes value: %s", item)
+        return None
+    empty_note: str = ""
+    notes_text: str = raw_notes if raw_notes is not None else empty_note
+
+    parsed_choices: tuple[bool, bool, str] = (
+        interested_choice,
+        do_not_call_choice,
+        notes_text,
+    )
+    return parsed_choices
+
+
 def extract_valid_call(
     item: Any,
     default_country: str,
@@ -57,7 +85,7 @@ def extract_valid_call(
     window_start_minute: int,
     window_end_minute: int,
     seen_call_ids: set[str],
-) -> tuple[str, str, datetime, int, str | None, str] | None:
+) -> tuple[str, str, datetime, int, str | None, str, bool, bool, str] | None:
     if not isinstance(item, dict):
         logger.warning("Discarding non-dict call item: %s", item)
         return None
@@ -107,6 +135,12 @@ def extract_valid_call(
     if call_direction is None:
         return None
 
+    outcome_choices: tuple[bool, bool, str] | None = extract_call_outcome_choices(item)
+    if outcome_choices is None:
+        return None
+
+    interested_choice, do_not_call_choice, notes_text = outcome_choices
+
     normalized_phone: str = normalize_phone_number(clean_phone, default_country)
 
     raw_scheduled_at: Any = item.get("scheduled_at")
@@ -114,13 +148,16 @@ def extract_valid_call(
     if raw_scheduled_at is not None:
         scheduled_at_raw = str(raw_scheduled_at)
 
-    parsed_record: tuple[str, str, datetime, int, str | None, str] = (
+    parsed_record: tuple[str, str, datetime, int, str | None, str, bool, bool, str] = (
         call_id,
         normalized_phone,
         dialed_at_utc,
         raw_duration,
         scheduled_at_raw,
         call_direction,
+        interested_choice,
+        do_not_call_choice,
+        notes_text,
     )
     return parsed_record
 
@@ -149,9 +186,18 @@ def sync_calls_batch(
         if call_data is None:
             continue
 
-        call_id, phone_number, dialed_at, duration, scheduled_at_raw, direction = (
-            call_data
-        )
+        (
+            call_id,
+            phone_number,
+            dialed_at,
+            duration,
+            scheduled_at_raw,
+            direction,
+            interested_choice,
+            do_not_call_choice,
+            notes_text,
+        ) = call_data
+
         call_record: Call = Call(
             call_id=call_id,
             user_id=user_id,
@@ -159,6 +205,9 @@ def sync_calls_batch(
             dialed_at=dialed_at,
             duration_seconds=duration,
             direction=direction,
+            interested=interested_choice,
+            do_not_call=do_not_call_choice,
+            notes=notes_text,
         )
         db.session.add(call_record)
         seen_call_ids.add(call_id)

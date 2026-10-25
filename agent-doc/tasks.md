@@ -20,14 +20,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A sync item saves `interested` and `do_not_call` as yes/no flags and `notes` on the call row; items without them save with both flags false and an empty note (`specs/call-tracking.md` — Post-call outcome popup on every flow; `api.md` — sync item fields).
-- [ ] Flags and note ride the normal batch unchanged — the call's time and duration still come only from the call log, and the popup never changes any number (`specs/call-tracking.md` — Time and duration stay call-log only).
+- [x] A sync item saves `interested` and `do_not_call` as yes/no flags and `notes` on the call row; items without them save with both flags false and an empty note (`specs/call-tracking.md` — Post-call outcome popup on every flow; `api.md` — sync item fields).
+- [x] Flags and note ride the normal batch unchanged — the call's time and duration still come only from the call log, and the popup never changes any number (`specs/call-tracking.md` — Time and duration stay call-log only).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_calls.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_calls.py -q` in `backend/`
 
 ## Task 3: Backend — a call's outcome reaches its lead
 

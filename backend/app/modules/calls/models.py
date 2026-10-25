@@ -18,7 +18,13 @@ class Call(db.Model):
     direction = db.Column(
         db.String(10), nullable=False, default="outgoing", server_default="outgoing"
     )
-    outcome = db.Column(db.String(20), nullable=True)
+    interested = db.Column(
+        db.Boolean, nullable=False, default=False, server_default=db.false()
+    )
+    do_not_call = db.Column(
+        db.Boolean, nullable=False, default=False, server_default=db.false()
+    )
+    notes = db.Column(db.Text, nullable=True)
 
     __table_args__ = (
         db.Index("idx_calls_call_id", "call_id", unique=True),

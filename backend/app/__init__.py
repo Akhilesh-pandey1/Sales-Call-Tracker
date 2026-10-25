@@ -48,7 +48,9 @@ def create_initial_manager(app: Flask) -> None:
 
 def ensure_calls_column(column_name: str) -> None:
     allowed_calls_columns: dict[str, str] = {
-        "outcome": "VARCHAR(20)",
+        "interested": "BOOLEAN NOT NULL DEFAULT FALSE",
+        "do_not_call": "BOOLEAN NOT NULL DEFAULT FALSE",
+        "notes": "TEXT",
         "direction": "VARCHAR(10) NOT NULL DEFAULT 'outgoing'",
     }
     if column_name not in allowed_calls_columns:
@@ -96,7 +98,9 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
 
     with app.app_context():
         db.create_all()
-        ensure_calls_column("outcome")
+        ensure_calls_column("interested")
+        ensure_calls_column("do_not_call")
+        ensure_calls_column("notes")
         ensure_calls_column("direction")
         get_or_create_office_hours_window()
         create_initial_manager(app)

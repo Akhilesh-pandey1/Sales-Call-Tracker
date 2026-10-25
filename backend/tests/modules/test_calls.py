@@ -17,6 +17,7 @@ from backend.app.core.utils import (
     normalize_phone_number,
     now_ist,
     now_utc,
+    to_ist,
 )
 from backend.app.extensions import db
 from backend.app.modules.calls.models import Call
@@ -445,7 +446,50 @@ def test_sync_malformed_row_skipped_while_valid_saved(
         assert db.session.get(Call, "bad-duration") is None
 
 
-def test_sync_leaves_outcome_column_empty_on_every_saved_row(
+def test_sync_saves_outcome_choices_on_call_row(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        call_note: str = "Asked to call after 6 pm"
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-with-choices",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 95,
+                    "interested": True,
+                    "do_not_call": True,
+                    "notes": call_note,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        saved_call: Call | None = db.session.get(Call, "call-with-choices")
+        assert saved_call is not None
+        assert saved_call.interested is True
+        assert saved_call.do_not_call is True
+        assert saved_call.notes == call_note
+
+        saved_dialed_at_ist: datetime = to_ist(saved_call.dialed_at)
+        assert saved_dialed_at_ist.hour == 12
+        assert saved_dialed_at_ist.minute == 0
+        assert saved_call.duration_seconds == 95
+        assert saved_call.phone_number == "+919876543210"
+
+
+def test_sync_items_without_choices_save_false_flags_and_empty_note(
     app: Flask, client: FlaskClient
 ) -> None:
     with app.app_context():
@@ -455,17 +499,17 @@ def test_sync_leaves_outcome_column_empty_on_every_saved_row(
         payload: dict[str, Any] = {
             "calls": [
                 {
-                    "call_id": "call-without-outcome-field",
+                    "call_id": "call-without-choices",
                     "phone_number": "9876543210",
                     "dialed_at": build_ist_dialed_at(0, 12, 0),
                     "duration_seconds": 45,
                 },
                 {
-                    "call_id": "call-with-stale-outcome-field",
+                    "call_id": "call-with-empty-note",
                     "phone_number": "9876543211",
                     "dialed_at": build_ist_dialed_at(0, 12, 5),
                     "duration_seconds": 30,
-                    "outcome": "connected",
+                    "notes": "",
                 },
             ]
         }
@@ -478,11 +522,130 @@ def test_sync_leaves_outcome_column_empty_on_every_saved_row(
         assert status_code == expected_code
         assert response_json.get("status") is True
 
-        saved_rows: list[Call] = Call.query.all()
+        saved_rows: list[Call] = Call.query.order_by(Call.call_id).all()
         expected_saved_count: int = 2
         assert len(saved_rows) == expected_saved_count
         for saved_row in saved_rows:
-            assert saved_row.outcome is None
+            assert saved_row.interested is False
+            assert saved_row.do_not_call is False
+            assert saved_row.notes == ""
+
+
+def test_sync_interested_choice_alone_saves_on_call_row(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-interested-only",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 60,
+                    "interested": True,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        saved_call: Call | None = db.session.get(Call, "call-interested-only")
+        assert saved_call is not None
+        assert saved_call.interested is True
+        assert saved_call.do_not_call is False
+        assert saved_call.notes == ""
+
+
+def test_sync_incoming_call_saves_outcome_choices(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        incoming_note: str = "Customer called back, will join demo"
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-incoming-with-choices",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 45,
+                    "direction": "incoming",
+                    "do_not_call": True,
+                    "notes": incoming_note,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        assert response.status_code == 200
+
+        saved_call: Call | None = db.session.get(Call, "call-incoming-with-choices")
+        assert saved_call is not None
+        assert saved_call.direction == "incoming"
+        assert saved_call.interested is False
+        assert saved_call.do_not_call is True
+        assert saved_call.notes == incoming_note
+
+
+def test_sync_invalid_outcome_value_discards_row_saves_valid_ones(
+    app: Flask, client: FlaskClient, caplog: pytest.LogCaptureFixture
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-bad-interested",
+                    "phone_number": "9876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 10,
+                    "interested": "yes",
+                },
+                {
+                    "call_id": "call-bad-notes",
+                    "phone_number": "9876543211",
+                    "dialed_at": build_ist_dialed_at(0, 12, 5),
+                    "duration_seconds": 10,
+                    "notes": 123,
+                },
+                {
+                    "call_id": "call-valid-choices",
+                    "phone_number": "9876543212",
+                    "dialed_at": build_ist_dialed_at(0, 12, 10),
+                    "duration_seconds": 20,
+                    "do_not_call": True,
+                },
+            ]
+        }
+
+        services_logger_name: str = "backend.app.modules.calls.services"
+        with caplog.at_level(logging.WARNING, logger=services_logger_name):
+            response: Response = client.post(
+                "/api/calls/sync", json=payload, headers=headers
+            )
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
+
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json.get("status") is True
+
+        assert db.session.get(Call, "call-bad-interested") is None
+        assert db.session.get(Call, "call-bad-notes") is None
+
+        saved_valid_call: Call | None = db.session.get(Call, "call-valid-choices")
+        assert saved_valid_call is not None
+        assert saved_valid_call.do_not_call is True
+        assert "call-bad-interested" in caplog.text
+        assert "call-bad-notes" in caplog.text
 
 
 def test_sync_incoming_call_saved_without_touching_lead(

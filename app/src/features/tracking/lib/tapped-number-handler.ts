@@ -1,5 +1,9 @@
 import { Alert, NativeModules, Platform } from 'react-native';
 import intentLauncher, { IntentConstant } from 'react-native-intent-launcher';
+import {
+  readWasTappedNumberRefused,
+  saveTappedNumberRefusal,
+} from './tapped-number-refusal';
 
 type TappedNumberNativeModule = {
   isTappedNumberHandler(): Promise<boolean>;
@@ -37,15 +41,21 @@ function showTappedNumberInstruction(): void {
   const instructionMessage =
     'Pick Apex Sales Call, then Always, so numbers you tap in other apps open here.';
   const laterButtonLabel = 'Later';
+  const dontShowAgainButtonLabel = "Don't show again";
   const pickNowButtonLabel = 'Pick now';
   Alert.alert(instructionTitle, instructionMessage, [
     { text: laterButtonLabel, style: 'cancel' },
+    { text: dontShowAgainButtonLabel, onPress: saveTappedNumberRefusal },
     { text: pickNowButtonLabel, onPress: fireTappedNumberChooser },
   ]);
 }
 
 export async function askToCatchTappedNumbers(): Promise<void> {
   if (Platform.OS !== 'android') {
+    return;
+  }
+  const wasRefused = await readWasTappedNumberRefused();
+  if (wasRefused) {
     return;
   }
   const isHandlerAlready = await readIsTappedNumberHandler();

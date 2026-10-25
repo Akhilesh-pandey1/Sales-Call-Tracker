@@ -67,14 +67,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Submitting the keypad post-call popup — "Do not schedule" and "Schedule" alike — clears the display to blank, with paste, backspace, and hold-to-clear unchanged (`specs/call-tracking.md` — Keypad clears after the post-call popup).
-- [ ] The automated lead flow keeps its number and popup untouched — the clearing applies to the keypad only (`specs/call-tracking.md` — Automated flow keeps its number).
+- [x] Submitting the keypad post-call popup — "Do not schedule" and "Schedule" alike — clears the display to blank, with paste, backspace, and hold-to-clear unchanged (`specs/call-tracking.md` — Keypad clears after the post-call popup).
+- [x] The automated lead flow keeps its number and popup untouched — the clearing applies to the keypad only (`specs/call-tracking.md` — Automated flow keeps its number).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 6: App — the lead card hands out its number
 

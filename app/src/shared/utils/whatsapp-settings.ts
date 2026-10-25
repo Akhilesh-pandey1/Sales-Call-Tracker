@@ -17,6 +17,9 @@ export type WhatsAppSettings = {
 };
 
 export async function readWhatsAppSettings(): Promise<WhatsAppSettings> {
+  const defaultIsFirstMessageOn = true;
+  const defaultFirstMessageText =
+    'Hello sir, Mai Apex Album AI se baat kar raha/rahi hu';
   const [storedApp, storedMessageOn, storedMessageText] = await Promise.all([
     AsyncStorage.getItem(whatsappAppStorageKey),
     AsyncStorage.getItem(whatsappMessageOnStorageKey),
@@ -24,8 +27,11 @@ export async function readWhatsAppSettings(): Promise<WhatsAppSettings> {
   ]);
   const chosenApp: ChosenWhatsAppApp =
     storedApp === businessWhatsAppApp ? businessWhatsAppApp : defaultWhatsAppApp;
-  const isFirstMessageOn: boolean = storedMessageOn === storedOnValue;
-  const firstMessageText: string = storedMessageText ?? '';
+  const isFirstMessageOn: boolean =
+    storedMessageOn === null
+      ? defaultIsFirstMessageOn
+      : storedMessageOn === storedOnValue;
+  const firstMessageText: string = storedMessageText ?? defaultFirstMessageText;
   const whatsappSettings: WhatsAppSettings = {
     chosenApp,
     isFirstMessageOn,

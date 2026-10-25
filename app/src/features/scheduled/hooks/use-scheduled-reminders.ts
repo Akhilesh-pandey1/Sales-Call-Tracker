@@ -2,6 +2,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useRef, useState } from 'react';
 import {
   readAllScheduledReminders,
+  removeScheduledReminderForNumber,
   type ScheduledReminder,
 } from '@/features/tracking';
 import {
@@ -23,6 +24,7 @@ type UseScheduledRemindersResult = {
   isLoading: boolean;
   errorMessage: string | null;
   reloadBookings: () => Promise<void>;
+  removeBooking: (phoneNumber: string) => Promise<void>;
 };
 
 function toScheduledBooking(
@@ -104,6 +106,20 @@ export function useScheduledReminders(): UseScheduledRemindersResult {
     }, [reloadBookings]),
   );
 
+  const removeBooking = useCallback(
+    async (phoneNumber: string): Promise<void> => {
+      const bookingRemovalWarnMessage = 'Could not remove the tapped booking.';
+      try {
+        await removeScheduledReminderForNumber(phoneNumber);
+      } catch (removalError: unknown) {
+        console.warn(bookingRemovalWarnMessage, removalError);
+        return;
+      }
+      await reloadBookings();
+    },
+    [reloadBookings],
+  );
+
   const dueBookingCount = bookings.filter(
     booking => booking.state === 'Due',
   ).length;
@@ -113,6 +129,7 @@ export function useScheduledReminders(): UseScheduledRemindersResult {
     isLoading,
     errorMessage,
     reloadBookings,
+    removeBooking,
   };
   return scheduledReminders;
 }

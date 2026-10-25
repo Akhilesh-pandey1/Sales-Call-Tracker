@@ -7,7 +7,11 @@ export { useReminderPress } from './hooks/use-reminder-press';
 export { syncPendingCallsSafely } from './lib/tracking-pipeline';
 export { submitTrackedCall } from './lib/call-submit';
 export { readIsDoNotTrackNumber } from './lib/do-not-track-check';
-export { setBookedLeadReminder, setBookedNumberReminder } from './lib/call-reminders';
+export {
+  removeScheduledReminderForNumber,
+  setBookedLeadReminder,
+  setBookedNumberReminder,
+} from './lib/call-reminders';
 export { subscribeToReminderPress } from './lib/reminder-press-events';
 export { subscribeToBookingsChanged } from './lib/booking-change-events';
 export { subscribeToMyListChanged } from './lib/my-list-change-events';

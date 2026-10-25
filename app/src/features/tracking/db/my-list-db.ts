@@ -42,6 +42,11 @@ function toMyListNumber(dbRow: MyListNumberDbRow): MyListNumber {
   return listNumber;
 }
 
+export async function clearMyListNumbers(): Promise<void> {
+  const clearListNumbersSql = 'DELETE FROM my_list_numbers';
+  await runQuery(clearListNumbersSql, []);
+}
+
 export async function readMyListNumbers(): Promise<MyListNumber[]> {
   const readListNumbersSql =
     'SELECT id, phone_number, status, interested, do_not_call, notes, called_at ' +

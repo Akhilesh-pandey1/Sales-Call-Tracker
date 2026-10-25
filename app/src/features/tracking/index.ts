@@ -13,6 +13,7 @@ export { readLiveCallState } from './live-call-state';
 export { subscribeToCallEnded } from './sync-events';
 export {
   clearAllPendingCalls,
+  clearMyListNumbers,
   countUnsyncedPendingCalls,
   deleteDoNotTrackNumber,
   insertDoNotTrackNumber,

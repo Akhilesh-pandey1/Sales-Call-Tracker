@@ -9,5 +9,6 @@
   "minMsBetweenJanitorSweeps": 5000,
   "directCallStartTimeoutMs": 8000,
   "backspaceLongPressClearMs": 500,
-  "callHistoryMaxRows": 1000
+  "callHistoryMaxRows": 1000,
+  "my_list_max_numbers": 10000
 }

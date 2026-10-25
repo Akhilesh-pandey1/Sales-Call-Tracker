@@ -445,8 +445,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/index.ts": {
-    "mtime": 1792932513.0715916,
-    "ast_hash": "02a62c55a5f0840674450a12d3719021",
+    "mtime": 1792934080.302941,
+    "ast_hash": "03047bd7f78ba76ceda7739580602cac",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/pending-calls-db.ts": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/index.ts": {
-    "mtime": 1792932513.0715916,
-    "ast_hash": "af9866bd07a2bda12ff8ad8cf258ee58",
+    "mtime": 1792934080.3043134,
+    "ast_hash": "f14c32566773867291d5b69ef9f56a43",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-janitor.ts": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792932513.0673368,
-    "ast_hash": "1e54b8a4b01be6193356115c097973fc",
+    "mtime": 1792934401.0335054,
+    "ast_hash": "c0ae1ccacac95d5bc26754710ddc98ec",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2725,8 +2725,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/my-list-db.ts": {
-    "mtime": 1792932513.0715916,
-    "ast_hash": "84f0492e49479e23bd86d5a9d708a54d",
+    "mtime": 1792934401.036482,
+    "ast_hash": "aabc2148b992bc3cfc526d13b0b1605d",
     "semantic_hash": ""
   },
   "app/android/app/src/main/java/com/apexsalescall/WhatsAppModule.kt": {
@@ -2880,8 +2880,8 @@
     "semantic_hash": ""
   },
   "app/src/features/my-list/components/my-list-view.tsx": {
-    "mtime": 1792932513.0693486,
-    "ast_hash": "795b5185d5919d7d413a30932d1a9908",
+    "mtime": 1792934401.0335054,
+    "ast_hash": "ab5919e1b8f5532428fa238328defc3a",
     "semantic_hash": ""
   },
   "app/src/features/my-list/components/upload-numbers-dialog.tsx": {
@@ -2907,6 +2907,26 @@
   "app/src/features/my-list/types.ts": {
     "mtime": 1792932513.070461,
     "ast_hash": "8ea265f595d4e30b1c073f952302f56b",
+    "semantic_hash": ""
+  },
+  "app/src/features/my-list/components/clear-list-dialog.tsx": {
+    "mtime": 1792934080.3019412,
+    "ast_hash": "277c1b78da988aa094adb3d25a9039a6",
+    "semantic_hash": ""
+  },
+  "app/src/features/my-list/hooks/use-clear-my-list.ts": {
+    "mtime": 1792934080.302941,
+    "ast_hash": "a6ac145001bb115ef29df8f099ff7535",
+    "semantic_hash": ""
+  },
+  "app/src/features/my-list/hooks/use-my-list-download.ts": {
+    "mtime": 1792934401.036482,
+    "ast_hash": "8df1bff063dce4b7651ca012394606d0",
+    "semantic_hash": ""
+  },
+  "app/src/features/my-list/lib/build-my-list-csv.ts": {
+    "mtime": 1792934401.036482,
+    "ast_hash": "beec11f22b6ce0291103f86d45cf4011",
     "semantic_hash": ""
   }
 }

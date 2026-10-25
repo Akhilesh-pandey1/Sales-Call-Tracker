@@ -39,7 +39,8 @@ export type { ScheduledReminder } from './scheduled-reminders-db';
 export {
   clearMyListNumbers,
   markMyListNumberCalled,
+  readMyListCounts,
   readMyListNumbers,
   replaceMyListNumbers,
 } from './my-list-db';
-export type { MyListNumber, MyListNumberStatus } from './my-list-db';
+export type { MyListCounts, MyListNumber, MyListNumberStatus } from './my-list-db';

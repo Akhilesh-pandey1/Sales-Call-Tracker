@@ -22,9 +22,9 @@ import {
 import { useDialer, type UseDialerResult } from '../hooks/use-dialer';
 import { useLeadCallFlowPresence } from '../hooks/use-lead-call-flow-presence';
 import {
-  useKeypadPostCall,
-  type UseKeypadPostCallResult,
-} from '../hooks/use-keypad-post-call';
+  useDirectCall,
+  type UseDirectCallResult,
+} from '../hooks/use-direct-call';
 import {
   useMyListCalling,
   type UseMyListCallingResult,
@@ -93,12 +93,12 @@ function DialerSubTabs({
 
 function KeypadView({
   dialer,
-  keypadPostCall,
+  directCall,
 }: {
   dialer: UseDialerResult;
-  keypadPostCall: UseKeypadPostCallResult;
+  directCall: UseDirectCallResult;
 }) {
-  const isCallEnabled = dialer.isNumberValid && !dialer.isDialLocked;
+  const isCallEnabled = dialer.isNumberValid && !directCall.isDialing;
   const callButtonClasses = cn(
     'h-14 rounded-2xl',
     dialer.isNumberValid
@@ -112,7 +112,7 @@ function KeypadView({
   const callHintMessage = dialer.isNumberValid
     ? 'Calls are logged and sent to your manager automatically.'
     : 'Type a valid number to enable calling.';
-  const trackedCall = keypadPostCall.trackedCall;
+  const trackedCall = directCall.trackedCall;
   const postCallDialogKey = trackedCall?.callId ?? 'idle-keypad-post-call';
   const postCallDialogPhoneNumber = trackedCall === null
     ? ''
@@ -121,15 +121,11 @@ function KeypadView({
   const handleBackspacePress = () => dialer.removeLastCharacter();
   const handleBackspaceLongPress = () => dialer.clearDialedNumber();
   const handlePastePress = () => dialer.pasteNumberFromClipboard();
-  const handleCallPress = async () => {
-    const launchedCall = await dialer.startCall();
-    keypadPostCall.trackLaunchedCall(launchedCall);
+  const handleCallPress = async (): Promise<void> => {
+    await directCall.startDirectCall(dialer.dialedNumberInput);
   };
-  const handleSubmitKeypadPostCall = async ({
-    scheduledAt,
-    outcome,
-  }: PostCallSubmitData) => {
-    await keypadPostCall.submitKeypadPostCall(scheduledAt, outcome);
+  const handleSubmitKeypadPostCall = async (submitData: PostCallSubmitData) => {
+    await directCall.submitDirectCall(submitData);
     dialer.clearDialedNumber();
   };
 
@@ -181,10 +177,10 @@ function KeypadView({
       <PostCallDialog
         key={postCallDialogKey}
         variant="keypad"
-        isOpen={keypadPostCall.isPostCallDialogOpen}
+        isOpen={directCall.isPostCallDialogOpen}
         phoneNumber={postCallDialogPhoneNumber}
-        isSubmitting={keypadPostCall.isSubmittingPostCall}
-        errorMessage={keypadPostCall.postCallErrorMessage}
+        isSubmitting={directCall.isSubmittingPostCall}
+        errorMessage={directCall.postCallErrorMessage}
         onSubmit={handleSubmitKeypadPostCall}
       />
     </View>
@@ -368,7 +364,7 @@ export function DialerScreen() {
   }, []);
 
   const dialer = useDialer();
-  const keypadPostCall = useKeypadPostCall();
+  const directCall = useDirectCall();
   const automatedCalling = useAutomatedCalling();
   const myListCalling = useMyListCalling();
   const isLeadFlowScreenShown =
@@ -383,7 +379,7 @@ export function DialerScreen() {
       </View>
       <DialerSubTabs activeSubTab={activeSubTab} onSelectSubTab={setActiveSubTab} />
       {activeSubTab === 'keypad' ? (
-        <KeypadView dialer={dialer} keypadPostCall={keypadPostCall} />
+        <KeypadView dialer={dialer} directCall={directCall} />
       ) : activeSubTab === 'automated' ? (
         <AutomatedView automatedCalling={automatedCalling} />
       ) : (

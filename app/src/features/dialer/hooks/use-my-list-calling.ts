@@ -1,40 +1,35 @@
 import { ToastAndroid } from 'react-native';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { pickNextListNumber } from '@/features/my-list';
 import type { LaunchedCall } from '../lib/call-launcher';
 import { launchTrackedCall, showCallLaunchErrorToast } from '../lib/call-launcher';
-import { useCallHangUpDetector } from './use-call-hang-up-detector';
-import { useDialogVisibility } from './use-dialog-visibility';
 import {
-  usePostCallSubmit,
-  type PostCallDialogState,
-} from './use-post-call-submit';
+  useTrackedCall,
+  type UseTrackedCallResult,
+} from './use-tracked-call';
 import type { PostCallSubmitData } from '../types';
 
 const noNumbersLeftMessage = 'No numbers left.';
 const nextCallStartFailedMessage = 'Could not start the next call. Try again.';
 
-export type UseMyListCallingResult = PostCallDialogState & {
-  trackedCall: LaunchedCall | null;
+export type UseMyListCallingResult = UseTrackedCallResult & {
   startCalling: () => Promise<void>;
   submitMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
 };
 
 export function useMyListCalling(): UseMyListCallingResult {
-  const [trackedCall, setTrackedCall] = useState<LaunchedCall | null>(null);
-  const trackedCallRef = useRef<LaunchedCall | null>(null);
   const isDialInFlightRef = useRef(false);
-  const { isPostCallDialogOpen, showDialog, closeDialog } = useDialogVisibility();
+  const trackedCallFlow = useTrackedCall();
   const {
-    isSubmittingPostCall,
-    postCallErrorMessage,
-    clearPostCallErrorMessage,
-    submitPostCall,
-  } = usePostCallSubmit();
+    trackLaunchedCall,
+    isCallAwaitingHangUp,
+    closePostCallDialog,
+    submitTrackedCall,
+  } = trackedCallFlow;
 
   const startCalling = useCallback(async (): Promise<void> => {
     const isCallAlreadyRunning =
-      trackedCallRef.current !== null || isDialInFlightRef.current;
+      isCallAwaitingHangUp() || isDialInFlightRef.current;
     if (isCallAlreadyRunning) {
       return;
     }
@@ -52,68 +47,31 @@ export function useMyListCalling(): UseMyListCallingResult {
         showCallLaunchErrorToast(callStartError);
         return;
       }
-      if (launchedCall === null) {
-        return;
-      }
-      trackedCallRef.current = launchedCall;
-      setTrackedCall(launchedCall);
-      clearPostCallErrorMessage();
+      trackLaunchedCall(launchedCall);
     } catch {
       ToastAndroid.show(nextCallStartFailedMessage, ToastAndroid.SHORT);
     } finally {
       isDialInFlightRef.current = false;
     }
-  }, [clearPostCallErrorMessage]);
-
-  const showPostCallDialog = useCallback((): void => {
-    if (trackedCallRef.current === null) {
-      return;
-    }
-    showDialog();
-  }, [showDialog]);
-
-  const clearTrackedCall = useCallback((): void => {
-    trackedCallRef.current = null;
-    setTrackedCall(null);
-  }, []);
-
-  const finishMyListPostCall = useCallback(
-    async (shouldContinueToNextCall: boolean): Promise<void> => {
-      closeDialog();
-      clearTrackedCall();
-      if (!shouldContinueToNextCall) {
-        return;
-      }
-      await startCalling();
-    },
-    [closeDialog, clearTrackedCall, startCalling],
-  );
+  }, [isCallAwaitingHangUp, trackLaunchedCall]);
 
   const submitMyListPostCall = useCallback(
     async (submitData: PostCallSubmitData): Promise<void> => {
-      const trackedCallAtSubmit = trackedCallRef.current;
-      const myListCallId =
-        trackedCallAtSubmit === null ? null : trackedCallAtSubmit.callId;
       const shouldContinueToNextCall = submitData.shouldContinueToNextLead;
-      const afterCallSent = (): Promise<void> =>
-        finishMyListPostCall(shouldContinueToNextCall);
-      await submitPostCall(
-        myListCallId,
-        afterCallSent,
-        submitData.scheduledAt,
-        submitData.outcome,
-      );
+      const finishMyListCall = async (): Promise<void> => {
+        closePostCallDialog();
+        if (!shouldContinueToNextCall) {
+          return;
+        }
+        await startCalling();
+      };
+      await submitTrackedCall(submitData, finishMyListCall);
     },
-    [finishMyListPostCall, submitPostCall],
+    [closePostCallDialog, startCalling, submitTrackedCall],
   );
 
-  useCallHangUpDetector(trackedCall !== null, showPostCallDialog);
-
   const myListCalling: UseMyListCallingResult = {
-    trackedCall,
-    isPostCallDialogOpen,
-    isSubmittingPostCall,
-    postCallErrorMessage,
+    ...trackedCallFlow,
     startCalling,
     submitMyListPostCall,
   };

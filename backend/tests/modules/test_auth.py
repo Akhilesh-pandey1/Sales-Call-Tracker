@@ -146,6 +146,82 @@ def test_login_success(app: Flask, client: FlaskClient) -> None:
         assert persisted_session.user_id == persisted_user.id
 
 
+def test_login_carries_default_office_hours_window(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        active_user: User = User(
+            name="lena_window",
+            password_hash=hash_password("ValidPassword1"),
+            role="salesperson",
+            country="IN",
+            is_active=True,
+        )
+        db.session.add(active_user)
+        db.session.commit()
+
+    response: Response = client.post(
+        "/api/login",
+        json={"name": "lena_window", "password": "ValidPassword1"},
+    )
+    expected_ok_status: int = 200
+    assert response.status_code == expected_ok_status
+    json_data: dict[str, object] = response.get_json()
+    expected_default_window: dict[str, str] = {
+        "start_time": "10:00",
+        "end_time": "19:00",
+    }
+    assert json_data["office_hours"] == expected_default_window
+
+
+def test_login_carries_manager_saved_office_hours_window(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        manager_user: User = User(
+            name="mona_manager",
+            password_hash=hash_password("ValidPassword1"),
+            role="manager",
+            country="IN",
+            is_active=True,
+        )
+        salesperson_user: User = User(
+            name="nila_sales",
+            password_hash=hash_password("ValidPassword1"),
+            role="salesperson",
+            country="IN",
+            is_active=True,
+        )
+        db.session.add(manager_user)
+        db.session.add(salesperson_user)
+        db.session.commit()
+
+        manager_token: str = generate_auth_token()
+        manager_session: Session = Session(
+            user_id=manager_user.id, token=manager_token
+        )
+        db.session.add(manager_session)
+        db.session.commit()
+
+    manager_headers: dict[str, str] = {
+        "Authorization": f"Bearer {manager_token}"
+    }
+    saved_window: dict[str, str] = {"start_time": "09:30", "end_time": "18:00"}
+    update_response: Response = client.put(
+        "/api/settings/office-hours", json=saved_window, headers=manager_headers
+    )
+    expected_ok_status: int = 200
+    assert update_response.status_code == expected_ok_status
+
+    login_response: Response = client.post(
+        "/api/login",
+        json={"name": "nila_sales", "password": "ValidPassword1"},
+    )
+    assert login_response.status_code == expected_ok_status
+    login_json: dict[str, object] = login_response.get_json()
+    assert login_json["office_hours"] == saved_window
+
+
 def test_login_lockout_triggered(app: Flask, client: FlaskClient) -> None:
     with app.app_context():
         user: User = User(

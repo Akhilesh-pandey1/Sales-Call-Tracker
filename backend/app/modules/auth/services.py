@@ -84,11 +84,16 @@ def authenticate_user(login_request: LoginRequest) -> LoginResponse:
     db.session.add(new_session)
     db.session.commit()
 
+    from backend.app.modules.settings import get_office_hours_view
+
+    current_office_hours: dict[str, str] = get_office_hours_view()
+
     login_response: LoginResponse = LoginResponse(
         token=new_token,
         id=user.id,
         role=user.role,
         name=user.name,
         country=user.country,
+        office_hours=current_office_hours,
     )
     return login_response

@@ -42,8 +42,7 @@ Decompose specifications in `agent-doc/specs/` and technical contracts in `agent
 Before writing any code, operate in read-only mode:
 
 - Read all relevant files in `agent-doc/`:
-  - `agent-doc/proposal.md` — Capability Map & build order
-  - `agent-doc/specs/<module-id>.md` — Behavior contracts and scenarios
+  - `agent-doc/specs/<module-id>.md` — Behavior contracts and scenarios; the set of spec files is the module list, each spec's `Depends on:` line gives the build order
   - `agent-doc/database.md` — Database schemas & tables
   - `agent-doc/api.md` — API endpoints & contracts
 - Identify existing patterns and conventions in the codebase

@@ -15,6 +15,13 @@ Do NOT invent architecture, folder structures, database schemas, API routes, or 
 - **API contracts & endpoints**: `agent-doc/api.md`
 - **Architectural & tech stack decisions**: `agent-doc/decisions.md`
 - **Screens & UI designs**: `agent-doc/screens/` (or generated HTML/CSS mockups)
+- **UI stack guidelines (how to build UI in your stack)**: the `ui-ux-pro-max` skill - `.claude/skills/ui-ux-pro-max/`
+
+Building UI: the design is already decided by the sources above - what this adds is the HOW in your framework. Detect the stack from the project's package file and query THAT stack - never a hardcoded one. React + shadcn + Tailwind is a common example, not the rule (that app queries `react` and `shadcn` and takes `cn()` and component patterns from them; plain HTML mockups: `html-tailwind`):
+
+```bash
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --stack <react|shadcn|...> --max-results 3
+```
 
 Strictly mirror the exact types, naming, and layouts defined in these files.
 

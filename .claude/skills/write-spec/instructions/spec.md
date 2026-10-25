@@ -7,9 +7,10 @@ Create specification files that define WHAT the module must do as a testable beh
    - DO NOT include programming language code, internal class/function bodies, or step-by-step code execution.
    - Database tables belong in `agent-doc/database.md`. API payloads belong in `agent-doc/api.md`. Cross-reference them when needed, do not duplicate them here.
 
-2. **1:1 Mapping to Capability Map:**
-   Create exactly one spec file per module listed in `agent-doc/proposal.md` under the Capability Map:
-   `agent-doc/specs/<module-id>.md` (kebab-case name matching the table).
+2. **One File Per Module:**
+   Create exactly one spec file per module from the Phase 0 decomposition:
+   `agent-doc/specs/<module-id>.md` (kebab-case name matching the module).
+   Each spec opens with a `Depends on:` line. The set of spec files IS the module list — build order comes from these lines. No separate index file.
 
 3. **Normative Requirements (RFC 2119):**
    - Each requirement header: `### Requirement: <Name>`

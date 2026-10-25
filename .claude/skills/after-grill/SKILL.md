@@ -22,7 +22,7 @@ Grilling settles **what** and **why**. It never forces the engineering surface t
 - Never weight effort, time, or team size by training-data-era experience. A CRM that took 1–2 years now takes a month or less with AI — one person can do the work of a whole team. Old timelines are not evidence.
 
 <HARD GATE>
-This skill asks questions and produces a summary — nothing else. Do NOT write any file, do NOT write or modify any spec, do NOT implement anything, and do NOT edit this project's grill skills or any other skill. The sweep's output is the conversation itself.
+This skill asks questions and produces a summary — nothing else. It writes or edits exactly one file: `agent-doc/after-grill-progress.md` — the progress table, per "Build the progress table" below. Do NOT write any other file, do NOT write or modify any spec, do NOT implement anything, and do NOT edit this project's grill skills or any other skill. The sweep's output is the conversation itself.
 </HARD GATE>
 
 ## Precondition
@@ -30,9 +30,11 @@ This skill asks questions and produces a summary — nothing else. Do NOT write 
 The input is the settled truth, found in this order:
 
 1. **Grill conversation in this session** — a grill skill declared shared understanding, or the user says grilling is done. The conversation is the input. Do not re-open it.
-2. **`agent-doc/`** — when this conversation holds no grill (fresh session, cleared with `/clear`, new day). Read `agent-doc/` completely — `proposal.md`, every `specs/<feature>.md`, `design.md`, `tasks.md`, `decisions.md`. Anything recorded there is decided. Never re-ask it. Run the sweep from it. Do NOT ask the user to re-grill, and do NOT stop.
+2. **`agent-doc/`** — when this conversation holds no grill (fresh session, cleared with `/clear`, new day). Read `agent-doc/` completely — every `specs/<feature>.md`, `design.md`, `tasks.md`, `decisions.md`. Anything recorded there is decided. Never re-ask it. Run the sweep from it. Do NOT ask the user to re-grill, and do NOT stop.
 
 If neither exists — no grill conversation and no `agent-doc/` — say so and stop; nothing is settled, so there is nothing to sweep.
+
+**Unfinished sweep.** If `agent-doc/after-grill-progress.md` exists and still has a `pending` row, a previous round did not finish. Do not start over. Read `agent-doc/` for everything already settled, then continue the sweep from the first `pending` row — same rules as a round that never stopped. Never re-ask a settled piece.
 
 If the settled topic involves no change to the codebase (pure business or pure discussion), say the sweep found nothing technical to cover and stop — the grilling was already complete.
 
@@ -43,7 +45,7 @@ If the settled topic involves no change to the codebase (pure business or pure d
 Read before asking anything:
 
 - The full grill conversation — everything already decided is settled. Never ask about it again.
-- If `agent-doc/` exists, read it completely — `proposal.md`, every `specs/<feature>.md`, `design.md`, `tasks.md`. Anything recorded there is decided. Never re-ask it. Also skip anything in it that is not important for this change — no extras.
+- If `agent-doc/` exists, read it completely — every `specs/<feature>.md`, `design.md`, `tasks.md`. Anything recorded there is decided. Never re-ask it. Also skip anything in it that is not important for this change — no extras.
 - `.claude/rules/*` — the repo's folder structure rules (MVC mapping, pages/hooks/components/services, file and function limits, naming rules). Every file-placement recommendation must comply with these.
 - `stacks.md` — in this skill's folder. The library catalog: known JS and Python libraries, each with what it is for. Dimension 10 proposes from it.
 - The actual file tree in the affected area — existing files, existing structure.
@@ -67,11 +69,29 @@ State it out loud before anything else:
 
 Small → the whole sweep is one compact round. Medium → one round per touched dimension. Large → one round per touched dimension, plus a final round ordering the work.
 
-### 4. Build the coverage checklist
+### 4. Build the progress table
 
-For each dimension below, mark it **TOUCHED** or **NOT-TOUCHED** from the grill conversation, `agent-doc/`, and the codebase facts. Show the user the full checklist — every dimension visible, skipped ones included. A skipped dimension must be seen and agreed, never silently dropped. The user can flip any mark.
+From the grill conversation, `agent-doc/`, and the codebase facts, decide which dimensions this change touches. Tell the user which dimensions are skipped and why — a skipped dimension must be seen and agreed, never silently dropped. The user can flip any skip.
 
-If every dimension is NOT-TOUCHED, say the sweep found nothing technical to cover and stop.
+Then write the work list to `agent-doc/after-grill-progress.md` — the only file this skill writes:
+
+```
+## <feature name> — greenfield / brownfield
+
+| Dimension | Status |
+|---|---|
+| File structure & changes | pending |
+| API contracts | pending |
+```
+
+Rules for the table:
+
+- Two columns only: Dimension and Status.
+- Status has two values only: `pending` and `done`.
+- Only touched dimensions get a row — a skipped dimension has no work, so no row.
+- The table is written at round start. Every later round resumes from its first `pending` row.
+
+If no dimension is touched, say the sweep found nothing technical to cover and stop — no file is written.
 
 ### 5. Grill each TOUCHED dimension
 
@@ -82,7 +102,11 @@ Work dimension by dimension. Inside a dimension, go piece by piece — never a w
 - **File structure** — one module or feature area at a time: its files first, then the next area.
 - **Failure & edge cases** — one case at a time: propose the handling, get the yes, move to the next case.
 
-Use the question format below. Work from facts — propose the exact file list, the exact endpoint contract, or the exact schema delta for the piece in front of you, and let the user approve or correct it. When the last piece of a dimension is settled, say that dimension is done, then move to the next TOUCHED one. Small changes go the same way — they just have fewer questions.
+Use the question format below. Work from facts — propose the exact file list, the exact endpoint contract, or the exact schema delta for the piece in front of you, and let the user approve or correct it. When the last piece of a dimension is settled, say that dimension is done, flip its row to `done` in the progress table the same turn, then move to the next touched one. Small changes go the same way — they just have fewer questions.
+
+The row stays `pending` until every piece of the dimension is agreed — one settled endpoint never finishes the API row. Update the file the moment it flips; never let the table fall behind the conversation.
+
+**Never jump sections on your own.** When one dimension is done, do not start the next dimension in the same message. Say the current dimension is done, then ask the user first: "Should we move to <next dimension>?" Wait for the yes. The user may want to stay, go back, or skip ahead — that is the user's call, not yours. This applies to every transition: dimension to dimension, and inside a dimension, module to module (for example, file structure to API contracts, or the auth module's endpoints to the billing module's).
 
 ## Question format
 
@@ -182,7 +206,7 @@ The stack is settled by now — grilling decided it, or this sweep does. For eve
 
 ## Terminal state
 
-When every TOUCHED dimension is settled, present the **change surface** — the agreed summary the spec will be built from:
+When every touched dimension is settled — every row in the progress table reads `done` — present the **change surface** — the agreed summary the spec will be built from:
 
 ```
 CHANGE SURFACE
@@ -203,14 +227,17 @@ Then declare, and stop:
 
 > **AFTER-GRILL COMPLETE** — the technical surface is settled. Every aspect of the grilling is now covered.
 
-No files, no spec, no follow-on skill, no instructions for what to do next. What happens after is the caller's job.
+No files, no spec, no follow-on skill, no instructions for what to do next. What happens after is the caller's job. The progress table stays as the record — every row `done` means the sweep is complete.
 
 ## Rules
 
 - **Technical only.** The concept was settled in grilling — never re-open it. If a technical question exposes a broken concept decision, name it in one sentence and let the user decide; do not silently re-grill it here.
 - **One question at a time.** One question per message, piece by piece — one API endpoint, one table, one file area, one edge case. Never dump a whole dimension in one message.
 - **Nothing re-asked.** The grill conversation and `agent-doc/` are the settled truth. Read them fully; never ask about a settled thing again.
-- **Nothing silently assumed.** Every dimension appears in the checklist with its mark; every TOUCHED dimension ends with an explicit agreement; every deferred failure or edge case is written down.
+- **Nothing silently assumed.** Every dimension appears in the checklist with its mark; every touched dimension ends with an explicit agreement; every deferred failure or edge case is written down.
+- **The progress table is the memory.** `agent-doc/after-grill-progress.md` holds the sweep's state — `pending` until a dimension's every piece is agreed, `done` the moment it is. Updated in the same turn, never left behind. A fresh round resumes from its first `pending` row.
 - **Facts first.** Read the rules, the tree, the code, the graph before asking. The decisions are the user's; the findings are yours.
 - **Scale to the change and the team.** A small change gets one short round — do not inflate it. A large one gets every dimension fully worked. Always the simplest solution a 2–3 person team on a single server can run.
+- **No echo-back.** API responses never repeat the request data. Reads return the data itself — no flag; saves return a short done-message + only what the frontend cannot know (generated ids, timestamps, server-computed values, counts). Every API is written as the full card from Dimension 2.
+- **Ask before every section change.** Finishing one dimension (or module) never auto-starts the next. Say what is done, ask "Should we move to <next>?", and wait for the yes.
 - **Easy English always.** Short sentences. Explain technical words. Propose, then let the user correct.

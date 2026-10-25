@@ -8,10 +8,11 @@ description: Turn agent-doc/screen.md into real designed HTML screens - one HTML
 Turn `agent-doc/screen.md` into designed HTML screens in the user's chosen folder:
 
 ```
-<folder>/               <- folder name comes from the user (ask)
+agent-doc/               <- folder name comes from the user (ask)
   screens/
     index.html          <- the runner - open this, flip through screens
     THEME.md            <- the locked design system (source of truth)
+    INDEX.md
     01-login--M.html
     02-dashboard--P.html
     02-dashboard--empty--P.html
@@ -20,16 +21,17 @@ Turn `agent-doc/screen.md` into designed HTML screens in the user's chosen folde
 
 Screens are HTML + Tailwind (CDN) plus small inline JavaScript for same-page interactions only - tabs, toggles, date ranges, dropdowns, modals. A screen never opens, links to, or loads another screen file - the runner is the only way to move between screens.
 
-## The design brain
+## The design brain - ui-ux-pro-max skill
 
-Theme decisions come from the bundled search tool - never invent colors or fonts, and never ask the user for them:
+Theme decisions come from the ui-ux-pro-max skill - never invent colors or fonts, and never ask the user for them:
 
 ```bash
-python "<this skill's folder>/uiux/scripts/search.py" "<product type> <industry> <keywords>" --design-system --variance 3 --density <3-4 or 7-8> -p "<Product Name>" --format markdown
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<product type> <industry> <keywords>" --design-system --variance 3 --density <3-4 or 7-8> -p "<Product Name>" --format markdown
 ```
 
-- `--variance 3` always - the house style is simple, minimal, comfortable.
+- **Variants first** - run the design-system search 2-3 times with different keywords (variance 2-5) to get different theme variants. Compare them and lock the strongest one into THEME.md. Once THEME.md is approved, the design is decided - no new variants.
 - `--density 7-8` for dashboards and admin tools, `3-4` for everything else.
+- Screens are HTML + Tailwind - for build patterns (classes, layout, components) also query the stack data: `python .claude/skills/ui-ux-pro-max/scripts/search.py "<topic>" --stack html-tailwind`.
 - If `python` is missing, try `python3`, then `py -3`.
 - Save the full markdown output to `<folder>/screens/THEME.md` - it is the source of truth for every screen.
 - Zero results - retry once with a narrower query. Still empty - say the theme came from general defaults, not the database.

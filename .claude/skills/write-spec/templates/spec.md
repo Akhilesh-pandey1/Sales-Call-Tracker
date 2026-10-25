@@ -1,3 +1,7 @@
+# <module-id>
+
+Depends on: <none, or comma-separated module ids>
+
 ## Purpose
 
 <!-- 1-2 sentences (50+ characters) describing what this module does and why it exists. -->

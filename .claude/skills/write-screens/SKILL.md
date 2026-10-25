@@ -25,7 +25,7 @@ Before finishing, check every screen once: "Can a designer build the right scree
 Take the product from wherever it exists, in this order:
 
 1. The conversation so far - what was already decided is settled.
-2. `agent-doc/proposal.md` and `agent-doc/specs/` - if they exist, read them from disk.
+2. `agent-doc/specs/` - if the folder exists, read every spec from disk.
 3. Nothing exists - ask the user ONE question: "What is the product, and who uses it (which views)?" After the answer, decide everything yourself. No more questions.
 
 ## Steps

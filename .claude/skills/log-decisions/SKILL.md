@@ -27,6 +27,7 @@ Read before writing anything:
 - The full grill conversation — everything agreed there is settled truth. Never re-ask it, never re-open it.
 - Every existing `agent-doc/` file, completely. `decisions.md` may already exist — `before-grill` writes it. Its entries are already logged: never log the same decision twice, and never rewrite an entry unless the new conversation contradicts it.
 - If `agent-doc/` does not exist, it is created when the first file is written.
+- `api-format.md` — in this skill's folder, next to `SKILL.md`. The one saving format for API contracts. Read it before writing anything API-related.
 
 ### 2. Sort — each fact goes to exactly one file
 
@@ -36,7 +37,7 @@ Go through the conversation's agreements. Each one belongs to exactly one file, 
 |---|---|---|
 | `decisions.md` | Every agreed decision with no dedicated file | Product decisions, failure and edge-case handling, config choices — anything settled by talking |
 | `database.md` | Database schema and design | Tables, fields, indexes, migrations |
-| `api.md` | API contracts | Method, path, request shape, response shape, errors, auth |
+| `api.md` | API contracts | Method, path, request, response, errors, auth — written in the exact shape from `api-format.md` |
 | `testing.md` | Testing approach | What gets tests and how |
 | `structure.md` | File structure and tech stack | Which files and folders are created, changed, or deleted; the tech stack with exact versions — frontend framework, backend framework, every agreed library — as one compatible set |
 
@@ -67,27 +68,9 @@ Rules:
 - `calls.user_id` points to `users.id`.
 ```
 
-#### `api.md` — one endpoint per section
+#### `api.md` — written from the format file
 
-One `## <METHOD> <path>` section per endpoint. One line on what it does and whether it needs login. Then three bullet groups — one field per bullet: `key` — type, required or optional. What it is. Example.
-
-```
-## POST /api/v1/calls
-
-Books one call with a customer. Needs login (JWT).
-
-**Request body**
-- `phone_number` — string, required. Customer phone with country code. Example: `+919876543210`
-- `notes` — string, optional. What the call is about. Example: `Discuss invoice`
-
-**Response 200**
-- `id` — integer. New call id. Example: `101`
-- `status` — string. Call state after booking. Example: `scheduled`
-
-**Errors**
-- `400` — phone number is missing. Message: "Phone number is required"
-- `401` — token missing or expired. Message: "Please log in again"
-```
+`api-format.md` sits in this skill's folder, next to `SKILL.md`. It holds the one saving format for API contracts — the file header, the full endpoint shape, and a worked example. Read it first, then write every endpoint exactly in that shape. Never invent a different shape, and never keep a copy of the format inside `api.md`.
 
 #### `testing.md` — grouped by feature
 
@@ -152,20 +135,6 @@ backend/
 ## Terminal state
 
 When every agreement is written, show the summary — the change history lives in this conversation, never in the files:
-
-```
-LOGGED
-Files created: <list, or "none">
-Files updated: <list, or "none">
-Decisions added: <count>
-Decisions rewritten: <count> — <one line each, what changed and why>
-Database: <one line on what was written, or "not discussed">
-API: <one line, or "not discussed">
-Testing: <one line, or "not discussed">
-Structure: <one line, or "not discussed">
-```
-
-Then declare, and stop:
 
 > **LOG-DECISIONS COMPLETE** — every agreed outcome from the grilling is written in `agent-doc/`.
 

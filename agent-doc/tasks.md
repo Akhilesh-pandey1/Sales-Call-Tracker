@@ -97,7 +97,7 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] The native module launches only the chosen app by its exact package — WhatsApp `com.whatsapp`, Business `com.whatsapp.w4b` — with the number in international format and the optional text, so Android shows the existing chat with that number or a fresh one (`specs/whatsapp-open.md` — Every WhatsApp button opens the chosen app).
@@ -113,7 +113,7 @@
 
 **Blocked by:** 7
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] Settings shows the WhatsApp app row with WhatsApp preselected and Business selectable, saved on the phone only (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
@@ -129,7 +129,7 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] Pasted text with numbers buried anywhere and picked CSV files both fill the `my_list_numbers` table, every number normalized to E.164 with the login country before storing (`specs/my-list.md` — Numbers come in three ways; Upload rules).
@@ -207,7 +207,7 @@
 
 **Blocked by:** 11
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] Clear opens a confirmation showing both counts — left and called — before anything is deleted (`specs/my-list.md` — Confirmation shows the counts).
@@ -222,7 +222,7 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] One `call_history` row is written per call at the moment the real time and duration are known, before any sync, so queue cleanup never touches history and the list works offline (`specs/call-history.md` — One history row per recorded call).
@@ -238,7 +238,7 @@
 
 **Blocked by:** 15
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] The first open after the update backfills the history table once from the phone's call log, skipping Do-not-track numbers (`specs/call-history.md` — Backfill runs once).
@@ -253,7 +253,7 @@
 
 **Blocked by:** 7, 15, 16
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] The tab bar holds Dialer, Scheduled, History, My Stats, Settings, and History lists every recorded call, outgoing and incoming, newest first, 50 rows per page with Load-more (`specs/call-history.md` — History tab in a five-tab bar; Paged list capped at 1000 rows).
@@ -269,7 +269,7 @@
 
 **Blocked by:** 7
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] The tab lists every booking from the local `scheduled_reminders` table — lead bookings and keypad bookings alike — with the number, the booked date and time, and Upcoming while the time has not come, Due once it has passed (`specs/scheduled-bookings.md` — Every booking listed with its state).
@@ -285,7 +285,7 @@
 
 **Blocked by:** 18
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 - [x] A row leaves the list when the notification is tapped, when a call to that number is recorded, or when 24 hours pass its booked time — the same window the server uses to free the lead — with the cleanup running at every app open (`specs/scheduled-bookings.md` — Handled bookings leave the list).

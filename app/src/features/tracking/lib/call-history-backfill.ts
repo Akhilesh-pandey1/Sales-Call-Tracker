@@ -3,6 +3,7 @@ import { PermissionsAndroid } from 'react-native';
 import { readStoredCountry } from '@/features/auth';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import {
+  buildCallKey,
   readCallHistoryRowKeys,
   readDoNotTrackNumbers,
   saveCallHistoryEntries,
@@ -43,17 +44,12 @@ function toRefreshSinceTimeMs(lastLoadedAt: string | null): number {
   return lastLoadedAtMs;
 }
 
-function toCallKey(normalizedPhoneNumber: string, callAt: string): string {
-  const callKey = `${normalizedPhoneNumber} ${callAt}`;
-  return callKey;
-}
-
 async function readStoredCallKeySet(countryCode: string): Promise<Set<string>> {
   const rowKeyList = await readCallHistoryRowKeys();
   const storedCallKeySet = new Set<string>();
   for (const rowKey of rowKeyList) {
     const normalizedPhoneNumber = normalizePhoneNumber(rowKey.phoneNumber, countryCode);
-    storedCallKeySet.add(toCallKey(normalizedPhoneNumber, rowKey.callAt));
+    storedCallKeySet.add(buildCallKey(normalizedPhoneNumber, rowKey.callAt));
   }
   return storedCallKeySet;
 }
@@ -79,7 +75,7 @@ function collectInsertableHistoryEntries(
       continue;
     }
     const entryCallAt = new Date(entryTimeMs).toISOString();
-    const entryCallKey = toCallKey(normalizedEntryNumber, entryCallAt);
+    const entryCallKey = buildCallKey(normalizedEntryNumber, entryCallAt);
     const callAlreadyStored = storedCallKeySet.has(entryCallKey);
     if (callAlreadyStored) {
       continue;

@@ -2,6 +2,7 @@ import { readStoredCountry } from '@/features/auth';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import type { CallOutcome } from '../types';
 import type { Transaction } from 'react-native-sqlite-storage';
+import { buildCallKey } from './call-key';
 import { runInTransaction, runQuery } from './database';
 
 export type MyListNumberStatus = 'left' | 'called';
@@ -37,13 +38,6 @@ interface CalledCallDurationRow {
   duration_seconds: number;
 }
 
-function buildCalledDurationKey(phoneNumber: string, callAt: string): string {
-  const calledDurationKeySeparator = '|';
-  const calledDurationKey =
-    `${phoneNumber}${calledDurationKeySeparator}${callAt}`;
-  return calledDurationKey;
-}
-
 async function readCalledDurationsByCall(): Promise<Map<string, number>> {
   const readCalledDurationsSql =
     'SELECT phone_number, call_at, duration_seconds FROM call_history';
@@ -51,7 +45,7 @@ async function readCalledDurationsByCall(): Promise<Map<string, number>> {
   const calledDurationsByCall = new Map<string, number>();
   for (let rowIndex = 0; rowIndex < queryResult.rows.length; rowIndex += 1) {
     const durationRow = queryResult.rows.item(rowIndex) as CalledCallDurationRow;
-    const durationKey = buildCalledDurationKey(
+    const durationKey = buildCallKey(
       durationRow.phone_number,
       durationRow.call_at,
     );
@@ -68,7 +62,7 @@ function toMyListNumber(
     dbRow.status === 'called' ? 'called' : 'left';
   let calledDurationSeconds: number | null = null;
   if (dbRow.called_at !== null) {
-    const durationKey = buildCalledDurationKey(dbRow.phone_number, dbRow.called_at);
+    const durationKey = buildCallKey(dbRow.phone_number, dbRow.called_at);
     calledDurationSeconds = calledDurationsByCall.get(durationKey) ?? null;
   }
   const listNumber: MyListNumber = {

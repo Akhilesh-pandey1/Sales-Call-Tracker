@@ -14,6 +14,7 @@ export {
   deleteDoNotTrackNumber,
   insertDoNotTrackNumber,
   insertPendingCall,
+  readAllScheduledReminders,
   readDoNotTrackNumbers,
 } from './db';
 export type { ScheduledReminder } from './db';

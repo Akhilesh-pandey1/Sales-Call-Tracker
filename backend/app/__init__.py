@@ -49,20 +49,30 @@ def create_initial_manager(app: Flask) -> None:
     db.session.commit()
 
 
-def ensure_calls_column(column_name: str) -> None:
-    allowed_calls_columns: dict[str, str] = {
-        "interested": "BOOLEAN NOT NULL DEFAULT FALSE",
-        "do_not_call": "BOOLEAN NOT NULL DEFAULT FALSE",
-        "notes": "TEXT",
-        "direction": "VARCHAR(10) NOT NULL DEFAULT 'outgoing'",
+def ensure_table_column(table_name: str, column_name: str) -> None:
+    allowed_columns_by_table: dict[str, dict[str, str]] = {
+        "calls": {
+            "interested": "BOOLEAN NOT NULL DEFAULT FALSE",
+            "do_not_call": "BOOLEAN NOT NULL DEFAULT FALSE",
+            "notes": "TEXT",
+            "direction": "VARCHAR(10) NOT NULL DEFAULT 'outgoing'",
+        },
+        "leads": {
+            "interested": "BOOLEAN NOT NULL DEFAULT FALSE",
+            "do_not_call": "BOOLEAN NOT NULL DEFAULT FALSE",
+            "notes": "TEXT",
+        },
     }
-    if column_name not in allowed_calls_columns:
-        raise ValueError(f"Column {column_name} is not allowed on the calls table.")
-    column_definition: str = allowed_calls_columns[column_name]
+    table_columns: dict[str, str] | None = allowed_columns_by_table.get(table_name)
+    if table_columns is None or column_name not in table_columns:
+        raise ValueError(
+            f"Column {column_name} is not allowed on the {table_name} table."
+        )
+    column_definition: str = table_columns[column_name]
 
     database_inspector = inspect(db.engine)
     existing_column_names: list[str] = [
-        column["name"] for column in database_inspector.get_columns("calls")
+        column["name"] for column in database_inspector.get_columns(table_name)
     ]
     if column_name in existing_column_names:
         return
@@ -70,11 +80,11 @@ def ensure_calls_column(column_name: str) -> None:
     is_postgres_database: bool = db.engine.dialect.name == "postgresql"
     if is_postgres_database:
         add_column_statement = text(
-            f"ALTER TABLE calls ADD COLUMN IF NOT EXISTS {column_name} {column_definition}"
+            f"ALTER TABLE {table_name} ADD COLUMN IF NOT EXISTS {column_name} {column_definition}"
         )
     else:
         add_column_statement = text(
-            f"ALTER TABLE calls ADD COLUMN {column_name} {column_definition}"
+            f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_definition}"
         )
     db.session.execute(add_column_statement)
     db.session.commit()
@@ -174,10 +184,13 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
 
     with app.app_context():
         db.create_all()
-        ensure_calls_column("interested")
-        ensure_calls_column("do_not_call")
-        ensure_calls_column("notes")
-        ensure_calls_column("direction")
+        ensure_table_column("calls", "interested")
+        ensure_table_column("calls", "do_not_call")
+        ensure_table_column("calls", "notes")
+        ensure_table_column("calls", "direction")
+        ensure_table_column("leads", "interested")
+        ensure_table_column("leads", "do_not_call")
+        ensure_table_column("leads", "notes")
         migrate_legacy_auth_tokens_to_sessions()
         get_or_create_office_hours_window()
         create_initial_manager(app)

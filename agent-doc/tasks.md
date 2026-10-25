@@ -35,15 +35,15 @@
 
 **Blocked by:** 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `do_not_call: true` on a matched call sets the lead's status to `stopped` with claims and schedules cleared — even when the call was unconnected (`specs/lead-management.md` — Call outcome reaches the lead).
-- [ ] `interested: true` is stored as a label beside the lead's state with the normal retry rules running unchanged, and the call's note is copied onto the lead (`specs/lead-management.md` — Call outcome reaches the lead).
-- [ ] A synced call with no outcome choices resolves the lead exactly as before — no label stored (`specs/lead-management.md` — No outcome resolves as before).
+- [x] `do_not_call: true` on a matched call sets the lead's status to `stopped` with claims and schedules cleared — even when the call was unconnected (`specs/lead-management.md` — Call outcome reaches the lead).
+- [x] `interested: true` is stored as a label beside the lead's state with the normal retry rules running unchanged, and the call's note is copied onto the lead (`specs/lead-management.md` — Call outcome reaches the lead).
+- [x] A synced call with no outcome choices resolves the lead exactly as before — no label stored (`specs/lead-management.md` — No outcome resolves as before).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_calls.py tests/modules/test_leads.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_calls.py tests/modules/test_leads.py -q` in `backend/`
 
 ## Task 4: App — post-call popups carry outcome choices
 

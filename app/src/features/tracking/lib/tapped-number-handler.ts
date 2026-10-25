@@ -9,24 +9,6 @@ type TappedNumberNativeModule = {
   isTappedNumberHandler(): Promise<boolean>;
 };
 
-function readTappedNumberNativeModule(): TappedNumberNativeModule {
-  const nativeModule = NativeModules.TappedNumber as
-    | TappedNumberNativeModule
-    | undefined;
-  const missingModuleMessage =
-    'Tapped number setup is not available on this phone.';
-  if (!nativeModule) {
-    throw new Error(missingModuleMessage);
-  }
-  return nativeModule;
-}
-
-async function readIsTappedNumberHandler(): Promise<boolean> {
-  const isHandler: boolean =
-    await readTappedNumberNativeModule().isTappedNumberHandler();
-  return isHandler;
-}
-
 async function fireTappedNumberChooser(): Promise<void> {
   const chooserProbeNumber = '1';
   const chooserIntentParams = {
@@ -58,7 +40,13 @@ export async function askToCatchTappedNumbers(): Promise<void> {
   if (wasRefused) {
     return;
   }
-  const isHandlerAlready = await readIsTappedNumberHandler();
+  const nativeModule = NativeModules.TappedNumber as
+    | TappedNumberNativeModule
+    | undefined;
+  if (nativeModule === undefined) {
+    return;
+  }
+  const isHandlerAlready = await nativeModule.isTappedNumberHandler();
   if (isHandlerAlready) {
     return;
   }

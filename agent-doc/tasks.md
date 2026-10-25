@@ -116,12 +116,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] Settings shows the WhatsApp app row with WhatsApp preselected and Business selectable, saved on the phone only (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
-- [ ] The First message row holds a switch, off by default, plus a text field — off opens the chat empty, on pre-types the saved text, still editable, nothing ever sends by itself (`specs/whatsapp-open.md` — Switch off opens an empty chat; Switch on pre-types the text).
-- [ ] Both choices never reach the server and never move between phones (`specs/whatsapp-open.md` — Saved on the phone only).
+- [x] Settings shows the WhatsApp app row with WhatsApp preselected and Business selectable, saved on the phone only (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
+- [x] The First message row holds a switch, off by default, plus a text field — off opens the chat empty, on pre-types the saved text, still editable, nothing ever sends by itself (`specs/whatsapp-open.md` — Switch off opens an empty chat; Switch on pre-types the text).
+- [x] Both choices never reach the server and never move between phones (`specs/whatsapp-open.md` — Saved on the phone only).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 9: App — My List stores numbers with the replace rule
 

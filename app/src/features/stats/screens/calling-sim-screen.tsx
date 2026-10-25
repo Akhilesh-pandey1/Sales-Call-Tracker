@@ -1,44 +1,24 @@
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { CardSim, Check, ChevronLeft, Monitor, type LucideIcon } from 'lucide-react-native';
+import { CardSim, Check, Monitor, type LucideIcon } from 'lucide-react-native';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { cn } from '@/lib/utils';
+import { SettingsSubScreenHeader } from '../components/settings-sub-screen-header';
 import { useCallingSim } from '../hooks/use-calling-sim';
 
 type CallingSimScreenProps = {
   onBack: () => void;
 };
 
-type CallingSimHeaderProps = {
-  onBack: () => void;
-};
-
-function CallingSimHeader({ onBack }: CallingSimHeaderProps) {
-  return (
-    <View className="border-b border-border bg-card px-3 py-3">
-      <View className="flex-row items-center gap-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-xl"
-          onPress={onBack}
-          accessibilityLabel="Back to Settings"
-        >
-          <Icon as={ChevronLeft} size={24} className="text-muted-foreground" />
-        </Button>
-        <Text className="flex-1 text-lg font-bold leading-tight tracking-tight">Calling SIM</Text>
-      </View>
-    </View>
-  );
-}
-
 function SimChoiceCheck({ isVisible }: { isVisible: boolean }) {
   return (
     <View className="h-5 w-5 shrink-0 items-center justify-center">
-      {isVisible ? <Icon as={Check} size={20} className="text-primary" /> : null}
+      {isVisible ? (
+        <Icon as={Check} size={20} className="text-primary" />
+      ) : null}
     </View>
   );
 }
@@ -106,7 +86,9 @@ function CallingSimRow({
   const slotTitle = `SIM ${simSlotIndex + 1}`;
   const readableSimNumber =
     simNumber === '' ? null : formatInternationalPhoneNumber(simNumber);
-  const rowSubtitle = [carrierName, readableSimNumber].filter(Boolean).join(' · ');
+  const rowSubtitle = [carrierName, readableSimNumber]
+    .filter(Boolean)
+    .join(' · ');
   const handleSelectSim = (): void => {
     onSelect(simSlotIndex);
   };
@@ -181,10 +163,11 @@ export function CallingSimScreen({ onBack }: CallingSimScreenProps) {
 
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
-      <CallingSimHeader onBack={onBack} />
+      <SettingsSubScreenHeader title="Calling SIM" onBack={onBack} />
       <View className="flex-1 px-5 pb-6 pt-4">
         <Text className="px-1 text-xs text-muted-foreground">
-          Every call goes out from the SIM you pick. The choice stays on your phone only.
+          Every call goes out from the SIM you pick. The choice stays on your
+          phone only.
         </Text>
         {isLoading ? null : (
           <View className="mt-3 gap-3">
@@ -216,7 +199,10 @@ export function CallingSimScreen({ onBack }: CallingSimScreenProps) {
           </View>
         )}
         {saveErrorMessage ? (
-          <Text role="alert" className="px-1 pt-3 text-xs font-semibold text-destructive">
+          <Text
+            role="alert"
+            className="px-1 pt-3 text-xs font-semibold text-destructive"
+          >
             {saveErrorMessage}
           </Text>
         ) : null}

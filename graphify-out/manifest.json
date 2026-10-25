@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/settings-screen.tsx": {
-    "mtime": 1792760747.6771095,
-    "ast_hash": "b29d1bde0c528f3a34c42e3e43391f10",
+    "mtime": 1792927960.0767553,
+    "ast_hash": "3a55f3249bff65beb0bd0cd8de510f11",
     "semantic_hash": ""
   },
   "app/src/features/tracking/api/calls.api.ts": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792927505.2387762,
-    "ast_hash": "4c30e42a4fcb85e8e5b0f85b64812741",
+    "mtime": 1792927960.0732734,
+    "ast_hash": "fd7d5284e685a1ad36e77f62932eeec9",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2375,8 +2375,8 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/do-not-track-screen.tsx": {
-    "mtime": 1792760747.6757178,
-    "ast_hash": "e1144a243971523d8e8cd2e9725d30cb",
+    "mtime": 1792927960.0753102,
+    "ast_hash": "f05472cd017ff3e821c90c1b3b56b83b",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/do-not-track-db.ts": {
@@ -2465,8 +2465,8 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/calling-sim-screen.tsx": {
-    "mtime": 1792760747.6757178,
-    "ast_hash": "738aa425a3f95a83529ce6ddd8daa455",
+    "mtime": 1792927960.0753102,
+    "ast_hash": "c99498261135d08a666cbb2079575d3b",
     "semantic_hash": ""
   },
   "app/src/shared/utils/phone-permissions.ts": {
@@ -2777,6 +2777,21 @@
   "backend/tests/modules/session_test_helpers.py": {
     "mtime": 1792927505.248963,
     "ast_hash": "c8666fa532dae015cdac77959c0f28a1",
+    "semantic_hash": ""
+  },
+  "app/src/features/stats/components/settings-sub-screen-header.tsx": {
+    "mtime": 1792927960.0742955,
+    "ast_hash": "113716444bb769037832d0c7d5ae72f0",
+    "semantic_hash": ""
+  },
+  "app/src/features/stats/hooks/use-whatsapp-settings.ts": {
+    "mtime": 1792927960.0742955,
+    "ast_hash": "014d8c0ca556b49fb4a540065477ac11",
+    "semantic_hash": ""
+  },
+  "app/src/features/stats/screens/whatsapp-screen.tsx": {
+    "mtime": 1792927960.0767553,
+    "ast_hash": "9b8cc9bae07c6e392e7c9ffe43851660",
     "semantic_hash": ""
   }
 }

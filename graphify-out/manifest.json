@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "app/config.json": {
-    "mtime": 1792926559.654275,
-    "ast_hash": "c66b95ad5feb0e3ece1a30994da4cac9",
+    "mtime": 1792930692.101559,
+    "ast_hash": "e3d57e66be86d32472bcde4020dbe138",
     "semantic_hash": ""
   },
   "app/index.js": {
@@ -220,13 +220,13 @@
     "semantic_hash": ""
   },
   "app/package.json": {
-    "mtime": 1792760747.663884,
-    "ast_hash": "80625ce65c7d5b6b837c0c7abe19095d",
+    "mtime": 1792929199.4494598,
+    "ast_hash": "bbce0eac44cb9278cc041e0c6807060b",
     "semantic_hash": ""
   },
   "app/src/app/navigation/app-navigator.tsx": {
-    "mtime": 1792928270.7924652,
-    "ast_hash": "7691a2cc13c6863f44c335383c38b272",
+    "mtime": 1792930692.101559,
+    "ast_hash": "6382483375a5bc7bf5c032da108af169",
     "semantic_hash": ""
   },
   "app/src/app/navigation/main-tabs-param-list.ts": {
@@ -275,8 +275,8 @@
     "semantic_hash": ""
   },
   "app/src/config/app-config.ts": {
-    "mtime": 1792926560.6554158,
-    "ast_hash": "3cbd4c435979b6dac58bb1bdfb94601f",
+    "mtime": 1792930692.101559,
+    "ast_hash": "0a4abbc9e9a5df4937bef23767689c63",
     "semantic_hash": ""
   },
   "app/src/features/auth/api/auth.api.ts": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/index.ts": {
-    "mtime": 1792928943.878432,
-    "ast_hash": "b9db02afea8d864049cb2f63e7611eba",
+    "mtime": 1792930692.1035614,
+    "ast_hash": "f953cf2673cc30989c8d067fc1c4eea3",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-janitor.ts": {
@@ -495,8 +495,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-submit.ts": {
-    "mtime": 1792926143.990893,
-    "ast_hash": "429529f655d40ba9fc586e78266b29f0",
+    "mtime": 1792930692.1045609,
+    "ast_hash": "895089bd6674bbe7f2c8050576a5eec0",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/pending-call-filler.ts": {
@@ -515,8 +515,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/tracking-pipeline.ts": {
-    "mtime": 1792760747.6874216,
-    "ast_hash": "de4a2618fcafaf6f6a8a2612007f6705",
+    "mtime": 1792930692.1045609,
+    "ast_hash": "5bb37a2d790f7cef877e83e72b5bbb8a",
     "semantic_hash": ""
   },
   "app/src/features/tracking/live-call-state.ts": {
@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {
-    "mtime": 1792927505.240049,
-    "ast_hash": "92ae20750b05eb97ea000667aed19300",
+    "mtime": 1792929573.33674,
+    "ast_hash": "83e0b6240db2282a25c558759f021d5c",
     "semantic_hash": ""
   },
   "backend/app/api/__init__.py": {
@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/calls/services.py": {
-    "mtime": 1792926878.3574576,
-    "ast_hash": "c1be92483334cd16c4828b31ff38f73c",
+    "mtime": 1792929573.33674,
+    "ast_hash": "d8189ffe4576b3fdfafb446d30b652c8",
     "semantic_hash": ""
   },
   "backend/app/modules/dashboard/__init__.py": {
@@ -700,8 +700,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/leads/models.py": {
-    "mtime": 1792011064.1892426,
-    "ast_hash": "1527ba02e7a1b067fc1ba3e507ff7c54",
+    "mtime": 1792929573.33674,
+    "ast_hash": "49534a629d8cc2a39029551036be895c",
     "semantic_hash": ""
   },
   "backend/app/modules/leads/routes.py": {
@@ -715,8 +715,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/leads/services.py": {
-    "mtime": 1792760747.6971428,
-    "ast_hash": "a4109239032f34e4157069b6f9470db9",
+    "mtime": 1792929573.33674,
+    "ast_hash": "db14cc7b7a8f08f809f22bf641aca4f7",
     "semantic_hash": ""
   },
   "backend/app/modules/settings/__init__.py": {
@@ -790,8 +790,8 @@
     "semantic_hash": ""
   },
   "backend/tests/modules/test_calls.py": {
-    "mtime": 1792927713.6904085,
-    "ast_hash": "c70f7ef869c228300554babb0f2737d2",
+    "mtime": 1792929573.3378234,
+    "ast_hash": "081bd6814f444692eaf31c0253c0b60c",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_dashboard.py": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792928943.8773615,
-    "ast_hash": "51aceacf85e3fd4308184d72aa26e1bd",
+    "mtime": 1792930692.1005573,
+    "ast_hash": "172b2d878ee5f6806d403cf733482108",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2355,13 +2355,13 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-reminder-press.ts": {
-    "mtime": 1792760747.6808026,
-    "ast_hash": "367be7d4effd68ddc5c39b7c1ada5155",
+    "mtime": 1792930692.1035614,
+    "ast_hash": "c3a287b0f1b21b338028866ed6f5e2e3",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-reminders.ts": {
-    "mtime": 1792760747.6852193,
-    "ast_hash": "8b872e174f2b906f2d5e2e773fc59df2",
+    "mtime": 1792930692.1045609,
+    "ast_hash": "2431b4b1b3a580e96255d430a15a62ba",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/reminder-press-events.ts": {
@@ -2715,8 +2715,8 @@
     "semantic_hash": ""
   },
   "app/src/features/my-list/hooks/use-my-list-upload.ts": {
-    "mtime": 1792926389.1839263,
-    "ast_hash": "efe0dea8dd7b73b1de704346d8abc64f",
+    "mtime": 1792929199.4494598,
+    "ast_hash": "5fa83ae29d5c66a55b90796745ef4b56",
     "semantic_hash": ""
   },
   "app/src/features/my-list/index.ts": {
@@ -2745,8 +2745,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-history-recorder.ts": {
-    "mtime": 1792926039.4527252,
-    "ast_hash": "894b4a5eea0e2616dfc82480aefb4e08",
+    "mtime": 1792930692.1035614,
+    "ast_hash": "1c560f0c50bf9ec83578c62043606c81",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/do-not-track-check.ts": {
@@ -2770,18 +2770,18 @@
     "semantic_hash": ""
   },
   "app/src/features/scheduled/hooks/use-scheduled-reminders.ts": {
-    "mtime": 1792928270.7939708,
-    "ast_hash": "44f96cf0907a9a8fd9b5a5476dea8d5d",
+    "mtime": 1792930692.1025589,
+    "ast_hash": "9907240d9626e2b84ec5d79793872e0b",
     "semantic_hash": ""
   },
   "app/src/features/scheduled/index.ts": {
-    "mtime": 1792928270.7949805,
-    "ast_hash": "39f4de7ec5ff9ae32699ddc303528154",
+    "mtime": 1792930692.1025589,
+    "ast_hash": "d5e85960a937fa933cb6ecfd4de573fd",
     "semantic_hash": ""
   },
   "app/src/features/scheduled/screens/scheduled-screen.tsx": {
-    "mtime": 1792928270.7949805,
-    "ast_hash": "1cc3f0482b42bc7b96da8bda6526fa92",
+    "mtime": 1792930692.1035614,
+    "ast_hash": "11ec53d7f7e12c2baa41d44a564323f0",
     "semantic_hash": ""
   },
   "app/src/features/stats/components/settings-sub-screen-header.tsx": {
@@ -2827,6 +2827,21 @@
   "app/src/features/tracking/lib/call-history-backfill.ts": {
     "mtime": 1792928943.878432,
     "ast_hash": "88a2a51a108091c393baece1c3b76f62",
+    "semantic_hash": ""
+  },
+  "app/src/features/scheduled/hooks/use-due-booking-count.ts": {
+    "mtime": 1792930692.101559,
+    "ast_hash": "fe08d232c2324b77e3fa0e8b77def710",
+    "semantic_hash": ""
+  },
+  "app/src/features/scheduled/lib/booking-state.ts": {
+    "mtime": 1792930692.1025589,
+    "ast_hash": "89fe64862154d69e9369dd2891e160c6",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/booking-change-events.ts": {
+    "mtime": 1792930692.1035614,
+    "ast_hash": "a655d3b2c3fc592297256635edbf6977",
     "semantic_hash": ""
   }
 }

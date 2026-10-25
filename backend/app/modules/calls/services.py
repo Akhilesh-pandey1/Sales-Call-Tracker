@@ -216,7 +216,15 @@ def sync_calls_batch(
         if is_incoming_call:
             continue
 
-        resolve_lead_for_call(phone_number, duration, dialed_at, user_id)
+        resolve_lead_for_call(
+            phone_number,
+            duration,
+            dialed_at,
+            user_id,
+            interested_choice,
+            do_not_call_choice,
+            notes_text,
+        )
 
         is_unscheduled_call: bool = scheduled_at_raw is None
         if is_unscheduled_call:

@@ -35,15 +35,15 @@
 
 **Blocked by:** 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `do_not_call: true` on a matched call sets the lead's status to `stopped` with claims and schedules cleared — even when the call was unconnected (`specs/lead-management.md` — Call outcome reaches the lead).
-- [ ] `interested: true` is stored as a label beside the lead's state with the normal retry rules running unchanged, and the call's note is copied onto the lead (`specs/lead-management.md` — Call outcome reaches the lead).
-- [ ] A synced call with no outcome choices resolves the lead exactly as before — no label stored (`specs/lead-management.md` — No outcome resolves as before).
+- [x] `do_not_call: true` on a matched call sets the lead's status to `stopped` with claims and schedules cleared — even when the call was unconnected (`specs/lead-management.md` — Call outcome reaches the lead).
+- [x] `interested: true` is stored as a label beside the lead's state with the normal retry rules running unchanged, and the call's note is copied onto the lead (`specs/lead-management.md` — Call outcome reaches the lead).
+- [x] A synced call with no outcome choices resolves the lead exactly as before — no label stored (`specs/lead-management.md` — No outcome resolves as before).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_calls.py tests/modules/test_leads.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_calls.py tests/modules/test_leads.py -q` in `backend/`
 
 ## Task 4: App — post-call popups carry outcome choices
 
@@ -145,14 +145,14 @@
 
 **Blocked by:** 9
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] An .xlsx file picked on the phone is parsed by an Excel-reading library chosen at implementation and its numbers join the upload like any other source (`specs/my-list.md` — Excel parsed on the phone).
-- [ ] "Copy AI prompt" copies a ready prompt, so the salesperson pastes their sheet text and the prompt into ChatGPT and puts the comma-separated numbers back into the paste box (`specs/my-list.md` — AI prompt copied).
+- [x] An .xlsx file picked on the phone is parsed by an Excel-reading library chosen at implementation and its numbers join the upload like any other source (`specs/my-list.md` — Excel parsed on the phone).
+- [x] "Copy AI prompt" copies a ready prompt, so the salesperson pastes their sheet text and the prompt into ChatGPT and puts the comma-separated numbers back into the paste box (`specs/my-list.md` — AI prompt copied).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 11: App — the My List tab
 
@@ -288,9 +288,9 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] A row leaves the list when the notification is tapped, when a call to that number is recorded, or when 24 hours pass its booked time — the same window the server uses to free the lead — with the cleanup running at every app open (`specs/scheduled-bookings.md` — Handled bookings leave the list).
-- [ ] Every app open counts the Due rows and shows the count as a badge on the Scheduled tab, with the line "You have N leads you have not called." (`specs/scheduled-bookings.md` — Due count badge and line).
-- [ ] The tab works fully offline from the phone's own tables (`specs/scheduled-bookings.md` — Works offline).
+- [x] A row leaves the list when the notification is tapped, when a call to that number is recorded, or when 24 hours pass its booked time — the same window the server uses to free the lead — with the cleanup running at every app open (`specs/scheduled-bookings.md` — Handled bookings leave the list).
+- [x] Every app open counts the Due rows and shows the count as a badge on the Scheduled tab, with the line "You have N leads you have not called." (`specs/scheduled-bookings.md` — Due count badge and line).
+- [x] The tab works fully offline from the phone's own tables (`specs/scheduled-bookings.md` — Works offline).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`

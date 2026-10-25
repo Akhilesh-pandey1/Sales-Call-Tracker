@@ -4,7 +4,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { DialerScreen, useTappedNumberLinks } from '@/features/dialer';
 import { HistoryScreen } from '@/features/history';
-import { ScheduledScreen } from '@/features/scheduled';
+import { ScheduledScreen, useDueBookingCount } from '@/features/scheduled';
 import { MyStatsScreen, SettingsScreen } from '@/features/stats';
 import { useReminderPress, useSync } from '@/features/tracking';
 import { Icon } from '@/components/ui/icon';
@@ -42,6 +42,8 @@ export function AppNavigator() {
   useReminderPressNavigation();
   useTappedNumberNavigation();
   useTappedNumberLinks();
+  const dueBookingCount = useDueBookingCount();
+  const minimumCountForBadge = 1;
 
   return (
     <MainTabs.Navigator screenOptions={{ headerShown: false }}>
@@ -53,7 +55,11 @@ export function AppNavigator() {
       <MainTabs.Screen
         name="Scheduled"
         component={ScheduledScreen}
-        options={{ tabBarIcon: ScheduledTabIcon }}
+        options={{
+          tabBarIcon: ScheduledTabIcon,
+          tabBarBadge:
+            dueBookingCount >= minimumCountForBadge ? dueBookingCount : undefined,
+        }}
       />
       <MainTabs.Screen
         name="History"

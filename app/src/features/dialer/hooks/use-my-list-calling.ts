@@ -1,6 +1,7 @@
 import { ToastAndroid } from 'react-native';
 import { useCallback, useRef } from 'react';
 import { pickNextListNumber } from '@/features/my-list';
+import { bookNumberWhenScheduled } from '../lib/book-number-when-scheduled';
 import type { LaunchedCall } from '../lib/call-launcher';
 import { launchTrackedCall, showCallLaunchErrorToast } from '../lib/call-launcher';
 import {
@@ -58,7 +59,16 @@ export function useMyListCalling(): UseMyListCallingResult {
   const submitMyListPostCall = useCallback(
     async (submitData: PostCallSubmitData): Promise<void> => {
       const shouldContinueToNextCall = submitData.shouldContinueToNextLead;
-      const finishMyListCall = async (): Promise<void> => {
+      const scheduledAt = submitData.scheduledAt;
+      const finishMyListCall = async (
+        launchedCall: LaunchedCall | null,
+        scheduleWasRefused: boolean,
+      ): Promise<void> => {
+        await bookNumberWhenScheduled(
+          launchedCall,
+          scheduledAt,
+          scheduleWasRefused,
+        );
         closePostCallDialog();
         if (!shouldContinueToNextCall) {
           return;

@@ -1,10 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
 import { readStoredCountry } from '@/features/auth';
-import { setBookedNumberReminder } from '@/features/tracking';
 import {
   isValidPhoneNumber,
   normalizePhoneNumber,
 } from '@/shared/utils/phone-formatter';
+import { bookNumberWhenScheduled } from '../lib/book-number-when-scheduled';
 import {
   launchTrackedCall,
   showCallLaunchErrorToast,
@@ -70,11 +70,7 @@ export function useDirectCall(): UseDirectCallResult {
         launchedCall: LaunchedCall | null,
         scheduleWasRefused: boolean,
       ): Promise<void> => {
-        const canBookReminder =
-          launchedCall !== null && scheduledAt !== null && !scheduleWasRefused;
-        if (canBookReminder) {
-          await setBookedNumberReminder(launchedCall.phoneNumber, scheduledAt);
-        }
+        await bookNumberWhenScheduled(launchedCall, scheduledAt, scheduleWasRefused);
         closePostCallDialog();
       };
       await submitTrackedCall(submitData, finishDirectCall);

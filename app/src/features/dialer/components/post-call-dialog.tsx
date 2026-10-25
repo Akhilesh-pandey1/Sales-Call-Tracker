@@ -196,7 +196,6 @@ function PostCallDialog({
   };
 
   const isLeadFlow = variant === 'lead';
-  const isScheduleSectionShown = variant !== 'my-list';
   const isNextCallSectionShown = variant === 'lead' || variant === 'my-list';
   const nextCallHintMessage = isLeadFlow
     ? 'Uncheck to stop automated calling after Submit.'
@@ -251,29 +250,27 @@ function PostCallDialog({
           <NotesField noteText={noteText} onChangeNote={handleChangeNote} />
         </View>
 
-        {isScheduleSectionShown ? (
-          <View className="gap-2.5">
-            <Text className="text-sm font-bold">
-              Schedule this number for the next call?
-            </Text>
-            <ScheduleChoiceRow
-              label="Do not schedule"
-              isSelected={!isScheduleChosen}
-              onSelect={handleChooseNoSchedule}
+        <View className="gap-2.5">
+          <Text className="text-sm font-bold">
+            Schedule this number for the next call?
+          </Text>
+          <ScheduleChoiceRow
+            label="Do not schedule"
+            isSelected={!isScheduleChosen}
+            onSelect={handleChooseNoSchedule}
+          />
+          <ScheduleChoiceRow
+            label="Schedule"
+            isSelected={isScheduleChosen}
+            onSelect={handleChooseSchedule}
+          />
+          {isScheduleChosen ? (
+            <SchedulePickerField
+              scheduleLabel={scheduleLabel}
+              onOpenPicker={openSchedulePicker}
             />
-            <ScheduleChoiceRow
-              label="Schedule"
-              isSelected={isScheduleChosen}
-              onSelect={handleChooseSchedule}
-            />
-            {isScheduleChosen ? (
-              <SchedulePickerField
-                scheduleLabel={scheduleLabel}
-                onOpenPicker={openSchedulePicker}
-              />
-            ) : null}
-          </View>
-        ) : null}
+          ) : null}
+        </View>
 
         {isNextCallSectionShown ? (
           <View className="gap-1 rounded-2xl border border-border bg-muted/40 p-3">

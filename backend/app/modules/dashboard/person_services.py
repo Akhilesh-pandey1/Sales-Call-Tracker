@@ -22,7 +22,11 @@ from backend.app.modules.dashboard.services import (
     create_empty_hourly_counts,
     create_empty_period_metrics,
 )
-from backend.app.modules.settings import OfficeHours, get_or_create_office_hours_window
+from backend.app.modules.settings import (
+    OfficeHours,
+    get_office_hours_view_with_label,
+    get_or_create_office_hours_window,
+)
 from backend.app.modules.users import User
 
 
@@ -330,8 +334,11 @@ def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
     sorted_top_numbers: list[dict[str, Any]] = build_top_numbers_list(
         aggregates.phone_summary
     )
+    office_hours_view_with_label: dict[str, Any] = get_office_hours_view_with_label()
     response_payload: dict[str, Any] = {
         "name": target_user.name,
+        "office_hours": office_hours_view_with_label["office_hours"],
+        "office_hours_label": office_hours_view_with_label["office_hours_label"],
         "today": period_blocks["today"],
         "yesterday": period_blocks["yesterday"],
         "last_30_days": period_blocks["last_30_days"],

@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict
+from backend.app.modules.settings import OfficeHoursResponse
 
 
 class AvgPerPersonPerDay(BaseModel):
@@ -116,6 +117,8 @@ class PersonThirtyDayStats(PersonPeriodStats):
 class PersonDashboardResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     name: str
+    office_hours: OfficeHoursResponse
+    office_hours_label: str
     today: PersonPeriodStats
     yesterday: PersonPeriodStats
     last_30_days: PersonThirtyDayStats

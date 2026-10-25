@@ -241,11 +241,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The first open after the update backfills the history table once from the phone's call log, skipping Do-not-track numbers (`specs/call-history.md` — Backfill runs once).
-- [ ] Every History open runs the call-log sweep and saves the last-loaded time, so closed-period calls appear at the next look (`specs/call-history.md` — Closed-period calls appear at the next look; Last-loaded time saved).
+- [x] The first open after the update backfills the history table once from the phone's call log, skipping Do-not-track numbers (`specs/call-history.md` — Backfill runs once).
+- [x] Every History open runs the call-log sweep and saves the last-loaded time, so closed-period calls appear at the next look (`specs/call-history.md` — Closed-period calls appear at the next look; Last-loaded time saved).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 17: App — the History tab in a five-tab bar
 

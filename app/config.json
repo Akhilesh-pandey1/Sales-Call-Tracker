@@ -10,6 +10,7 @@
   "directCallStartTimeoutMs": 8000,
   "backspaceLongPressClearMs": 500,
   "callHistoryMaxRows": 1000,
+  "callHistoryPageSize": 50,
   "my_list_max_numbers": 10000,
   "schedule_expire_hours": 24
 }

@@ -9,12 +9,13 @@ import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { maxScheduleAheadDays } from '@/config/app-config';
 import type { CallOutcome } from '@/features/tracking';
-import { Calendar, Check } from 'lucide-react-native';
+import { Calendar, Check, Copy } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 import { cn } from '@/lib/utils';
 import { usePostCallSchedule } from '../hooks/use-post-call-schedule';
 import type { PostCallSubmitData } from '../types';
+import { CopyNumberButton } from './copy-number-button';
 
 type ScheduleChoiceRowProps = {
   label: string;
@@ -144,6 +145,7 @@ type PostCallDialogProps = {
   variant: PostCallDialogVariant;
   isOpen: boolean;
   phoneNumber: string;
+  phoneNumberToCopy?: string | null;
   isSubmitting: boolean;
   errorMessage: string | null;
   onSubmit: (submitData: PostCallSubmitData) => void;
@@ -153,6 +155,7 @@ function PostCallDialog({
   variant,
   isOpen,
   phoneNumber,
+  phoneNumberToCopy = null,
   isSubmitting,
   errorMessage,
   onSubmit,
@@ -187,7 +190,7 @@ function PostCallDialog({
     onSubmit(submitData);
   };
 
-  const showGoToNextCall = variant === 'lead';
+  const isLeadFlow = variant === 'lead';
   const submitButtonLabel = isSubmitting ? 'Submitting…' : 'Submit';
 
   return (
@@ -201,9 +204,19 @@ function PostCallDialog({
             <DialogTitle className="text-base font-bold tracking-tight">
               Call ended
             </DialogTitle>
-            <DialogDescription className="text-xs tabular-nums">
-              {phoneNumber}
-            </DialogDescription>
+            <View className="flex-row items-center gap-1.5">
+              <DialogDescription className="text-xs tabular-nums">
+                {phoneNumber}
+              </DialogDescription>
+              {phoneNumberToCopy !== null ? (
+                <CopyNumberButton
+                  phoneNumber={phoneNumberToCopy}
+                  className="h-5 w-5 items-center justify-center rounded-full active:bg-muted"
+                >
+                  <Icon as={Copy} size={14} className="text-muted-foreground" />
+                </CopyNumberButton>
+              ) : null}
+            </View>
           </View>
           <View className="ml-2 rounded-full bg-muted px-2.5 py-0.5">
             <Text className="text-[11px] font-semibold text-muted-foreground">Ended</Text>
@@ -250,7 +263,7 @@ function PostCallDialog({
           ) : null}
         </View>
 
-        {showGoToNextCall ? (
+        {isLeadFlow ? (
           <View className="gap-1 rounded-2xl border border-border bg-muted/40 p-3">
             <Pressable
               accessibilityRole="checkbox"

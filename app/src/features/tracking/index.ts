@@ -14,6 +14,7 @@ export {
   deleteDoNotTrackNumber,
   insertDoNotTrackNumber,
   insertPendingCall,
+  readAllScheduledReminders,
   readDoNotTrackNumbers,
   replaceMyListNumbers,
 } from './db';

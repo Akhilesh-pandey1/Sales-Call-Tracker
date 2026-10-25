@@ -4,8 +4,9 @@ import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { maxLeadAttempts } from '@/config/app-config';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
-import { Phone } from 'lucide-react-native';
+import { Copy, Phone } from 'lucide-react-native';
 import { ActivityIndicator, View } from 'react-native';
+import { CopyNumberButton } from './copy-number-button';
 
 export type LeadCallCardVariant = 'ready' | 'dialing';
 
@@ -58,6 +59,15 @@ export function LeadCallCard({
           <Text className="text-center text-2xl font-extrabold tabular-nums tracking-tight">
             {displayedPhoneNumber}
           </Text>
+          {variant === 'dialing' ? (
+            <CopyNumberButton
+              phoneNumber={phoneNumber}
+              className="flex-row items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 active:bg-muted"
+            >
+              <Icon as={Copy} size={14} className="text-primary" />
+              <Text className="text-xs font-semibold text-primary">Copy</Text>
+            </CopyNumberButton>
+          ) : null}
           <View className="rounded-full bg-muted px-2.5 py-0.5">
             <Text className="text-[11px] font-semibold text-muted-foreground">
               {attemptLabel}

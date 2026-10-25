@@ -67,14 +67,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Submitting the keypad post-call popup — "Do not schedule" and "Schedule" alike — clears the display to blank, with paste, backspace, and hold-to-clear unchanged (`specs/call-tracking.md` — Keypad clears after the post-call popup).
-- [ ] The automated lead flow keeps its number and popup untouched — the clearing applies to the keypad only (`specs/call-tracking.md` — Automated flow keeps its number).
+- [x] Submitting the keypad post-call popup — "Do not schedule" and "Schedule" alike — clears the display to blank, with paste, backspace, and hold-to-clear unchanged (`specs/call-tracking.md` — Keypad clears after the post-call popup).
+- [x] The automated lead flow keeps its number and popup untouched — the clearing applies to the keypad only (`specs/call-tracking.md` — Automated flow keeps its number).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 6: App — the lead card hands out its number
 
@@ -82,14 +82,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A Copy button sits beside the lead's number on the lead calling card, available while ringing, during the call, and on the post-call popup; one tap copies it with a "Number copied." toast (`specs/lead-management.md` — Lead card hands out its number).
-- [ ] Copying leaves the call and the flow running exactly as they were (`specs/lead-management.md` — Copy leaves the flow untouched).
+- [x] A Copy button sits beside the lead's number on the lead calling card, available while ringing, during the call, and on the post-call popup; one tap copies it with a "Number copied." toast (`specs/lead-management.md` — Lead card hands out its number).
+- [x] Copying leaves the call and the flow running exactly as they were (`specs/lead-management.md` — Copy leaves the flow untouched).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 7: App — WhatsApp opens the chosen app by package
 
@@ -116,12 +116,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] Settings shows the WhatsApp app row with WhatsApp preselected and Business selectable, saved on the phone only (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
-- [ ] The First message row holds a switch, off by default, plus a text field — off opens the chat empty, on pre-types the saved text, still editable, nothing ever sends by itself (`specs/whatsapp-open.md` — Switch off opens an empty chat; Switch on pre-types the text).
-- [ ] Both choices never reach the server and never move between phones (`specs/whatsapp-open.md` — Saved on the phone only).
+- [x] Settings shows the WhatsApp app row with WhatsApp preselected and Business selectable, saved on the phone only (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
+- [x] The First message row holds a switch, off by default, plus a text field — off opens the chat empty, on pre-types the saved text, still editable, nothing ever sends by itself (`specs/whatsapp-open.md` — Switch off opens an empty chat; Switch on pre-types the text).
+- [x] Both choices never reach the server and never move between phones (`specs/whatsapp-open.md` — Saved on the phone only).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 9: App — My List stores numbers with the replace rule
 
@@ -272,12 +272,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The tab lists every booking from the local `scheduled_reminders` table — lead bookings and keypad bookings alike — with the number, the booked date and time, and Upcoming while the time has not come, Due once it has passed (`specs/scheduled-bookings.md` — Every booking listed with its state).
-- [ ] Due rows sort first, most overdue at top, then Upcoming rows soonest first, and nothing booked reads "Nothing scheduled." (`specs/scheduled-bookings.md` — Due first, most overdue at top; Empty state).
-- [ ] Each row carries Copy and WhatsApp buttons, and tapping the row opens the booked lead's card ready to call — the same thing tapping the notification does (`specs/scheduled-bookings.md` — Row actions and tap-through).
+- [x] The tab lists every booking from the local `scheduled_reminders` table — lead bookings and keypad bookings alike — with the number, the booked date and time, and Upcoming while the time has not come, Due once it has passed (`specs/scheduled-bookings.md` — Every booking listed with its state).
+- [x] Due rows sort first, most overdue at top, then Upcoming rows soonest first, and nothing booked reads "Nothing scheduled." (`specs/scheduled-bookings.md` — Due first, most overdue at top; Empty state).
+- [x] Each row carries Copy and WhatsApp buttons, and tapping the row opens the booked lead's card ready to call — the same thing tapping the notification does (`specs/scheduled-bookings.md` — Row actions and tap-through).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 19: App — handled bookings leave the Scheduled tab
 

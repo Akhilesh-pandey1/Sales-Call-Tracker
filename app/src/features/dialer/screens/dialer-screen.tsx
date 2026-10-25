@@ -1,3 +1,4 @@
+import { useIsFocused } from '@react-navigation/native';
 import { useState } from 'react';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -18,6 +19,7 @@ import {
   type UseAutomatedCallingResult,
 } from '../hooks/use-automated-calling';
 import { useDialer, type UseDialerResult } from '../hooks/use-dialer';
+import { useLeadCallFlowPresence } from '../hooks/use-lead-call-flow-presence';
 import {
   useKeypadPostCall,
   type UseKeypadPostCallResult,
@@ -311,10 +313,14 @@ function AutomatedView({
 
 export function DialerScreen() {
   const missingPermissions = usePermissions();
+  const isDialerTabFocused = useIsFocused();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
   const dialer = useDialer();
   const keypadPostCall = useKeypadPostCall();
   const automatedCalling = useAutomatedCalling();
+  const isLeadFlowScreenShown =
+    isDialerTabFocused && activeSubTab === 'automated';
+  useLeadCallFlowPresence(isLeadFlowScreenShown, automatedCalling.viewState);
   const { top: topInset } = useSafeAreaInsets();
 
   return (

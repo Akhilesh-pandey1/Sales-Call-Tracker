@@ -256,12 +256,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The tab bar holds Dialer, Scheduled, History, My Stats, Settings, and History lists every recorded call, outgoing and incoming, newest first, 50 rows per page with Load-more (`specs/call-history.md` — History tab in a five-tab bar; Paged list capped at 1000 rows).
-- [ ] A row shows the number, an out or in mark, the date-time, and the result — connected with talk time, or not connected — and carries Copy, WhatsApp, and the Scheduled badge when the number has an active booking (`specs/call-history.md` — Row contents and empty state).
-- [ ] With no calls yet the tab reads "No calls yet." (`specs/call-history.md` — Empty state).
+- [x] The tab bar holds Dialer, Scheduled, History, My Stats, Settings, and History lists every recorded call, outgoing and incoming, newest first, 50 rows per page with Load-more (`specs/call-history.md` — History tab in a five-tab bar; Paged list capped at 1000 rows).
+- [x] A row shows the number, an out or in mark, the date-time, and the result — connected with talk time, or not connected — and carries Copy, WhatsApp, and the Scheduled badge when the number has an active booking (`specs/call-history.md` — Row contents and empty state).
+- [x] With no calls yet the tab reads "No calls yet." (`specs/call-history.md` — Empty state).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 18: App — the Scheduled tab lists every booking
 

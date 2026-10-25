@@ -1,11 +1,17 @@
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import {
   CardSim,
   ChevronRight,
   LogOut,
+  MessageCircle,
   ShieldMinus,
   Trash2,
   type LucideIcon,
@@ -17,6 +23,7 @@ import { useClearLocalData } from '../hooks/use-clear-local-data';
 import { useLogout } from '../hooks/use-logout';
 import { CallingSimScreen } from './calling-sim-screen';
 import { DoNotTrackScreen } from './do-not-track-screen';
+import { WhatsAppScreen } from './whatsapp-screen';
 
 function SettingsHeader() {
   return (
@@ -62,16 +69,20 @@ function SettingsMenuRow({
         <Text className="text-base font-bold">{title}</Text>
         <Text className="text-xs text-muted-foreground">{subtitle}</Text>
       </View>
-      <Icon as={ChevronRight} size={20} className="shrink-0 text-muted-foreground" />
+      <Icon
+        as={ChevronRight}
+        size={20}
+        className="shrink-0 text-muted-foreground"
+      />
     </Button>
   );
 }
 
 function buildDeleteMessage(pendingCallCount: number): string {
   const singleCallCount = 1;
-  const callWord: string = pendingCallCount === singleCallCount ? 'call' : 'calls';
-  const deleteMessage: string =
-    `This deletes ${pendingCallCount} ${callWord} not yet sent to the server. Cannot be undone.`;
+  const callWord: string =
+    pendingCallCount === singleCallCount ? 'call' : 'calls';
+  const deleteMessage: string = `This deletes ${pendingCallCount} ${callWord} not yet sent to the server. Cannot be undone.`;
   return deleteMessage;
 }
 
@@ -94,13 +105,18 @@ function ClearConfirmDialog({
 }: ClearConfirmDialogProps) {
   const deleteMessage: string = buildDeleteMessage(pendingCallCount);
   return (
-    <Dialog open={isOpen} onOpenChange={nextOpen => (!nextOpen ? onCancel() : undefined)}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={nextOpen => (!nextOpen ? onCancel() : undefined)}
+    >
       <DialogContent className="max-w-sm rounded-3xl p-6">
         <View className="h-12 w-12 items-center justify-center rounded-2xl bg-destructive/10">
           <Icon as={Trash2} size={24} className="text-destructive" />
         </View>
         <View className="gap-1.5">
-          <DialogTitle className="text-base font-bold leading-snug">{deleteMessage}</DialogTitle>
+          <DialogTitle className="text-base font-bold leading-snug">
+            {deleteMessage}
+          </DialogTitle>
           <DialogDescription className="text-xs">
             The numbers already on the server stay exactly as they are.
           </DialogDescription>
@@ -125,7 +141,9 @@ function ClearConfirmDialog({
             onPress={onConfirm}
             disabled={isClearing}
           >
-            <Text className="text-xs font-bold">{isClearing ? 'Deleting…' : 'Delete'}</Text>
+            <Text className="text-xs font-bold">
+              {isClearing ? 'Deleting…' : 'Delete'}
+            </Text>
           </Button>
         </View>
       </DialogContent>
@@ -137,6 +155,7 @@ export function SettingsScreen() {
   const { top: topInset } = useSafeAreaInsets();
   const [isDoNotTrackListOpen, setIsDoNotTrackListOpen] = useState(false);
   const [isCallingSimPickerOpen, setIsCallingSimPickerOpen] = useState(false);
+  const [isWhatsAppSettingsOpen, setIsWhatsAppSettingsOpen] = useState(false);
   const {
     pendingCallCount,
     isClearDialogOpen,
@@ -164,12 +183,24 @@ export function SettingsScreen() {
     setIsCallingSimPickerOpen(false);
   };
 
+  const openWhatsAppSettings = (): void => {
+    setIsWhatsAppSettingsOpen(true);
+  };
+
+  const closeWhatsAppSettings = (): void => {
+    setIsWhatsAppSettingsOpen(false);
+  };
+
   if (isDoNotTrackListOpen) {
     return <DoNotTrackScreen onBack={closeDoNotTrackList} />;
   }
 
   if (isCallingSimPickerOpen) {
     return <CallingSimScreen onBack={closeCallingSimPicker} />;
+  }
+
+  if (isWhatsAppSettingsOpen) {
+    return <WhatsAppScreen onBack={closeWhatsAppSettings} />;
   }
 
   return (
@@ -180,6 +211,14 @@ export function SettingsScreen() {
           <Text className="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Local data
           </Text>
+          <SettingsMenuRow
+            icon={MessageCircle}
+            iconContainerClassName="bg-primary/10"
+            iconClassName="text-primary"
+            title="WhatsApp"
+            subtitle="Pick the app — WhatsApp or WhatsApp Business — and the first message chats open with."
+            onPress={openWhatsAppSettings}
+          />
           <SettingsMenuRow
             icon={Trash2}
             iconContainerClassName="bg-destructive/10"
@@ -214,12 +253,18 @@ export function SettingsScreen() {
             disabled={isLoggingOut}
           />
           {clearErrorMessage && !isClearDialogOpen ? (
-            <Text role="alert" className="px-1 text-xs font-semibold text-destructive">
+            <Text
+              role="alert"
+              className="px-1 text-xs font-semibold text-destructive"
+            >
               {clearErrorMessage}
             </Text>
           ) : null}
           {logoutErrorMessage ? (
-            <Text role="alert" className="px-1 text-xs font-semibold text-destructive">
+            <Text
+              role="alert"
+              className="px-1 text-xs font-semibold text-destructive"
+            >
               {logoutErrorMessage}
             </Text>
           ) : null}

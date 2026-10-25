@@ -5,8 +5,10 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { Icon } from '@/components/ui/icon';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
+import { Plus } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -188,8 +190,13 @@ export function DoNotTrackScreen({ onBack }: DoNotTrackScreenProps) {
         title="Do not track numbers"
         onBack={onBack}
         action={
-          <Button className="rounded-xl px-3.5" onPress={openAddDialog}>
-            <Text className="text-sm font-semibold">Add number</Text>
+          <Button
+            size="icon"
+            className="rounded-xl"
+            onPress={openAddDialog}
+            accessibilityLabel="Add number"
+          >
+            <Icon as={Plus} size={20} className="text-primary-foreground" />
           </Button>
         }
       />

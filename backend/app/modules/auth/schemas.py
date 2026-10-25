@@ -21,9 +21,15 @@ class LoginRequest(BaseModel):
         return value
 
 
+class OfficeHoursWindow(BaseModel):
+    start_time: str
+    end_time: str
+
+
 class LoginResponse(BaseModel):
     token: str
     id: int
     role: str
     name: str
     country: str
+    office_hours: OfficeHoursWindow

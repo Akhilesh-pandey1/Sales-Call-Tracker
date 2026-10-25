@@ -6,8 +6,10 @@ import notifee, {
   type TimestampTrigger,
 } from '@notifee/react-native';
 import { readStoredCountry } from '@/features/auth';
+import { scheduleExpireMs } from '@/config/app-config';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import { readAreNotificationsEnabled } from './reminder-settings';
+import { emitBookingsChanged } from './booking-change-events';
 import {
   deleteScheduledRemindersByLeadIdList,
   readAllScheduledReminders,
@@ -18,6 +20,14 @@ import {
 function toReminderNotificationId(leadId: number): string {
   const reminderIdPrefix = 'reminder-';
   return `${reminderIdPrefix}${leadId}`;
+}
+
+function readReminderTimeOrNull(scheduledAt: string): number | null {
+  const scheduledAtMs = new Date(scheduledAt).getTime();
+  if (Number.isNaN(scheduledAtMs)) {
+    return null;
+  }
+  return scheduledAtMs;
 }
 
 function toBookedNumberReminderKey(phoneNumber: string): number {
@@ -94,6 +104,7 @@ export async function setBookedLeadReminder(
     scheduledReminder.phoneNumber,
     scheduledReminder.scheduledAt,
   );
+  emitBookingsChanged();
   const areNotificationsEnabled = await readAreNotificationsEnabled();
   if (!areNotificationsEnabled) {
     return;
@@ -121,29 +132,51 @@ export async function setBookedNumberReminder(
   await setBookedLeadReminder(bookedNumberReminder);
 }
 
-export async function cancelReminderForCalledNumber(
-  calledPhoneNumber: string,
+async function removeRemindersByLeadIdList(leadIdList: number[]): Promise<void> {
+  await deleteScheduledRemindersByLeadIdList(leadIdList);
+  const cancelTriggerList = leadIdList.map(leadId =>
+    notifee.cancelTriggerNotification(toReminderNotificationId(leadId)),
+  );
+  await Promise.all(cancelTriggerList);
+  emitBookingsChanged();
+}
+
+export async function removeScheduledReminderForNumber(
+  handledPhoneNumber: string,
 ): Promise<void> {
   const countryCode = await readStoredCountry();
   if (countryCode === null) {
     return;
   }
   const reminders = await readAllScheduledReminders();
-  const calledNormalizedNumber = normalizePhoneNumber(calledPhoneNumber, countryCode);
+  const handledNormalizedNumber = normalizePhoneNumber(handledPhoneNumber, countryCode);
   const matchedLeadIdList = reminders
     .filter(
       reminder =>
-        normalizePhoneNumber(reminder.phoneNumber, countryCode) === calledNormalizedNumber,
+        normalizePhoneNumber(reminder.phoneNumber, countryCode) === handledNormalizedNumber,
     )
     .map(reminder => reminder.leadId);
   if (matchedLeadIdList.length === 0) {
     return;
   }
-  await deleteScheduledRemindersByLeadIdList(matchedLeadIdList);
-  const cancelTriggerList = matchedLeadIdList.map(leadId =>
-    notifee.cancelTriggerNotification(toReminderNotificationId(leadId)),
-  );
-  await Promise.all(cancelTriggerList);
+  await removeRemindersByLeadIdList(matchedLeadIdList);
+}
+
+export async function removeHandledScheduledBookings(
+  currentTimeMs: number,
+): Promise<void> {
+  const reminders = await readAllScheduledReminders();
+  const expireCutoffMs = currentTimeMs - scheduleExpireMs;
+  const handledLeadIdList = reminders
+    .filter(reminder => {
+      const reminderTimeMs = readReminderTimeOrNull(reminder.scheduledAt);
+      return reminderTimeMs !== null && reminderTimeMs < expireCutoffMs;
+    })
+    .map(reminder => reminder.leadId);
+  if (handledLeadIdList.length === 0) {
+    return;
+  }
+  await removeRemindersByLeadIdList(handledLeadIdList);
 }
 
 export async function rebuildBookedLeadReminders(): Promise<void> {

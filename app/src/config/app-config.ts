@@ -15,6 +15,9 @@ const backspaceLongPressClearMs: number =
   appConfigJson.backspaceLongPressClearMs;
 const callHistoryMaxRows: number = appConfigJson.callHistoryMaxRows;
 const myListMaxNumbers: number = appConfigJson.my_list_max_numbers;
+const scheduleExpireHours: number = appConfigJson.schedule_expire_hours;
+const millisecondsPerHour: number = 60 * 60 * 1000;
+const scheduleExpireMs: number = scheduleExpireHours * millisecondsPerHour;
 
 export {
   apiBaseUrl,
@@ -27,5 +30,6 @@ export {
   maxLeadAttempts,
   maxScheduleAheadDays,
   minMsBetweenJanitorSweeps,
+  scheduleExpireMs,
   stalePendingCallAgeMs,
 };

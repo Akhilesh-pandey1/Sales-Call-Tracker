@@ -6,6 +6,7 @@ export { syncPendingCallsSafely } from './lib/tracking-pipeline';
 export { submitTrackedCall } from './lib/call-submit';
 export { setBookedLeadReminder, setBookedNumberReminder } from './lib/call-reminders';
 export { subscribeToReminderPress } from './lib/reminder-press-events';
+export { subscribeToBookingsChanged } from './lib/booking-change-events';
 export { readLiveCallState } from './live-call-state';
 export { subscribeToCallEnded } from './sync-events';
 export {

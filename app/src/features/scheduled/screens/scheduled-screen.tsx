@@ -15,8 +15,8 @@ import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
 import {
   useScheduledReminders,
   type ScheduledBooking,
-  type ScheduledBookingState,
 } from '../hooks/use-scheduled-reminders';
+import { type ScheduledBookingState } from '../lib/booking-state';
 
 const bookedDayMonthFormatter = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
@@ -207,8 +207,22 @@ function BookingsEmptyView() {
   );
 }
 
+function DueCountLine({ dueCount }: { dueCount: number }) {
+  const minimumDueCountForLine = 1;
+  if (dueCount < minimumDueCountForLine) {
+    return null;
+  }
+  const notCalledLine = `You have ${dueCount} leads you have not called.`;
+  return (
+    <Text className="mt-3 px-1 text-xs font-semibold text-muted-foreground">
+      {notCalledLine}
+    </Text>
+  );
+}
+
 type BookingsListProps = {
   bookings: ScheduledBooking[];
+  dueBookingCount: number;
   onOpenBooking: () => void;
   onCopyPhoneNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
@@ -216,6 +230,7 @@ type BookingsListProps = {
 
 function BookingsList({
   bookings,
+  dueBookingCount,
   onOpenBooking,
   onCopyPhoneNumber,
   onOpenWhatsAppChat,
@@ -225,6 +240,7 @@ function BookingsList({
       data={bookings}
       keyExtractor={booking => String(booking.leadId)}
       contentContainerClassName="px-3 pb-4"
+      ListHeaderComponent={<DueCountLine dueCount={dueBookingCount} />}
       renderItem={({ item }) => (
         <BookingRow
           booking={item}
@@ -238,7 +254,7 @@ function BookingsList({
 }
 
 export function ScheduledScreen() {
-  const { bookings, isLoading, errorMessage, reloadBookings } =
+  const { bookings, dueBookingCount, isLoading, errorMessage, reloadBookings } =
     useScheduledReminders();
   const navigation =
     useNavigation<BottomTabNavigationProp<MainTabsParamList>>();
@@ -269,6 +285,7 @@ export function ScheduledScreen() {
   ) : (
     <BookingsList
       bookings={bookings}
+      dueBookingCount={dueBookingCount}
       onOpenBooking={handleOpenBooking}
       onCopyPhoneNumber={handleCopyPhoneNumber}
       onOpenWhatsAppChat={handleOpenWhatsAppChat}

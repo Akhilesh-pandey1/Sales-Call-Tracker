@@ -4,22 +4,14 @@ import { Text } from '@/components/ui/text';
 import type { LucideIcon } from 'lucide-react-native';
 import { Download, Play, Trash2, Upload } from 'lucide-react-native';
 import { useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  View,
-  type ListRenderItemInfo,
-} from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { useClearMyList } from '../hooks/use-clear-my-list';
 import { useMyList } from '../hooks/use-my-list';
 import { useMyListDownload } from '../hooks/use-my-list-download';
 import { useMyListUpload } from '../hooks/use-my-list-upload';
-import type { MyListCounts, MyListNumberItem } from '../types';
 import { ClearListDialog } from './clear-list-dialog';
-import { MyListCountChips } from './my-list-count-chips';
 import { MyListEmptyState } from './my-list-empty-state';
-import { MyListNumberRow } from './my-list-number-row';
+import { MyListSummaryCards } from './my-list-summary-cards';
 import { UploadNumbersDialog } from './upload-numbers-dialog';
 
 function MyListFooterNote() {
@@ -54,111 +46,24 @@ function MyListActionButton({ label, icon, iconClass, onPress }: MyListActionBut
   );
 }
 
-type MyListHeaderProps = {
-  counts: MyListCounts;
-  hasNumbers: boolean;
-  onPressUpload: () => void;
-  onPressDownload: () => void;
-  onPressClear: () => void;
-  onPressStartCalling: () => void;
-};
-
-function MyListHeader({
-  counts,
-  hasNumbers,
-  onPressUpload,
-  onPressDownload,
-  onPressClear,
-  onPressStartCalling,
-}: MyListHeaderProps) {
-  return (
-    <View className="px-5 pt-4">
-      {hasNumbers ? (
-        <View>
-          <View className="flex-row gap-2">
-            <MyListActionButton
-              label="Upload"
-              icon={Upload}
-              iconClass="text-primary"
-              onPress={onPressUpload}
-            />
-            <MyListActionButton
-              label="Download"
-              icon={Download}
-              iconClass="text-primary"
-              onPress={onPressDownload}
-            />
-            <MyListActionButton
-              label="Clear"
-              icon={Trash2}
-              iconClass="text-destructive"
-              onPress={onPressClear}
-            />
-          </View>
-          <Button
-            onPress={onPressStartCalling}
-            className="mt-2 h-12 rounded-2xl bg-accent active:bg-accent/90"
-          >
-            <Icon as={Play} size={20} className="text-accent-foreground" />
-            <Text className="text-base font-bold text-accent-foreground">Start Calling</Text>
-          </Button>
-        </View>
-      ) : null}
-      <View className={hasNumbers ? 'mt-5' : ''}>
-        <MyListCountChips counts={counts} />
-      </View>
-    </View>
-  );
-}
-
-function MyListLoadingView() {
-  return (
-    <View className="items-center py-16">
-      <ActivityIndicator size="large" className="text-primary" />
-    </View>
-  );
-}
-
-function extractNumberRowKey(numberRow: MyListNumberItem): string {
-  return numberRow.id.toString();
-}
-
-function renderNumberItem({ item }: ListRenderItemInfo<MyListNumberItem>) {
-  return (
-    <View className="mx-5">
-      <MyListNumberRow phoneNumber={item.phoneNumber} badge={item.badge} />
-    </View>
-  );
-}
-
-function NumberRowSeparator() {
-  return <View className="h-2" />;
-}
-
 type MyListViewProps = {
   onStartCalling: () => void;
 };
 
 export function MyListView({ onStartCalling }: MyListViewProps) {
-  const { numberRows, counts, isLoading, errorMessage, reloadListNumbers } = useMyList();
+  const { counts, hasNumbers, errorMessage, reloadListCounts } = useMyList();
   const upload = useMyListUpload();
   const download = useMyListDownload();
-  const clearList = useClearMyList(reloadListNumbers);
+  const clearList = useClearMyList(reloadListCounts);
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
 
   const handleOpenUploadDialog = () => setIsUploadDialogOpen(true);
   const handleCloseUploadDialog = () => setIsUploadDialogOpen(false);
   const handleUploaded = () => {
     setIsUploadDialogOpen(false);
-    reloadListNumbers();
+    reloadListCounts();
   };
   const handleDownloadPress = () => download.exportListToCsv();
-
-  const listEmptyView = isLoading ? (
-    <MyListLoadingView />
-  ) : (
-    <MyListEmptyState onPressUpload={handleOpenUploadDialog} />
-  );
 
   return (
     <View className="flex-1 bg-background">
@@ -170,26 +75,51 @@ export function MyListView({ onStartCalling }: MyListViewProps) {
           {errorMessage}
         </Text>
       ) : null}
-      <FlatList
-        data={numberRows}
-        keyExtractor={extractNumberRowKey}
-        renderItem={renderNumberItem}
-        ItemSeparatorComponent={NumberRowSeparator}
-        ListHeaderComponent={
-          <MyListHeader
-            counts={counts}
-            hasNumbers={numberRows.length > 0}
-            onPressUpload={handleOpenUploadDialog}
-            onPressDownload={handleDownloadPress}
-            onPressClear={clearList.openClearDialog}
-            onPressStartCalling={onStartCalling}
-          />
-        }
-        ListEmptyComponent={listEmptyView}
-        ListFooterComponent={
-          numberRows.length > 0 ? <MyListFooterNote /> : undefined
-        }
-      />
+      <ScrollView contentContainerClassName="pb-6">
+        <View className="px-5 pt-4">
+          {hasNumbers ? (
+            <View>
+              <View className="flex-row gap-2">
+                <MyListActionButton
+                  label="Upload"
+                  icon={Upload}
+                  iconClass="text-primary"
+                  onPress={handleOpenUploadDialog}
+                />
+                <MyListActionButton
+                  label="Download"
+                  icon={Download}
+                  iconClass="text-primary"
+                  onPress={handleDownloadPress}
+                />
+                <MyListActionButton
+                  label="Clear"
+                  icon={Trash2}
+                  iconClass="text-destructive"
+                  onPress={clearList.openClearDialog}
+                />
+              </View>
+              <Button
+                onPress={onStartCalling}
+                className="mt-2 h-12 rounded-2xl bg-accent active:bg-accent/90"
+              >
+                <Icon as={Play} size={20} className="text-accent-foreground" />
+                <Text className="text-base font-bold text-accent-foreground">
+                  Start Calling
+                </Text>
+              </Button>
+            </View>
+          ) : null}
+          <View className={hasNumbers ? 'mt-5' : ''}>
+            <MyListSummaryCards counts={counts} />
+          </View>
+        </View>
+        {hasNumbers ? (
+          <MyListFooterNote />
+        ) : (
+          <MyListEmptyState onPressUpload={handleOpenUploadDialog} />
+        )}
+      </ScrollView>
       <UploadNumbersDialog
         isOpen={isUploadDialogOpen}
         onClose={handleCloseUploadDialog}

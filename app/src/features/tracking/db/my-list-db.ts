@@ -2,7 +2,6 @@ import { readStoredCountry } from '@/features/auth';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import type { CallOutcome } from '../types';
 import type { Transaction } from 'react-native-sqlite-storage';
-import { buildCallKey } from './call-key';
 import { runInTransaction, runQuery } from './database';
 
 export type MyListNumberStatus = 'left' | 'called';
@@ -15,11 +14,26 @@ export type MyListNumber = {
   isDoNotCall: boolean;
   notes: string | null;
   calledAt: string | null;
-  calledDurationSeconds: number | null;
+};
+
+export type MyListCounts = {
+  totalCount: number;
+  leftCount: number;
+  calledCount: number;
+  interestedCount: number;
+  doNotCallCount: number;
 };
 
 interface ListCountRow {
   total: number;
+}
+
+interface MyListCountsDbRow {
+  total_count: number;
+  left_count: number;
+  called_count: number;
+  interested_count: number;
+  do_not_call_count: number;
 }
 
 interface MyListNumberDbRow {
@@ -32,39 +46,9 @@ interface MyListNumberDbRow {
   called_at: string | null;
 }
 
-interface CalledCallDurationRow {
-  phone_number: string;
-  call_at: string;
-  duration_seconds: number;
-}
-
-async function readCalledDurationsByCall(): Promise<Map<string, number>> {
-  const readCalledDurationsSql =
-    'SELECT phone_number, call_at, duration_seconds FROM call_history';
-  const queryResult = await runQuery(readCalledDurationsSql, []);
-  const calledDurationsByCall = new Map<string, number>();
-  for (let rowIndex = 0; rowIndex < queryResult.rows.length; rowIndex += 1) {
-    const durationRow = queryResult.rows.item(rowIndex) as CalledCallDurationRow;
-    const durationKey = buildCallKey(
-      durationRow.phone_number,
-      durationRow.call_at,
-    );
-    calledDurationsByCall.set(durationKey, durationRow.duration_seconds);
-  }
-  return calledDurationsByCall;
-}
-
-function toMyListNumber(
-  dbRow: MyListNumberDbRow,
-  calledDurationsByCall: Map<string, number>,
-): MyListNumber {
+function toMyListNumber(dbRow: MyListNumberDbRow): MyListNumber {
   const status: MyListNumberStatus =
     dbRow.status === 'called' ? 'called' : 'left';
-  let calledDurationSeconds: number | null = null;
-  if (dbRow.called_at !== null) {
-    const durationKey = buildCallKey(dbRow.phone_number, dbRow.called_at);
-    calledDurationSeconds = calledDurationsByCall.get(durationKey) ?? null;
-  }
   const listNumber: MyListNumber = {
     id: dbRow.id,
     phoneNumber: dbRow.phone_number,
@@ -73,7 +57,6 @@ function toMyListNumber(
     isDoNotCall: dbRow.do_not_call === 1,
     notes: dbRow.notes,
     calledAt: dbRow.called_at,
-    calledDurationSeconds,
   };
   return listNumber;
 }
@@ -87,17 +70,35 @@ export async function readMyListNumbers(): Promise<MyListNumber[]> {
   const readListNumbersSql =
     'SELECT id, phone_number, status, interested, do_not_call, notes, called_at ' +
     'FROM my_list_numbers ORDER BY id ASC';
-  const [queryResult, calledDurationsByCall] = await Promise.all([
-    runQuery(readListNumbersSql, []),
-    readCalledDurationsByCall(),
-  ]);
+  const queryResult = await runQuery(readListNumbersSql, []);
   const listNumbers: MyListNumber[] = [];
   for (let rowIndex = 0; rowIndex < queryResult.rows.length; rowIndex += 1) {
     const dbRow = queryResult.rows.item(rowIndex) as MyListNumberDbRow;
-    const listNumber = toMyListNumber(dbRow, calledDurationsByCall);
+    const listNumber = toMyListNumber(dbRow);
     listNumbers.push(listNumber);
   }
   return listNumbers;
+}
+
+export async function readMyListCounts(): Promise<MyListCounts> {
+  const readListCountsSql =
+    'SELECT ' +
+    'COUNT(*) AS total_count, ' +
+    "COUNT(CASE WHEN status = 'left' THEN 1 END) AS left_count, " +
+    "COUNT(CASE WHEN status = 'called' THEN 1 END) AS called_count, " +
+    'COUNT(CASE WHEN interested = 1 THEN 1 END) AS interested_count, ' +
+    'COUNT(CASE WHEN do_not_call = 1 THEN 1 END) AS do_not_call_count ' +
+    'FROM my_list_numbers';
+  const queryResult = await runQuery(readListCountsSql, []);
+  const countsRow = queryResult.rows.item(0) as MyListCountsDbRow;
+  const listCounts: MyListCounts = {
+    totalCount: countsRow.total_count,
+    leftCount: countsRow.left_count,
+    calledCount: countsRow.called_count,
+    interestedCount: countsRow.interested_count,
+    doNotCallCount: countsRow.do_not_call_count,
+  };
+  return listCounts;
 }
 
 export async function markMyListNumberCalled(

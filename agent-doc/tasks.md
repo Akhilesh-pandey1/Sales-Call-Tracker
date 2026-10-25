@@ -100,12 +100,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The native module launches only the chosen app by its exact package — WhatsApp `com.whatsapp`, Business `com.whatsapp.w4b` — with the number in international format and the optional text, so Android shows the existing chat with that number or a fresh one (`specs/whatsapp-open.md` — Every WhatsApp button opens the chosen app).
-- [ ] When the chosen app is not installed, a toast says "WhatsApp is not installed." and nothing else happens (`specs/whatsapp-open.md` — Missing app handled quietly).
-- [ ] The JS bridge opens the chosen app with the saved first message when the switch is on, and empty when off (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
+- [x] The native module launches only the chosen app by its exact package — WhatsApp `com.whatsapp`, Business `com.whatsapp.w4b` — with the number in international format and the optional text, so Android shows the existing chat with that number or a fresh one (`specs/whatsapp-open.md` — Every WhatsApp button opens the chosen app).
+- [x] When the chosen app is not installed, a toast says "WhatsApp is not installed." and nothing else happens (`specs/whatsapp-open.md` — Missing app handled quietly).
+- [x] The JS bridge opens the chosen app with the saved first message when the switch is on, and empty when off (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 8: App — WhatsApp settings rows saved on the phone
 

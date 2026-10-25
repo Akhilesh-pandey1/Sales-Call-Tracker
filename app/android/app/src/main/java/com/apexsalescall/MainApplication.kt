@@ -17,6 +17,7 @@ class MainApplication : Application(), ReactApplication {
           add(SimCallPackage())
           add(BatteryPackage())
           add(TappedNumberPackage())
+          add(WhatsAppPackage())
         },
     )
   }

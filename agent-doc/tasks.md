@@ -288,9 +288,9 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] A row leaves the list when the notification is tapped, when a call to that number is recorded, or when 24 hours pass its booked time — the same window the server uses to free the lead — with the cleanup running at every app open (`specs/scheduled-bookings.md` — Handled bookings leave the list).
-- [ ] Every app open counts the Due rows and shows the count as a badge on the Scheduled tab, with the line "You have N leads you have not called." (`specs/scheduled-bookings.md` — Due count badge and line).
-- [ ] The tab works fully offline from the phone's own tables (`specs/scheduled-bookings.md` — Works offline).
+- [x] A row leaves the list when the notification is tapped, when a call to that number is recorded, or when 24 hours pass its booked time — the same window the server uses to free the lead — with the cleanup running at every app open (`specs/scheduled-bookings.md` — Handled bookings leave the list).
+- [x] Every app open counts the Due rows and shows the count as a badge on the Scheduled tab, with the line "You have N leads you have not called." (`specs/scheduled-bookings.md` — Due count badge and line).
+- [x] The tab works fully offline from the phone's own tables (`specs/scheduled-bookings.md` — Works offline).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`

@@ -2,7 +2,10 @@ import { syncCalls, type SyncCall } from '../api/calls.api';
 import { getUnsyncedPendingCalls, markPendingCallsSynced } from '../db';
 import { runJanitorSweep } from './call-janitor';
 import { runCallLogSweep } from './call-log-sweep';
-import { rebuildBookedLeadReminders } from './call-reminders';
+import {
+  rebuildBookedLeadReminders,
+  removeHandledScheduledBookings,
+} from './call-reminders';
 import { deleteSyncedCallsBehindSweepLine } from './synced-call-cleanup';
 import { toSyncCallOrNull } from './sync-call';
 
@@ -24,6 +27,7 @@ async function sendUnsyncedPendingCalls(): Promise<void> {
 async function runAppOpenTrackingPipeline(): Promise<void> {
   await runJanitorSweep();
   await runCallLogSweep();
+  await removeHandledScheduledBookings(Date.now());
   await sendUnsyncedPendingCalls();
   await rebuildBookedLeadReminders();
 }

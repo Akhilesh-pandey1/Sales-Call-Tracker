@@ -1,9 +1,3 @@
-import {
-  errorCodes,
-  isErrorWithCode,
-  pick,
-  types,
-} from '@react-native-documents/picker';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {
   findPhoneNumbersInText,
@@ -16,15 +10,12 @@ import { myListMaxNumbers } from '@/config/app-config';
 import { readStoredCountry } from '@/features/auth';
 import { replaceMyListNumbers } from '@/features/tracking';
 
+const uploadFailedMessage = 'Could not add your numbers. Try again.';
+
 interface UploadedNumbers {
   uniqueE164Numbers: string[];
   notValidCount: number;
 }
-
-type ExcelFilePickResult =
-  | { outcome: 'picked'; fileUri: string }
-  | { outcome: 'canceled' }
-  | { outcome: 'wrongFileType' };
 
 function lineHasPhoneLikeDigitRun(line: string): boolean {
   const lineSeparatorPattern = /[\s().+/-]/g;
@@ -79,29 +70,21 @@ function buildUploadToastMessage(
     return addedMessage;
   }
   const notValidMessage = `${notValidCount} not valid.`;
-  return `${addedMessage} ${notValidMessage}`;
+  const fullMessage = `${addedMessage} ${notValidMessage}`;
+  return fullMessage;
 }
 
-async function pickExcelFileUri(): Promise<ExcelFilePickResult> {
-  try {
-    const pickedFiles = await pick({ type: [types.xlsx] });
-    const pickedFile = pickedFiles[0];
-    if (!pickedFile.hasRequestedType) {
-      const wrongFileType: ExcelFilePickResult = { outcome: 'wrongFileType' };
-      return wrongFileType;
-    }
-    const picked: ExcelFilePickResult = {
-      outcome: 'picked',
-      fileUri: pickedFile.uri,
-    };
-    return picked;
-  } catch (error) {
-    if (isErrorWithCode(error) && error.code === errorCodes.OPERATION_CANCELED) {
-      const canceled: ExcelFilePickResult = { outcome: 'canceled' };
-      return canceled;
-    }
-    throw error;
+function isCsvMimeType(fileMimeType: string | null): boolean {
+  if (fileMimeType === null) {
+    return false;
   }
+  return fileMimeType.includes('csv');
+}
+
+async function readCsvFileText(fileUri: string): Promise<string> {
+  const fileResponse = await fetch(fileUri);
+  const csvText = await fileResponse.text();
+  return csvText;
 }
 
 async function readExcelFileText(fileUri: string): Promise<string> {
@@ -113,6 +96,18 @@ async function readExcelFileText(fileUri: string): Promise<string> {
   );
   const sheetText = sheetTexts.join('\n');
   return sheetText;
+}
+
+async function readPickedListFileText(
+  fileMimeType: string | null,
+  fileUri: string,
+): Promise<string> {
+  if (isCsvMimeType(fileMimeType)) {
+    const csvText = await readCsvFileText(fileUri);
+    return csvText;
+  }
+  const excelText = await readExcelFileText(fileUri);
+  return excelText;
 }
 
 async function storePhoneNumbersFromText(
@@ -135,8 +130,11 @@ async function storePhoneNumbersFromText(
 
 export type UseMyListUpload = {
   isUploading: boolean;
-  uploadNumbersFromText: (rawText: string) => Promise<void>;
-  uploadNumbersFromExcelFile: () => Promise<void>;
+  uploadNumbersFromText: (rawText: string) => Promise<boolean>;
+  uploadNumbersFromFile: (
+    fileMimeType: string | null,
+    fileUri: string,
+  ) => Promise<boolean>;
   copyAiPrompt: () => Promise<void>;
 };
 
@@ -144,18 +142,22 @@ export function useMyListUpload(): UseMyListUpload {
   const [isUploading, setIsUploading] = useState(false);
 
   const uploadNumbersFromText = useCallback(
-    async (rawText: string): Promise<void> => {
-      const uploadFailedMessage = 'Could not add your numbers. Try again.';
+    async (rawText: string): Promise<boolean> => {
       setIsUploading(true);
       try {
         const countryCode = await readStoredCountry();
         if (countryCode === null) {
           ToastAndroid.show(uploadFailedMessage, ToastAndroid.SHORT);
-          return;
+          const notUploaded = false;
+          return notUploaded;
         }
         await storePhoneNumbersFromText(rawText, countryCode);
+        const uploaded = true;
+        return uploaded;
       } catch {
         ToastAndroid.show(uploadFailedMessage, ToastAndroid.SHORT);
+        const notUploaded = false;
+        return notUploaded;
       } finally {
         setIsUploading(false);
       }
@@ -163,24 +165,20 @@ export function useMyListUpload(): UseMyListUpload {
     [],
   );
 
-  const uploadNumbersFromExcelFile = useCallback(async (): Promise<void> => {
-    const uploadFailedMessage = 'Could not add your numbers. Try again.';
-    const wrongFileTypeMessage = 'Please pick an Excel (.xlsx) file.';
-    try {
-      const pickResult = await pickExcelFileUri();
-      if (pickResult.outcome === 'canceled') {
-        return;
+  const uploadNumbersFromFile = useCallback(
+    async (fileMimeType: string | null, fileUri: string): Promise<boolean> => {
+      try {
+        const fileText = await readPickedListFileText(fileMimeType, fileUri);
+        const uploaded = await uploadNumbersFromText(fileText);
+        return uploaded;
+      } catch {
+        ToastAndroid.show(uploadFailedMessage, ToastAndroid.SHORT);
+        const notUploaded = false;
+        return notUploaded;
       }
-      if (pickResult.outcome === 'wrongFileType') {
-        ToastAndroid.show(wrongFileTypeMessage, ToastAndroid.SHORT);
-        return;
-      }
-      const sheetText = await readExcelFileText(pickResult.fileUri);
-      await uploadNumbersFromText(sheetText);
-    } catch {
-      ToastAndroid.show(uploadFailedMessage, ToastAndroid.SHORT);
-    }
-  }, [uploadNumbersFromText]);
+    },
+    [uploadNumbersFromText],
+  );
 
   const copyAiPrompt = useCallback(async (): Promise<void> => {
     const promptCopiedMessage = 'Prompt copied. Paste it into ChatGPT.';
@@ -193,5 +191,11 @@ export function useMyListUpload(): UseMyListUpload {
     ToastAndroid.show(promptCopiedMessage, ToastAndroid.SHORT);
   }, []);
 
-  return { isUploading, uploadNumbersFromText, uploadNumbersFromExcelFile, copyAiPrompt };
+  const upload: UseMyListUpload = {
+    isUploading,
+    uploadNumbersFromText,
+    uploadNumbersFromFile,
+    copyAiPrompt,
+  };
+  return upload;
 }

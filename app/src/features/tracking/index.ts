@@ -17,7 +17,8 @@ export {
   insertPendingCall,
   readAllScheduledReminders,
   readDoNotTrackNumbers,
+  readMyListNumbers,
   replaceMyListNumbers,
 } from './db';
-export type { ScheduledReminder } from './db';
+export type { MyListNumber, MyListNumberStatus, ScheduledReminder } from './db';
 export type { CallOutcome } from './types';

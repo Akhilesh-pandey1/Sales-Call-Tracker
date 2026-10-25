@@ -160,15 +160,15 @@
 
 **Blocked by:** 9, 10
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The pill switch shows Keypad | Automated | My List, and the tab shows Left, Called, Interested, and Do not call count chips matching the table (`specs/my-list.md` — My List as the third pill item).
-- [ ] One row per number carries its badge — Left, Connected, Not connected, Interested, or Do not call — and everything on the tab works with no internet (`specs/my-list.md` — One badge per row; Works offline).
-- [ ] With no numbers stored the tab shows its empty state with an Upload button (`testing.md` — My List manual pass).
+- [x] The pill switch shows Keypad | Automated | My List, and the tab shows Left, Called, Interested, and Do not call count chips matching the table (`specs/my-list.md` — My List as the third pill item).
+- [x] One row per number carries its badge — Left, Connected, Not connected, Interested, or Do not call — and everything on the tab works with no internet (`specs/my-list.md` — One badge per row; Works offline).
+- [x] With no numbers stored the tab shows its empty state with an Upload button (`testing.md` — My List manual pass).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 12: Start Calling dials the list
 

@@ -1,8 +1,53 @@
 import type { Transaction } from 'react-native-sqlite-storage';
-import { runInTransaction } from './database';
+import { runInTransaction, runQuery } from './database';
+
+export type MyListNumberStatus = 'left' | 'called';
+
+export type MyListNumber = {
+  id: number;
+  phoneNumber: string;
+  status: MyListNumberStatus;
+  isInterested: boolean;
+  isDoNotCall: boolean;
+};
 
 interface ListCountRow {
   total: number;
+}
+
+interface MyListNumberDbRow {
+  id: number;
+  phone_number: string;
+  status: string;
+  interested: number;
+  do_not_call: number;
+}
+
+function toMyListNumber(dbRow: MyListNumberDbRow): MyListNumber {
+  const status: MyListNumberStatus =
+    dbRow.status === 'called' ? 'called' : 'left';
+  const listNumber: MyListNumber = {
+    id: dbRow.id,
+    phoneNumber: dbRow.phone_number,
+    status,
+    isInterested: dbRow.interested === 1,
+    isDoNotCall: dbRow.do_not_call === 1,
+  };
+  return listNumber;
+}
+
+export async function readMyListNumbers(): Promise<MyListNumber[]> {
+  const readListNumbersSql =
+    'SELECT id, phone_number, status, interested, do_not_call ' +
+    'FROM my_list_numbers ORDER BY id ASC';
+  const queryResult = await runQuery(readListNumbersSql, []);
+  const listNumbers: MyListNumber[] = [];
+  for (let rowIndex = 0; rowIndex < queryResult.rows.length; rowIndex += 1) {
+    const dbRow = queryResult.rows.item(rowIndex) as MyListNumberDbRow;
+    const listNumber = toMyListNumber(dbRow);
+    listNumbers.push(listNumber);
+  }
+  return listNumbers;
 }
 
 function insertFreshLeftRows(

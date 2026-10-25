@@ -20,7 +20,8 @@ export {
   readAllScheduledReminders,
   readCallHistoryPage,
   readDoNotTrackNumbers,
+  readMyListNumbers,
   replaceMyListNumbers,
 } from './db';
-export type { CallHistoryEntry, ScheduledReminder } from './db';
+export type { CallHistoryEntry, MyListNumber, MyListNumberStatus, ScheduledReminder } from './db';
 export type { CallOutcome } from './types';

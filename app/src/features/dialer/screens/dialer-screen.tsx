@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { backspaceLongPressClearMs } from '@/config/app-config';
+import { MyListView } from '@/features/my-list';
 import { usePermissions } from '@/features/tracking';
 import { cn } from '@/lib/utils';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
@@ -27,7 +28,7 @@ import {
 import { subscribeToTappedNumber } from '../lib/tapped-number-events';
 import type { PostCallSubmitData } from '../types';
 
-type DialerSubTab = 'keypad' | 'automated';
+type DialerSubTab = 'keypad' | 'automated' | 'my-list';
 
 type SubTabButtonProps = {
   label: string;
@@ -61,6 +62,7 @@ function DialerSubTabs({
 }) {
   const handleKeypadPress = () => onSelectSubTab('keypad');
   const handleAutomatedPress = () => onSelectSubTab('automated');
+  const handleMyListPress = () => onSelectSubTab('my-list');
 
   return (
     <View className="items-center border-b border-border bg-card py-2 shadow-xs">
@@ -74,6 +76,11 @@ function DialerSubTabs({
           label="Automated"
           isActive={activeSubTab === 'automated'}
           onPress={handleAutomatedPress}
+        />
+        <SubTabButton
+          label="My List"
+          isActive={activeSubTab === 'my-list'}
+          onPress={handleMyListPress}
         />
       </View>
     </View>
@@ -349,8 +356,10 @@ export function DialerScreen() {
       <DialerSubTabs activeSubTab={activeSubTab} onSelectSubTab={setActiveSubTab} />
       {activeSubTab === 'keypad' ? (
         <KeypadView dialer={dialer} keypadPostCall={keypadPostCall} />
-      ) : (
+      ) : activeSubTab === 'automated' ? (
         <AutomatedView automatedCalling={automatedCalling} />
+      ) : (
+        <MyListView />
       )}
     </View>
   );

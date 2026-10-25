@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Every login creates a `sessions` row and all tokens keep working — a new login never signs an older device out, for managers and salespeople alike; deactivation or deletion still rejects every session (`specs/authentication.md` — One session per login, all staying valid; `database.md` — `sessions`).
-- [ ] A password change deletes the account's other sessions while the session that made the change stays valid, and there is still no logout endpoint (`specs/authentication.md`; `specs/user-management.md` — Edit account).
-- [ ] Each token stored in the old single-token column becomes one `sessions` row, so the update signs nobody out (`specs/authentication.md` — Migration keeps old tokens working).
+- [x] Every login creates a `sessions` row and all tokens keep working — a new login never signs an older device out, for managers and salespeople alike; deactivation or deletion still rejects every session (`specs/authentication.md` — One session per login, all staying valid; `database.md` — `sessions`).
+- [x] A password change deletes the account's other sessions while the session that made the change stays valid, and there is still no logout endpoint (`specs/authentication.md`; `specs/user-management.md` — Edit account).
+- [x] Each token stored in the old single-token column becomes one `sessions` row, so the update signs nobody out (`specs/authentication.md` — Migration keeps old tokens working).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_auth.py tests/modules/test_users.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_auth.py tests/modules/test_users.py -q` in `backend/`
 
 ## Task 2: Backend — outcome choices ride the synced call
 

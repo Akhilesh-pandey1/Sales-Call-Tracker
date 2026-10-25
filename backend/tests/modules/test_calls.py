@@ -22,6 +22,10 @@ from backend.app.extensions import db
 from backend.app.modules.calls.models import Call
 from backend.app.modules.leads import Lead
 from backend.app.modules.users import User
+from backend.tests.modules.session_test_helpers import (
+    create_session_record,
+    fetch_user_session_token,
+)
 
 
 def create_user_fixture(
@@ -37,10 +41,10 @@ def create_user_fixture(
         role=role,
         country=country,
         is_active=is_active,
-        auth_token=token,
     )
     db.session.add(user)
     db.session.commit()
+    create_session_record(user_id=user.id, token=token)
     return user
 
 
@@ -89,7 +93,7 @@ def build_utc_iso_days_from_now(days_from_now: int) -> str:
 def test_sync_valid_batch_saved(app: Flask, client: FlaskClient) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -133,7 +137,7 @@ def test_sync_valid_batch_saved(app: Flask, client: FlaskClient) -> None:
 def test_sync_old_call_dropped(app: Flask, client: FlaskClient) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
         current_time: datetime = now_utc()
 
         old_age_days: int = MAX_CALL_AGE_DAYS + 1
@@ -175,7 +179,7 @@ def test_sync_old_call_dropped(app: Flask, client: FlaskClient) -> None:
 def test_sync_window_boundaries_inclusive(app: Flask, client: FlaskClient) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -225,7 +229,7 @@ def test_sync_out_of_window_call_dropped_with_warning(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -266,7 +270,7 @@ def test_sync_office_hours_gate_applies_to_incoming_calls(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -311,7 +315,7 @@ def test_sync_judges_call_own_start_time_not_sync_moment(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -351,9 +355,9 @@ def test_sync_uses_updated_window_after_manager_change(
         )
         user: User = create_user_fixture()
         manager_headers: dict[str, str] = {
-            "Authorization": f"Bearer {manager.auth_token}"
+            "Authorization": f"Bearer {fetch_user_session_token(manager.id)}"
         }
-        user_headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        user_headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         new_window: dict[str, str] = {"start_time": "08:00", "end_time": "09:30"}
         update_response: Response = client.put(
@@ -397,7 +401,7 @@ def test_sync_malformed_row_skipped_while_valid_saved(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -450,7 +454,7 @@ def test_sync_leaves_outcome_column_empty_on_every_saved_row(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -490,7 +494,7 @@ def test_sync_incoming_call_saved_without_touching_lead(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         existing_lead: Lead = create_lead_fixture(
             phone_number="+919876543210",
@@ -542,7 +546,7 @@ def test_sync_incoming_call_never_creates_lead(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -578,7 +582,7 @@ def test_sync_call_without_direction_saves_as_outgoing(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -604,7 +608,7 @@ def test_sync_invalid_direction_row_skipped_while_valid_saved(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -644,7 +648,7 @@ def test_sync_server_deduplicates_retried_rows(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         batch_one: dict[str, Any] = {
             "calls": [
@@ -702,7 +706,7 @@ def test_phone_number_normalization_local_format(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture(country="IN")
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -728,7 +732,7 @@ def test_phone_number_normalization_international_format(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture(country="IN")
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -754,7 +758,7 @@ def test_phone_number_normalization_unparseable_stored_raw(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture(country="IN")
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -780,7 +784,7 @@ def test_lead_resolution_connected_call_finishes_lead(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         lead: Lead = create_lead_fixture(
             phone_number="+919876543210",
@@ -819,7 +823,7 @@ def test_lead_resolution_unconnected_call_increments_and_locks(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
         current_time: datetime = now_utc()
 
         lead: Lead = create_lead_fixture(
@@ -871,7 +875,7 @@ def test_lead_resolution_stopped_at_attempt_cap(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         starting_attempts: int = MAX_LEAD_ATTEMPTS - 1
         lead: Lead = create_lead_fixture(
@@ -905,7 +909,7 @@ def test_lead_resolution_manual_keypad_call_resolves_lead(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         lead: Lead = create_lead_fixture(
             phone_number="+919876543210",
@@ -937,7 +941,7 @@ def test_sync_call_to_new_number_creates_lead_and_marks_it_done(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -967,7 +971,7 @@ def test_sync_call_to_new_number_burns_attempt_one_when_unconnected(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload: dict[str, Any] = {
             "calls": [
@@ -998,7 +1002,7 @@ def test_sync_repeated_unconnected_calls_to_new_number_stop_lead_at_limit(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         limit_call_ids: list[str] = [
             "call-limit-one",
@@ -1035,7 +1039,7 @@ def test_sync_second_call_to_existing_lead_number_never_creates_second_lead(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         missed_call_payload: dict[str, Any] = {
             "calls": [
@@ -1084,7 +1088,7 @@ def test_lead_resolution_ignores_already_done_or_stopped_lead_for_unconnected_ca
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         done_lead: Lead = create_lead_fixture(
             phone_number="+919876543211",
@@ -1135,7 +1139,7 @@ def test_sync_scheduled_at_schedules_resolved_lead_and_saves_call(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         matched_lead: Lead = create_lead_fixture(
             phone_number="+919876500100",
@@ -1208,7 +1212,7 @@ def test_sync_scheduled_at_books_lead_even_when_call_connects(
 ) -> None:
     with app.app_context():
         user = create_user_fixture()
-        headers = {"Authorization": f"Bearer {user.auth_token}"}
+        headers = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         lead = create_lead_fixture(
             phone_number="+919876500200",
@@ -1264,7 +1268,7 @@ def test_sync_schedule_lifts_done_or_stopped_lead_back_to_waiting(
 ) -> None:
     with app.app_context():
         user = create_user_fixture()
-        headers = {"Authorization": f"Bearer {user.auth_token}"}
+        headers = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         done_lead = create_lead_fixture(
             phone_number="+919876500210",
@@ -1320,7 +1324,7 @@ def test_sync_schedule_by_non_owner_is_refused_and_owner_keeps_booking(
     with app.app_context():
         owner_user = create_user_fixture(name="booking-owner", token="owner-token")
         other_user = create_user_fixture(name="other-caller", token="other-token")
-        other_headers = {"Authorization": f"Bearer {other_user.auth_token}"}
+        other_headers = {"Authorization": f"Bearer {fetch_user_session_token(other_user.id)}"}
 
         booked_days_ahead = 1
         lead = create_lead_fixture(
@@ -1383,7 +1387,7 @@ def test_sync_call_that_stops_a_booked_lead_frees_the_booking(
     with app.app_context():
         owner_user = create_user_fixture(name="stop-owner", token="stop-owner-token")
         other_user = create_user_fixture(name="stop-caller", token="stop-caller-token")
-        other_headers = {"Authorization": f"Bearer {other_user.auth_token}"}
+        other_headers = {"Authorization": f"Bearer {fetch_user_session_token(other_user.id)}"}
 
         attempts_before_final: int = MAX_LEAD_ATTEMPTS - 1
         lead = create_lead_fixture(
@@ -1432,7 +1436,7 @@ def test_sync_owner_rebooks_own_lead_and_new_time_replaces_old(
 ) -> None:
     with app.app_context():
         owner_user = create_user_fixture(name="rebooking-owner", token="rebook-token")
-        owner_headers = {"Authorization": f"Bearer {owner_user.auth_token}"}
+        owner_headers = {"Authorization": f"Bearer {fetch_user_session_token(owner_user.id)}"}
 
         lead = create_lead_fixture(
             phone_number="+919876500230",
@@ -1495,7 +1499,7 @@ def test_sync_success_returns_empty_refused_call_ids(
 ) -> None:
     with app.app_context():
         user = create_user_fixture()
-        headers = {"Authorization": f"Bearer {user.auth_token}"}
+        headers = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         payload = {
             "calls": [
@@ -1521,7 +1525,7 @@ def test_sync_past_or_beyond_horizon_scheduled_at_skipped_and_calls_saved(
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         lead: Lead = create_lead_fixture(
             phone_number="+919876500300",
@@ -1589,7 +1593,7 @@ def test_sync_requires_authentication(client: FlaskClient) -> None:
 def test_sync_refuses_deactivated_user(app: Flask, client: FlaskClient) -> None:
     with app.app_context():
         user: User = create_user_fixture(is_active=False)
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         response: Response = client.post(
             "/api/calls/sync", json={"calls": []}, headers=headers
@@ -1606,7 +1610,7 @@ def test_sync_refuses_deactivated_user(app: Flask, client: FlaskClient) -> None:
 def test_sync_missing_calls_payload(app: Flask, client: FlaskClient) -> None:
     with app.app_context():
         user: User = create_user_fixture()
-        headers: dict[str, str] = {"Authorization": f"Bearer {user.auth_token}"}
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
 
         response: Response = client.post(
             "/api/calls/sync", json={}, headers=headers

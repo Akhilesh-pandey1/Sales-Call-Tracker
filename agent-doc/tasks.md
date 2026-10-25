@@ -225,12 +225,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] One `call_history` row is written per call at the moment the real time and duration are known, before any sync, so queue cleanup never touches history and the list works offline (`specs/call-history.md` — One history row per recorded call).
-- [ ] A Do-not-track number never gets a history row — the same rule tracking follows (`specs/call-history.md` — Do-not-track number gets no row).
-- [ ] The table keeps at most 1000 rows — row 1001 pushes the oldest out (`specs/call-history.md` — Cap pushes the oldest out).
+- [x] One `call_history` row is written per call at the moment the real time and duration are known, before any sync, so queue cleanup never touches history and the list works offline (`specs/call-history.md` — One history row per recorded call).
+- [x] A Do-not-track number never gets a history row — the same rule tracking follows (`specs/call-history.md` — Do-not-track number gets no row).
+- [x] The table keeps at most 1000 rows — row 1001 pushes the oldest out (`specs/call-history.md` — Cap pushes the oldest out).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 16: App — History backfill with the sweep on every open
 

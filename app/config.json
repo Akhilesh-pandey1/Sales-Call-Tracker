@@ -8,5 +8,6 @@
   "maxJanitorAttempts": 5,
   "minMsBetweenJanitorSweeps": 5000,
   "directCallStartTimeoutMs": 8000,
-  "backspaceLongPressClearMs": 500
+  "backspaceLongPressClearMs": 500,
+  "callHistoryMaxRows": 1000
 }

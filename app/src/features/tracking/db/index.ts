@@ -8,6 +8,7 @@ export {
   getUnsyncedPendingCalls,
   insertPendingCall,
   markPendingCallFilled,
+  markPendingCallOutcome,
   markPendingCallsSynced,
 } from './pending-calls-db';
 export type { PendingCall } from './pending-calls-db';

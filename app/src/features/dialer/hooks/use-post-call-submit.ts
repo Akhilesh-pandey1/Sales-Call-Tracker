@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { ToastAndroid } from 'react-native';
-import { submitTrackedCall } from '@/features/tracking';
+import { submitTrackedCall, type CallOutcome } from '@/features/tracking';
 import { readRequestErrorMessage } from '../lib/request-error';
 
 export type PostCallDialogState = {
@@ -14,7 +14,8 @@ export type UsePostCallSubmitResult = Omit<PostCallDialogState, 'isPostCallDialo
   submitPostCall: (
     callId: string | null,
     afterCallSent: (scheduleWasRefused: boolean) => void | Promise<void>,
-    scheduledAt?: string | null,
+    scheduledAt: string | null,
+    outcome: CallOutcome,
   ) => Promise<void>;
 };
 
@@ -31,7 +32,8 @@ export function usePostCallSubmit(): UsePostCallSubmitResult {
     async (
       callId: string | null,
       afterCallSent: (scheduleWasRefused: boolean) => void | Promise<void>,
-      scheduledAt: string | null = null,
+      scheduledAt: string | null,
+      outcome: CallOutcome,
     ): Promise<void> => {
       if (isSubmittingPostCallRef.current) {
         return;
@@ -43,7 +45,7 @@ export function usePostCallSubmit(): UsePostCallSubmitResult {
       let scheduleWasRefused = false;
       try {
         if (callId !== null) {
-          scheduleWasRefused = await submitTrackedCall(callId, scheduledAt);
+          scheduleWasRefused = await submitTrackedCall(callId, scheduledAt, outcome);
           if (scheduleWasRefused) {
             ToastAndroid.show(refusedScheduleToastMessage, ToastAndroid.SHORT);
           }

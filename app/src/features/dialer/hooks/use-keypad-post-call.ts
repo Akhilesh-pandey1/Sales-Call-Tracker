@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import { setBookedNumberReminder } from '@/features/tracking';
+import { setBookedNumberReminder, type CallOutcome } from '@/features/tracking';
 import type { LaunchedCall } from '../lib/call-launcher';
 import { useCallHangUpDetector } from './use-call-hang-up-detector';
 import { useDialogVisibility } from './use-dialog-visibility';
@@ -11,7 +11,7 @@ import {
 export type UseKeypadPostCallResult = PostCallDialogState & {
   trackedCall: LaunchedCall | null;
   trackLaunchedCall: (launchedCall: LaunchedCall | null) => void;
-  submitKeypadPostCall: (scheduledAt: string | null) => Promise<void>;
+  submitKeypadPostCall: (scheduledAt: string | null, outcome: CallOutcome) => Promise<void>;
 };
 
 export function useKeypadPostCall(): UseKeypadPostCallResult {
@@ -55,7 +55,7 @@ export function useKeypadPostCall(): UseKeypadPostCallResult {
   }, [showDialog]);
 
   const submitKeypadPostCall = useCallback(
-    async (scheduledAt: string | null): Promise<void> => {
+    async (scheduledAt: string | null, outcome: CallOutcome): Promise<void> => {
       const trackedCallAtSubmit = trackedCallRef.current;
       const keypadCallId = trackedCallAtSubmit === null ? null : trackedCallAtSubmit.callId;
       const finishKeypadPostCall = async (scheduleWasRefused: boolean): Promise<void> => {
@@ -68,7 +68,7 @@ export function useKeypadPostCall(): UseKeypadPostCallResult {
         }
         closePostCallDialog();
       };
-      await submitPostCall(keypadCallId, finishKeypadPostCall, scheduledAt);
+      await submitPostCall(keypadCallId, finishKeypadPostCall, scheduledAt, outcome);
     },
     [closePostCallDialog, submitPostCall],
   );

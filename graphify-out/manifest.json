@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {
-    "mtime": 1792926878.355692,
-    "ast_hash": "c90529d3a1e95ab3237184c01dee9669",
+    "mtime": 1792927505.240049,
+    "ast_hash": "92ae20750b05eb97ea000667aed19300",
     "semantic_hash": ""
   },
   "backend/app/api/__init__.py": {
@@ -610,8 +610,8 @@
     "semantic_hash": ""
   },
   "backend/app/core/permissions.py": {
-    "mtime": 1792005968.893087,
-    "ast_hash": "d1bae5fd74004232ff0e408ba89a54f7",
+    "mtime": 1792927505.2410526,
+    "ast_hash": "d39a908b74e0680dc9a5c805277f4752",
     "semantic_hash": ""
   },
   "backend/app/core/security.py": {
@@ -630,8 +630,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/auth/__init__.py": {
-    "mtime": 1792004750.1960347,
-    "ast_hash": "944c9a12935d7f4fa727948fce062e8a",
+    "mtime": 1792927505.2425208,
+    "ast_hash": "17623a012d265c2db22450347d8cdac7",
     "semantic_hash": ""
   },
   "backend/app/modules/auth/routes.py": {
@@ -645,8 +645,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/auth/services.py": {
-    "mtime": 1792005279.09628,
-    "ast_hash": "6c083d0198a25a995d9773ca0ecbc6a6",
+    "mtime": 1792927505.2435248,
+    "ast_hash": "d50ffde7b9ac106812a33fdb873e37b0",
     "semantic_hash": ""
   },
   "backend/app/modules/calls/__init__.py": {
@@ -750,13 +750,13 @@
     "semantic_hash": ""
   },
   "backend/app/modules/users/models.py": {
-    "mtime": 1792004191.9222286,
-    "ast_hash": "d7cb27223febda6bc22ab06ad7fa15cb",
+    "mtime": 1792927505.2449386,
+    "ast_hash": "50f846bba8409f61923905c97598c9c5",
     "semantic_hash": ""
   },
   "backend/app/modules/users/routes.py": {
-    "mtime": 1792006850.5050354,
-    "ast_hash": "86fe2fa646ed978295411123737f7700",
+    "mtime": 1792927505.2464316,
+    "ast_hash": "7ad1b91afb96ccc62aab82c727f91e90",
     "semantic_hash": ""
   },
   "backend/app/modules/users/schemas.py": {
@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/users/services.py": {
-    "mtime": 1792006837.3440008,
-    "ast_hash": "807d3135cc1abcafc2e91172f3275134",
+    "mtime": 1792927505.2474527,
+    "ast_hash": "1eebbdd672ed7a3602f260cd959efc7b",
     "semantic_hash": ""
   },
   "backend/app/static_routes.py": {
@@ -785,13 +785,13 @@
     "semantic_hash": ""
   },
   "backend/tests/modules/test_auth.py": {
-    "mtime": 1792005349.037071,
-    "ast_hash": "916a3a722229f01be1f5e8827b612da5",
+    "mtime": 1792927505.2503796,
+    "ast_hash": "693c9fb9355e632574304afb72989cfd",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_calls.py": {
-    "mtime": 1792926878.3584886,
-    "ast_hash": "fa1e6de32fa644db91b1fabf88ca964f",
+    "mtime": 1792927713.6904085,
+    "ast_hash": "c70f7ef869c228300554babb0f2737d2",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_dashboard.py": {
@@ -805,18 +805,18 @@
     "semantic_hash": ""
   },
   "backend/tests/modules/test_leads.py": {
-    "mtime": 1792760747.7029283,
-    "ast_hash": "af5bada1079d00f8c89deaf13da73804",
+    "mtime": 1792927505.2536366,
+    "ast_hash": "fa6e75bfe0c548966823e1cecc753100",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_settings.py": {
-    "mtime": 1792502977.8971267,
-    "ast_hash": "802f25fc2503858f63ac35cb07379163",
+    "mtime": 1792927505.2575243,
+    "ast_hash": "a3babfbfe40d72bade744c3da0727c0d",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_users.py": {
-    "mtime": 1792006889.9846413,
-    "ast_hash": "5f98b5a4b548ef94467cdf0f3ae58d03",
+    "mtime": 1792927505.25897,
+    "ast_hash": "6116127882403d891c5cdc0a91d7b174",
     "semantic_hash": ""
   },
   "backend/tests/test_foundation.py": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792926878.3551702,
-    "ast_hash": "da7685f235d9b7c3388c861c59dc08ee",
+    "mtime": 1792927505.2387762,
+    "ast_hash": "4c30e42a4fcb85e8e5b0f85b64812741",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2335,8 +2335,8 @@
     "semantic_hash": ""
   },
   "backend/tests/modules/dashboard_test_helpers.py": {
-    "mtime": 1792760747.7001736,
-    "ast_hash": "751fe861c25c4138eb26e1cb943236be",
+    "mtime": 1792927505.248963,
+    "ast_hash": "684c6d0d09bf4127c17834be9ba23826",
     "semantic_hash": ""
   },
   "app/src/app/navigation/navigation-ref.ts": {
@@ -2767,6 +2767,16 @@
   "app/src/shared/utils/whatsapp-settings.ts": {
     "mtime": 1792925489.5279758,
     "ast_hash": "1dc357f33eda89a4d251fba9fb4fbd1e",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/auth/models.py": {
+    "mtime": 1792927505.2425208,
+    "ast_hash": "cc9fa497ca7f61cfbe9ba9df5af985bd",
+    "semantic_hash": ""
+  },
+  "backend/tests/modules/session_test_helpers.py": {
+    "mtime": 1792927505.248963,
+    "ast_hash": "c8666fa532dae015cdac77959c0f28a1",
     "semantic_hash": ""
   }
 }

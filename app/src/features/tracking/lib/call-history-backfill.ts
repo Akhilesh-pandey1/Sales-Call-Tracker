@@ -1,6 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PermissionsAndroid } from 'react-native';
-import { readStoredCountry } from '@/features/auth';
+import {
+  readStoredCountry,
+  readStoredOfficeHoursWindow,
+  type OfficeHoursWindow,
+} from '@/features/auth';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import {
   buildCallKey,
@@ -15,6 +19,7 @@ import {
   toEntryTimeMs,
   type CallLogEntry,
 } from './call-log-matcher';
+import { isCallStartInsideOfficeHoursWindow } from './office-hours-window-check';
 import { safeReadCallLogEntries } from './call-log-reader';
 
 const historyLastLoadedStorageKey = 'history_last_loaded_at';
@@ -59,6 +64,7 @@ function collectInsertableHistoryEntries(
   countryCode: string,
   doNotTrackNumberSet: Set<string>,
   storedCallKeySet: Set<string>,
+  officeHoursWindow: OfficeHoursWindow,
 ): CallHistoryEntry[] {
   const insertableEntries: CallHistoryEntry[] = [];
   for (const callLogEntry of callLogEntries) {
@@ -72,6 +78,13 @@ function collectInsertableHistoryEntries(
     const normalizedEntryNumber = normalizePhoneNumber(callLogEntry.phoneNumber, countryCode);
     const isDoNotTrackNumber = doNotTrackNumberSet.has(normalizedEntryNumber);
     if (isDoNotTrackNumber) {
+      continue;
+    }
+    const isOutsideOfficeHoursWindow = !isCallStartInsideOfficeHoursWindow(
+      entryTimeMs,
+      officeHoursWindow,
+    );
+    if (isOutsideOfficeHoursWindow) {
       continue;
     }
     const entryCallAt = new Date(entryTimeMs).toISOString();
@@ -118,9 +131,10 @@ async function refreshCallHistoryFromCallLog(): Promise<void> {
     return;
   }
 
-  const [doNotTrackNumbers, storedCallKeySet] = await Promise.all([
+  const [doNotTrackNumbers, storedCallKeySet, officeHoursWindow] = await Promise.all([
     readDoNotTrackNumbers(),
     readStoredCallKeySet(countryCode),
+    readStoredOfficeHoursWindow(),
   ]);
   const doNotTrackNumberSet = new Set(doNotTrackNumbers);
 
@@ -129,6 +143,7 @@ async function refreshCallHistoryFromCallLog(): Promise<void> {
     countryCode,
     doNotTrackNumberSet,
     storedCallKeySet,
+    officeHoursWindow,
   );
 
   if (insertableEntries.length > 0) {

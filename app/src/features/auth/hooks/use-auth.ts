@@ -10,6 +10,7 @@ import {
 } from '@/shared/api/api-client';
 import { serverUnreachableMessage } from '@/shared/constants/messages';
 import { requestLogin, type LoginResponse } from '../api/auth.api';
+import { writeStoredOfficeHoursWindow } from '../office-hours-window';
 
 export type AuthStatus = 'checking' | 'logged-in' | 'logged-out';
 
@@ -70,6 +71,7 @@ export function useAuth(): {
       await Promise.all([
         writeStoredUserId(loginResponse.id),
         AsyncStorage.setItem(storedCountryKey, loginResponse.country),
+        writeStoredOfficeHoursWindow(loginResponse.office_hours),
       ]);
       await writeStoredToken(loginResponse.token);
       setAuthStatus('logged-in');

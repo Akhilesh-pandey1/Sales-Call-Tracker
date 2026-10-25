@@ -26,6 +26,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Period switch - Today | Yesterday | Last 30 days; drives the KPI cards, Calls by hour, and Top 5
 - KPI cards (4) - Dials, Connected calls, Not connected, Talk minutes. Dials / Connected / Not connected count outgoing calls only (from the app and outside dialers); Talk minutes is TOTAL talk time - outgoing and incoming together. Sub-line shows per-active-person per-day average; the Today card sub-line compares with yesterday instead
 - Calls by hour - ONE bar per hour: total calls that hour, split into two colored segments - outgoing and incoming - sized by share; 30 days shows the daily average per hour; best hour highlighted by total calls
+- Bar hours - bars run from the office opening hour through the last full hour before closing - a 10-to-7 window shows 9 bars (10 through 6); a call starting exactly at closing counts in the last bar
 - Bar counts - each segment's count sits in the vertical middle of its own color, the bar's total on top; a segment under one eighth of the tallest bar shows no count
 - Color legend - one row under the chart: blue dot = outgoing, green dot = incoming
 - Split line under the legend - reads like "142 outgoing · 37 incoming" for the selected period
@@ -172,7 +173,7 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
   - Booking a lead sets a reminder - at the booked time the phone itself shows "Time to call" with the lead's number; tapping the notification opens this screen straight to the booked lead's card, ready to call, and clears that booking from the Scheduled tab; one notification per booking, never repeats
   - Follow-up time field (both popups) - tapping it opens the phone's date picker first, then the time picker; starts at tomorrow 9:00 AM; past dates and dates beyond 30 days cannot be picked
   - Locked popup (both popups) - tapping outside or pressing the back button does nothing; Submit is the only way through
-- Every post-call popup (all views) - carries the same two optional outcome buttons, Interested and Do not call again, plus an optional Notes box; nothing preselected, Submit works with it all empty
+- Every post-call popup (all views) - carries the same two optional outcome buttons, Interested and Do not call again, plus an optional Notes box; the two buttons cannot both be on - tapping one clears the other, and tapping it again clears it too; nothing preselected, Submit works with it all empty
 - Red banner (all views when any call permission is off) - "Calls are not being logged", with a Fix button that opens Android app settings
 
 **Edge cases:**
@@ -201,7 +202,7 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 - Start Calling button - dials the Left numbers one by one
 - Download button - exports the whole list as a CSV (number, status, interested, do-not-call, notes, called date) through Android's share sheet
 - Clear button - wipes the whole list after a confirmation that shows the counts: left and called; the server is never touched
-- Post-call popup - the same outcome buttons and Notes box every popup carries (Screen 7)
+- Post-call popup - the same outcome buttons and Notes box every popup carries, plus the schedule choice and the pre-checked "Go to next call" checkbox (Screen 7); choosing Schedule books the number so it appears on the Scheduled tab with Call, Copy, and WhatsApp
 - Uploading replaces - a number already on the list in any state has its old row deleted and is added fresh as Left; the same number twice in one upload counts once
 - List cap - at most 10,000 numbers
 
@@ -222,11 +223,13 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 - Bookings list - Due first (most overdue at top), then Upcoming soonest first
 - Booking row - the number, the booked date and time, and a state badge: Upcoming (its time has not come) or Due (time passed, not handled)
 - Tap a row - opens the booked lead's card ready to call
-- Call icon per row - starts the call to the number at once
+- Call icon per row - dials the number directly, and the same post-call popup as the keypad follows
 - Reload icon in the header - pulls in newer bookings without reopening the tab
 - Copy button per row - copies the number, "Number copied." toast
 - WhatsApp button per row - opens the chosen WhatsApp app on that number's chat
-- Row leaves the list when - the reminder notification is tapped, the number gets called, or 24 hours pass its booked time
+- WhatsApp tap removes the row - the booking is handled without a call, so it leaves the list at once
+- Call overwrites the booking - the popup after the direct call decides: "Do not schedule" leaves the row removed; a new schedule replaces the old booking with the new date
+- Row also leaves the list when - the reminder notification is tapped, or 24 hours pass its booked time
 
 **Edge cases:**
 - Nothing booked: "Nothing scheduled."
@@ -238,7 +241,7 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 - Every call this phone recorded - dialed out and incoming, saved on the phone; works offline
 - Calls list - newest first, 50 rows at a time with a Load-more button at the bottom
 - Call row - the number, an out or in mark, the date-time, and the result: connected with talk time, or not connected
-- Call icon per row - starts the call to the number at once; rows look like the Scheduled tab rows
+- Call icon per row - dials the number directly, no keypad stop, and the same post-call popup as the keypad follows; rows look like the Scheduled tab rows; tapping the row dials too
 - Reload icon in the header - pulls in newer calls without reopening the tab
 - Copy button per row - copies the number, "Number copied." toast
 - WhatsApp button per row - opens the chosen WhatsApp app on that number's chat
@@ -246,6 +249,7 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 - First open after the update - the list fills once from the phone's own call log
 - Every tab open - pulls in the calls made since the last look, even ones made while the app was closed
 - Do-not-track numbers never appear here
+- Calls made outside the office hours window never appear here - the same window the dashboards count, so History shows exactly what the dashboard counts
 
 **Edge cases:**
 - No calls yet: "No calls yet."
@@ -255,7 +259,9 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 
 ### Screen 8: My Stats - fourth tab
 - "Last 30 days" KPI cards (4) - Active days (out of 30), Avg dials, Avg connected, Avg minutes; averages per active day, with the 30-day totals as small sub-lines. Avg minutes is TOTAL talk time (outgoing + incoming); Active days counts only days with an outgoing call
+- Office hours label - the office timing written short, like "10 to 7", beside the "Last 30 days" heading; it follows the manager's window at the next login or My Stats open
 - Calls by hour - ONE bar per hour: total calls that hour, split into two colored segments - outgoing and incoming - sized by share, counts centered in their segments with the total on top; small period switch (Today | Yesterday | 30 days) opens on Today and drives only this chart; one-row color legend under the bars: blue dot = outgoing, green dot = incoming; one line under it names the best hour
+- Bar hours - bars run from the office opening hour through the last full hour before closing - a 10-to-7 window shows 9 bars (10 through 6); a call starting exactly at closing counts in the last bar
 - Donut chart - incoming vs outgoing share of TOTAL talk minutes; the same three-period switch drives it; one line under it reads the exact numbers: "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min"
 - Performance table - three rows (Today, Yesterday, Last 30 days); the four headings are icons (phone, connected phone, clock, percent) and one line under the table names them: Dials, Connected, Minutes, Connected %. Minutes is TOTAL talk; Dials / Connected count outgoing only
 - No most-contacted-numbers table here - that lives only on the manager's Person View
@@ -275,6 +281,7 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 
 ### Screen 9: Settings - fifth tab
 - Plain "Settings" title - no back arrow; this is a top-level tab
+- Leaving and coming back always lands here - going to another tab and returning opens the Settings home, never a sub-page left open
 - Five-row menu, each row icon + title + short description + chevron:
   1. WhatsApp - opens Screen 9d
   2. Calling SIM - opens Screen 9c
@@ -293,7 +300,7 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 → Next: Screen 9b Do Not Track Numbers
 
 ### Screen 9b: Do Not Track Numbers
-- Top bar - Back button on the left (returns to Screen 9), title "Do not track numbers", "Add number" button on the right
+- Top bar - Back button on the left (returns to Screen 9), title "Do not track numbers", a bare + icon on the right (no text; it opens the add-number dialog)
 - Privacy line - "Calls to or from these numbers are never recorded. This list stays on your phone only."
 - Numbers table - one row per saved number: row number, the number in international format (+91...), a Remove button per row
 - Add number button - opens a pop-up dialog with one phone-number field (typing 10 digits is fine - it saves in +91 format) and Cancel / Add buttons
@@ -325,7 +332,7 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 ### Screen 9d: WhatsApp
 - Opens from the Settings WhatsApp row
 - WhatsApp app choice - WhatsApp or WhatsApp Business, WhatsApp preselected; a pick saves at once on the phone, and every WhatsApp button in the app opens only the chosen one
-- First message - a switch plus the editable message text below it; switch on, WhatsApp chats open with this text already typed - the salesperson can always edit or clear it before sending, nothing ever sends by itself
+- First message - a switch plus the editable message text below it; the switch comes ON from the first install with "Hello sir, Mai Apex Album AI se baat kar raha/rahi hu" already filled in - a phone that saved its own message keeps what it saved; chats open with the text pre-typed - the salesperson can always edit or clear it before sending, nothing ever sends by itself
 - Save message - stores the text on the phone only; never synced
 
 **Edge cases:**

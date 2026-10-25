@@ -38,6 +38,7 @@ Open `index.html` to flip through the screens (arrow keys or the buttons; Mobile
 | My List — upload — pick file | `07a-my-list--upload-file--M.html` | One file input — tap and pick a CSV or Excel (.xlsx) file, read right on the phone |
 | My List — upload result toast | `07a-my-list--upload-toast--M.html` | "Added 24 numbers. 2 not valid." after the upload closes |
 | My List — clear confirmation | `07a-my-list--clear-dialog--M.html` | Shows the left and called counts before wiping the whole list |
+| My List — post-call popup | `07a-my-list--post-call--M.html` | The same popup as the automated flow — outcome buttons (mutually exclusive), the schedule question, and the pre-checked "Go to next call"; booking lands on the Scheduled tab |
 | Scheduled — due & upcoming callbacks | `07b-scheduled--M.html` | Every callback booked on this phone, due first — compact rows with Call, Copy and WhatsApp icons, reload in the header |
 | Scheduled — nothing booked | `07b-scheduled--empty--M.html` | Empty state — "Nothing scheduled." |
 | Scheduled — WhatsApp missing toast | `07b-scheduled--no-whatsapp--M.html` | "WhatsApp is not installed." toast on the WhatsApp button |

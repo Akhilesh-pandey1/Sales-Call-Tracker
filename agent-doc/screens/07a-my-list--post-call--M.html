@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My List post-call popup — Apex Sales Call</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #6366F1;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #818CF8;
+      --color-on-secondary: #0F172A;
+      --color-accent: #059669;
+      --color-on-accent: #FFFFFF;
+      --color-background: #F5F3FF;
+      --color-foreground: #1E1B4B;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #1E1B4B;
+      --color-muted: #EBEFF9;
+      --color-muted-foreground: #475569;
+      --color-border: #E0E7FF;
+      --color-destructive: #DC2626;
+      --color-on-destructive: #FFFFFF;
+      --color-ring: #6366F1;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
+
+  <div class="relative mx-auto flex min-h-screen w-full max-w-md flex-col">
+
+    <!-- Header: My List sub-tab active, dimmed behind the popup -->
+    <header class="sticky top-0 z-20 flex items-center justify-center border-b border-[var(--color-border)] bg-[var(--color-card)] py-2 px-4 shadow-xs opacity-50">
+      <div class="inline-flex items-center rounded-full bg-[var(--color-muted)] p-0.5 border border-[var(--color-border)] text-xs font-semibold">
+        <span class="rounded-full px-4 py-1 text-xs text-[var(--color-muted-foreground)]">Keypad</span>
+        <span class="rounded-full px-4 py-1 text-xs text-[var(--color-muted-foreground)]">Automated</span>
+        <span class="rounded-full px-4 py-1 text-xs bg-[var(--color-primary)] text-white shadow-xs">My List</span>
+      </div>
+    </header>
+
+    <!-- Background: the My List tab, dimmed behind the popup -->
+    <main class="flex flex-1 flex-col px-5 pb-6 pt-4 opacity-50">
+
+      <!-- Actions at the top: Upload / Download / Clear, then Start Calling -->
+      <div class="grid grid-cols-3 gap-2">
+        <button type="button" class="flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-2 py-2 text-xs font-semibold text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <svg class="h-4 w-4 shrink-0 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Upload
+        </button>
+        <button type="button" class="flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-2 py-2 text-xs font-semibold text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <svg class="h-4 w-4 shrink-0 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download
+        </button>
+        <button type="button" class="flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-2 py-2 text-xs font-semibold text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <svg class="h-4 w-4 shrink-0 text-[var(--color-destructive)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 6h18"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          Clear
+        </button>
+      </div>
+      <button type="button" class="mt-2 flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-accent)] py-3 text-base font-bold text-[var(--color-on-accent)] shadow-sm transition-opacity hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Start Calling
+      </button>
+
+      <!-- List summary: the same KPI card style as My Stats -->
+      <section aria-label="List summary" class="mt-5">
+        <h2 class="text-base font-bold tracking-tight">List summary</h2>
+        <div class="mt-3 grid grid-cols-2 gap-3">
+          <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Left</span>
+              <svg class="h-5 w-5 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="8" y1="6" x2="21" y2="6"/>
+                <line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                <line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+            </div>
+            <div class="mt-2 text-2xl font-bold tabular-nums tracking-tight">7</div>
+            <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">never dialed yet</p>
+          </div>
+          <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Called</span>
+              <svg class="h-5 w-5 shrink-0 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="mt-2 text-2xl font-bold tabular-nums tracking-tight">13</div>
+            <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">connected + not connected</p>
+          </div>
+          <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Interested</span>
+              <svg class="h-5 w-5 shrink-0 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="mt-2 text-2xl font-bold tabular-nums tracking-tight text-[var(--color-accent)]">3</div>
+            <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">wants a call back</p>
+          </div>
+          <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Do not call</span>
+              <svg class="h-5 w-5 shrink-0 text-[var(--color-destructive)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/>
+              </svg>
+            </div>
+            <div class="mt-2 text-2xl font-bold tabular-nums tracking-tight text-[var(--color-destructive)]">1</div>
+            <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">never call again</p>
+          </div>
+        </div>
+      </section>
+
+      <p class="mt-6 text-center text-xs text-[var(--color-muted-foreground)]">Your list lives only on this phone. The manager never sees it, and everything works offline.</p>
+
+    </main>
+
+    <!-- My List post-call popup: opens by itself when a My List call ends. The same popup as the automated flow - outcome buttons, the schedule question, and the pre-checked "Go to next call". Submit dials the next Left number when the box is checked; booking lands on the Scheduled tab. -->
+    <div id="post-call-overlay" class="absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
+      <div id="post-call-dialog" class="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
+
+        <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+          <div>
+            <h3 class="text-base font-bold tracking-tight">Call ended</h3>
+            <div class="flex items-center gap-1.5">
+              <p class="text-xs text-[var(--color-muted-foreground)] tabular-nums">+91 98220 12345</p>
+              <button type="button" title="Copy number" aria-label="Copy number" class="flex h-5 w-5 cursor-pointer items-center justify-center rounded-full text-[var(--color-muted-foreground)] transition-colors hover:bg-[var(--color-muted)] hover:text-[var(--color-primary)]">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
+        </div>
+
+        <!-- Outcome: two optional choices, mutually exclusive - both off or exactly one on - plus an optional note; nothing preselected, Submit works with it all empty -->
+        <div class="mt-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <label class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-accent)] has-checked:bg-emerald-50/40">
+              <input id="outcome-interested" type="checkbox" class="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-ring)]">
+              <span class="text-xs font-bold text-[var(--color-foreground)]">Interested</span>
+            </label>
+            <label class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-destructive)] has-checked:bg-red-50/40">
+              <input id="outcome-do-not-call" type="checkbox" class="h-4 w-4 text-[var(--color-destructive)] focus:ring-[var(--color-ring)]">
+              <span class="text-xs font-bold text-[var(--color-foreground)]">Do not call again</span>
+            </label>
+          </div>
+          <label class="mt-2 block rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 focus-within:border-[var(--color-primary)]">
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Notes (optional)</span>
+            <textarea rows="2" placeholder="e.g. Asked to call back after 6 PM" class="mt-1 w-full resize-none bg-transparent text-sm text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none"></textarea>
+          </label>
+        </div>
+
+        <!-- Schedule question: "Do not schedule" pre-selected; choosing "Schedule" reveals the date and time below in the same popup -->
+        <div class="mt-4">
+          <div class="space-y-2">
+            <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/40">
+              <span class="text-sm font-bold text-[var(--color-foreground)]">Do not schedule</span>
+              <input type="radio" name="schedule-choice" value="none" checked onchange="toggleScheduleInput()" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            </label>
+            <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/40">
+              <span class="text-sm font-bold text-[var(--color-foreground)]">Schedule</span>
+              <input type="radio" name="schedule-choice" value="pick" onchange="toggleScheduleInput()" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            </label>
+          </div>
+          <div id="schedule-input-box" class="mt-2 hidden rounded-xl border border-indigo-200 bg-indigo-50/40 p-3">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-indigo-900">Follow-up time (IST)</p>
+            <button type="button" class="mt-1.5 flex w-full cursor-pointer items-center justify-between rounded-lg border border-indigo-200 bg-white px-2.5 py-2 text-left transition-colors duration-200 hover:bg-indigo-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+              <span class="text-xs font-medium text-[var(--color-foreground)]">Tomorrow, 21 Oct 2026 · 9:00 AM</span>
+              <svg class="h-4 w-4 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </button>
+            <p class="mt-1 text-[10px] text-[var(--color-muted-foreground)]">Tap to pick — opens the date picker, then the time picker. Up to 30 days ahead.</p>
+          </div>
+        </div>
+
+        <!-- Go to next call: pre-checked -->
+        <div class="mt-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-3">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="go-next-checkbox" checked class="h-4 w-4 rounded text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
+            <span class="text-xs font-bold text-[var(--color-foreground)]">Go to next call</span>
+          </label>
+          <p class="mt-1 pl-7 text-[10px] text-[var(--color-muted-foreground)]">Uncheck to stop after Submit - no more My List numbers will dial.</p>
+        </div>
+
+        <!-- One Submit button: reads the call record and sends the call -->
+        <div class="mt-5">
+          <button type="button" class="w-full cursor-pointer rounded-xl bg-[var(--color-primary)] py-3 text-sm font-bold text-[var(--color-on-primary)] shadow-xs transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 text-center">Submit</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom tab bar: 5 tabs - Dialer | Scheduled | History | My Stats | Settings -->
+    <nav class="sticky bottom-0 z-20 border-t border-[var(--color-border)] bg-[var(--color-card)]" aria-label="App tabs">
+      <div class="grid grid-cols-5">
+        <a href="#" aria-current="page" class="flex flex-col items-center gap-1 py-2 text-xs font-semibold text-[var(--color-primary)]"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Dialer</a>
+        <a href="#" class="relative flex cursor-pointer flex-col items-center gap-1 py-2 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)]"><span class="relative"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="absolute -right-2 -top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-destructive)] px-1 text-[9px] font-bold text-white">2</span></span>Scheduled</a>
+        <a href="#" class="relative flex cursor-pointer flex-col items-center gap-1 py-2 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)]"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</a>
+        <a href="#" class="relative flex cursor-pointer flex-col items-center gap-1 py-2 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)]"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>My Stats</a>
+        <a href="#" class="relative flex cursor-pointer flex-col items-center gap-1 py-2 text-xs font-medium text-[var(--color-muted-foreground)] transition-colors duration-200 hover:text-[var(--color-foreground)]"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>Settings</a>
+      </div>
+    </nav>
+
+  </div>
+
+  <script>
+    // Choosing "Schedule" reveals the date and time below in the same popup
+    function toggleScheduleInput() {
+      const box = document.getElementById('schedule-input-box');
+      const picked = document.querySelector('input[name="schedule-choice"]:checked').value === 'pick';
+      if (picked) box.classList.remove('hidden');
+      else box.classList.add('hidden');
+    }
+
+    // The two outcome buttons cannot both be on - checking one clears the other
+    const outcomeInterested = document.getElementById('outcome-interested');
+    const outcomeDoNotCall = document.getElementById('outcome-do-not-call');
+    outcomeInterested.addEventListener('change', () => {
+      if (outcomeInterested.checked) outcomeDoNotCall.checked = false;
+    });
+    outcomeDoNotCall.addEventListener('change', () => {
+      if (outcomeDoNotCall.checked) outcomeInterested.checked = false;
+    });
+  </script>
+
+</body>
+</html>

@@ -7,7 +7,7 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 ## 1. Backend Automated Tests (`backend/tests/`)
 
 ### `tests/modules/test_auth.py`
-- Valid login returns token, user ID, role, name, country.
+- Valid login returns token, user ID, role, name, country, and the office-hours window.
 - Invalid password returns 401 `"Wrong name or password."`.
 - Correct credentials on deactivated account returns 403 `"Your account is not active. Please contact your manager."`.
 - 10 consecutive failed attempts locks out the name for 5 minutes (429 `"Too many tries. Wait 5 minutes and try again."`), blocking even the correct password.
@@ -46,7 +46,8 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - `connected_percent` returns `null` when a period has 0 dials, otherwise the rounded percent.
 - `avg_per_person_per_day` divides each metric by the period day count and the active salesperson count, then rounds.
 - `vs_yesterday` exists only on `today`, holds today minus yesterday in the displayed unit, and is `null` on the other two periods.
-- `calls_by_hour.hours` spans the office hours window start-to-end inclusive; `outgoing` and `incoming` hold one count per hour; `best_hour` follows total calls and is `null` when the period has no calls.
+- `calls_by_hour.hours` runs from the window's start hour through the hour before its end — nine hours for a 10:00–19:00 window; a call starting exactly at the window's end minute counts in the last bar; `outgoing` and `incoming` hold one count per hour; `best_hour` follows total calls and is `null` when the period has no calls.
+- The person response carries the stored window as `office_hours` and its short label `office_hours_label` — `10 to 7` for 10:00–19:00 — and both follow a window update.
 - `talk_totals` carries the outgoing/incoming calls and minutes plus the two rounded percentages of total talk minutes, on every period of the team and person responses.
 - The `last_30_days` `calls_by_hour` holds `round(total / 30)` per hour in both series.
 - Calls by deactivated salespeople stay counted in every period total.
@@ -174,3 +175,17 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - A Do-not-track number in My List is never dialed by Start Calling and never recorded.
 - With airplane mode on, upload, calling, outcomes, Clear, and Download all still work; calls sync at the next open with internet.
 - Two managers logging into the shared account on two devices both stay logged in; changing the password keeps the changing device in and signs the other out.
+- The post-call popup allows both outcome buttons off or exactly one on — tapping one clears the other, and tapping the chosen one again clears it too.
+- Tapping a History row or its call button dials the number directly, the shared post-call popup follows, and the keypad itself works as before.
+- A Scheduled row carries a call button; tapping it dials directly with the same post-call flow.
+- Tapping WhatsApp on a Scheduled row removes that booking from the tab.
+- Calling a booked number removes its row; "Do not schedule" leaves it removed, and a new schedule replaces it with the new date on the Scheduled tab.
+- The My List tab shows only Upload, Download, Clear, Start Calling, and the four summary cards — no per-number rows anywhere.
+- Scheduling from a My List post-call popup books the number so it appears on the Scheduled tab with Copy, WhatsApp, and Call.
+- A fresh install opens WhatsApp chats with "Hello sir, Mai Apex Album AI se baat kar raha/rahi hu" pre-typed; a phone that saved its own first message keeps it.
+- The Do-not-track screen's add button is a bare + icon in the header with no text.
+- Leaving the Settings tab and returning always lands on the Settings home, never inside a sub-page.
+- The Settings list has no "Local data" section header, and the "Clear local data" row keeps its name.
+- My Stats shows the short office timing (like "10 to 7") beside the "Last 30 days" heading; after the manager edits the window, the next login or My Stats open shows the new timing and History filters by it.
+- With a 10-to-7 window, the calls-by-hour chart shows nine bars (10 through 6) on My Stats and the web dashboard, and a call starting exactly at 19:00 counts in the last bar.
+- History holds no calls from outside the office-hours window and never holds Do-not-track numbers; upload still accepts +91 numbers, bare 10-digit numbers, and 10-digit numbers with spaces.

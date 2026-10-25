@@ -100,15 +100,15 @@
           <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
         </div>
 
-        <!-- Outcome: two optional choices plus an optional note - nothing preselected, Submit works with it all empty -->
+        <!-- Outcome: two optional choices, mutually exclusive - both off or exactly one on - plus an optional note; nothing preselected, Submit works with it all empty -->
         <div class="mt-4">
           <div class="flex flex-wrap items-center gap-2">
             <label class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-accent)] has-checked:bg-emerald-50/40">
-              <input type="checkbox" class="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-ring)]">
+              <input id="outcome-interested" type="checkbox" class="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-ring)]">
               <span class="text-xs font-bold text-[var(--color-foreground)]">Interested</span>
             </label>
             <label class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-destructive)] has-checked:bg-red-50/40">
-              <input type="checkbox" class="h-4 w-4 text-[var(--color-destructive)] focus:ring-[var(--color-ring)]">
+              <input id="outcome-do-not-call" type="checkbox" class="h-4 w-4 text-[var(--color-destructive)] focus:ring-[var(--color-ring)]">
               <span class="text-xs font-bold text-[var(--color-foreground)]">Do not call again</span>
             </label>
           </div>
@@ -172,6 +172,16 @@
       if (picked) box.classList.remove('hidden');
       else box.classList.add('hidden');
     }
+
+    // The two outcome buttons cannot both be on - checking one clears the other
+    const keypadOutcomeInterested = document.getElementById('outcome-interested');
+    const keypadOutcomeDoNotCall = document.getElementById('outcome-do-not-call');
+    keypadOutcomeInterested.addEventListener('change', () => {
+      if (keypadOutcomeInterested.checked) keypadOutcomeDoNotCall.checked = false;
+    });
+    keypadOutcomeDoNotCall.addEventListener('change', () => {
+      if (keypadOutcomeDoNotCall.checked) keypadOutcomeInterested.checked = false;
+    });
 
   </script>
 

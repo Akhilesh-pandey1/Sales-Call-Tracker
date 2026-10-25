@@ -36,7 +36,7 @@
 
   <div class="mx-auto flex min-h-screen w-full max-w-md flex-col">
 
-    <!-- Header: back on the left, Add number on the right -->
+    <!-- Header: back on the left, a bare + icon on the right (no text) -->
     <header class="sticky top-0 z-20 border-b border-[var(--color-border)] bg-[var(--color-card)]">
       <div class="flex items-center gap-2 px-3 py-3">
         <button type="button" aria-label="Back to Settings" class="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
@@ -45,7 +45,12 @@
           </svg>
         </button>
         <h1 class="flex-1 text-lg font-bold tracking-tight leading-tight">Do not track numbers</h1>
-        <button id="open-add-dialog" type="button" class="shrink-0 cursor-pointer rounded-xl bg-[var(--color-primary)] px-3.5 py-2 text-sm font-semibold text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">Add number</button>
+        <button id="open-add-dialog" type="button" aria-label="Add number" class="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-[var(--color-primary)] text-[var(--color-on-primary)] transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
       </div>
     </header>
 

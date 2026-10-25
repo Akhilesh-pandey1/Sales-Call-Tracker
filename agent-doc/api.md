@@ -24,9 +24,11 @@ Authenticates a manager or salesperson.
     "id": 3,
     "role": "salesperson",
     "name": "Ramesh",
-    "country": "IN"
+    "country": "IN",
+    "office_hours": { "start_time": "10:00", "end_time": "19:00" }
   }
   ```
+- `office_hours` — object. The stored office-hours window as `HH:MM` strings. The phone saves it and filters its History by it; every My Stats fetch returns it too, so a window edit reaches the phone at the next login or My Stats open.
 - **Error Responses**:
   - `400 Bad Request`: `{"message": "Name and password are required."}`
   - `401 Unauthorized`: `{"message": "Wrong name or password."}`
@@ -120,9 +122,9 @@ Returns team call aggregates for today, yesterday, and the last 30 days. Each pe
         "minutes": -45
       },
       "calls_by_hour": {
-        "hours": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-        "outgoing": [0, 5, 25, 38, 15, 20, 12, 3, 1, 1],
-        "incoming": [0, 1, 3, 2, 1, 1, 0, 0, 0, 0],
+        "hours": [10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "outgoing": [0, 5, 25, 38, 15, 20, 12, 3, 1],
+        "incoming": [0, 1, 3, 2, 1, 1, 0, 0, 0],
         "best_hour": 12
       },
       "talk_totals": {
@@ -147,7 +149,7 @@ Returns team call aggregates for today, yesterday, and the last 30 days. Each pe
   - `connected_percent` is `round(connected / dials * 100)`, `null` when dials is 0.
   - `avg_per_person_per_day` divides each metric by the period day count (1 or 30) and the active salesperson count, then rounds — count metrics to whole numbers, minutes to 2 decimals.
   - `vs_yesterday` exists only on `today`; each value is today minus yesterday in the displayed unit (`minutes` against yesterday's `minutes`). It is `null` on the other two periods.
-  - `calls_by_hour.hours` lists the IST hours of the office hours window, start to end inclusive. `calls_by_hour.outgoing` and `calls_by_hour.incoming` hold one count per hour — the screen draws ONE stacked bar per hour from the pair; for `last_30_days` both hold `round(total / 30)` per hour. `best_hour` is the hour number with the highest total (outgoing + incoming), `null` when the period has no calls.
+  - `calls_by_hour.hours` runs from the window's start hour through the hour before its end — nine hours for a 10:00–19:00 window. `calls_by_hour.outgoing` and `calls_by_hour.incoming` hold one count per hour — the screen draws ONE stacked bar per hour from the pair; for `last_30_days` both hold `round(total / 30)` per hour. A call starting in hour H counts in the bar labeled H; a call starting exactly at the window's end minute counts in the last bar. `best_hour` is the hour number with the highest total (outgoing + incoming), `null` when the period has no calls.
   - `talk_totals` carries the outgoing/incoming calls and minutes for the period and the two percentages of total talk minutes, rounded. The summary line under the chart reads from it.
   - `top_people` holds at most 5 active salespeople by TOTAL talk seconds in the period, highest first.
   - Period totals count every stored call in those IST windows, including calls made by currently deactivated salespeople.
@@ -187,6 +189,8 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
   ```json
   {
     "name": "Ramesh",
+    "office_hours": { "start_time": "10:00", "end_time": "19:00" },
+    "office_hours_label": "10 to 7",
     "today": {
       "dials": 12,
       "connected": 7,
@@ -195,9 +199,9 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
       "minutes": 38,
       "connected_percent": 58,
       "calls_by_hour": {
-        "hours": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-        "outgoing": [0, 1, 2, 3, 1, 2, 1, 1, 0, 1],
-        "incoming": [0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+        "hours": [10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "outgoing": [0, 1, 2, 3, 1, 2, 1, 1, 0],
+        "incoming": [0, 0, 1, 1, 0, 0, 0, 0, 0],
         "best_hour": 13
       },
       "talk_totals": {
@@ -243,6 +247,7 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
   - `avg_per_active_day` divides dials, connected, and exact total talk minutes by `active_days`, then rounds — counts to whole numbers, minutes to 2 decimals; it is `null` when `active_days` is 0.
   - `calls_by_hour` follows the same rules as the team endpoint: office-hours `hours`, an `outgoing` and an `incoming` count per hour (per-day averages for `last_30_days`) drawn as ONE stacked bar, and `best_hour` as the hour number or `null` by total calls.
   - `talk_totals` carries the outgoing/incoming calls and minutes for the period and the two percentages of total talk minutes, rounded — the donut chart and its numbers line render only these.
+  - `office_hours` carries the stored window as `HH:MM` strings, and `office_hours_label` is its display form — 12-hour clock, minutes only when not :00, no AM/PM, like `10 to 7` or `9:30 to 6:30` — both computed on the server from the `office_hours` table. The phone saves `office_hours` on every fetch and filters its History by it, and renders the label beside the Last-30-days heading.
   - `top_numbers` includes at most 5 phone numbers with the highest TOTAL talk seconds (outgoing and incoming together) in the last 30 days.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`

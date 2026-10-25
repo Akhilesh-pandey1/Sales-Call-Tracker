@@ -25,6 +25,7 @@ The manager web dashboard matches the approved screen screenshots in `agent-doc/
 - `dashboard`: server-computed per-period responses — team dashboard (Today / Yesterday / 30 days switch, four KPI cards with returned averages and yesterday deltas, calls-by-hour chart, top 5 people), person view (active-day KPI cards, performance table, calls-by-hour chart, most-contacted numbers), and the salesperson's own My Stats view on the app; screens format returned values and compute nothing
 - `user-management`: manager creates, edits, activates, deactivates, and deletes accounts; accounts list with counts and own-row marker
 - `lead-management`: single-column CSV upload, shared pool with newest-first serving, 10-minute claims, scheduling, call-based resolution, manager summary with stage split and daily upload/tackle counts
+- `tapped-number-capture`: numbers tapped outside the app — Contacts, WhatsApp, browser, SMS — open our Dialer keypad already typed and ready to call; a one-time login-pass setup step with a permanent Don't-show-again; the app never becomes the default phone app
 - The manager web UI on all five screens — Login, Team Dashboard, Person View, Leads, Accounts — built with the React 19 + Tailwind v4 + sonner + Recharts stack
 
 ### Out of Scope (Non-Goals)
@@ -49,10 +50,13 @@ The manager web dashboard matches the approved screen screenshots in `agent-doc/
 | `office-hours` | The single manager-editable office-hours window: storage, editing, sync gate, chart hours | `authentication`, `call-tracking` | `specs/office-hours.md` |
 | `lead-management` | Shared lead pool: upload, serving, claims, scheduling, call-based resolution, manager summary | `authentication`, `call-tracking` | `specs/lead-management.md` |
 | `dashboard` | Server-computed call aggregates for manager web and salesperson app: per-period team and person data, hourly chart, top lists | `authentication`, `call-tracking`, `office-hours` | `specs/dashboard.md` |
+| `tapped-number-capture` | Catches numbers tapped outside the app into the Dialer keypad ready to call; one-time login-pass setup with a permanent opt-out | `call-tracking` | `specs/tapped-number-capture.md` |
 
 ### Build Order
 
 `authentication` ──► `user-management` and `call-tracking` ──► `office-hours` and `lead-management` ──► `dashboard`
+
+`call-tracking` ──► `tapped-number-capture`
 
 ## Impact & Systems Affected
 

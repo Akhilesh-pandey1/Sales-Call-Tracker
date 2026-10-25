@@ -150,3 +150,10 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - Tapping a Scheduled row opens the booked lead's card ready to call; tapping the notification removes that row; the row also leaves when the number is called or 24 hours pass its booked time.
 - Submitting the keypad post-call popup clears the typed number to blank; the Automated card keeps its number and its Copy button copies it with "Number copied."
 - Settings shows the WhatsApp app row (WhatsApp or WhatsApp Business, WhatsApp preselected) and the First message row; with the switch on, the WhatsApp button opens the chat with the text pre-typed; a missing chosen app shows "WhatsApp is not installed."
+- Tapping a number in Contacts, WhatsApp, and the browser shows our app in Android's chooser; picking Always makes the chooser stop appearing and every later tap opens our app.
+- A caught number lands on the Dialer tab already typed with the Call button ready; backing out leaves the number in the keypad and nothing dials.
+- A call started from a caught number leaves on the chosen SIM, records like a keypad call, and shows in History.
+- While the automated lead call flow is on screen, a caught number is ignored and the live flow keeps running.
+- An empty or unreadable number link opens the dialer with nothing filled.
+- When our app already handles tapped numbers, the login pass shows nothing for this step.
+- Tapping "Don't show again" on the login step keeps it hidden at every later login, even when our app is never picked.

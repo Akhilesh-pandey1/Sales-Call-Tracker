@@ -1780,8 +1780,8 @@
     "semantic_hash": ""
   },
   "agent-doc/decisions.md": {
-    "mtime": 1792841722.2744443,
-    "ast_hash": "669ba0948db3b91c08c005d3546c4221",
+    "mtime": 1792889654.6473527,
+    "ast_hash": "6b6857e77bd6dab21b0176a455d69402",
     "semantic_hash": ""
   },
   "agent-doc/old-decisions.md": {
@@ -1790,8 +1790,8 @@
     "semantic_hash": ""
   },
   "agent-doc/proposal.md": {
-    "mtime": 1792502977.6100068,
-    "ast_hash": "4a88f2249063d92c40d1af0489b65c5b",
+    "mtime": 1792889890.6390643,
+    "ast_hash": "52c3baf1bcffef259732b9ce77401a20",
     "semantic_hash": ""
   },
   "agent-doc/screen.md": {
@@ -2025,18 +2025,18 @@
     "semantic_hash": ""
   },
   "agent-doc/structure.md": {
-    "mtime": 1792841750.7368944,
-    "ast_hash": "4813828719c4a6e46a11d1d9508858cc",
+    "mtime": 1792889676.8321223,
+    "ast_hash": "3eedc68b6207d3ef531d60e695a62ba7",
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792760747.6543787,
-    "ast_hash": "13aca7aa3cc93ae42bc19dd095e8f88e",
+    "mtime": 1792890628.2234628,
+    "ast_hash": "035a78da8d7dc87c925c395f0e8c13e0",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
-    "mtime": 1792841756.7440598,
-    "ast_hash": "d6ede84ad2bb616b988b461f37c60844",
+    "mtime": 1792889668.054531,
+    "ast_hash": "1be37fb6df34981ac0533c005493128a",
     "semantic_hash": ""
   },
   "app/docs/build-apk.md": {
@@ -2577,6 +2577,11 @@
   "agent-doc/screens/09d-whatsapp--M.png": {
     "mtime": 1792886254.6403642,
     "ast_hash": "538511915d6a51a6dc521087fb33b6c6",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/tapped-number-capture.md": {
+    "mtime": 1792889865.4791677,
+    "ast_hash": "3a7d5529c14961f5a45df63084920ed1",
     "semantic_hash": ""
   }
 }

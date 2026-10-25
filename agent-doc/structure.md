@@ -202,7 +202,7 @@ app/
 ├── global.css                       # NativeWind CSS theme and styles
 ├── App.tsx                          # Root container: Auth check → Tab navigation
 ├── index.js                         # React Native app registry entry point
-├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE)
+├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE, and the tel: dial intent filter that catches numbers tapped outside the app)
 │   └── app/src/main/
 │       ├── java/com/apexsalescall/SimCallModule.kt    # Kotlin bridge: reads the SIM numbers, places the call on the matching SIM
 │       ├── java/com/apexsalescall/WhatsAppModule.kt   # Kotlin bridge: opens WhatsApp or WhatsApp Business on a number's chat with optional prefilled text
@@ -228,7 +228,7 @@ app/
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
     │   │   ├── hooks/use-post-call-submit.ts  # Submit click: read call log, send to server, delete or save the row
-    │   │   └── screens/dialer-screen.tsx # Hosts Dialer keypad and Automated lead calling sub-tabs
+    │   │   └── screens/dialer-screen.tsx # Hosts Dialer keypad and Automated lead calling sub-tabs; fills the keypad from a number tapped outside the app
     │   ├── history/
     │   │   ├── hooks/use-call-history.ts        # History rows: newest first, 50 per page, refresh sweep on tab open, last-loaded marker
     │   │   └── screens/history-screen.tsx       # History tab: call rows with Copy, WhatsApp, and the Scheduled badge

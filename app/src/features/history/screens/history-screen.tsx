@@ -5,7 +5,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { CopyNumberButton, emitTappedNumber } from '@/features/dialer';
+import {
+  CopyNumberButton,
+  PostCallDialog,
+  useDirectCall,
+  type PostCallSubmitData,
+} from '@/features/dialer';
 import { cn } from '@/lib/utils';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
@@ -103,13 +108,13 @@ function CallHistoryActionButton({
 
 type CallRowProps = {
   callItem: CallHistoryItem;
-  onOpenNumberInDialer: (phoneNumber: string) => void;
+  onCallNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
 };
 
 function CallRow({
   callItem,
-  onOpenNumberInDialer,
+  onCallNumber,
   onOpenWhatsAppChat,
 }: CallRowProps) {
   const displayedPhoneNumber = formatInternationalPhoneNumber(
@@ -124,12 +129,12 @@ function CallRow({
     ? 'text-accent'
     : 'text-muted-foreground';
 
-  const handleRowPress = () => onOpenNumberInDialer(callItem.phoneNumber);
+  const handleRowPress = () => onCallNumber(callItem.phoneNumber);
   const handleWhatsAppPress = () => onOpenWhatsAppChat(callItem.phoneNumber);
 
   return (
     <Pressable
-      accessibilityLabel={`Open ${displayedPhoneNumber} in the dialer`}
+      accessibilityLabel={`Call ${displayedPhoneNumber}`}
       accessibilityRole="button"
       onPress={handleRowPress}
       className="mt-2 flex-row items-center gap-3 rounded-xl border border-border bg-card px-4 py-2 shadow-sm active:bg-muted"
@@ -258,7 +263,7 @@ type CallsListProps = {
   callItems: CallHistoryItem[];
   canLoadMore: boolean;
   onLoadMorePress: () => void;
-  onOpenNumberInDialer: (phoneNumber: string) => void;
+  onCallNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
 };
 
@@ -266,7 +271,7 @@ function CallsList({
   callItems,
   canLoadMore,
   onLoadMorePress,
-  onOpenNumberInDialer,
+  onCallNumber,
   onOpenWhatsAppChat,
 }: CallsListProps) {
   const loadMoreFooter = canLoadMore ? (
@@ -281,7 +286,7 @@ function CallsList({
       renderItem={({ item }) => (
         <CallRow
           callItem={item}
-          onOpenNumberInDialer={onOpenNumberInDialer}
+          onCallNumber={onCallNumber}
           onOpenWhatsAppChat={onOpenWhatsAppChat}
         />
       )}
@@ -298,14 +303,30 @@ export function HistoryScreen() {
     reloadHistory,
     loadMoreHistory,
   } = useCallHistory();
+  const directCall = useDirectCall();
   const { top: topInset } = useSafeAreaInsets();
 
+  const idlePostCallDialogKey = 'idle-history-post-call';
+  const historyTrackedCall = directCall.trackedCall;
+  const postCallDialogKey =
+    historyTrackedCall?.callId ?? idlePostCallDialogKey;
+  const postCallDialogPhoneNumber = historyTrackedCall === null
+    ? ''
+    : formatInternationalPhoneNumber(historyTrackedCall.phoneNumber);
+
   const handleReloadHistory = () => reloadHistory();
-  const handleOpenNumberInDialer = (phoneNumber: string) => {
-    emitTappedNumber(phoneNumber);
+  const handleCallHistoryNumber = async (
+    phoneNumber: string,
+  ): Promise<void> => {
+    await directCall.startDirectCall(phoneNumber);
   };
   const handleOpenWhatsAppChat = async (phoneNumber: string): Promise<void> => {
     await openChosenWhatsAppChat(phoneNumber);
+  };
+  const handleSubmitHistoryPostCall = async (
+    submitData: PostCallSubmitData,
+  ): Promise<void> => {
+    await directCall.submitDirectCall(submitData);
   };
 
   const screenContent = isLoading ? (
@@ -324,7 +345,7 @@ export function HistoryScreen() {
       callItems={historyItems}
       canLoadMore={canLoadMore}
       onLoadMorePress={loadMoreHistory}
-      onOpenNumberInDialer={handleOpenNumberInDialer}
+      onCallNumber={handleCallHistoryNumber}
       onOpenWhatsAppChat={handleOpenWhatsAppChat}
     />
   );
@@ -333,6 +354,15 @@ export function HistoryScreen() {
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
       <HistoryHeader onReloadPress={handleReloadHistory} />
       {screenContent}
+      <PostCallDialog
+        key={postCallDialogKey}
+        variant="keypad"
+        isOpen={directCall.isPostCallDialogOpen}
+        phoneNumber={postCallDialogPhoneNumber}
+        isSubmitting={directCall.isSubmittingPostCall}
+        errorMessage={directCall.postCallErrorMessage}
+        onSubmit={handleSubmitHistoryPostCall}
+      />
     </View>
   );
 }

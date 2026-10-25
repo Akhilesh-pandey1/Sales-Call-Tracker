@@ -1,12 +1,9 @@
 from sqlalchemy import inspect, text
 from backend.app.config.base import ALLOWED_COUNTRIES
 from backend.app.core.errors import AppException
-from backend.app.core.security import (
-    generate_auth_token,
-    hash_password,
-    validate_password_strength,
-)
+from backend.app.core.security import hash_password, validate_password_strength
 from backend.app.extensions import db
+from backend.app.modules.auth import Session
 from backend.app.modules.users.models import User
 from backend.app.modules.users.schemas import (
     CreateUserRequest,
@@ -67,7 +64,9 @@ def create_new_user(create_request: CreateUserRequest) -> None:
     db.session.commit()
 
 
-def update_user_account(user_id: int, update_request: UpdateUserRequest) -> None:
+def update_user_account(
+    user_id: int, update_request: UpdateUserRequest, current_session_id: int
+) -> None:
     not_found_code: int = 404
     bad_request_code: int = 400
 
@@ -98,7 +97,9 @@ def update_user_account(user_id: int, update_request: UpdateUserRequest) -> None
             )
 
         target_user.password_hash = hash_password(update_request.password)
-        target_user.auth_token = generate_auth_token()
+        Session.query.filter(
+            Session.user_id == user_id, Session.id != current_session_id
+        ).delete(synchronize_session=False)
 
     if update_request.country is not None:
         trimmed_country: str = update_request.country.strip()
@@ -122,7 +123,7 @@ def deactivate_user_account(user_id: int, current_user_id: int) -> None:
         raise AppException("User not found.", not_found_code)
 
     target_user.is_active = False
-    target_user.auth_token = None
+    Session.query.filter_by(user_id=user_id).delete(synchronize_session=False)
     db.session.commit()
 
 
@@ -153,10 +154,15 @@ def delete_user_account(user_id: int, current_user_id: int) -> None:
 
     calls_table_name: str = "calls"
     leads_table_name: str = "leads"
+    sessions_table_name: str = "sessions"
 
     if calls_table_name in existing_tables:
         delete_calls_sql: str = "DELETE FROM calls WHERE user_id = :user_id"
         db.session.execute(text(delete_calls_sql), {"user_id": user_id})
+
+    if sessions_table_name in existing_tables:
+        delete_sessions_sql: str = "DELETE FROM sessions WHERE user_id = :user_id"
+        db.session.execute(text(delete_sessions_sql), {"user_id": user_id})
 
     if leads_table_name in existing_tables:
         release_leads_sql: str = (

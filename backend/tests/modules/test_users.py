@@ -3,7 +3,9 @@ from flask.testing import FlaskClient
 from sqlalchemy import text
 from backend.app.core.security import hash_password
 from backend.app.extensions import db
+from backend.app.modules.auth import Session
 from backend.app.modules.users import User
+from backend.tests.modules.session_test_helpers import create_session_record
 
 
 def create_user_record(
@@ -12,7 +14,7 @@ def create_user_record(
     role: str = "salesperson",
     country: str = "IN",
     is_active: bool = True,
-    auth_token: str | None = None,
+    session_token: str | None = None,
 ) -> User:
     user: User = User(
         name=name,
@@ -20,10 +22,13 @@ def create_user_record(
         role=role,
         country=country,
         is_active=is_active,
-        auth_token=auth_token,
     )
     db.session.add(user)
     db.session.commit()
+
+    if session_token is not None:
+        create_session_record(user_id=user.id, token=session_token)
+
     return user
 
 
@@ -66,7 +71,7 @@ def ensure_auxiliary_tables() -> None:
 def test_get_users_non_manager_refused(app: Flask, client: FlaskClient) -> None:
     token: str = "salesperson-token-123"
     with app.app_context():
-        create_user_record(name="Ramesh", auth_token=token)
+        create_user_record(name="Ramesh", session_token=token)
     response: Response = client.get("/api/users", headers={"Authorization": f"Bearer {token}"})
     expected_status_forbidden: int = 403
     assert response.status_code == expected_status_forbidden
@@ -81,7 +86,7 @@ def test_get_users_unauthenticated_refused(client: FlaskClient) -> None:
 def test_get_users_manager_returns_all_accounts(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-123"
     with app.app_context():
-        create_user_record(name="Manager", role="manager", auth_token=token)
+        create_user_record(name="Manager", role="manager", session_token=token)
         create_user_record(name="Ramesh", role="salesperson", is_active=True)
         create_user_record(name="Sunita", role="salesperson", country="AE", is_active=False)
 
@@ -105,7 +110,7 @@ def test_get_users_manager_returns_all_accounts(app: Flask, client: FlaskClient)
 def test_create_user_successful(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-create"
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
 
     payload: dict[str, str] = {"name": "Sunita", "password": "Password123", "country": "IN"}
     response: Response = client.post(
@@ -126,7 +131,7 @@ def test_create_user_successful(app: Flask, client: FlaskClient) -> None:
 def test_create_user_duplicate_name_rejected(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-dup"
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         create_user_record(name="Sunita")
 
     payload: dict[str, str] = {"name": "Sunita", "password": "Password123", "country": "IN"}
@@ -141,7 +146,7 @@ def test_create_user_duplicate_name_rejected(app: Flask, client: FlaskClient) ->
 def test_create_user_weak_password_rejected(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-weak"
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
 
     headers: dict[str, str] = {"Authorization": f"Bearer {token}"}
     expected_bad_request: int = 400
@@ -169,7 +174,7 @@ def test_create_user_weak_password_rejected(app: Flask, client: FlaskClient) -> 
 def test_create_user_invalid_country_rejected(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-country"
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
 
     payload: dict[str, str] = {"name": "UserUK", "password": "Password123", "country": "GB"}
     response: Response = client.post(
@@ -183,7 +188,7 @@ def test_create_user_invalid_country_rejected(app: Flask, client: FlaskClient) -
 def test_create_user_non_manager_refused(app: Flask, client: FlaskClient) -> None:
     token: str = "salesperson-token-create"
     with app.app_context():
-        create_user_record(name="Ramesh", auth_token=token)
+        create_user_record(name="Ramesh", session_token=token)
 
     payload: dict[str, str] = {"name": "NewUser", "password": "Password123", "country": "IN"}
     response: Response = client.post(
@@ -197,7 +202,7 @@ def test_update_user_name_success(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-upd-name"
     user_id: int
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(name="Sunita")
         user_id = user.id
 
@@ -220,7 +225,7 @@ def test_update_user_duplicate_name_rejected(app: Flask, client: FlaskClient) ->
     token: str = "manager-token-upd-dup"
     user_id: int
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         create_user_record(name="ExistingPerson")
         user: User = create_user_record(name="Sunita")
         user_id = user.id
@@ -240,8 +245,8 @@ def test_update_user_password_invalidates_old_token(app: Flask, client: FlaskCli
     old_salesperson_token: str = "old-salesperson-token"
     user_id: int
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
-        user: User = create_user_record(name="Sunita", auth_token=old_salesperson_token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
+        user: User = create_user_record(name="Sunita", session_token=old_salesperson_token)
         user_id = user.id
 
     response: Response = client.post(
@@ -259,12 +264,17 @@ def test_update_user_password_invalidates_old_token(app: Flask, client: FlaskCli
     expected_status_unauthorized: int = 401
     assert protected_response.status_code == expected_status_unauthorized
 
+    acting_manager_response: Response = client.get(
+        "/api/users", headers={"Authorization": f"Bearer {token}"}
+    )
+    assert acting_manager_response.status_code == expected_status_ok
+
 
 def test_update_user_weak_password_rejected(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-upd-weak"
     user_id: int
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(name="Sunita")
         user_id = user.id
 
@@ -285,7 +295,7 @@ def test_update_user_country_success(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-upd-country"
     user_id: int
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(name="Sunita", country="IN")
         user_id = user.id
 
@@ -308,7 +318,7 @@ def test_update_user_invalid_country_rejected(app: Flask, client: FlaskClient) -
     token: str = "manager-token-upd-bad-country"
     user_id: int
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(name="Sunita")
         user_id = user.id
 
@@ -327,7 +337,7 @@ def test_update_user_manager_edits_own_account(app: Flask, client: FlaskClient) 
     manager_id: int
     with app.app_context():
         manager: User = create_user_record(
-            name="AdminManager", role="manager", country="IN", auth_token=token
+            name="AdminManager", role="manager", country="IN", session_token=token
         )
         manager_id = manager.id
 
@@ -351,7 +361,7 @@ def test_update_user_manager_edits_own_account(app: Flask, client: FlaskClient) 
 def test_update_user_not_found(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-upd-404"
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
 
     response: Response = client.post(
         "/api/users/9999/update",
@@ -368,9 +378,9 @@ def test_deactivate_user_success(app: Flask, client: FlaskClient) -> None:
     salesperson_token: str = "salesperson-token-deact"
     user_id: int
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(
-            name="Sunita", password="Password123", auth_token=salesperson_token
+            name="Sunita", password="Password123", session_token=salesperson_token
         )
         user_id = user.id
 
@@ -385,7 +395,17 @@ def test_deactivate_user_success(app: Flask, client: FlaskClient) -> None:
         deactivated_user: User | None = db.session.get(User, user_id)
         assert deactivated_user is not None
         assert deactivated_user.is_active is False
-        assert deactivated_user.auth_token is None
+        remaining_session_count: int = Session.query.filter_by(
+            user_id=user_id
+        ).count()
+        expected_remaining_sessions: int = 0
+        assert remaining_session_count == expected_remaining_sessions
+
+    stale_token_response: Response = client.get(
+        "/api/users", headers={"Authorization": f"Bearer {salesperson_token}"}
+    )
+    expected_stale_status_unauthorized: int = 401
+    assert stale_token_response.status_code == expected_stale_status_unauthorized
 
     login_response: Response = client.post(
         "/api/login", json={"name": "Sunita", "password": "Password123"}
@@ -403,7 +423,7 @@ def test_deactivate_user_calls_kept(app: Flask, client: FlaskClient) -> None:
     user_id: int
     with app.app_context():
         ensure_auxiliary_tables()
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(name="Sunita")
         user_id = user.id
 
@@ -435,7 +455,7 @@ def test_deactivate_user_self_deactivation_refused(app: Flask, client: FlaskClie
     token: str = "manager-token-self-deact"
     manager_id: int
     with app.app_context():
-        manager: User = create_user_record(name="AdminManager", role="manager", auth_token=token)
+        manager: User = create_user_record(name="AdminManager", role="manager", session_token=token)
         manager_id = manager.id
 
     response: Response = client.post(
@@ -449,7 +469,7 @@ def test_deactivate_user_self_deactivation_refused(app: Flask, client: FlaskClie
 def test_deactivate_user_not_found(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-deact-404"
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
 
     response: Response = client.post(
         "/api/users/9999/deactivate", headers={"Authorization": f"Bearer {token}"}
@@ -463,7 +483,7 @@ def test_deactivate_user_non_manager_refused(app: Flask, client: FlaskClient) ->
     token: str = "salesperson-token-deact-perm"
     user_id: int
     with app.app_context():
-        create_user_record(name="Ramesh", auth_token=token)
+        create_user_record(name="Ramesh", session_token=token)
         user: User = create_user_record(name="Sunita")
         user_id = user.id
 
@@ -478,9 +498,9 @@ def test_activate_user_success(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-act"
     user_id: int
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(
-            name="Sunita", password="Password123", is_active=False, auth_token=None
+            name="Sunita", password="Password123", is_active=False
         )
         user_id = user.id
 
@@ -506,7 +526,7 @@ def test_activate_user_success(app: Flask, client: FlaskClient) -> None:
 def test_activate_user_not_found(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-act-404"
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
 
     response: Response = client.post(
         "/api/users/9999/activate", headers={"Authorization": f"Bearer {token}"}
@@ -520,7 +540,7 @@ def test_activate_user_non_manager_refused(app: Flask, client: FlaskClient) -> N
     token: str = "salesperson-token-act-perm"
     user_id: int
     with app.app_context():
-        create_user_record(name="Ramesh", auth_token=token)
+        create_user_record(name="Ramesh", session_token=token)
         user: User = create_user_record(name="Sunita", is_active=False)
         user_id = user.id
 
@@ -536,7 +556,7 @@ def test_delete_user_removes_user_and_calls(app: Flask, client: FlaskClient) -> 
     user_id: int
     with app.app_context():
         ensure_auxiliary_tables()
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(name="Sunita")
         user_id = user.id
 
@@ -572,7 +592,7 @@ def test_delete_user_self_deletion_refused(app: Flask, client: FlaskClient) -> N
     token: str = "manager-token-self-del"
     manager_id: int
     with app.app_context():
-        manager: User = create_user_record(name="AdminManager", role="manager", auth_token=token)
+        manager: User = create_user_record(name="AdminManager", role="manager", session_token=token)
         manager_id = manager.id
 
     response: Response = client.delete(
@@ -588,7 +608,7 @@ def test_delete_user_releases_lead_claims(app: Flask, client: FlaskClient) -> No
     user_id: int
     with app.app_context():
         ensure_auxiliary_tables()
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
         user: User = create_user_record(name="Sunita")
         user_id = user.id
 
@@ -621,7 +641,7 @@ def test_delete_user_releases_lead_claims(app: Flask, client: FlaskClient) -> No
 def test_delete_user_not_found(app: Flask, client: FlaskClient) -> None:
     token: str = "manager-token-del-404"
     with app.app_context():
-        create_user_record(name="AdminManager", role="manager", auth_token=token)
+        create_user_record(name="AdminManager", role="manager", session_token=token)
 
     response: Response = client.delete(
         "/api/users/9999", headers={"Authorization": f"Bearer {token}"}
@@ -635,7 +655,7 @@ def test_delete_user_non_manager_refused(app: Flask, client: FlaskClient) -> Non
     token: str = "salesperson-token-del-perm"
     user_id: int
     with app.app_context():
-        create_user_record(name="Ramesh", auth_token=token)
+        create_user_record(name="Ramesh", session_token=token)
         user: User = create_user_record(name="Sunita")
         user_id = user.id
 

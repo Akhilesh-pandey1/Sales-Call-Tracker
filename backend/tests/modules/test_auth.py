@@ -2,9 +2,12 @@ from datetime import datetime, timedelta, timezone
 from flask import Flask, Response, g, jsonify
 from flask.testing import FlaskClient
 import pytest
+from sqlalchemy import inspect, text
+from backend.app import migrate_legacy_auth_tokens_to_sessions
 from backend.app.core.permissions import require_auth
 from backend.app.core.security import generate_auth_token, hash_password
 from backend.app.extensions import db
+from backend.app.modules.auth import Session
 from backend.app.modules.auth.services import reset_lockout_state, set_lockout_expiry
 from backend.app.modules.users import User
 
@@ -136,7 +139,11 @@ def test_login_success(app: Flask, client: FlaskClient) -> None:
             name="carol_active"
         ).first()
         assert persisted_user is not None
-        assert persisted_user.auth_token == token
+        persisted_session: Session | None = Session.query.filter_by(
+            token=token
+        ).first()
+        assert persisted_session is not None
+        assert persisted_session.user_id == persisted_user.id
 
 
 def test_login_lockout_triggered(app: Flask, client: FlaskClient) -> None:
@@ -269,9 +276,11 @@ def test_require_auth_valid_token(app: Flask, client: FlaskClient) -> None:
             role="salesperson",
             country="IN",
             is_active=True,
-            auth_token=token,
         )
         db.session.add(user)
+        db.session.commit()
+        user_session: Session = Session(user_id=user.id, token=token)
+        db.session.add(user_session)
         db.session.commit()
 
     headers: dict[str, str] = {"Authorization": f"Bearer {token}"}
@@ -335,9 +344,11 @@ def test_require_auth_deactivated_user(app: Flask, client: FlaskClient) -> None:
             role="salesperson",
             country="IN",
             is_active=False,
-            auth_token=token,
         )
         db.session.add(user)
+        db.session.commit()
+        user_session: Session = Session(user_id=user.id, token=token)
+        db.session.add(user_session)
         db.session.commit()
 
     headers: dict[str, str] = {"Authorization": f"Bearer {token}"}
@@ -353,8 +364,8 @@ def test_require_auth_deactivated_user(app: Flask, client: FlaskClient) -> None:
     )
 
 
-def test_relogin_replaces_old_token(app: Flask, client: FlaskClient) -> None:
-    @app.get("/api/test-single-session")
+def test_relogin_keeps_older_sessions_working(app: Flask, client: FlaskClient) -> None:
+    @app.get("/api/test-two-sessions")
     @require_auth
     def sample_protected_route() -> tuple[Response, int]:
         response: Response = jsonify({"status": "ok"})
@@ -384,7 +395,7 @@ def test_relogin_replaces_old_token(app: Flask, client: FlaskClient) -> None:
         "Authorization": f"Bearer {first_token}"
     }
     first_auth_response: Response = client.get(
-        "/api/test-single-session", headers=first_auth_headers
+        "/api/test-two-sessions", headers=first_auth_headers
     )
     assert first_auth_response.status_code == expected_ok_status
 
@@ -396,69 +407,88 @@ def test_relogin_replaces_old_token(app: Flask, client: FlaskClient) -> None:
     second_token: str = str(second_login_response.get_json()["token"])
     assert first_token != second_token
 
-    stale_auth_response: Response = client.get(
-        "/api/test-single-session", headers=first_auth_headers
-    )
-    expected_unauthorized_status: int = 401
-    assert stale_auth_response.status_code == expected_unauthorized_status
-    stale_json: dict[str, str] = stale_auth_response.get_json()
-    assert stale_json["message"] == "Invalid or expired token."
-
     second_auth_headers: dict[str, str] = {
         "Authorization": f"Bearer {second_token}"
     }
-    valid_second_response: Response = client.get(
-        "/api/test-single-session", headers=second_auth_headers
+    second_auth_response: Response = client.get(
+        "/api/test-two-sessions", headers=second_auth_headers
     )
-    assert valid_second_response.status_code == expected_ok_status
+    assert second_auth_response.status_code == expected_ok_status
+
+    first_token_still_valid_response: Response = client.get(
+        "/api/test-two-sessions", headers=first_auth_headers
+    )
+    assert first_token_still_valid_response.status_code == expected_ok_status
+
+    with app.app_context():
+        persisted_user: User | None = User.query.filter_by(
+            name="ivan_sessions"
+        ).first()
+        assert persisted_user is not None
+        user_session_count: int = Session.query.filter_by(
+            user_id=persisted_user.id
+        ).count()
+        expected_session_count: int = 2
+        assert user_session_count == expected_session_count
 
 
-def test_token_invalid_after_password_reset(
+def test_password_change_keeps_acting_session_and_rejects_others(
     app: Flask, client: FlaskClient
 ) -> None:
-    @app.get("/api/test-password-reset-route")
+    @app.get("/api/test-password-change-route")
     @require_auth
     def sample_protected_route() -> tuple[Response, int]:
         response: Response = jsonify({"status": "ok"})
         success_status: int = 200
         return response, success_status
 
-    old_token: str = generate_auth_token()
+    acting_token: str = generate_auth_token()
+    other_device_token: str = generate_auth_token()
+    manager_id: int
     with app.app_context():
-        user: User = User(
+        manager: User = User(
             name="jack_reset",
             password_hash=hash_password("ValidPassword1"),
-            role="salesperson",
+            role="manager",
             country="IN",
             is_active=True,
-            auth_token=old_token,
         )
-        db.session.add(user)
+        db.session.add(manager)
+        db.session.commit()
+        manager_id = manager.id
+        acting_session: Session = Session(user_id=manager_id, token=acting_token)
+        other_device_session: Session = Session(
+            user_id=manager_id, token=other_device_token
+        )
+        db.session.add(acting_session)
+        db.session.add(other_device_session)
         db.session.commit()
 
-    headers: dict[str, str] = {"Authorization": f"Bearer {old_token}"}
-    initial_response: Response = client.get(
-        "/api/test-password-reset-route", headers=headers
+    acting_headers: dict[str, str] = {"Authorization": f"Bearer {acting_token}"}
+    update_response: Response = client.post(
+        f"/api/users/{manager_id}/update",
+        json={"password": "NewPassword1"},
+        headers=acting_headers,
     )
     expected_ok_status: int = 200
-    assert initial_response.status_code == expected_ok_status
+    assert update_response.status_code == expected_ok_status
+    assert update_response.get_json()["status"] is True
 
-    with app.app_context():
-        persisted_user: User | None = User.query.filter_by(
-            name="jack_reset"
-        ).first()
-        assert persisted_user is not None
-        persisted_user.password_hash = hash_password("NewPassword1")
-        persisted_user.auth_token = generate_auth_token()
-        db.session.commit()
+    acting_session_response: Response = client.get(
+        "/api/test-password-change-route", headers=acting_headers
+    )
+    assert acting_session_response.status_code == expected_ok_status
 
-    stale_response: Response = client.get(
-        "/api/test-password-reset-route", headers=headers
+    other_device_headers: dict[str, str] = {
+        "Authorization": f"Bearer {other_device_token}"
+    }
+    rejected_response: Response = client.get(
+        "/api/test-password-change-route", headers=other_device_headers
     )
     expected_unauthorized_status: int = 401
-    assert stale_response.status_code == expected_unauthorized_status
-    stale_json: dict[str, str] = stale_response.get_json()
-    assert stale_json["message"] == "Invalid or expired token."
+    assert rejected_response.status_code == expected_unauthorized_status
+    rejected_json: dict[str, str] = rejected_response.get_json()
+    assert rejected_json["message"] == "Invalid or expired token."
 
 
 def test_login_preserves_password_whitespace(
@@ -482,6 +512,74 @@ def test_login_preserves_password_whitespace(
     )
     expected_ok_status: int = 200
     assert response.status_code == expected_ok_status
+
+
+def test_legacy_tokens_become_sessions_rows(app: Flask) -> None:
+    with app.app_context():
+        db.drop_all()
+        db.session.execute(
+            text(
+                "CREATE TABLE users ("
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                "name VARCHAR(100) UNIQUE NOT NULL, "
+                "password_hash VARCHAR(255) NOT NULL, "
+                "role VARCHAR(20) NOT NULL DEFAULT 'salesperson', "
+                "is_active BOOLEAN NOT NULL DEFAULT TRUE, "
+                "country VARCHAR(5) NOT NULL DEFAULT 'IN', "
+                "auth_token VARCHAR(255), "
+                "created_at DATETIME)"
+            )
+        )
+        db.session.execute(
+            text(
+                "CREATE TABLE sessions ("
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                "user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE, "
+                "token VARCHAR(255) NOT NULL UNIQUE, "
+                "created_at DATETIME)"
+            )
+        )
+        db.session.execute(
+            text(
+                "INSERT INTO users (name, password_hash, auth_token) VALUES "
+                "('alice_legacy', 'hash', 'legacy-token-alice'), "
+                "('bob_legacy', 'hash', 'legacy-token-bob'), "
+                "('carol_legacy', 'hash', NULL)"
+            )
+        )
+        db.session.commit()
+
+        migrate_legacy_auth_tokens_to_sessions()
+
+        moved_session_count: int | None = db.session.execute(
+            text("SELECT count(*) FROM sessions")
+        ).scalar()
+        expected_moved_sessions: int = 2
+        assert moved_session_count == expected_moved_sessions
+
+        alice_user_id: int | None = db.session.execute(
+            text("SELECT id FROM users WHERE name = 'alice_legacy'")
+        ).scalar()
+        alice_session_row = db.session.execute(
+            text(
+                "SELECT user_id, created_at FROM sessions "
+                "WHERE token = 'legacy-token-alice'"
+            )
+        ).mappings().first()
+        assert alice_session_row is not None
+        assert alice_session_row["user_id"] == alice_user_id
+        assert alice_session_row["created_at"] is not None
+
+        user_column_names: list[str] = [
+            column["name"] for column in inspect(db.engine).get_columns("users")
+        ]
+        assert "auth_token" not in user_column_names
+
+        migrate_legacy_auth_tokens_to_sessions()
+        rerun_session_count: int | None = db.session.execute(
+            text("SELECT count(*) FROM sessions")
+        ).scalar()
+        assert rerun_session_count == expected_moved_sessions
 
 
 

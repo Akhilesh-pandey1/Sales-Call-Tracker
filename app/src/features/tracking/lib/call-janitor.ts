@@ -15,6 +15,7 @@ import { safeReadCallLogEntries } from './call-log-reader';
 import {
   fillMatchedPendingCalls,
   fillPendingCallAndRecordHistory,
+  toPendingCallOutcome,
 } from './pending-call-filler';
 
 let janitorSweepPromise: Promise<void> | null = null;
@@ -61,10 +62,12 @@ async function strikeUnmatchedPendingCalls(
     const attemptCount = await addPendingCallAttempt(stalePendingCall.callId);
     if (attemptCount >= maxJanitorAttempts) {
       const giveUpDurationSeconds = 0;
+      const staleCallOutcome = toPendingCallOutcome(stalePendingCall);
       await fillPendingCallAndRecordHistory(
         stalePendingCall,
         stalePendingCall.intentAt,
         giveUpDurationSeconds,
+        staleCallOutcome,
       );
     }
   }

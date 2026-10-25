@@ -1,13 +1,15 @@
 import { insertCallHistoryRow } from '../db';
-import type { CallDirection } from '../types';
+import type { CallDirection, CallOutcome } from '../types';
 import { readIsDoNotTrackNumber } from './do-not-track-check';
 import { removeScheduledReminderForNumber } from './call-reminders';
+import { markCalledMyListRowForNumber } from './my-list-called-marker';
 
 export async function recordCallInHistory(
   phoneNumber: string,
   direction: CallDirection,
   callAt: string,
   durationSeconds: number,
+  outcome: CallOutcome,
 ): Promise<void> {
   const historySaveWarnMessage = 'Could not save the call to history.';
   try {
@@ -31,4 +33,5 @@ export async function recordCallInHistory(
   } catch (removalError: unknown) {
     console.warn(handledBookingRemovalWarnMessage, removalError);
   }
+  await markCalledMyListRowForNumber(phoneNumber, outcome, callAt);
 }

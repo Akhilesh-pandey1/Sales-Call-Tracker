@@ -176,15 +176,15 @@
 
 **Blocked by:** 4, 11
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Start Calling dials the oldest Left number; a Do-not-track number is skipped, never dialed, and never recorded (`specs/my-list.md` — Start Calling never dials Do-not-track numbers).
-- [ ] Any recorded call to a listed number — from Start Calling or a keypad dial — moves the row out of Left with the outcome and note saved on it, matched on the normalized number exactly like lead resolution does (`specs/my-list.md` — Marked called from Start Calling; Marked called from a keypad dial).
-- [ ] With "Go to next call" checked the next Left number dials right after Submit, and an empty list says "No numbers left." (`testing.md` — Start Calling manual pass).
+- [x] Start Calling dials the oldest Left number; a Do-not-track number is skipped, never dialed, and never recorded (`specs/my-list.md` — Start Calling never dials Do-not-track numbers).
+- [x] Any recorded call to a listed number — from Start Calling or a keypad dial — moves the row out of Left with the outcome and note saved on it, matched on the normalized number exactly like lead resolution does (`specs/my-list.md` — Marked called from Start Calling; Marked called from a keypad dial).
+- [x] With "Go to next call" checked the next Left number dials right after Submit, and an empty list says "No numbers left." (`testing.md` — Start Calling manual pass).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 13: App — My List downloads the whole list as CSV
 

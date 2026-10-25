@@ -139,7 +139,7 @@ function NotesField({ noteText, onChangeNote }: NotesFieldProps) {
   );
 }
 
-export type PostCallDialogVariant = 'keypad' | 'lead';
+export type PostCallDialogVariant = 'keypad' | 'lead' | 'my-list';
 
 type PostCallDialogProps = {
   variant: PostCallDialogVariant;
@@ -191,6 +191,11 @@ function PostCallDialog({
   };
 
   const isLeadFlow = variant === 'lead';
+  const isScheduleSectionShown = variant !== 'my-list';
+  const isNextCallSectionShown = variant === 'lead' || variant === 'my-list';
+  const nextCallHintMessage = isLeadFlow
+    ? 'Uncheck to stop automated calling after Submit.'
+    : 'Uncheck to stop calling after Submit.';
   const submitButtonLabel = isSubmitting ? 'Submitting…' : 'Submit';
 
   return (
@@ -241,29 +246,31 @@ function PostCallDialog({
           <NotesField noteText={noteText} onChangeNote={handleChangeNote} />
         </View>
 
-        <View className="gap-2.5">
-          <Text className="text-sm font-bold">
-            Schedule this number for the next call?
-          </Text>
-          <ScheduleChoiceRow
-            label="Do not schedule"
-            isSelected={!isScheduleChosen}
-            onSelect={handleChooseNoSchedule}
-          />
-          <ScheduleChoiceRow
-            label="Schedule"
-            isSelected={isScheduleChosen}
-            onSelect={handleChooseSchedule}
-          />
-          {isScheduleChosen ? (
-            <SchedulePickerField
-              scheduleLabel={scheduleLabel}
-              onOpenPicker={openSchedulePicker}
+        {isScheduleSectionShown ? (
+          <View className="gap-2.5">
+            <Text className="text-sm font-bold">
+              Schedule this number for the next call?
+            </Text>
+            <ScheduleChoiceRow
+              label="Do not schedule"
+              isSelected={!isScheduleChosen}
+              onSelect={handleChooseNoSchedule}
             />
-          ) : null}
-        </View>
+            <ScheduleChoiceRow
+              label="Schedule"
+              isSelected={isScheduleChosen}
+              onSelect={handleChooseSchedule}
+            />
+            {isScheduleChosen ? (
+              <SchedulePickerField
+                scheduleLabel={scheduleLabel}
+                onOpenPicker={openSchedulePicker}
+              />
+            ) : null}
+          </View>
+        ) : null}
 
-        {isLeadFlow ? (
+        {isNextCallSectionShown ? (
           <View className="gap-1 rounded-2xl border border-border bg-muted/40 p-3">
             <Pressable
               accessibilityRole="checkbox"
@@ -288,7 +295,7 @@ function PostCallDialog({
               </Text>
             </Pressable>
             <Text className="pl-8 text-[10px] text-muted-foreground">
-              Uncheck to stop automated calling after Submit.
+              {nextCallHintMessage}
             </Text>
           </View>
         ) : null}

@@ -55,9 +55,15 @@ type MyListHeaderProps = {
   counts: MyListCounts;
   hasNumbers: boolean;
   onPressUpload: () => void;
+  onPressStartCalling: () => void;
 };
 
-function MyListHeader({ counts, hasNumbers, onPressUpload }: MyListHeaderProps) {
+function MyListHeader({
+  counts,
+  hasNumbers,
+  onPressUpload,
+  onPressStartCalling,
+}: MyListHeaderProps) {
   return (
     <View className="px-5 pt-4">
       {hasNumbers ? (
@@ -72,7 +78,10 @@ function MyListHeader({ counts, hasNumbers, onPressUpload }: MyListHeaderProps) 
             <MyListActionButton label="Download" icon={Download} iconClass="text-primary" />
             <MyListActionButton label="Clear" icon={Trash2} iconClass="text-destructive" />
           </View>
-          <Button className="mt-2 h-12 rounded-2xl bg-accent active:bg-accent/90">
+          <Button
+            onPress={onPressStartCalling}
+            className="mt-2 h-12 rounded-2xl bg-accent active:bg-accent/90"
+          >
             <Icon as={Play} size={20} className="text-accent-foreground" />
             <Text className="text-base font-bold text-accent-foreground">Start Calling</Text>
           </Button>
@@ -109,7 +118,11 @@ function NumberRowSeparator() {
   return <View className="h-2" />;
 }
 
-export function MyListView() {
+type MyListViewProps = {
+  onStartCalling: () => void;
+};
+
+export function MyListView({ onStartCalling }: MyListViewProps) {
   const { numberRows, counts, isLoading, errorMessage, reloadListNumbers } = useMyList();
   const upload = useMyListUpload();
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
@@ -147,6 +160,7 @@ export function MyListView() {
             counts={counts}
             hasNumbers={numberRows.length > 0}
             onPressUpload={handleOpenUploadDialog}
+            onPressStartCalling={onStartCalling}
           />
         }
         ListEmptyComponent={listEmptyView}

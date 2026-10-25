@@ -5,6 +5,7 @@ export function deriveMyListBadge(
   status: MyListNumberStatus,
   isInterested: boolean,
   isDoNotCall: boolean,
+  calledDurationSeconds: number | null,
 ): MyListBadge {
   if (status === 'left') {
     return 'Left';
@@ -15,5 +16,14 @@ export function deriveMyListBadge(
   if (isInterested) {
     return 'Interested';
   }
-  return 'Connected';
+  const connectedDurationFloorSeconds = 0;
+  const isRecordedCallNotConnected =
+    calledDurationSeconds !== null &&
+    calledDurationSeconds <= connectedDurationFloorSeconds;
+  if (isRecordedCallNotConnected) {
+    const notConnectedBadge: MyListBadge = 'Not connected';
+    return notConnectedBadge;
+  }
+  const connectedBadge: MyListBadge = 'Connected';
+  return connectedBadge;
 }

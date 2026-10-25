@@ -1,3 +1,6 @@
+import { readStoredCountry } from '@/features/auth';
+import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
+import type { CallOutcome } from '../types';
 import type { Transaction } from 'react-native-sqlite-storage';
 import { runInTransaction, runQuery } from './database';
 
@@ -9,6 +12,7 @@ export type MyListNumber = {
   status: MyListNumberStatus;
   isInterested: boolean;
   isDoNotCall: boolean;
+  calledDurationSeconds: number | null;
 };
 
 interface ListCountRow {
@@ -21,33 +25,100 @@ interface MyListNumberDbRow {
   status: string;
   interested: number;
   do_not_call: number;
+  called_at: string | null;
 }
 
-function toMyListNumber(dbRow: MyListNumberDbRow): MyListNumber {
+interface CalledCallDurationRow {
+  phone_number: string;
+  call_at: string;
+  duration_seconds: number;
+}
+
+function buildCalledDurationKey(phoneNumber: string, callAt: string): string {
+  const calledDurationKeySeparator = '|';
+  const calledDurationKey =
+    `${phoneNumber}${calledDurationKeySeparator}${callAt}`;
+  return calledDurationKey;
+}
+
+async function readCalledDurationsByCall(): Promise<Map<string, number>> {
+  const readCalledDurationsSql =
+    'SELECT phone_number, call_at, duration_seconds FROM call_history';
+  const queryResult = await runQuery(readCalledDurationsSql, []);
+  const calledDurationsByCall = new Map<string, number>();
+  for (let rowIndex = 0; rowIndex < queryResult.rows.length; rowIndex += 1) {
+    const durationRow = queryResult.rows.item(rowIndex) as CalledCallDurationRow;
+    const durationKey = buildCalledDurationKey(
+      durationRow.phone_number,
+      durationRow.call_at,
+    );
+    calledDurationsByCall.set(durationKey, durationRow.duration_seconds);
+  }
+  return calledDurationsByCall;
+}
+
+function toMyListNumber(
+  dbRow: MyListNumberDbRow,
+  calledDurationsByCall: Map<string, number>,
+): MyListNumber {
   const status: MyListNumberStatus =
     dbRow.status === 'called' ? 'called' : 'left';
+  let calledDurationSeconds: number | null = null;
+  if (dbRow.called_at !== null) {
+    const durationKey = buildCalledDurationKey(dbRow.phone_number, dbRow.called_at);
+    calledDurationSeconds = calledDurationsByCall.get(durationKey) ?? null;
+  }
   const listNumber: MyListNumber = {
     id: dbRow.id,
     phoneNumber: dbRow.phone_number,
     status,
     isInterested: dbRow.interested === 1,
     isDoNotCall: dbRow.do_not_call === 1,
+    calledDurationSeconds,
   };
   return listNumber;
 }
 
 export async function readMyListNumbers(): Promise<MyListNumber[]> {
   const readListNumbersSql =
-    'SELECT id, phone_number, status, interested, do_not_call ' +
+    'SELECT id, phone_number, status, interested, do_not_call, called_at ' +
     'FROM my_list_numbers ORDER BY id ASC';
-  const queryResult = await runQuery(readListNumbersSql, []);
+  const [queryResult, calledDurationsByCall] = await Promise.all([
+    runQuery(readListNumbersSql, []),
+    readCalledDurationsByCall(),
+  ]);
   const listNumbers: MyListNumber[] = [];
   for (let rowIndex = 0; rowIndex < queryResult.rows.length; rowIndex += 1) {
     const dbRow = queryResult.rows.item(rowIndex) as MyListNumberDbRow;
-    const listNumber = toMyListNumber(dbRow);
+    const listNumber = toMyListNumber(dbRow, calledDurationsByCall);
     listNumbers.push(listNumber);
   }
   return listNumbers;
+}
+
+export async function markMyListNumberCalled(
+  phoneNumber: string,
+  outcome: CallOutcome,
+  calledAt: string,
+): Promise<boolean> {
+  const countryCode = await readStoredCountry();
+  if (countryCode === null) {
+    const listNumberNotMarked = false;
+    return listNumberNotMarked;
+  }
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode);
+  const markNumberCalledSql = `UPDATE my_list_numbers
+    SET status = 'called', interested = ?, do_not_call = ?, notes = ?, called_at = ?
+    WHERE phone_number = ?`;
+  const markResult = await runQuery(markNumberCalledSql, [
+    outcome.interested ? 1 : 0,
+    outcome.doNotCall ? 1 : 0,
+    outcome.notes,
+    calledAt,
+    normalizedPhoneNumber,
+  ]);
+  const isListNumberMarked = markResult.rowsAffected > 0;
+  return isListNumberMarked;
 }
 
 function insertFreshLeftRows(

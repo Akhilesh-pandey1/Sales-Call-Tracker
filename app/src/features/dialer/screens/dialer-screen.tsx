@@ -25,6 +25,10 @@ import {
   useKeypadPostCall,
   type UseKeypadPostCallResult,
 } from '../hooks/use-keypad-post-call';
+import {
+  useMyListCalling,
+  type UseMyListCallingResult,
+} from '../hooks/use-my-list-calling';
 import { subscribeToTappedNumber } from '../lib/tapped-number-events';
 import type { PostCallSubmitData } from '../types';
 
@@ -328,6 +332,29 @@ function AutomatedView({
   );
 }
 
+function MyListCallingView({ myListCalling }: { myListCalling: UseMyListCallingResult }) {
+  const trackedCall = myListCalling.trackedCall;
+  const postCallDialogKey = trackedCall?.callId ?? 'idle-my-list-post-call';
+  const postCallDialogPhoneNumber = trackedCall === null
+    ? ''
+    : formatInternationalPhoneNumber(trackedCall.phoneNumber);
+
+  return (
+    <View className="flex-1">
+      <MyListView onStartCalling={myListCalling.startCalling} />
+      <PostCallDialog
+        key={postCallDialogKey}
+        variant="my-list"
+        isOpen={myListCalling.isPostCallDialogOpen}
+        phoneNumber={postCallDialogPhoneNumber}
+        isSubmitting={myListCalling.isSubmittingPostCall}
+        errorMessage={myListCalling.postCallErrorMessage}
+        onSubmit={myListCalling.submitMyListPostCall}
+      />
+    </View>
+  );
+}
+
 export function DialerScreen() {
   const missingPermissions = usePermissions();
   const isDialerTabFocused = useIsFocused();
@@ -343,6 +370,7 @@ export function DialerScreen() {
   const dialer = useDialer();
   const keypadPostCall = useKeypadPostCall();
   const automatedCalling = useAutomatedCalling();
+  const myListCalling = useMyListCalling();
   const isLeadFlowScreenShown =
     isDialerTabFocused && activeSubTab === 'automated';
   useLeadCallFlowPresence(isLeadFlowScreenShown, automatedCalling.viewState);
@@ -359,7 +387,7 @@ export function DialerScreen() {
       ) : activeSubTab === 'automated' ? (
         <AutomatedView automatedCalling={automatedCalling} />
       ) : (
-        <MyListView />
+        <MyListCallingView myListCalling={myListCalling} />
       )}
     </View>
   );

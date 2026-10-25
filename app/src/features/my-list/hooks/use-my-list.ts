@@ -1,6 +1,7 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   readMyListNumbers,
+  subscribeToMyListChanged,
   type MyListNumber,
 } from '@/features/tracking';
 import { deriveMyListBadge } from '../lib/my-list-badge';
@@ -22,6 +23,7 @@ function toNumberRow(listNumber: MyListNumber): MyListNumberItem {
       listNumber.status,
       listNumber.isInterested,
       listNumber.isDoNotCall,
+      listNumber.calledDurationSeconds,
     ),
   };
   return numberRow;
@@ -92,6 +94,17 @@ export function useMyList(): UseMyListResult {
       }
     }
   }, []);
+
+  useEffect(() => {
+    reloadListNumbers();
+  }, [reloadListNumbers]);
+
+  useEffect(() => {
+    const unsubscribeMyListChanged = subscribeToMyListChanged(() => {
+      reloadListNumbers();
+    });
+    return unsubscribeMyListChanged;
+  }, [reloadListNumbers]);
 
   const myListResult: UseMyListResult = {
     numberRows,

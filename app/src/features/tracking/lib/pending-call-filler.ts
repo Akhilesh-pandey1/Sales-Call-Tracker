@@ -1,5 +1,6 @@
 import type { MatchedPendingCall } from './call-log-matcher';
 import { markPendingCallFilled, type PendingCall } from '../db';
+import type { CallOutcome } from '../types';
 import { recordCallInHistory } from './call-history-recorder';
 
 function toPendingCallMapByCallId(pendingCalls: PendingCall[]): Map<string, PendingCall> {
@@ -10,10 +11,20 @@ function toPendingCallMapByCallId(pendingCalls: PendingCall[]): Map<string, Pend
   return pendingCallsByCallId;
 }
 
+export function toPendingCallOutcome(pendingCall: PendingCall): CallOutcome {
+  const pendingCallOutcome: CallOutcome = {
+    interested: pendingCall.interested,
+    doNotCall: pendingCall.doNotCall,
+    notes: pendingCall.notes,
+  };
+  return pendingCallOutcome;
+}
+
 export async function fillPendingCallAndRecordHistory(
   pendingCall: PendingCall,
   dialedAt: string,
   durationSeconds: number,
+  outcome: CallOutcome,
 ): Promise<void> {
   await markPendingCallFilled(pendingCall.callId, dialedAt, durationSeconds);
   await recordCallInHistory(
@@ -21,6 +32,7 @@ export async function fillPendingCallAndRecordHistory(
     pendingCall.direction,
     dialedAt,
     durationSeconds,
+    outcome,
   );
 }
 
@@ -35,6 +47,12 @@ export async function fillMatchedPendingCalls(
       await markPendingCallFilled(match.callId, match.dialedAt, match.durationSeconds);
       continue;
     }
-    await fillPendingCallAndRecordHistory(pendingCall, match.dialedAt, match.durationSeconds);
+    const matchedCallOutcome = toPendingCallOutcome(pendingCall);
+    await fillPendingCallAndRecordHistory(
+      pendingCall,
+      match.dialedAt,
+      match.durationSeconds,
+      matchedCallOutcome,
+    );
   }
 }

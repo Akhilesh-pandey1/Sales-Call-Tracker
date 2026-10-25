@@ -1,0 +1,284 @@
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
+import Clipboard from '@react-native-clipboard/clipboard';
+import { Calendar, Copy, MessageCircle, RotateCw } from 'lucide-react-native';
+import type { LucideIcon } from 'lucide-react-native';
+import { ActivityIndicator, FlatList, Pressable, ToastAndroid, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { MainTabsParamList } from '@/app/navigation/main-tabs-param-list';
+import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
+import { Text } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
+import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
+import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
+import {
+  useScheduledReminders,
+  type ScheduledBooking,
+  type ScheduledBookingState,
+} from '../hooks/use-scheduled-reminders';
+
+const bookedDayMonthFormatter = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'short',
+});
+const bookedTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: true,
+});
+
+function formatDateLabel(bookedDate: Date): string {
+  const dayMonthLabel: string = bookedDayMonthFormatter.format(bookedDate);
+  return dayMonthLabel;
+}
+
+function formatTimeLabel(bookedDate: Date): string {
+  const timeLabel: string = bookedTimeFormatter.format(bookedDate);
+  return timeLabel;
+}
+
+function formatBookedAtLabel(scheduledAt: string): string {
+  const bookedDate = new Date(scheduledAt);
+  if (Number.isNaN(bookedDate.getTime())) {
+    return scheduledAt;
+  }
+  const dayMonthLabel = formatDateLabel(bookedDate);
+  const timeLabel = formatTimeLabel(bookedDate);
+  const bookedAtLabel = `${dayMonthLabel} · ${timeLabel}`;
+  return bookedAtLabel;
+}
+
+function BookingStateBadge({ state }: { state: ScheduledBookingState }) {
+  const isDue = state === 'Due';
+  const badgeClasses = isDue ? 'bg-red-50' : 'bg-indigo-50';
+  const badgeTextClasses = isDue ? 'text-destructive' : 'text-primary';
+  return (
+    <View className={cn('shrink-0 rounded-full px-2 py-0.5', badgeClasses)}>
+      <Text className={cn('text-[10px] font-semibold', badgeTextClasses)}>
+        {state}
+      </Text>
+    </View>
+  );
+}
+
+type BookingActionButtonProps = {
+  accessibilityLabel: string;
+  icon: LucideIcon;
+  iconClassName: string;
+  onPress: () => void;
+};
+
+function BookingActionButton({
+  accessibilityLabel,
+  icon,
+  iconClassName,
+  onPress,
+}: BookingActionButtonProps) {
+  return (
+    <Pressable
+      accessibilityLabel={accessibilityLabel}
+      accessibilityRole="button"
+      onPress={onPress}
+      className="h-8 w-8 items-center justify-center rounded-lg border border-border bg-card active:bg-muted"
+    >
+      <Icon as={icon} size={16} className={iconClassName} />
+    </Pressable>
+  );
+}
+
+type BookingRowProps = {
+  booking: ScheduledBooking;
+  onOpenBooking: () => void;
+  onCopyPhoneNumber: (phoneNumber: string) => void;
+  onOpenWhatsAppChat: (phoneNumber: string) => void;
+};
+
+function BookingRow({
+  booking,
+  onOpenBooking,
+  onCopyPhoneNumber,
+  onOpenWhatsAppChat,
+}: BookingRowProps) {
+  const isDue = booking.state === 'Due';
+  const rowBorderClasses = isDue ? 'border-destructive' : 'border-border';
+  const displayedPhoneNumber = formatInternationalPhoneNumber(
+    booking.phoneNumber,
+  );
+  const bookedAtLabel = formatBookedAtLabel(booking.scheduledAt);
+
+  return (
+    <Pressable
+      accessibilityLabel={`Open booking for ${displayedPhoneNumber}`}
+      accessibilityRole="button"
+      onPress={onOpenBooking}
+      className={cn(
+        'mt-2 flex-row items-center gap-3 rounded-xl border bg-card px-4 py-2 shadow-sm active:bg-muted',
+        rowBorderClasses,
+      )}
+    >
+      <View className="min-w-0 flex-1">
+        <View className="flex-row items-center gap-2">
+          <Text className="text-sm font-bold tabular-nums">
+            {displayedPhoneNumber}
+          </Text>
+          <BookingStateBadge state={booking.state} />
+        </View>
+        <Text className="mt-0.5 text-[11px] text-muted-foreground">
+          {bookedAtLabel}
+        </Text>
+      </View>
+      <View className="shrink-0 flex-row items-center gap-1">
+        <BookingActionButton
+          accessibilityLabel={`Copy ${displayedPhoneNumber}`}
+          icon={Copy}
+          iconClassName="text-muted-foreground"
+          onPress={() => onCopyPhoneNumber(booking.phoneNumber)}
+        />
+        <BookingActionButton
+          accessibilityLabel={`WhatsApp ${displayedPhoneNumber}`}
+          icon={MessageCircle}
+          iconClassName="text-accent"
+          onPress={() => onOpenWhatsAppChat(booking.phoneNumber)}
+        />
+      </View>
+    </Pressable>
+  );
+}
+
+function ScheduledHeader({ onReloadPress }: { onReloadPress: () => void }) {
+  return (
+    <View className="border-b border-border bg-card px-5 py-3">
+      <View className="flex-row items-center justify-between">
+        <Text className="text-lg font-bold tracking-tight">Scheduled</Text>
+        <Pressable
+          accessibilityLabel="Reload"
+          accessibilityRole="button"
+          onPress={onReloadPress}
+          className="h-9 w-9 items-center justify-center rounded-lg active:bg-muted"
+        >
+          <Icon as={RotateCw} size={20} className="text-muted-foreground" />
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
+function BookingsLoadingView() {
+  return (
+    <View className="flex-1 items-center justify-center">
+      <ActivityIndicator size="large" className="text-primary" />
+    </View>
+  );
+}
+
+function BookingsErrorView({
+  errorMessage,
+  onTryAgain,
+}: {
+  errorMessage: string;
+  onTryAgain: () => void;
+}) {
+  const handleTryAgainPress = () => onTryAgain();
+  return (
+    <View className="flex-1 items-center justify-center px-3">
+      <Text role="alert" className="text-center text-xs font-semibold text-destructive">
+        {errorMessage}
+      </Text>
+      <Button
+        variant="outline"
+        onPress={handleTryAgainPress}
+        className="mt-4 h-12 w-full rounded-2xl"
+      >
+        <Text className="text-xs font-bold">Try again</Text>
+      </Button>
+    </View>
+  );
+}
+
+function BookingsEmptyView() {
+  return (
+    <View className="flex-1 items-center justify-center px-3">
+      <View className="h-16 w-16 items-center justify-center rounded-2xl bg-primary">
+        <Icon as={Calendar} size={32} className="text-primary-foreground" />
+      </View>
+      <Text className="mt-4 text-sm font-bold">Nothing scheduled.</Text>
+    </View>
+  );
+}
+
+type BookingsListProps = {
+  bookings: ScheduledBooking[];
+  onOpenBooking: () => void;
+  onCopyPhoneNumber: (phoneNumber: string) => void;
+  onOpenWhatsAppChat: (phoneNumber: string) => void;
+};
+
+function BookingsList({
+  bookings,
+  onOpenBooking,
+  onCopyPhoneNumber,
+  onOpenWhatsAppChat,
+}: BookingsListProps) {
+  return (
+    <FlatList
+      data={bookings}
+      keyExtractor={booking => String(booking.leadId)}
+      contentContainerClassName="px-3 pb-4"
+      renderItem={({ item }) => (
+        <BookingRow
+          booking={item}
+          onOpenBooking={onOpenBooking}
+          onCopyPhoneNumber={onCopyPhoneNumber}
+          onOpenWhatsAppChat={onOpenWhatsAppChat}
+        />
+      )}
+    />
+  );
+}
+
+export function ScheduledScreen() {
+  const { bookings, isLoading, errorMessage, reloadBookings } =
+    useScheduledReminders();
+  const navigation =
+    useNavigation<BottomTabNavigationProp<MainTabsParamList>>();
+  const { top: topInset } = useSafeAreaInsets();
+
+  const handleReloadPress = () => reloadBookings();
+  const handleOpenBooking = () => navigation.navigate('Dialer');
+  const handleCopyPhoneNumber = async (phoneNumber: string): Promise<void> => {
+    const numberCopiedMessage = 'Number copied.';
+    await Clipboard.setString(phoneNumber);
+    ToastAndroid.show(numberCopiedMessage, ToastAndroid.SHORT);
+  };
+  const handleOpenWhatsAppChat = async (phoneNumber: string): Promise<void> => {
+    await openChosenWhatsAppChat(phoneNumber);
+  };
+
+  const screenContent = isLoading ? (
+    <BookingsLoadingView />
+  ) : bookings.length === 0 ? (
+    errorMessage ? (
+      <BookingsErrorView
+        errorMessage={errorMessage}
+        onTryAgain={handleReloadPress}
+      />
+    ) : (
+      <BookingsEmptyView />
+    )
+  ) : (
+    <BookingsList
+      bookings={bookings}
+      onOpenBooking={handleOpenBooking}
+      onCopyPhoneNumber={handleCopyPhoneNumber}
+      onOpenWhatsAppChat={handleOpenWhatsAppChat}
+    />
+  );
+
+  return (
+    <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
+      <ScheduledHeader onReloadPress={handleReloadPress} />
+      {screenContent}
+    </View>
+  );
+}

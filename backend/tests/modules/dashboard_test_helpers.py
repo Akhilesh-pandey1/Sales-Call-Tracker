@@ -7,6 +7,7 @@ from backend.app.core.utils import now_ist
 from backend.app.extensions import db
 from backend.app.modules.calls import Call
 from backend.app.modules.users import User
+from backend.tests.modules.session_test_helpers import create_session_record
 
 
 def create_user_fixture(
@@ -22,10 +23,10 @@ def create_user_fixture(
         role=role,
         country="IN",
         is_active=is_active,
-        auth_token=token,
     )
     db.session.add(user)
     db.session.commit()
+    create_session_record(user_id=user.id, token=token)
     return user
 
 

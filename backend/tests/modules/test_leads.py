@@ -16,6 +16,10 @@ from backend.app.tasks.lead_expiry import (
     LEAD_EXPIRY_SCHEDULER_EXTENSION_KEY,
     run_lead_expiry_job,
 )
+from backend.tests.modules.session_test_helpers import (
+    create_session_record,
+    fetch_user_session_token,
+)
 
 
 def create_user_fixture(
@@ -31,10 +35,10 @@ def create_user_fixture(
         role=role,
         country="IN",
         is_active=is_active,
-        auth_token=token,
     )
     db.session.add(user)
     db.session.commit()
+    create_session_record(user_id=user.id, token=token)
     return user
 
 
@@ -598,8 +602,8 @@ def test_next_lead_claimed_on_serve_and_expires(
 
     lead = create_lead_fixture(phone_number="+919876543240", status="waiting")
 
-    headers_1: dict[str, str] = {"Authorization": f"Bearer {sales_1.auth_token}"}
-    headers_2: dict[str, str] = {"Authorization": f"Bearer {sales_2.auth_token}"}
+    headers_1: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(sales_1.id)}"}
+    headers_2: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(sales_2.id)}"}
 
     resp1 = client.post("/api/leads/next", json={}, headers=headers_1)
     assert resp1.status_code == 200
@@ -631,7 +635,7 @@ def test_next_lead_schedule_accepted(app: Flask, client: FlaskClient) -> None:
     current_time: datetime = now_utc()
     scheduled_future: datetime = current_time + timedelta(days=5)
 
-    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(salesperson.id)}"}
     payload: dict[str, Any] = {
         "schedule": {
             "lead_id": lead_to_schedule.id,
@@ -657,7 +661,7 @@ def test_next_lead_schedule_combined_with_next_fetch(
     lead_2 = create_lead_fixture(phone_number="+919876543262", status="waiting")
 
     scheduled_future: datetime = now_utc() + timedelta(days=3)
-    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(salesperson.id)}"}
 
     payload: dict[str, Any] = {
         "schedule": {
@@ -690,7 +694,7 @@ def test_next_lead_continue_calling_false_serves_no_lead(
     )
     create_lead_fixture(phone_number="+919876543291", status="waiting")
 
-    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(salesperson.id)}"}
     payload: dict[str, Any] = {"continue_calling": False}
 
     response = client.post("/api/leads/next", json=payload, headers=headers)
@@ -724,7 +728,7 @@ def test_next_lead_continue_calling_false_still_applies_schedule(
     create_lead_fixture(phone_number="+919876543293", status="waiting")
 
     future_schedule: datetime = current_time + timedelta(days=2)
-    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(salesperson.id)}"}
     payload: dict[str, Any] = {
         "continue_calling": False,
         "schedule": {
@@ -759,7 +763,7 @@ def test_next_lead_continue_calling_true_serves_lead_as_before(
     salesperson = create_user_fixture(name="SalesContinue", role="salesperson", token="continue-token")
     pool_lead = create_lead_fixture(phone_number="+919876543294", status="waiting")
 
-    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(salesperson.id)}"}
     payload: dict[str, Any] = {"continue_calling": True}
 
     response = client.post("/api/leads/next", json=payload, headers=headers)
@@ -786,10 +790,10 @@ def test_next_lead_newest_schedule_wins_ownership(
     lead = create_lead_fixture(phone_number="+919876543300", status="waiting")
 
     headers_first: dict[str, str] = {
-        "Authorization": f"Bearer {first_salesperson.auth_token}"
+        "Authorization": f"Bearer {fetch_user_session_token(first_salesperson.id)}"
     }
     headers_second: dict[str, str] = {
-        "Authorization": f"Bearer {second_salesperson.auth_token}"
+        "Authorization": f"Bearer {fetch_user_session_token(second_salesperson.id)}"
     }
 
     first_payload: dict[str, Any] = {
@@ -824,7 +828,7 @@ def test_next_lead_schedule_in_past_or_too_far_ahead_rejected(
 
     current_time: datetime = now_utc()
     past_time: datetime = current_time - timedelta(hours=1)
-    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(salesperson.id)}"}
 
     past_payload: dict[str, Any] = {
         "schedule": {
@@ -869,7 +873,7 @@ def test_next_lead_schedule_books_done_or_stopped_lead(
     )
 
     future_time: str = (now_utc() + timedelta(days=2)).isoformat()
-    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(salesperson.id)}"}
 
     done_payload: dict[str, Any] = {
         "schedule": {"lead_id": done_lead.id, "scheduled_at": future_time}
@@ -913,7 +917,7 @@ def test_next_lead_schedule_clears_claim_held_by_different_user(
     )
 
     future_time = (now_utc() + timedelta(days=2)).isoformat()
-    headers = {"Authorization": f"Bearer {scheduler.auth_token}"}
+    headers = {"Authorization": f"Bearer {fetch_user_session_token(scheduler.id)}"}
     payload = {
         "schedule": {"lead_id": claimed_lead.id, "scheduled_at": future_time}
     }
@@ -961,7 +965,7 @@ def test_expiry_job_frees_expired_booking_into_newest_first_pool(
     assert freed_lead.scheduled_at is None
     assert freed_lead.attempt_count == 1
 
-    headers: dict[str, str] = {"Authorization": f"Bearer {salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(salesperson.id)}"}
     response = client.post("/api/leads/next", json={}, headers=headers)
 
     assert response.status_code == 200
@@ -1046,7 +1050,7 @@ def test_next_lead_serving_never_frees_expired_booking(
         created_at=current_time,
     )
 
-    headers: dict[str, str] = {"Authorization": f"Bearer {other_salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(other_salesperson.id)}"}
     response = client.post("/api/leads/next", json={}, headers=headers)
 
     assert response.status_code == 200
@@ -1082,7 +1086,7 @@ def test_next_lead_booking_inside_window_keeps_lead_reserved(
         created_at=current_time - two_hours_ago,
     )
 
-    other_headers: dict[str, str] = {"Authorization": f"Bearer {other.auth_token}"}
+    other_headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(other.id)}"}
     other_response = client.post("/api/leads/next", json={}, headers=other_headers)
 
     assert other_response.status_code == 200
@@ -1094,7 +1098,7 @@ def test_next_lead_booking_inside_window_keeps_lead_reserved(
     assert booked_lead.scheduled_at is not None
     assert booked_lead.attempt_count == 1
 
-    owner_headers: dict[str, str] = {"Authorization": f"Bearer {owner.auth_token}"}
+    owner_headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(owner.id)}"}
     owner_response = client.post("/api/leads/next", json={}, headers=owner_headers)
 
     assert owner_response.status_code == 200
@@ -1139,7 +1143,7 @@ def test_expiry_job_frees_deactivated_owner_booking(
     assert stuck_lead.scheduled_at is None
     assert stuck_lead.attempt_count == 2
 
-    headers: dict[str, str] = {"Authorization": f"Bearer {active_salesperson.auth_token}"}
+    headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(active_salesperson.id)}"}
     response = client.post("/api/leads/next", json={}, headers=headers)
 
     assert response.status_code == 200

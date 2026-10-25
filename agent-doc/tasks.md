@@ -132,12 +132,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] Pasted text with numbers buried anywhere and picked CSV files both fill the `my_list_numbers` table, every number normalized to E.164 with the login country before storing (`specs/my-list.md` — Numbers come in three ways; Upload rules).
-- [ ] A number already in the list in any state has its old row deleted and is added fresh as Left, the same number twice inside one upload counts once, and the toast reads "Added N numbers." with "M not valid." appended when any parse fails (`specs/my-list.md` — Re-upload re-arms; Toast with counts).
-- [ ] The list cap comes from the app's `config.json` as `my_list_max_numbers` (10000), never hardcoded (`specs/my-list.md` — List capped by config).
+- [x] Pasted text with numbers buried anywhere and picked CSV files both fill the `my_list_numbers` table, every number normalized to E.164 with the login country before storing (`specs/my-list.md` — Numbers come in three ways; Upload rules).
+- [x] A number already in the list in any state has its old row deleted and is added fresh as Left, the same number twice inside one upload counts once, and the toast reads "Added N numbers." with "M not valid." appended when any parse fails (`specs/my-list.md` — Re-upload re-arms; Toast with counts).
+- [x] The list cap comes from the app's `config.json` as `my_list_max_numbers` (10000), never hardcoded (`specs/my-list.md` — List capped by config).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 10: App — My List takes Excel files with the Copy AI prompt
 

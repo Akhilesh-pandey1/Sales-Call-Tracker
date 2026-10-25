@@ -15,5 +15,6 @@ export {
   insertDoNotTrackNumber,
   insertPendingCall,
   readDoNotTrackNumbers,
+  replaceMyListNumbers,
 } from './db';
 export type { ScheduledReminder } from './db';

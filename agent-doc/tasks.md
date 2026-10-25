@@ -272,12 +272,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The tab lists every booking from the local `scheduled_reminders` table — lead bookings and keypad bookings alike — with the number, the booked date and time, and Upcoming while the time has not come, Due once it has passed (`specs/scheduled-bookings.md` — Every booking listed with its state).
-- [ ] Due rows sort first, most overdue at top, then Upcoming rows soonest first, and nothing booked reads "Nothing scheduled." (`specs/scheduled-bookings.md` — Due first, most overdue at top; Empty state).
-- [ ] Each row carries Copy and WhatsApp buttons, and tapping the row opens the booked lead's card ready to call — the same thing tapping the notification does (`specs/scheduled-bookings.md` — Row actions and tap-through).
+- [x] The tab lists every booking from the local `scheduled_reminders` table — lead bookings and keypad bookings alike — with the number, the booked date and time, and Upcoming while the time has not come, Due once it has passed (`specs/scheduled-bookings.md` — Every booking listed with its state).
+- [x] Due rows sort first, most overdue at top, then Upcoming rows soonest first, and nothing booked reads "Nothing scheduled." (`specs/scheduled-bookings.md` — Due first, most overdue at top; Empty state).
+- [x] Each row carries Copy and WhatsApp buttons, and tapping the row opens the booked lead's card ready to call — the same thing tapping the notification does (`specs/scheduled-bookings.md` — Row actions and tap-through).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 19: App — handled bookings leave the Scheduled tab
 

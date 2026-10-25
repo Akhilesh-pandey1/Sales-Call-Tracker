@@ -141,6 +141,8 @@ function NotesField({ noteText, onChangeNote }: NotesFieldProps) {
 
 export type PostCallDialogVariant = 'keypad' | 'lead' | 'my-list';
 
+type CallOutcomeChoice = 'interested' | 'doNotCall';
+
 type PostCallDialogProps = {
   variant: PostCallDialogVariant;
   isOpen: boolean;
@@ -163,16 +165,19 @@ function PostCallDialog({
   const { scheduleDate, scheduleLabel, openSchedulePicker } = usePostCallSchedule();
   const [isScheduleChosen, setIsScheduleChosen] = useState(false);
   const [shouldContinueToNextLead, setShouldContinueToNextLead] = useState(true);
-  const [isInterested, setIsInterested] = useState(false);
-  const [isDoNotCall, setIsDoNotCall] = useState(false);
+  const [chosenOutcome, setChosenOutcome] = useState<CallOutcomeChoice | null>(null);
   const [noteText, setNoteText] = useState('');
+  const isInterested = chosenOutcome === 'interested';
+  const isDoNotCall = chosenOutcome === 'doNotCall';
 
   const handleChooseSchedule = () => setIsScheduleChosen(true);
   const handleChooseNoSchedule = () => setIsScheduleChosen(false);
   const handleContinueToNextLeadToggle = () =>
     setShouldContinueToNextLead(!shouldContinueToNextLead);
-  const handleToggleInterested = () => setIsInterested(!isInterested);
-  const handleToggleDoNotCall = () => setIsDoNotCall(!isDoNotCall);
+  const handleToggleInterested = () =>
+    setChosenOutcome(chosenOutcome === 'interested' ? null : 'interested');
+  const handleToggleDoNotCall = () =>
+    setChosenOutcome(chosenOutcome === 'doNotCall' ? null : 'doNotCall');
   const handleChangeNote = (changedNoteText: string) => setNoteText(changedNoteText);
   const handleSubmitPress = () => {
     const scheduledAt = isScheduleChosen ? scheduleDate.toISOString() : null;

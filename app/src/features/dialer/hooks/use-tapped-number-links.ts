@@ -7,6 +7,11 @@ import { cleanTappedPhoneNumber } from '../lib/tel-link';
 export function useTappedNumberLinks(): void {
   useEffect(() => {
     function emitCaughtNumber(telLinkUrl: string): void {
+      const telLinkScheme = 'tel:';
+      const isTelLink = telLinkUrl.startsWith(telLinkScheme);
+      if (!isTelLink) {
+        return;
+      }
       if (isLeadCallFlowOnScreen()) {
         return;
       }
@@ -26,7 +31,8 @@ export function useTappedNumberLinks(): void {
       emitCaughtNumber(linkEvent.url);
     }
 
-    emitInitialTelLink();
+    const initialLinkEmission = emitInitialTelLink();
+    initialLinkEmission.catch(() => {});
     const linkSubscription = Linking.addEventListener('url', emitTelLinkEvent);
     return () => {
       linkSubscription.remove();

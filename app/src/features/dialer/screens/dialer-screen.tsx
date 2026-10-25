@@ -1,5 +1,5 @@
 import { useIsFocused } from '@react-navigation/native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui/button';
@@ -24,6 +24,7 @@ import {
   useKeypadPostCall,
   type UseKeypadPostCallResult,
 } from '../hooks/use-keypad-post-call';
+import { subscribeToTappedNumber } from '../lib/tapped-number-events';
 
 type DialerSubTab = 'keypad' | 'automated';
 
@@ -315,6 +316,14 @@ export function DialerScreen() {
   const missingPermissions = usePermissions();
   const isDialerTabFocused = useIsFocused();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
+
+  useEffect(() => {
+    const unsubscribe = subscribeToTappedNumber(() => {
+      setActiveSubTab('keypad');
+    });
+    return unsubscribe;
+  }, []);
+
   const dialer = useDialer();
   const keypadPostCall = useKeypadPostCall();
   const automatedCalling = useAutomatedCalling();

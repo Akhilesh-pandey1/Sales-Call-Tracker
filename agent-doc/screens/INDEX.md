@@ -25,13 +25,19 @@ Open `index.html` to flip through the screens (arrow keys or the buttons; Mobile
 | Login (app) | `06-login--M.html` | Salesperson signs in on the phone |
 | Login — wrong details | `06-login--error--M.html` | Wrong name or password |
 | Login — too many tries | `06-login--locked--M.html` | Lockout after 10 wrong tries |
-| Dialer — Keypad & Automated | `07-dialer--M.html` | Home tab — keypad and the lead-calling flow with booking reminders |
+| Dialer — Keypad & Automated & My List | `07-dialer--M.html` | Home tab — three-item pill switch, keypad (a tapped number from any app lands here typed), and the lead-calling flow with booking reminders |
 | Dialer — empty number | `07-dialer--empty--M.html` | Call button locked until the number is valid |
 | Dialer — permissions off | `07-dialer--permissions-off--M.html` | Red banner when any call permission is off |
-| Dialer — Keypad — post-call popup | `07-dialer--post-call-keypad--M.html` | Popup after a keypad call with the schedule question |
+| Dialer — Keypad — post-call popup | `07-dialer--post-call-keypad--M.html` | Popup after a keypad call — Interested / Do not call again buttons, optional note, and the schedule question |
 | Dialer — Automated — Start Calling | `07-dialer--automated--M.html` | The lead-calling entry point |
-| Dialer — Automated — post-call popup | `07-dialer--post-call--M.html` | Popup after a lead call, "Do not schedule" pre-selected |
+| Dialer — Automated — post-call popup | `07-dialer--post-call--M.html` | Popup after a lead call — outcome buttons + note, "Do not schedule" pre-selected |
 | Dialer — post-call popup (Schedule chosen) | `07-dialer--post-call--schedule--M.html` | Date/time picker revealed in the popup |
+| My List — personal calling list | `07a-my-list--M.html` | Start Calling + Upload / Download / Clear on top, My-Stats-style KPI cards (Left / Called / Interested / Do not call) — lives only on the phone, offline |
+| My List — no numbers yet | `07a-my-list--empty--M.html` | KPI cards at zero with Upload as the invite |
+| My List — upload — paste text | `07a-my-list--upload-paste--M.html` | Paste box for any messy text + Copy AI prompt — one of the two upload screens |
+| My List — upload — pick file | `07a-my-list--upload-file--M.html` | One file input — tap and pick a CSV or Excel (.xlsx) file, read right on the phone |
+| My List — upload result toast | `07a-my-list--upload-toast--M.html` | "Added 24 numbers. 2 not valid." after the upload closes |
+| My List — clear confirmation | `07a-my-list--clear-dialog--M.html` | Shows the left and called counts before wiping the whole list |
 | Scheduled — due & upcoming callbacks | `07b-scheduled--M.html` | Every callback booked on this phone, due first — compact rows with Call, Copy and WhatsApp icons, reload in the header |
 | Scheduled — nothing booked | `07b-scheduled--empty--M.html` | Empty state — "Nothing scheduled." |
 | Scheduled — WhatsApp missing toast | `07b-scheduled--no-whatsapp--M.html` | "WhatsApp is not installed." toast on the WhatsApp button |
@@ -46,6 +52,6 @@ Open `index.html` to flip through the screens (arrow keys or the buttons; Mobile
 | Do not track numbers | `09b-do-not-track--M.html` | Back button + Add number, table of private numbers with Remove per row |
 | Do not track — add number dialog | `09b-do-not-track--add-dialog--M.html` | Pop-up to add a number (10 digits → +91) |
 | Do not track — number already added | `09b-do-not-track--add-error--M.html` | Duplicate refused inside the pop-up |
-| Calling SIM | `09c-calling-sim--M.html` | Pick the number every call leaves from — readable SIM numbers with carrier names, plus Use phone default |
-| Calling SIM — numbers not readable | `09c-calling-sim--none-readable--M.html` | Phone hides its SIM numbers — calls stay on the phone's default SIM |
+| Calling SIM | `09c-calling-sim--M.html` | Pick the SIM slot every call leaves from — "SIM 1 · Jio" style slots, number shown only when the phone can read it, plus Use phone default |
+| Calling SIM — numbers not readable | `09c-calling-sim--none-readable--M.html` | Phone hides its SIMs — calls stay on the phone's default SIM |
 | WhatsApp settings | `09d-whatsapp--M.html` | Pick WhatsApp or WhatsApp Business, and edit the first message chats open with |

@@ -56,16 +56,21 @@ Receives a batch of completed calls from the salesperson's mobile app.
         "phone_number": "+919812345678",
         "dialed_at": "2026-10-14T06:45:00Z",
         "duration_seconds": 0,
-        "scheduled_at": "2026-10-16T04:30:00Z"
+        "scheduled_at": "2026-10-16T04:30:00Z",
+        "interested": true,
+        "notes": "Asked to call after 6 pm"
       }
     ]
   }
   ```
 - `scheduled_at` — string, optional. ISO UTC follow-up time for the dialed number, chosen in the post-call popup. Omitted when no schedule was chosen.
 - `direction` — string, optional, `outgoing` by default. `incoming` marks an answered incoming call caught by the phone's call-log sweep.
+- `interested` — boolean, optional, `false` by default. The Interested choice in the post-call popup.
+- `do_not_call` — boolean, optional, `false` by default. The Do not call again choice in the post-call popup.
+- `notes` — string, optional. The note typed in the post-call popup. Omitted when empty.
 - **Processing Logic**:
   - Saves all valid call entries under the authenticated user's ID.
-  - Calls carry no outcome — the salesperson is never asked for one; connected is derived from duration.
+  - Saves the optional `interested`, `do_not_call`, and `notes` on the call row and copies the two yes/no flags and the note onto the lead matching the dialed number: `do_not_call: true` sets the lead's status to `stopped` — never served again — with claims and schedules cleared; `interested: true` is stored as a label and the normal attempt rules keep running. Connected is still derived from duration.
   - Silently ignores existing `call_id` values (idempotent unique key).
   - Skips and logs any call older than 3 days (`MAX_CALL_AGE_DAYS`).
   - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped. The gate applies to both directions.
@@ -318,7 +323,7 @@ Updates a user's name, password, or dialing country code.
   { "status": true }
   ```
 - **Rules**:
-  - Changing the password invalidates the user's active session by generating a new session token.
+  - Changing the password deletes all of the user's sessions except the one making the change — other devices must log in again; the device that changed it stays logged in.
   - Allowed on the manager's own account.
 
 ### `POST /api/users/<id>/deactivate`

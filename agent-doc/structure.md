@@ -15,7 +15,7 @@ The system consists of three parts in a single repository:
 - **Styling**: NativeWind (Tailwind CSS for React Native)
 - **UI Components**: React Native Reusables (`react-native-reusables` — shadcn/ui for React Native in `components/ui/`)
 - **Navigation**: React Navigation (`@react-navigation/bottom-tabs`)
-- **Local Storage**: `react-native-sqlite-storage` (local tracking database: `pending_calls`, `do_not_track`, `sweep_state`, `scheduled_reminders`, `call_history`) + `@react-native-async-storage/async-storage`
+- **Local Storage**: `react-native-sqlite-storage` (local tracking database: `pending_calls`, `do_not_track`, `sweep_state`, `scheduled_reminders`, `call_history`, `my_list_numbers`) + `@react-native-async-storage/async-storage`
 - **Telephony & Permissions**:
   - `react-native-permissions`
   - `react-native-call-detection-android`
@@ -66,7 +66,8 @@ backend/
 │       ├── auth/
 │       │   ├── routes.py            # POST /api/login
 │       │   ├── schemas.py           # Login request and response validation
-│       │   ├── services.py          # Authentication and in-memory lockout logic
+│       │   ├── services.py          # Authentication, session issue and check, and in-memory lockout logic
+│       │   ├── models.py            # Session SQLAlchemy database model
 │       │   └── __init__.py
 │       ├── calls/
 │       │   ├── routes.py            # POST /api/calls/sync
@@ -223,12 +224,16 @@ app/
     │   │   ├── components/keypad.tsx
     │   │   ├── components/permission-banner.tsx
     │   │   ├── components/lead-call-card.tsx # Lead calling card with a Copy button for the lead's number
-    │   │   ├── components/post-call-dialog.tsx  # Post-call popup: native date/time picker + schedule question + Go-to-next checkbox + Submit; locked so only Submit closes it; keypad variant shows the number with the same schedule question, and submitting it clears the typed number
+    │   │   ├── components/post-call-dialog.tsx  # Post-call popup: native date/time picker + schedule question + Go-to-next checkbox + optional Interested / Do-not-call-again outcome buttons + Notes box + Submit; locked so only Submit closes it; keypad variant shows the number with the same schedule question, and submitting it clears the typed number
     │   │   ├── lib/call-launcher.ts     # Starts the call: chosen-SIM placement through TelecomManager; Android default SIM when none picked or CALL_PHONE off
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
     │   │   ├── hooks/use-post-call-submit.ts  # Submit click: read call log, send to server, delete or save the row
-    │   │   └── screens/dialer-screen.tsx # Hosts Dialer keypad and Automated lead calling sub-tabs; fills the keypad from a number tapped outside the app
+    │   │   └── screens/dialer-screen.tsx # Hosts the Keypad, Automated, and My List sub-tabs; fills the keypad from a number tapped outside the app
+    │   ├── my-list/
+    │   │   ├── hooks/use-my-list.ts             # My List rows and count chips; Start Calling serves the oldest Left number
+    │   │   ├── hooks/use-my-list-upload.ts      # Paste / CSV / Excel parsing, E.164 normalization, and the replace rule
+    │   │   └── screens/my-list-screen.tsx       # My List sub-tab: count chips, number rows, Upload, Start Calling, Download, Clear
     │   ├── history/
     │   │   ├── hooks/use-call-history.ts        # History rows: newest first, 50 per page, refresh sweep on tab open, last-loaded marker
     │   │   └── screens/history-screen.tsx       # History tab: call rows with Copy, WhatsApp, and the Scheduled badge
@@ -246,6 +251,7 @@ app/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
     │       ├── db/call-history-db.ts     # Local call history: one row per filled call, 1000-row FIFO, one-time call-log backfill
     │       ├── db/scheduled-reminders-db.ts # Booked reminders: save, read all, delete by lead id or by called number
+    │       ├── db/my-list-db.ts             # Personal list rows: upload replace, mark called, clear, CSV export
     │       ├── hooks/use-permissions.ts  # Runtime permissions check, request, settings link
     │       ├── hooks/use-call-tracker.ts # Call-state listener: opens the post-call popup when a call ends (no call-log reading)
     │       ├── hooks/use-janitor.ts      # 1-hour check and 5-strike give-up filler

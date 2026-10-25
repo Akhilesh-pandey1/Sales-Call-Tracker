@@ -50,7 +50,7 @@
 
     <main class="flex-1 px-5 pb-6 pt-4">
 
-      <p class="px-1 text-xs text-[var(--color-muted-foreground)]">Every call goes out from the number you pick. The choice stays on your phone only.</p>
+      <p class="px-1 text-xs text-[var(--color-muted-foreground)]">Every call leaves on the SIM slot you pick. The choice stays on the slot — SIMs swapped between slots keep it.</p>
 
       <!-- SIM numbers this phone can read: tap a row to choose it -->
       <div class="mt-3 flex flex-col gap-3">
@@ -62,8 +62,8 @@
             </svg>
           </span>
           <span class="flex-1">
-            <span class="block text-sm font-semibold tabular-nums">+91 98220 12345</span>
-            <span class="mt-0.5 block text-xs text-[var(--color-muted-foreground)]">Jio</span>
+            <span class="block text-sm font-semibold">SIM 1 · Jio</span>
+            <span class="mt-0.5 block text-xs text-[var(--color-muted-foreground)] tabular-nums">+91 98220 12345</span>
           </span>
           <svg data-sim-check class="h-5 w-5 shrink-0 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="20 6 9 17 4 12"/>
@@ -77,8 +77,8 @@
             </svg>
           </span>
           <span class="flex-1">
-            <span class="block text-sm font-semibold tabular-nums">+91 90045 67890</span>
-            <span class="mt-0.5 block text-xs text-[var(--color-muted-foreground)]">Airtel</span>
+            <span class="block text-sm font-semibold">SIM 2 · Airtel</span>
+            <span class="mt-0.5 block text-xs text-[var(--color-muted-foreground)] tabular-nums">+91 90045 67890</span>
           </span>
           <svg data-sim-check class="invisible h-5 w-5 shrink-0 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="20 6 9 17 4 12"/>
@@ -103,6 +103,8 @@
           </svg>
         </button>
       </div>
+
+      <p class="mt-3 px-1 text-xs text-[var(--color-muted-foreground)]">The SIM's own number shows only when the phone can read it.</p>
 
     </main>
 

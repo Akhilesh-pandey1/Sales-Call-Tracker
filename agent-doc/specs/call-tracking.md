@@ -157,3 +157,44 @@ The system SHALL provide a settings action that wipes only the local SQLite queu
 - **GIVEN** the confirmation dialog opens
 - **WHEN** it renders
 - **THEN** it displays the exact number of unsent calls that will be deleted — which can be zero
+
+### Requirement: Post-call outcome popup on every flow
+The system SHALL show the same two optional outcome buttons — Interested and Do not call again — plus an optional Notes box on every post-call popup, keypad, automated lead, and My List flows alike, with nothing preselected and Submit working with all of it empty, and SHALL save the two choices as yes/no flags and the note on the call record — the phone's pending row and the server's `calls` table both carry them — so they ride the normal batch sync while the call's time and duration still come only from the call log.
+
+#### Scenario: Popup choices identical on every flow
+- **GIVEN** a post-call popup from the keypad, the automated lead flow, or My List
+- **WHEN** it renders
+- **THEN** it carries the same Interested and Do not call again buttons and the same optional Notes box, with nothing preselected
+
+#### Scenario: Submit with everything empty
+- **GIVEN** a post-call popup with no outcome button chosen and no note typed
+- **WHEN** Submit is tapped
+- **THEN** the call is saved with both flags false and an empty note
+
+#### Scenario: Choices ride the sync batch
+- **GIVEN** a call recorded with Interested or Do not call again chosen and a note typed
+- **WHEN** the batch sync runs
+- **THEN** the flags and the note arrive on the server's call row beside the number, time, and duration
+
+#### Scenario: Time and duration stay call-log only
+- **GIVEN** a call recorded with any outcome choices
+- **WHEN** the call's time and duration are filled
+- **THEN** they come only from the call log — the popup never changes any number
+
+### Requirement: Keypad clears after the post-call popup
+The system SHALL clear the typed number to blank when the keypad's post-call popup is submitted — "Do not schedule" and "Schedule" alike — leaving the display empty for the next number, while paste, backspace, and hold-to-clear keep working as they are.
+
+#### Scenario: Keypad blank after Do not schedule
+- **GIVEN** a keypad call ended and its post-call popup is showing
+- **WHEN** the salesperson taps "Do not schedule"
+- **THEN** the keypad display clears to blank
+
+#### Scenario: Keypad blank after Schedule
+- **GIVEN** a keypad call ended and its post-call popup is showing
+- **WHEN** the salesperson schedules and submits
+- **THEN** the keypad display clears to blank
+
+#### Scenario: Automated flow keeps its number
+- **GIVEN** the automated lead call flow is on screen
+- **WHEN** its post-call popup is submitted
+- **THEN** the lead's number and popup stay untouched — the clearing applies to the keypad only

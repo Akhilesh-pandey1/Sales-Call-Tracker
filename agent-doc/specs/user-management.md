@@ -28,17 +28,22 @@ The system SHALL allow the manager to create a salesperson account with a unique
 - **THEN** the server refuses with "Country must be one of: IN, AE, US."
 
 ### Requirement: Edit account
-The system SHALL allow the manager to update a user's name, password, and/or country in any combination; changing the password SHALL invalidate the user's existing session token.
+The system SHALL allow the manager to update a user's name, password, and/or country in any combination; changing the password SHALL delete the account's other sessions while the session making the change stays signed in.
 
 #### Scenario: Name updated
 - **GIVEN** a new unique name for an existing account
 - **WHEN** the manager submits the edit
 - **THEN** the name is updated and success is confirmed
 
-#### Scenario: Password changed invalidates old token
+#### Scenario: Password changed signs other devices out
 - **GIVEN** the manager changes a salesperson's password
 - **WHEN** the salesperson's next request uses the old token
 - **THEN** it is rejected as invalid
+
+#### Scenario: Password changed from the same device stays signed in
+- **GIVEN** the manager changes their own password on the web
+- **WHEN** the manager's next request uses the current token
+- **THEN** it keeps working — the device that made the change is never signed out
 
 #### Scenario: Manager can edit own account
 - **GIVEN** the manager submits an edit targeting their own account

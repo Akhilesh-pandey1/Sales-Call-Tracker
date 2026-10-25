@@ -45,6 +45,7 @@
         <button type="button" id="tab-automated-btn" onclick="showSubTab('automated')" class="rounded-full px-4 py-1 text-xs transition-all text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]">
           Automated
         </button>
+        <span class="rounded-full px-4 py-1 text-xs text-[var(--color-muted-foreground)]">My List</span>
       </div>
     </header>
 
@@ -159,17 +160,36 @@
 
     <!-- Keypad post-call popup: opens by itself when a keypad call ends. Same popup as the lead call - schedule question with date and time reveal, no Go to next call. -->
     <div id="keypad-postcall-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-4 backdrop-blur-xs">
-      <div class="w-full max-w-sm rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
+      <div class="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
         <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
           <div>
             <h3 class="text-base font-bold tracking-tight">Call ended</h3>
             <p id="keypad-call-number" class="text-xs text-[var(--color-muted-foreground)] tabular-nums">+91 98765 43210</p>
           </div>
           <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
-        </div>        <!-- Schedule question: "Do not schedule" pre-selected; choosing "Schedule" reveals the date and time below in the same popup -->
+        </div>
+
+        <!-- Outcome: two optional choices plus an optional note - nothing preselected, Submit works with it all empty -->
         <div class="mt-4">
-          <p class="text-sm font-bold">Schedule this number for the next call?</p>
-          <div class="mt-2.5 space-y-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <label class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-accent)] has-checked:bg-emerald-50/40">
+              <input type="checkbox" class="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-ring)]">
+              <span class="text-xs font-bold text-[var(--color-foreground)]">Interested</span>
+            </label>
+            <label class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-destructive)] has-checked:bg-red-50/40">
+              <input type="checkbox" class="h-4 w-4 text-[var(--color-destructive)] focus:ring-[var(--color-ring)]">
+              <span class="text-xs font-bold text-[var(--color-foreground)]">Do not call again</span>
+            </label>
+          </div>
+          <label class="mt-2 block rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 focus-within:border-[var(--color-primary)]">
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Notes (optional)</span>
+            <textarea rows="2" placeholder="e.g. Asked to call back after 6 PM" class="mt-1 w-full resize-none bg-transparent text-sm text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none"></textarea>
+          </label>
+        </div>
+
+        <!-- Schedule question: "Do not schedule" pre-selected; choosing "Schedule" reveals the date and time below in the same popup -->
+        <div class="mt-4">
+          <div class="space-y-2">
             <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/40">
               <span class="text-sm font-bold text-[var(--color-foreground)]">Do not schedule</span>
               <input type="radio" name="keypad-schedule-choice" value="none" checked onchange="toggleKeypadScheduleInput()" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-ring)]">
@@ -199,9 +219,9 @@
       </div>
     </div>
 
-    <!-- Post-call popup: opens by itself when the lead call ends. One Submit button, no outcome choices. -->
+    <!-- Post-call popup: opens by itself when the lead call ends. Outcome buttons + optional note, the schedule question, and one Submit. -->
     <div id="post-call-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-4 backdrop-blur-xs">
-      <div class="w-full max-w-sm rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
+      <div class="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-2xl text-left">
 
         <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
           <div>
@@ -211,10 +231,27 @@
           <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">Ended</span>
         </div>
 
+        <!-- Outcome: two optional choices plus an optional note - nothing preselected, Submit works with it all empty -->
+        <div class="mt-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <label class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-accent)] has-checked:bg-emerald-50/40">
+              <input type="checkbox" class="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-ring)]">
+              <span class="text-xs font-bold text-[var(--color-foreground)]">Interested</span>
+            </label>
+            <label class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-destructive)] has-checked:bg-red-50/40">
+              <input type="checkbox" class="h-4 w-4 text-[var(--color-destructive)] focus:ring-[var(--color-ring)]">
+              <span class="text-xs font-bold text-[var(--color-foreground)]">Do not call again</span>
+            </label>
+          </div>
+          <label class="mt-2 block rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 focus-within:border-[var(--color-primary)]">
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Notes (optional)</span>
+            <textarea rows="2" placeholder="e.g. Asked to call back after 6 PM" class="mt-1 w-full resize-none bg-transparent text-sm text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none"></textarea>
+          </label>
+        </div>
+
         <!-- Schedule question with "Do not schedule" pre-selected -->
         <div class="mt-4">
-          <p class="text-sm font-bold">Schedule this number for the next call?</p>
-          <div class="mt-2.5 space-y-2">
+          <div class="space-y-2">
             <label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 hover:bg-[var(--color-background)] has-checked:border-[var(--color-primary)] has-checked:bg-indigo-50/40">
               <span class="text-sm font-bold text-[var(--color-foreground)]">Do not schedule</span>
               <input type="radio" id="schedule-choice-none" name="schedule-choice" value="none" checked onchange="toggleScheduleInput()" class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-ring)]">

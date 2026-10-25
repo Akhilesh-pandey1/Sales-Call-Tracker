@@ -32,18 +32,33 @@ The system SHALL authenticate a user by matching their name and plaintext passwo
 - **WHEN** the request is submitted
 - **THEN** the server returns "Name and password are required."
 
-### Requirement: Single active session per user
-The system SHALL issue a new random auth token on every login, replacing any previously stored token for that user, so logging in on a new device instantly invalidates the old session.
+### Requirement: One session per login, all staying valid
+The system SHALL create one row in the `sessions` table per login and keep every session valid — a new login never signs an older device out — with the same rule for every account, so a manager keeps the dashboard open on several devices at once and one salesperson login may sit on two phones. The system SHALL offer no logout endpoint; a device ends its own session by clearing its stored token.
 
-#### Scenario: Re-login replaces old token
+#### Scenario: New login does not sign older devices out
 - **GIVEN** a user logged in on one device
 - **WHEN** the same user logs in successfully elsewhere
-- **THEN** the old token no longer works for any API request
+- **THEN** both tokens keep working — nothing is replaced or invalidated
 
-#### Scenario: Token used after password reset
-- **GIVEN** the manager reset a salesperson's password
-- **WHEN** the salesperson's next request uses the old token
-- **THEN** it is rejected as invalid
+#### Scenario: One shared salesperson login on two phones
+- **GIVEN** a salesperson account with a shared login
+- **WHEN** two phones sign in with the same name and password
+- **THEN** each phone holds its own live session and both keep working
+
+#### Scenario: Password change signs other devices out
+- **GIVEN** a password change saved from one logged-in device
+- **WHEN** another session of the same account is used
+- **THEN** it is rejected as invalid while the session that made the change keeps working
+
+#### Scenario: Migration keeps old tokens working
+- **GIVEN** a token stored before the sessions update
+- **WHEN** it is used on any endpoint
+- **THEN** it maps to a `sessions` row and keeps working — nobody was signed out by the update
+
+#### Scenario: No logout endpoint
+- **GIVEN** any logged-in device
+- **WHEN** it wants to end its own session
+- **THEN** there is no logout endpoint to call — the phone clears its own stored token
 
 ### Requirement: Token-gated API access
 The system SHALL require a valid `Authorization: Bearer <token>` header on every endpoint except login and SHALL verify the token owner's account is active before processing the request.

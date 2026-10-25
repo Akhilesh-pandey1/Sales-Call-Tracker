@@ -11,6 +11,9 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - Invalid password returns 401 `"Wrong name or password."`.
 - Correct credentials on deactivated account returns 403 `"Your account is not active. Please contact your manager."`.
 - 10 consecutive failed attempts locks out the name for 5 minutes (429 `"Too many tries. Wait 5 minutes and try again."`), blocking even the correct password.
+- Two logins for one account create two sessions and both tokens work at the same time.
+- Changing the password keeps the acting session valid and rejects every other session of that user.
+- Deactivating an account rejects all of its sessions.
 
 ### `tests/modules/test_calls.py`
 - Single batch inserts multiple valid calls and associates them with the token owner's user ID.
@@ -20,7 +23,9 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - A call starting 18:59 and exactly 19:00 IST are saved; 19:01 is discarded (window end inclusive).
 - After the manager updates the office hours window, the gate uses the new window on the next sync.
 - Malformed call rows are skipped while valid rows in the same batch are saved.
-- Calls sync without an outcome; the `outcome` column stays empty on every saved row.
+- A sync item with `interested: true` and a note saves both on the call row and on the matched lead; the lead's attempt rules run unchanged.
+- A sync item with `do_not_call: true` sets the matched lead's status to `stopped` even when the call was not connected; claims and schedules clear.
+- Items without the flags and `notes` save with both flags false and the note empty.
 - A sync item with `direction: 'incoming'` is saved with direction incoming; it never creates or resolves a lead and never burns an attempt.
 - The office-hours gate applies to incoming calls the same as outgoing — an outside-window incoming call is discarded with a log line.
 - A call to a number with no lead creates that lead as `waiting` and resolves it from the same call — connected marks it `done`, not connected burns attempt 1.
@@ -62,7 +67,7 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 ### `tests/modules/test_users.py`
 - Manager creates a salesperson with unique name, password (8+ chars, upper/lower), and country code.
 - Duplicate name on create or edit returns 400 `"That name is already taken."`.
-- Editing password generates a new session token, invalidating old sessions.
+- Editing the password keeps the editing session valid; every other session of that user is rejected on its next request.
 - Deactivating an account sets `is_active = false` and revokes session.
 - Self-deactivation and self-deletion by the manager are rejected with 400 `"You cannot do this to your own account."`.
 - Permanent delete removes the user and cascades to delete all their call rows.
@@ -157,3 +162,15 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - An empty or unreadable number link opens the dialer with nothing filled.
 - When our app already handles tapped numbers, the login pass shows nothing for this step.
 - Tapping "Don't show again" on the login step keeps it hidden at every later login, even when our app is never picked.
+- The Dialer pill switch shows three items — Keypad, Automated, My List — and My List opens empty with "No numbers yet." and an Upload button.
+- Uploading messy pasted text, a CSV file, and an Excel file all fill the list; the count chips update after each upload.
+- The "Copy AI prompt" button copies the prompt; pasting the comma-separated ChatGPT answer adds every number.
+- Re-uploading a number already in the list resets it to Left; the same number twice in one upload is added once.
+- Start Calling dials the oldest Left number; with "Go to next call" checked the next Left number dials right after Submit; an empty list says "No numbers left."
+- All three post-call popups — keypad, automated, My List — show the Interested and Do not call again buttons and the Notes box, all optional.
+- Submitting a My List call marks the row Called with its badge; a keypad call to a listed number marks it Called too.
+- Do not call again on a lead call stops the lead — automated calling never serves it again; an interested mark saves on the lead without changing its retries.
+- Download produces the CSV in the share sheet with number, status, interested, do-not-call, notes, and date; Clear asks with the counts and wipes the list locally only.
+- A Do-not-track number in My List is never dialed by Start Calling and never recorded.
+- With airplane mode on, upload, calling, outcomes, Clear, and Download all still work; calls sync at the next open with internet.
+- Two managers logging into the shared account on two devices both stay logged in; changing the password keeps the changing device in and signs the other out.

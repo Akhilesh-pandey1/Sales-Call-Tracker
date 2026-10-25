@@ -36,7 +36,7 @@ The system SHALL show four KPI cards for the selected period — Dials, Connecte
 - **THEN** the Talk minutes card shows a 45-minute decrease against yesterday from the returned delta
 
 ### Requirement: Calls-by-hour chart
-The system SHALL show dials per IST hour as a bar chart built only from the returned calls_by_hour block — hours spanning the office-hours window start to end inclusive, one returned count per hour, and the returned best_hour highlighted — with a one-line summary under it; hour labels such as "10 AM" are display formatting.
+The system SHALL show dials per IST hour as a bar chart built only from the returned calls_by_hour block — hours spanning the office-hours window start to end inclusive, one returned count per hour, and the returned best_hour highlighted — with a one-row color legend and the one-line summary under it; hour labels such as "10 AM" are display formatting.
 
 #### Scenario: Hours span the office-hours window
 - **GIVEN** the office-hours window is 10:00–19:00
@@ -57,6 +57,39 @@ The system SHALL show dials per IST hour as a bar chart built only from the retu
 - **GIVEN** the selected period's calls_by_hour has best_hour null
 - **WHEN** the chart area renders
 - **THEN** a "No calls in this period." note shows instead of the chart and no best hour is highlighted
+
+### Requirement: Hour-chart split in dots with centered counts
+The system SHALL show the calls-by-hour chart's outgoing and incoming split as blue and green colored segments rendered with a dot, each segment's count sitting in the vertical middle of the segment and the period total on top of the bar, with a count appearing only when its segment holds at least one eighth of the tallest bar's calls; both hour charts — web and app — SHALL carry the same one-row color legend, blue dot = outgoing and green dot = incoming, the same colors the Call Split cards already use; the web keeps its one-line summary under the legend and the app shows the legend under the bars, and the Call Split cards themselves stay untouched.
+
+#### Scenario: Split shown as colored dots
+- **GIVEN** a bar whose hour holds both outgoing and incoming calls
+- **WHEN** the chart renders
+- **THEN** the bar shows the split as blue and green segments, each carrying a dot with its count centered inside the segment
+
+#### Scenario: Total stays on top
+- **GIVEN** any bar on the chart
+- **WHEN** it renders
+- **THEN** the hour's total count sits on top of the bar
+
+#### Scenario: Small segments hide their count
+- **GIVEN** a segment holding less than one eighth of the tallest bar's calls
+- **WHEN** the chart renders
+- **THEN** that segment shows no count inside it — only its colored dot
+
+#### Scenario: Legend on both charts
+- **GIVEN** the web person view or the app's My Stats screen
+- **WHEN** the hour chart renders
+- **THEN** a one-row legend shows beside it — blue dot = outgoing, green dot = incoming
+
+#### Scenario: Legend placement differs per side
+- **GIVEN** the web chart and the app chart
+- **WHEN** they render
+- **THEN** the web keeps its one-line summary under the legend, and the app shows the legend under the bars
+
+#### Scenario: Call Split cards untouched
+- **GIVEN** the dashboards that carry Call Split cards
+- **WHEN** they render
+- **THEN** the cards are unchanged — the chart changes touch nothing else
 
 ### Requirement: Top 5 people by talk time
 The system SHALL list the active salespeople with the highest returned talk seconds for the selected period — at most five, highest first — each entry carrying its returned seconds and minutes.

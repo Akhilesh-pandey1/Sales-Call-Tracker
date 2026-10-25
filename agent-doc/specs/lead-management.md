@@ -154,3 +154,77 @@ The system SHALL store the full lead state — status, attempt count, last-attem
 - **GIVEN** the summary or next-lead endpoint is called
 - **WHEN** lead state is read
 - **THEN** it comes from the leads table directly, not from a derivation over calls
+
+### Requirement: Expired bookings freed by the hourly job
+The system SHALL run a booking-expiry job inside the server process that fires once the moment the server starts and then once every hour, clearing `scheduled_by` and `scheduled_at` on every `waiting` lead whose `scheduled_at` sits more than 24 hours (`SCHEDULE_EXPIRE_HOURS`) in the past — attempt counts untouched, freed leads returning to the newest-first pool. Serving SHALL never free a booking: only the job releases expired bookings.
+
+#### Scenario: Expired booking cleared
+- **GIVEN** a waiting lead whose booking sits more than 24 hours in the past
+- **WHEN** the hourly job fires
+- **THEN** `scheduled_by` and `scheduled_at` are cleared and the lead returns to the newest-first pool with its attempt count unchanged
+
+#### Scenario: Young overdue booking stays reserved
+- **GIVEN** a lead whose booking is overdue by less than 24 hours
+- **WHEN** the hourly job fires
+- **THEN** the booking stays — the lead is still reserved for its booker and invisible to the pool
+
+#### Scenario: Serving never frees a booking
+- **GIVEN** a lead holds an overdue-but-not-expired booking and is served to its booker
+- **WHEN** no call happens
+- **THEN** the booking stays — only the hourly job releases expired bookings
+
+#### Scenario: Startup run recovers a sleeping server
+- **GIVEN** the server was down and bookings expired while it was away
+- **WHEN** the server starts
+- **THEN** the job fires once immediately and frees everything that expired within seconds of waking
+
+#### Scenario: Duplicate runs are harmless
+- **GIVEN** the job fires twice over the same leads
+- **WHEN** the second run processes an already-freed lead
+- **THEN** the release is one idempotent update — nothing changes and nothing breaks
+
+#### Scenario: Manager's Scheduled count drains within the hour
+- **GIVEN** bookings have sat expired
+- **WHEN** the hourly job has run
+- **THEN** the lead summary's Scheduled count reflects the freed leads within the hour
+
+### Requirement: Call outcome reaches the lead
+When a synced and kept call matches a lead, the system SHALL store the call's outcome and note beside the lead's own state: Do not call again SHALL set the lead's status to stopped — never served again by any salesperson, even unconnected — with claims and schedules cleared; Interested SHALL be stored as a label with the normal retry rules running unchanged; and a call with no outcome SHALL resolve the lead exactly as before.
+
+#### Scenario: Do not call again stops the lead
+- **GIVEN** a synced call with the Do not call again choice matches a lead
+- **WHEN** the sync is processed
+- **THEN** the lead's status becomes stopped with claims and schedules cleared — it is never served again by any salesperson
+
+#### Scenario: Stopped even when the call was unconnected
+- **GIVEN** a synced unconnected call carrying the Do not call again choice matches a lead
+- **WHEN** the sync is processed
+- **THEN** the lead is still stopped — the choice does not need a connected call
+
+#### Scenario: Interested stored as a label only
+- **GIVEN** a synced call carrying the Interested choice matches a lead
+- **WHEN** the sync is processed
+- **THEN** the label is stored beside the lead's state and the normal retry rules keep running unchanged
+
+#### Scenario: Note stored beside the lead
+- **GIVEN** a synced call with a note typed matches a lead
+- **WHEN** the sync is processed
+- **THEN** the note is stored beside the lead's state with the outcome
+
+#### Scenario: No outcome resolves as before
+- **GIVEN** a synced call with no outcome choices matches a lead
+- **WHEN** the sync is processed
+- **THEN** the lead resolves by the normal connected / unconnected rules with no label stored
+
+### Requirement: Lead card hands out its number
+The system SHALL show a Copy button beside the lead's number on the automated lead calling card, available while ringing, during the call, and on the post-call popup; one tap copies the number with a "Number copied." toast.
+
+#### Scenario: Copy available through the whole flow
+- **GIVEN** the lead card is showing while the lead's call is ringing, in progress, or on its post-call popup
+- **WHEN** the salesperson taps Copy
+- **THEN** the lead's number is copied and a "Number copied." toast shows
+
+#### Scenario: Copy leaves the flow untouched
+- **GIVEN** the lead's call is live
+- **WHEN** Copy is tapped
+- **THEN** the call and the flow keep running exactly as they were

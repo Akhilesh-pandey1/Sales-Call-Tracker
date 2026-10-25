@@ -16,7 +16,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Wrong name or password: "Wrong name or password."
 - Correct details on a deactivated account: "Your account is not active. Please contact your manager."
 - 10 wrong password tries for one name: "Too many tries. Wait 5 minutes and try again." - blocks even the correct password
-- Login ended (signed in on another device, account paused, or password changed): the next page goes back to this login
+- Login ended (password changed on another device, or the account deactivated or deleted): the next page goes back to this login
 
 → Next: Screen 2 Team Dashboard
 
@@ -25,8 +25,10 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Top bar - page title "Dashboard" and today's date
 - Period switch - Today | Yesterday | Last 30 days; drives the KPI cards, Calls by hour, and Top 5
 - KPI cards (4) - Dials, Connected calls, Not connected, Talk minutes. Dials / Connected / Not connected count outgoing calls only (from the app and outside dialers); Talk minutes is TOTAL talk time - outgoing and incoming together. Sub-line shows per-active-person per-day average; the Today card sub-line compares with yesterday instead
-- Calls by hour - ONE bar per hour: total calls that hour, split into two colored segments - outgoing and incoming - sized by share, counts written inside the segments; 30 days shows the daily average per hour; best hour highlighted by total calls
-- Split line under the chart - reads like "142 outgoing · 37 incoming" for the selected period
+- Calls by hour - ONE bar per hour: total calls that hour, split into two colored segments - outgoing and incoming - sized by share; 30 days shows the daily average per hour; best hour highlighted by total calls
+- Bar counts - each segment's count sits in the vertical middle of its own color, the bar's total on top; a segment under one eighth of the tallest bar shows no count
+- Color legend - one row under the chart: blue dot = outgoing, green dot = incoming
+- Split line under the legend - reads like "142 outgoing · 37 incoming" for the selected period
 - Top 5 by minutes - the 5 people with the most TOTAL talk time (outgoing and incoming together) in the selected period
 - No person rows here - per-salesperson rows live on Screen 2b Team
 - Totals count every call on record - including deactivated people's past calls
@@ -35,7 +37,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 **Edge cases:**
 - No calls yet at all: totals show 0 and the chart shows the "No calls in this period." note
 - Backend does not load: "Could not load data." with a Retry button
-- Login ended (signed in on another device): back to Screen 1 Login
+- Login ended (password changed, or the account deactivated or deleted): back to Screen 1 Login
 
 **Graph - what it means:** Calls by hour shows how all team calling - outgoing and incoming - is distributed through the working day. The two segments in each bar show how much of that hour was dialing effort versus customers calling back. The manager uses it to find peak windows and quiet hours.
 
@@ -63,7 +65,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Back link - returns to the section the person was opened from (Team for an active person, Accounts for a deactivated one)
 - KPI cards (4, last 30 days) - Active days (of 30), Avg dials, Avg connected, Avg minutes; averages per active day; Avg minutes is TOTAL talk (outgoing + incoming); Active days counts only days with an outgoing call
 - Stats block - three rows (Today, Yesterday, Last 30 days), each with: Dials, Connected, Minutes, Connected %. Minutes is TOTAL talk; Dials / Connected count outgoing only
-- Calls by hour - ONE stacked two-color bar per hour (outgoing and incoming segments, counts inside), same as the Dashboard, for this person only; its own small period switch (Today | Yesterday | Last 30 days) drives only this chart
+- Calls by hour - ONE stacked two-color bar per hour, same as the Dashboard - centered counts, color legend included - for this person only; its own small period switch (Today | Yesterday | Last 30 days) drives only this chart
 - Donut chart - incoming vs outgoing share of TOTAL talk minutes for the period; its own small period switch (Today | Yesterday | Last 30 days); one line under it reads the exact numbers: "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min"
 - Connected % - connected ÷ dials for that period; "—" means the period has no dials yet, not 0%
 - Most contacted numbers table (last 30 days) - number, minutes, calls; sorted by TOTAL talk time (outgoing and incoming together)
@@ -92,7 +94,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
   - Waiting (1 call) - dialed 1 time without answer, awaiting 2nd retry
   - Waiting (2 calls) - dialed 2 times without answer, awaiting final retry
   - Scheduled - callbacks requested for a specific date and time
-  - Stopped - did not answer after 3 attempts (max retries reached)
+  - Stopped - did not answer after 3 attempts, or the customer said "Do not call again"
 - Active Lead Pool visual composition bar - shows distribution across 0-call, 1-call, 2-call, scheduled, and stopped stages
 - Numbers update on open and page refresh - no live updates
 
@@ -112,6 +114,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Row taps - an active row does not open anything (performance lives on Screen 2b Team); a deactivated person's row opens their Person View, read-only
 - Add person button, top right above the list - opens a dialog with the form: name, starting password, country dropdown (IN, AE, US); role is always Salesperson
 - Per-row actions - Edit (name, password, country) · Deactivate or Activate · Delete
+- Saving a password change signs that person's other devices out at once - the device making the change stays in
 - The manager's own row shows no actions at all - no edit, no deactivate, no delete; it carries a "You" badge
 - Delete confirmation dialog - "This permanently removes NAME and all their calls. Cannot be undone."
 - The list carries no call counts
@@ -142,33 +145,41 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 ## Salesperson View (Android app "Apex Sales Call")
 
 ### Screen 6: Login
-Same as Screen 1 Login (shared design, same messages) - without the manager-only gate. A correct login opens the app straight to the Dialer.
+Same as Screen 1 Login (shared design, same messages) - without the manager-only gate. A correct login runs the short step-by-step permission pass, then opens the app straight to the Dialer.
+
+- Tapped-number step - one short instruction line, then Android's chooser opens once over a probe number that is never dialed; picking our app (Always) sends every number tapped anywhere on the phone straight to the Dialer keypad from then on
+- Silent skip - when our app already handles tapped numbers, the step passes without showing anything
+- Skip vs Don't show again - a plain skip brings the step back at the next login; the "Don't show again" button (found only on this step) refuses for good and the step never shows again
 
 → Next: Screen 7 Dialer
 
 ### Screen 7: Dialer - home tab
 - Bottom tab bar - Dialer | Scheduled | History | My Stats | Settings
-- Sub-tab switch at top - pill switch: Keypad | Automated
+- Sub-tab switch at top - pill switch: Keypad | Automated | My List
 - **Keypad view**:
   - Number display - the phone number being typed
   - Keypad - 0–9, *, #, and backspace (tap deletes one character, holding it clears the whole number)
   - Paste button - fills the number field from clipboard
+  - Caught number fill - a number tapped anywhere on the phone (Contacts, WhatsApp, browser, SMS) lands here already typed - spaces and dashes stripped - Call button ready; backing out keeps the number and dials nothing
   - Call button - grey and unpressable until the number is valid for the country; green when valid; starts the call at once, no confirm step
-  - Post-call popup - opens by itself when a keypad call ends; same popup as the lead call - the dialed number, the schedule question with the follow-up time field below, and one Submit button - no "Go to next call"
+  - Post-call popup - opens by itself when a keypad call ends; same popup as the lead call - the dialed number, the schedule choice (Do not schedule / Schedule) with the follow-up time field below, and one Submit button - no "Go to next call"
   - Submit clears the number - submitting the popup, either schedule choice, wipes the typed number to blank, ready for the next call
 - **Automated view (lead calling)**:
   - Start Calling button - dials the next lead at once, one tap, no lead card step; a due booked lead comes first when it is time
   - Lead number with Copy button - one tap copies the lead's number while ringing, during the call, and on the post-call popup; "Number copied." toast
-  - Post-call popup - opens by itself when the call ends: "Schedule this number for the next call?" with two choices - "Do not schedule" pre-selected and "Schedule", which reveals the follow-up time field below in the same popup; a pre-checked "Go to next call" checkbox; one Submit button
+  - Post-call popup - opens by itself when the call ends: two choices - "Do not schedule" pre-selected and "Schedule", which reveals the follow-up time field below in the same popup; a pre-checked "Go to next call" checkbox; one Submit button
   - Submit - saves the chosen schedule and sends the call; with the box checked the next lead's call starts at once; with the box unchecked the flow pauses until Start Calling again
   - Booking a lead sets a reminder - at the booked time the phone itself shows "Time to call" with the lead's number; tapping the notification opens this screen straight to the booked lead's card, ready to call, and clears that booking from the Scheduled tab; one notification per booking, never repeats
   - Follow-up time field (both popups) - tapping it opens the phone's date picker first, then the time picker; starts at tomorrow 9:00 AM; past dates and dates beyond 30 days cannot be picked
   - Locked popup (both popups) - tapping outside or pressing the back button does nothing; Submit is the only way through
-- Red banner (both views when any call permission is off) - "Calls are not being logged", with a Fix button that opens Android app settings
+- Every post-call popup (all views) - carries the same two optional outcome buttons, Interested and Do not call again, plus an optional Notes box; nothing preselected, Submit works with it all empty
+- Red banner (all views when any call permission is off) - "Calls are not being logged", with a Fix button that opens Android app settings
 
 **Edge cases:**
 - Paste with nothing copied: "Nothing copied." toast; typed number stays untouched
 - Number not valid yet: Call button stays grey
+- Tapped link with no readable number: the dialer opens with nothing filled
+- Caught number while the automated flow is on screen: ignored - the live flow keeps its number and state
 - Any of the three call permissions off: red banner shows; Fix opens Android settings; banner clears once all three are on
 - Call permission off: tapping Call hands the number to the phone's own dialer (one extra tap there) - that call is not recorded
 - Direct call fails to start: "Could not start the call. Please try again."
@@ -176,7 +187,33 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 - Submitting a schedule on a lead booked by another salesperson: "This lead is already booked by someone else." - the call itself still records
 - Popup closed without Submit, or app killed with the popup open: the call still records at the next app open; the popup does not come back
 - No internet: dialing and lead calling work as always; calls sync on a later app open
-- Login ended (signed in on another phone, deactivated, or password changed): back to Screen 6 Login
+- Login ended (password changed, deactivated, or deleted): back to Screen 6 Login
+
+→ Next: Screen 7a My List
+
+### Screen 7a: My List
+The Dialer pill switch's third item - Keypad | Automated | My List. The salesperson's personal calling list: it lives only on this phone, never on the server, and the manager never sees it. Everything works offline.
+
+- Action buttons at the top - a row of Upload, Download, Clear, with Start Calling right below them
+- KPI cards (4, My Stats style) - Left, Called, Interested, Do not call; one big count per card; Left means never dialed, Called counts the Connected + Not connected rows together
+- Row leaves Left after any recorded call to its number - from Start Calling or a keypad dial alike; the call's outcome and note are saved on the row
+- Upload button - opens the upload dialog below
+- Start Calling button - dials the Left numbers one by one
+- Download button - exports the whole list as a CSV (number, status, interested, do-not-call, notes, called date) through Android's share sheet
+- Clear button - wipes the whole list after a confirmation that shows the counts: left and called; the server is never touched
+- Post-call popup - the same outcome buttons and Notes box every popup carries (Screen 7)
+- Uploading replaces - a number already on the list in any state has its old row deleted and is added fresh as Left; the same number twice in one upload counts once
+- List cap - at most 10,000 numbers
+
+**Upload - two screens, switched the same way (Paste text | File):**
+- Paste text screen - a paste box that accepts any messy text and pulls out every phone-like number, plus the Copy AI prompt button
+- File screen - one file input: tap it and pick a CSV or Excel (.xlsx) file from the phone; the file is read right on the phone, numbers sit in one column of the sheet
+- Numbers save in international format, built with the login country
+
+**Edge cases:**
+- Upload toast: "Added N numbers." - with "M not valid." appended when some text was not readable as a number
+- Start Calling reaches a Do-not-track number: it is skipped and never recorded
+- Empty list: only the count chips at zero, with Upload as the invite
 
 → Next: Screen 7b Scheduled
 
@@ -219,7 +256,7 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 
 ### Screen 8: My Stats - fourth tab
 - "Last 30 days" KPI cards (4) - Active days (out of 30), Avg dials, Avg connected, Avg minutes; averages per active day, with the 30-day totals as small sub-lines. Avg minutes is TOTAL talk time (outgoing + incoming); Active days counts only days with an outgoing call
-- Calls by hour - ONE bar per hour: total calls that hour, split into two colored segments - outgoing and incoming - sized by share, counts written inside the segments; small period switch (Today | Yesterday | 30 days) opens on Today and drives only this chart; one line under it names the best hour
+- Calls by hour - ONE bar per hour: total calls that hour, split into two colored segments - outgoing and incoming - sized by share, counts centered in their segments with the total on top; small period switch (Today | Yesterday | 30 days) opens on Today and drives only this chart; one-row color legend under the bars: blue dot = outgoing, green dot = incoming; one line under it names the best hour
 - Donut chart - incoming vs outgoing share of TOTAL talk minutes; the same three-period switch drives it; one line under it reads the exact numbers: "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min"
 - Performance table - three rows (Today, Yesterday, Last 30 days); the four headings are icons (phone, connected phone, clock, percent) and one line under the table names them: Dials, Connected, Minutes, Connected %. Minutes is TOTAL talk; Dials / Connected count outgoing only
 - No most-contacted-numbers table here - that lives only on the manager's Person View
@@ -231,7 +268,7 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 - Zero active days in the last 30: all four average cards show "—"
 - Chart period with no calls: "No calls in this period." instead of the chart, with no best-hour line
 - No incoming calls in a period: the donut shows the full circle as outgoing; the line reads "Incoming 0 calls · 0 min"
-- Login ended (signed in on another phone, deactivated, or password changed): back to Screen 6 Login
+- Login ended (password changed, deactivated, or deleted): back to Screen 6 Login
 
 **Graph - what it means:** The stacked hour bars show when the person's calling happens - the two segments show dialing effort versus customers calling back in each hour. The donut shows the overall split of talk time: how much they drove versus answered. Best hour follows total calls.
 

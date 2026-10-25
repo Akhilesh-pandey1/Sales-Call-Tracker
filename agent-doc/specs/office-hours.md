@@ -84,4 +84,27 @@ The system SHALL leave every call stored before the gate untouched in totals —
 #### Scenario: Pre-gate call has no chart bucket
 - **GIVEN** the same 08:00 call and the window 10:00–19:00
 - **WHEN** the chart renders
-- **THEN** its hours span 10 through 19 only and the call appears in no bar
+- **THEN** its hours span 10 through 18 only and the call appears in no bar
+
+### Requirement: The window reaches the phone without its own endpoint
+The system SHALL carry the office-hours window to the phone inside responses it already receives — the login response beside the token, and every My Stats fetch beside its short label — and SHALL open no settings endpoint to salespeople; the office-hours GET stays manager-only. The app SHALL store the window it last received; with no window received yet the phone SHALL use the documented default, 10:00–19:00 IST.
+
+#### Scenario: Login carries the window
+- **GIVEN** a salesperson logs in successfully
+- **WHEN** the login response is built
+- **THEN** it carries the current office-hours window beside the token
+
+#### Scenario: My Stats fetch carries the window
+- **GIVEN** any My Stats fetch
+- **WHEN** the response is built
+- **THEN** it carries the current window beside its short label
+
+#### Scenario: No salesperson endpoint exists
+- **GIVEN** the phone wants the current window
+- **WHEN** it looks for a way to fetch it
+- **THEN** no settings endpoint opens to salespeople — the window arrives only inside the login and My Stats responses
+
+#### Scenario: Default before any window arrives
+- **GIVEN** a phone that has received no window yet
+- **WHEN** it filters its own recordings
+- **THEN** it uses the documented default, 10:00–19:00 IST

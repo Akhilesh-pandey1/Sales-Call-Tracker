@@ -158,18 +158,43 @@ The system SHALL provide a settings action that wipes only the local SQLite queu
 - **WHEN** it renders
 - **THEN** it displays the exact number of unsent calls that will be deleted — which can be zero
 
-### Requirement: Post-call outcome popup on every flow
-The system SHALL show the same two optional outcome buttons — Interested and Do not call again — plus an optional Notes box on every post-call popup, keypad, automated lead, and My List flows alike, with nothing preselected and Submit working with all of it empty, and SHALL save the two choices as yes/no flags and the note on the call record — the phone's pending row and the server's `calls` table both carry them — so they ride the normal batch sync while the call's time and duration still come only from the call log.
+### Requirement: Shared post-call popup on every flow
+The system SHALL show one mergeable popup — the same Interested and Do not call again buttons, the same optional Notes box, and the same Schedule choice — on every flow, keypad, automated lead, and My List alike, with nothing preselected and Submit working with all of it empty. Interested and Do not call again SHALL be mutually exclusive: tapping one clears the other and tapping the chosen one again unchecks it, so the popup allows both off or exactly one on, never both on. The automated and My List popups SHALL carry the "Go to next call" checkbox and the keypad popup SHALL not carry it. The system SHALL save the two choices as yes/no flags and the note on the call record — the phone's pending row and the server's `calls` table both carry them — so they ride the normal batch sync while the call's time and duration still come only from the call log.
 
 #### Scenario: Popup choices identical on every flow
 - **GIVEN** a post-call popup from the keypad, the automated lead flow, or My List
 - **WHEN** it renders
-- **THEN** it carries the same Interested and Do not call again buttons and the same optional Notes box, with nothing preselected
+- **THEN** it carries the same Interested and Do not call again buttons, the same optional Notes box, and the same Schedule choice, with nothing preselected
 
 #### Scenario: Submit with everything empty
 - **GIVEN** a post-call popup with no outcome button chosen and no note typed
 - **WHEN** Submit is tapped
 - **THEN** the call is saved with both flags false and an empty note
+
+#### Scenario: Submit with exactly one outcome
+- **GIVEN** only Interested is chosen and a note is typed
+- **WHEN** Submit is tapped
+- **THEN** the call is saved with Interested true, Do not call again false, and the note
+
+#### Scenario: Tapping one outcome clears the other
+- **GIVEN** the Interested button is on
+- **WHEN** the salesperson taps Do not call again
+- **THEN** Interested turns off and only Do not call again is on
+
+#### Scenario: Tapping the chosen outcome again unchecks it
+- **GIVEN** the Do not call again button is on
+- **WHEN** the salesperson taps Do not call again again
+- **THEN** it turns off and both buttons are off
+
+#### Scenario: Keypad popup carries no next-call checkbox
+- **GIVEN** the keypad post-call popup renders
+- **WHEN** the salesperson reads it
+- **THEN** it carries no "Go to next call" checkbox
+
+#### Scenario: Automated and My List popups carry the next-call checkbox
+- **GIVEN** the automated or the My List post-call popup renders
+- **WHEN** the salesperson reads it
+- **THEN** it carries the "Go to next call" checkbox
 
 #### Scenario: Choices ride the sync batch
 - **GIVEN** a call recorded with Interested or Do not call again chosen and a note typed
@@ -198,3 +223,59 @@ The system SHALL clear the typed number to blank when the keypad's post-call pop
 - **GIVEN** the automated lead call flow is on screen
 - **WHEN** its post-call popup is submitted
 - **THEN** the lead's number and popup stay untouched — the clearing applies to the keypad only
+
+### Requirement: Shared direct-call flow
+One shared direct-call flow SHALL serve every row that dials from a list — it writes the intent row, places the call straight through Android's direct-call intent with CALL_PHONE, and runs the shared post-call popup after, the exact keypad process. Tapping a History row or its Call button dials the number directly instead of filling the keypad, the Scheduled rows' Call button uses the same flow, and the keypad itself stays unchanged. With CALL_PHONE denied, the flow SHALL fall back to the standing rule — the number goes to the phone's own dialer and the call is not tracked.
+
+#### Scenario: History row tapped dials directly
+- **GIVEN** the History tab shows a row
+- **WHEN** the salesperson taps the row
+- **THEN** the shared flow writes the intent row and dials the number directly — the keypad is never filled
+
+#### Scenario: Scheduled row's Call button uses the same flow
+- **GIVEN** a booking row on the Scheduled tab
+- **WHEN** its Call button is tapped
+- **THEN** the same shared flow dials the number and runs the shared post-call popup
+
+#### Scenario: The keypad stays unchanged
+- **GIVEN** the Dialer keypad
+- **WHEN** the salesperson dials from it
+- **THEN** it works exactly as before — the shared flow changes nothing about the keypad
+
+#### Scenario: CALL_PHONE denied falls back to the phone's dialer
+- **GIVEN** CALL_PHONE is denied
+- **WHEN** a History or Scheduled row starts a call
+- **THEN** the number goes to the phone's own dialer and the call is not tracked
+
+### Requirement: Do-not-track list
+The system SHALL keep a phone-local Do-not-track list of numbers whose calls — in or out — are never recorded, with the add button as a bare + icon in the screen's header with no text opening the add dialog, invalid numbers refused, duplicate numbers refused, numbers stored normalized with the login country, removal putting the number back under tracking, and the list never synced to the server.
+
+#### Scenario: Add button is a bare + icon
+- **GIVEN** the Do-not-track screen renders
+- **WHEN** the salesperson reads it
+- **THEN** the add button is a bare + icon in the header with no text
+
+#### Scenario: Invalid number refused
+- **GIVEN** the add dialog holds a number not valid for the login country
+- **WHEN** Add is tapped
+- **THEN** the app says "Enter a valid phone number." and adds nothing
+
+#### Scenario: Duplicate refused
+- **GIVEN** a number already on the list
+- **WHEN** it is added again
+- **THEN** the app says "This number is already on the list." and no second row is added
+
+#### Scenario: Listed number never recorded
+- **GIVEN** a number on the Do-not-track list
+- **WHEN** a call to or from it happens
+- **THEN** nothing is recorded anywhere — no queue row, no history row, nothing synced
+
+#### Scenario: Removing re-arms tracking
+- **GIVEN** a number removed from the list
+- **WHEN** a call with that number is recorded after the removal
+- **THEN** it is tracked like any other number — the removal takes effect at once
+
+#### Scenario: List never synced
+- **GIVEN** numbers were added to and removed from the list
+- **WHEN** the batch sync runs
+- **THEN** no Do-not-track data rides it — the list stays on the phone only

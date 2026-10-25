@@ -4,23 +4,28 @@ Gives the salesperson a personal calling list that lives on the phone only. Uplo
 
 ## Requirements
 
-### Requirement: My List as the third pill item
-The system SHALL grow the Dialer's pill switch to three items — Keypad | Automated | My List — with the My List tab showing count chips for Left, Called, Interested, and Do not call, and one row per number with its badge: Left, Connected, Not connected, Interested, or Do not call.
+### Requirement: My List tab shows KPIs only
+The system SHALL grow the Dialer's pill switch to three items — Keypad | Automated | My List — and the My List tab SHALL show only the Upload, Download, and Clear buttons, Start Calling, the four summary cards — Left, Called, Interested, Do not call — and the line that the list lives only on the phone. The per-number rows, their badges, and the list-loading code SHALL be gone, while the `my_list_numbers` table stays and still powers Start Calling, Download, Clear, and call-marking.
 
 #### Scenario: Third pill item
 - **GIVEN** the Dialer is open
 - **WHEN** the pill switch renders
 - **THEN** it shows Keypad | Automated | My List
 
-#### Scenario: Count chips match the table
-- **GIVEN** the list holds rows in several states
+#### Scenario: Four summary cards match the table
+- **GIVEN** the table holds numbers in several states
 - **WHEN** the My List tab opens
-- **THEN** the Left, Called, Interested, and Do not call chips show each state's count
+- **THEN** the Left, Called, Interested, and Do not call cards show each state's count
 
-#### Scenario: One badge per row
-- **GIVEN** a row with a saved outcome
-- **WHEN** the list renders
-- **THEN** the row carries its badge — Left, Connected, Not connected, Interested, or Do not call
+#### Scenario: No per-number rows
+- **GIVEN** the table holds called and interested numbers
+- **WHEN** the My List tab renders
+- **THEN** no number row or badge shows anywhere on the tab
+
+#### Scenario: Empty list
+- **GIVEN** the table is empty
+- **WHEN** the My List tab opens
+- **THEN** it reads "No numbers yet." with Upload as the invite
 
 ### Requirement: Phone-local only
 The list SHALL live only on the phone, in its own local SQLite table, never sent to the server; the manager never sees it, and everything on the tab works offline.
@@ -120,7 +125,7 @@ The system SHALL move a My List row out of Left on the first recorded call to it
 #### Scenario: Unconnected call still moves the row
 - **GIVEN** a row in Left whose number was dialed and not connected
 - **WHEN** the call is recorded
-- **THEN** the row becomes Called with its badge showing the outcome
+- **THEN** the number moves out of Left into Called
 
 #### Scenario: Outcome and note saved on the row
 - **GIVEN** a call to a list number carried the Interested choice and a note
@@ -129,8 +134,21 @@ The system SHALL move a My List row out of Left on the first recorded call to it
 
 #### Scenario: Left stays for never-dialed numbers
 - **GIVEN** a number never dialed
-- **WHEN** the list renders
-- **THEN** its row still shows Left
+- **WHEN** the tab renders
+- **THEN** the number still counts as Left in the summary cards
+
+### Requirement: Post-call popup schedules like the keypad
+The My List post-call popup SHALL carry the same Schedule choice the automated flow has — same popup, same pieces. Choosing Schedule SHALL book the number as a keypad-style booking keyed by phone number, so it appears on the Scheduled tab with Copy, WhatsApp, and the Call button, and it leaves that tab by the same rules as any booking.
+
+#### Scenario: Schedule choice books onto the Scheduled tab
+- **GIVEN** a My List call ended and its post-call popup is showing
+- **WHEN** the salesperson schedules a future date and submits
+- **THEN** the number is booked keypad-style, keyed by phone number, and the booking appears on the Scheduled tab with Copy, WhatsApp, and the Call button
+
+#### Scenario: Booking leaves by the standing rules
+- **GIVEN** a booking made from the My List popup
+- **WHEN** its notification is tapped, its number is called, or 24 hours pass its booked time
+- **THEN** it leaves the Scheduled tab like any other booking
 
 ### Requirement: Download exports the whole list
 The system SHALL export the whole list as a CSV — number, status, interested, do-not-call, notes, called date — through Android's share sheet, each row keeping its called date so today's slice is a filter in the spreadsheet app.

@@ -5,12 +5,22 @@ Opens WhatsApp chats on the salesperson's chosen app — WhatsApp or WhatsApp Bu
 ## Requirements
 
 ### Requirement: WhatsApp settings rows saved on the phone
-The system SHALL add two Settings rows saved on the phone only: a WhatsApp app row holding WhatsApp or WhatsApp Business with WhatsApp preselected, and a First message row holding a switch, off by default, plus a text field — off opens the chat empty, on opens the chat with that text already typed, and WhatsApp always lets the salesperson edit before sending, so nothing ever sends by itself.
+The system SHALL add two Settings rows saved on the phone only: a WhatsApp app row holding WhatsApp or WhatsApp Business with WhatsApp preselected, and a First message row holding a switch, ON by default with the text "Hello sir, Mai Apex Album AI se baat kar raha/rahi hu" pre-filled — off opens the chat empty, on opens the chat with that text already typed, and WhatsApp always lets the salesperson edit before sending, so nothing ever sends by itself. A phone that already saved its own first-message choice SHALL keep what it saved — the default never overwrites a saved choice.
 
 #### Scenario: WhatsApp preselected
 - **GIVEN** a fresh install
 - **WHEN** the WhatsApp app row opens
 - **THEN** WhatsApp is the preselected choice
+
+#### Scenario: Fresh install defaults ON
+- **GIVEN** a fresh install
+- **WHEN** the First message row opens or any WhatsApp button opens a chat
+- **THEN** the switch is ON with "Hello sir, Mai Apex Album AI se baat kar raha/rahi hu" pre-filled and the chat opens with that line pre-typed
+
+#### Scenario: Saved choice keeps what it saved
+- **GIVEN** a phone saved its own first-message choice — the switch off, or its own text
+- **WHEN** the app restarts
+- **THEN** the saved choice stays exactly as saved — the default never overwrites it
 
 #### Scenario: Switch off opens an empty chat
 - **GIVEN** the First message switch is off

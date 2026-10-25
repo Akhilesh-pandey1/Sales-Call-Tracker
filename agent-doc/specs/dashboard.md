@@ -36,12 +36,17 @@ The system SHALL show four KPI cards for the selected period — Dials, Connecte
 - **THEN** the Talk minutes card shows a 45-minute decrease against yesterday from the returned delta
 
 ### Requirement: Calls-by-hour chart
-The system SHALL show dials per IST hour as a bar chart built only from the returned calls_by_hour block — hours spanning the office-hours window start to end inclusive, one returned count per hour, and the returned best_hour highlighted — with a one-row color legend and the one-line summary under it; hour labels such as "10 AM" are display formatting.
+The system SHALL show dials per IST hour as a bar chart built only from the returned calls_by_hour block — hours running from the window's start hour through the hour before its end, nine bars for a 10-to-7 window, one returned count per hour, and the returned best_hour highlighted — with a one-row color legend and the one-line summary under it; hour labels such as "10 AM" are display formatting.
 
 #### Scenario: Hours span the office-hours window
 - **GIVEN** the office-hours window is 10:00–19:00
 - **WHEN** the chart renders
-- **THEN** exactly the hours 10 through 19 appear as bars — no hours outside the window
+- **THEN** exactly nine bars appear — labeled 10, 11, 12, and 1 through 6 — and no hour outside them
+
+#### Scenario: End-minute call lands in the last bar
+- **GIVEN** the window 10:00–19:00
+- **WHEN** a kept call starting exactly at 19:00 is charted
+- **THEN** it counts in the last bar — no kept call goes missing from the chart
 
 #### Scenario: Best hour highlighted from the returned value
 - **GIVEN** the returned calls_by_hour names hour 12 as best_hour
@@ -212,6 +217,24 @@ The system SHALL render the same person view for a salesperson's own ID on every
 - **GIVEN** a salesperson token requests the person endpoint of a different user
 - **WHEN** the request is processed
 - **THEN** the server refuses with "Access denied: you can only view your own statistics."
+
+### Requirement: My Stats office-timing label
+The system SHALL show the office timing beside the My Stats "Last 30 days" heading in a very short form the server computes from the stored window — 12-hour clock, minutes shown only when they are not :00, no AM/PM — and the label SHALL arrive with every My Stats fetch, so it follows whatever window the manager last saved.
+
+#### Scenario: Exact hours render shortest
+- **GIVEN** the stored window is 10:00–19:00
+- **WHEN** the label is computed
+- **THEN** it reads "10 to 7" beside the "Last 30 days" heading
+
+#### Scenario: Minutes shown only when needed
+- **GIVEN** the stored window is 09:30–18:15
+- **WHEN** the label is computed
+- **THEN** it reads "9:30 to 6:15" — minutes appear only when they are not :00, with no AM/PM
+
+#### Scenario: Label arrives with every fetch
+- **GIVEN** any My Stats fetch
+- **WHEN** the response is processed
+- **THEN** it carries the label, and a window the manager saved earlier shows on the next fetch without any extra request
 
 ### Requirement: All dashboard math computed server-side
 The system SHALL compute every dashboard number on the server in IST over UTC-stored times — period totals, not_connected, minutes, connected_percent, the per-person and per-active-day averages, vs_yesterday deltas, calls_by_hour counts, and best_hour — and screens SHALL only format returned values (thousand separators, percent signs, "10 AM" hour labels, card wording) without computing any number.

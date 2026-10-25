@@ -1,6 +1,6 @@
 ## Purpose
 
-Keeps every call the phone records on the phone, in its own History tab. The list works offline, never syncs, and never touches the server.
+Keeps the calls the dashboards count on the phone, in its own History tab. The list works offline, never syncs, and never touches the server.
 
 ## Requirements
 
@@ -40,6 +40,34 @@ The system SHALL write one call-history row per call at the moment the call's re
 - **WHEN** a call with that number is recorded
 - **THEN** no history row is written for it
 
+### Requirement: Only in-window calls kept
+The system SHALL keep on the phone only the calls the dashboard would count: a call whose IST start minute falls outside the office-hours window the phone last received SHALL never get a history row — the check runs at the same moment the Do-not-track check runs — and the first-open backfill and every sweep apply the same filter. With no window received yet the phone SHALL use the documented default, 10:00–19:00 IST, and history rows already stored SHALL stay untouched.
+
+#### Scenario: Out-of-window call gets no row
+- **GIVEN** the phone holds the window 10:00–19:00 IST
+- **WHEN** a call starting 19:30 IST is recorded
+- **THEN** no history row is written for it
+
+#### Scenario: Check runs with the Do-not-track check
+- **GIVEN** a call just became known to the phone
+- **WHEN** the recording check runs
+- **THEN** the window check and the Do-not-track check run at the same moment, in one pass
+
+#### Scenario: Backfill and sweep apply the filter
+- **GIVEN** calls were made outside the window while the app was closed
+- **WHEN** the first-open backfill or a sweep runs
+- **THEN** those calls never join the list
+
+#### Scenario: Default window before any arrives
+- **GIVEN** the phone has received no office-hours window yet
+- **WHEN** calls are recorded
+- **THEN** the documented default 10:00–19:00 IST decides which get a row
+
+#### Scenario: Stored rows stay untouched
+- **GIVEN** history rows stored before a window change
+- **WHEN** the manager saves a new window and the phone receives it
+- **THEN** the stored rows are not deleted — only new recordings are filtered
+
 ### Requirement: Backfill and sweep at every open
 The system SHALL backfill the history table once from the phone's own call log on the first open after the update, skipping Do-not-track numbers, and SHALL run the call-log sweep and save the last-loaded time on the phone at every History tab open, so calls made while the app was closed show up at the next look.
 
@@ -72,7 +100,37 @@ The system SHALL read the list newest first, 50 rows per page with a Load-more b
 - **THEN** the oldest row is deleted and the table still holds at most 1000
 
 ### Requirement: Row contents and empty state
-The system SHALL show each row with the number, an out or in mark, the date-time, and the result — connected with its talk time, or not connected — and SHALL carry a Copy button, a WhatsApp button, and a Scheduled badge when the number has an active booking in the local reminders table; with no calls yet the tab SHALL read "No calls yet."
+The system SHALL show each row with the number, an out or in mark, the date-time, and the result — connected with its talk time, or not connected — and SHALL carry a Call button beside Copy and WhatsApp, and a Scheduled badge when the number has an active booking in the local reminders table; tapping the row or its Call button dials the number directly through the shared direct-call flow instead of filling the keypad; with no calls yet the tab SHALL read "No calls yet."
+
+#### Scenario: Connected row shows talk time
+- **GIVEN** a recorded call with duration above zero
+- **WHEN** its row renders
+- **THEN** it shows the number, the out mark, the date-time, and connected with the talk time
+
+#### Scenario: Not-connected row
+- **GIVEN** a recorded call with zero duration
+- **WHEN** its row renders
+- **THEN** it shows "Not connected" in place of talk time
+
+#### Scenario: Scheduled badge from an active booking
+- **GIVEN** a row's number has an active booking in the local reminders table
+- **WHEN** the row renders
+- **THEN** it carries the Scheduled badge
+
+#### Scenario: Call, Copy, and WhatsApp on every row
+- **GIVEN** any history row
+- **WHEN** it renders
+- **THEN** it carries a Call button beside Copy and WhatsApp
+
+#### Scenario: Tapping the row dials directly
+- **GIVEN** any history row
+- **WHEN** the salesperson taps the row or its Call button
+- **THEN** the number dials directly through the shared direct-call flow — the keypad is never filled
+
+#### Scenario: Empty state
+- **GIVEN** no call is recorded on the phone
+- **WHEN** the History tab opens
+- **THEN** it reads "No calls yet."
 
 #### Scenario: Connected row shows talk time
 - **GIVEN** a recorded call with duration above zero

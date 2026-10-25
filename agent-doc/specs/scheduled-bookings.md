@@ -28,17 +28,27 @@ The system SHALL read the local `scheduled_reminders` table — lead bookings an
 - **THEN** Due rows come first with the most overdue at top, followed by Upcoming rows soonest first
 
 ### Requirement: Row actions and tap-through
-Each row SHALL carry Copy and WhatsApp buttons, and tapping the row SHALL open the booked lead's card ready to call — the same thing tapping the notification does.
+Each row SHALL carry a Call button beside Copy and WhatsApp. Tapping the row SHALL open the booked lead's card ready to call — the same thing tapping the notification does. Tapping the Call button SHALL dial through the shared direct-call flow, and tapping WhatsApp SHALL open the chosen app on the number's chat and remove that booking from the list — the salesperson handled it.
 
 #### Scenario: Tapping opens the booked lead's card
 - **GIVEN** a row for a booked lead
 - **WHEN** the salesperson taps the row
 - **THEN** that lead's card opens ready to call — the same thing tapping the notification does
 
-#### Scenario: Copy and WhatsApp on every row
+#### Scenario: Call, Copy, and WhatsApp on every row
 - **GIVEN** any booking row
 - **WHEN** it renders
-- **THEN** it carries a Copy button and a WhatsApp button
+- **THEN** it carries a Call button beside Copy and WhatsApp
+
+#### Scenario: Call button dials through the shared flow
+- **GIVEN** a booking row
+- **WHEN** its Call button is tapped
+- **THEN** the number dials directly through the shared direct-call flow with the shared post-call popup after
+
+#### Scenario: WhatsApp tap removes the booking
+- **GIVEN** a booking row
+- **WHEN** its WhatsApp button is tapped
+- **THEN** the chat opens on the chosen app and the booking leaves the Scheduled list
 
 ### Requirement: Handled bookings leave the list
 The system SHALL remove a row when the notification is tapped, when a call to that number is recorded, or when 24 hours pass its booked time — the same window the server uses to free the lead — with the cleanup running at every app open.
@@ -57,6 +67,24 @@ The system SHALL remove a row when the notification is tapped, when a call to th
 - **GIVEN** a booking untouched for 24 hours past its booked time
 - **WHEN** the cleanup runs at the next app open
 - **THEN** the row leaves the list — the same window the server uses to free the lead
+
+### Requirement: Calling a booked number re-books or clears through the popup
+The system SHALL run the shared post-call popup after a call started from a Scheduled row, and its Schedule answer SHALL overwrite the booking — "Do not schedule" leaves the row removed, and a new schedule replaces the old booking with the new date.
+
+#### Scenario: Do not schedule leaves it removed
+- **GIVEN** a booked number was called from the Scheduled tab
+- **WHEN** the popup's Schedule answer is "Do not schedule"
+- **THEN** the row stays removed — the old booking is gone
+
+#### Scenario: New schedule replaces the old booking
+- **GIVEN** a booked number was called from the Scheduled tab
+- **WHEN** the popup's Schedule answer books a new date
+- **THEN** the old booking is replaced with the new date and the row shows the new booked time
+
+#### Scenario: Standing removal rules stay as they are
+- **GIVEN** any booking
+- **WHEN** 24 hours pass its booked time
+- **THEN** the row leaves the list — the 24-hour window and the Due badge stay exactly as they are
 
 ### Requirement: Due count badge and line
 The system SHALL count the Due rows at every app open and show the count as a badge on the Scheduled tab, with the tab showing the line "You have N leads you have not called."

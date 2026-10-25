@@ -1540,8 +1540,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/after-grill/SKILL.md": {
-    "mtime": 1792092024.4508598,
-    "ast_hash": "4a49a87ec1e3e0e4d1dddac2d34137aa",
+    "mtime": 1792953467.6776881,
+    "ast_hash": "380b010b9b913a1fb3c26a2eb919cbea",
     "semantic_hash": ""
   },
   ".claude/skills/after-grill/stacks.md": {
@@ -1580,8 +1580,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/SKILL.md": {
-    "mtime": 1792487001.1372192,
-    "ast_hash": "9bae2b16c234e14906c4af51897bcdfd",
+    "mtime": 1792952372.5080671,
+    "ast_hash": "295805e7df4205e4e0fc0277a956165d",
     "semantic_hash": ""
   },
   ".claude/skills/design-screens/templates/runner.html": {
@@ -1680,8 +1680,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/implement-with-pocock/SKILL.md": {
-    "mtime": 1792354873.5902505,
-    "ast_hash": "e1d8e13209cc156b385b6a084a2515be",
+    "mtime": 1792952594.3589003,
+    "ast_hash": "5e3bd6c9bd7b5e6e5c4073e043fa86f0",
     "semantic_hash": ""
   },
   ".claude/skills/implement-with-pocock/agents/openai.yaml": {
@@ -1690,8 +1690,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/log-decisions/SKILL.md": {
-    "mtime": 1792311301.416452,
-    "ast_hash": "61dbc72965ed388a2f9db87dcfad0444",
+    "mtime": 1792815551.4223173,
+    "ast_hash": "49b3ab4a2d49463ecc73ae9584a9169b",
     "semantic_hash": ""
   },
   ".claude/skills/snap-screens/SKILL.md": {
@@ -1725,13 +1725,13 @@
     "semantic_hash": ""
   },
   ".claude/skills/write-screens/SKILL.md": {
-    "mtime": 1789640992.9083753,
-    "ast_hash": "aed99c0ce8dd6810d7ceaced78250084",
+    "mtime": 1792953461.6322093,
+    "ast_hash": "9766e0ecc84680d188d76cf6a733b043",
     "semantic_hash": ""
   },
   ".claude/skills/write-spec/SKILL.md": {
-    "mtime": 1792319797.7245257,
-    "ast_hash": "5e3e7d6cc7073204be66e5fcf05a37f5",
+    "mtime": 1792953445.0027885,
+    "ast_hash": "5c321f59155dacc5e5fee8d82b3a4ad5",
     "semantic_hash": ""
   },
   ".claude/skills/write-spec/instructions/proposal.md": {
@@ -1740,8 +1740,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/write-spec/instructions/spec.md": {
-    "mtime": 1792005286.1237736,
-    "ast_hash": "9725f4ee00c52f988ab3dfda79eff6d4",
+    "mtime": 1792953455.7293475,
+    "ast_hash": "1738f03284806b96ea7dc0ce6f469128",
     "semantic_hash": ""
   },
   ".claude/skills/write-spec/templates/proposal.md": {
@@ -1750,13 +1750,13 @@
     "semantic_hash": ""
   },
   ".claude/skills/write-spec/templates/spec.md": {
-    "mtime": 1792005277.904216,
-    "ast_hash": "69bc2d5f370e3231c7551e9e404a965c",
+    "mtime": 1792953457.6299596,
+    "ast_hash": "73f00fbbf9ffab941d6136f85c61d431",
     "semantic_hash": ""
   },
   ".claude/skills/write-tasks/SKILL.md": {
-    "mtime": 1792354899.8282301,
-    "ast_hash": "c59115be92605681853ab004270600e2",
+    "mtime": 1792953459.518027,
+    "ast_hash": "f8feedf5168f97dfce4992259a78d8ba",
     "semantic_hash": ""
   },
   "AGENTS.md": {
@@ -1787,11 +1787,6 @@
   "agent-doc/old-decisions.md": {
     "mtime": 1792947594.2101786,
     "ast_hash": "6999ec72d02fa025dc1f929f9bd5af58",
-    "semantic_hash": ""
-  },
-  "agent-doc/proposal.md": {
-    "mtime": 1792920701.1708834,
-    "ast_hash": "b6e805c5d6405d80ca53228eed9e053f",
     "semantic_hash": ""
   },
   "agent-doc/screen.md": {
@@ -2000,13 +1995,13 @@
     "semantic_hash": ""
   },
   "agent-doc/specs/call-tracking.md": {
-    "mtime": 1792920409.1279502,
-    "ast_hash": "4ee7eec68a53b99d1118694626345b49",
+    "mtime": 1792952536.106238,
+    "ast_hash": "62685136f8d46341e114f062237a550a",
     "semantic_hash": ""
   },
   "agent-doc/specs/dashboard.md": {
-    "mtime": 1792920441.0390995,
-    "ast_hash": "f55a70a8bcf87ab2dde94be8644ebc0c",
+    "mtime": 1792952674.2937424,
+    "ast_hash": "f90aeda8c556c4470e3bf1b71b012a49",
     "semantic_hash": ""
   },
   "agent-doc/specs/lead-management.md": {
@@ -2015,8 +2010,8 @@
     "semantic_hash": ""
   },
   "agent-doc/specs/office-hours.md": {
-    "mtime": 1792502977.7290268,
-    "ast_hash": "25cf3d3974731626fe35ff26a9b7d5df",
+    "mtime": 1792952687.5351412,
+    "ast_hash": "965b98630c6380c29896d2e4756c046d",
     "semantic_hash": ""
   },
   "agent-doc/specs/user-management.md": {
@@ -2030,8 +2025,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792938654.6824596,
-    "ast_hash": "8011999c796adb7e9a64c7f13387adf0",
+    "mtime": 1792953569.271701,
+    "ast_hash": "5a72232c46ade3adb0173a9a9379ef54",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2660,8 +2655,8 @@
     "semantic_hash": ""
   },
   "agent-doc/specs/call-history.md": {
-    "mtime": 1792920605.5684185,
-    "ast_hash": "9da96b767924cb37c08e71ca0b0a55a3",
+    "mtime": 1792952624.183222,
+    "ast_hash": "1de73dc57f06114af28e033207055b4e",
     "semantic_hash": ""
   },
   "agent-doc/specs/calling-sim.md": {
@@ -2670,18 +2665,18 @@
     "semantic_hash": ""
   },
   "agent-doc/specs/my-list.md": {
-    "mtime": 1792920651.4854412,
-    "ast_hash": "2f28823f15224e9e3782abe8f568761e",
+    "mtime": 1792952572.4761932,
+    "ast_hash": "73e17aa03e889804d56c300601e0a340",
     "semantic_hash": ""
   },
   "agent-doc/specs/scheduled-bookings.md": {
-    "mtime": 1792920622.550249,
-    "ast_hash": "1703c2df159f575e8af90766fd6ba4ec",
+    "mtime": 1792952590.3057792,
+    "ast_hash": "50370100da2f56d0f329fc526f16fccf",
     "semantic_hash": ""
   },
   "agent-doc/specs/whatsapp-open.md": {
-    "mtime": 1792920589.1387882,
-    "ast_hash": "36a736afb685191d58d1573cdfea1cbe",
+    "mtime": 1792952640.7781963,
+    "ast_hash": "fd965293a1fc9b3e269bc004830f76f4",
     "semantic_hash": ""
   },
   "agent-doc/screens/07a-my-list--M.png": {
@@ -2962,6 +2957,61 @@
   "agent-doc/screens/07a-my-list--post-call--M.png": {
     "mtime": 1792951299.8029847,
     "ast_hash": "4f72a9958ec08274683845c3ff462e5b",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/data/catalog-summary.json": {
+    "mtime": 1789643590.3991568,
+    "ast_hash": "fec976f3137ba3c46fde3bfd6bc05f66",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/data/data-provenance.json": {
+    "mtime": 1789643590.4162571,
+    "ast_hash": "41746a212544275a499cf33d658767d9",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/data/google-font-licenses.json": {
+    "mtime": 1789643590.3399687,
+    "ast_hash": "b5306352a8f70990df4a5c78356d35f0",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/data/phosphor-icons-upstream.json": {
+    "mtime": 1789643590.3856544,
+    "ast_hash": "4b14f80c98453cd4b8361ffab7c49bbf",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/scripts/core.py": {
+    "mtime": 1789643590.224035,
+    "ast_hash": "a1ec0e82db8146ba46a6941f6017c8a1",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/scripts/design_system.py": {
+    "mtime": 1789643590.2362666,
+    "ast_hash": "70692061482010156ab94bb1cb24ed61",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/scripts/reasoning_contract.py": {
+    "mtime": 1789643590.2527552,
+    "ast_hash": "653e45c1072a3662322d66a81c89d548",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/scripts/search.py": {
+    "mtime": 1789643590.2552352,
+    "ast_hash": "0998767ebe8de2d056a9cdfa91e68b71",
+    "semantic_hash": ""
+  },
+  ".claude/skills/log-decisions/api-format.md": {
+    "mtime": 1792602565.9325328,
+    "ast_hash": "c41db4367c21d8709944ba5e3d330606",
+    "semantic_hash": ""
+  },
+  ".claude/skills/ui-ux-pro-max/SKILL.md": {
+    "mtime": 1792951735.1450112,
+    "ast_hash": "005e10bdb818a941f7e86e85e7d0bd03",
+    "semantic_hash": ""
+  },
+  "agent-doc/specs/settings-tab.md": {
+    "mtime": 1792952812.7283478,
+    "ast_hash": "e0bb61f00bfc1dc86e03e4f535eba0a5",
     "semantic_hash": ""
   }
 }

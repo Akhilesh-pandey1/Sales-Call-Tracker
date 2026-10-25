@@ -1,4 +1,4 @@
-import { createAppEvent } from './app-event';
+import { createAppEvent } from '@/shared/utils/app-event';
 
 const reminderPressEvent = createAppEvent<string>();
 

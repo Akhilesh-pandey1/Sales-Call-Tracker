@@ -6,6 +6,7 @@ declare module 'react-native-intent-launcher' {
 
   export const IntentConstant: {
     ACTION_CALL: string;
+    ACTION_DIAL: string;
   };
 
   const intentLauncher: {

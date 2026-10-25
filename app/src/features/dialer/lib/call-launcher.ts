@@ -1,5 +1,4 @@
 import {
-  Linking,
   PermissionsAndroid,
   Platform,
   ToastAndroid,
@@ -111,7 +110,11 @@ async function launchTrackedCall(phoneNumber: string): Promise<LaunchedCall | nu
     readChosenSimSlot(),
   ]);
   if (!isCallPermissionGranted) {
-    await Linking.openURL(`tel:${phoneNumber}`);
+    const dialIntentParams = {
+      action: IntentConstant.ACTION_DIAL,
+      data: `tel:${phoneNumber}`,
+    };
+    await intentLauncher.startActivity(dialIntentParams);
     const noLaunchedCall = null;
     return noLaunchedCall;
   }

@@ -2,7 +2,7 @@ import {
   createBottomTabNavigator,
   type BottomTabNavigationOptions,
 } from '@react-navigation/bottom-tabs';
-import { DialerScreen } from '@/features/dialer';
+import { DialerScreen, useTappedNumberLinks } from '@/features/dialer';
 import { MyStatsScreen, SettingsScreen } from '@/features/stats';
 import { useReminderPress, useSync } from '@/features/tracking';
 import { Icon } from '@/components/ui/icon';
@@ -10,6 +10,7 @@ import { ChartColumn, Phone, Settings } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import type { MainTabsParamList } from './main-tabs-param-list';
 import { useReminderPressNavigation } from './use-reminder-press-navigation';
+import { useTappedNumberNavigation } from './use-tapped-number-navigation';
 
 const MainTabs = createBottomTabNavigator<MainTabsParamList>();
 
@@ -35,6 +36,8 @@ export function AppNavigator() {
   useSync();
   useReminderPress();
   useReminderPressNavigation();
+  useTappedNumberNavigation();
+  useTappedNumberLinks();
 
   return (
     <MainTabs.Navigator screenOptions={{ headerShown: false }}>

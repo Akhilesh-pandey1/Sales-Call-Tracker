@@ -1,5 +1,6 @@
 import { matchWindowMs } from '@/config/app-config';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
+import type { CallDirection } from '../types';
 
 export interface CallLogEntry {
   phoneNumber: string;
@@ -20,7 +21,7 @@ export interface MatchedPendingCall {
   durationSeconds: number;
 }
 
-function toEntryTimeMs(callLogEntry: CallLogEntry): number {
+export function toEntryTimeMs(callLogEntry: CallLogEntry): number {
   const entryTimeMs = Number(callLogEntry.timestamp);
   return entryTimeMs;
 }
@@ -47,6 +48,21 @@ export function isEntryWithinMatchWindow(entryTimeMs: number, intentTimeMs: numb
   const isInsideWindow = entryTimeMs <= intentTimeMs + matchWindowMs;
   const isWithinWindow = isAfterIntent && isInsideWindow;
   return isWithinWindow;
+}
+
+export function toCallDirection(callLogEntry: CallLogEntry): CallDirection {
+  const isIncoming = isIncomingCallEntry(callLogEntry);
+  const callDirection: CallDirection = isIncoming ? 'incoming' : 'outgoing';
+  return callDirection;
+}
+
+export function isTrackedCallEntry(callLogEntry: CallLogEntry): boolean {
+  const notAnsweredDuration = 0;
+  const isOutgoing = isOutgoingCallEntry(callLogEntry);
+  const isAnsweredIncoming =
+    isIncomingCallEntry(callLogEntry) && callLogEntry.duration > notAnsweredDuration;
+  const isTracked = isOutgoing || isAnsweredIncoming;
+  return isTracked;
 }
 
 function doesEntryMatchPendingCall(

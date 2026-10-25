@@ -35,15 +35,15 @@
 
 **Blocked by:** 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `do_not_call: true` on a matched call sets the lead's status to `stopped` with claims and schedules cleared — even when the call was unconnected (`specs/lead-management.md` — Call outcome reaches the lead).
-- [ ] `interested: true` is stored as a label beside the lead's state with the normal retry rules running unchanged, and the call's note is copied onto the lead (`specs/lead-management.md` — Call outcome reaches the lead).
-- [ ] A synced call with no outcome choices resolves the lead exactly as before — no label stored (`specs/lead-management.md` — No outcome resolves as before).
+- [x] `do_not_call: true` on a matched call sets the lead's status to `stopped` with claims and schedules cleared — even when the call was unconnected (`specs/lead-management.md` — Call outcome reaches the lead).
+- [x] `interested: true` is stored as a label beside the lead's state with the normal retry rules running unchanged, and the call's note is copied onto the lead (`specs/lead-management.md` — Call outcome reaches the lead).
+- [x] A synced call with no outcome choices resolves the lead exactly as before — no label stored (`specs/lead-management.md` — No outcome resolves as before).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_calls.py tests/modules/test_leads.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_calls.py tests/modules/test_leads.py -q` in `backend/`
 
 ## Task 4: App — post-call popups carry outcome choices
 
@@ -67,14 +67,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Submitting the keypad post-call popup — "Do not schedule" and "Schedule" alike — clears the display to blank, with paste, backspace, and hold-to-clear unchanged (`specs/call-tracking.md` — Keypad clears after the post-call popup).
-- [ ] The automated lead flow keeps its number and popup untouched — the clearing applies to the keypad only (`specs/call-tracking.md` — Automated flow keeps its number).
+- [x] Submitting the keypad post-call popup — "Do not schedule" and "Schedule" alike — clears the display to blank, with paste, backspace, and hold-to-clear unchanged (`specs/call-tracking.md` — Keypad clears after the post-call popup).
+- [x] The automated lead flow keeps its number and popup untouched — the clearing applies to the keypad only (`specs/call-tracking.md` — Automated flow keeps its number).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 6: App — the lead card hands out its number
 
@@ -82,14 +82,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A Copy button sits beside the lead's number on the lead calling card, available while ringing, during the call, and on the post-call popup; one tap copies it with a "Number copied." toast (`specs/lead-management.md` — Lead card hands out its number).
-- [ ] Copying leaves the call and the flow running exactly as they were (`specs/lead-management.md` — Copy leaves the flow untouched).
+- [x] A Copy button sits beside the lead's number on the lead calling card, available while ringing, during the call, and on the post-call popup; one tap copies it with a "Number copied." toast (`specs/lead-management.md` — Lead card hands out its number).
+- [x] Copying leaves the call and the flow running exactly as they were (`specs/lead-management.md` — Copy leaves the flow untouched).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 7: App — WhatsApp opens the chosen app by package
 
@@ -145,14 +145,14 @@
 
 **Blocked by:** 9
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] An .xlsx file picked on the phone is parsed by an Excel-reading library chosen at implementation and its numbers join the upload like any other source (`specs/my-list.md` — Excel parsed on the phone).
-- [ ] "Copy AI prompt" copies a ready prompt, so the salesperson pastes their sheet text and the prompt into ChatGPT and puts the comma-separated numbers back into the paste box (`specs/my-list.md` — AI prompt copied).
+- [x] An .xlsx file picked on the phone is parsed by an Excel-reading library chosen at implementation and its numbers join the upload like any other source (`specs/my-list.md` — Excel parsed on the phone).
+- [x] "Copy AI prompt" copies a ready prompt, so the salesperson pastes their sheet text and the prompt into ChatGPT and puts the comma-separated numbers back into the paste box (`specs/my-list.md` — AI prompt copied).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 11: App — the My List tab
 
@@ -241,11 +241,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The first open after the update backfills the history table once from the phone's call log, skipping Do-not-track numbers (`specs/call-history.md` — Backfill runs once).
-- [ ] Every History open runs the call-log sweep and saves the last-loaded time, so closed-period calls appear at the next look (`specs/call-history.md` — Closed-period calls appear at the next look; Last-loaded time saved).
+- [x] The first open after the update backfills the history table once from the phone's call log, skipping Do-not-track numbers (`specs/call-history.md` — Backfill runs once).
+- [x] Every History open runs the call-log sweep and saves the last-loaded time, so closed-period calls appear at the next look (`specs/call-history.md` — Closed-period calls appear at the next look; Last-loaded time saved).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 17: App — the History tab in a five-tab bar
 

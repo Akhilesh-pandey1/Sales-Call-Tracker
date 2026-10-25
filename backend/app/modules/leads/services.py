@@ -65,33 +65,80 @@ def booking_belongs_to_another_user(target_lead: Lead, user_id: int) -> bool:
     return owner_is_someone_else
 
 
+def find_or_create_lead_for_call(phone_number: str) -> Lead:
+    waiting_status: str = "waiting"
+    existing_lead: Lead | None = Lead.query.filter_by(
+        phone_number=phone_number
+    ).first()
+    if existing_lead is not None:
+        return existing_lead
+
+    starting_attempt_count: int = 0
+    new_lead: Lead = Lead(
+        phone_number=phone_number,
+        status=waiting_status,
+        attempt_count=starting_attempt_count,
+    )
+    db.session.add(new_lead)
+    return new_lead
+
+
+def clear_lead_claims_and_schedule(target_lead: Lead) -> None:
+    target_lead.claimed_by = None
+    target_lead.claimed_until = None
+    target_lead.scheduled_by = None
+    target_lead.scheduled_at = None
+
+
+def store_call_outcome_on_lead(
+    target_lead: Lead,
+    interested_choice: bool,
+    do_not_call_choice: bool,
+    notes_text: str,
+) -> None:
+    if interested_choice:
+        target_lead.interested = True
+    if do_not_call_choice:
+        target_lead.do_not_call = True
+    if notes_text:
+        target_lead.notes = notes_text
+
+
+def stop_lead_for_do_not_call(target_lead: Lead, call_time: datetime) -> None:
+    stopped_status: str = "stopped"
+    target_lead.status = stopped_status
+    clear_lead_claims_and_schedule(target_lead)
+    target_lead.retry_locked_until = None
+    target_lead.last_attempted_at = call_time
+
+
 def resolve_lead_for_call(
     phone_number: str,
     duration_seconds: int,
     call_time: datetime,
     caller_user_id: int,
+    interested_choice: bool,
+    do_not_call_choice: bool,
+    notes_text: str,
 ) -> None:
     waiting_status: str = "waiting"
     done_status: str = "done"
     stopped_status: str = "stopped"
     connected_threshold: int = 0
 
-    target_lead: Lead | None = Lead.query.filter_by(phone_number=phone_number).first()
-    if target_lead is None:
-        starting_attempt_count: int = 0
-        target_lead = Lead(
-            phone_number=phone_number,
-            status=waiting_status,
-            attempt_count=starting_attempt_count,
-        )
-        db.session.add(target_lead)
+    target_lead: Lead = find_or_create_lead_for_call(phone_number)
+
+    store_call_outcome_on_lead(
+        target_lead, interested_choice, do_not_call_choice, notes_text
+    )
+
+    if do_not_call_choice:
+        stop_lead_for_do_not_call(target_lead, call_time)
+        return
 
     if duration_seconds > connected_threshold:
         target_lead.status = done_status
-        target_lead.claimed_by = None
-        target_lead.claimed_until = None
-        target_lead.scheduled_by = None
-        target_lead.scheduled_at = None
+        clear_lead_claims_and_schedule(target_lead)
         target_lead.last_attempted_at = call_time
         return
 
@@ -108,8 +155,7 @@ def resolve_lead_for_call(
     if target_lead.attempt_count >= MAX_LEAD_ATTEMPTS:
         target_lead.status = stopped_status
         target_lead.retry_locked_until = None
-        target_lead.scheduled_by = None
-        target_lead.scheduled_at = None
+        clear_lead_claims_and_schedule(target_lead)
         return
 
     booking_is_clearable_by_caller: bool = not booking_belongs_to_another_user(

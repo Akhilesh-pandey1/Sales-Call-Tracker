@@ -1,9 +1,17 @@
 import {
+  errorCodes,
+  isErrorWithCode,
+  pick,
+  types,
+} from '@react-native-documents/picker';
+import Clipboard from '@react-native-clipboard/clipboard';
+import {
   findPhoneNumbersInText,
   type CountryCode,
 } from 'libphonenumber-js';
 import { ToastAndroid } from 'react-native';
 import { useCallback, useState } from 'react';
+import * as ExcelReader from 'xlsx';
 import { myListMaxNumbers } from '@/config/app-config';
 import { readStoredCountry } from '@/features/auth';
 import { replaceMyListNumbers } from '@/features/tracking';
@@ -12,6 +20,11 @@ interface UploadedNumbers {
   uniqueE164Numbers: string[];
   notValidCount: number;
 }
+
+type ExcelFilePickResult =
+  | { outcome: 'picked'; fileUri: string }
+  | { outcome: 'canceled' }
+  | { outcome: 'wrongFileType' };
 
 function lineHasPhoneLikeDigitRun(line: string): boolean {
   const lineSeparatorPattern = /[\s().+/-]/g;
@@ -69,9 +82,62 @@ function buildUploadToastMessage(
   return `${addedMessage} ${notValidMessage}`;
 }
 
+async function pickExcelFileUri(): Promise<ExcelFilePickResult> {
+  try {
+    const pickedFiles = await pick({ type: [types.xlsx] });
+    const pickedFile = pickedFiles[0];
+    if (!pickedFile.hasRequestedType) {
+      const wrongFileType: ExcelFilePickResult = { outcome: 'wrongFileType' };
+      return wrongFileType;
+    }
+    const picked: ExcelFilePickResult = {
+      outcome: 'picked',
+      fileUri: pickedFile.uri,
+    };
+    return picked;
+  } catch (error) {
+    if (isErrorWithCode(error) && error.code === errorCodes.OPERATION_CANCELED) {
+      const canceled: ExcelFilePickResult = { outcome: 'canceled' };
+      return canceled;
+    }
+    throw error;
+  }
+}
+
+async function readExcelFileText(fileUri: string): Promise<string> {
+  const fileResponse = await fetch(fileUri);
+  const fileBytes = await fileResponse.arrayBuffer();
+  const workbook = ExcelReader.read(fileBytes);
+  const sheetTexts = workbook.SheetNames.map((sheetName) =>
+    ExcelReader.utils.sheet_to_csv(workbook.Sheets[sheetName]),
+  );
+  const sheetText = sheetTexts.join('\n');
+  return sheetText;
+}
+
+async function storePhoneNumbersFromText(
+  rawText: string,
+  countryCode: string,
+): Promise<void> {
+  const uploadedNumbers = extractUploadNumbers(rawText, countryCode);
+  const uploadedAtIso = new Date().toISOString();
+  const storedCount = await replaceMyListNumbers(
+    uploadedNumbers.uniqueE164Numbers,
+    myListMaxNumbers,
+    uploadedAtIso,
+  );
+  const toastMessage = buildUploadToastMessage(
+    storedCount,
+    uploadedNumbers.notValidCount,
+  );
+  ToastAndroid.show(toastMessage, ToastAndroid.SHORT);
+}
+
 export type UseMyListUpload = {
   isUploading: boolean;
   uploadNumbersFromText: (rawText: string) => Promise<void>;
+  uploadNumbersFromExcelFile: () => Promise<void>;
+  copyAiPrompt: () => Promise<void>;
 };
 
 export function useMyListUpload(): UseMyListUpload {
@@ -87,18 +153,7 @@ export function useMyListUpload(): UseMyListUpload {
           ToastAndroid.show(uploadFailedMessage, ToastAndroid.SHORT);
           return;
         }
-        const uploadedNumbers = extractUploadNumbers(rawText, countryCode);
-        const uploadedAtIso = new Date().toISOString();
-        const storedCount = await replaceMyListNumbers(
-          uploadedNumbers.uniqueE164Numbers,
-          myListMaxNumbers,
-          uploadedAtIso,
-        );
-        const toastMessage = buildUploadToastMessage(
-          storedCount,
-          uploadedNumbers.notValidCount,
-        );
-        ToastAndroid.show(toastMessage, ToastAndroid.SHORT);
+        await storePhoneNumbersFromText(rawText, countryCode);
       } catch {
         ToastAndroid.show(uploadFailedMessage, ToastAndroid.SHORT);
       } finally {
@@ -108,5 +163,35 @@ export function useMyListUpload(): UseMyListUpload {
     [],
   );
 
-  return { isUploading, uploadNumbersFromText };
+  const uploadNumbersFromExcelFile = useCallback(async (): Promise<void> => {
+    const uploadFailedMessage = 'Could not add your numbers. Try again.';
+    const wrongFileTypeMessage = 'Please pick an Excel (.xlsx) file.';
+    try {
+      const pickResult = await pickExcelFileUri();
+      if (pickResult.outcome === 'canceled') {
+        return;
+      }
+      if (pickResult.outcome === 'wrongFileType') {
+        ToastAndroid.show(wrongFileTypeMessage, ToastAndroid.SHORT);
+        return;
+      }
+      const sheetText = await readExcelFileText(pickResult.fileUri);
+      await uploadNumbersFromText(sheetText);
+    } catch {
+      ToastAndroid.show(uploadFailedMessage, ToastAndroid.SHORT);
+    }
+  }, [uploadNumbersFromText]);
+
+  const copyAiPrompt = useCallback(async (): Promise<void> => {
+    const promptCopiedMessage = 'Prompt copied. Paste it into ChatGPT.';
+    const chatGptPrompt =
+      'Pull every phone number out of the sheet text below. ' +
+      'Write each number with its country code, digits only. ' +
+      'Skip anything that is not a phone number. ' +
+      'Reply with only the numbers separated by commas, and nothing else.';
+    await Clipboard.setString(chatGptPrompt);
+    ToastAndroid.show(promptCopiedMessage, ToastAndroid.SHORT);
+  }, []);
+
+  return { isUploading, uploadNumbersFromText, uploadNumbersFromExcelFile, copyAiPrompt };
 }

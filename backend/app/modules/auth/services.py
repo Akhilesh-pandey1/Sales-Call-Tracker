@@ -3,6 +3,7 @@ from backend.app.config.base import LOCKOUT_ATTEMPTS, LOCKOUT_MINUTES
 from backend.app.core.errors import AppException
 from backend.app.core.security import generate_auth_token, verify_password
 from backend.app.extensions import db
+from backend.app.modules.auth.models import Session
 from backend.app.modules.auth.schemas import LoginRequest, LoginResponse
 from backend.app.modules.users import User
 
@@ -79,7 +80,8 @@ def authenticate_user(login_request: LoginRequest) -> LoginResponse:
     record_success(login_request.name)
 
     new_token: str = generate_auth_token()
-    user.auth_token = new_token
+    new_session: Session = Session(user_id=user.id, token=new_token)
+    db.session.add(new_session)
     db.session.commit()
 
     login_response: LoginResponse = LoginResponse(

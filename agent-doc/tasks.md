@@ -4,15 +4,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Every login creates a `sessions` row and all tokens keep working — a new login never signs an older device out, for managers and salespeople alike; deactivation or deletion still rejects every session (`specs/authentication.md` — One session per login, all staying valid; `database.md` — `sessions`).
-- [ ] A password change deletes the account's other sessions while the session that made the change stays valid, and there is still no logout endpoint (`specs/authentication.md`; `specs/user-management.md` — Edit account).
-- [ ] Each token stored in the old single-token column becomes one `sessions` row, so the update signs nobody out (`specs/authentication.md` — Migration keeps old tokens working).
+- [x] Every login creates a `sessions` row and all tokens keep working — a new login never signs an older device out, for managers and salespeople alike; deactivation or deletion still rejects every session (`specs/authentication.md` — One session per login, all staying valid; `database.md` — `sessions`).
+- [x] A password change deletes the account's other sessions while the session that made the change stays valid, and there is still no logout endpoint (`specs/authentication.md`; `specs/user-management.md` — Edit account).
+- [x] Each token stored in the old single-token column becomes one `sessions` row, so the update signs nobody out (`specs/authentication.md` — Migration keeps old tokens working).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_auth.py tests/modules/test_users.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_auth.py tests/modules/test_users.py -q` in `backend/`
 
 ## Task 2: Backend — outcome choices ride the synced call
 
@@ -20,14 +20,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A sync item saves `interested` and `do_not_call` as yes/no flags and `notes` on the call row; items without them save with both flags false and an empty note (`specs/call-tracking.md` — Post-call outcome popup on every flow; `api.md` — sync item fields).
-- [ ] Flags and note ride the normal batch unchanged — the call's time and duration still come only from the call log, and the popup never changes any number (`specs/call-tracking.md` — Time and duration stay call-log only).
+- [x] A sync item saves `interested` and `do_not_call` as yes/no flags and `notes` on the call row; items without them save with both flags false and an empty note (`specs/call-tracking.md` — Post-call outcome popup on every flow; `api.md` — sync item fields).
+- [x] Flags and note ride the normal batch unchanged — the call's time and duration still come only from the call log, and the popup never changes any number (`specs/call-tracking.md` — Time and duration stay call-log only).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_calls.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_calls.py -q` in `backend/`
 
 ## Task 3: Backend — a call's outcome reaches its lead
 
@@ -116,12 +116,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] Settings shows the WhatsApp app row with WhatsApp preselected and Business selectable, saved on the phone only (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
-- [ ] The First message row holds a switch, off by default, plus a text field — off opens the chat empty, on pre-types the saved text, still editable, nothing ever sends by itself (`specs/whatsapp-open.md` — Switch off opens an empty chat; Switch on pre-types the text).
-- [ ] Both choices never reach the server and never move between phones (`specs/whatsapp-open.md` — Saved on the phone only).
+- [x] Settings shows the WhatsApp app row with WhatsApp preselected and Business selectable, saved on the phone only (`specs/whatsapp-open.md` — WhatsApp settings rows saved on the phone).
+- [x] The First message row holds a switch, off by default, plus a text field — off opens the chat empty, on pre-types the saved text, still editable, nothing ever sends by itself (`specs/whatsapp-open.md` — Switch off opens an empty chat; Switch on pre-types the text).
+- [x] Both choices never reach the server and never move between phones (`specs/whatsapp-open.md` — Saved on the phone only).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 9: App — My List stores numbers with the replace rule
 
@@ -132,12 +132,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] Pasted text with numbers buried anywhere and picked CSV files both fill the `my_list_numbers` table, every number normalized to E.164 with the login country before storing (`specs/my-list.md` — Numbers come in three ways; Upload rules).
-- [ ] A number already in the list in any state has its old row deleted and is added fresh as Left, the same number twice inside one upload counts once, and the toast reads "Added N numbers." with "M not valid." appended when any parse fails (`specs/my-list.md` — Re-upload re-arms; Toast with counts).
-- [ ] The list cap comes from the app's `config.json` as `my_list_max_numbers` (10000), never hardcoded (`specs/my-list.md` — List capped by config).
+- [x] Pasted text with numbers buried anywhere and picked CSV files both fill the `my_list_numbers` table, every number normalized to E.164 with the login country before storing (`specs/my-list.md` — Numbers come in three ways; Upload rules).
+- [x] A number already in the list in any state has its old row deleted and is added fresh as Left, the same number twice inside one upload counts once, and the toast reads "Added N numbers." with "M not valid." appended when any parse fails (`specs/my-list.md` — Re-upload re-arms; Toast with counts).
+- [x] The list cap comes from the app's `config.json` as `my_list_max_numbers` (10000), never hardcoded (`specs/my-list.md` — List capped by config).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 10: App — My List takes Excel files with the Copy AI prompt
 
@@ -272,12 +272,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The tab lists every booking from the local `scheduled_reminders` table — lead bookings and keypad bookings alike — with the number, the booked date and time, and Upcoming while the time has not come, Due once it has passed (`specs/scheduled-bookings.md` — Every booking listed with its state).
-- [ ] Due rows sort first, most overdue at top, then Upcoming rows soonest first, and nothing booked reads "Nothing scheduled." (`specs/scheduled-bookings.md` — Due first, most overdue at top; Empty state).
-- [ ] Each row carries Copy and WhatsApp buttons, and tapping the row opens the booked lead's card ready to call — the same thing tapping the notification does (`specs/scheduled-bookings.md` — Row actions and tap-through).
+- [x] The tab lists every booking from the local `scheduled_reminders` table — lead bookings and keypad bookings alike — with the number, the booked date and time, and Upcoming while the time has not come, Due once it has passed (`specs/scheduled-bookings.md` — Every booking listed with its state).
+- [x] Due rows sort first, most overdue at top, then Upcoming rows soonest first, and nothing booked reads "Nothing scheduled." (`specs/scheduled-bookings.md` — Due first, most overdue at top; Empty state).
+- [x] Each row carries Copy and WhatsApp buttons, and tapping the row opens the booked lead's card ready to call — the same thing tapping the notification does (`specs/scheduled-bookings.md` — Row actions and tap-through).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 19: App — handled bookings leave the Scheduled tab
 

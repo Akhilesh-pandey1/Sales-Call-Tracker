@@ -34,3 +34,4 @@ export {
   saveScheduledReminder,
 } from './scheduled-reminders-db';
 export type { ScheduledReminder } from './scheduled-reminders-db';
+export { replaceMyListNumbers } from './my-list-db';

@@ -110,7 +110,8 @@ def update_user(user_id: int) -> tuple[Response, int]:
         password=parsed_password,
         country=parsed_country,
     )
-    update_user_account(user_id, update_request)
+    current_session_id: int = g.session_id
+    update_user_account(user_id, update_request, current_session_id)
 
     response_payload: dict[str, bool] = {"status": True}
     response: Response = jsonify(response_payload)

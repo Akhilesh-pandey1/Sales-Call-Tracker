@@ -29,7 +29,9 @@ def test_app_creation(app: Flask) -> None:
     assert is_testing is True
 
 
-def test_startup_adds_outcome_column_to_existing_database(tmp_path: Path) -> None:
+def test_startup_adds_call_outcome_columns_to_existing_database(
+    tmp_path: Path,
+) -> None:
     database_path: Path = tmp_path / "existing-database.sqlite"
     database_url: str = f"sqlite:///{database_path.as_posix()}"
 
@@ -65,9 +67,13 @@ def test_startup_adds_outcome_column_to_existing_database(tmp_path: Path) -> Non
         db.session.remove()
         db.engine.dispose()
 
-    assert "outcome" in existing_column_names
+    assert "interested" in existing_column_names
+    assert "do_not_call" in existing_column_names
+    assert "notes" in existing_column_names
     assert stored_existing_call is not None
-    assert stored_existing_call.outcome is None
+    assert stored_existing_call.interested is False
+    assert stored_existing_call.do_not_call is False
+    assert stored_existing_call.notes is None
 
 
 def test_user_model(app: Flask) -> None:

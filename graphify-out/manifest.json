@@ -165,8 +165,8 @@
     "semantic_hash": ""
   },
   "app/android/app/src/main/java/com/apexsalescall/MainApplication.kt": {
-    "mtime": 1792896639.4193733,
-    "ast_hash": "2b17ceec6bebf4e4f63c057ecd1b096d",
+    "mtime": 1792925489.5257938,
+    "ast_hash": "f8bd1fe35a3bdcbd87b20387c58eb29c",
     "semantic_hash": ""
   },
   "app/android/build.gradle": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "app/config.json": {
-    "mtime": 1792760747.663884,
-    "ast_hash": "c3d5d6c2bd420b3b8febf2cf6ba7bfe3",
+    "mtime": 1792926559.654275,
+    "ast_hash": "c66b95ad5feb0e3ece1a30994da4cac9",
     "semantic_hash": ""
   },
   "app/index.js": {
@@ -225,13 +225,13 @@
     "semantic_hash": ""
   },
   "app/src/app/navigation/app-navigator.tsx": {
-    "mtime": 1792894211.741094,
-    "ast_hash": "1333c8ee14e7d4551e547bf6d463652a",
+    "mtime": 1792928270.7924652,
+    "ast_hash": "7691a2cc13c6863f44c335383c38b272",
     "semantic_hash": ""
   },
   "app/src/app/navigation/main-tabs-param-list.ts": {
-    "mtime": 1792502977.8095858,
-    "ast_hash": "1317a819d5a8101668311df3ccc7fc2b",
+    "mtime": 1792928270.7939708,
+    "ast_hash": "2d2060e71353b236e3ab7044ccab11a1",
     "semantic_hash": ""
   },
   "app/src/app/navigation/root-navigator.tsx": {
@@ -275,8 +275,8 @@
     "semantic_hash": ""
   },
   "app/src/config/app-config.ts": {
-    "mtime": 1792760747.6666212,
-    "ast_hash": "9e2bce48a7f26d915ff2add2ba38db9f",
+    "mtime": 1792926560.6554158,
+    "ast_hash": "3cbd4c435979b6dac58bb1bdfb94601f",
     "semantic_hash": ""
   },
   "app/src/features/auth/api/auth.api.ts": {
@@ -325,13 +325,13 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/components/post-call-dialog.tsx": {
-    "mtime": 1792502977.8444157,
-    "ast_hash": "7cca5ecbda60746150ea085d8f32ef3c",
+    "mtime": 1792925835.0285513,
+    "ast_hash": "89ef2c3b99d683bc80ed05110d129998",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-automated-calling.ts": {
-    "mtime": 1792502977.8444157,
-    "ast_hash": "230cf064eab6090937b4f4cab802230c",
+    "mtime": 1792925835.029555,
+    "ast_hash": "7f37697ad009631aa4fce245fd97d02b",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-call-hang-up-detector.ts": {
@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-keypad-post-call.ts": {
-    "mtime": 1792760747.6679153,
-    "ast_hash": "c620dcdf17ad417f47509eda4669bf59",
+    "mtime": 1792925835.029555,
+    "ast_hash": "3743d27c9aed26c610f21fee88522cfc",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-lead-loading.ts": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-lead-post-call.ts": {
-    "mtime": 1792760747.6692579,
-    "ast_hash": "548171ee58da64bb7c697c632042cf5c",
+    "mtime": 1792925835.029555,
+    "ast_hash": "53200e65a0983f9ea39b07530137f985",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-post-call-schedule.ts": {
@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-post-call-submit.ts": {
-    "mtime": 1792760747.6706421,
-    "ast_hash": "bca06461f7cbd0333a552510fc973b74",
+    "mtime": 1792925835.029555,
+    "ast_hash": "cfd6f62414e79e6835a9c092a65fa747",
     "semantic_hash": ""
   },
   "app/src/features/dialer/index.ts": {
@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/screens/dialer-screen.tsx": {
-    "mtime": 1792898531.6369855,
-    "ast_hash": "d58de46c65d2a2335ddaa0fee199ccb0",
+    "mtime": 1792925835.0309405,
+    "ast_hash": "50546113f7451aa6d16ff71738ad2f2f",
     "semantic_hash": ""
   },
   "app/src/features/stats/api/stats.api.ts": {
@@ -425,33 +425,33 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/settings-screen.tsx": {
-    "mtime": 1792760747.6771095,
-    "ast_hash": "b29d1bde0c528f3a34c42e3e43391f10",
+    "mtime": 1792927960.0767553,
+    "ast_hash": "3a55f3249bff65beb0bd0cd8de510f11",
     "semantic_hash": ""
   },
   "app/src/features/tracking/api/calls.api.ts": {
-    "mtime": 1792760747.6771095,
-    "ast_hash": "ac899f00b9ae07b6358280284b7339d9",
+    "mtime": 1792925835.0338695,
+    "ast_hash": "7a389552be1ed04367941714362d0055",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/call-sweep-db.ts": {
-    "mtime": 1792760747.6785502,
-    "ast_hash": "ba50a057bfde9358248361193864fc8f",
+    "mtime": 1792926039.4508836,
+    "ast_hash": "b953e925421b176ac4aa7a2345fd681a",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/database.ts": {
-    "mtime": 1792760747.6785502,
-    "ast_hash": "02c300761ce8c601ccb4e182a2ea8d06",
+    "mtime": 1792926557.970871,
+    "ast_hash": "8e80bd91bc87b3c8a2d23f8621e2b992",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/index.ts": {
-    "mtime": 1792760747.6797743,
-    "ast_hash": "2a1cc5fe547bde6e605faa79873aaed8",
+    "mtime": 1792926389.1849322,
+    "ast_hash": "1b674fedbe84182cafa3da055ee74dcc",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/pending-calls-db.ts": {
-    "mtime": 1792760747.6797743,
-    "ast_hash": "305ec50ffe3be31795b4bbe394cdb92a",
+    "mtime": 1792925835.0338695,
+    "ast_hash": "b087309e3ac8b3b7762d42ab16ce4a5f",
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-call-tracker.ts": {
@@ -470,13 +470,13 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/index.ts": {
-    "mtime": 1792760747.6822684,
-    "ast_hash": "ec4c82d21abacf1e98fe69f36960717e",
+    "mtime": 1792928270.7949805,
+    "ast_hash": "c5e89fe7fd2180e80287b637cb7aea5c",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-janitor.ts": {
-    "mtime": 1792760747.6837342,
-    "ast_hash": "a8b354ce9438294db3362fff0031f9bf",
+    "mtime": 1792926039.4527252,
+    "ast_hash": "883d19942b56184219b29627b2b9f72f",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-log-matcher.ts": {
@@ -495,18 +495,18 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-submit.ts": {
-    "mtime": 1792760747.6852193,
-    "ast_hash": "ff881794a59b7c13e957ee2be868df3d",
+    "mtime": 1792926143.990893,
+    "ast_hash": "429529f655d40ba9fc586e78266b29f0",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/pending-call-filler.ts": {
-    "mtime": 1792502977.864009,
-    "ast_hash": "f4836106e4ac482611583770f363aead",
+    "mtime": 1792926039.453743,
+    "ast_hash": "69c8e455c36f0cf3d4158341e6892076",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/sync-call.ts": {
-    "mtime": 1792760747.6863568,
-    "ast_hash": "764503d29b8440157f7e24c966451534",
+    "mtime": 1792925835.0364342,
+    "ast_hash": "ff5e0ca7a594297bea54ce3d0cae55ba",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/synced-call-cleanup.ts": {
@@ -530,8 +530,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/types.ts": {
-    "mtime": 1792760747.6874216,
-    "ast_hash": "a14f1cb63dbcce7131127901e816e1ad",
+    "mtime": 1792925835.0364342,
+    "ast_hash": "07ad4fa1adbb10ebacef0a5a75ca969d",
     "semantic_hash": ""
   },
   "app/src/lib/utils.ts": {
@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "backend/app/__init__.py": {
-    "mtime": 1792760747.6898284,
-    "ast_hash": "73b9404d892373cf981010b5c25b8df2",
+    "mtime": 1792927505.240049,
+    "ast_hash": "92ae20750b05eb97ea000667aed19300",
     "semantic_hash": ""
   },
   "backend/app/api/__init__.py": {
@@ -610,8 +610,8 @@
     "semantic_hash": ""
   },
   "backend/app/core/permissions.py": {
-    "mtime": 1792005968.893087,
-    "ast_hash": "d1bae5fd74004232ff0e408ba89a54f7",
+    "mtime": 1792927505.2410526,
+    "ast_hash": "d39a908b74e0680dc9a5c805277f4752",
     "semantic_hash": ""
   },
   "backend/app/core/security.py": {
@@ -630,8 +630,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/auth/__init__.py": {
-    "mtime": 1792004750.1960347,
-    "ast_hash": "944c9a12935d7f4fa727948fce062e8a",
+    "mtime": 1792927505.2425208,
+    "ast_hash": "17623a012d265c2db22450347d8cdac7",
     "semantic_hash": ""
   },
   "backend/app/modules/auth/routes.py": {
@@ -645,8 +645,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/auth/services.py": {
-    "mtime": 1792005279.09628,
-    "ast_hash": "6c083d0198a25a995d9773ca0ecbc6a6",
+    "mtime": 1792927505.2435248,
+    "ast_hash": "d50ffde7b9ac106812a33fdb873e37b0",
     "semantic_hash": ""
   },
   "backend/app/modules/calls/__init__.py": {
@@ -655,8 +655,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/calls/models.py": {
-    "mtime": 1792760747.6923792,
-    "ast_hash": "037341058813d4824267c732142d09d1",
+    "mtime": 1792926878.3566992,
+    "ast_hash": "32dbe25773ee98f4e192f7560bb00e8c",
     "semantic_hash": ""
   },
   "backend/app/modules/calls/routes.py": {
@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/calls/services.py": {
-    "mtime": 1792760747.6940136,
-    "ast_hash": "0767e71d0942070282417a4056a09ce9",
+    "mtime": 1792926878.3574576,
+    "ast_hash": "c1be92483334cd16c4828b31ff38f73c",
     "semantic_hash": ""
   },
   "backend/app/modules/dashboard/__init__.py": {
@@ -750,13 +750,13 @@
     "semantic_hash": ""
   },
   "backend/app/modules/users/models.py": {
-    "mtime": 1792004191.9222286,
-    "ast_hash": "d7cb27223febda6bc22ab06ad7fa15cb",
+    "mtime": 1792927505.2449386,
+    "ast_hash": "50f846bba8409f61923905c97598c9c5",
     "semantic_hash": ""
   },
   "backend/app/modules/users/routes.py": {
-    "mtime": 1792006850.5050354,
-    "ast_hash": "86fe2fa646ed978295411123737f7700",
+    "mtime": 1792927505.2464316,
+    "ast_hash": "7ad1b91afb96ccc62aab82c727f91e90",
     "semantic_hash": ""
   },
   "backend/app/modules/users/schemas.py": {
@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/users/services.py": {
-    "mtime": 1792006837.3440008,
-    "ast_hash": "807d3135cc1abcafc2e91172f3275134",
+    "mtime": 1792927505.2474527,
+    "ast_hash": "1eebbdd672ed7a3602f260cd959efc7b",
     "semantic_hash": ""
   },
   "backend/app/static_routes.py": {
@@ -785,13 +785,13 @@
     "semantic_hash": ""
   },
   "backend/tests/modules/test_auth.py": {
-    "mtime": 1792005349.037071,
-    "ast_hash": "916a3a722229f01be1f5e8827b612da5",
+    "mtime": 1792927505.2503796,
+    "ast_hash": "693c9fb9355e632574304afb72989cfd",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_calls.py": {
-    "mtime": 1792760747.7014806,
-    "ast_hash": "a606a8f9a0bfd80e7029e2015411d897",
+    "mtime": 1792927713.6904085,
+    "ast_hash": "c70f7ef869c228300554babb0f2737d2",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_dashboard.py": {
@@ -805,23 +805,23 @@
     "semantic_hash": ""
   },
   "backend/tests/modules/test_leads.py": {
-    "mtime": 1792760747.7029283,
-    "ast_hash": "af5bada1079d00f8c89deaf13da73804",
+    "mtime": 1792927505.2536366,
+    "ast_hash": "fa6e75bfe0c548966823e1cecc753100",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_settings.py": {
-    "mtime": 1792502977.8971267,
-    "ast_hash": "802f25fc2503858f63ac35cb07379163",
+    "mtime": 1792927505.2575243,
+    "ast_hash": "a3babfbfe40d72bade744c3da0727c0d",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_users.py": {
-    "mtime": 1792006889.9846413,
-    "ast_hash": "5f98b5a4b548ef94467cdf0f3ae58d03",
+    "mtime": 1792927505.25897,
+    "ast_hash": "6116127882403d891c5cdc0a91d7b174",
     "semantic_hash": ""
   },
   "backend/tests/test_foundation.py": {
-    "mtime": 1792502977.8971267,
-    "ast_hash": "4e4873c18c4a38f13431213a275164ee",
+    "mtime": 1792926878.3595889,
+    "ast_hash": "e6a4ed8e1d70f131aefed5fb81dc0ca1",
     "semantic_hash": ""
   },
   "backend/tests/test_production.py": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792922730.6548543,
-    "ast_hash": "b549f7881dcd78daec8ac7be8e006134",
+    "mtime": 1792928270.7924652,
+    "ast_hash": "c3a0239df3bb1cbbe1db484e1ee02f60",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2335,8 +2335,8 @@
     "semantic_hash": ""
   },
   "backend/tests/modules/dashboard_test_helpers.py": {
-    "mtime": 1792760747.7001736,
-    "ast_hash": "751fe861c25c4138eb26e1cb943236be",
+    "mtime": 1792927505.248963,
+    "ast_hash": "684c6d0d09bf4127c17834be9ba23826",
     "semantic_hash": ""
   },
   "app/src/app/navigation/navigation-ref.ts": {
@@ -2375,8 +2375,8 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/do-not-track-screen.tsx": {
-    "mtime": 1792760747.6757178,
-    "ast_hash": "e1144a243971523d8e8cd2e9725d30cb",
+    "mtime": 1792927960.0753102,
+    "ast_hash": "f05472cd017ff3e821c90c1b3b56b83b",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/do-not-track-db.ts": {
@@ -2465,8 +2465,8 @@
     "semantic_hash": ""
   },
   "app/src/features/stats/screens/calling-sim-screen.tsx": {
-    "mtime": 1792760747.6757178,
-    "ast_hash": "738aa425a3f95a83529ce6ddd8daa455",
+    "mtime": 1792927960.0753102,
+    "ast_hash": "c99498261135d08a666cbb2079575d3b",
     "semantic_hash": ""
   },
   "app/src/shared/utils/phone-permissions.ts": {
@@ -2712,6 +2712,101 @@
   "agent-doc/screens/07a-my-list--upload-toast--M.png": {
     "mtime": 1792919549.0964525,
     "ast_hash": "713013708a94157dbd8bc1b73cf1bf38",
+    "semantic_hash": ""
+  },
+  "app/src/features/my-list/hooks/use-my-list-upload.ts": {
+    "mtime": 1792926389.1839263,
+    "ast_hash": "efe0dea8dd7b73b1de704346d8abc64f",
+    "semantic_hash": ""
+  },
+  "app/src/features/my-list/index.ts": {
+    "mtime": 1792926389.1839263,
+    "ast_hash": "2e86f4cc5c74f4a7af69fedf546a08d4",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/db/my-list-db.ts": {
+    "mtime": 1792926389.1849322,
+    "ast_hash": "e4e8d4c1a546ce292434971156b337ff",
+    "semantic_hash": ""
+  },
+  "app/android/app/src/main/java/com/apexsalescall/WhatsAppModule.kt": {
+    "mtime": 1792925489.5267937,
+    "ast_hash": "2f6c63fc2a413f220267ffc435a006b7",
+    "semantic_hash": ""
+  },
+  "app/src/features/dialer/types.ts": {
+    "mtime": 1792925835.033363,
+    "ast_hash": "c60c0ad6de3a30aefb2b3a734eff908c",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/db/call-history-db.ts": {
+    "mtime": 1792926039.449781,
+    "ast_hash": "44f238251151237a9a9f1562ebf7b7b3",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/call-history-recorder.ts": {
+    "mtime": 1792926039.4527252,
+    "ast_hash": "894b4a5eea0e2616dfc82480aefb4e08",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/do-not-track-check.ts": {
+    "mtime": 1792926039.453743,
+    "ast_hash": "26b5e34a412b3a39317a1da4a13f24e2",
+    "semantic_hash": ""
+  },
+  "app/src/shared/api/whatsapp-module.ts": {
+    "mtime": 1792925489.5273,
+    "ast_hash": "8a2d5b0f2ae0df244cc6839e3ca0f035",
+    "semantic_hash": ""
+  },
+  "app/src/shared/utils/whatsapp-chat.ts": {
+    "mtime": 1792925489.5279758,
+    "ast_hash": "8c8175f35f4a058b56bb5cefb5328b26",
+    "semantic_hash": ""
+  },
+  "app/src/shared/utils/whatsapp-settings.ts": {
+    "mtime": 1792925489.5279758,
+    "ast_hash": "1dc357f33eda89a4d251fba9fb4fbd1e",
+    "semantic_hash": ""
+  },
+  "backend/app/modules/auth/models.py": {
+    "mtime": 1792927505.2425208,
+    "ast_hash": "cc9fa497ca7f61cfbe9ba9df5af985bd",
+    "semantic_hash": ""
+  },
+  "backend/tests/modules/session_test_helpers.py": {
+    "mtime": 1792927505.248963,
+    "ast_hash": "c8666fa532dae015cdac77959c0f28a1",
+    "semantic_hash": ""
+  },
+  "app/src/features/stats/components/settings-sub-screen-header.tsx": {
+    "mtime": 1792927960.0742955,
+    "ast_hash": "113716444bb769037832d0c7d5ae72f0",
+    "semantic_hash": ""
+  },
+  "app/src/features/stats/hooks/use-whatsapp-settings.ts": {
+    "mtime": 1792927960.0742955,
+    "ast_hash": "014d8c0ca556b49fb4a540065477ac11",
+    "semantic_hash": ""
+  },
+  "app/src/features/stats/screens/whatsapp-screen.tsx": {
+    "mtime": 1792927960.0767553,
+    "ast_hash": "9b8cc9bae07c6e392e7c9ffe43851660",
+    "semantic_hash": ""
+  },
+  "app/src/features/scheduled/hooks/use-scheduled-reminders.ts": {
+    "mtime": 1792928270.7939708,
+    "ast_hash": "44f96cf0907a9a8fd9b5a5476dea8d5d",
+    "semantic_hash": ""
+  },
+  "app/src/features/scheduled/index.ts": {
+    "mtime": 1792928270.7949805,
+    "ast_hash": "39f4de7ec5ff9ae32699ddc303528154",
+    "semantic_hash": ""
+  },
+  "app/src/features/scheduled/screens/scheduled-screen.tsx": {
+    "mtime": 1792928270.7949805,
+    "ast_hash": "1cc3f0482b42bc7b96da8bda6526fa92",
     "semantic_hash": ""
   }
 }

@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import { ToastAndroid } from 'react-native';
 import { readStoredCountry } from '@/features/auth';
 import {
   isValidPhoneNumber,
@@ -45,6 +46,8 @@ export function useDirectCall(): UseDirectCallResult {
           countryCode === null ||
           !isValidPhoneNumber(phoneNumber, countryCode)
         ) {
+          const numberNotDialableMessage = "This number can't be dialed.";
+          ToastAndroid.show(numberNotDialableMessage, ToastAndroid.SHORT);
           return;
         }
         const normalizedPhoneNumber = normalizePhoneNumber(

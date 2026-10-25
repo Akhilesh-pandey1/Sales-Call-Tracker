@@ -1,4 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  whatsappDefaultFirstMessageOn,
+  whatsappDefaultFirstMessageText,
+} from '@/config/app-config';
 import type { ChosenWhatsAppApp } from '@/shared/api/whatsapp-module';
 
 const whatsappAppStorageKey = 'whatsapp_chosen_app';
@@ -17,9 +21,6 @@ export type WhatsAppSettings = {
 };
 
 export async function readWhatsAppSettings(): Promise<WhatsAppSettings> {
-  const defaultIsFirstMessageOn = true;
-  const defaultFirstMessageText =
-    'Hello sir, Mai Apex Album AI se baat kar raha/rahi hu';
   const [storedApp, storedMessageOn, storedMessageText] = await Promise.all([
     AsyncStorage.getItem(whatsappAppStorageKey),
     AsyncStorage.getItem(whatsappMessageOnStorageKey),
@@ -29,9 +30,9 @@ export async function readWhatsAppSettings(): Promise<WhatsAppSettings> {
     storedApp === businessWhatsAppApp ? businessWhatsAppApp : defaultWhatsAppApp;
   const isFirstMessageOn: boolean =
     storedMessageOn === null
-      ? defaultIsFirstMessageOn
+      ? whatsappDefaultFirstMessageOn
       : storedMessageOn === storedOnValue;
-  const firstMessageText: string = storedMessageText ?? defaultFirstMessageText;
+  const firstMessageText: string = storedMessageText ?? whatsappDefaultFirstMessageText;
   const whatsappSettings: WhatsAppSettings = {
     chosenApp,
     isFirstMessageOn,

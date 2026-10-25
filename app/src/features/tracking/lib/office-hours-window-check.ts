@@ -10,6 +10,17 @@ function parseTimeToMinute(timeText: string): number {
   return minuteOfDay;
 }
 
+export function isCallStartOutsideOfficeHoursWindow(
+  callStartMs: number,
+  officeHoursWindow: OfficeHoursWindow,
+): boolean {
+  const isInsideWindow = isCallStartInsideOfficeHoursWindow(
+    callStartMs,
+    officeHoursWindow,
+  );
+  return !isInsideWindow;
+}
+
 export function isCallStartInsideOfficeHoursWindow(
   callStartMs: number,
   officeHoursWindow: OfficeHoursWindow,

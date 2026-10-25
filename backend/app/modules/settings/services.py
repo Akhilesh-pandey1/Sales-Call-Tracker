@@ -7,9 +7,14 @@ from backend.app.modules.settings.models import DEFAULT_WINDOW_ID, OfficeHours
 MINUTES_PER_HOUR: int = 60
 
 
-def format_minute_of_day(minute_of_day: int) -> str:
+def split_minute_of_day(minute_of_day: int) -> tuple[int, int]:
     hour_of_day: int = minute_of_day // MINUTES_PER_HOUR
     minute_within_hour: int = minute_of_day % MINUTES_PER_HOUR
+    return hour_of_day, minute_within_hour
+
+
+def format_minute_of_day(minute_of_day: int) -> str:
+    hour_of_day, minute_within_hour = split_minute_of_day(minute_of_day)
     return f"{hour_of_day:02d}:{minute_within_hour:02d}"
 
 
@@ -59,8 +64,7 @@ def update_office_hours_window(start_time: str, end_time: str) -> None:
 
 
 def format_short_clock_time(minute_of_day: int) -> str:
-    hour_of_day: int = minute_of_day // MINUTES_PER_HOUR
-    minute_within_hour: int = minute_of_day % MINUTES_PER_HOUR
+    hour_of_day, minute_within_hour = split_minute_of_day(minute_of_day)
     hours_on_twelve_hour_clock: int = 12
     display_hour: int = hour_of_day % hours_on_twelve_hour_clock
     if display_hour == 0:
@@ -80,8 +84,9 @@ def build_office_hours_label(start_minute: int, end_minute: int) -> str:
     return window_label
 
 
-def get_office_hours_view_with_label() -> dict[str, Any]:
-    office_hours_window: OfficeHours = get_or_create_office_hours_window()
+def get_office_hours_view_with_label(
+    office_hours_window: OfficeHours,
+) -> dict[str, Any]:
     window_view: dict[str, str] = build_window_view(office_hours_window)
     window_label: str = build_office_hours_label(
         office_hours_window.start_minute, office_hours_window.end_minute

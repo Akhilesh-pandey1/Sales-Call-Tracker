@@ -45,6 +45,13 @@ class PeopleCallMetrics:
     yesterday: dict[str, int]
 
 
+@dataclass(frozen=True)
+class OfficeHoursWindowInputs:
+    window_start_minute: int
+    window_end_minute: int
+    office_hours: list[int]
+
+
 def calculate_dashboard_time_windows() -> DashboardTimeWindows:
     current_ist: datetime = now_ist()
     midnight_today_ist: datetime = current_ist.replace(
@@ -151,6 +158,22 @@ def build_office_hour_range(
         range(window_start_hour, last_bucket_hour + 1)
     )
     return office_hour_range
+
+
+def build_office_hours_window_inputs(
+    office_hours_window: OfficeHours,
+) -> OfficeHoursWindowInputs:
+    window_start_minute: int = office_hours_window.start_minute
+    window_end_minute: int = office_hours_window.end_minute
+    office_hours: list[int] = build_office_hour_range(
+        window_start_minute, window_end_minute
+    )
+    window_inputs: OfficeHoursWindowInputs = OfficeHoursWindowInputs(
+        window_start_minute=window_start_minute,
+        window_end_minute=window_end_minute,
+        office_hours=office_hours,
+    )
+    return window_inputs
 
 
 def create_empty_hourly_counts(office_hours: list[int]) -> dict[int, int]:
@@ -279,13 +302,11 @@ def apply_team_call_to_period_aggregates(
 def accumulate_team_call_records(
     call_records: list[Any],
     windows: DashboardTimeWindows,
-    window_start_minute: int,
-    window_end_minute: int,
+    window_inputs: OfficeHoursWindowInputs,
 ) -> TeamCallAggregates:
-    office_hours: list[int] = build_office_hour_range(
-        window_start_minute, window_end_minute
+    aggregates: TeamCallAggregates = create_empty_team_aggregates(
+        window_inputs.office_hours
     )
-    aggregates: TeamCallAggregates = create_empty_team_aggregates(office_hours)
 
     for user_id, raw_dialed_at, duration_seconds, direction in call_records:
         dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
@@ -296,8 +317,8 @@ def accumulate_team_call_records(
             direction,
             duration_seconds,
             dialed_at,
-            window_start_minute,
-            window_end_minute,
+            window_inputs.window_start_minute,
+            window_inputs.window_end_minute,
         )
 
         if dialed_at >= windows.today_start_utc:
@@ -307,8 +328,8 @@ def accumulate_team_call_records(
                 direction,
                 duration_seconds,
                 dialed_at,
-                window_start_minute,
-                window_end_minute,
+                window_inputs.window_start_minute,
+                window_inputs.window_end_minute,
             )
         elif dialed_at >= windows.yesterday_start_utc:
             apply_team_call_to_period_aggregates(
@@ -317,8 +338,8 @@ def accumulate_team_call_records(
                 direction,
                 duration_seconds,
                 dialed_at,
-                window_start_minute,
-                window_end_minute,
+                window_inputs.window_start_minute,
+                window_inputs.window_end_minute,
             )
 
     return aggregates
@@ -506,14 +527,14 @@ def build_team_period_block(
 
 
 def fetch_team_dashboard_aggregates(
-    window_start_minute: int, window_end_minute: int
+    window_inputs: OfficeHoursWindowInputs,
 ) -> tuple[TeamCallAggregates, list[Any], int]:
     windows: DashboardTimeWindows = calculate_dashboard_time_windows()
     call_records: list[Any] = fetch_team_call_records(
         windows, windows.thirty_days_start_utc
     )
     aggregates: TeamCallAggregates = accumulate_team_call_records(
-        call_records, windows, window_start_minute, window_end_minute
+        call_records, windows, window_inputs
     )
     active_salespeople: list[Any] = fetch_active_salespeople()
     active_salesperson_count: int = len(active_salespeople)
@@ -601,16 +622,17 @@ def build_team_period_blocks(
 
 def get_team_dashboard_data() -> dict[str, Any]:
     office_hours_window: OfficeHours = get_or_create_office_hours_window()
-    window_start_minute: int = office_hours_window.start_minute
-    window_end_minute: int = office_hours_window.end_minute
-    office_hours: list[int] = build_office_hour_range(
-        window_start_minute, window_end_minute
+    window_inputs: OfficeHoursWindowInputs = build_office_hours_window_inputs(
+        office_hours_window
     )
     aggregates, active_salespeople, active_salesperson_count = (
-        fetch_team_dashboard_aggregates(window_start_minute, window_end_minute)
+        fetch_team_dashboard_aggregates(window_inputs)
     )
     period_blocks: dict[str, dict[str, Any]] = build_team_period_blocks(
-        aggregates, active_salespeople, active_salesperson_count, office_hours
+        aggregates,
+        active_salespeople,
+        active_salesperson_count,
+        window_inputs.office_hours,
     )
     return period_blocks
 

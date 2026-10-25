@@ -21,7 +21,7 @@ import {
   toEntryTimeMs,
   type CallLogEntry,
 } from './call-log-matcher';
-import { isCallStartInsideOfficeHoursWindow } from './office-hours-window-check';
+import { isCallStartOutsideOfficeHoursWindow } from './office-hours-window-check';
 import { safeReadCallLogEntries } from './call-log-reader';
 
 interface TrackedCallGuard {
@@ -79,7 +79,7 @@ function collectSweptCalls(
     if (isDoNotTrackNumber) {
       continue;
     }
-    const isOutsideOfficeHoursWindow = !isCallStartInsideOfficeHoursWindow(
+    const isOutsideOfficeHoursWindow = isCallStartOutsideOfficeHoursWindow(
       entryTimeMs,
       officeHoursWindow,
     );

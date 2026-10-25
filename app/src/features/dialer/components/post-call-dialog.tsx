@@ -8,11 +8,13 @@ import {
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { maxScheduleAheadDays } from '@/config/app-config';
+import type { CallOutcome } from '@/features/tracking';
 import { Calendar, Check } from 'lucide-react-native';
 import { useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, TextInput, View } from 'react-native';
 import { cn } from '@/lib/utils';
 import { usePostCallSchedule } from '../hooks/use-post-call-schedule';
+import type { PostCallSubmitData } from '../types';
 
 type ScheduleChoiceRowProps = {
   label: string;
@@ -71,6 +73,71 @@ function SchedulePickerField({ scheduleLabel, onOpenPicker }: SchedulePickerFiel
   );
 }
 
+type OutcomeTone = 'positive' | 'negative';
+
+type OutcomeChoiceChipProps = {
+  label: string;
+  tone: OutcomeTone;
+  isSelected: boolean;
+  onToggle: () => void;
+};
+
+function OutcomeChoiceChip({ label, tone, isSelected, onToggle }: OutcomeChoiceChipProps) {
+  const isPositive = tone === 'positive';
+  const selectedChipClasses = isPositive
+    ? 'border-accent bg-emerald-50/40'
+    : 'border-destructive bg-red-50/40';
+  const selectedBoxClasses = isPositive
+    ? 'border-accent bg-accent'
+    : 'border-destructive bg-destructive';
+
+  return (
+    <Pressable
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: isSelected }}
+      accessibilityLabel={label}
+      onPress={onToggle}
+      className={cn(
+        'flex-row items-center gap-2 rounded-xl border px-3 py-2',
+        isSelected ? selectedChipClasses : 'border-border bg-card',
+      )}
+    >
+      <View
+        className={cn(
+          'h-4 w-4 items-center justify-center rounded border-2',
+          isSelected ? selectedBoxClasses : 'border-border bg-card',
+        )}
+      >
+        {isSelected ? <Icon as={Check} size={12} className="text-white" /> : null}
+      </View>
+      <Text className="text-xs font-bold text-foreground">{label}</Text>
+    </Pressable>
+  );
+}
+
+type NotesFieldProps = {
+  noteText: string;
+  onChangeNote: (noteText: string) => void;
+};
+
+function NotesField({ noteText, onChangeNote }: NotesFieldProps) {
+  return (
+    <View className="rounded-xl border border-border p-3">
+      <Text className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+        Notes (optional)
+      </Text>
+      <TextInput
+        multiline
+        numberOfLines={2}
+        value={noteText}
+        onChangeText={onChangeNote}
+        placeholder="e.g. Asked to call back after 6 PM"
+        className="mt-1 h-14 w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground"
+      />
+    </View>
+  );
+}
+
 export type PostCallDialogVariant = 'keypad' | 'lead';
 
 type PostCallDialogProps = {
@@ -79,7 +146,7 @@ type PostCallDialogProps = {
   phoneNumber: string;
   isSubmitting: boolean;
   errorMessage: string | null;
-  onSubmit: (scheduledAt: string | null, shouldContinueToNextLead: boolean) => void;
+  onSubmit: (submitData: PostCallSubmitData) => void;
 };
 
 function PostCallDialog({
@@ -93,14 +160,31 @@ function PostCallDialog({
   const { scheduleDate, scheduleLabel, openSchedulePicker } = usePostCallSchedule();
   const [isScheduleChosen, setIsScheduleChosen] = useState(false);
   const [shouldContinueToNextLead, setShouldContinueToNextLead] = useState(true);
+  const [isInterested, setIsInterested] = useState(false);
+  const [isDoNotCall, setIsDoNotCall] = useState(false);
+  const [noteText, setNoteText] = useState('');
 
   const handleChooseSchedule = () => setIsScheduleChosen(true);
   const handleChooseNoSchedule = () => setIsScheduleChosen(false);
   const handleContinueToNextLeadToggle = () =>
     setShouldContinueToNextLead(!shouldContinueToNextLead);
+  const handleToggleInterested = () => setIsInterested(!isInterested);
+  const handleToggleDoNotCall = () => setIsDoNotCall(!isDoNotCall);
+  const handleChangeNote = (changedNoteText: string) => setNoteText(changedNoteText);
   const handleSubmitPress = () => {
     const scheduledAt = isScheduleChosen ? scheduleDate.toISOString() : null;
-    onSubmit(scheduledAt, shouldContinueToNextLead);
+    const trimmedNoteText = noteText.trim();
+    const callOutcome: CallOutcome = {
+      interested: isInterested,
+      doNotCall: isDoNotCall,
+      notes: trimmedNoteText === '' ? null : trimmedNoteText,
+    };
+    const submitData: PostCallSubmitData = {
+      scheduledAt,
+      shouldContinueToNextLead,
+      outcome: callOutcome,
+    };
+    onSubmit(submitData);
   };
 
   const showGoToNextCall = variant === 'lead';
@@ -124,6 +208,24 @@ function PostCallDialog({
           <View className="ml-2 rounded-full bg-muted px-2.5 py-0.5">
             <Text className="text-[11px] font-semibold text-muted-foreground">Ended</Text>
           </View>
+        </View>
+
+        <View className="gap-2">
+          <View className="flex-row flex-wrap items-center gap-2">
+            <OutcomeChoiceChip
+              label="Interested"
+              tone="positive"
+              isSelected={isInterested}
+              onToggle={handleToggleInterested}
+            />
+            <OutcomeChoiceChip
+              label="Do not call again"
+              tone="negative"
+              isSelected={isDoNotCall}
+              onToggle={handleToggleDoNotCall}
+            />
+          </View>
+          <NotesField noteText={noteText} onChangeNote={handleChangeNote} />
         </View>
 
         <View className="gap-2.5">

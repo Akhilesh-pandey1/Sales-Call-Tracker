@@ -1,7 +1,7 @@
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { Calendar, Copy, MessageCircle, RotateCw } from 'lucide-react-native';
+import { Calendar, Copy, MessageCircle, Phone, RotateCw } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import { ActivityIndicator, FlatList, Pressable, ToastAndroid, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -9,6 +9,7 @@ import type { MainTabsParamList } from '@/app/navigation/main-tabs-param-list';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
+import { PostCallDialog, useDirectCall } from '@/features/dialer';
 import { cn } from '@/lib/utils';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
@@ -90,6 +91,7 @@ function BookingActionButton({
 type BookingRowProps = {
   booking: ScheduledBooking;
   onOpenBooking: () => void;
+  onCallPhoneNumber: (phoneNumber: string) => void;
   onCopyPhoneNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
 };
@@ -97,6 +99,7 @@ type BookingRowProps = {
 function BookingRow({
   booking,
   onOpenBooking,
+  onCallPhoneNumber,
   onCopyPhoneNumber,
   onOpenWhatsAppChat,
 }: BookingRowProps) {
@@ -129,6 +132,12 @@ function BookingRow({
         </Text>
       </View>
       <View className="shrink-0 flex-row items-center gap-1">
+        <BookingActionButton
+          accessibilityLabel={`Call ${displayedPhoneNumber}`}
+          icon={Phone}
+          iconClassName="text-primary"
+          onPress={() => onCallPhoneNumber(booking.phoneNumber)}
+        />
         <BookingActionButton
           accessibilityLabel={`Copy ${displayedPhoneNumber}`}
           icon={Copy}
@@ -224,6 +233,7 @@ type BookingsListProps = {
   bookings: ScheduledBooking[];
   dueBookingCount: number;
   onOpenBooking: () => void;
+  onCallPhoneNumber: (phoneNumber: string) => void;
   onCopyPhoneNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
 };
@@ -232,6 +242,7 @@ function BookingsList({
   bookings,
   dueBookingCount,
   onOpenBooking,
+  onCallPhoneNumber,
   onCopyPhoneNumber,
   onOpenWhatsAppChat,
 }: BookingsListProps) {
@@ -245,6 +256,7 @@ function BookingsList({
         <BookingRow
           booking={item}
           onOpenBooking={onOpenBooking}
+          onCallPhoneNumber={onCallPhoneNumber}
           onCopyPhoneNumber={onCopyPhoneNumber}
           onOpenWhatsAppChat={onOpenWhatsAppChat}
         />
@@ -254,11 +266,24 @@ function BookingsList({
 }
 
 export function ScheduledScreen() {
-  const { bookings, dueBookingCount, isLoading, errorMessage, reloadBookings } =
-    useScheduledReminders();
+  const {
+    bookings,
+    dueBookingCount,
+    isLoading,
+    errorMessage,
+    reloadBookings,
+    removeBooking,
+  } = useScheduledReminders();
+  const directCall = useDirectCall();
   const navigation =
     useNavigation<BottomTabNavigationProp<MainTabsParamList>>();
   const { top: topInset } = useSafeAreaInsets();
+
+  const trackedCall = directCall.trackedCall;
+  const postCallDialogKey = trackedCall?.callId ?? 'idle-scheduled-post-call';
+  const postCallDialogPhoneNumber = trackedCall === null
+    ? ''
+    : formatInternationalPhoneNumber(trackedCall.phoneNumber);
 
   const handleReloadPress = () => reloadBookings();
   const handleOpenBooking = () => navigation.navigate('Dialer');
@@ -268,7 +293,11 @@ export function ScheduledScreen() {
     ToastAndroid.show(numberCopiedMessage, ToastAndroid.SHORT);
   };
   const handleOpenWhatsAppChat = async (phoneNumber: string): Promise<void> => {
-    await openChosenWhatsAppChat(phoneNumber);
+    const didChatOpen = await openChosenWhatsAppChat(phoneNumber);
+    if (!didChatOpen) {
+      return;
+    }
+    await removeBooking(phoneNumber);
   };
 
   const screenContent = isLoading ? (
@@ -287,6 +316,7 @@ export function ScheduledScreen() {
       bookings={bookings}
       dueBookingCount={dueBookingCount}
       onOpenBooking={handleOpenBooking}
+      onCallPhoneNumber={directCall.startDirectCall}
       onCopyPhoneNumber={handleCopyPhoneNumber}
       onOpenWhatsAppChat={handleOpenWhatsAppChat}
     />
@@ -296,6 +326,15 @@ export function ScheduledScreen() {
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
       <ScheduledHeader onReloadPress={handleReloadPress} />
       {screenContent}
+      <PostCallDialog
+        key={postCallDialogKey}
+        variant="keypad"
+        isOpen={directCall.isPostCallDialogOpen}
+        phoneNumber={postCallDialogPhoneNumber}
+        isSubmitting={directCall.isSubmittingPostCall}
+        errorMessage={directCall.postCallErrorMessage}
+        onSubmit={directCall.submitDirectCall}
+      />
     </View>
   );
 }

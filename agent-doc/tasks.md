@@ -145,14 +145,14 @@
 
 **Blocked by:** 9
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] An .xlsx file picked on the phone is parsed by an Excel-reading library chosen at implementation and its numbers join the upload like any other source (`specs/my-list.md` — Excel parsed on the phone).
-- [ ] "Copy AI prompt" copies a ready prompt, so the salesperson pastes their sheet text and the prompt into ChatGPT and puts the comma-separated numbers back into the paste box (`specs/my-list.md` — AI prompt copied).
+- [x] An .xlsx file picked on the phone is parsed by an Excel-reading library chosen at implementation and its numbers join the upload like any other source (`specs/my-list.md` — Excel parsed on the phone).
+- [x] "Copy AI prompt" copies a ready prompt, so the salesperson pastes their sheet text and the prompt into ChatGPT and puts the comma-separated numbers back into the paste box (`specs/my-list.md` — AI prompt copied).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 11: App — the My List tab
 

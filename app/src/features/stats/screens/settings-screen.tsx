@@ -1,3 +1,4 @@
+import { useFocusEffect } from '@react-navigation/native';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -16,7 +17,7 @@ import {
   Trash2,
   type LucideIcon,
 } from 'lucide-react-native';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useClearLocalData } from '../hooks/use-clear-local-data';
@@ -24,6 +25,8 @@ import { useLogout } from '../hooks/use-logout';
 import { CallingSimScreen } from './calling-sim-screen';
 import { DoNotTrackScreen } from './do-not-track-screen';
 import { WhatsAppScreen } from './whatsapp-screen';
+
+type SettingsSubScreen = 'callingSim' | 'doNotTrack' | 'whatsapp';
 
 function SettingsHeader() {
   return (
@@ -153,9 +156,9 @@ function ClearConfirmDialog({
 
 export function SettingsScreen() {
   const { top: topInset } = useSafeAreaInsets();
-  const [isDoNotTrackListOpen, setIsDoNotTrackListOpen] = useState(false);
-  const [isCallingSimPickerOpen, setIsCallingSimPickerOpen] = useState(false);
-  const [isWhatsAppSettingsOpen, setIsWhatsAppSettingsOpen] = useState(false);
+  const [openSubScreen, setOpenSubScreen] = useState<SettingsSubScreen | null>(
+    null,
+  );
   const {
     pendingCallCount,
     isClearDialogOpen,
@@ -167,40 +170,24 @@ export function SettingsScreen() {
   } = useClearLocalData();
   const { isLoggingOut, logoutErrorMessage, logout } = useLogout();
 
-  const openDoNotTrackList = (): void => {
-    setIsDoNotTrackListOpen(true);
-  };
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setOpenSubScreen(null);
+      };
+    }, []),
+  );
 
-  const closeDoNotTrackList = (): void => {
-    setIsDoNotTrackListOpen(false);
-  };
-
-  const openCallingSimPicker = (): void => {
-    setIsCallingSimPickerOpen(true);
-  };
-
-  const closeCallingSimPicker = (): void => {
-    setIsCallingSimPickerOpen(false);
-  };
-
-  const openWhatsAppSettings = (): void => {
-    setIsWhatsAppSettingsOpen(true);
-  };
-
-  const closeWhatsAppSettings = (): void => {
-    setIsWhatsAppSettingsOpen(false);
-  };
-
-  if (isDoNotTrackListOpen) {
-    return <DoNotTrackScreen onBack={closeDoNotTrackList} />;
+  if (openSubScreen === 'doNotTrack') {
+    return <DoNotTrackScreen onBack={() => setOpenSubScreen(null)} />;
   }
 
-  if (isCallingSimPickerOpen) {
-    return <CallingSimScreen onBack={closeCallingSimPicker} />;
+  if (openSubScreen === 'callingSim') {
+    return <CallingSimScreen onBack={() => setOpenSubScreen(null)} />;
   }
 
-  if (isWhatsAppSettingsOpen) {
-    return <WhatsAppScreen onBack={closeWhatsAppSettings} />;
+  if (openSubScreen === 'whatsapp') {
+    return <WhatsAppScreen onBack={() => setOpenSubScreen(null)} />;
   }
 
   return (
@@ -214,7 +201,7 @@ export function SettingsScreen() {
             iconClassName="text-primary"
             title="WhatsApp"
             subtitle="Pick the app — WhatsApp or WhatsApp Business — and the first message chats open with."
-            onPress={openWhatsAppSettings}
+            onPress={() => setOpenSubScreen('whatsapp')}
           />
           <SettingsMenuRow
             icon={Trash2}
@@ -230,7 +217,7 @@ export function SettingsScreen() {
             iconClassName="text-primary"
             title="Do not track numbers"
             subtitle="Numbers never recorded as work - incoming or outgoing."
-            onPress={openDoNotTrackList}
+            onPress={() => setOpenSubScreen('doNotTrack')}
           />
           <SettingsMenuRow
             icon={CardSim}
@@ -238,7 +225,7 @@ export function SettingsScreen() {
             iconClassName="text-primary"
             title="Calling SIM"
             subtitle="The SIM every call goes out from."
-            onPress={openCallingSimPicker}
+            onPress={() => setOpenSubScreen('callingSim')}
           />
           <SettingsMenuRow
             icon={LogOut}

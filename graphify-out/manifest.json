@@ -445,8 +445,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/index.ts": {
-    "mtime": 1792926389.1849322,
-    "ast_hash": "1b674fedbe84182cafa3da055ee74dcc",
+    "mtime": 1792928943.8773615,
+    "ast_hash": "2bee0581e1a9f28e184948b775d6a993",
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/pending-calls-db.ts": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/index.ts": {
-    "mtime": 1792928270.7949805,
-    "ast_hash": "c5e89fe7fd2180e80287b637cb7aea5c",
+    "mtime": 1792928943.878432,
+    "ast_hash": "b9db02afea8d864049cb2f63e7611eba",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-janitor.ts": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-log-matcher.ts": {
-    "mtime": 1792760747.6837342,
-    "ast_hash": "24d7eef1d8f080430c8efa3173300b32",
+    "mtime": 1792928943.878432,
+    "ast_hash": "63afd2c1d24b49b781b5290a07830bf8",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-log-reader.ts": {
@@ -490,8 +490,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-log-sweep.ts": {
-    "mtime": 1792760747.6837342,
-    "ast_hash": "f04edf33f1ed0cb766b24b0d75315d1a",
+    "mtime": 1792928943.8794363,
+    "ast_hash": "fdb57498f8c14f98ca6dc6e862634a8d",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-submit.ts": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792928686.8694322,
-    "ast_hash": "c1b631035ec8ff3f435e32f6306ebfc3",
+    "mtime": 1792928943.8773615,
+    "ast_hash": "51aceacf85e3fd4308184d72aa26e1bd",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2740,8 +2740,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/db/call-history-db.ts": {
-    "mtime": 1792926039.449781,
-    "ast_hash": "44f238251151237a9a9f1562ebf7b7b3",
+    "mtime": 1792928943.8773615,
+    "ast_hash": "191a40e9fd1fef2f6a5d6c5705986e81",
     "semantic_hash": ""
   },
   "app/src/features/tracking/lib/call-history-recorder.ts": {
@@ -2817,6 +2817,16 @@
   "app/src/features/dialer/lib/copy-number.ts": {
     "mtime": 1792928686.8717222,
     "ast_hash": "605debf386591449abb622d395cebf26",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/hooks/use-history-open.ts": {
+    "mtime": 1792928943.878432,
+    "ast_hash": "dee28b4accd82b20cb2a212aad31b996",
+    "semantic_hash": ""
+  },
+  "app/src/features/tracking/lib/call-history-backfill.ts": {
+    "mtime": 1792928943.878432,
+    "ast_hash": "88a2a51a108091c393baece1c3b76f62",
     "semantic_hash": ""
   }
 }

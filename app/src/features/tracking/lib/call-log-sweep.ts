@@ -10,11 +10,11 @@ import {
   type PendingCall,
   type SweptCall,
 } from '../db';
-import type { CallDirection } from '../types';
 import {
   isEntryWithinMatchWindow,
-  isIncomingCallEntry,
-  isOutgoingCallEntry,
+  isTrackedCallEntry,
+  toCallDirection,
+  toEntryTimeMs,
   type CallLogEntry,
 } from './call-log-matcher';
 import { safeReadCallLogEntries } from './call-log-reader';
@@ -22,26 +22,6 @@ import { safeReadCallLogEntries } from './call-log-reader';
 interface TrackedCallGuard {
   normalizedPhoneNumber: string;
   intentTimeMs: number;
-}
-
-function toEntryTimeMs(callLogEntry: CallLogEntry): number {
-  const entryTimeMs = Number(callLogEntry.timestamp);
-  return entryTimeMs;
-}
-
-function toCallDirection(callLogEntry: CallLogEntry): CallDirection {
-  const isIncoming = isIncomingCallEntry(callLogEntry);
-  const callDirection: CallDirection = isIncoming ? 'incoming' : 'outgoing';
-  return callDirection;
-}
-
-function isTrackedCallEntry(callLogEntry: CallLogEntry): boolean {
-  const notAnsweredDuration = 0;
-  const isOutgoing = isOutgoingCallEntry(callLogEntry);
-  const isAnsweredIncoming =
-    isIncomingCallEntry(callLogEntry) && callLogEntry.duration > notAnsweredDuration;
-  const isTracked = isOutgoing || isAnsweredIncoming;
-  return isTracked;
 }
 
 function toTrackedCallGuard(

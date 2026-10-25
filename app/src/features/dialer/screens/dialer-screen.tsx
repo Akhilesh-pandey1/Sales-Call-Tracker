@@ -114,8 +114,13 @@ function KeypadView({
     const launchedCall = await dialer.startCall();
     keypadPostCall.trackLaunchedCall(launchedCall);
   };
-  const handleSubmitKeypadPostCall = ({ scheduledAt, outcome }: PostCallSubmitData) =>
-    keypadPostCall.submitKeypadPostCall(scheduledAt, outcome);
+  const handleSubmitKeypadPostCall = async ({
+    scheduledAt,
+    outcome,
+  }: PostCallSubmitData) => {
+    await keypadPostCall.submitKeypadPostCall(scheduledAt, outcome);
+    dialer.clearDialedNumber();
+  };
 
   return (
     <View className="flex-1 justify-center px-3 pb-4 pt-2">

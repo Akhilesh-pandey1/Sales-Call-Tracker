@@ -1,6 +1,7 @@
 import { insertCallHistoryRow } from '../db';
 import type { CallDirection } from '../types';
 import { readIsDoNotTrackNumber } from './do-not-track-check';
+import { removeScheduledReminderForNumber } from './call-reminders';
 
 export async function recordCallInHistory(
   phoneNumber: string,
@@ -17,5 +18,17 @@ export async function recordCallInHistory(
     await insertCallHistoryRow(phoneNumber, direction, callAt, durationSeconds);
   } catch (historyError: unknown) {
     console.warn(historySaveWarnMessage, historyError);
+    return;
+  }
+  const outgoingCallDirection = 'outgoing';
+  const isOutgoingCall = direction === outgoingCallDirection;
+  if (!isOutgoingCall) {
+    return;
+  }
+  const handledBookingRemovalWarnMessage = 'Could not remove the handled booking.';
+  try {
+    await removeScheduledReminderForNumber(phoneNumber);
+  } catch (removalError: unknown) {
+    console.warn(handledBookingRemovalWarnMessage, removalError);
   }
 }

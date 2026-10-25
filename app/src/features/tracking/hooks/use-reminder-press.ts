@@ -4,6 +4,7 @@ import notifee, {
   type Notification,
 } from '@notifee/react-native';
 import { useEffect } from 'react';
+import { removeScheduledReminderForNumber } from '../lib/call-reminders';
 import { emitReminderPress } from '../lib/reminder-press-events';
 
 function readPressedPhoneNumber(
@@ -20,7 +21,18 @@ function readPressedPhoneNumber(
   return pressedPhoneNumber;
 }
 
-function emitReminderPressFromNotification(
+async function removePressedNumberBooking(
+  pressedPhoneNumber: string,
+): Promise<void> {
+  const bookingRemovalWarnMessage = 'Could not remove the tapped booking.';
+  try {
+    await removeScheduledReminderForNumber(pressedPhoneNumber);
+  } catch (removalError: unknown) {
+    console.warn(bookingRemovalWarnMessage, removalError);
+  }
+}
+
+function handlePressedReminderNotification(
   notification: Notification | null | undefined,
 ): void {
   const pressedPhoneNumber = readPressedPhoneNumber(notification);
@@ -28,27 +40,28 @@ function emitReminderPressFromNotification(
     return;
   }
   emitReminderPress(pressedPhoneNumber);
+  removePressedNumberBooking(pressedPhoneNumber);
 }
 
-function emitReminderPressFromNotifeeEvent(notifeeEvent: Event): void {
+function handlePressedReminderNotifeeEvent(notifeeEvent: Event): void {
   if (notifeeEvent.type !== EventType.PRESS) {
     return;
   }
-  emitReminderPressFromNotification(notifeeEvent.detail.notification);
+  handlePressedReminderNotification(notifeeEvent.detail.notification);
 }
 
-async function emitReminderPressFromInitialNotification(): Promise<void> {
+async function handleInitialReminderNotification(): Promise<void> {
   const initialNotification = await notifee.getInitialNotification();
   if (initialNotification === null) {
     return;
   }
-  emitReminderPressFromNotification(initialNotification.notification);
+  handlePressedReminderNotification(initialNotification.notification);
 }
 
 export function useReminderPress(): void {
   useEffect(() => {
-    const unsubscribe = notifee.onForegroundEvent(emitReminderPressFromNotifeeEvent);
-    emitReminderPressFromInitialNotification();
+    const unsubscribe = notifee.onForegroundEvent(handlePressedReminderNotifeeEvent);
+    handleInitialReminderNotification();
     return unsubscribe;
   }, []);
 }

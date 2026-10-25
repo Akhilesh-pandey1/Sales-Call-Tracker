@@ -27,6 +27,13 @@ class Lead(db.Model):
         nullable=True,
     )
     scheduled_at = db.Column(db.DateTime(timezone=True), nullable=True)
+    interested = db.Column(
+        db.Boolean, nullable=False, default=False, server_default=db.false()
+    )
+    do_not_call = db.Column(
+        db.Boolean, nullable=False, default=False, server_default=db.false()
+    )
+    notes = db.Column(db.Text, nullable=True)
     created_at = db.Column(
         db.DateTime(timezone=True),
         nullable=False,

@@ -23,6 +23,7 @@ export {
 } from './call-sweep-db';
 export {
   insertCallHistoryRow,
+  readCallHistoryPage,
   readCallHistoryRowKeys,
   saveCallHistoryEntries,
 } from './call-history-db';

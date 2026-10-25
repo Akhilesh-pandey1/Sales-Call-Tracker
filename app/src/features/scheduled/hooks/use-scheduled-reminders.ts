@@ -4,8 +4,11 @@ import {
   readAllScheduledReminders,
   type ScheduledReminder,
 } from '@/features/tracking';
-
-export type ScheduledBookingState = 'Due' | 'Upcoming';
+import {
+  readBookingState,
+  readBookingTimeMs,
+  type ScheduledBookingState,
+} from '../lib/booking-state';
 
 export type ScheduledBooking = {
   leadId: number;
@@ -16,30 +19,11 @@ export type ScheduledBooking = {
 
 type UseScheduledRemindersResult = {
   bookings: ScheduledBooking[];
+  dueBookingCount: number;
   isLoading: boolean;
   errorMessage: string | null;
   reloadBookings: () => Promise<void>;
 };
-
-function readBookingTimeMs(scheduledAt: string): number {
-  const bookingTimeMs = new Date(scheduledAt).getTime();
-  if (Number.isNaN(bookingTimeMs)) {
-    const invalidBookingTimeMs = 0;
-    return invalidBookingTimeMs;
-  }
-  return bookingTimeMs;
-}
-
-function readBookingState(
-  scheduledAtMs: number,
-  currentTimeMs: number,
-): ScheduledBookingState {
-  const isBookingTimeAhead = scheduledAtMs > currentTimeMs;
-  if (isBookingTimeAhead) {
-    return 'Upcoming';
-  }
-  return 'Due';
-}
 
 function toScheduledBooking(
   reminder: ScheduledReminder,
@@ -120,8 +104,12 @@ export function useScheduledReminders(): UseScheduledRemindersResult {
     }, [reloadBookings]),
   );
 
+  const dueBookingCount = bookings.filter(
+    booking => booking.state === 'Due',
+  ).length;
   const scheduledReminders: UseScheduledRemindersResult = {
     bookings,
+    dueBookingCount,
     isLoading,
     errorMessage,
     reloadBookings,

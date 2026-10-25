@@ -3,11 +3,12 @@ import {
   type BottomTabNavigationOptions,
 } from '@react-navigation/bottom-tabs';
 import { DialerScreen, useTappedNumberLinks } from '@/features/dialer';
-import { ScheduledScreen } from '@/features/scheduled';
+import { HistoryScreen } from '@/features/history';
+import { ScheduledScreen, useDueBookingCount } from '@/features/scheduled';
 import { MyStatsScreen, SettingsScreen } from '@/features/stats';
 import { useReminderPress, useSync } from '@/features/tracking';
 import { Icon } from '@/components/ui/icon';
-import { Calendar, ChartColumn, Phone, Settings } from 'lucide-react-native';
+import { Calendar, ChartColumn, Clock, Phone, Settings } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import type { MainTabsParamList } from './main-tabs-param-list';
 import { useReminderPressNavigation } from './use-reminder-press-navigation';
@@ -31,6 +32,7 @@ function createTabIcon(icon: LucideIcon): TabBarIconComponent {
 
 const DialerTabIcon = createTabIcon(Phone);
 const ScheduledTabIcon = createTabIcon(Calendar);
+const HistoryTabIcon = createTabIcon(Clock);
 const MyStatsTabIcon = createTabIcon(ChartColumn);
 const SettingsTabIcon = createTabIcon(Settings);
 
@@ -40,6 +42,8 @@ export function AppNavigator() {
   useReminderPressNavigation();
   useTappedNumberNavigation();
   useTappedNumberLinks();
+  const dueBookingCount = useDueBookingCount();
+  const minimumCountForBadge = 1;
 
   return (
     <MainTabs.Navigator screenOptions={{ headerShown: false }}>
@@ -51,7 +55,16 @@ export function AppNavigator() {
       <MainTabs.Screen
         name="Scheduled"
         component={ScheduledScreen}
-        options={{ tabBarIcon: ScheduledTabIcon }}
+        options={{
+          tabBarIcon: ScheduledTabIcon,
+          tabBarBadge:
+            dueBookingCount >= minimumCountForBadge ? dueBookingCount : undefined,
+        }}
+      />
+      <MainTabs.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{ tabBarIcon: HistoryTabIcon }}
       />
       <MainTabs.Screen
         name="My Stats"

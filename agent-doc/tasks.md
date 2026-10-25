@@ -35,15 +35,15 @@
 
 **Blocked by:** 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `do_not_call: true` on a matched call sets the lead's status to `stopped` with claims and schedules cleared — even when the call was unconnected (`specs/lead-management.md` — Call outcome reaches the lead).
-- [ ] `interested: true` is stored as a label beside the lead's state with the normal retry rules running unchanged, and the call's note is copied onto the lead (`specs/lead-management.md` — Call outcome reaches the lead).
-- [ ] A synced call with no outcome choices resolves the lead exactly as before — no label stored (`specs/lead-management.md` — No outcome resolves as before).
+- [x] `do_not_call: true` on a matched call sets the lead's status to `stopped` with claims and schedules cleared — even when the call was unconnected (`specs/lead-management.md` — Call outcome reaches the lead).
+- [x] `interested: true` is stored as a label beside the lead's state with the normal retry rules running unchanged, and the call's note is copied onto the lead (`specs/lead-management.md` — Call outcome reaches the lead).
+- [x] A synced call with no outcome choices resolves the lead exactly as before — no label stored (`specs/lead-management.md` — No outcome resolves as before).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_calls.py tests/modules/test_leads.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_calls.py tests/modules/test_leads.py -q` in `backend/`
 
 ## Task 4: App — post-call popups carry outcome choices
 
@@ -256,12 +256,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The tab bar holds Dialer, Scheduled, History, My Stats, Settings, and History lists every recorded call, outgoing and incoming, newest first, 50 rows per page with Load-more (`specs/call-history.md` — History tab in a five-tab bar; Paged list capped at 1000 rows).
-- [ ] A row shows the number, an out or in mark, the date-time, and the result — connected with talk time, or not connected — and carries Copy, WhatsApp, and the Scheduled badge when the number has an active booking (`specs/call-history.md` — Row contents and empty state).
-- [ ] With no calls yet the tab reads "No calls yet." (`specs/call-history.md` — Empty state).
+- [x] The tab bar holds Dialer, Scheduled, History, My Stats, Settings, and History lists every recorded call, outgoing and incoming, newest first, 50 rows per page with Load-more (`specs/call-history.md` — History tab in a five-tab bar; Paged list capped at 1000 rows).
+- [x] A row shows the number, an out or in mark, the date-time, and the result — connected with talk time, or not connected — and carries Copy, WhatsApp, and the Scheduled badge when the number has an active booking (`specs/call-history.md` — Row contents and empty state).
+- [x] With no calls yet the tab reads "No calls yet." (`specs/call-history.md` — Empty state).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 18: App — the Scheduled tab lists every booking
 
@@ -288,9 +288,9 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] A row leaves the list when the notification is tapped, when a call to that number is recorded, or when 24 hours pass its booked time — the same window the server uses to free the lead — with the cleanup running at every app open (`specs/scheduled-bookings.md` — Handled bookings leave the list).
-- [ ] Every app open counts the Due rows and shows the count as a badge on the Scheduled tab, with the line "You have N leads you have not called." (`specs/scheduled-bookings.md` — Due count badge and line).
-- [ ] The tab works fully offline from the phone's own tables (`specs/scheduled-bookings.md` — Works offline).
+- [x] A row leaves the list when the notification is tapped, when a call to that number is recorded, or when 24 hours pass its booked time — the same window the server uses to free the lead — with the cleanup running at every app open (`specs/scheduled-bookings.md` — Handled bookings leave the list).
+- [x] Every app open counts the Due rows and shows the count as a badge on the Scheduled tab, with the line "You have N leads you have not called." (`specs/scheduled-bookings.md` — Due count badge and line).
+- [x] The tab works fully offline from the phone's own tables (`specs/scheduled-bookings.md` — Works offline).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`

@@ -9,7 +9,7 @@ import {
 import { readIsDoNotTrackNumber } from './do-not-track-check';
 import type { CallOutcome } from '../types';
 import { safeReadCallLogEntries } from './call-log-reader';
-import { cancelReminderForCalledNumber } from './call-reminders';
+import { removeScheduledReminderForNumber } from './call-reminders';
 
 import {
   matchPendingCallsToLogEntries,
@@ -84,7 +84,7 @@ export async function submitTrackedCall(
     doNotCall: outcome.doNotCall,
     notes: outcome.notes,
   };
-  await cancelReminderForCalledNumber(pendingCall.phoneNumber);
+  await removeScheduledReminderForNumber(pendingCall.phoneNumber);
   const isDoNotTrackNumber = await readIsDoNotTrackNumber(pendingCall.phoneNumber);
   if (isDoNotTrackNumber) {
     await markPendingCallsSynced([pendingCall.callId]);

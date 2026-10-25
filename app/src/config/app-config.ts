@@ -14,12 +14,17 @@ const directCallStartTimeoutMs: number = appConfigJson.directCallStartTimeoutMs;
 const backspaceLongPressClearMs: number =
   appConfigJson.backspaceLongPressClearMs;
 const callHistoryMaxRows: number = appConfigJson.callHistoryMaxRows;
+const callHistoryPageSize: number = appConfigJson.callHistoryPageSize;
 const myListMaxNumbers: number = appConfigJson.my_list_max_numbers;
+const scheduleExpireHours: number = appConfigJson.schedule_expire_hours;
+const millisecondsPerHour: number = 60 * 60 * 1000;
+const scheduleExpireMs: number = scheduleExpireHours * millisecondsPerHour;
 
 export {
   apiBaseUrl,
   backspaceLongPressClearMs,
   callHistoryMaxRows,
+  callHistoryPageSize,
   directCallStartTimeoutMs,
   myListMaxNumbers,
   matchWindowMs,
@@ -27,5 +32,6 @@ export {
   maxLeadAttempts,
   maxScheduleAheadDays,
   minMsBetweenJanitorSweeps,
+  scheduleExpireMs,
   stalePendingCallAgeMs,
 };

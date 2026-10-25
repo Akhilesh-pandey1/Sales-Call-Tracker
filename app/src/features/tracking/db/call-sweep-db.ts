@@ -1,5 +1,9 @@
 import type { Transaction } from 'react-native-sqlite-storage';
 import type { CallDirection } from '../types';
+import {
+  insertCallHistoryRowInTransaction,
+  trimCallHistoryRowsInTransaction,
+} from './call-history-db';
 import { runInTransaction, runQuery } from './database';
 
 export interface SweptCall {
@@ -34,6 +38,13 @@ function saveSweptCall(transaction: Transaction, sweptCall: SweptCall): void {
     sweptCall.durationSeconds,
     sweptCall.direction,
   ]);
+  insertCallHistoryRowInTransaction(
+    transaction,
+    sweptCall.phoneNumber,
+    sweptCall.direction,
+    sweptCall.callAt,
+    sweptCall.durationSeconds,
+  );
 }
 
 export async function saveSweptCallsAndMoveSweepLine(
@@ -46,5 +57,6 @@ export async function saveSweptCallsAndMoveSweepLine(
       saveSweptCall(transaction, sweptCall);
     }
     transaction.executeSql(moveSweepLineSql, [sweptToAt]);
+    trimCallHistoryRowsInTransaction(transaction);
   });
 }

@@ -13,11 +13,15 @@ const minMsBetweenJanitorSweeps: number = appConfigJson.minMsBetweenJanitorSweep
 const directCallStartTimeoutMs: number = appConfigJson.directCallStartTimeoutMs;
 const backspaceLongPressClearMs: number =
   appConfigJson.backspaceLongPressClearMs;
+const callHistoryMaxRows: number = appConfigJson.callHistoryMaxRows;
+const myListMaxNumbers: number = appConfigJson.my_list_max_numbers;
 
 export {
   apiBaseUrl,
   backspaceLongPressClearMs,
+  callHistoryMaxRows,
   directCallStartTimeoutMs,
+  myListMaxNumbers,
   matchWindowMs,
   maxJanitorAttempts,
   maxLeadAttempts,

@@ -266,8 +266,14 @@ function BookingsList({
 }
 
 export function ScheduledScreen() {
-  const { bookings, dueBookingCount, isLoading, errorMessage, reloadBookings } =
-    useScheduledReminders();
+  const {
+    bookings,
+    dueBookingCount,
+    isLoading,
+    errorMessage,
+    reloadBookings,
+    removeBooking,
+  } = useScheduledReminders();
   const directCall = useDirectCall();
   const navigation =
     useNavigation<BottomTabNavigationProp<MainTabsParamList>>();
@@ -287,7 +293,11 @@ export function ScheduledScreen() {
     ToastAndroid.show(numberCopiedMessage, ToastAndroid.SHORT);
   };
   const handleOpenWhatsAppChat = async (phoneNumber: string): Promise<void> => {
-    await openChosenWhatsAppChat(phoneNumber);
+    const didChatOpen = await openChosenWhatsAppChat(phoneNumber);
+    if (!didChatOpen) {
+      return;
+    }
+    await removeBooking(phoneNumber);
   };
 
   const screenContent = isLoading ? (

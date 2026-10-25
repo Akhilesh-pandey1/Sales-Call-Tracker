@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/components/lead-call-card.tsx": {
-    "mtime": 1792502977.8431811,
-    "ast_hash": "f97a5317571d0903476c4eed852c6c45",
+    "mtime": 1792928686.8704321,
+    "ast_hash": "97dcf7b707da82ac10a0e954e6404a8a",
     "semantic_hash": ""
   },
   "app/src/features/dialer/components/permission-banner.tsx": {
@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/components/post-call-dialog.tsx": {
-    "mtime": 1792925835.0285513,
-    "ast_hash": "89ef2c3b99d683bc80ed05110d129998",
+    "mtime": 1792928686.8704321,
+    "ast_hash": "ca0ffc4dd397ff194ac67d35f7d55626",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-automated-calling.ts": {
@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/screens/dialer-screen.tsx": {
-    "mtime": 1792928482.8587792,
-    "ast_hash": "7a9404e4602beba8ded065f7d3e438a1",
+    "mtime": 1792928686.8717222,
+    "ast_hash": "9c621a32a6b6ad995f611aea57b80312",
     "semantic_hash": ""
   },
   "app/src/features/stats/api/stats.api.ts": {
@@ -2030,8 +2030,8 @@
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1792928482.8587792,
-    "ast_hash": "ec4b0022be9b66eae8fc02cb4d7ba344",
+    "mtime": 1792928686.8694322,
+    "ast_hash": "c1b631035ec8ff3f435e32f6306ebfc3",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
@@ -2807,6 +2807,16 @@
   "backend/tests/modules/session_test_helpers.py": {
     "mtime": 1792927505.248963,
     "ast_hash": "c8666fa532dae015cdac77959c0f28a1",
+    "semantic_hash": ""
+  },
+  "app/src/features/dialer/components/copy-number-button.tsx": {
+    "mtime": 1792928686.8694322,
+    "ast_hash": "c2b1f6dc219db5c4f8ead7a46570698b",
+    "semantic_hash": ""
+  },
+  "app/src/features/dialer/lib/copy-number.ts": {
+    "mtime": 1792928686.8717222,
+    "ast_hash": "605debf386591449abb622d395cebf26",
     "semantic_hash": ""
   }
 }

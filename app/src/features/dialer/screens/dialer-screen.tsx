@@ -302,6 +302,7 @@ function AutomatedView({
           variant="lead"
           isOpen={automatedCalling.isPostCallDialogOpen}
           phoneNumber={finishedPhoneNumber}
+          phoneNumberToCopy={viewState.lead.phone_number}
           isSubmitting={automatedCalling.isSubmittingPostCall}
           errorMessage={automatedCalling.postCallErrorMessage}
           onSubmit={automatedCalling.submitPostCall}

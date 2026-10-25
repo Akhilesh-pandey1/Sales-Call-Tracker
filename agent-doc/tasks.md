@@ -82,14 +82,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A Copy button sits beside the lead's number on the lead calling card, available while ringing, during the call, and on the post-call popup; one tap copies it with a "Number copied." toast (`specs/lead-management.md` — Lead card hands out its number).
-- [ ] Copying leaves the call and the flow running exactly as they were (`specs/lead-management.md` — Copy leaves the flow untouched).
+- [x] A Copy button sits beside the lead's number on the lead calling card, available while ringing, during the call, and on the post-call popup; one tap copies it with a "Number copied." toast (`specs/lead-management.md` — Lead card hands out its number).
+- [x] Copying leaves the call and the flow running exactly as they were (`specs/lead-management.md` — Copy leaves the flow untouched).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 7: App — WhatsApp opens the chosen app by package
 

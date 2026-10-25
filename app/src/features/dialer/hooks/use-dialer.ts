@@ -1,17 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { ToastAndroid } from 'react-native';
 import { readStoredCountry } from '@/features/auth';
 import { subscribeToReminderPress } from '@/features/tracking';
-import {
-  isValidPhoneNumber,
-  normalizePhoneNumber,
-} from '@/shared/utils/phone-formatter';
-import {
-  launchTrackedCall,
-  showCallLaunchErrorToast,
-  type LaunchedCall,
-} from '../lib/call-launcher';
+import { isValidPhoneNumber } from '@/shared/utils/phone-formatter';
 import { subscribeToTappedNumber } from '../lib/tapped-number-events';
 
 const emptyClipboardMessage = 'Nothing copied.';
@@ -19,12 +11,10 @@ const emptyClipboardMessage = 'Nothing copied.';
 export type UseDialerResult = {
   dialedNumberInput: string;
   isNumberValid: boolean;
-  isDialLocked: boolean;
   appendKeypadCharacter: (character: string) => void;
   removeLastCharacter: () => void;
   clearDialedNumber: () => void;
   pasteNumberFromClipboard: () => Promise<void>;
-  startCall: () => Promise<LaunchedCall | null>;
 };
 
 function useStoredCountry(): string | null {
@@ -52,8 +42,6 @@ function useStoredCountry(): string | null {
 
 export function useDialer(): UseDialerResult {
   const [dialedNumberInput, setDialedNumberInput] = useState('');
-  const [isDialLocked, setIsDialLocked] = useState(false);
-  const isDialLockHeld = useRef(false);
   const countryCode = useStoredCountry();
 
   useEffect(() => {
@@ -96,45 +84,16 @@ export function useDialer(): UseDialerResult {
     setDialedNumberInput(trimmedClipboardText);
   }, []);
 
-  const startCall = useCallback(async (): Promise<LaunchedCall | null> => {
-    if (
-      isDialLockHeld.current ||
-      countryCode === null ||
-      !isValidPhoneNumber(dialedNumberInput, countryCode)
-    ) {
-      const noLaunchedCall = null;
-      return noLaunchedCall;
-    }
-    isDialLockHeld.current = true;
-    setIsDialLocked(true);
-    let launchedCall: LaunchedCall | null = null;
-    try {
-      const normalizedPhoneNumber = normalizePhoneNumber(
-        dialedNumberInput,
-        countryCode,
-      );
-      launchedCall = await launchTrackedCall(normalizedPhoneNumber);
-    } catch (callStartError) {
-      showCallLaunchErrorToast(callStartError);
-    } finally {
-      isDialLockHeld.current = false;
-      setIsDialLocked(false);
-    }
-    return launchedCall;
-  }, [dialedNumberInput, countryCode]);
-
   const isNumberValid =
     countryCode !== null && isValidPhoneNumber(dialedNumberInput, countryCode);
 
   const dialer: UseDialerResult = {
     dialedNumberInput,
     isNumberValid,
-    isDialLocked,
     appendKeypadCharacter,
     removeLastCharacter,
     clearDialedNumber,
     pasteNumberFromClipboard,
-    startCall,
   };
   return dialer;
 }

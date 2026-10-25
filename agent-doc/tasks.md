@@ -51,15 +51,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Every post-call popup — keypad, automated lead, My List — shows the same Interested and Do not call again buttons and Notes box, with nothing preselected and Submit working with all of it empty (`specs/call-tracking.md` — Post-call outcome popup on every flow).
-- [ ] The two flags and the note are saved on the phone's pending row and sent in the sync batch, while the call's time and duration still come only from the call log (`specs/call-tracking.md` — Choices ride the sync batch; `database.md` — `pending_calls`).
-- [ ] `specs/call-tracking.md` — Time and duration stay call-log only.
+- [x] Every post-call popup — keypad, automated lead, My List — shows the same Interested and Do not call again buttons and Notes box, with nothing preselected and Submit working with all of it empty (`specs/call-tracking.md` — Post-call outcome popup on every flow).
+- [x] The two flags and the note are saved on the phone's pending row and sent in the sync batch, while the call's time and duration still come only from the call log (`specs/call-tracking.md` — Choices ride the sync batch; `database.md` — `pending_calls`).
+- [x] `specs/call-tracking.md` — Time and duration stay call-log only.
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 5: App — the keypad clears after the post-call popup
 
@@ -132,12 +132,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] Pasted text with numbers buried anywhere and picked CSV files both fill the `my_list_numbers` table, every number normalized to E.164 with the login country before storing (`specs/my-list.md` — Numbers come in three ways; Upload rules).
-- [ ] A number already in the list in any state has its old row deleted and is added fresh as Left, the same number twice inside one upload counts once, and the toast reads "Added N numbers." with "M not valid." appended when any parse fails (`specs/my-list.md` — Re-upload re-arms; Toast with counts).
-- [ ] The list cap comes from the app's `config.json` as `my_list_max_numbers` (10000), never hardcoded (`specs/my-list.md` — List capped by config).
+- [x] Pasted text with numbers buried anywhere and picked CSV files both fill the `my_list_numbers` table, every number normalized to E.164 with the login country before storing (`specs/my-list.md` — Numbers come in three ways; Upload rules).
+- [x] A number already in the list in any state has its old row deleted and is added fresh as Left, the same number twice inside one upload counts once, and the toast reads "Added N numbers." with "M not valid." appended when any parse fails (`specs/my-list.md` — Re-upload re-arms; Toast with counts).
+- [x] The list cap comes from the app's `config.json` as `my_list_max_numbers` (10000), never hardcoded (`specs/my-list.md` — List capped by config).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 10: App — My List takes Excel files with the Copy AI prompt
 
@@ -225,12 +225,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] One `call_history` row is written per call at the moment the real time and duration are known, before any sync, so queue cleanup never touches history and the list works offline (`specs/call-history.md` — One history row per recorded call).
-- [ ] A Do-not-track number never gets a history row — the same rule tracking follows (`specs/call-history.md` — Do-not-track number gets no row).
-- [ ] The table keeps at most 1000 rows — row 1001 pushes the oldest out (`specs/call-history.md` — Cap pushes the oldest out).
+- [x] One `call_history` row is written per call at the moment the real time and duration are known, before any sync, so queue cleanup never touches history and the list works offline (`specs/call-history.md` — One history row per recorded call).
+- [x] A Do-not-track number never gets a history row — the same rule tracking follows (`specs/call-history.md` — Do-not-track number gets no row).
+- [x] The table keeps at most 1000 rows — row 1001 pushes the oldest out (`specs/call-history.md` — Cap pushes the oldest out).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 16: App — History backfill with the sweep on every open
 

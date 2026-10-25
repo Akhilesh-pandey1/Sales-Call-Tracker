@@ -43,11 +43,12 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
     duration_seconds INTEGER,
     direction TEXT NOT NULL DEFAULT 'outgoing',
     synced INTEGER NOT NULL DEFAULT 0,
-    outcome TEXT,
+    interested INTEGER NOT NULL DEFAULT 0,
+    do_not_call INTEGER NOT NULL DEFAULT 0,
+    notes TEXT,
     attempts INTEGER NOT NULL DEFAULT 0
   )`;
   const tableInfoPendingCallsSql = 'PRAGMA TABLE_INFO (pending_calls)';
-  const addOutcomeColumnSql = 'ALTER TABLE pending_calls ADD COLUMN outcome TEXT';
   const addDirectionColumnSql =
     "ALTER TABLE pending_calls ADD COLUMN direction TEXT NOT NULL DEFAULT 'outgoing'";
   const addSyncedColumnSql = 'ALTER TABLE pending_calls ADD COLUMN synced INTEGER NOT NULL DEFAULT 0';
@@ -65,9 +66,25 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
     phone_number TEXT PRIMARY KEY,
     created_at TEXT
   )`;
+  const createCallHistoryTableSql = `CREATE TABLE IF NOT EXISTS call_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    phone_number TEXT NOT NULL,
+    direction TEXT NOT NULL,
+    call_at TEXT NOT NULL,
+    duration_seconds INTEGER NOT NULL DEFAULT 0
+  )`;
+  const createMyListNumbersTableSql = `CREATE TABLE IF NOT EXISTS my_list_numbers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    phone_number TEXT NOT NULL UNIQUE,
+    status TEXT NOT NULL DEFAULT 'left',
+    interested INTEGER NOT NULL DEFAULT 0,
+    do_not_call INTEGER NOT NULL DEFAULT 0,
+    notes TEXT,
+    uploaded_at TEXT NOT NULL,
+    called_at TEXT
+  )`;
 
   await database.executeSql(createPendingCallsTableSql);
-  await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'outcome', addOutcomeColumnSql);
   await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'direction', addDirectionColumnSql);
   await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'synced', addSyncedColumnSql);
   await database.executeSql(createSweepStateTableSql);
@@ -75,6 +92,16 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
   await database.executeSql(seedSweepStateRowSql, [installMomentIso]);
   await database.executeSql(createScheduledRemindersTableSql);
   await database.executeSql(createDoNotTrackTableSql);
+  const addInterestedColumnSql =
+    'ALTER TABLE pending_calls ADD COLUMN interested INTEGER NOT NULL DEFAULT 0';
+  const addDoNotCallColumnSql =
+    'ALTER TABLE pending_calls ADD COLUMN do_not_call INTEGER NOT NULL DEFAULT 0';
+  const addNotesColumnSql = 'ALTER TABLE pending_calls ADD COLUMN notes TEXT';
+  await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'interested', addInterestedColumnSql);
+  await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'do_not_call', addDoNotCallColumnSql);
+  await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'notes', addNotesColumnSql);
+  await database.executeSql(createCallHistoryTableSql);
+  await database.executeSql(createMyListNumbersTableSql);
   return database;
 }
 
@@ -95,7 +122,10 @@ async function openDatabase(): Promise<SQLiteDatabase> {
   return preparedDatabase;
 }
 
-async function runQuery(sql: string, parameters: (string | number)[]): Promise<ResultSet> {
+async function runQuery(
+  sql: string,
+  parameters: (string | number | null)[],
+): Promise<ResultSet> {
   const database = await openDatabase();
   const [queryResult] = await database.executeSql(sql, parameters);
   return queryResult;

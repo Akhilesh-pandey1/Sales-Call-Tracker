@@ -4,16 +4,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The main activity's manifest gains one intent filter answering `tel:` dial intents — no call-screen or incoming-call service is registered, so the phone's own call screens stay Android's (`specs/tapped-number-capture.md` — Catch tapped numbers through Android's chooser; `structure.md` — the Android manifest).
-- [ ] The app reads the incoming link, cleans the number to plus and digits, and fills the Dialer keypad with Call ready — backing out leaves the number in the keypad with nothing dialed, and an empty or unreadable link opens the dialer normally with nothing filled (`specs/tapped-number-capture.md` — Caught number fills the keypad; `structure.md` — `dialer-screen.tsx`).
-- [ ] A call started from a caught number follows the normal keypad flow — on the chosen SIM, recorded like every call, with the normal post-call popup; a Do-not-track number still calls and is never recorded; with no SIM picked the call leaves on the phone default (`specs/tapped-number-capture.md` — Caught calls follow the keypad call rules).
+- [x] The main activity's manifest gains one intent filter answering `tel:` dial intents — no call-screen or incoming-call service is registered, so the phone's own call screens stay Android's (`specs/tapped-number-capture.md` — Catch tapped numbers through Android's chooser; `structure.md` — the Android manifest).
+- [x] The app reads the incoming link, cleans the number to plus and digits, and fills the Dialer keypad with Call ready — backing out leaves the number in the keypad with nothing dialed, and an empty or unreadable link opens the dialer normally with nothing filled (`specs/tapped-number-capture.md` — Caught number fills the keypad; `structure.md` — `dialer-screen.tsx`).
+- [x] A call started from a caught number follows the normal keypad flow — on the chosen SIM, recorded like every call, with the normal post-call popup; a Do-not-track number still calls and is never recorded; with no SIM picked the call leaves on the phone default (`specs/tapped-number-capture.md` — Caught calls follow the keypad call rules).
 
 **Verification:**
-- [ ] Lint passes: `npm run lint` in `app/`
-- [ ] Types pass: `npx tsc --noEmit` in `app/`
+- [x] Lint passes: `npm run lint` in `app/`
+- [x] Types pass: `npx tsc --noEmit` in `app/`
 
 ## Task 2: App — caught numbers are ignored during the lead call flow
 
@@ -21,13 +21,13 @@
 
 **Blocked by:** 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A tapped number arriving while the automated lead call flow is on screen is ignored — the lead flow keeps its number and its state, and no keypad fill happens (`specs/tapped-number-capture.md` — Live lead flow stays undisturbed).
+- [x] A tapped number arriving while the automated lead call flow is on screen is ignored — the lead flow keeps its number and its state, and no keypad fill happens (`specs/tapped-number-capture.md` — Live lead flow stays undisturbed).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 3: App — the login pass asks once to catch tapped numbers
 
@@ -35,15 +35,15 @@
 
 **Blocked by:** 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The step checks quietly which app handles tapped numbers and shows nothing at all when ours already does — no dialog, no banner (`specs/tapped-number-capture.md` — One-time setup at the login pass).
-- [ ] When ours does not, the step shows one short instruction line and fires Android's chooser once; the probe number is never dialed (`specs/tapped-number-capture.md` — One-time setup at the login pass).
-- [ ] Leaving the step without picking brings it back at the next login pass, until picked (`specs/tapped-number-capture.md` — One-time setup at the login pass).
+- [x] The step checks quietly which app handles tapped numbers and shows nothing at all when ours already does — no dialog, no banner (`specs/tapped-number-capture.md` — One-time setup at the login pass).
+- [x] When ours does not, the step shows one short instruction line and fires Android's chooser once; the probe number is never dialed (`specs/tapped-number-capture.md` — One-time setup at the login pass).
+- [x] Leaving the step without picking brings it back at the next login pass, until picked (`specs/tapped-number-capture.md` — One-time setup at the login pass).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 4: App — Don't-show-again hides the login step forever
 
@@ -51,12 +51,12 @@
 
 **Blocked by:** 3
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The "Don't show again" button appears only on the tapped-number login step; tapping it saves the refusal on the phone (`specs/tapped-number-capture.md` — Don't-show-again is permanent and lives only on that screen).
-- [ ] After the refusal, the step never appears at any later login, even though the app is never picked (`specs/tapped-number-capture.md` — Don't-show-again is permanent and lives only on that screen).
-- [ ] No other screen ever shows a tapped-number prompt or a "Don't show again" for it (`specs/tapped-number-capture.md` — Don't-show-again is permanent and lives only on that screen).
+- [x] The "Don't show again" button appears only on the tapped-number login step; tapping it saves the refusal on the phone (`specs/tapped-number-capture.md` — Don't-show-again is permanent and lives only on that screen).
+- [x] After the refusal, the step never appears at any later login, even though the app is never picked (`specs/tapped-number-capture.md` — Don't-show-again is permanent and lives only on that screen).
+- [x] No other screen ever shows a tapped-number prompt or a "Don't show again" for it (`specs/tapped-number-capture.md` — Don't-show-again is permanent and lives only on that screen).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`

@@ -133,13 +133,22 @@ def apply_direction_call_to_metrics(
         period_metrics["connected"] += 1
 
 
-def get_office_hour_range() -> list[int]:
-    office_hours_window: OfficeHours = get_or_create_office_hours_window()
+def get_last_bucket_hour(window_end_minute: int) -> int:
     minutes_per_hour: int = 60
-    window_start_hour: int = office_hours_window.start_minute // minutes_per_hour
-    window_end_hour: int = office_hours_window.end_minute // minutes_per_hour
+    one_minute: int = 1
+    last_in_window_minute: int = window_end_minute - one_minute
+    last_bucket_hour: int = last_in_window_minute // minutes_per_hour
+    return last_bucket_hour
+
+
+def build_office_hour_range(
+    window_start_minute: int, window_end_minute: int
+) -> list[int]:
+    minutes_per_hour: int = 60
+    window_start_hour: int = window_start_minute // minutes_per_hour
+    last_bucket_hour: int = get_last_bucket_hour(window_end_minute)
     office_hour_range: list[int] = list(
-        range(window_start_hour, window_end_hour + 1)
+        range(window_start_hour, last_bucket_hour + 1)
     )
     return office_hour_range
 
@@ -149,21 +158,42 @@ def create_empty_hourly_counts(office_hours: list[int]) -> dict[int, int]:
     return empty_counts
 
 
+def resolve_call_bucket_hour(
+    dialed_at_utc: datetime, window_start_minute: int, window_end_minute: int
+) -> int | None:
+    minutes_per_hour: int = 60
+    ist_dialed_at: datetime = to_ist(dialed_at_utc)
+    call_minute_of_day: int = (
+        ist_dialed_at.hour * minutes_per_hour + ist_dialed_at.minute
+    )
+    if call_minute_of_day < window_start_minute or call_minute_of_day > window_end_minute:
+        return None
+
+    end_minute_bucket_hour: int = get_last_bucket_hour(window_end_minute)
+    if call_minute_of_day == window_end_minute:
+        return end_minute_bucket_hour
+
+    call_hour: int = ist_dialed_at.hour
+    return call_hour
+
+
 def apply_direction_call_to_hourly_bucket(
     outgoing_counts_by_hour: dict[int, int],
     incoming_counts_by_hour: dict[int, int],
     direction: str,
     dialed_at_utc: datetime,
-    office_hour_set: set[int],
+    window_start_minute: int,
+    window_end_minute: int,
 ) -> None:
-    ist_dialed_at: datetime = to_ist(dialed_at_utc)
-    call_hour: int = ist_dialed_at.hour
-    if call_hour not in office_hour_set:
+    bucket_hour: int | None = resolve_call_bucket_hour(
+        dialed_at_utc, window_start_minute, window_end_minute
+    )
+    if bucket_hour is None:
         return
     if direction == OUTGOING_DIRECTION:
-        outgoing_counts_by_hour[call_hour] += 1
+        outgoing_counts_by_hour[bucket_hour] += 1
         return
-    incoming_counts_by_hour[call_hour] += 1
+    incoming_counts_by_hour[bucket_hour] += 1
 
 
 def add_user_talk_seconds(
@@ -227,7 +257,8 @@ def apply_team_call_to_period_aggregates(
     direction: str,
     duration_seconds: int,
     dialed_at: datetime,
-    office_hour_set: set[int],
+    window_start_minute: int,
+    window_end_minute: int,
 ) -> None:
     apply_direction_call_to_metrics(
         period_aggregates.call_metrics, direction, duration_seconds
@@ -240,16 +271,20 @@ def apply_team_call_to_period_aggregates(
         period_aggregates.incoming_by_hour,
         direction,
         dialed_at,
-        office_hour_set,
+        window_start_minute,
+        window_end_minute,
     )
 
 
 def accumulate_team_call_records(
     call_records: list[Any],
     windows: DashboardTimeWindows,
-    office_hours: list[int],
+    window_start_minute: int,
+    window_end_minute: int,
 ) -> TeamCallAggregates:
-    office_hour_set: set[int] = set(office_hours)
+    office_hours: list[int] = build_office_hour_range(
+        window_start_minute, window_end_minute
+    )
     aggregates: TeamCallAggregates = create_empty_team_aggregates(office_hours)
 
     for user_id, raw_dialed_at, duration_seconds, direction in call_records:
@@ -261,7 +296,8 @@ def accumulate_team_call_records(
             direction,
             duration_seconds,
             dialed_at,
-            office_hour_set,
+            window_start_minute,
+            window_end_minute,
         )
 
         if dialed_at >= windows.today_start_utc:
@@ -271,7 +307,8 @@ def accumulate_team_call_records(
                 direction,
                 duration_seconds,
                 dialed_at,
-                office_hour_set,
+                window_start_minute,
+                window_end_minute,
             )
         elif dialed_at >= windows.yesterday_start_utc:
             apply_team_call_to_period_aggregates(
@@ -280,7 +317,8 @@ def accumulate_team_call_records(
                 direction,
                 duration_seconds,
                 dialed_at,
-                office_hour_set,
+                window_start_minute,
+                window_end_minute,
             )
 
     return aggregates
@@ -468,14 +506,14 @@ def build_team_period_block(
 
 
 def fetch_team_dashboard_aggregates(
-    office_hours: list[int],
+    window_start_minute: int, window_end_minute: int
 ) -> tuple[TeamCallAggregates, list[Any], int]:
     windows: DashboardTimeWindows = calculate_dashboard_time_windows()
     call_records: list[Any] = fetch_team_call_records(
         windows, windows.thirty_days_start_utc
     )
     aggregates: TeamCallAggregates = accumulate_team_call_records(
-        call_records, windows, office_hours
+        call_records, windows, window_start_minute, window_end_minute
     )
     active_salespeople: list[Any] = fetch_active_salespeople()
     active_salesperson_count: int = len(active_salespeople)
@@ -562,9 +600,14 @@ def build_team_period_blocks(
 
 
 def get_team_dashboard_data() -> dict[str, Any]:
-    office_hours: list[int] = get_office_hour_range()
+    office_hours_window: OfficeHours = get_or_create_office_hours_window()
+    window_start_minute: int = office_hours_window.start_minute
+    window_end_minute: int = office_hours_window.end_minute
+    office_hours: list[int] = build_office_hour_range(
+        window_start_minute, window_end_minute
+    )
     aggregates, active_salespeople, active_salesperson_count = (
-        fetch_team_dashboard_aggregates(office_hours)
+        fetch_team_dashboard_aggregates(window_start_minute, window_end_minute)
     )
     period_blocks: dict[str, dict[str, Any]] = build_team_period_blocks(
         aggregates, active_salespeople, active_salesperson_count, office_hours

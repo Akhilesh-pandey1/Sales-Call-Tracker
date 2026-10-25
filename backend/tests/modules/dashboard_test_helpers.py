@@ -71,14 +71,24 @@ def create_call_records_bulk(
     db.session.commit()
 
 
-def create_utc_call_time(days_ago: int, hour_of_day: int) -> datetime:
+def create_utc_call_time_at_minute(
+    days_ago: int, hour_of_day: int, minute_of_hour: int
+) -> datetime:
     ist_today_midnight: datetime = now_ist().replace(
         hour=0, minute=0, second=0, microsecond=0
     )
-    ist_call_time: datetime = ist_today_midnight - timedelta(
-        days=days_ago
-    ) + timedelta(hours=hour_of_day)
+    ist_call_time: datetime = ist_today_midnight - timedelta(days=days_ago) + timedelta(
+        hours=hour_of_day, minutes=minute_of_hour
+    )
     utc_call_time: datetime = ist_call_time.astimezone(timezone.utc)
+    return utc_call_time
+
+
+def create_utc_call_time(days_ago: int, hour_of_day: int) -> datetime:
+    zero_minutes: int = 0
+    utc_call_time: datetime = create_utc_call_time_at_minute(
+        days_ago, hour_of_day, zero_minutes
+    )
     return utc_call_time
 
 

@@ -11,6 +11,7 @@ from backend.app.modules.dashboard.services import (
     apply_direction_call_to_hourly_bucket,
     apply_direction_call_to_metrics,
     build_calls_by_hour_block,
+    build_office_hour_range,
     build_talk_totals_block,
     calculate_connected_percentage,
     calculate_dashboard_time_windows,
@@ -20,8 +21,8 @@ from backend.app.modules.dashboard.services import (
     calculate_talk_minutes,
     create_empty_hourly_counts,
     create_empty_period_metrics,
-    get_office_hour_range,
 )
+from backend.app.modules.settings import OfficeHours, get_or_create_office_hours_window
 from backend.app.modules.users import User
 
 
@@ -124,7 +125,8 @@ def apply_person_call_to_period(
     direction: str,
     duration_seconds: int,
     dialed_at_utc: datetime,
-    office_hour_set: set[int],
+    window_start_minute: int,
+    window_end_minute: int,
 ) -> None:
     apply_direction_call_to_metrics(
         period_aggregates.call_metrics, direction, duration_seconds
@@ -134,16 +136,20 @@ def apply_person_call_to_period(
         period_aggregates.incoming_by_hour,
         direction,
         dialed_at_utc,
-        office_hour_set,
+        window_start_minute,
+        window_end_minute,
     )
 
 
 def accumulate_person_call_records(
     call_records: list[Any],
     windows: DashboardTimeWindows,
-    office_hours: list[int],
+    window_start_minute: int,
+    window_end_minute: int,
 ) -> PersonCallAggregates:
-    office_hour_set: set[int] = set(office_hours)
+    office_hours: list[int] = build_office_hour_range(
+        window_start_minute, window_end_minute
+    )
     aggregates: PersonCallAggregates = create_empty_person_aggregates(office_hours)
 
     for phone_number, raw_dialed_at, duration_seconds, direction in call_records:
@@ -159,7 +165,8 @@ def accumulate_person_call_records(
             direction,
             duration_seconds,
             dialed_at,
-            office_hour_set,
+            window_start_minute,
+            window_end_minute,
         )
 
         if dialed_at >= windows.today_start_utc:
@@ -168,7 +175,8 @@ def accumulate_person_call_records(
                 direction,
                 duration_seconds,
                 dialed_at,
-                office_hour_set,
+                window_start_minute,
+                window_end_minute,
             )
         elif dialed_at >= windows.yesterday_start_utc:
             apply_person_call_to_period(
@@ -176,7 +184,8 @@ def accumulate_person_call_records(
                 direction,
                 duration_seconds,
                 dialed_at,
-                office_hour_set,
+                window_start_minute,
+                window_end_minute,
             )
 
     return aggregates
@@ -304,11 +313,16 @@ def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
         not_found_code: int = 404
         raise AppException("User not found.", not_found_code)
 
-    office_hours: list[int] = get_office_hour_range()
+    office_hours_window: OfficeHours = get_or_create_office_hours_window()
+    window_start_minute: int = office_hours_window.start_minute
+    window_end_minute: int = office_hours_window.end_minute
+    office_hours: list[int] = build_office_hour_range(
+        window_start_minute, window_end_minute
+    )
     windows: DashboardTimeWindows = calculate_dashboard_time_windows()
     call_records: list[Any] = fetch_person_call_records(user_id, windows)
     aggregates: PersonCallAggregates = accumulate_person_call_records(
-        call_records, windows, office_hours
+        call_records, windows, window_start_minute, window_end_minute
     )
     period_blocks: dict[str, dict[str, Any]] = build_person_period_blocks(
         aggregates, office_hours

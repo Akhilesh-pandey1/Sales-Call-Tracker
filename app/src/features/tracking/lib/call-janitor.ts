@@ -8,12 +8,14 @@ import { readStoredCountry } from '@/features/auth';
 import {
   addPendingCallAttempt,
   getAllPendingCalls,
-  markPendingCallFilled,
   type PendingCall,
 } from '@/features/tracking/db';
 import { matchPendingCallsToLogEntries, type CallLogEntry } from './call-log-matcher';
 import { safeReadCallLogEntries } from './call-log-reader';
-import { fillMatchedPendingCalls } from './pending-call-filler';
+import {
+  fillMatchedPendingCalls,
+  fillPendingCallAndRecordHistory,
+} from './pending-call-filler';
 
 let janitorSweepPromise: Promise<void> | null = null;
 let lastSweepStartedAtMs = 0;
@@ -59,8 +61,8 @@ async function strikeUnmatchedPendingCalls(
     const attemptCount = await addPendingCallAttempt(stalePendingCall.callId);
     if (attemptCount >= maxJanitorAttempts) {
       const giveUpDurationSeconds = 0;
-      await markPendingCallFilled(
-        stalePendingCall.callId,
+      await fillPendingCallAndRecordHistory(
+        stalePendingCall,
         stalePendingCall.intentAt,
         giveUpDurationSeconds,
       );
@@ -81,7 +83,7 @@ async function completeStalePendingCalls(
   const matchedCallIds = new Set(
     matches.map(match => match.callId),
   );
-  await fillMatchedPendingCalls(matches);
+  await fillMatchedPendingCalls(matches, stalePendingCalls);
   await strikeUnmatchedPendingCalls(stalePendingCalls, matchedCallIds);
 }
 

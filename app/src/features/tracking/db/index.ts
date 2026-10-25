@@ -20,6 +20,7 @@ export {
   readLastSweptAt,
   saveSweptCallsAndMoveSweepLine,
 } from './call-sweep-db';
+export { insertCallHistoryRow } from './call-history-db';
 export type { SweptCall } from './call-sweep-db';
 export {
   deleteScheduledRemindersByLeadIdList,

@@ -65,6 +65,13 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
     phone_number TEXT PRIMARY KEY,
     created_at TEXT
   )`;
+  const createCallHistoryTableSql = `CREATE TABLE IF NOT EXISTS call_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    phone_number TEXT NOT NULL,
+    direction TEXT NOT NULL,
+    call_at TEXT NOT NULL,
+    duration_seconds INTEGER NOT NULL DEFAULT 0
+  )`;
 
   await database.executeSql(createPendingCallsTableSql);
   await addColumnWhenMissing(database, tableInfoPendingCallsSql, 'outcome', addOutcomeColumnSql);
@@ -75,6 +82,7 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
   await database.executeSql(seedSweepStateRowSql, [installMomentIso]);
   await database.executeSql(createScheduledRemindersTableSql);
   await database.executeSql(createDoNotTrackTableSql);
+  await database.executeSql(createCallHistoryTableSql);
   return database;
 }
 

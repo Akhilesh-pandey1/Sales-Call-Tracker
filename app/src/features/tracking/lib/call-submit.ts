@@ -1,13 +1,11 @@
 import { readStoredCountry } from '@/features/auth';
-import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import { syncCalls } from '../api/calls.api';
 import {
   getPendingCallById,
-  markPendingCallFilled,
   markPendingCallsSynced,
-  readDoNotTrackNumbers,
   type PendingCall,
 } from '../db';
+import { readIsDoNotTrackNumber } from './do-not-track-check';
 import { safeReadCallLogEntries } from './call-log-reader';
 import { cancelReminderForCalledNumber } from './call-reminders';
 
@@ -16,6 +14,7 @@ import {
   type MatchedPendingCall,
 } from './call-log-matcher';
 import { deleteSyncedCallsBehindSweepLine } from './synced-call-cleanup';
+import { fillPendingCallAndRecordHistory } from './pending-call-filler';
 import { toSyncCallOrNull } from './sync-call';
 
 async function findMatchingLogEntry(
@@ -66,19 +65,6 @@ async function sendPendingCallToServer(
   return scheduleWasRefused;
 }
 
-async function readIsDoNotTrackNumber(phoneNumber: string): Promise<boolean> {
-  const countryCode = await readStoredCountry();
-  if (countryCode === null) {
-    const isNotListed = false;
-    return isNotListed;
-  }
-  const doNotTrackNumbers = await readDoNotTrackNumbers();
-  const doNotTrackNumberSet = new Set(doNotTrackNumbers);
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode);
-  const isDoNotTrackNumber = doNotTrackNumberSet.has(normalizedPhoneNumber);
-  return isDoNotTrackNumber;
-}
-
 export async function submitTrackedCall(
   callId: string,
   scheduledAt: string | null = null,
@@ -104,8 +90,8 @@ export async function submitTrackedCall(
     const scheduleWasRefused = false;
     return scheduleWasRefused;
   }
-  await markPendingCallFilled(
-    pendingCall.callId,
+  await fillPendingCallAndRecordHistory(
+    pendingCall,
     matchedEntry.dialedAt,
     matchedEntry.durationSeconds,
   );

@@ -83,7 +83,7 @@ function UploadPastePanel({
     'Paste anything - every phone-like number is pulled out';
   const aiPromptButtonLabel = 'Copy AI prompt';
   const aiPromptHintMessage =
-    'No sheet yet? Paste your text and this prompt into ChatGPT, then paste the numbers it returns here.';
+    'Use this prompt with your text in any AI chatbot, then paste the result here.';
 
   return (
     <View className="mt-4">
@@ -254,9 +254,6 @@ export function UploadNumbersDialog({
     onClose();
   };
 
-  const storageInfoMessage =
-    'Numbers save in international format, built with your login country. ' +
-    'A number already on the list starts fresh as Left.';
   const hasSomethingToUpload =
     activeSource === 'paste' ? pasteText.trim() !== '' : pickedFile !== null;
   const isUploadBusy = upload.isUploading || isPickingFile || isCommittingUpload;
@@ -295,12 +292,6 @@ export function UploadNumbersDialog({
             onPressPickFile={handlePickFilePress}
           />
         )}
-
-        <View className="rounded-xl bg-muted p-3">
-          <Text className="text-[11px] leading-relaxed text-muted-foreground">
-            {storageInfoMessage}
-          </Text>
-        </View>
 
         <View className="mt-1 flex-row justify-end gap-3">
           <Button

@@ -208,7 +208,6 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 **Upload - two screens, switched the same way (Paste text | File):**
 - Paste text screen - a paste box that accepts any messy text and pulls out every phone-like number, plus the Copy AI prompt button
 - File screen - one file input: tap it and pick a CSV or Excel (.xlsx) file from the phone; the file is read right on the phone, numbers sit in one column of the sheet
-- Numbers save in international format, built with the login country
 
 **Edge cases:**
 - Upload toast: "Added N numbers." - with "M not valid." appended when some text was not readable as a number

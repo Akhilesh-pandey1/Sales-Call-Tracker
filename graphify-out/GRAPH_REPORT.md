@@ -1,7 +1,7 @@
 # Graph Report - sales-call-tracker  (2026-10-25)
 
 ## Corpus Check
-- 452 files · ~740,843 words
+- 452 files · ~741,101 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cb7f0b37`
+- Built from commit: `7eda63f3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -110,7 +110,7 @@
 - Grill with Osmani — the intent interview
 - How to Start the App (Android + Local Backend)
 - .claude/settings.json
-- parse_decision_rules
+- ._apply_reasoning
 - Grill with Osmani — the intent interview
 - React + TypeScript Code Style & Standards
 - BatteryModule
@@ -243,13 +243,13 @@
 - react-native-screens
 - react-native-svg
 - tailwindcss-animate
-- axios
+- _select_palette_for_mode
 - react-native-reanimated
 - use-my-list-upload.ts
 - Requirement: WhatsApp settings rows saved on the phone
 - @rn-primitives/slot
 - libphonenumber-js
-- class-variance-authority
+- axios
 - lucide-react-native
 - xlsx
 - Requirement: Hour-chart split in dots with centered counts
@@ -270,7 +270,7 @@
 - call-split-donut.tsx
 - clsx
 - formatCount
-- _select_palette_for_mode
+- class-variance-authority
 - clsx
 - @radix-ui/react-dialog
 
@@ -328,8 +328,8 @@ Cohesion: 0.06
 Nodes (24): CallsByHourChartProps, CallSplitCardProps, ChartPeriod, ChartPeriodInfo, chartPeriodsInfo, ChartPeriodSwitchProps, DirectionDotLegendEntry, DirectionDotLegendProps (+16 more)
 
 ### Community 6 - "lead-pool-stats.tsx"
-Cohesion: 0.10
-Nodes (26): uploadLeads(), buildPoolStages(), getStageWidthPercent(), LeadPoolStage, LeadPoolStageCard(), LeadPoolStageCardProps, LeadPoolStats(), LeadPoolStatsProps (+18 more)
+Cohesion: 0.11
+Nodes (21): buildPoolStages(), getStageWidthPercent(), LeadPoolStage, LeadPoolStageCard(), LeadPoolStageCardProps, LeadPoolStats(), LeadPoolStatsProps, PoolCompositionBar() (+13 more)
 
 ### Community 7 - "dashboard/services.py"
 Cohesion: 0.07
@@ -340,12 +340,12 @@ Cohesion: 0.09
 Nodes (26): dueBookingCountListeners, notifyDueBookingCountListeners(), readAndStoreDueBookingCount(), refreshDueBookingCount(), subscribeToDueBookingCount(), useDueBookingCount(), compareByBookedTimeAsc(), ScheduledBooking (+18 more)
 
 ### Community 9 - "add-user-modal.tsx"
-Cohesion: 0.13
-Nodes (25): Button, ButtonProps, buttonVariants, DialogContent, DialogDescription, DialogOverlay, DialogTitle, Input (+17 more)
+Cohesion: 0.11
+Nodes (31): Button, ButtonProps, buttonVariants, DialogContent, DialogDescription, DialogOverlay, DialogTitle, Input (+23 more)
 
 ### Community 10 - "accounts.api.ts"
-Cohesion: 0.09
-Nodes (35): activateUser(), createUser(), CreateUserApiRequest, deactivateUser(), deleteUser(), getAccounts(), updateUser(), DeleteDialog() (+27 more)
+Cohesion: 0.10
+Nodes (34): activateUser(), createUser(), CreateUserApiRequest, deactivateUser(), deleteUser(), getAccounts(), updateUser(), DeleteDialog() (+26 more)
 
 ### Community 11 - "providers.tsx"
 Cohesion: 0.11
@@ -405,7 +405,7 @@ Nodes (33): create_user_record(), ensure_auxiliary_tables(), Flask, FlaskClient,
 
 ### Community 25 - ".claude/skills/design-screens/uiux/scripts/design_system.py"
 Cohesion: 0.09
-Nodes (31): _contrast_ratio(), _derive_dark_palette(), _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), _palette_is_dark(), persist_design_system() (+23 more)
+Nodes (33): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+25 more)
 
 ### Community 26 - "seed_fake_data.py"
 Cohesion: 0.16
@@ -421,15 +421,15 @@ Nodes (29): Purpose, Requirement: Accounts list header and own-row marker, Requi
 
 ### Community 29 - "dependencies"
 Cohesion: 0.07
-Nodes (29): dependencies, axios, @notifee/react-native, react-native, @react-native-async-storage/async-storage, react-native-call-log, @react-native-documents/picker, react-native-permissions (+21 more)
+Nodes (29): dependencies, class-variance-authority, @notifee/react-native, react-native, @react-native-async-storage/async-storage, react-native-call-log, @react-native-documents/picker, react-native-permissions (+21 more)
 
 ### Community 30 - "test_calls.py"
 Cohesion: 0.10
 Nodes (99): now_utc(), release_expired_bookings(), Flask, run_lead_expiry_job(), start_lead_expiry_scheduler(), fetch_user_session_token(), build_ist_dialed_at(), build_utc_iso_days_from_now() (+91 more)
 
 ### Community 31 - "my-list-view.tsx"
-Cohesion: 0.08
-Nodes (26): ARIA_LEVEL, ROLE, Text(), TextVariant, TextVariantProps, textVariants, MyListBadgeTag(), MyListBadgeTagProps (+18 more)
+Cohesion: 0.09
+Nodes (25): ARIA_LEVEL, ROLE, Text(), TextVariant, TextVariantProps, textVariants, MyListBadgeTag(), MyListBadgeTagProps (+17 more)
 
 ### Community 32 - "settings-screen.tsx"
 Cohesion: 0.09
@@ -492,8 +492,8 @@ Cohesion: 0.08
 Nodes (24): Agent, Bash(git add:*), Bash(git commit:*), Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(git status:*), Bash(graphify:*) (+16 more)
 
 ### Community 47 - "search"
-Cohesion: 0.14
-Nodes (21): _exact_match_diagnostic(), _exact_stack_identifier(), _legacy_successor_guidance(), _normalize(), _project_row(), Apply longest-first synonym substitution at token boundaries., Resolve an explicit style identity without opening generic variant ranking., Resolve a deprecated in-domain alias, or expose a cross-domain redirect. (+13 more)
+Cohesion: 0.12
+Nodes (23): _exact_match_diagnostic(), _exact_stack_identifier(), _legacy_successor_guidance(), _normalize(), _project_row(), Apply longest-first synonym substitution at token boundaries., Resolve an explicit style identity without opening generic variant ranking., Resolve a deprecated in-domain alias, or expose a cross-domain redirect. (+15 more)
 
 ### Community 48 - ".claude/skills/grill-for-business/SKILL.md"
 Cohesion: 0.08
@@ -505,7 +505,7 @@ Nodes (25): Purpose, Requirement: Login brute-force lockout, Requirement: Manage
 
 ### Community 50 - "cn"
 Cohesion: 0.07
-Nodes (36): Button(), ButtonProps, buttonTextVariants, buttonVariants, Card(), CardContent(), CardDescription(), CardFooter() (+28 more)
+Nodes (39): Button(), ButtonProps, buttonTextVariants, buttonVariants, Card(), CardContent(), CardDescription(), CardFooter() (+31 more)
 
 ### Community 51 - "app/src/shared/api/api-client.ts"
 Cohesion: 0.17
@@ -520,8 +520,8 @@ Cohesion: 0.16
 Nodes (23): deleteScheduledRemindersByLeadIdList(), readAllScheduledReminders(), readReminderList(), saveScheduledReminder(), ScheduledReminder, ScheduledReminderTableRow, handleInitialReminderNotification(), handlePressedReminderNotifeeEvent() (+15 more)
 
 ### Community 54 - "DesignSystemGenerator"
-Cohesion: 0.12
-Nodes (13): DesignSystemGenerator, _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Execute searches across multiple domains., Find matching reasoning rule for a category., Apply reasoning rules to search results. (+5 more)
+Cohesion: 0.13
+Nodes (11): DesignSystemGenerator, _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Execute searches across multiple domains., Select best matching result based on priority keywords., Extract results list from search result dict. (+3 more)
 
 ### Community 55 - "Visual Companion Guide"
 Cohesion: 0.10
@@ -533,7 +533,7 @@ Nodes (19): Common Rationalizations (Banned Shortcuts), Never Overwrite an Incom
 
 ### Community 57 - "accounts-table.tsx"
 Cohesion: 0.07
-Nodes (40): Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow (+32 more)
+Nodes (38): Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow (+30 more)
 
 ### Community 58 - "Visual Companion Guide"
 Cohesion: 0.10
@@ -585,7 +585,7 @@ Nodes (16): A. Find the Frontier, B. For Each Frontier Task — Create Worktree 
 
 ### Community 70 - "dependencies"
 Cohesion: 0.12
-Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, dependencies, class-variance-authority, lucide-react (+9 more)
+Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, dependencies, axios, lucide-react (+9 more)
 
 ### Community 71 - "Salesperson View (Android app "Apex Sales Call")"
 Cohesion: 0.10
@@ -596,12 +596,12 @@ Cohesion: 0.12
 Nodes (15): aliases, components, hooks, lib, ui, utils, rsc, $schema (+7 more)
 
 ### Community 73 - "dialer-screen.tsx"
-Cohesion: 0.07
-Nodes (25): CopyNumberButton(), CopyNumberButtonProps, Keypad(), keypadCharacters, KeypadProps, buildAttemptLabel(), LeadCallCard(), LeadCallCardProps (+17 more)
+Cohesion: 0.08
+Nodes (23): CopyNumberButton(), CopyNumberButtonProps, Keypad(), keypadCharacters, KeypadProps, buildAttemptLabel(), LeadCallCard(), LeadCallCardProps (+15 more)
 
 ### Community 74 - "accounts-page.tsx"
-Cohesion: 0.10
-Nodes (21): AccountsTable(), AccountsPage(), LoginPage(), DashboardPage(), getLeadsSummary(), LEADS_SUMMARY_QUERY_KEY, useLeads(), LeadsPage() (+13 more)
+Cohesion: 0.09
+Nodes (23): AccountsTable(), AccountsPage(), LoginPage(), DashboardPage(), getLeadsSummary(), LEADS_SUMMARY_QUERY_KEY, useLeads(), LeadsPage() (+15 more)
 
 ### Community 75 - "my-list-db.ts"
 Cohesion: 0.16
@@ -664,8 +664,8 @@ Cohesion: 0.18
 Nodes (10): autoMemoryEnabled, disableArtifact, disableBundledSkills, disableClaudeAiConnectors, disableRemoteControl, disableWorkflows, hooks, PreToolUse (+2 more)
 
 ### Community 90 - "DesignSystemGenerator"
-Cohesion: 0.15
-Nodes (9): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Execute searches across multiple domains., Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict. (+1 more)
+Cohesion: 0.12
+Nodes (13): DesignSystemGenerator, _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Execute searches across multiple domains., Find matching reasoning rule for a category., Apply reasoning rules to search results. (+5 more)
 
 ### Community 91 - "parse_decision_rules"
 Cohesion: 0.38
@@ -683,9 +683,9 @@ Nodes (10): 1. Start the backend (Flask), 2. Start Metro (JS server), 3. Phone s
 Cohesion: 0.18
 Nodes (10): autoMemoryEnabled, disableArtifact, disableBundledSkills, disableClaudeAiConnectors, disableRemoteControl, disableWorkflows, hooks, PreToolUse (+2 more)
 
-### Community 95 - "parse_decision_rules"
-Cohesion: 0.38
-Nodes (6): apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Parse the canonical condition -> action-array representation., _validate_action()
+### Community 95 - "._apply_reasoning"
+Cohesion: 0.24
+Nodes (8): Find matching reasoning rule for a category., Apply reasoning rules to search results., apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Parse the canonical condition -> action-array representation., _validate_action()
 
 ### Community 96 - "Grill with Osmani — the intent interview"
 Cohesion: 0.18
@@ -1100,12 +1100,16 @@ Cohesion: 0.20
 Nodes (9): Env Files, Language, Private Folder, Rules, Search, Source of Truth (No Guessing), Tasks, Timelines (+1 more)
 
 ### Community 238 - ".agents/skills/design-screens/uiux/scripts/design_system.py"
-Cohesion: 0.07
-Nodes (39): ansi_ljust(), _detect_page_type(), _filter_anti_patterns_for_mode(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system() (+31 more)
+Cohesion: 0.09
+Nodes (31): _contrast_ratio(), _derive_dark_palette(), _detect_page_type(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), _palette_is_dark(), persist_design_system() (+23 more)
 
 ### Community 239 - "_suggest_identities"
 Cohesion: 0.33
 Nodes (6): _exact_row_identity(), Suggest complete public identities so a retry can bypass score thresholds., Return non-empty public identities from ordinary and alias fields., Return one row whose stable public identity exactly matches the query., _row_identities(), _suggest_identities()
+
+### Community 243 - "_select_palette_for_mode"
+Cohesion: 0.22
+Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
 
 ### Community 245 - "use-my-list-upload.ts"
 Cohesion: 0.19
@@ -1179,10 +1183,6 @@ Nodes (7): TalkTotalsStats, CallSplitDonut(), CallSplitDonutProps, donutGeometry
 Cohesion: 0.38
 Nodes (7): buildDirectionSplitLabel(), CallSplitCard(), formatAverageOrNoDataLabel(), formatConnectedPercent(), formatCount(), Last30DaysCards(), PeriodStatsRow()
 
-### Community 270 - "_select_palette_for_mode"
-Cohesion: 0.22
-Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
-
 ## Knowledge Gaps
 - **1496 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+1491 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -1195,7 +1195,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.049) - this node is a cross-community bridge._
 - **Why does `loginUser()` connect `providers.tsx` to `app-navigator.tsx`?**
   _High betweenness centrality (0.048) - this node is a cross-community bridge._
-- **Why does `useAuthLogin()` connect `providers.tsx` to `add-user-modal.tsx`, `accounts-page.tsx`, `lead-pool-stats.tsx`?**
+- **Why does `useAuthLogin()` connect `providers.tsx` to `add-user-modal.tsx`, `accounts.api.ts`, `accounts-page.tsx`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
   _1496 weakly-connected nodes found - possible documentation gaps or missing edges._

@@ -183,10 +183,10 @@ export function useMyListUpload(): UseMyListUpload {
   const copyAiPrompt = useCallback(async (): Promise<void> => {
     const promptCopiedMessage = 'Prompt copied. Paste it into ChatGPT.';
     const chatGptPrompt =
-      'Pull every phone number out of the sheet text below. ' +
-      'Write each number with its country code, digits only. ' +
-      'Skip anything that is not a phone number. ' +
-      'Reply with only the numbers separated by commas, and nothing else.';
+      'Extract all phone numbers from the text below. ' +
+      'Include country codes and digits only (e.g. +919876543210). ' +
+      'Return unique numbers, comma-separated with no spaces, inside one Markdown code block. ' +
+      'Ignore anything that is not a phone number. Output nothing else.';
     await Clipboard.setString(chatGptPrompt);
     ToastAndroid.show(promptCopiedMessage, ToastAndroid.SHORT);
   }, []);

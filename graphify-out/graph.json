@@ -1319,8 +1319,8 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_resolve_dial",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 90,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "_resolve_dial()"
     },
     {
@@ -1330,8 +1330,8 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_relative_luminance",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_relative_luminance()"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_palette_is_dark",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_palette_is_dark()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_contrast_ratio",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_contrast_ratio()"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_derive_dark_palette",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_derive_dark_palette()"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L220",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_select_palette_for_mode",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "_select_palette_for_mode()"
     },
     {
@@ -1418,8 +1418,8 @@
       "source_location": "L246",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_filter_anti_patterns_for_mode",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 90,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "_filter_anti_patterns_for_mode()"
     },
     {
@@ -1572,8 +1572,8 @@
       "source_location": "L611",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_hex_to_ansi",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "hex_to_ansi()"
     },
     {
@@ -1583,8 +1583,8 @@
       "source_location": "L625",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_ansi_ljust",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "ansi_ljust()"
     },
     {
@@ -1594,8 +1594,8 @@
       "source_location": "L633",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_section_header",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "section_header()"
     },
     {
@@ -1605,8 +1605,8 @@
       "source_location": "L640",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_format_ascii_box",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "format_ascii_box()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L791",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_format_markdown",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "format_markdown()"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L919",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_generate_design_system",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "generate_design_system()"
     },
     {
@@ -1726,8 +1726,8 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_91",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 90,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "bucket a 1-10 dial value into its tier config. returns none if value is none."
     },
     {
@@ -1737,8 +1737,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_130",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "wcag relative luminance of a #rrggbb string, or none if unparseable."
     },
     {
@@ -1748,8 +1748,8 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_148",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "true when a colors.csv row's background is a dark surface."
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_154",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid."
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L194",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_194",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "keep product brand tokens while deriving accessible dark surfaces."
     },
     {
@@ -1814,8 +1814,8 @@
       "source_location": "L222",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_222",
-      "community": 270,
-      "community_name": "_select_palette_for_mode",
+      "community": 238,
+      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case..."
     },
     {
@@ -1825,8 +1825,8 @@
       "source_location": "L247",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_247",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 90,
+      "community_name": "DesignSystemGenerator",
       "norm_label": "drop \"avoid dark mode\" advice once dark mode is the resolved answer."
     },
     {
@@ -1924,8 +1924,8 @@
       "source_location": "L612",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_612",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "convert hex color to ansi true color swatch (\u2588\u2588) with fallback."
     },
     {
@@ -1935,8 +1935,8 @@
       "source_location": "L626",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_626",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "like str.ljust but accounts for zero-width ansi escape sequences."
     },
     {
@@ -1946,8 +1946,8 @@
       "source_location": "L634",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_634",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "create a unicode section separator: \u251c\u2500\u2500\u2500 name \u2500\u2500\u2500...\u2524"
     },
     {
@@ -1957,8 +1957,8 @@
       "source_location": "L641",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_641",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "format design system as unicode box with ansi color swatches."
     },
     {
@@ -1968,8 +1968,8 @@
       "source_location": "L792",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_792",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "format design system as markdown."
     },
     {
@@ -1979,8 +1979,8 @@
       "source_location": "L923",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_design_system_rationale_923",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": ".agents/skills/design-screens/uiux/scripts/search.py"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search_format_output",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "format_output()"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "agents_skills_design_screens_uiux_scripts_search_rationale_45",
-      "community": 238,
-      "community_name": ".agents/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 78,
+      "community_name": "generate_design_system",
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
@@ -4472,8 +4472,8 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_relative_luminance",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_relative_luminance()"
     },
     {
@@ -4483,8 +4483,8 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_palette_is_dark",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_palette_is_dark()"
     },
     {
@@ -4494,8 +4494,8 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_contrast_ratio",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_contrast_ratio()"
     },
     {
@@ -4538,8 +4538,8 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_derive_dark_palette",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_derive_dark_palette()"
     },
     {
@@ -4549,8 +4549,8 @@
       "source_location": "L220",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_select_palette_for_mode",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "_select_palette_for_mode()"
     },
     {
@@ -4659,8 +4659,8 @@
       "source_location": "L357",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_find_reasoning_rule",
-      "community": 54,
-      "community_name": "DesignSystemGenerator",
+      "community": 95,
+      "community_name": "._apply_reasoning",
       "norm_label": "._find_reasoning_rule()"
     },
     {
@@ -4670,8 +4670,8 @@
       "source_location": "L365",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_designsystemgenerator_apply_reasoning",
-      "community": 54,
-      "community_name": "DesignSystemGenerator",
+      "community": 95,
+      "community_name": "._apply_reasoning",
       "norm_label": "._apply_reasoning()"
     },
     {
@@ -4714,8 +4714,8 @@
       "source_location": "L611",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_hex_to_ansi",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "hex_to_ansi()"
     },
     {
@@ -4725,8 +4725,8 @@
       "source_location": "L625",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_ansi_ljust",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "ansi_ljust()"
     },
     {
@@ -4736,8 +4736,8 @@
       "source_location": "L633",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_section_header",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "section_header()"
     },
     {
@@ -4747,8 +4747,8 @@
       "source_location": "L640",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_ascii_box",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format_ascii_box()"
     },
     {
@@ -4758,8 +4758,8 @@
       "source_location": "L791",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_format_markdown",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format_markdown()"
     },
     {
@@ -4769,8 +4769,8 @@
       "source_location": "L919",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_generate_design_system",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "generate_design_system()"
     },
     {
@@ -4879,8 +4879,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_130",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "wcag relative luminance of a #rrggbb string, or none if unparseable."
     },
     {
@@ -4890,8 +4890,8 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_148",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "true when a colors.csv row's background is a dark surface."
     },
     {
@@ -4901,8 +4901,8 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_154",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid."
     },
     {
@@ -4945,8 +4945,8 @@
       "source_location": "L194",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_194",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "keep product brand tokens while deriving accessible dark surfaces."
     },
     {
@@ -4956,8 +4956,8 @@
       "source_location": "L222",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_222",
-      "community": 25,
-      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
+      "community": 243,
+      "community_name": "_select_palette_for_mode",
       "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case..."
     },
     {
@@ -5011,8 +5011,8 @@
       "source_location": "L358",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_358",
-      "community": 54,
-      "community_name": "DesignSystemGenerator",
+      "community": 95,
+      "community_name": "._apply_reasoning",
       "norm_label": "find matching reasoning rule for a category."
     },
     {
@@ -5022,8 +5022,8 @@
       "source_location": "L366",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_366",
-      "community": 54,
-      "community_name": "DesignSystemGenerator",
+      "community": 95,
+      "community_name": "._apply_reasoning",
       "norm_label": "apply reasoning rules to search results."
     },
     {
@@ -5066,8 +5066,8 @@
       "source_location": "L612",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_612",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "convert hex color to ansi true color swatch (\u2588\u2588) with fallback."
     },
     {
@@ -5077,8 +5077,8 @@
       "source_location": "L626",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_626",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "like str.ljust but accounts for zero-width ansi escape sequences."
     },
     {
@@ -5088,8 +5088,8 @@
       "source_location": "L634",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_634",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "create a unicode section separator: \u251c\u2500\u2500\u2500 name \u2500\u2500\u2500...\u2524"
     },
     {
@@ -5099,8 +5099,8 @@
       "source_location": "L641",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_641",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format design system as unicode box with ansi color swatches."
     },
     {
@@ -5110,8 +5110,8 @@
       "source_location": "L792",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_792",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "format design system as markdown."
     },
     {
@@ -5121,8 +5121,8 @@
       "source_location": "L923",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_design_system_rationale_923",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 25,
+      "community_name": ".claude/skills/design-screens/uiux/scripts/design_system.py",
       "norm_label": "main entry point for design system generation. args: query: search query (e.g.,..."
     },
     {
@@ -5210,7 +5210,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_reasoning_contract",
       "community": 95,
-      "community_name": "parse_decision_rules",
+      "community_name": "._apply_reasoning",
       "norm_label": ".claude/skills/design-screens/uiux/scripts/reasoning_contract.py"
     },
     {
@@ -5221,7 +5221,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_reasoning_contract_object_without_duplicates",
       "community": 95,
-      "community_name": "parse_decision_rules",
+      "community_name": "._apply_reasoning",
       "norm_label": "_object_without_duplicates()"
     },
     {
@@ -5232,7 +5232,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_reasoning_contract_parse_decision_rules",
       "community": 95,
-      "community_name": "parse_decision_rules",
+      "community_name": "._apply_reasoning",
       "norm_label": "parse_decision_rules()"
     },
     {
@@ -5243,7 +5243,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_reasoning_contract_validate_action",
       "community": 95,
-      "community_name": "parse_decision_rules",
+      "community_name": "._apply_reasoning",
       "norm_label": "_validate_action()"
     },
     {
@@ -5254,7 +5254,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_reasoning_contract_apply_decision_rules",
       "community": 95,
-      "community_name": "parse_decision_rules",
+      "community_name": "._apply_reasoning",
       "norm_label": "apply_decision_rules()"
     },
     {
@@ -5265,7 +5265,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_reasoning_contract_rationale_68",
       "community": 95,
-      "community_name": "parse_decision_rules",
+      "community_name": "._apply_reasoning",
       "norm_label": "parse the canonical condition -> action-array representation."
     },
     {
@@ -5276,7 +5276,7 @@
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_reasoning_contract_rationale_102",
       "community": 95,
-      "community_name": "parse_decision_rules",
+      "community_name": "._apply_reasoning",
       "norm_label": "return deterministic mutations and an audit trail; never execute data."
     },
     {
@@ -5286,8 +5286,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 47,
+      "community_name": "search",
       "norm_label": ".claude/skills/design-screens/uiux/scripts/search.py"
     },
     {
@@ -5297,8 +5297,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_format_output",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 47,
+      "community_name": "search",
       "norm_label": "format_output()"
     },
     {
@@ -5308,8 +5308,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "claude_skills_design_screens_uiux_scripts_search_rationale_45",
-      "community": 78,
-      "community_name": "generate_design_system",
+      "community": 47,
+      "community_name": "search",
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
@@ -8125,8 +8125,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_package_dependencies_axios",
-      "community": 29,
-      "community_name": "dependencies",
+      "community": 249,
+      "community_name": "axios",
       "norm_label": "axios"
     },
     {
@@ -8136,8 +8136,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_package_json_axios",
-      "community": 29,
-      "community_name": "dependencies",
+      "community": 249,
+      "community_name": "axios",
       "norm_label": "axios"
     },
     {
@@ -8147,8 +8147,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "app_package_dependencies_class_variance_authority",
-      "community": 249,
-      "community_name": "class-variance-authority",
+      "community": 29,
+      "community_name": "dependencies",
       "norm_label": "class-variance-authority"
     },
     {
@@ -8158,8 +8158,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "app_package_json_class_variance_authority",
-      "community": 249,
-      "community_name": "class-variance-authority",
+      "community": 29,
+      "community_name": "dependencies",
       "norm_label": "class-variance-authority"
     },
     {
@@ -10105,8 +10105,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner",
-      "community": 73,
-      "community_name": "dialer-screen.tsx",
+      "community": 50,
+      "community_name": "cn",
       "norm_label": "permission-banner.tsx"
     },
     {
@@ -10116,8 +10116,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner_permissionbannerprops",
-      "community": 73,
-      "community_name": "dialer-screen.tsx",
+      "community": 50,
+      "community_name": "cn",
       "norm_label": "permissionbannerprops"
     },
     {
@@ -10127,8 +10127,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_src_features_dialer_components_permission_banner_permissionbanner",
-      "community": 73,
-      "community_name": "dialer-screen.tsx",
+      "community": 50,
+      "community_name": "cn",
       "norm_label": "permissionbanner()"
     },
     {
@@ -11744,8 +11744,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_src_features_my_list_components_my_list_empty_state_mylistemptystate",
-      "community": 31,
-      "community_name": "my-list-view.tsx",
+      "community": 50,
+      "community_name": "cn",
       "norm_label": "mylistemptystate()"
     },
     {
@@ -23833,8 +23833,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_package_dependencies_axios",
-      "community": 243,
-      "community_name": "axios",
+      "community": 70,
+      "community_name": "dependencies",
       "norm_label": "axios"
     },
     {
@@ -23844,8 +23844,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "web_package_json_axios",
-      "community": 243,
-      "community_name": "axios",
+      "community": 70,
+      "community_name": "dependencies",
       "norm_label": "axios"
     },
     {
@@ -23855,8 +23855,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_package_dependencies_class_variance_authority",
-      "community": 70,
-      "community_name": "dependencies",
+      "community": 270,
+      "community_name": "class-variance-authority",
       "norm_label": "class-variance-authority"
     },
     {
@@ -23866,8 +23866,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "web_package_json_class_variance_authority",
-      "community": 70,
-      "community_name": "dependencies",
+      "community": 270,
+      "community_name": "class-variance-authority",
       "norm_label": "class-variance-authority"
     },
     {
@@ -25340,8 +25340,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "web_src_features_accounts_components_edit_user_modal_editusermodal",
-      "community": 10,
-      "community_name": "accounts.api.ts",
+      "community": 9,
+      "community_name": "add-user-modal.tsx",
       "norm_label": "editusermodal()"
     },
     {
@@ -25516,8 +25516,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form",
-      "community": 10,
-      "community_name": "accounts.api.ts",
+      "community": 9,
+      "community_name": "add-user-modal.tsx",
       "norm_label": "use-edit-account-form.ts"
     },
     {
@@ -25527,8 +25527,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form_useeditaccountformresult",
-      "community": 10,
-      "community_name": "accounts.api.ts",
+      "community": 9,
+      "community_name": "add-user-modal.tsx",
       "norm_label": "useeditaccountformresult"
     },
     {
@@ -25538,8 +25538,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form_isaccountcountry",
-      "community": 10,
-      "community_name": "accounts.api.ts",
+      "community": 9,
+      "community_name": "add-user-modal.tsx",
       "norm_label": "isaccountcountry()"
     },
     {
@@ -25549,8 +25549,8 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form_getaccountcountry",
-      "community": 10,
-      "community_name": "accounts.api.ts",
+      "community": 9,
+      "community_name": "add-user-modal.tsx",
       "norm_label": "getaccountcountry()"
     },
     {
@@ -25560,8 +25560,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "web_src_features_accounts_hooks_use_edit_account_form_useeditaccountform",
-      "community": 10,
-      "community_name": "accounts.api.ts",
+      "community": 9,
+      "community_name": "add-user-modal.tsx",
       "norm_label": "useeditaccountform()"
     },
     {
@@ -25725,8 +25725,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_accounts_types_accountcountry",
-      "community": 10,
-      "community_name": "accounts.api.ts",
+      "community": 9,
+      "community_name": "add-user-modal.tsx",
       "norm_label": "accountcountry"
     },
     {
@@ -27188,8 +27188,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "web_src_features_leads_api_leads_api_uploadleads",
-      "community": 6,
-      "community_name": "lead-pool-stats.tsx",
+      "community": 10,
+      "community_name": "accounts.api.ts",
       "norm_label": "uploadleads()"
     },
     {
@@ -27474,8 +27474,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload",
-      "community": 6,
-      "community_name": "lead-pool-stats.tsx",
+      "community": 10,
+      "community_name": "accounts.api.ts",
       "norm_label": "use-lead-upload.ts"
     },
     {
@@ -27496,8 +27496,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload_handleuploadsuccess",
-      "community": 6,
-      "community_name": "lead-pool-stats.tsx",
+      "community": 10,
+      "community_name": "accounts.api.ts",
       "norm_label": "handleuploadsuccess"
     },
     {
@@ -27529,8 +27529,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "web_src_features_leads_hooks_use_lead_upload_useleadupload",
-      "community": 6,
-      "community_name": "lead-pool-stats.tsx",
+      "community": 10,
+      "community_name": "accounts.api.ts",
       "norm_label": "useleadupload()"
     },
     {
@@ -28134,8 +28134,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_features_team_hooks_use_team_people",
-      "community": 57,
-      "community_name": "accounts-table.tsx",
+      "community": 74,
+      "community_name": "accounts-page.tsx",
       "norm_label": "use-team-people.ts"
     },
     {
@@ -28145,8 +28145,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_src_features_team_hooks_use_team_people_team_people_query_key",
-      "community": 57,
-      "community_name": "accounts-table.tsx",
+      "community": 74,
+      "community_name": "accounts-page.tsx",
       "norm_label": "team_people_query_key"
     },
     {
@@ -28156,8 +28156,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_src_features_team_hooks_use_team_people_useteampeopleresult",
-      "community": 57,
-      "community_name": "accounts-table.tsx",
+      "community": 74,
+      "community_name": "accounts-page.tsx",
       "norm_label": "useteampeopleresult"
     },
     {
@@ -28288,8 +28288,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error",
-      "community": 6,
-      "community_name": "lead-pool-stats.tsx",
+      "community": 10,
+      "community_name": "accounts.api.ts",
       "norm_label": "api-error.ts"
     },
     {
@@ -28299,8 +28299,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error_apierrorbody",
-      "community": 6,
-      "community_name": "lead-pool-stats.tsx",
+      "community": 10,
+      "community_name": "accounts.api.ts",
       "norm_label": "apierrorbody"
     },
     {
@@ -28310,8 +28310,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_src_shared_api_api_error_getapierrormessage",
-      "community": 6,
-      "community_name": "lead-pool-stats.tsx",
+      "community": 10,
+      "community_name": "accounts.api.ts",
       "norm_label": "getapierrormessage()"
     },
     {
@@ -38790,7 +38790,7 @@
       "label": "Screen 7b: Scheduled - second tab",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L220",
+      "source_location": "L219",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_7b_scheduled_second_tab",
       "community": 71,
@@ -38801,7 +38801,7 @@
       "label": "Screen 7c: History - third tab",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L238",
+      "source_location": "L237",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_7c_history_third_tab",
       "community": 71,
@@ -38812,7 +38812,7 @@
       "label": "Screen 8: My Stats - fourth tab",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L257",
+      "source_location": "L256",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_8_my_stats_fourth_tab",
       "community": 71,
@@ -38823,7 +38823,7 @@
       "label": "Screen 9: Settings - fifth tab",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L277",
+      "source_location": "L276",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_9_settings_fifth_tab",
       "community": 71,
@@ -38834,7 +38834,7 @@
       "label": "Screen 9b: Do Not Track Numbers",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L296",
+      "source_location": "L295",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_9b_do_not_track_numbers",
       "community": 71,
@@ -38845,7 +38845,7 @@
       "label": "Screen 9c: Calling SIM",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L312",
+      "source_location": "L311",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_9c_calling_sim",
       "community": 71,
@@ -38856,7 +38856,7 @@
       "label": "Screen 9d: WhatsApp",
       "file_type": "document",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L326",
+      "source_location": "L325",
       "_origin": "ast",
       "id": "agent_doc_screen_screen_9d_whatsapp",
       "community": 71,
@@ -128487,7 +128487,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L220",
+      "source_location": "L219",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -128498,7 +128498,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L238",
+      "source_location": "L237",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -128509,7 +128509,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L257",
+      "source_location": "L256",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -128520,7 +128520,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L277",
+      "source_location": "L276",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -128531,7 +128531,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L296",
+      "source_location": "L295",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -128542,7 +128542,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L312",
+      "source_location": "L311",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -128553,7 +128553,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "agent-doc/screen.md",
-      "source_location": "L326",
+      "source_location": "L325",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agent_doc_screen_salesperson_view_android_app_apex_sales_call",
@@ -133413,5 +133413,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "cb7f0b37c2bd92bef0c57e3eeab39ed0dd9ded45"
+  "built_at_commit": "7eda63f3b1d8790cf59ea19485512ba152f6ffca"
 }

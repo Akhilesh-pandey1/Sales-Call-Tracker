@@ -13,6 +13,8 @@
   "callHistoryPageSize": 50,
   "officeHoursDefaultStartTime": "10:00",
   "officeHoursDefaultEndTime": "19:00",
+  "whatsappDefaultFirstMessageOn": true,
+  "whatsappDefaultFirstMessageText": "Hello sir, Mai Apex Album AI se baat kar raha/rahi hu",
   "istOffsetMinutes": 330,
   "my_list_max_numbers": 10000,
   "schedule_expire_hours": 24

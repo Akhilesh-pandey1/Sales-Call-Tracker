@@ -124,7 +124,9 @@ function KeypadView({
   const handleCallPress = async (): Promise<void> => {
     await directCall.startDirectCall(dialer.dialedNumberInput);
   };
-  const handleSubmitKeypadPostCall = async (submitData: PostCallSubmitData) => {
+  const handleSubmitKeypadPostCall = async (
+    submitData: PostCallSubmitData,
+  ): Promise<void> => {
     await directCall.submitDirectCall(submitData);
     dialer.clearDialedNumber();
   };

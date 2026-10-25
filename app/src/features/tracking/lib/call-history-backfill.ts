@@ -19,7 +19,7 @@ import {
   toEntryTimeMs,
   type CallLogEntry,
 } from './call-log-matcher';
-import { isCallStartInsideOfficeHoursWindow } from './office-hours-window-check';
+import { isCallStartOutsideOfficeHoursWindow } from './office-hours-window-check';
 import { safeReadCallLogEntries } from './call-log-reader';
 
 const historyLastLoadedStorageKey = 'history_last_loaded_at';
@@ -80,7 +80,7 @@ function collectInsertableHistoryEntries(
     if (isDoNotTrackNumber) {
       continue;
     }
-    const isOutsideOfficeHoursWindow = !isCallStartInsideOfficeHoursWindow(
+    const isOutsideOfficeHoursWindow = isCallStartOutsideOfficeHoursWindow(
       entryTimeMs,
       officeHoursWindow,
     );

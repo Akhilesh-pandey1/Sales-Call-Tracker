@@ -19,6 +19,10 @@ const officeHoursDefaultStartTime: string =
   appConfigJson.officeHoursDefaultStartTime;
 const officeHoursDefaultEndTime: string =
   appConfigJson.officeHoursDefaultEndTime;
+const whatsappDefaultFirstMessageOn: boolean =
+  appConfigJson.whatsappDefaultFirstMessageOn;
+const whatsappDefaultFirstMessageText: string =
+  appConfigJson.whatsappDefaultFirstMessageText;
 const istOffsetMinutes: number = appConfigJson.istOffsetMinutes;
 const myListMaxNumbers: number = appConfigJson.my_list_max_numbers;
 const scheduleExpireHours: number = appConfigJson.schedule_expire_hours;
@@ -42,4 +46,6 @@ export {
   officeHoursDefaultStartTime,
   scheduleExpireMs,
   stalePendingCallAgeMs,
+  whatsappDefaultFirstMessageOn,
+  whatsappDefaultFirstMessageText,
 };

@@ -7,11 +7,12 @@ from backend.app.extensions import db
 from backend.app.modules.calls import Call, OUTGOING_DIRECTION
 from backend.app.modules.dashboard.services import (
     DashboardTimeWindows,
+    OfficeHoursWindowInputs,
     PeriodHourlyInputs,
     apply_direction_call_to_hourly_bucket,
     apply_direction_call_to_metrics,
     build_calls_by_hour_block,
-    build_office_hour_range,
+    build_office_hours_window_inputs,
     build_talk_totals_block,
     calculate_connected_percentage,
     calculate_dashboard_time_windows,
@@ -129,8 +130,7 @@ def apply_person_call_to_period(
     direction: str,
     duration_seconds: int,
     dialed_at_utc: datetime,
-    window_start_minute: int,
-    window_end_minute: int,
+    window_inputs: OfficeHoursWindowInputs,
 ) -> None:
     apply_direction_call_to_metrics(
         period_aggregates.call_metrics, direction, duration_seconds
@@ -140,21 +140,19 @@ def apply_person_call_to_period(
         period_aggregates.incoming_by_hour,
         direction,
         dialed_at_utc,
-        window_start_minute,
-        window_end_minute,
+        window_inputs.window_start_minute,
+        window_inputs.window_end_minute,
     )
 
 
 def accumulate_person_call_records(
     call_records: list[Any],
     windows: DashboardTimeWindows,
-    window_start_minute: int,
-    window_end_minute: int,
+    window_inputs: OfficeHoursWindowInputs,
 ) -> PersonCallAggregates:
-    office_hours: list[int] = build_office_hour_range(
-        window_start_minute, window_end_minute
+    aggregates: PersonCallAggregates = create_empty_person_aggregates(
+        window_inputs.office_hours
     )
-    aggregates: PersonCallAggregates = create_empty_person_aggregates(office_hours)
 
     for phone_number, raw_dialed_at, duration_seconds, direction in call_records:
         dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
@@ -169,8 +167,7 @@ def accumulate_person_call_records(
             direction,
             duration_seconds,
             dialed_at,
-            window_start_minute,
-            window_end_minute,
+            window_inputs,
         )
 
         if dialed_at >= windows.today_start_utc:
@@ -179,8 +176,7 @@ def accumulate_person_call_records(
                 direction,
                 duration_seconds,
                 dialed_at,
-                window_start_minute,
-                window_end_minute,
+                window_inputs,
             )
         elif dialed_at >= windows.yesterday_start_utc:
             apply_person_call_to_period(
@@ -188,8 +184,7 @@ def accumulate_person_call_records(
                 direction,
                 duration_seconds,
                 dialed_at,
-                window_start_minute,
-                window_end_minute,
+                window_inputs,
             )
 
     return aggregates
@@ -318,23 +313,23 @@ def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
         raise AppException("User not found.", not_found_code)
 
     office_hours_window: OfficeHours = get_or_create_office_hours_window()
-    window_start_minute: int = office_hours_window.start_minute
-    window_end_minute: int = office_hours_window.end_minute
-    office_hours: list[int] = build_office_hour_range(
-        window_start_minute, window_end_minute
+    window_inputs: OfficeHoursWindowInputs = build_office_hours_window_inputs(
+        office_hours_window
     )
     windows: DashboardTimeWindows = calculate_dashboard_time_windows()
     call_records: list[Any] = fetch_person_call_records(user_id, windows)
     aggregates: PersonCallAggregates = accumulate_person_call_records(
-        call_records, windows, window_start_minute, window_end_minute
+        call_records, windows, window_inputs
     )
     period_blocks: dict[str, dict[str, Any]] = build_person_period_blocks(
-        aggregates, office_hours
+        aggregates, window_inputs.office_hours
     )
     sorted_top_numbers: list[dict[str, Any]] = build_top_numbers_list(
         aggregates.phone_summary
     )
-    office_hours_view_with_label: dict[str, Any] = get_office_hours_view_with_label()
+    office_hours_view_with_label: dict[str, Any] = get_office_hours_view_with_label(
+        office_hours_window
+    )
     response_payload: dict[str, Any] = {
         "name": target_user.name,
         "office_hours": office_hours_view_with_label["office_hours"],

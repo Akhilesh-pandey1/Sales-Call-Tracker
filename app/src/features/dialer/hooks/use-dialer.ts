@@ -12,6 +12,7 @@ import {
   showCallLaunchErrorToast,
   type LaunchedCall,
 } from '../lib/call-launcher';
+import { subscribeToTappedNumber } from '../lib/tapped-number-events';
 
 const emptyClipboardMessage = 'Nothing copied.';
 
@@ -61,6 +62,17 @@ export function useDialer(): UseDialerResult {
     });
     return unsubscribe;
   }, []);
+
+  const handleTappedNumber = useCallback((tappedPhoneNumber: string): void => {
+    if (tappedPhoneNumber !== '') {
+      setDialedNumberInput(tappedPhoneNumber);
+    }
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToTappedNumber(handleTappedNumber);
+    return unsubscribe;
+  }, [handleTappedNumber]);
 
   const appendKeypadCharacter = useCallback((character: string): void => {
     setDialedNumberInput(currentInput => currentInput + character);

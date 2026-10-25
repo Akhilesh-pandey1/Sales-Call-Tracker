@@ -1,4 +1,4 @@
-import { createAppEvent } from './lib/app-event';
+import { createAppEvent } from '@/shared/utils/app-event';
 
 const callEndedEvent = createAppEvent<void>();
 

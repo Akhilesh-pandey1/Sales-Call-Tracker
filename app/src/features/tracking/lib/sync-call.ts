@@ -15,9 +15,15 @@ function toSyncCallOrNull(
     dialed_at: pendingCall.dialedAt,
     duration_seconds: pendingCall.durationSeconds,
     direction: pendingCall.direction,
+    interested: pendingCall.interested,
+    do_not_call: pendingCall.doNotCall,
   };
   if (scheduledAt !== null) {
     syncCall.scheduled_at = scheduledAt;
+  }
+  const noteText = pendingCall.notes;
+  if (noteText !== null && noteText !== '') {
+    syncCall.notes = noteText;
   }
   return syncCall;
 }

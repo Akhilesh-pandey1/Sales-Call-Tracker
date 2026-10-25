@@ -1,5 +1,5 @@
 import type { ResultSet } from 'react-native-sqlite-storage';
-import type { CallDirection } from '../types';
+import type { CallDirection, CallOutcome } from '../types';
 import { runQuery } from './database';
 
 export interface PendingCall {
@@ -9,6 +9,9 @@ export interface PendingCall {
   dialedAt: string | null;
   durationSeconds: number | null;
   direction: CallDirection;
+  interested: boolean;
+  doNotCall: boolean;
+  notes: string | null;
 }
 
 interface PendingCallTableRow {
@@ -18,6 +21,9 @@ interface PendingCallTableRow {
   dialed_at: string | null;
   duration_seconds: number | null;
   direction: CallDirection;
+  interested: number;
+  do_not_call: number;
+  notes: string | null;
 }
 
 function readRowList<RowItemType, ResultItemType>(
@@ -40,9 +46,15 @@ function toPendingCall(row: PendingCallTableRow): PendingCall {
     dialedAt: row.dialed_at,
     durationSeconds: row.duration_seconds,
     direction: row.direction,
+    interested: row.interested === 1,
+    doNotCall: row.do_not_call === 1,
+    notes: row.notes,
   };
   return pendingCall;
 }
+
+const pendingCallColumnsSql =
+  'call_id, phone_number, intent_at, dialed_at, duration_seconds, direction, interested, do_not_call, notes';
 
 async function selectPendingCalls(
   sql: string,
@@ -64,7 +76,7 @@ export async function insertPendingCall(
 }
 
 export async function getAllPendingCalls(): Promise<PendingCall[]> {
-  const selectAllPendingCallsSql = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, direction
+  const selectAllPendingCallsSql = `SELECT ${pendingCallColumnsSql}
     FROM pending_calls
     ORDER BY intent_at ASC`;
   const pendingCalls = await selectPendingCalls(selectAllPendingCallsSql, []);
@@ -72,7 +84,7 @@ export async function getAllPendingCalls(): Promise<PendingCall[]> {
 }
 
 export async function getUnsyncedPendingCalls(): Promise<PendingCall[]> {
-  const selectUnsyncedPendingCallsSql = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, direction
+  const selectUnsyncedPendingCallsSql = `SELECT ${pendingCallColumnsSql}
     FROM pending_calls
     WHERE synced = 0
     ORDER BY intent_at ASC`;
@@ -81,7 +93,7 @@ export async function getUnsyncedPendingCalls(): Promise<PendingCall[]> {
 }
 
 async function selectPendingCallOrNull(callId: string): Promise<PendingCall | null> {
-  const selectPendingCallByIdSql = `SELECT call_id, phone_number, intent_at, dialed_at, duration_seconds, direction
+  const selectPendingCallByIdSql = `SELECT ${pendingCallColumnsSql}
     FROM pending_calls
     WHERE call_id = ?`;
   const pendingCalls = await selectPendingCalls(selectPendingCallByIdSql, [callId]);
@@ -106,6 +118,22 @@ export async function markPendingCallFilled(
   const markPendingCallFilledSql =
     'UPDATE pending_calls SET dialed_at = ?, duration_seconds = ? WHERE call_id = ?';
   await runQuery(markPendingCallFilledSql, [dialedAt, durationSeconds, callId]);
+}
+
+export async function markPendingCallOutcome(
+  callId: string,
+  outcome: CallOutcome,
+): Promise<void> {
+  const markPendingCallOutcomeSql =
+    'UPDATE pending_calls SET interested = ?, do_not_call = ?, notes = ? WHERE call_id = ?';
+  const interestedFlag = outcome.interested ? 1 : 0;
+  const doNotCallFlag = outcome.doNotCall ? 1 : 0;
+  await runQuery(markPendingCallOutcomeSql, [
+    interestedFlag,
+    doNotCallFlag,
+    outcome.notes,
+    callId,
+  ]);
 }
 
 export async function markPendingCallsSynced(callIds: string[]): Promise<void> {

@@ -5,6 +5,7 @@ import {
   type ScheduledReminder,
 } from '@/features/tracking';
 import { fetchNextLead, type LeadScheduleRequest, type ServedLead } from '../api/leads.api';
+import type { PostCallSubmitData } from '../types';
 import { useDialogVisibility } from './use-dialog-visibility';
 import type { AutomatedViewState } from './use-automated-calling';
 import {
@@ -14,10 +15,7 @@ import {
 
 export type UseLeadPostCallResult = PostCallDialogState & {
   showPostCallDialog: () => void;
-  submitPostCall: (
-    scheduledAt: string | null,
-    shouldContinueToNextLead: boolean,
-  ) => Promise<void>;
+  submitPostCall: (submitData: PostCallSubmitData) => Promise<void>;
 };
 
 function buildLeadScheduleRequest(
@@ -99,15 +97,17 @@ export function useLeadPostCall(
     showDialog();
   }, [showDialog, updateViewState, viewStateRef]);
   const submitPostCall = useCallback(
-    async (
-      scheduledAt: string | null,
-      shouldContinueToNextLead: boolean,
-    ): Promise<void> => {
+    async (submitData: PostCallSubmitData): Promise<void> => {
+      const { scheduledAt, shouldContinueToNextLead, outcome } = submitData;
       const currentState = viewStateRef.current;
       const finishedCallId =
         currentState.kind === 'finished' ? currentState.callId : null;
-      await submitTrackedPostCall(finishedCallId, (scheduleWasRefused: boolean) =>
-        continueAfterLeadSubmit(scheduledAt, shouldContinueToNextLead, scheduleWasRefused),
+      await submitTrackedPostCall(
+        finishedCallId,
+        (scheduleWasRefused: boolean) =>
+          continueAfterLeadSubmit(scheduledAt, shouldContinueToNextLead, scheduleWasRefused),
+        scheduledAt,
+        outcome,
       );
     },
     [continueAfterLeadSubmit, submitTrackedPostCall, viewStateRef],

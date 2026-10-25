@@ -51,15 +51,15 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Every post-call popup — keypad, automated lead, My List — shows the same Interested and Do not call again buttons and Notes box, with nothing preselected and Submit working with all of it empty (`specs/call-tracking.md` — Post-call outcome popup on every flow).
-- [ ] The two flags and the note are saved on the phone's pending row and sent in the sync batch, while the call's time and duration still come only from the call log (`specs/call-tracking.md` — Choices ride the sync batch; `database.md` — `pending_calls`).
-- [ ] `specs/call-tracking.md` — Time and duration stay call-log only.
+- [x] Every post-call popup — keypad, automated lead, My List — shows the same Interested and Do not call again buttons and Notes box, with nothing preselected and Submit working with all of it empty (`specs/call-tracking.md` — Post-call outcome popup on every flow).
+- [x] The two flags and the note are saved on the phone's pending row and sent in the sync batch, while the call's time and duration still come only from the call log (`specs/call-tracking.md` — Choices ride the sync batch; `database.md` — `pending_calls`).
+- [x] `specs/call-tracking.md` — Time and duration stay call-log only.
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 5: App — the keypad clears after the post-call popup
 

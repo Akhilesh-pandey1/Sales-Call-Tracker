@@ -8,6 +8,9 @@ export type SyncCall = {
   duration_seconds: number;
   direction: CallDirection;
   scheduled_at?: string;
+  interested?: boolean;
+  do_not_call?: boolean;
+  notes?: string;
 };
 
 export type SyncCallsResponse = {

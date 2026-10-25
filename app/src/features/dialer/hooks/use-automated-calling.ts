@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import type { ServedLead } from '../api/leads.api';
+import type { PostCallSubmitData } from '../types';
 import { useCallHangUpDetector } from './use-call-hang-up-detector';
 import { useLeadLoading } from './use-lead-loading';
 import { useLeadPostCall } from './use-lead-post-call';
@@ -18,10 +19,7 @@ export type UseAutomatedCallingResult = PostCallDialogState & {
   startErrorMessage: string | null;
   startCalling: () => Promise<void>;
   dialCurrentLead: () => Promise<void>;
-  submitPostCall: (
-    scheduledAt: string | null,
-    shouldContinueToNextLead: boolean,
-  ) => Promise<void>;
+  submitPostCall: (submitData: PostCallSubmitData) => Promise<void>;
 };
 
 export function useAutomatedCalling(): UseAutomatedCallingResult {

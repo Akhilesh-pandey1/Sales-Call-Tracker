@@ -25,6 +25,7 @@ import {
   type UseKeypadPostCallResult,
 } from '../hooks/use-keypad-post-call';
 import { subscribeToTappedNumber } from '../lib/tapped-number-events';
+import type { PostCallSubmitData } from '../types';
 
 type DialerSubTab = 'keypad' | 'automated';
 
@@ -113,6 +114,8 @@ function KeypadView({
     const launchedCall = await dialer.startCall();
     keypadPostCall.trackLaunchedCall(launchedCall);
   };
+  const handleSubmitKeypadPostCall = ({ scheduledAt, outcome }: PostCallSubmitData) =>
+    keypadPostCall.submitKeypadPostCall(scheduledAt, outcome);
 
   return (
     <View className="flex-1 justify-center px-3 pb-4 pt-2">
@@ -166,7 +169,7 @@ function KeypadView({
         phoneNumber={postCallDialogPhoneNumber}
         isSubmitting={keypadPostCall.isSubmittingPostCall}
         errorMessage={keypadPostCall.postCallErrorMessage}
-        onSubmit={keypadPostCall.submitKeypadPostCall}
+        onSubmit={handleSubmitKeypadPostCall}
       />
     </View>
   );

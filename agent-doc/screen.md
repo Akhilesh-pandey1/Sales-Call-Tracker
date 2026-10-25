@@ -147,7 +147,7 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 → Next: Screen 7 Dialer
 
 ### Screen 7: Dialer - home tab
-- Bottom tab bar - Dialer | My Stats | Settings
+- Bottom tab bar - Dialer | Scheduled | History | My Stats | Settings
 - Sub-tab switch at top - pill switch: Keypad | Automated
 - **Keypad view**:
   - Number display - the phone number being typed
@@ -155,11 +155,13 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
   - Paste button - fills the number field from clipboard
   - Call button - grey and unpressable until the number is valid for the country; green when valid; starts the call at once, no confirm step
   - Post-call popup - opens by itself when a keypad call ends; same popup as the lead call - the dialed number, the schedule question with the follow-up time field below, and one Submit button - no "Go to next call"
+  - Submit clears the number - submitting the popup, either schedule choice, wipes the typed number to blank, ready for the next call
 - **Automated view (lead calling)**:
   - Start Calling button - dials the next lead at once, one tap, no lead card step; a due booked lead comes first when it is time
+  - Lead number with Copy button - one tap copies the lead's number while ringing, during the call, and on the post-call popup; "Number copied." toast
   - Post-call popup - opens by itself when the call ends: "Schedule this number for the next call?" with two choices - "Do not schedule" pre-selected and "Schedule", which reveals the follow-up time field below in the same popup; a pre-checked "Go to next call" checkbox; one Submit button
   - Submit - saves the chosen schedule and sends the call; with the box checked the next lead's call starts at once; with the box unchecked the flow pauses until Start Calling again
-  - Booking a lead sets a reminder - at the booked time the phone itself shows "Time to call" with the lead's number; tapping the notification opens this screen straight to the booked lead's card, ready to call; one notification per booking, never repeats
+  - Booking a lead sets a reminder - at the booked time the phone itself shows "Time to call" with the lead's number; tapping the notification opens this screen straight to the booked lead's card, ready to call, and clears that booking from the Scheduled tab; one notification per booking, never repeats
   - Follow-up time field (both popups) - tapping it opens the phone's date picker first, then the time picker; starts at tomorrow 9:00 AM; past dates and dates beyond 30 days cannot be picked
   - Locked popup (both popups) - tapping outside or pressing the back button does nothing; Submit is the only way through
 - Red banner (both views when any call permission is off) - "Calls are not being logged", with a Fix button that opens Android app settings
@@ -176,9 +178,46 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 - No internet: dialing and lead calling work as always; calls sync on a later app open
 - Login ended (signed in on another phone, deactivated, or password changed): back to Screen 6 Login
 
+→ Next: Screen 7b Scheduled
+
+### Screen 7b: Scheduled - second tab
+- Every callback booked on this phone - so a dismissed notification never means a lost call; saved on the phone, works offline
+- Due rows stand out - bookings past their time get a red border; the same count shows as a badge on the tab
+- Bookings list - Due first (most overdue at top), then Upcoming soonest first
+- Booking row - the number, the booked date and time, and a state badge: Upcoming (its time has not come) or Due (time passed, not handled)
+- Tap a row - opens the booked lead's card ready to call
+- Call icon per row - starts the call to the number at once
+- Reload icon in the header - pulls in newer bookings without reopening the tab
+- Copy button per row - copies the number, "Number copied." toast
+- WhatsApp button per row - opens the chosen WhatsApp app on that number's chat
+- Row leaves the list when - the reminder notification is tapped, the number gets called, or 24 hours pass its booked time
+
+**Edge cases:**
+- Nothing booked: "Nothing scheduled."
+- WhatsApp app not installed: "WhatsApp is not installed." toast
+
+→ Next: Screen 7c History
+
+### Screen 7c: History - third tab
+- Every call this phone recorded - dialed out and incoming, saved on the phone; works offline
+- Calls list - newest first, 50 rows at a time with a Load-more button at the bottom
+- Call row - the number, an out or in mark, the date-time, and the result: connected with talk time, or not connected
+- Call icon per row - starts the call to the number at once; rows look like the Scheduled tab rows
+- Reload icon in the header - pulls in newer calls without reopening the tab
+- Copy button per row - copies the number, "Number copied." toast
+- WhatsApp button per row - opens the chosen WhatsApp app on that number's chat
+- Scheduled badge - shows on rows whose number has a booked callback
+- First open after the update - the list fills once from the phone's own call log
+- Every tab open - pulls in the calls made since the last look, even ones made while the app was closed
+- Do-not-track numbers never appear here
+
+**Edge cases:**
+- No calls yet: "No calls yet."
+- WhatsApp app not installed: "WhatsApp is not installed." toast
+
 → Next: Screen 8 My Stats
 
-### Screen 8: My Stats - second tab
+### Screen 8: My Stats - fourth tab
 - "Last 30 days" KPI cards (4) - Active days (out of 30), Avg dials, Avg connected, Avg minutes; averages per active day, with the 30-day totals as small sub-lines. Avg minutes is TOTAL talk time (outgoing + incoming); Active days counts only days with an outgoing call
 - Calls by hour - ONE bar per hour: total calls that hour, split into two colored segments - outgoing and incoming - sized by share, counts written inside the segments; small period switch (Today | Yesterday | 30 days) opens on Today and drives only this chart; one line under it names the best hour
 - Donut chart - incoming vs outgoing share of TOTAL talk minutes; the same three-period switch drives it; one line under it reads the exact numbers: "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min"
@@ -198,12 +237,14 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 
 → Next: Screen 9 Settings
 
-### Screen 9: Settings - third tab
+### Screen 9: Settings - fifth tab
 - Plain "Settings" title - no back arrow; this is a top-level tab
-- Three-row menu, each row icon + title + short description + chevron:
-  1. Clear local data - deletes only the unsent calls on this phone; opens the confirm dialog
-  2. Do not track numbers - the middle row; opens Screen 9b
-  3. Log out - sends unsent calls first, then signs out
+- Five-row menu, each row icon + title + short description + chevron:
+  1. WhatsApp - opens Screen 9d
+  2. Calling SIM - opens Screen 9c
+  3. Do not track numbers - opens Screen 9b
+  4. Clear local data - deletes only the unsent calls on this phone; opens the confirm dialog
+  5. Log out - sends unsent calls first, then signs out
 - Confirmation dialog on Clear local data tap - "This deletes N calls not yet sent to the server. Cannot be undone." (N is the real count of unsent calls on the phone)
 - Confirm - wipes only the unsent calls on the phone; server numbers stay untouched
 - Cancel - closes dialog without changes
@@ -228,5 +269,31 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 - Number already on the list: "This number is already on the list." - no duplicate row
 - List is empty: "No numbers yet. Use Add number to keep a personal number private."
 - Removing a number: the row disappears at once; that number is tracked again from now on
+
+→ Next: Screen 9c Calling SIM
+
+### Screen 9c: Calling SIM
+- Opens from the Settings Calling SIM row
+- SIM list - one item per SIM slot: "SIM 1 · Jio", "SIM 2 · Airtel" - the SIM's own number shows only when the phone has one
+- Current choice checkmarked; a pick saves at once - every later call leaves on that slot, no SIM picker ever
+- "Use phone default" item - calls go out on Android's default SIM again
+- The choice stays on the slot - SIMs swapped between slots keep the choice
+- No permissions are asked on this screen; with the Phone permission off, a note shows and calls stay on phone default
+
+**Edge cases:**
+- The phone shows no SIM numbers: a note says so and the phone default stays in use
+- A call fails on the chosen slot: "Could not place the call on this SIM." - nothing dialed, nothing recorded; picking the SIM again here is the fix
+
+→ Next: Screen 9d WhatsApp
+
+### Screen 9d: WhatsApp
+- Opens from the Settings WhatsApp row
+- WhatsApp app choice - WhatsApp or WhatsApp Business, WhatsApp preselected; a pick saves at once on the phone, and every WhatsApp button in the app opens only the chosen one
+- First message - a switch plus the editable message text below it; switch on, WhatsApp chats open with this text already typed - the salesperson can always edit or clear it before sending, nothing ever sends by itself
+- Save message - stores the text on the phone only; never synced
+
+**Edge cases:**
+- Chosen app not installed: "WhatsApp is not installed." toast
+- First message switch on with empty text: chats open with an empty message field
 
 → Flow ends

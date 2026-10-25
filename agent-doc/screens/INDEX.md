@@ -32,13 +32,20 @@ Open `index.html` to flip through the screens (arrow keys or the buttons; Mobile
 | Dialer — Automated — Start Calling | `07-dialer--automated--M.html` | The lead-calling entry point |
 | Dialer — Automated — post-call popup | `07-dialer--post-call--M.html` | Popup after a lead call, "Do not schedule" pre-selected |
 | Dialer — post-call popup (Schedule chosen) | `07-dialer--post-call--schedule--M.html` | Date/time picker revealed in the popup |
+| Scheduled — due & upcoming callbacks | `07b-scheduled--M.html` | Every callback booked on this phone, due first — compact rows with Call, Copy and WhatsApp icons, reload in the header |
+| Scheduled — nothing booked | `07b-scheduled--empty--M.html` | Empty state — "Nothing scheduled." |
+| Scheduled — WhatsApp missing toast | `07b-scheduled--no-whatsapp--M.html` | "WhatsApp is not installed." toast on the WhatsApp button |
+| History — every call on this phone | `07c-history--M.html` | Call log, newest first — compact rows like Scheduled, with direction, result, talk time, Scheduled chip, Call, Copy and WhatsApp icons, reload in the header |
+| History — no calls yet | `07c-history--empty--M.html` | Empty state — "No calls yet." |
+| History — WhatsApp missing toast | `07c-history--no-whatsapp--M.html` | "WhatsApp is not installed." toast on the WhatsApp button |
 | My Stats | `08-my-stats--M.html` | Cards, stacked hour chart, direction donut, performance table |
 | My Stats — no incoming calls | `08-my-stats--no-incoming--M.html` | Donut full outgoing, "Incoming 0 calls · 0 min" |
 | My Stats — server unreachable | `08-my-stats--offline--M.html` | Offline state — no fake zeros |
-| Settings | `09-settings--M.html` | Four-row menu — clear data, do-not-track numbers, calling SIM, log out |
+| Settings | `09-settings--M.html` | Five-row menu — WhatsApp, calling SIM, do-not-track numbers, clear data, log out |
 | Settings — clear data dialog | `09-settings--confirm-dialog--M.html` | Confirmation before wiping unsent calls |
 | Do not track numbers | `09b-do-not-track--M.html` | Back button + Add number, table of private numbers with Remove per row |
 | Do not track — add number dialog | `09b-do-not-track--add-dialog--M.html` | Pop-up to add a number (10 digits → +91) |
 | Do not track — number already added | `09b-do-not-track--add-error--M.html` | Duplicate refused inside the pop-up |
 | Calling SIM | `09c-calling-sim--M.html` | Pick the number every call leaves from — readable SIM numbers with carrier names, plus Use phone default |
 | Calling SIM — numbers not readable | `09c-calling-sim--none-readable--M.html` | Phone hides its SIM numbers — calls stay on the phone's default SIM |
+| WhatsApp settings | `09d-whatsapp--M.html` | Pick WhatsApp or WhatsApp Business, and edit the first message chats open with |

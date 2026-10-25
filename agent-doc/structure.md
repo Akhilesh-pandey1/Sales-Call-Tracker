@@ -15,7 +15,7 @@ The system consists of three parts in a single repository:
 - **Styling**: NativeWind (Tailwind CSS for React Native)
 - **UI Components**: React Native Reusables (`react-native-reusables` — shadcn/ui for React Native in `components/ui/`)
 - **Navigation**: React Navigation (`@react-navigation/bottom-tabs`)
-- **Local Storage**: `react-native-sqlite-storage` (local tracking database: `pending_calls`, `do_not_track`, `sweep_state`, `scheduled_reminders`) + `@react-native-async-storage/async-storage`
+- **Local Storage**: `react-native-sqlite-storage` (local tracking database: `pending_calls`, `do_not_track`, `sweep_state`, `scheduled_reminders`, `call_history`) + `@react-native-async-storage/async-storage`
 - **Telephony & Permissions**:
   - `react-native-permissions`
   - `react-native-call-detection-android`
@@ -204,12 +204,13 @@ app/
 ├── index.js                         # React Native app registry entry point
 ├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE)
 │   └── app/src/main/
-│       ├── java/com/apexsalescall/SimCallModule.kt   # Kotlin bridge: reads the SIM numbers, places the call on the matching SIM
+│       ├── java/com/apexsalescall/SimCallModule.kt    # Kotlin bridge: reads the SIM numbers, places the call on the matching SIM
+│       ├── java/com/apexsalescall/WhatsAppModule.kt   # Kotlin bridge: opens WhatsApp or WhatsApp Business on a number's chat with optional prefilled text
 │       └── res/drawable-*dpi/ic_reminder_icon.png     # White notification glyph on transparent background, five densities
 └── src/
     ├── app/
     │   └── navigation/
-    │       ├── app-navigator.tsx    # Bottom tabs with icons: Dialer, My Stats, Settings
+    │       ├── app-navigator.tsx    # Bottom tabs with icons: Dialer, Scheduled, History, My Stats, Settings
     │       └── root-navigator.tsx   # Login vs Main App screen switch
     ├── components/
     │   └── ui/                      # React Native Reusables (shadcn for mobile): button, input, card, dialog, text
@@ -221,22 +222,30 @@ app/
     │   ├── dialer/
     │   │   ├── components/keypad.tsx
     │   │   ├── components/permission-banner.tsx
-    │   │   ├── components/lead-call-card.tsx
-    │   │   ├── components/post-call-dialog.tsx  # Post-call popup: native date/time picker + schedule question + Go-to-next checkbox + Submit; locked so only Submit closes it; keypad variant shows the number with the same schedule question
+    │   │   ├── components/lead-call-card.tsx # Lead calling card with a Copy button for the lead's number
+    │   │   ├── components/post-call-dialog.tsx  # Post-call popup: native date/time picker + schedule question + Go-to-next checkbox + Submit; locked so only Submit closes it; keypad variant shows the number with the same schedule question, and submitting it clears the typed number
     │   │   ├── lib/call-launcher.ts     # Starts the call: chosen-SIM placement through TelecomManager; Android default SIM when none picked or CALL_PHONE off
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
     │   │   ├── hooks/use-post-call-submit.ts  # Submit click: read call log, send to server, delete or save the row
     │   │   └── screens/dialer-screen.tsx # Hosts Dialer keypad and Automated lead calling sub-tabs
+    │   ├── history/
+    │   │   ├── hooks/use-call-history.ts        # History rows: newest first, 50 per page, refresh sweep on tab open, last-loaded marker
+    │   │   └── screens/history-screen.tsx       # History tab: call rows with Copy, WhatsApp, and the Scheduled badge
+    │   ├── scheduled/
+    │   │   ├── hooks/use-scheduled-reminders.ts # Booking rows: Upcoming and Due states, 24-hour cleanup, due-count badge
+    │   │   └── screens/scheduled-screen.tsx     # Scheduled tab: bookings Due first, Copy, WhatsApp, tap opens the booked lead's card
     │   ├── stats/
     │   │   ├── api/stats.api.ts
     │   │   ├── hooks/use-my-stats.ts
     │   │   └── screens/
     │   │       ├── my-stats-screen.tsx   # Salesperson stats: last-30-days KPI cards, performance table, calls-by-hour chart
     │   │       ├── calling-sim-screen.tsx # Pick the calling number: readable SIM numbers with carrier names, plus Use phone default
-    │   │       └── settings-screen.tsx   # Settings tab: Log out row and Clear local data with its confirm dialog
+    │   │       └── settings-screen.tsx   # Settings tab: WhatsApp app and First message rows above the Calling SIM, Do-not-track, Clear local data, and Log out rows
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
+    │       ├── db/call-history-db.ts     # Local call history: one row per filled call, 1000-row FIFO, one-time call-log backfill
+    │       ├── db/scheduled-reminders-db.ts # Booked reminders: save, read all, delete by lead id or by called number
     │       ├── hooks/use-permissions.ts  # Runtime permissions check, request, settings link
     │       ├── hooks/use-call-tracker.ts # Call-state listener: opens the post-call popup when a call ends (no call-log reading)
     │       ├── hooks/use-janitor.ts      # 1-hour check and 5-strike give-up filler
@@ -244,8 +253,11 @@ app/
     └── shared/
         ├── api/
         │   ├── api-client.ts             # Axios HTTP client with token header
-        │   └── sim-module.ts             # Kotlin module bridge: read SIM numbers, place the call on the matching SIM
+        │   ├── sim-module.ts             # Kotlin module bridge: read SIM numbers, place the call on the matching SIM
+        │   └── whatsapp-module.ts        # Kotlin module bridge: open WhatsApp or WhatsApp Business on a chat with optional text
         └── utils/
             ├── phone-formatter.ts        # libphonenumber-js E.164 normalization
-            └── calling-sim.ts            # The chosen calling number on this phone (AsyncStorage)
+            ├── calling-sim.ts            # The chosen calling number on this phone (AsyncStorage)
+            ├── whatsapp-settings.ts      # The chosen WhatsApp app and the first-message switch and text on this phone (AsyncStorage)
+            └── whatsapp-chat.ts          # Opens the chosen WhatsApp app on a number's chat, with the first message when set
 ```

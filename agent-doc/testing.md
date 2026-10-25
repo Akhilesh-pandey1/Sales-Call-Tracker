@@ -120,8 +120,8 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - Tapping outside the post-call popup or pressing the back button does nothing — Submit is the only way through, for lead and keypad calls alike.
 - Tapping Log out on the Settings screen sends any unsent calls first and returns to the Login screen; with airplane mode and unsent calls it shows how many are waiting and stays logged in.
 - The My Stats calls-by-hour chart opens on Today.
-- The tab bar shows three tabs with icons — Dialer (phone), My Stats (bar chart), Settings (gear) — and the My Stats header has no gear button.
-- No screen draws content under the status bar (Login, Dialer, My Stats, Settings).
+- The tab bar shows five tabs with icons — Dialer, Scheduled, History, My Stats, Settings — and the My Stats header has no gear button.
+- No screen draws content under the status bar (Login, Dialer, Scheduled, History, My Stats, Settings).
 - The Settings "Clear local data" row shows its full title and description, and tapping it opens the confirm dialog.
 - Holding the dialer backspace clears the whole typed number; a single tap still deletes one character.
 - My Stats shows the Last-30-days KPI cards, the performance table, and the Calls-by-hour chart with its period switch — and no most-contacted-numbers table.
@@ -143,3 +143,10 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - After the SIMs are swapped between slots, the next call still leaves on the stored number.
 - Removing the chosen SIM from the phone blocks the call with "This SIM number is not in the phone." — nothing is dialed or recorded; picking again in Settings fixes it.
 - The reminder notification shows the white phone icon in the status bar and the full-color app icon in the notification drawer.
+- The History tab backfills from the phone's call log on its first open, shows newest first, 50 rows per page with Load-more; Do-not-track numbers never appear.
+- A History row shows the number, an out or in mark, the time, and the result; Copy shows "Number copied."; the WhatsApp button opens the chosen app on that number's chat; a booked number carries the Scheduled badge.
+- A call made while the app was closed appears in History at the next tab open; past 1000 rows, the oldest row disappears as a new one arrives.
+- The Scheduled tab lists bookings Due first, then Upcoming soonest first, and shows "You have N leads you have not called." with the count as a badge on the tab.
+- Tapping a Scheduled row opens the booked lead's card ready to call; tapping the notification removes that row; the row also leaves when the number is called or 24 hours pass its booked time.
+- Submitting the keypad post-call popup clears the typed number to blank; the Automated card keeps its number and its Copy button copies it with "Number copied."
+- Settings shows the WhatsApp app row (WhatsApp or WhatsApp Business, WhatsApp preselected) and the First message row; with the switch on, the WhatsApp button opens the chat with the text pre-typed; a missing chosen app shows "WhatsApp is not installed."

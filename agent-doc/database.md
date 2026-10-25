@@ -2,7 +2,7 @@
 
 ## Overview
 - **Server Database**: Neon PostgreSQL (Singapore region).
-- **Client Database**: SQLite on Android phones — `pending_calls`, `do_not_track`, `sweep_state`, `scheduled_reminders`.
+- **Client Database**: SQLite on Android phones — `pending_calls`, `do_not_track`, `sweep_state`, `scheduled_reminders`, `call_history`.
 - **Timezone**: All timestamps are stored in UTC.
 
 ---
@@ -152,6 +152,26 @@ CREATE TABLE scheduled_reminders (
 
 - `lead_id` is the reminder's key: the lead's id for lead bookings, or a stable negative key derived from the phone number for keypad bookings — so a keypad key can never collide with a real lead id. Rebooking the same number replaces the row.
 - Submitting a call to the booked number deletes the row, matched by normalized phone number.
+
+### `call_history`
+Holds the salesperson's call history on the phone — every call the app records in both directions, shown on the History tab. Local only, never synced.
+
+```sql
+CREATE TABLE call_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    phone_number TEXT NOT NULL,
+    direction TEXT NOT NULL,
+    call_at TEXT NOT NULL,
+    duration_seconds INTEGER NOT NULL DEFAULT 0
+);
+```
+
+- `direction` is `outgoing` or `incoming`; `duration_seconds` above 0 means connected, 0 means not connected.
+- `call_at` is the call's real time in UTC — the filled `dialed_at` for app-dialed calls, the log time for sweep-caught incoming calls.
+- One row is written per call, at the moment the call's real time and duration are known — before any sync, so queue cleanup never touches history.
+- A Do-not-track number never gets a history row.
+- The table keeps at most 1000 rows — an insert past 1000 deletes the oldest row first.
+- The first open after the update backfills the table once from the phone's own call log, skipping Do-not-track numbers.
 
 ---
 

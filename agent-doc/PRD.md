@@ -1,33 +1,8 @@
-# PRD — Scheduled Lead Expiry
+ I have given my salesperson this calling thing. Okay. So after that, I got the three, three feedbacks, which I need to correct. First feedback is that we need a call history also there. Like we need to save the call history, like call history with the like fourth option we should give their call history. So user can you know see all the college trees there like copy paste there, copy button there, connect to whatsapp or whatsapp business whatever. Okay that button should be there. and all things if it is scheduled so it should show the scheduled also that it is it is actually scheduled okay and this is this is first feedback second feedback is after calling in a keypad like they have clicked on do not schedule or schedule whatever after that the number it is actually showing there so it should be removed automatically so that they should not have any confusion that they have to call in next number so it should be blank so okay that is the second thing they need to do we need to do and third thing is this if actually they they copy the number from the automatic dialer okay so if they have to copy they need it actually okay if they need it so automatically just copy button okay copy automatically just copy button should be there so do copy button copy button should be there so directly now they can call through the dialer i mean they directly come to our dialer after copy so they don't have to you know copy then paste in another dialer then come to our dialer and then paste it because it is a two three step extra for a salesperson which they want to avoid and definitely it is a right thing to do so these three features we need to add so tell me what can possible what is not possible and all okay
 
-## Background scheduler for expired bookings
+ In the settings we have to give the button of WhatsApp and WhatsApp business What by default WhatsApp selected? So directly when user click in the in the screen we will show the button of WhatsApp and WhatsApp business Okay, only one we will show whatever user has selected icon so directly That particular software we will open whatsapp or whatsapp business with previous chat if there or new chat Okay with that number
 
-- A background scheduler runs a cleanup job every 1 hour.
-- The scheduler is APScheduler (Python).
-- The job finds every lead whose scheduled time has passed and whose booking is older than the expiry window (`SCHEDULE_EXPIRE_HOURS`).
-- The job clears those bookings: `scheduled_by = None`, `scheduled_at = None`.
-- Cleared leads return to the shared lead pool, so any salesperson can get them again.
-- The clear-on-request inside `serve_next_lead` is removed — the hourly scheduler is the only place that releases expired bookings.
+ one more button actually we have to give the set one more button of scheduled schedule one new tab that tab is like schedule up i'm not sure is it correct to go for or not like no we should go as a notification center or as a schedule center i'm not sure But like there can be a case when a notification came but user did not notice it. And he clicked the cross button so all the notification gone. But that particular lead call never happened. So that particular all the notification in mobile or something can come out like all missed or something we can show.
 
-## Calls by hour — values inside the bars
+Also, give one option. It's not fixed; it should be optional, like connected, whenever there should be a message or not. Sorry, I mean his first message automatically there. For example, they want to write: “Hello sir, hum Apex album AI se bol rahe hain, baat kar rahe hain, kind of, okay.” So this should be the first message if they want to send it, if it is possible or not. I don't know, but I'm just writing. Okay.
 
-- Each bar keeps its total value on top of the bar; that stays as it is.
-- Inside each bar, the outgoing and incoming counts must sit in the vertical middle of their own colored segment — outgoing count centered in the outgoing part, incoming count centered in the incoming part.
-- This matches the calls-by-hour chart on the website.
-
-## Dialer — call from the salesperson's chosen SIM number
-
-- The salesperson picks their SIM by phone number once, in the app's settings — never by slot.
-- At every dial, the app reads the active SIMs and their numbers (`READ_PHONE_STATE`, already asked at login).
-- The app finds the slot where that number currently lives and places the call on that slot with no SIM picker (`TelecomManager.placeCall` with the SIM's account handle).
-- If the stored number is not present in any slot, the app shows an error — "This SIM number is not in the phone" — and does not dial.
-- Numbers are matched only after normalizing format (`+91…` vs `0…`).
-- If a SIM's number cannot be read from the phone, the app asks the user to pick from the readable numbers once.
-- Salespeople can swap SIMs between slots; the next call automatically follows the number.
-
-## Reminder notification — show the app icon
-
-- Today the reminder notification comes without the app icon — it shows a blank or plain shape.
-- The reminder notification must show the app icon.
-- The status-bar icon must be a dedicated white-on-transparent notification icon, set as the notification's small icon (`notifee` `android.smallIcon`) — Android flattens any colored icon to plain white there, so the normal app icon cannot be used.
-- In the notification drawer, the full-color app icon shows as the large icon.

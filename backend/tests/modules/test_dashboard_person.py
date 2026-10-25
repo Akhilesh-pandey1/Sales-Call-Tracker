@@ -767,6 +767,80 @@ def test_person_dashboard_top_numbers_rank_by_total_talk(
         assert data["last_30_days"]["seconds"] == 1560
 
 
+def test_person_dashboard_carries_office_hours_window_and_label(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        salesperson: User = create_user_fixture(
+            name="rep_window", role="salesperson", token="rep-window-token"
+        )
+        response, data = fetch_person_dashboard(
+            client, "rep-window-token", salesperson.id
+        )
+        assert response.status_code == 200
+        assert data["office_hours"] == {"start_time": "10:00", "end_time": "19:00"}
+        assert data["office_hours_label"] == "10 to 7"
+
+
+def test_person_dashboard_label_follows_window_saved_earlier(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_window", role="manager", token="mgr-window-token")
+        salesperson: User = create_user_fixture(
+            name="rep_saved_window", role="salesperson", token="rep-saved-token"
+        )
+        manager_headers: dict[str, str] = {"Authorization": "Bearer mgr-window-token"}
+        saved_window: dict[str, str] = {"start_time": "09:30", "end_time": "18:15"}
+
+        save_response: Response = client.put(
+            "/api/settings/office-hours", json=saved_window, headers=manager_headers
+        )
+        assert save_response.status_code == 200
+
+        response, data = fetch_person_dashboard(
+            client, "rep-saved-token", salesperson.id
+        )
+        assert response.status_code == 200
+        assert data["office_hours"] == {"start_time": "09:30", "end_time": "18:15"}
+        assert data["office_hours_label"] == "9:30 to 6:15"
+
+
+def test_person_dashboard_label_uses_twelve_hour_minutes_only(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(name="manager_clock", role="manager", token="mgr-clock-token")
+        salesperson: User = create_user_fixture(
+            name="rep_clock", role="salesperson", token="rep-clock-token"
+        )
+        manager_headers: dict[str, str] = {"Authorization": "Bearer mgr-clock-token"}
+        saved_window: dict[str, str] = {"start_time": "12:45", "end_time": "21:05"}
+
+        save_response: Response = client.put(
+            "/api/settings/office-hours", json=saved_window, headers=manager_headers
+        )
+        assert save_response.status_code == 200
+
+        response, data = fetch_person_dashboard(
+            client, "rep-clock-token", salesperson.id
+        )
+        assert response.status_code == 200
+        assert data["office_hours_label"] == "12:45 to 9:05"
+
+        midnight_window: dict[str, str] = {"start_time": "00:30", "end_time": "10:00"}
+        midnight_response: Response = client.put(
+            "/api/settings/office-hours", json=midnight_window, headers=manager_headers
+        )
+        assert midnight_response.status_code == 200
+
+        midnight_fetch, midnight_data = fetch_person_dashboard(
+            client, "rep-clock-token", salesperson.id
+        )
+        assert midnight_fetch.status_code == 200
+        assert midnight_data["office_hours_label"] == "12:30 to 10"
+
+
 def test_person_dashboard_fewer_than_five_numbers(
     app: Flask, client: FlaskClient
 ) -> None:

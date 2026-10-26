@@ -75,14 +75,14 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 
-- [ ] Download saves one .csv of the whole list into Downloads, named like `26-10-2026-18-03-26.csv`, and no share sheet opens (`specs/my-list.md` — Download saves a unique file).
-- [ ] The columns stay Number, Status, Interested, Do not call, Notes, Called date, Called time, with each row's called date and called time kept (`specs/my-list.md` — Download requirement).
-- [ ] A toast confirms the save with the file's name, and a failed save shows a short user-facing error without opening a share sheet (`decisions.md` — Decision 4).
+- [x] Download saves one .csv of the whole list into Downloads, named like `26-10-2026-18-03-26.csv`, and no share sheet opens (`specs/my-list.md` — Download saves a unique file).
+- [x] The columns stay Number, Status, Interested, Do not call, Notes, Called date, Called time, with each row's called date and called time kept (`specs/my-list.md` — Download requirement).
+- [x] A toast confirms the save with the file's name, and a failed save shows a short user-facing error without opening a share sheet (`decisions.md` — Decision 4).
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`

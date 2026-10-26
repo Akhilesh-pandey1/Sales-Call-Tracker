@@ -63,7 +63,7 @@ export function MyListView({ onStartCalling }: MyListViewProps) {
     setIsUploadDialogOpen(false);
     reloadListCounts();
   };
-  const handleDownloadPress = () => download.exportListToCsv();
+  const handleDownloadPress = () => download.downloadListToCsv();
 
   return (
     <View className="flex-1 bg-background">

@@ -1,27 +1,27 @@
-import { Share, ToastAndroid } from 'react-native';
+import { ToastAndroid } from 'react-native';
 import { useCallback, useRef, useState } from 'react';
 import { readMyListNumbers } from '@/features/tracking';
 import { buildMyListCsv } from '../lib/build-my-list-csv';
-
-const exportFailedMessage = 'Could not export your list. Try again.';
-const emptyListMessage = 'Your list is empty. Nothing to export.';
-const exportShareTitle = 'My List';
+import { buildMyListCsvFileName } from '../lib/build-my-list-csv-file-name';
+import { saveMyListCsvToDownloads } from '../lib/save-my-list-csv-to-downloads';
 
 export type UseMyListDownload = {
-  isExporting: boolean;
-  exportListToCsv: () => Promise<void>;
+  isDownloading: boolean;
+  downloadListToCsv: () => Promise<void>;
 };
 
 export function useMyListDownload(): UseMyListDownload {
-  const [isExporting, setIsExporting] = useState(false);
-  const isExportInProgressRef = useRef(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const isDownloadInProgressRef = useRef(false);
 
-  const exportListToCsv = useCallback(async (): Promise<void> => {
-    if (isExportInProgressRef.current) {
+  const downloadListToCsv = useCallback(async (): Promise<void> => {
+    if (isDownloadInProgressRef.current) {
       return;
     }
-    isExportInProgressRef.current = true;
-    setIsExporting(true);
+    const saveFailedMessage = 'Could not save your list. Try again.';
+    const emptyListMessage = 'Your list is empty. Nothing to download.';
+    isDownloadInProgressRef.current = true;
+    setIsDownloading(true);
     try {
       const listNumbers = await readMyListNumbers();
       if (listNumbers.length === 0) {
@@ -29,18 +29,22 @@ export function useMyListDownload(): UseMyListDownload {
         return;
       }
       const csvText = buildMyListCsv(listNumbers);
-      await Share.share({ title: exportShareTitle, message: csvText });
+      const savedAt = new Date();
+      const csvFileName = buildMyListCsvFileName(savedAt);
+      await saveMyListCsvToDownloads(csvText, csvFileName);
+      const savedMessage = `Saved ${csvFileName} in Downloads.`;
+      ToastAndroid.show(savedMessage, ToastAndroid.SHORT);
     } catch {
-      ToastAndroid.show(exportFailedMessage, ToastAndroid.SHORT);
+      ToastAndroid.show(saveFailedMessage, ToastAndroid.SHORT);
     } finally {
-      isExportInProgressRef.current = false;
-      setIsExporting(false);
+      isDownloadInProgressRef.current = false;
+      setIsDownloading(false);
     }
   }, []);
 
   const download: UseMyListDownload = {
-    isExporting,
-    exportListToCsv,
+    isDownloading,
+    downloadListToCsv,
   };
   return download;
 }

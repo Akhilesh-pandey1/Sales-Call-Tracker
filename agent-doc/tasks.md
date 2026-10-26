@@ -54,11 +54,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] Every My Stats response carries `office_hours_full_label` beside `office_hours_label`, computed on the server from the `office_hours` table (`api.md` — GET /api/dashboard/person/<id>; `decisions.md` — Decision 4).
-- [ ] The fuller label always shows minutes — `10:00 to 7:00` — while the short label keeps its minutes-only-when-needed form (`api.md` — office-hours label rules).
+- [x] Every My Stats response carries `office_hours_full_label` beside `office_hours_label`, computed on the server from the `office_hours` table (`api.md` — GET /api/dashboard/person/<id>; `decisions.md` — Decision 4).
+- [x] The fuller label always shows minutes — `10:00 to 7:00` — while the short label keeps its minutes-only-when-needed form (`api.md` — office-hours label rules).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard_person.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard_person.py -q` in `backend/`
 
 ## Task 5: App — My Stats shows the fuller office-hours label
 

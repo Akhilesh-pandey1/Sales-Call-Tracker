@@ -119,6 +119,7 @@ class PersonDashboardResponse(BaseModel):
     name: str
     office_hours: OfficeHoursResponse
     office_hours_label: str
+    office_hours_full_label: str
     today: PersonPeriodStats
     yesterday: PersonPeriodStats
     last_30_days: PersonThirtyDayStats

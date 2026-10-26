@@ -69,11 +69,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The "Last 30 days" heading carries the fuller label on its right, small and muted, exactly as the approved screen shows it (`screen.md` — My Stats; `decisions.md` — Decision 4).
-- [ ] Nothing shows before the first successful fetch, and the label follows whatever window the manager last saved (`decisions.md` — Decision 4).
+- [x] The "Last 30 days" heading carries the fuller label on its right, small and muted, exactly as the approved screen shows it (`screen.md` — My Stats; `decisions.md` — Decision 4).
+- [x] Nothing shows before the first successful fetch, and the label follows whatever window the manager last saved (`decisions.md` — Decision 4).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 6: Backend — startup drops the legacy outcome column
 

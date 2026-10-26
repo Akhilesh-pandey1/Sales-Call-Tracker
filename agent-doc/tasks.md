@@ -84,8 +84,8 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] When the `calls` table has an `outcome` column, startup drops it; when it does not, startup skips it and nothing else changes (`database.md` — calls table rules).
-- [ ] `user_id` and every live column stay untouched — the dashboards keep counting per person (`database.md` — calls table rules).
+- [x] When the `calls` table has an `outcome` column, startup drops it; when it does not, startup skips it and nothing else changes (`database.md` — calls table rules).
+- [x] `user_id` and every live column stay untouched — the dashboards keep counting per person (`database.md` — calls table rules).
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/test_foundation.py -q` in `backend/`
+- [x] Tests pass: `python -m pytest tests/test_foundation.py -q` in `backend/`

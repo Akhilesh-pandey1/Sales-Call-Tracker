@@ -2,11 +2,12 @@ import notifee, {
   AuthorizationStatus,
   type NotificationSettings,
 } from '@notifee/react-native';
-import { Alert, Linking, Platform } from 'react-native';
+import { Linking, Platform } from 'react-native';
 import {
   isBatteryOptimizationEnabled,
   requestIgnoreBatteryOptimization,
 } from './battery-module';
+import { showAlertAndWaitForClose } from './show-alert-and-wait';
 
 function readIsNotificationAuthorized(
   notificationSettings: NotificationSettings,
@@ -35,8 +36,8 @@ async function openAppNotificationSettings(): Promise<void> {
   await Linking.openSettings();
 }
 
-function showNotificationsOffAlert(): void {
-  Alert.alert(
+async function showNotificationsOffAlert(): Promise<void> {
+  await showAlertAndWaitForClose(
     'Reminders are off',
     'Turn on notifications for this app to get call reminders on time.',
     [
@@ -61,7 +62,7 @@ export async function ensureRemindersAreReady(): Promise<void> {
   if (!areNotificationsEnabled) {
     const areEnabledAfterRequest = await readAreNotificationsEnabledAfterRequesting();
     if (!areEnabledAfterRequest) {
-      showNotificationsOffAlert();
+      await showNotificationsOffAlert();
       return;
     }
   }

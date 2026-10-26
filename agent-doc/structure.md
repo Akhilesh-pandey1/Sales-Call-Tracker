@@ -203,9 +203,8 @@ app/
 ├── global.css                       # NativeWind CSS theme and styles
 ├── App.tsx                          # Root container: Auth check → Tab navigation
 ├── index.js                         # React Native app registry entry point
-├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE, and the tel: dial intent filter that catches numbers tapped outside the app)
+├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE, and the tel: intent filter, VIEW + DIAL, that catches numbers tapped outside the app)
 │   └── app/src/main/
-│       ├── java/com/apexsalescall/SimCallModule.kt    # Kotlin bridge: reads the SIM numbers, places the call on the matching SIM
 │       ├── java/com/apexsalescall/WhatsAppModule.kt   # Kotlin bridge: opens WhatsApp or WhatsApp Business on a number's chat with optional prefilled text
 │       └── res/drawable-*dpi/ic_reminder_icon.png     # White notification glyph on transparent background, five densities
 └── src/
@@ -225,7 +224,7 @@ app/
     │   │   ├── components/permission-banner.tsx
     │   │   ├── components/lead-call-card.tsx # Lead calling card with a Copy button for the lead's number
     │   │   ├── components/post-call-dialog.tsx  # Post-call popup: native date/time picker + schedule question + Go-to-next checkbox + optional Interested / Do-not-call-again outcome buttons + Notes box + Submit; locked so only Submit closes it; keypad variant shows the number with the same schedule question, and submitting it clears the typed number
-    │   │   ├── lib/call-launcher.ts     # Starts the call: chosen-SIM placement through TelecomManager; Android default SIM when none picked or CALL_PHONE off
+    │   │   ├── lib/call-launcher.ts     # Starts the call: Android's direct-call intent; the phone's own dialer when CALL_PHONE is off
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
     │   │   ├── hooks/use-post-call-submit.ts  # Submit click: read call log, send to server, delete or save the row
@@ -245,8 +244,7 @@ app/
     │   │   ├── hooks/use-my-stats.ts
     │   │   └── screens/
     │   │       ├── my-stats-screen.tsx   # Salesperson stats: last-30-days KPI cards, performance table, calls-by-hour chart
-    │   │       ├── calling-sim-screen.tsx # Pick the calling number: readable SIM numbers with carrier names, plus Use phone default
-    │   │       └── settings-screen.tsx   # Settings tab: WhatsApp app and First message rows above the Calling SIM, Do-not-track, Clear local data, and Log out rows
+    │   │       └── settings-screen.tsx   # Settings tab: WhatsApp app and First message rows above the Do-not-track, Clear local data, and Log out rows
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
     │       ├── db/call-history-db.ts     # Local call history: one row per filled call, 1000-row FIFO, one-time call-log backfill
@@ -259,11 +257,9 @@ app/
     └── shared/
         ├── api/
         │   ├── api-client.ts             # Axios HTTP client with token header
-        │   ├── sim-module.ts             # Kotlin module bridge: read SIM numbers, place the call on the matching SIM
         │   └── whatsapp-module.ts        # Kotlin module bridge: open WhatsApp or WhatsApp Business on a chat with optional text
         └── utils/
             ├── phone-formatter.ts        # libphonenumber-js E.164 normalization
-            ├── calling-sim.ts            # The chosen calling number on this phone (AsyncStorage)
             ├── whatsapp-settings.ts      # The chosen WhatsApp app and the first-message switch and text on this phone (AsyncStorage)
             └── whatsapp-chat.ts          # Opens the chosen WhatsApp app on a number's chat, with the first message when set
 ```

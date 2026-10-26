@@ -265,3 +265,17 @@
 - **Decision 207:** The calls-by-hour chart loses its extra bar. The bars run from the window's start hour through the hour before its end — nine bars for a 10-to-7 window, labeled 10, 11, 12, 1 through 6. A call starting in hour H counts in the bar labeled H, and a call starting exactly at the window's end minute counts in the last bar, so no kept call goes missing from the chart. The buckets are computed on the backend, so My Stats and the manager dashboard change together.
 
 - **Decision 208:** The phone's History keeps only calls the dashboard would count, and no settings endpoint opens to salespeople — the office-hours GET stays manager-only. The window reaches the phone inside responses it already receives: the login response carries it beside the token, and every My Stats fetch returns it with its short label. The app stores the window it last received; a call whose IST start minute falls outside that window never gets a history row — checked at the same moment the Do-not-track check runs — and the first-open backfill and every sweep apply the same filter. With no window received yet the phone uses the documented default, 10:00–19:00 IST. History rows already stored stay untouched.
+
+---
+
+## Round 12
+
+- **Decision 209:** The phone's History takes only calls from the install moment onward, and the install moment needs no key of its own — the existing "history last loaded" marker carries it. On a fresh start the marker does not exist; the first load treats "now" as its start line and saves that as the marker, so no before-install call ever imports. Every later load reads from the marker onward as it already does. A phone updating the app keeps its marker and re-imports nothing, and history rows already stored stay untouched. The sweep and live recording are untouched — they never imported before-first-open calls anyway.
+
+- **Decision 210:** The history backfill inserts the same call once, even when the phone's call log holds two rows for it. Inside one batch, a fresh set of call keys starts empty beside the stored-keys set; after a row's call key is built, a key already in either set is skipped, and every accepted key joins the batch set before continuing. Two log rows for one real call insert once.
+
+- **Decision 211:** The My List Download CSV carries the columns Number, Status, Interested, Do not call, Notes, Called date, Called time. Called date shows DD/MM and Called time shows HH:MM in the phone's own time — the way the History tab shows it — and both cells stay empty when the number was never called. The formula guard and the share-sheet flow stay exactly as they are.
+
+- **Decision 212:** My Stats shows the office hours in the fuller clock form — like "10:00 to 7:00" — on the right of the "Last 30 days" heading. The server computes the fuller label from the stored window and sends it with every My Stats fetch, so it follows whatever window the manager last saved, and nothing shows before the first successful fetch. The short label keeps its existing use.
+
+- **Decision 213:** The production crash "column users.auth_token does not exist" came from old code — its User model still had `auth_token` — running against the already-migrated database. The fix is deploying the current code; its startup migration moves any leftover tokens into the sessions table and drops the column when present, and skips everything when the column is already gone. No code change was made for this crash.

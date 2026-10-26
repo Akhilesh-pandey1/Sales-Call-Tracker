@@ -150,13 +150,13 @@ The My List post-call popup SHALL carry the same Schedule choice the automated f
 - **WHEN** its notification is tapped, its number is called, or 24 hours pass its booked time
 - **THEN** it leaves the Scheduled tab like any other booking
 
-### Requirement: Download exports the whole list
-The system SHALL export the whole list as a CSV — number, status, interested, do-not-call, notes, called date, called time — through Android's share sheet, each row keeping its called date and called time so today's slice is a filter in the spreadsheet app.
+### Requirement: Download saves the whole list as a file
+The system SHALL save the whole list as one real .csv file in the phone's Downloads folder — number, status, interested, do-not-call, notes, called date, called time — named by the save moment as date and full time, like 26-10-2026-18-03-26.csv, so every download is its own file; no share sheet opens. A toast SHALL confirm the save with the file's name. Each row keeps its called date and called time so today's slice is a filter in the spreadsheet app.
 
-#### Scenario: Full export through the share sheet
+#### Scenario: Download saves a unique file
 - **GIVEN** a list of any size
 - **WHEN** Download is tapped
-- **THEN** one CSV of the whole list — number, status, interested, do-not-call, notes, called date, called time — opens in Android's share sheet
+- **THEN** one .csv of the whole list — number, status, interested, do-not-call, notes, called date, called time — lands in Downloads with the date-time name, no share sheet opens, and a toast confirms the save with the file's name
 
 #### Scenario: Rows keep their dates
 - **GIVEN** rows called on different days

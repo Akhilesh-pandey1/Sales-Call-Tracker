@@ -1,91 +1,88 @@
-## Task 1: App — history starts from the first open, never from the whole log
+## Task 1: App — the tel: intent filter also answers the dial intent
 
-**Description:** The history backfill's first load floors at "now": the missing `history_last_loaded_at` marker means the read window starts at the current moment and that moment is saved as the marker, so no before-install call ever imports.
-
-**Blocked by:** None
-
-**Status:** Not started
-
-**Acceptance criteria:**
-- [x] On a fresh start the first backfill reads nothing older than the open moment, so before-install calls never get a history row (`decisions.md` — Decision 1).
-- [x] A later open reads from the marker onward exactly as before, and history rows already stored stay untouched (`decisions.md` — Decision 1).
-- [x] The install moment needs no new storage key — the existing `history_last_loaded_at` marker carries it (`decisions.md` — Decision 1).
-
-**Verification:**
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-
-## Task 2: App — one history batch never inserts the same call twice
-
-**Description:** The backfill's batch loop dedupes against itself: after a row's call key is built, a key already in the stored-keys set or the batch set is skipped, and every accepted key joins the batch set before continuing.
-
-**Blocked by:** 1
-
-**Status:** Not started
-
-**Acceptance criteria:**
-- [x] After `entryCallKey` is built, a key found in the stored set or the batch set is skipped, and every accepted key is added to the batch set before continuing (`decisions.md` — Decision 2).
-- [x] Two call-log rows for the same call (same number, same call time) insert exactly one history row (`decisions.md` — Decision 2).
-
-**Verification:**
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-
-## Task 3: App — the Download CSV splits called date and called time
-
-**Description:** The My List Download CSV carries the columns Number, Status, Interested, Do not call, Notes, Called date, Called time — date as DD/MM and time as HH:MM in the phone's own time, both empty when the number was never called.
+**Description:** The Android manifest's `tel:` intent filter answers ACTION_DIAL beside ACTION_VIEW, so phones whose select-a-number "Call" button fires the dial intent can offer the app in Android's chooser (`specs/tapped-number-capture.md` — catch requirement).
 
 **Blocked by:** None
 
 **Status:** Not started
 
 **Acceptance criteria:**
-- [x] The CSV header reads Number, Status, Interested, Do not call, Notes, Called date, Called time, and the formula guard plus the share flow stay unchanged (`decisions.md` — Decision 3).
-- [x] Called date shows DD/MM and Called time shows HH:MM in phone-local time, reusing the way the History tab formats its row times (`decisions.md` — Decision 3).
-- [x] A number never called leaves both cells empty (`decisions.md` — Decision 3).
+
+- [ ] The `tel:` intent filter on MainActivity carries ACTION_VIEW and ACTION_DIAL, keeping DEFAULT and BROWSABLE (`specs/tapped-number-capture.md` — Catch tapped numbers through Android's chooser).
+- [ ] Nothing else in the capture flow changes — the chooser probe, keypad fill, and skip rules stay as they are.
 
 **Verification:**
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
-## Task 4: Backend — My Stats responses carry the fuller office-hours label
+- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
-**Description:** The server computes a second label from the stored window — 12-hour clock, minutes always shown, no AM/PM, like `10:00 to 7:00` — and sends it as `office_hours_full_label` beside the short label in every My Stats response.
+## Task 2: App — login-pass popups never overlap, so the tapped-number step shows on first login
+
+**Description:** Each login permission pass step waits until the previous popup is fully closed before its own popup shows, so the reminders popup can never swallow the tapped-number step and the step always appears on the first login (`specs/tapped-number-capture.md` — one-time setup requirement).
 
 **Blocked by:** None
 
 **Status:** Not started
 
 **Acceptance criteria:**
-- [x] Every My Stats response carries `office_hours_full_label` beside `office_hours_label`, computed on the server from the `office_hours` table (`api.md` — GET /api/dashboard/person/<id>; `decisions.md` — Decision 4).
-- [x] The fuller label always shows minutes — `10:00 to 7:00` — while the short label keeps its minutes-only-when-needed form (`api.md` — office-hours label rules).
+
+- [ ] No two login-pass popups can overlap — each step waits for the previous popup to be fully closed (`specs/tapped-number-capture.md` — Popups never overlap on first login).
+- [ ] On a first login whose reminders step showed its own popup, the tapped-number step still shows instead of being dropped (`specs/tapped-number-capture.md` — Popups never overlap on first login).
+- [ ] The skip rules stay exactly as they are — silent skip when already the handler, permanent refusal saved by "Don't show again" (`specs/tapped-number-capture.md` — Don't-show-again requirement).
 
 **Verification:**
-- [x] Tests pass: `python -m pytest tests/modules/test_dashboard_person.py -q` in `backend/`
 
-## Task 5: App — My Stats shows the fuller office-hours label
+- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
-**Description:** The My Stats screen renders the fuller label on the right of the "Last 30 days" heading — the office timing like "10:00 to 7:00" — and shows nothing there before the first successful fetch.
+## Task 3: App — the Dialer Paste button fills only real phone numbers
 
-**Blocked by:** 4
-
-**Status:** Not started
-
-**Acceptance criteria:**
-- [x] The "Last 30 days" heading carries the fuller label on its right, small and muted, exactly as the approved screen shows it (`screen.md` — My Stats; `decisions.md` — Decision 4).
-- [x] Nothing shows before the first successful fetch, and the label follows whatever window the manager last saved (`decisions.md` — Decision 4).
-
-**Verification:**
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-
-## Task 6: Backend — startup drops the legacy outcome column
-
-**Description:** Startup cleanup drops the dead `outcome` column from the `calls` table whenever it exists, the same way the legacy auth_token cleanup works — Postgres gets DROP COLUMN IF EXISTS, SQLite gets the inspect-then-drop treatment.
+**Description:** The Dialer paste button extracts the first real phone number from the clipboard text with libphonenumber-js and fills the keypad with it in E.164; a clipboard with no number leaves the keypad untouched with a toast (`decisions.md` — Decision 2; `specs/my-list.md` — the same library the upload uses).
 
 **Blocked by:** None
 
 **Status:** Not started
 
 **Acceptance criteria:**
-- [x] When the `calls` table has an `outcome` column, startup drops it; when it does not, startup skips it and nothing else changes (`database.md` — calls table rules).
-- [x] `user_id` and every live column stay untouched — the dashboards keep counting per person (`database.md` — calls table rules).
+
+- [ ] Pasting clipboard text fills the keypad with the first number found in it, in E.164 form (`decisions.md` — Decision 2).
+- [ ] A clipboard holding no number shows the toast "No number found in what you copied." and leaves the keypad exactly as it was (`decisions.md` — Decision 2).
+- [ ] An empty clipboard keeps its existing "Nothing copied." toast and changes nothing.
 
 **Verification:**
-- [x] Tests pass: `python -m pytest tests/test_foundation.py -q` in `backend/`
+
+- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+
+## Task 4: App — the Calling SIM feature is removed
+
+**Description:** Every trace of the Calling SIM feature is deleted: the Settings row and picker screen, its hook, utility, bridge, native module and its registration, the SIM logic in the call launcher, and the READ_PHONE_NUMBERS ask — calls always place on the phone default (`decisions.md` — Decision 3; `specs/settings-tab.md` — four-row menu).
+
+**Blocked by:** 2
+
+**Status:** Not started
+
+**Acceptance criteria:**
+
+- [ ] Settings shows exactly the WhatsApp, Do not track numbers, Clear local data, and Log out rows, and the SIM screen, hook, utility, bridge, native module, and its registration are deleted (`specs/settings-tab.md` — Four-row menu with no section header).
+- [ ] Every call places on the phone default through the direct call, and with CALL_PHONE off the number still hands to the phone's own dialer untracked.
+- [ ] READ_PHONE_NUMBERS is asked nowhere — the login pass asks only CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE, then the reminders check, then the tapped-number step (`decisions.md` — Decision 3).
+
+**Verification:**
+
+- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+
+## Task 5: App — Download saves the My List CSV as a real file
+
+**Description:** The My List Download button writes the whole list as one real .csv file into the phone's Downloads folder, named by the save moment as date and full time, with no share sheet and a confirming toast (`decisions.md` — Decision 4; `specs/my-list.md` — Download saves the whole list as a file).
+
+**Blocked by:** None
+
+**Status:** Not started
+
+**Acceptance criteria:**
+
+- [ ] Download saves one .csv of the whole list into Downloads, named like `26-10-2026-18-03-26.csv`, and no share sheet opens (`specs/my-list.md` — Download saves a unique file).
+- [ ] The columns stay Number, Status, Interested, Do not call, Notes, Called date, Called time, with each row's called date and called time kept (`specs/my-list.md` — Download requirement).
+- [ ] A toast confirms the save with the file's name, and a failed save shows a short user-facing error without opening a share sheet (`decisions.md` — Decision 4).
+
+**Verification:**
+
+- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`

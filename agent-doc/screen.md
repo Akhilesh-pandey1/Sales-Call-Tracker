@@ -282,12 +282,11 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 ### Screen 9: Settings - fifth tab
 - Plain "Settings" title - no back arrow; this is a top-level tab
 - Leaving and coming back always lands here - going to another tab and returning opens the Settings home, never a sub-page left open
-- Five-row menu, each row icon + title + short description + chevron:
+- Four-row menu, each row icon + title + short description + chevron:
   1. WhatsApp - opens Screen 9d
-  2. Calling SIM - opens Screen 9c
-  3. Do not track numbers - opens Screen 9b
-  4. Clear local data - deletes only the unsent calls on this phone; opens the confirm dialog
-  5. Log out - sends unsent calls first, then signs out
+  2. Do not track numbers - opens Screen 9b
+  3. Clear local data - deletes only the unsent calls on this phone; opens the confirm dialog
+  4. Log out - sends unsent calls first, then signs out
 - Confirmation dialog on Clear local data tap - "This deletes N calls not yet sent to the server. Cannot be undone." (N is the real count of unsent calls on the phone)
 - Confirm - wipes only the unsent calls on the phone; server numbers stay untouched
 - Cancel - closes dialog without changes
@@ -312,20 +311,6 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 - Number already on the list: "This number is already on the list." - no duplicate row
 - List is empty: "No numbers yet. Use Add number to keep a personal number private."
 - Removing a number: the row disappears at once; that number is tracked again from now on
-
-→ Next: Screen 9c Calling SIM
-
-### Screen 9c: Calling SIM
-- Opens from the Settings Calling SIM row
-- SIM list - one item per SIM slot: "SIM 1 · Jio", "SIM 2 · Airtel" - the SIM's own number shows only when the phone has one
-- Current choice checkmarked; a pick saves at once - every later call leaves on that slot, no SIM picker ever
-- "Use phone default" item - calls go out on Android's default SIM again
-- The choice stays on the slot - SIMs swapped between slots keep the choice
-- No permissions are asked on this screen; with the Phone permission off, a note shows and calls stay on phone default
-
-**Edge cases:**
-- The phone shows no SIM numbers: a note says so and the phone default stays in use
-- A call fails on the chosen slot: "Could not place the call on this SIM." - nothing dialed, nothing recorded; picking the SIM again here is the fix
 
 → Next: Screen 9d WhatsApp
 

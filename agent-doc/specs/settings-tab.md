@@ -1,16 +1,16 @@
 ## Purpose
 
-Holds the Settings tab shell: the five-row menu, the always-reset navigation rule, and the section-header cleanup. Each row's behavior — WhatsApp choices, SIM choice, the Do-not-track list, clearing local data — lives in its own module spec.
+Holds the Settings tab shell: the four-row menu, the always-reset navigation rule, and the section-header cleanup. Each row's behavior — WhatsApp choices, the Do-not-track list, clearing local data — lives in its own module spec.
 
 ## Requirements
 
-### Requirement: Five-row menu with no section header
-The system SHALL show the Settings tab as a plain top-level tab — title "Settings", no back arrow — with a five-row menu: WhatsApp, Calling SIM, Do not track numbers, Clear local data, and Log out, each row opening its own screen or dialog, and SHALL show no "Local data" section header above the rows.
+### Requirement: Four-row menu with no section header
+The system SHALL show the Settings tab as a plain top-level tab — title "Settings", no back arrow — with a four-row menu: WhatsApp, Do not track numbers, Clear local data, and Log out, each row opening its own screen or dialog, and SHALL show no "Local data" section header above the rows.
 
-#### Scenario: Five rows render with no header
+#### Scenario: Four rows render with no header
 - **GIVEN** the Settings tab opens
 - **WHEN** it renders
-- **THEN** it shows exactly the WhatsApp, Calling SIM, Do not track numbers, Clear local data, and Log out rows — with no "Local data" section header above them
+- **THEN** it shows exactly the WhatsApp, Do not track numbers, Clear local data, and Log out rows — with no "Local data" section header above them
 
 #### Scenario: Clear local data row keeps its name
 - **GIVEN** the Settings list renders

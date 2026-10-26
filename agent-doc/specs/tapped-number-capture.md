@@ -1,11 +1,11 @@
 ## Purpose
 
-Catches phone numbers tapped anywhere on the phone — Contacts, WhatsApp, a browser, SMS — so the call goes out through the app's own keypad flow and is tracked like every call. Also settles once, at the login pass, whether the app takes over number taps at all, with a permanent no-thanks option.
+Catches phone numbers other apps hand to Android through the standard number handoffs — Contacts, WhatsApp, a browser, SMS — so the call goes out through the app's own keypad flow and is tracked like every call. Also settles once, at the login pass, whether the app takes over number taps at all, with a permanent no-thanks option.
 
 ## Requirements
 
 ### Requirement: Catch tapped numbers through Android's chooser
-The system SHALL answer `tel:` dial links through one intent filter on the app's main activity, so tapping a number outside the app offers our app in Android's chooser, and the salesperson can make the choice permanent with Always. The system SHALL NOT become the default phone app — incoming call screens, the in-call screen, and the home-screen dial button stay Android's.
+The system SHALL answer both standard number handoffs — the `tel:` view link and the dial intent — through one intent filter on the app's main activity, so tapping a number outside the app offers our app in Android's chooser, and the salesperson can make the choice permanent with Always. The system SHALL NOT become the default phone app — incoming call screens, the in-call screen, and the home-screen dial button stay Android's.
 
 #### Scenario: Chooser offers our app
 - **GIVEN** our app is not yet the handler for tapped numbers
@@ -46,22 +46,17 @@ The system SHALL open the Dialer tab with the caught number already typed in the
 - **THEN** the dialer opens normally with nothing filled
 
 ### Requirement: Caught calls follow the keypad call rules
-The system SHALL place a call started from a caught number through the same keypad flow: on the chosen SIM, recorded like every call, with the normal post-call popup. A Do-not-track number SHALL still place the call and never be recorded. With no SIM picked, the call SHALL leave on the phone default.
+The system SHALL place a call started from a caught number through the same keypad flow: on the phone default, recorded like every call, with the normal post-call popup. A Do-not-track number SHALL still place the call and never be recorded.
 
 #### Scenario: Tracked like a keypad call
 - **GIVEN** a caught number sits in the keypad
 - **WHEN** Call is tapped and the call completes
-- **THEN** the call places on the chosen SIM, records like a keypad call, and shows in History
+- **THEN** the call places on the phone default, records like a keypad call, and shows in History
 
 #### Scenario: Do-not-track number
 - **GIVEN** the caught number is on the Do-not-track list
 - **WHEN** Call is tapped
 - **THEN** the call places normally and nothing is recorded — no history row and no synced call
-
-#### Scenario: No SIM picked
-- **GIVEN** no calling SIM has been picked in Settings
-- **WHEN** Call is tapped on a caught number
-- **THEN** the call leaves on the phone default
 
 ### Requirement: Live lead flow stays undisturbed
 The system SHALL ignore a caught number while the automated lead call flow is on screen — the live flow keeps its number and its state.
@@ -72,7 +67,7 @@ The system SHALL ignore a caught number while the automated lead call flow is on
 - **THEN** the caught number is ignored — the lead flow keeps its number and its state
 
 ### Requirement: One-time setup at the login pass
-The system SHALL add one step to the login permission pass in the same step-by-step style: it SHALL check quietly which app handles tapped numbers and skip silently when ours already does; otherwise it SHALL show one short instruction line and fire Android's chooser once, the probe number never dialed.
+The system SHALL add one step to the login permission pass in the same step-by-step style: it SHALL check quietly which app handles tapped numbers and skip silently when ours already does; otherwise it SHALL show one short instruction line and fire Android's chooser once, the probe number never dialed. Each pass step SHALL wait until the previous popup is fully closed before its own popup shows, so no two popups ever overlap and this step always appears on the first login.
 
 #### Scenario: Already the handler — silent skip
 - **GIVEN** our app already handles tapped numbers
@@ -88,6 +83,11 @@ The system SHALL add one step to the login permission pass in the same step-by-s
 - **GIVEN** the salesperson left the step without picking our app and without "Don't show again"
 - **WHEN** the next login pass runs
 - **THEN** the step shows again, and keeps returning until picked or refused
+
+#### Scenario: Popups never overlap on first login
+- **GIVEN** a first login whose earlier pass steps showed their own popups
+- **WHEN** the tapped-number step's turn comes
+- **THEN** it waits until the previous popup is fully closed and then shows — the step always appears on the first login and is never dropped to a later app open
 
 ### Requirement: Don't-show-again is permanent and lives only on that screen
 The system SHALL show a "Don't show again" button on that login step only, and tapping it SHALL save the refusal on the phone permanently, so the step never appears again even when the app is never picked.

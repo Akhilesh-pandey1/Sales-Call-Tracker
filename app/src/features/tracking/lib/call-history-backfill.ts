@@ -37,14 +37,13 @@ async function saveHistoryLastLoadedAt(loadedAt: string): Promise<void> {
   await AsyncStorage.setItem(historyLastLoadedStorageKey, loadedAt);
 }
 
-function toRefreshSinceTimeMs(lastLoadedAt: string | null): number {
-  const wholeCallLogMinTimeMs = 0;
+function toRefreshSinceTimeMs(lastLoadedAt: string | null, openedAtMs: number): number {
   if (lastLoadedAt === null) {
-    return wholeCallLogMinTimeMs;
+    return openedAtMs;
   }
   const lastLoadedAtMs = new Date(lastLoadedAt).getTime();
   if (Number.isNaN(lastLoadedAtMs)) {
-    return wholeCallLogMinTimeMs;
+    return openedAtMs;
   }
   return lastLoadedAtMs;
 }
@@ -112,7 +111,7 @@ async function refreshCallHistoryFromCallLog(): Promise<void> {
     return;
   }
 
-  const nowMs = Date.now();
+  const openedAtMs = Date.now();
   const [countryCode, lastLoadedAt] = await Promise.all([
     readStoredCountry(),
     readHistoryLastLoadedAt(),
@@ -120,11 +119,11 @@ async function refreshCallHistoryFromCallLog(): Promise<void> {
   if (countryCode === null) {
     return;
   }
-  const sinceTimeMs = toRefreshSinceTimeMs(lastLoadedAt);
+  const sinceTimeMs = toRefreshSinceTimeMs(lastLoadedAt, openedAtMs);
   const callLogReadWarnMessage = 'Could not read the call log for the history refresh.';
   const callLogEntries = await safeReadCallLogEntries(
     sinceTimeMs,
-    nowMs,
+    openedAtMs,
     callLogReadWarnMessage,
   );
   if (callLogEntries === null) {
@@ -149,7 +148,7 @@ async function refreshCallHistoryFromCallLog(): Promise<void> {
   if (insertableEntries.length > 0) {
     await saveCallHistoryEntries(insertableEntries);
   }
-  const loadedToAt = new Date(nowMs).toISOString();
+  const loadedToAt = new Date(openedAtMs).toISOString();
   await saveHistoryLastLoadedAt(loadedToAt);
 }
 

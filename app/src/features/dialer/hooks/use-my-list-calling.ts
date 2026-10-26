@@ -44,8 +44,8 @@ export function useMyListCalling(): UseMyListCallingResult {
       let launchedCall: LaunchedCall | null = null;
       try {
         launchedCall = await launchTrackedCall(nextListPhoneNumber);
-      } catch (callStartError: unknown) {
-        showCallLaunchErrorToast(callStartError);
+      } catch {
+        showCallLaunchErrorToast();
         return;
       }
       trackLaunchedCall(launchedCall);

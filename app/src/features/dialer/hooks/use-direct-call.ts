@@ -56,8 +56,8 @@ export function useDirectCall(): UseDirectCallResult {
         );
         const launchedCall = await launchTrackedCall(normalizedPhoneNumber);
         trackLaunchedCall(launchedCall);
-      } catch (callStartError: unknown) {
-        showCallLaunchErrorToast(callStartError);
+      } catch {
+        showCallLaunchErrorToast();
       } finally {
         isDialInFlightRef.current = false;
         setIsDialing(false);

@@ -23,11 +23,11 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] After `entryCallKey` is built, a key found in the stored set or the batch set is skipped, and every accepted key is added to the batch set before continuing (`decisions.md` — Decision 2).
-- [ ] Two call-log rows for the same call (same number, same call time) insert exactly one history row (`decisions.md` — Decision 2).
+- [x] After `entryCallKey` is built, a key found in the stored set or the batch set is skipped, and every accepted key is added to the batch set before continuing (`decisions.md` — Decision 2).
+- [x] Two call-log rows for the same call (same number, same call time) insert exactly one history row (`decisions.md` — Decision 2).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 3: App — the Download CSV splits called date and called time
 

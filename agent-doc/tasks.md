@@ -21,17 +21,17 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 
-- [ ] No two login-pass popups can overlap — each step waits for the previous popup to be fully closed (`specs/tapped-number-capture.md` — Popups never overlap on first login).
-- [ ] On a first login whose reminders step showed its own popup, the tapped-number step still shows instead of being dropped (`specs/tapped-number-capture.md` — Popups never overlap on first login).
-- [ ] The skip rules stay exactly as they are — silent skip when already the handler, permanent refusal saved by "Don't show again" (`specs/tapped-number-capture.md` — Don't-show-again requirement).
+- [x] No two login-pass popups can overlap — each step waits for the previous popup to be fully closed (`specs/tapped-number-capture.md` — Popups never overlap on first login).
+- [x] On a first login whose reminders step showed its own popup, the tapped-number step still shows instead of being dropped (`specs/tapped-number-capture.md` — Popups never overlap on first login).
+- [x] The skip rules stay exactly as they are — silent skip when already the handler, permanent refusal saved by "Don't show again" (`specs/tapped-number-capture.md` — Don't-show-again requirement).
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 3: App — the Dialer Paste button fills only real phone numbers
 

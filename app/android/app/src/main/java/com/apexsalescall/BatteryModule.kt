@@ -92,6 +92,10 @@ class BatteryModule(reactContext: ReactApplicationContext) :
         } catch (startError: ActivityNotFoundException) {
             reactApplicationContext.removeActivityEventListener(exemptionRequestCloseListener)
             promise.reject(dialogUnavailableCode, dialogUnavailableMessage, startError)
+        } catch (startError: Exception) {
+            reactApplicationContext.removeActivityEventListener(exemptionRequestCloseListener)
+            val requestWasDeclined = false
+            promise.resolve(requestWasDeclined)
         }
     }
 

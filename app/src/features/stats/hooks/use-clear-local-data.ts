@@ -1,5 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { clearAllPendingCalls, countUnsyncedPendingCalls } from '@/features/tracking';
 
 export type ClearLocalDataState = {
@@ -55,6 +56,8 @@ export function useClearLocalData(): ClearLocalDataState {
     setClearErrorMessage(null);
     try {
       await clearAllPendingCalls();
+      const removedCallingSimSlotKey = 'calling_sim_slot';
+      await AsyncStorage.removeItem(removedCallingSimSlotKey);
       const remainingCallCount: number = await countUnsyncedPendingCalls();
       setPendingCallCount(remainingCallCount);
       setIsClearDialogOpen(false);

@@ -77,22 +77,26 @@ export function useDialer(): UseDialerResult {
   }, []);
 
   const pasteNumberFromClipboard = useCallback(async (): Promise<void> => {
-    const clipboardText: string = await Clipboard.getString();
-    const trimmedClipboardText = clipboardText.trim();
-    if (trimmedClipboardText === '') {
-      ToastAndroid.show(emptyClipboardMessage, ToastAndroid.SHORT);
-      return;
-    }
-    const storedCountry = await readStoredCountry();
-    const firstClipboardNumber = extractFirstClipboardNumber(
-      trimmedClipboardText,
-      storedCountry,
-    );
-    if (firstClipboardNumber === null) {
+    try {
+      const clipboardText: string = await Clipboard.getString();
+      const trimmedClipboardText = clipboardText.trim();
+      if (trimmedClipboardText === '') {
+        ToastAndroid.show(emptyClipboardMessage, ToastAndroid.SHORT);
+        return;
+      }
+      const storedCountry = await readStoredCountry();
+      const firstClipboardNumber = extractFirstClipboardNumber(
+        trimmedClipboardText,
+        storedCountry,
+      );
+      if (firstClipboardNumber === null) {
+        ToastAndroid.show(noNumberInClipboardMessage, ToastAndroid.SHORT);
+        return;
+      }
+      setDialedNumberInput(firstClipboardNumber);
+    } catch {
       ToastAndroid.show(noNumberInClipboardMessage, ToastAndroid.SHORT);
-      return;
     }
-    setDialedNumberInput(firstClipboardNumber);
   }, []);
 
   const isNumberValid =

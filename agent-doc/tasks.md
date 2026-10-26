@@ -7,12 +7,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] On a fresh start the first backfill reads nothing older than the open moment, so before-install calls never get a history row (`decisions.md` — Decision 1).
-- [ ] A later open reads from the marker onward exactly as before, and history rows already stored stay untouched (`decisions.md` — Decision 1).
-- [ ] The install moment needs no new storage key — the existing `history_last_loaded_at` marker carries it (`decisions.md` — Decision 1).
+- [x] On a fresh start the first backfill reads nothing older than the open moment, so before-install calls never get a history row (`decisions.md` — Decision 1).
+- [x] A later open reads from the marker onward exactly as before, and history rows already stored stay untouched (`decisions.md` — Decision 1).
+- [x] The install moment needs no new storage key — the existing `history_last_loaded_at` marker carries it (`decisions.md` — Decision 1).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 2: App — one history batch never inserts the same call twice
 

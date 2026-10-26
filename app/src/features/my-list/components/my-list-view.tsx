@@ -16,7 +16,7 @@ import { UploadNumbersDialog } from './upload-numbers-dialog';
 
 function MyListFooterNote() {
   const footerNoteMessage =
-    'Your list lives only on this phone. The manager never sees it, and everything works offline.';
+    'Your downloaded CSV lives in the Downloads folder on this phone.';
 
   return (
     <Text className="mt-6 text-center text-xs text-muted-foreground">

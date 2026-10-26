@@ -32,8 +32,7 @@ export function useMyListDownload(): UseMyListDownload {
       const savedAt = new Date();
       const csvFileName = buildMyListCsvFileName(savedAt);
       await saveMyListCsvToDownloads(csvText, csvFileName);
-      const savedMessage = `Saved ${csvFileName} in Downloads.`;
-      ToastAndroid.show(savedMessage, ToastAndroid.SHORT);
+      ToastAndroid.show(csvFileName, ToastAndroid.SHORT);
     } catch {
       ToastAndroid.show(saveFailedMessage, ToastAndroid.SHORT);
     } finally {

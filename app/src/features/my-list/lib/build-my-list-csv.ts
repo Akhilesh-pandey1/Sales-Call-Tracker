@@ -8,10 +8,21 @@ const csvHeaderRow = [
   'Do not call',
   'Notes',
   'Called date',
+  'Called time',
 ];
 
 const formulaStarterPattern = /^[=+\-@]/;
 const formulaGuardTab = '\t';
+
+const calledDateFormatter = new Intl.DateTimeFormat('en-GB', {
+  day: '2-digit',
+  month: '2-digit',
+});
+const calledTimeFormatter = new Intl.DateTimeFormat('en-GB', {
+  hour: '2-digit',
+  minute: '2-digit',
+  hourCycle: 'h23',
+});
 
 function toFormulaSafeCellText(cellText: string): string {
   const startsFormulaLike = formulaStarterPattern.test(cellText);
@@ -35,15 +46,32 @@ function toStatusText(status: MyListNumber['status']): string {
   return 'Left';
 }
 
+function toCalledAtCellTexts(calledAt: string | null): [string, string] {
+  if (calledAt === null) {
+    return ['', ''];
+  }
+  const callDate = new Date(calledAt);
+  if (Number.isNaN(callDate.getTime())) {
+    return ['', ''];
+  }
+  const calledDateText: string = calledDateFormatter.format(callDate);
+  const calledTimeText: string = calledTimeFormatter.format(callDate);
+  return [calledDateText, calledTimeText];
+}
+
 function toCsvCellRows(listNumbers: MyListNumber[]): string[][] {
   const cellRows = listNumbers.map((listNumber) => {
+    const [calledDateText, calledTimeText] = toCalledAtCellTexts(
+      listNumber.calledAt,
+    );
     const cellRow: string[] = [
       toFormulaSafeCellText(listNumber.phoneNumber),
       toStatusText(listNumber.status),
       toFlagText(listNumber.isInterested),
       toFlagText(listNumber.isDoNotCall),
       toFormulaSafeCellText(listNumber.notes ?? ''),
-      toFormulaSafeCellText(listNumber.calledAt ?? ''),
+      toFormulaSafeCellText(calledDateText),
+      toFormulaSafeCellText(calledTimeText),
     ];
     return cellRow;
   });

@@ -66,6 +66,7 @@ function collectInsertableHistoryEntries(
   officeHoursWindow: OfficeHoursWindow,
 ): CallHistoryEntry[] {
   const insertableEntries: CallHistoryEntry[] = [];
+  const batchCallKeySet = new Set<string>();
   for (const callLogEntry of callLogEntries) {
     const entryTimeMs = toEntryTimeMs(callLogEntry);
     if (Number.isNaN(entryTimeMs)) {
@@ -88,10 +89,12 @@ function collectInsertableHistoryEntries(
     }
     const entryCallAt = new Date(entryTimeMs).toISOString();
     const entryCallKey = buildCallKey(normalizedEntryNumber, entryCallAt);
-    const callAlreadyStored = storedCallKeySet.has(entryCallKey);
-    if (callAlreadyStored) {
+    const isCallAlreadyStored = storedCallKeySet.has(entryCallKey);
+    const isCallAlreadyInBatch = batchCallKeySet.has(entryCallKey);
+    if (isCallAlreadyStored || isCallAlreadyInBatch) {
       continue;
     }
+    batchCallKeySet.add(entryCallKey);
     const historyEntry: CallHistoryEntry = {
       phoneNumber: normalizedEntryNumber,
       direction: toCallDirection(callLogEntry),

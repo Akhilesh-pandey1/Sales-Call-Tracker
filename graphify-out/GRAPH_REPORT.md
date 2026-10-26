@@ -1,16 +1,16 @@
-# Graph Report - task-6  (2026-10-26)
+# Graph Report - sales-call-tracker  (2026-10-26)
 
 ## Corpus Check
-- 459 files · ~864,493 words
+- 463 files · ~865,878 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4188 nodes · 8046 edges · 287 communities (248 shown, 39 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 46 edges (avg confidence: 0.58)
+- 4220 nodes · 8252 edges · 294 communities (255 shown, 39 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 50 edges (avg confidence: 0.58)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f0241373`
+- Built from commit: `21feeabf`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -37,7 +37,7 @@
 - .claude/skills/design-screens/uiux/scripts/core.py
 - Requirements
 - ui-ux-pro-max/scripts/core.py
-- extensions.py
+- settings/services.py
 - devDependencies
 - test_users.py
 - .claude/skills/design-screens/uiux/scripts/design_system.py
@@ -51,7 +51,7 @@
 - history-screen.tsx
 - app-navigator.tsx
 - What You Must Do When Invoked
-- app/__init__.py
+- test_foundation.py
 - What You Must Do When Invoked
 - office-hours-editor.tsx
 - Dimensions
@@ -66,7 +66,7 @@
 - .claude/skills/grill-for-business/SKILL.md
 - Requirement: Name-and-password login
 - cn
-- app/src/shared/api/api-client.ts
+- app/src/features/auth/index.ts
 - Requirement: Office-hours gate at call sync
 - call-reminders.ts
 - DesignSystemGenerator
@@ -88,8 +88,9 @@
 - dependencies
 - Salesperson View (Android app "Apex Sales Call")
 - components.json
+- dashboard/routes.py
 - accounts-page.tsx
-- tracking/index.ts
+- my-list-db.ts
 - Requirements
 - Requirements
 - scheduled-screen.tsx
@@ -139,7 +140,7 @@
 - search
 - Process
 - Design Screens
-- db/index.ts
+- runQuery
 - Brainstorming Ideas Into Designs
 - .agents/skills/snap-screens/scripts/screenshot.py
 - Write Screens
@@ -160,7 +161,7 @@
 - .claude/skills/grill-with-superpower/scripts/stop-server.sh
 - Requirements
 - Requirements
-- use-reminder-press.ts
+- app-event.ts
 - graphify reference: query, path, explain
 - Requirement: [Clear Name of Requirement]
 - MainActivity
@@ -170,11 +171,11 @@
 - _suggest_identities
 - graphify reference: query, path, explain
 - <module-id>
-- CLAUDE.md
+- person_services.py
 - Requirement: Calls-by-hour chart
 - Implement with Pocock
 - Implement with Pocock
-- readStoredCountry
+- tracking/index.ts
 - Requirement: Row contents and empty state
 - Requirement: All dashboard math computed server-side
 - Requirement: Dashboard failure and empty states
@@ -217,14 +218,14 @@
 - .agents/skills/write-spec/instructions/spec.md
 - formatCount
 - react-native-call-detection-android
-- call-log-sweep.ts
+- call-history-backfill.ts
 - auth/services.py
 - @react-native-clipboard/clipboard
 - @react-native-community/datetimepicker
 - nativewind
-- call-submit.ts
+- db/index.ts
 - react
-- call-launcher.ts
+- use-lead-post-call.ts
 - react-native-intent-launcher
 - react-native-safe-area-context
 - tailwind.config.js
@@ -234,8 +235,9 @@
 - person-page.tsx
 - TappedNumberModule
 - @tanstack/react-query
-- app.json
-- test_foundation.py
+- call-janitor.ts
+- calls/services.py
+- AGENTS.md
 - .agents/skills/design-screens/uiux/scripts/design_system.py
 - _suggest_identities
 - react-native-screens
@@ -243,7 +245,7 @@
 - tailwindcss-animate
 - _select_palette_for_mode
 - react-native-reanimated
-- use-my-list-upload.ts
+- use-tracked-call.ts
 - Requirement: WhatsApp settings rows saved on the phone
 - @rn-primitives/slot
 - libphonenumber-js
@@ -256,6 +258,7 @@
 - Requirement: Call outcome reaches the lead
 - Requirement: CSV upload into lead pool
 - Requirement: Lead resolution via call sync
+- lead-call-card.tsx
 - Requirement: Lead pool manager summary
 - Requirement: Lead scheduling
 - Requirement: Next-lead serving — priority order
@@ -266,16 +269,21 @@
 - Requirement: Shared post-call popup on every flow
 - call-split-donut.tsx
 - clsx
+- use-lead-call-flow-presence.ts
 - @radix-ui/react-slot
 - use-logout.ts
 - class-variance-authority
-- clsx
+- call-launcher.ts
 - @radix-ui/react-dialog
+- apply_team_call_to_period_aggregates
+- buildHourBars
 - test_settings.py
 - _select_palette_for_mode
 - Requirement: Five-row menu with no section header
+- MyStatsContent
 - API Format — the one saving shape for `agent-doc/api.md`
 - Requirement: Do-not-track list
+- axios
 - _suggest_identities
 - Requirement: Batch sync to server
 - Requirement: Call-log matching — Path 1 (real-time)
@@ -289,32 +297,32 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `fetch_user_session_token()` - 63 edges
-2. `create_user_fixture()` - 54 edges
-3. `create_user_fixture()` - 50 edges
-4. `User` - 48 edges
+2. `create_user_fixture()` - 60 edges
+3. `User` - 52 edges
+4. `create_user_fixture()` - 50 edges
 5. `build_ist_dialed_at()` - 47 edges
 6. `AppException` - 43 edges
 7. `cn()` - 42 edges
-8. `cn()` - 41 edges
-9. `now_utc()` - 40 edges
-10. `create_call_record()` - 38 edges
+8. `create_call_record()` - 41 edges
+9. `cn()` - 41 edges
+10. `now_utc()` - 40 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `useAuth()` --indirect_call--> `loginUser()`  [INFERRED]
   app/src/features/auth/hooks/use-auth.ts → web/src/features/auth/api/auth.api.ts
+- `AuthenticatedApp()` --calls--> `useCallTracker()`  [EXTRACTED]
+  app/src/app/navigation/root-navigator.tsx → app/src/features/tracking/hooks/use-call-tracker.ts
 - `ScheduleChoiceRow()` --calls--> `cn()`  [EXTRACTED]
   app/src/features/dialer/components/post-call-dialog.tsx → app/src/lib/utils.ts
 - `OutcomeChoiceChip()` --calls--> `cn()`  [EXTRACTED]
   app/src/features/dialer/components/post-call-dialog.tsx → app/src/lib/utils.ts
-- `SubTabButton()` --calls--> `cn()`  [EXTRACTED]
-  app/src/features/dialer/screens/dialer-screen.tsx → app/src/lib/utils.ts
 - `BookingStateBadge()` --calls--> `cn()`  [EXTRACTED]
   app/src/features/scheduled/screens/scheduled-screen.tsx → app/src/lib/utils.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (287 total, 39 thin omitted)
+## Communities (294 total, 39 thin omitted)
 
 ### Community 0 - "lead-daily-stats.tsx"
 Cohesion: 0.23
@@ -325,8 +333,8 @@ Cohesion: 0.10
 Nodes (31): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _file_signature(), _get_bm25(), _load_csv(), _load_csv_snapshot() (+23 more)
 
 ### Community 2 - "create_user_fixture"
-Cohesion: 0.15
-Nodes (67): now_ist(), create_call_record(), create_call_records_bulk(), create_user_fixture(), create_utc_call_time(), fetch_person_dashboard(), fetch_team_dashboard(), fetch_team_people() (+59 more)
+Cohesion: 0.12
+Nodes (78): get_ist_timezone(), now_ist(), datetime, to_ist(), create_call_record(), create_call_records_bulk(), create_user_fixture(), create_utc_call_time() (+70 more)
 
 ### Community 3 - ".agents/skills/grill-with-superpower/scripts/server.cjs"
 Cohesion: 0.06
@@ -337,16 +345,16 @@ Cohesion: 0.06
 Nodes (55): bootstrapPage(), brandMarkup(), broadcast(), browserLauncherForPlatform(), chmodOwnerOnly(), RFC-6455, clients, companionUrl() (+47 more)
 
 ### Community 5 - "my-stats-screen.tsx"
-Cohesion: 0.05
-Nodes (27): CallsByHourChartProps, CallSplitCardProps, ChartPeriod, ChartPeriodInfo, chartPeriodsInfo, ChartPeriodSwitchProps, collectPeriodCallsByHour(), collectPeriodStats() (+19 more)
+Cohesion: 0.06
+Nodes (24): CallsByHourChartProps, CallSplitCardProps, ChartPeriod, ChartPeriodInfo, chartPeriodsInfo, ChartPeriodSwitchProps, DirectionDotLegendEntry, DirectionDotLegendProps (+16 more)
 
 ### Community 6 - "lead-pool-stats.tsx"
 Cohesion: 0.10
 Nodes (26): uploadLeads(), buildPoolStages(), getStageWidthPercent(), LeadPoolStage, LeadPoolStageCard(), LeadPoolStageCardProps, LeadPoolStats(), LeadPoolStatsProps (+18 more)
 
 ### Community 7 - "dashboard/services.py"
-Cohesion: 0.07
-Nodes (81): parse_utc_datetime(), accumulate_person_call_records(), add_outgoing_date_to_active_days(), add_phone_call_totals(), apply_person_call_to_period(), build_avg_per_active_day(), build_person_period_block(), build_person_period_blocks() (+73 more)
+Cohesion: 0.19
+Nodes (30): build_avg_per_active_day(), build_person_period_block(), accumulate_people_call_records(), accumulate_team_call_records(), build_avg_per_person_per_day(), build_calls_by_hour_block(), build_people_row_period_block(), build_talk_totals_block() (+22 more)
 
 ### Community 8 - "use-calling-sim.ts"
 Cohesion: 0.25
@@ -377,12 +385,12 @@ Cohesion: 0.11
 Nodes (13): NativeModule, Promise, ReactApplicationContext, ReactContextBaseJavaModule, ReactPackage, ViewManager, SimCallModule, SimCallPackage (+5 more)
 
 ### Community 15 - "leads/services.py"
-Cohesion: 0.13
-Nodes (37): Lead, get_next_lead(), get_summary(), get, post, Response, upload_leads(), DayCounts (+29 more)
+Cohesion: 0.12
+Nodes (38): Lead, get_next_lead(), get_summary(), get, post, Response, upload_leads(), DayCounts (+30 more)
 
 ### Community 16 - "text.tsx"
-Cohesion: 0.06
-Nodes (34): Button(), ButtonProps, buttonTextVariants, buttonVariants, IconProps, ARIA_LEVEL, ROLE, Text() (+26 more)
+Cohesion: 0.08
+Nodes (33): Button(), ButtonProps, buttonTextVariants, buttonVariants, Icon(), IconProps, Input(), ARIA_LEVEL (+25 more)
 
 ### Community 17 - "Requirements"
 Cohesion: 0.20
@@ -404,9 +412,9 @@ Nodes (8): Purpose, Requirement: Lead card hands out its number, Requirement: Le
 Cohesion: 0.10
 Nodes (31): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _file_signature(), _get_bm25(), _load_csv(), _load_csv_snapshot() (+23 more)
 
-### Community 22 - "extensions.py"
-Cohesion: 0.13
-Nodes (18): Any, require_auth(), OfficeHours, get_office_hours(), get, Response, refuse_non_manager(), update_office_hours() (+10 more)
+### Community 22 - "settings/services.py"
+Cohesion: 0.15
+Nodes (24): Any, require_auth(), OfficeHours, get_office_hours(), get, Response, refuse_non_manager(), update_office_hours() (+16 more)
 
 ### Community 23 - "devDependencies"
 Cohesion: 0.06
@@ -421,11 +429,11 @@ Cohesion: 0.09
 Nodes (33): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+25 more)
 
 ### Community 26 - "seed_fake_data.py"
-Cohesion: 0.16
-Nodes (31): Call, validate_and_format_e164(), apply_schedule(), build_attempt_times_ist(), build_calls_for_lead(), build_extra_calls(), build_ist_datetime(), build_lead_with_calls() (+23 more)
+Cohesion: 0.14
+Nodes (42): Call, apply_schedule(), build_attempt_times_ist(), build_calls_for_lead(), build_extra_calls(), build_ist_datetime(), build_lead_with_calls(), build_leads_and_calls() (+34 more)
 
 ### Community 27 - "AppException"
-Cohesion: 0.19
+Cohesion: 0.18
 Nodes (25): AppException, require_manager(), validate_password_strength(), activate_user(), create_user(), deactivate_user(), delete_user(), get_users() (+17 more)
 
 ### Community 28 - "Requirements"
@@ -434,7 +442,7 @@ Nodes (29): Purpose, Requirement: Accounts list header and own-row marker, Requi
 
 ### Community 29 - "dependencies"
 Cohesion: 0.07
-Nodes (29): dependencies, axios, @notifee/react-native, react-native, @react-native-async-storage/async-storage, react-native-call-log, @react-native-documents/picker, react-native-permissions (+21 more)
+Nodes (29): dependencies, clsx, @notifee/react-native, react-native, @react-native-async-storage/async-storage, react-native-call-log, @react-native-documents/picker, react-native-permissions (+21 more)
 
 ### Community 30 - "test_calls.py"
 Cohesion: 0.10
@@ -449,16 +457,16 @@ Cohesion: 0.11
 Nodes (13): CallHistoryItem, callDayMonthFormatter, CallHistoryActionButtonProps, CallRow(), CallRowProps, CallsListProps, callTimeFormatter, formatCalledAtLabel() (+5 more)
 
 ### Community 34 - "app-navigator.tsx"
-Cohesion: 0.14
-Nodes (16): AppNavigator(), DialerTabIcon, HistoryTabIcon, MainTabs, MyStatsTabIcon, ScheduledTabIcon, SettingsTabIcon, TabBarIconComponent (+8 more)
+Cohesion: 0.09
+Nodes (23): App(), displayName, name, userInterfaceStyle, AppNavigator(), DialerTabIcon, HistoryTabIcon, MainTabs (+15 more)
 
 ### Community 35 - "What You Must Do When Invoked"
 Cohesion: 0.07
 Nodes (26): For /graphify add and --watch, For /graphify query, For the commit hook and native CLAUDE.md integration, For --update and --cluster-only, /graphify, Honesty Rules, Interpreter guard for subcommands, Part A - Structural extraction for code files (+18 more)
 
-### Community 36 - "app/__init__.py"
-Cohesion: 0.17
-Nodes (19): BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers(), create_app(), create_initial_manager(), drop_legacy_auth_token_column() (+11 more)
+### Community 36 - "test_foundation.py"
+Cohesion: 0.10
+Nodes (26): BaseConfig, DevConfig, ProdConfig, Flask, register_error_handlers(), create_app(), create_initial_manager(), drop_legacy_auth_token_column() (+18 more)
 
 ### Community 37 - "What You Must Do When Invoked"
 Cohesion: 0.07
@@ -473,8 +481,8 @@ Cohesion: 0.08
 Nodes (24): 10. Tech stack — one library per piece, 1. File structure & changes, 1. Gather facts — never ask the user for what you can find, 2. API contracts, 2. Say if this is greenfield or brownfield, 3. Classify the blast radius, 3. Database changes, 4. Build the coverage checklist (+16 more)
 
 ### Community 40 - "User"
-Cohesion: 0.23
-Nodes (27): generate_auth_token(), hash_password(), Session, reset_lockout_state(), User, clean_lockout_state(), fixture, Flask (+19 more)
+Cohesion: 0.24
+Nodes (26): generate_auth_token(), hash_password(), Session, reset_lockout_state(), User, clean_lockout_state(), fixture, Flask (+18 more)
 
 ### Community 41 - "Dimensions"
 Cohesion: 0.08
@@ -513,20 +521,20 @@ Cohesion: 0.08
 Nodes (25): Purpose, Requirement: Login brute-force lockout, Requirement: Manager-only web gate, Requirement: Name-and-password login, Requirement: One session per login, all staying valid, Requirement: Token-gated API access, Requirements, Scenario: Counter reset on success (+17 more)
 
 ### Community 50 - "cn"
-Cohesion: 0.12
-Nodes (21): Card(), CardContent(), CardDescription(), CardFooter(), CardHeader(), CardTitle(), Icon(), Input() (+13 more)
+Cohesion: 0.13
+Nodes (17): Card(), CardContent(), CardDescription(), CardFooter(), CardHeader(), CardTitle(), SubTabButton(), AppChoiceRadio() (+9 more)
 
-### Community 51 - "app/src/shared/api/api-client.ts"
-Cohesion: 0.14
-Nodes (19): RootNavigator(), LoginResponse, requestLogin(), AuthStatus, getLoginErrorMessage(), LoginResult, useAuth(), readRequestErrorMessage() (+11 more)
+### Community 51 - "app/src/features/auth/index.ts"
+Cohesion: 0.16
+Nodes (20): LoginResponse, requestLogin(), AuthStatus, LoginResult, useAuth(), buildDefaultOfficeHoursWindow(), isOfficeHoursTimeText(), OfficeHoursWindow (+12 more)
 
 ### Community 52 - "Requirement: Office-hours gate at call sync"
 Cohesion: 0.08
 Nodes (25): Purpose, Requirement: No retroactive cleanup, Requirement: Office-hours gate at call sync, Requirement: Single office-hours window, Requirement: The window reaches the phone without its own endpoint, Requirement: Window update validation, Requirements, Scenario: Applies to every day of the week (+17 more)
 
 ### Community 53 - "call-reminders.ts"
-Cohesion: 0.16
-Nodes (20): readBookedPhoneNumberSet(), toBookedPhoneNumberSet(), toMarkedHistoryItems(), useCallHistory(), UseCallHistoryResult, deleteScheduledRemindersByLeadIdList(), readAllScheduledReminders(), readReminderList() (+12 more)
+Cohesion: 0.13
+Nodes (27): deleteScheduledRemindersByLeadIdList(), readAllScheduledReminders(), readReminderList(), saveScheduledReminder(), ScheduledReminder, ScheduledReminderTableRow, handleInitialReminderNotification(), handlePressedReminderNotifeeEvent() (+19 more)
 
 ### Community 54 - "DesignSystemGenerator"
 Cohesion: 0.13
@@ -604,13 +612,17 @@ Nodes (20): Manager View (web), Salesperson View (Android app "Apex Sales Call")
 Cohesion: 0.12
 Nodes (15): aliases, components, hooks, lib, ui, utils, rsc, $schema (+7 more)
 
+### Community 73 - "dashboard/routes.py"
+Cohesion: 0.16
+Nodes (23): get_person_dashboard(), get_team_dashboard(), get_team_people(), Any, get, Response, require_dashboard_manager(), AvgPerActiveDay (+15 more)
+
 ### Community 74 - "accounts-page.tsx"
 Cohesion: 0.10
 Nodes (21): AccountsTable(), AccountsPage(), LoginPage(), DashboardPage(), getLeadsSummary(), LEADS_SUMMARY_QUERY_KEY, useLeads(), LeadsPage() (+13 more)
 
-### Community 75 - "tracking/index.ts"
+### Community 75 - "my-list-db.ts"
 Cohesion: 0.08
-Nodes (39): callOnCallEndedWhenPhoneIsIdle(), useClearMyList(), UseClearMyListResult, useMyListDownload, useMyList(), UseMyListResult, buildMyListCsv(), csvHeaderRow (+31 more)
+Nodes (34): MyListView(), useClearMyList(), UseClearMyListResult, useMyListDownload, buildUploadToastMessage(), extractUploadNumbers(), isCsvMimeType(), lineHasPhoneLikeDigitRun() (+26 more)
 
 ### Community 76 - "Requirements"
 Cohesion: 0.08
@@ -621,12 +633,12 @@ Cohesion: 0.05
 Nodes (41): Purpose, Requirement: Clear wipes the whole list after confirmation, Requirement: Download exports the whole list, Requirement: First call attempt moves the row out of Left, Requirement: My List tab shows KPIs only, Requirement: Numbers come in three ways, Requirement: Phone-local only, Requirement: Post-call popup schedules like the keypad (+33 more)
 
 ### Community 78 - "scheduled-screen.tsx"
-Cohesion: 0.09
-Nodes (26): dueBookingCountListeners, notifyDueBookingCountListeners(), readAndStoreDueBookingCount(), refreshDueBookingCount(), subscribeToDueBookingCount(), useDueBookingCount(), compareByBookedTimeAsc(), ScheduledBooking (+18 more)
+Cohesion: 0.08
+Nodes (32): AutomatedView(), KeypadView(), MyListCallingView(), dueBookingCountListeners, notifyDueBookingCountListeners(), readAndStoreDueBookingCount(), refreshDueBookingCount(), subscribeToDueBookingCount() (+24 more)
 
 ### Community 79 - "tasks.md"
-Cohesion: 0.12
-Nodes (16): Task 10: App — the popup answer re-books or clears a called booking, Task 11: App — the My List popup schedules like the keypad, Task 12: App — WhatsApp First message defaults ON, Task 13: App — the Do-not-track add button becomes a bare + icon, Task 14: App — leaving Settings always lands on its home, Task 15: App — the Settings list drops the Local data header, Task 16: App — the phone filters history by the received window, Task 1: Backend — hour-chart buckets run from the window's start through the hour before its end (+8 more)
+Cohesion: 0.29
+Nodes (6): Task 1: App — history starts from the first open, never from the whole log, Task 2: App — one history batch never inserts the same call twice, Task 3: App — the Download CSV splits called date and called time, Task 4: Backend — My Stats responses carry the fuller office-hours label, Task 5: App — My Stats shows the fuller office-hours label, Task 6: Backend — startup drops the legacy outcome column
 
 ### Community 80 - "Python / Flask Code Style & Standards"
 Cohesion: 0.15
@@ -705,12 +717,12 @@ Cohesion: 0.14
 Nodes (10): BatteryModule, BatteryPackage, Intent, NativeModule, Promise, ReactApplicationContext, ReactContextBaseJavaModule, ReactPackage (+2 more)
 
 ### Community 99 - "dialer-screen.tsx"
-Cohesion: 0.09
-Nodes (23): CopyNumberButton(), CopyNumberButtonProps, buildAttemptLabel(), LeadCallCard(), LeadCallCardProps, LeadCallCardVariant, UseDialerResult, UseDirectCallResult (+15 more)
+Cohesion: 0.14
+Nodes (18): Keypad(), keypadCharacters, KeypadProps, UseAutomatedCallingResult, UseDialerResult, useDirectCall(), UseDirectCallResult, useMyListCalling() (+10 more)
 
 ### Community 100 - "reminder-settings.ts"
 Cohesion: 0.13
-Nodes (25): AuthenticatedApp(), startCallTracking(), stopCallTracking(), useCallTracker(), findMissingPermissions(), requestCallPermissionsStepwise(), usePermissions(), BatteryNativeModule (+17 more)
+Nodes (24): startCallTracking(), stopCallTracking(), useCallTracker(), findMissingPermissions(), requestCallPermissionsStepwise(), usePermissions(), BatteryNativeModule, isBatteryOptimizationEnabled() (+16 more)
 
 ### Community 101 - "React + TypeScript Code Style & Standards"
 Cohesion: 0.20
@@ -729,8 +741,8 @@ Cohesion: 0.12
 Nodes (16): 1. PostgreSQL Tables, 2. Android Local Phone Database (SQLite), 3. Migrations & Rollback, `call_history`, `calls`, Database Schema & Design, `do_not_track`, `leads` (+8 more)
 
 ### Community 105 - "Sales Call Tracker - Decision Log"
-Cohesion: 0.18
-Nodes (10): Round 10, Round 2, Round 3, Round 4, Round 5, Round 6, Round 7, Round 8 (+2 more)
+Cohesion: 0.17
+Nodes (11): Round 10, Round 11, Round 2, Round 3, Round 4, Round 5, Round 6, Round 7 (+3 more)
 
 ### Community 106 - "Project File Structure"
 Cohesion: 0.20
@@ -804,9 +816,9 @@ Nodes (7): 1. Pin the fixed point, 2. Identify the spec source, 3. Identify the 
 Cohesion: 0.25
 Nodes (7): Checklist before reporting done, Design Screens, Guardrails, Screen file rules, Steps, The design brain, Thinking rules (apply while designing)
 
-### Community 125 - "db/index.ts"
-Cohesion: 0.14
-Nodes (27): CallHistoryEntry, CallHistoryKeyRow, CallHistoryRowKey, CallHistoryTableRow, insertCallHistoryRow(), insertCallHistoryRowInTransaction(), readCallHistoryEntryList(), readCallHistoryPage() (+19 more)
+### Community 125 - "runQuery"
+Cohesion: 0.19
+Nodes (19): CallHistoryKeyRow, CallHistoryRowKey, CallHistoryTableRow, insertCallHistoryRowInTransaction(), readCallHistoryEntryList(), readCallHistoryPage(), readCallHistoryRowKeys(), saveCallHistoryEntries() (+11 more)
 
 ### Community 126 - "Brainstorming Ideas Into Designs"
 Cohesion: 0.25
@@ -888,9 +900,9 @@ Nodes (5): Purpose, Requirement: Manager-only team dashboard, Requirements, Scen
 Cohesion: 0.06
 Nodes (30): Purpose, Requirement: Calling a booked number re-books or clears through the popup, Requirement: Due count badge and line, Requirement: Every booking listed with its state, Requirement: Fully local and offline, Requirement: Handled bookings leave the list, Requirement: Reminder notification carries the app icon, Requirement: Row actions and tap-through (+22 more)
 
-### Community 146 - "use-reminder-press.ts"
-Cohesion: 0.15
-Nodes (14): tappedNumberEvent, handleInitialReminderNotification(), handlePressedReminderNotifeeEvent(), handlePressedReminderNotification(), readPressedPhoneNumber(), removePressedNumberBooking(), useReminderPress(), bookingsChangedEvent (+6 more)
+### Community 146 - "app-event.ts"
+Cohesion: 0.20
+Nodes (8): tappedNumberEvent, bookingsChangedEvent, myListChangedEvent, reminderPressEvent, callEndedEvent, AppEvent, createAppEvent(), EventListener
 
 ### Community 147 - "graphify reference: query, path, explain"
 Cohesion: 0.33
@@ -928,9 +940,9 @@ Nodes (5): For /graphify explain, For /graphify path, graphify reference: query,
 Cohesion: 0.29
 Nodes (6): <module-id>, Purpose, Requirement: [Clear Name of Requirement], Requirements, Scenario: [Error or Boundary Condition], Scenario: [Specific Happy Path or Edge Case]
 
-### Community 156 - "CLAUDE.md"
-Cohesion: 0.20
-Nodes (9): Env Files, Language, Private Folder, Rules, Search, Source of Truth (No Guessing), Tasks, Timelines (+1 more)
+### Community 156 - "person_services.py"
+Cohesion: 0.21
+Nodes (23): parse_utc_datetime(), accumulate_person_call_records(), add_outgoing_date_to_active_days(), add_phone_call_totals(), apply_person_call_to_period(), build_person_period_blocks(), build_person_period_hourly_inputs(), build_top_numbers_list() (+15 more)
 
 ### Community 157 - "Requirement: Calls-by-hour chart"
 Cohesion: 0.33
@@ -944,9 +956,9 @@ Nodes (4): 1. Single Source of Truth (No Guessing / No Assumptions), 2. Implemen
 Cohesion: 0.40
 Nodes (4): 1. Single Source of Truth (No Guessing / No Assumptions), 2. Implementation Loop, 3. Review & Commit, Implement with Pocock
 
-### Community 160 - "readStoredCountry"
-Cohesion: 0.25
-Nodes (14): readStoredCountry(), useDialer(), useStoredCountry(), pickNextListNumber(), DoNotTrackState, useDoNotTrack(), readDoNotTrackNumbers(), markMyListNumberCalled() (+6 more)
+### Community 160 - "tracking/index.ts"
+Cohesion: 0.17
+Nodes (21): readStoredCountry(), useDialer(), useStoredCountry(), readBookedPhoneNumberSet(), toBookedPhoneNumberSet(), toMarkedHistoryItems(), useCallHistory(), UseCallHistoryResult (+13 more)
 
 ### Community 161 - "Requirement: Row contents and empty state"
 Cohesion: 0.06
@@ -1061,24 +1073,24 @@ Cohesion: 0.67
 Nodes (3): Requirement: Top 5 people by talk time, Scenario: Fewer than five contributors, Scenario: More than five contributors
 
 ### Community 202 - "formatCount"
-Cohesion: 0.20
-Nodes (14): buildDirectionSplitLabel(), buildHourBars(), buildHourBarSegment(), CallsByHourChart(), CallSplitCard(), formatAverageOrNoDataLabel(), formatConnectedPercent(), formatCount() (+6 more)
+Cohesion: 0.38
+Nodes (7): buildDirectionSplitLabel(), CallSplitCard(), formatAverageOrNoDataLabel(), formatConnectedPercent(), formatCount(), Last30DaysCards(), PeriodStatsRow()
 
-### Community 204 - "call-log-sweep.ts"
-Cohesion: 0.12
-Nodes (35): addPendingCallAttempt(), markPendingCallFilled(), PendingCall, completeStalePendingCalls(), getIntentTimeMs(), getOldestIntentTimeMs(), isStaleUnfilledPendingCall(), startJanitorSweep() (+27 more)
+### Community 204 - "call-history-backfill.ts"
+Cohesion: 0.16
+Nodes (27): buildCallKey(), collectInsertableHistoryEntries(), readHistoryLastLoadedAt(), readStoredCallKeySet(), refreshCallHistoryFromCallLog(), saveHistoryLastLoadedAt(), toRefreshSinceTimeMs(), CallLogEntry (+19 more)
 
 ### Community 205 - "auth/services.py"
-Cohesion: 0.16
+Cohesion: 0.17
 Nodes (16): verify_password(), login(), post, Response, LoginRequest, LoginResponse, OfficeHoursWindow, BaseModel (+8 more)
 
-### Community 209 - "call-submit.ts"
-Cohesion: 0.13
-Nodes (28): SyncCall, syncCalls(), SyncCallsResponse, readLastSweptAt(), deleteSyncedPendingCallsBehindSweepLine(), getAllPendingCalls(), getPendingCallById(), getUnsyncedPendingCalls() (+20 more)
+### Community 209 - "db/index.ts"
+Cohesion: 0.14
+Nodes (31): SyncCall, syncCalls(), SyncCallsResponse, CallHistoryEntry, insertCallHistoryRow(), readLastSweptAt(), SweptCall, markMyListNumberCalled() (+23 more)
 
-### Community 212 - "call-launcher.ts"
-Cohesion: 0.10
-Nodes (40): buildNextLeadRequestBody(), fetchNextLead(), isServedLead(), LeadScheduleRequest, NextLeadRequestBody, NextLeadResponseBody, ServedLead, AutomatedViewState (+32 more)
+### Community 212 - "use-lead-post-call.ts"
+Cohesion: 0.15
+Nodes (20): getLoginErrorMessage(), buildNextLeadRequestBody(), fetchNextLead(), isServedLead(), LeadScheduleRequest, NextLeadRequestBody, NextLeadResponseBody, ServedLead (+12 more)
 
 ### Community 219 - "person-page.tsx"
 Cohesion: 0.06
@@ -1088,13 +1100,17 @@ Nodes (57): getPersonDashboard(), getTeamDashboard(), PeriodSwitch(), PeriodSwit
 Cohesion: 0.16
 Nodes (9): Intent, NativeModule, Promise, ReactApplicationContext, ReactContextBaseJavaModule, ReactPackage, ViewManager, TappedNumberModule (+1 more)
 
-### Community 222 - "app.json"
-Cohesion: 0.38
-Nodes (4): App(), displayName, name, userInterfaceStyle
+### Community 222 - "call-janitor.ts"
+Cohesion: 0.26
+Nodes (15): addPendingCallAttempt(), markPendingCallFilled(), completeStalePendingCalls(), getIntentTimeMs(), getOldestIntentTimeMs(), isStaleUnfilledPendingCall(), runJanitorSweep(), startJanitorSweep() (+7 more)
 
-### Community 223 - "test_foundation.py"
-Cohesion: 0.14
-Nodes (25): get_ist_timezone(), normalize_phone_number(), datetime, to_ist(), Response, sync_calls(), BaseModel, SyncCallsRequest (+17 more)
+### Community 223 - "calls/services.py"
+Cohesion: 0.23
+Nodes (15): normalize_phone_number(), Response, sync_calls(), BaseModel, SyncCallsRequest, SyncCallsResponse, extract_call_direction(), extract_call_outcome_choices() (+7 more)
+
+### Community 224 - "AGENTS.md"
+Cohesion: 0.20
+Nodes (9): Env Files, Language, Private Folder, Rules, Search, Source of Truth (No Guessing), Tasks, Timelines (+1 more)
 
 ### Community 238 - ".agents/skills/design-screens/uiux/scripts/design_system.py"
 Cohesion: 0.09
@@ -1108,9 +1124,9 @@ Nodes (6): _exact_row_identity(), Suggest complete public identities so a retry 
 Cohesion: 0.22
 Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+2 more)
 
-### Community 245 - "use-my-list-upload.ts"
-Cohesion: 0.28
-Nodes (11): MyListView(), buildUploadToastMessage(), extractUploadNumbers(), isCsvMimeType(), lineHasPhoneLikeDigitRun(), readCsvFileText(), readExcelFileText(), readPickedListFileText() (+3 more)
+### Community 245 - "use-tracked-call.ts"
+Cohesion: 0.26
+Nodes (8): callOnCallEndedWhenPhoneIsIdle(), useCallHangUpDetector(), useDialogVisibility(), UseDialogVisibilityResult, usePostCallSubmit(), TrackedCallFinisher, useTrackedCall(), readLiveCallState()
 
 ### Community 246 - "Requirement: WhatsApp settings rows saved on the phone"
 Cohesion: 0.12
@@ -1143,6 +1159,10 @@ Nodes (6): Requirement: CSV upload into lead pool, Scenario: Duplicate in file s
 ### Community 257 - "Requirement: Lead resolution via call sync"
 Cohesion: 0.33
 Nodes (6): Requirement: Lead resolution via call sync, Scenario: Connected call finishes lead, Scenario: Discarded call leaves the lead unchanged, Scenario: Lead stopped at attempt cap, Scenario: Manual keypad call resolves matching lead, Scenario: Unconnected call increments attempt and locks
+
+### Community 258 - "lead-call-card.tsx"
+Cohesion: 0.25
+Nodes (7): CopyNumberButton(), CopyNumberButtonProps, buildAttemptLabel(), LeadCallCard(), LeadCallCardProps, LeadCallCardVariant, copyPhoneNumberToClipboard()
 
 ### Community 259 - "Requirement: Lead pool manager summary"
 Cohesion: 0.40
@@ -1180,9 +1200,25 @@ Nodes (10): Requirement: Shared post-call popup on every flow, Scenario: Automat
 Cohesion: 0.29
 Nodes (7): TalkTotalsStats, CallSplitDonut(), CallSplitDonutProps, donutGeometry, DonutSegment, getDonutSegments(), StyleableCircle
 
+### Community 269 - "use-lead-call-flow-presence.ts"
+Cohesion: 0.33
+Nodes (6): doesViewStateHoldLead(), useLeadCallFlowPresence(), isLeadCallFlowOnScreen(), setLeadCallFlowOnScreen(), cleanTappedPhoneNumber(), decodeTelNumberText()
+
 ### Community 271 - "use-logout.ts"
-Cohesion: 0.60
-Nodes (4): buildLogoutRefusalMessage(), countUnsentCallsAfterSyncAttempt(), LogoutState, useLogout()
+Cohesion: 0.22
+Nodes (11): ClearLocalDataState, useClearLocalData(), buildLogoutRefusalMessage(), countUnsentCallsAfterSyncAttempt(), LogoutState, useLogout(), clearAllPendingCalls(), countUnsyncedPendingCalls() (+3 more)
+
+### Community 273 - "call-launcher.ts"
+Cohesion: 0.36
+Nodes (8): isSimSlotUnavailable(), NativeCallError, raceWithTimeout(), readCallLaunchErrorMessage(), recordPendingCall(), startCallOnChosenSim(), startDefaultSimCall(), createCallId()
+
+### Community 275 - "apply_team_call_to_period_aggregates"
+Cohesion: 0.28
+Nodes (9): add_user_talk_seconds(), apply_direction_call_to_hourly_bucket(), apply_team_call_to_period_aggregates(), build_office_hour_range(), build_office_hours_window_inputs(), get_last_bucket_hour(), datetime, resolve_call_bucket_hour() (+1 more)
+
+### Community 276 - "buildHourBars"
+Cohesion: 0.38
+Nodes (7): buildHourBars(), buildHourBarSegment(), CallsByHourChart(), formatHourLabel(), getAxisHourLabel(), getHighestHourCallCount(), getHourCallCount()
 
 ### Community 277 - "test_settings.py"
 Cohesion: 0.53
@@ -1195,6 +1231,10 @@ Nodes (10): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG 
 ### Community 279 - "Requirement: Five-row menu with no section header"
 Cohesion: 0.22
 Nodes (8): Purpose, Requirement: Five-row menu with no section header, Requirement: Leaving Settings always resets it, Requirements, Scenario: Clear local data row keeps its name, Scenario: Every return lands on the home, Scenario: Five rows render with no header, Scenario: Sub-page does not survive leaving
+
+### Community 280 - "MyStatsContent"
+Cohesion: 0.67
+Nodes (3): collectPeriodCallsByHour(), collectPeriodStats(), MyStatsContent()
 
 ### Community 281 - "API Format — the one saving shape for `agent-doc/api.md`"
 Cohesion: 0.25
@@ -1245,24 +1285,24 @@ Cohesion: 0.50
 Nodes (4): Requirement: My Stats office-timing label, Scenario: Exact hours render shortest, Scenario: Label arrives with every fetch, Scenario: Minutes shown only when needed
 
 ## Knowledge Gaps
-- **1552 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+1547 more)
+- **1543 isolated node(s):** `$schema`, `autoMemoryEnabled`, `disableBundledSkills`, `disableWorkflows`, `disableArtifact` (+1538 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **39 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useAuth()` connect `app/src/shared/api/api-client.ts` to `readStoredCountry`, `app-navigator.tsx`, `providers.tsx`?**
+- **Why does `useAuth()` connect `app/src/features/auth/index.ts` to `app-navigator.tsx`, `providers.tsx`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
-- **Why does `loginUser()` connect `providers.tsx` to `app/src/shared/api/api-client.ts`?**
+- **Why does `loginUser()` connect `providers.tsx` to `app/src/features/auth/index.ts`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
-- **Why does `User` connect `User` to `create_user_fixture`, `app/__init__.py`, `dashboard/services.py`, `auth/services.py`, `test_settings.py`, `extensions.py`, `test_users.py`, `seed_fake_data.py`, `AppException`, `test_calls.py`, `test_foundation.py`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **Why does `User` connect `User` to `create_user_fixture`, `test_foundation.py`, `dashboard/services.py`, `dashboard/routes.py`, `auth/services.py`, `test_settings.py`, `test_users.py`, `seed_fake_data.py`, `AppException`, `person_services.py`, `test_calls.py`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
-  _1552 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1543 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `.agents/skills/design-screens/uiux/scripts/core.py` be split into smaller, more focused modules?**
   _Cohesion score 0.0990990990990991 - nodes in this community are weakly interconnected._
 - **Should `create_user_fixture` be split into smaller, more focused modules?**
-  _Cohesion score 0.14699792960662525 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.12345679012345678 - nodes in this community are weakly interconnected._
 - **Should `.agents/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**
   _Cohesion score 0.05868118572292801 - nodes in this community are weakly interconnected._

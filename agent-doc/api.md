@@ -191,6 +191,7 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
     "name": "Ramesh",
     "office_hours": { "start_time": "10:00", "end_time": "19:00" },
     "office_hours_label": "10 to 7",
+    "office_hours_full_label": "10:00 to 7:00",
     "today": {
       "dials": 12,
       "connected": 7,
@@ -247,7 +248,7 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
   - `avg_per_active_day` divides dials, connected, and exact total talk minutes by `active_days`, then rounds — counts to whole numbers, minutes to 2 decimals; it is `null` when `active_days` is 0.
   - `calls_by_hour` follows the same rules as the team endpoint: office-hours `hours`, an `outgoing` and an `incoming` count per hour (per-day averages for `last_30_days`) drawn as ONE stacked bar, and `best_hour` as the hour number or `null` by total calls.
   - `talk_totals` carries the outgoing/incoming calls and minutes for the period and the two percentages of total talk minutes, rounded — the donut chart and its numbers line render only these.
-  - `office_hours` carries the stored window as `HH:MM` strings, and `office_hours_label` is its display form — 12-hour clock, minutes only when not :00, no AM/PM, like `10 to 7` or `9:30 to 6:30` — both computed on the server from the `office_hours` table. The phone saves `office_hours` on every fetch and filters its History by it, and renders the label beside the Last-30-days heading.
+  - `office_hours` carries the stored window as `HH:MM` strings, `office_hours_label` is its short display form — 12-hour clock, minutes only when not :00, no AM/PM, like `10 to 7` or `9:30 to 6:30` — and `office_hours_full_label` is the fuller display form — 12-hour clock, minutes always shown, no AM/PM, like `10:00 to 7:00` — all computed on the server from the `office_hours` table. The phone saves `office_hours` on every fetch and filters its History by it, and renders the fuller label on the right of the Last-30-days heading on My Stats.
   - `top_numbers` includes at most 5 phone numbers with the highest TOTAL talk seconds (outgoing and incoming together) in the last 30 days.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`

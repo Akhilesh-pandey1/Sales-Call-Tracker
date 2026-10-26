@@ -70,6 +70,7 @@ CREATE INDEX idx_calls_user_dialed ON calls(user_id, dialed_at);
 - `direction` is `outgoing` or `incoming`; rows from before the column existed are `outgoing`.
 - `interested` and `do_not_call` are yes/no flags written by the post-call popup, both false when the salesperson picked none. `notes` holds the popup's optional note text. All three ride the sync batch and are copied onto the matched lead — `do_not_call` true sets that lead's status to `stopped`.
 - Incoming rows never create or resolve leads and never increment `leads.attempt_count`.
+- A leftover `outcome` column from an old design is dropped by the startup migration whenever it exists. `user_id` marks whose call the row is — every per-person stat counts on it.
 
 ### `leads`
 Stores shared lead numbers, call outcomes, retry locks, claims, and scheduling.

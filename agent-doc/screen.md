@@ -259,7 +259,7 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 
 ### Screen 8: My Stats - fourth tab
 - "Last 30 days" KPI cards (4) - Active days (out of 30), Avg dials, Avg connected, Avg minutes; averages per active day, with the 30-day totals as small sub-lines. Avg minutes is TOTAL talk time (outgoing + incoming); Active days counts only days with an outgoing call
-- Office hours label - the office timing written short, like "10 to 7", beside the "Last 30 days" heading; it follows the manager's window at the next login or My Stats open
+- Office hours label - the office timing written in full clock form, like "10:00 to 7:00", on the right of the "Last 30 days" heading; it follows the manager's window at the next login or My Stats open
 - Calls by hour - ONE bar per hour: total calls that hour, split into two colored segments - outgoing and incoming - sized by share, counts centered in their segments with the total on top; small period switch (Today | Yesterday | 30 days) opens on Today and drives only this chart; one-row color legend under the bars: blue dot = outgoing, green dot = incoming; one line under it names the best hour
 - Bar hours - bars run from the office opening hour through the last full hour before closing - a 10-to-7 window shows 9 bars (10 through 6); a call starting exactly at closing counts in the last bar
 - Donut chart - incoming vs outgoing share of TOTAL talk minutes; the same three-period switch drives it; one line under it reads the exact numbers: "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min"

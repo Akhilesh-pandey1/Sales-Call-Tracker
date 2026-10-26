@@ -1,5 +1,7 @@
 import appConfigJson from '../../config.json';
 
+const alertCloseTimeoutMs: number = appConfigJson.alertCloseTimeoutMs;
+
 const apiBaseUrl: string = __DEV__
   ? appConfigJson.apiBaseUrlDev
   : appConfigJson.apiBaseUrlRelease;
@@ -30,6 +32,7 @@ const millisecondsPerHour: number = 60 * 60 * 1000;
 const scheduleExpireMs: number = scheduleExpireHours * millisecondsPerHour;
 
 export {
+  alertCloseTimeoutMs,
   apiBaseUrl,
   backspaceLongPressClearMs,
   callHistoryMaxRows,

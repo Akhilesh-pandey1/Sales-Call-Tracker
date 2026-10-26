@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { isAxiosError } from 'axios';
+import { isSupportedCountry, type CountryCode } from 'libphonenumber-js';
 import {
   readResponseErrorMessage,
   readStoredToken,
@@ -19,9 +20,22 @@ export type LoginResult = { success: true } | { success: false; errorMessage: st
 const storedCountryKey = 'country';
 const unexpectedLoginMessage = 'Login failed. Please try again.';
 
-export async function readStoredCountry(): Promise<string | null> {
+function toSupportedCountryCode(storedCountry: string): CountryCode | null {
+  const upperCaseCountryCode = storedCountry.toUpperCase();
+  if (!isSupportedCountry(upperCaseCountryCode)) {
+    return null;
+  }
+  const supportedCountryCode: CountryCode = upperCaseCountryCode;
+  return supportedCountryCode;
+}
+
+export async function readStoredCountry(): Promise<CountryCode | null> {
   const storedCountry: string | null = await AsyncStorage.getItem(storedCountryKey);
-  return storedCountry;
+  if (storedCountry === null) {
+    return null;
+  }
+  const supportedCountryCode = toSupportedCountryCode(storedCountry);
+  return supportedCountryCode;
 }
 
 function getLoginErrorMessage(loginError: unknown): string {

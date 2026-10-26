@@ -1,4 +1,5 @@
 {
+  "alertCloseTimeoutMs": 120000,
   "apiBaseUrlDev": "http://localhost:5000/api",
   "apiBaseUrlRelease": "https://sales-call-tracker.onrender.com/api",
   "maxLeadAttempts": 3,

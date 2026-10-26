@@ -6,6 +6,7 @@ from backend.app.extensions import db
 from backend.app.modules.auth.models import Session
 from backend.app.modules.auth.schemas import LoginRequest, LoginResponse
 from backend.app.modules.users import User
+from backend.app.modules.settings import get_office_hours_view
 
 _failed_attempts: dict[str, int] = {}
 _lockout_expirations: dict[str, datetime] = {}
@@ -83,8 +84,6 @@ def authenticate_user(login_request: LoginRequest) -> LoginResponse:
     new_session: Session = Session(user_id=user.id, token=new_token)
     db.session.add(new_session)
     db.session.commit()
-
-    from backend.app.modules.settings import get_office_hours_view
 
     current_office_hours: dict[str, str] = get_office_hours_view()
 

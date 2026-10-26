@@ -90,13 +90,29 @@ def ensure_table_column(table_name: str, column_name: str) -> None:
     db.session.commit()
 
 
+def validate_sql_identifier(identifier: str) -> None:
+    if not identifier.isidentifier():
+        raise ValueError(f"{identifier} is not a safe SQL identifier.")
+
+
 def drop_table_column_if_exists(table_name: str, column_name: str) -> None:
+    allowed_columns_by_table: dict[str, set[str]] = {
+        "users": {"auth_token"},
+        "calls": {"outcome"},
+    }
+    allowed_column_names: set[str] | None = allowed_columns_by_table.get(table_name)
+    if allowed_column_names is None or column_name not in allowed_column_names:
+        raise ValueError(
+            f"Column {column_name} is not allowed on the {table_name} table."
+        )
+
     is_postgres_database: bool = db.engine.dialect.name == "postgresql"
 
     if is_postgres_database:
-        db.session.execute(
-            text(f"ALTER TABLE {table_name} DROP COLUMN IF EXISTS {column_name}")
+        drop_column_statement = text(
+            f"ALTER TABLE {table_name} DROP COLUMN IF EXISTS {column_name}"
         )
+        db.session.execute(drop_column_statement)
         db.session.commit()
         return
 
@@ -112,9 +128,9 @@ def drop_table_column_if_exists(table_name: str, column_name: str) -> None:
         if column_name not in table_index["column_names"]:
             continue
         blocking_index_name: str = table_index["name"]
-        db.session.execute(
-            text(f"DROP INDEX IF EXISTS {blocking_index_name}")
-        )
+        validate_sql_identifier(blocking_index_name)
+        drop_index_statement = text(f"DROP INDEX IF EXISTS {blocking_index_name}")
+        db.session.execute(drop_index_statement)
     db.session.commit()
     db.session.execute(text(f"ALTER TABLE {table_name} DROP COLUMN {column_name}"))
     db.session.commit()

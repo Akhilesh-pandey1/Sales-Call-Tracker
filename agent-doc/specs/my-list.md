@@ -151,12 +151,12 @@ The My List post-call popup SHALL carry the same Schedule choice the automated f
 - **THEN** it leaves the Scheduled tab like any other booking
 
 ### Requirement: Download exports the whole list
-The system SHALL export the whole list as a CSV — number, status, interested, do-not-call, notes, called date — through Android's share sheet, each row keeping its called date so today's slice is a filter in the spreadsheet app.
+The system SHALL export the whole list as a CSV — number, status, interested, do-not-call, notes, called date, called time — through Android's share sheet, each row keeping its called date and called time so today's slice is a filter in the spreadsheet app.
 
 #### Scenario: Full export through the share sheet
 - **GIVEN** a list of any size
 - **WHEN** Download is tapped
-- **THEN** one CSV of the whole list — number, status, interested, do-not-call, notes, called date — opens in Android's share sheet
+- **THEN** one CSV of the whole list — number, status, interested, do-not-call, notes, called date, called time — opens in Android's share sheet
 
 #### Scenario: Rows keep their dates
 - **GIVEN** rows called on different days

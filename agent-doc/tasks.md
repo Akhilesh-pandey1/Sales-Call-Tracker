@@ -7,12 +7,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] On a fresh start the first backfill reads nothing older than the open moment, so before-install calls never get a history row (`decisions.md` — Decision 1).
-- [ ] A later open reads from the marker onward exactly as before, and history rows already stored stay untouched (`decisions.md` — Decision 1).
-- [ ] The install moment needs no new storage key — the existing `history_last_loaded_at` marker carries it (`decisions.md` — Decision 1).
+- [x] On a fresh start the first backfill reads nothing older than the open moment, so before-install calls never get a history row (`decisions.md` — Decision 1).
+- [x] A later open reads from the marker onward exactly as before, and history rows already stored stay untouched (`decisions.md` — Decision 1).
+- [x] The install moment needs no new storage key — the existing `history_last_loaded_at` marker carries it (`decisions.md` — Decision 1).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 2: App — one history batch never inserts the same call twice
 
@@ -38,12 +38,12 @@
 **Status:** Not started
 
 **Acceptance criteria:**
-- [ ] The CSV header reads Number, Status, Interested, Do not call, Notes, Called date, Called time, and the formula guard plus the share flow stay unchanged (`decisions.md` — Decision 3).
-- [ ] Called date shows DD/MM and Called time shows HH:MM in phone-local time, reusing the way the History tab formats its row times (`decisions.md` — Decision 3).
-- [ ] A number never called leaves both cells empty (`decisions.md` — Decision 3).
+- [x] The CSV header reads Number, Status, Interested, Do not call, Notes, Called date, Called time, and the formula guard plus the share flow stay unchanged (`decisions.md` — Decision 3).
+- [x] Called date shows DD/MM and Called time shows HH:MM in phone-local time, reusing the way the History tab formats its row times (`decisions.md` — Decision 3).
+- [x] A number never called leaves both cells empty (`decisions.md` — Decision 3).
 
 **Verification:**
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 4: Backend — My Stats responses carry the fuller office-hours label
 

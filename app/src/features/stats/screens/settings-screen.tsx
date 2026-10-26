@@ -9,7 +9,6 @@ import {
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import {
-  CardSim,
   ChevronRight,
   LogOut,
   MessageCircle,
@@ -22,11 +21,10 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useClearLocalData } from '../hooks/use-clear-local-data';
 import { useLogout } from '../hooks/use-logout';
-import { CallingSimScreen } from './calling-sim-screen';
 import { DoNotTrackScreen } from './do-not-track-screen';
 import { WhatsAppScreen } from './whatsapp-screen';
 
-type SettingsSubScreen = 'callingSim' | 'doNotTrack' | 'whatsapp';
+type SettingsSubScreen = 'doNotTrack' | 'whatsapp';
 
 function SettingsHeader() {
   return (
@@ -182,10 +180,6 @@ export function SettingsScreen() {
     return <DoNotTrackScreen onBack={() => setOpenSubScreen(null)} />;
   }
 
-  if (openSubScreen === 'callingSim') {
-    return <CallingSimScreen onBack={() => setOpenSubScreen(null)} />;
-  }
-
   if (openSubScreen === 'whatsapp') {
     return <WhatsAppScreen onBack={() => setOpenSubScreen(null)} />;
   }
@@ -204,14 +198,6 @@ export function SettingsScreen() {
             onPress={() => setOpenSubScreen('whatsapp')}
           />
           <SettingsMenuRow
-            icon={Trash2}
-            iconContainerClassName="bg-destructive/10"
-            iconClassName="text-destructive"
-            title="Clear local data"
-            subtitle="Deletes only the calls on this phone that haven't reached the server yet."
-            onPress={openClearDialog}
-          />
-          <SettingsMenuRow
             icon={ShieldMinus}
             iconContainerClassName="bg-primary/10"
             iconClassName="text-primary"
@@ -220,12 +206,12 @@ export function SettingsScreen() {
             onPress={() => setOpenSubScreen('doNotTrack')}
           />
           <SettingsMenuRow
-            icon={CardSim}
-            iconContainerClassName="bg-primary/10"
-            iconClassName="text-primary"
-            title="Calling SIM"
-            subtitle="The SIM every call goes out from."
-            onPress={() => setOpenSubScreen('callingSim')}
+            icon={Trash2}
+            iconContainerClassName="bg-destructive/10"
+            iconClassName="text-destructive"
+            title="Clear local data"
+            subtitle="Deletes only the calls on this phone that haven't reached the server yet."
+            onPress={openClearDialog}
           />
           <SettingsMenuRow
             icon={LogOut}

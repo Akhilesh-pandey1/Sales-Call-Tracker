@@ -57,17 +57,17 @@
 
 **Blocked by:** 2
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 
-- [ ] Settings shows exactly the WhatsApp, Do not track numbers, Clear local data, and Log out rows, and the SIM screen, hook, utility, bridge, native module, and its registration are deleted (`specs/settings-tab.md` — Four-row menu with no section header).
-- [ ] Every call places on the phone default through the direct call, and with CALL_PHONE off the number still hands to the phone's own dialer untracked.
-- [ ] READ_PHONE_NUMBERS is asked nowhere — the login pass asks only CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE, then the reminders check, then the tapped-number step (`decisions.md` — Decision 3).
+- [x] Settings shows exactly the WhatsApp, Do not track numbers, Clear local data, and Log out rows, and the SIM screen, hook, utility, bridge, native module, and its registration are deleted (`specs/settings-tab.md` — Four-row menu with no section header).
+- [x] Every call places on the phone default through the direct call, and with CALL_PHONE off the number still hands to the phone's own dialer untracked.
+- [x] READ_PHONE_NUMBERS is asked nowhere — the login pass asks only CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE, then the reminders check, then the tapped-number step (`decisions.md` — Decision 3).
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 5: App — Download saves the My List CSV as a real file
 

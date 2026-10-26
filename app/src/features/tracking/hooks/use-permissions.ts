@@ -53,8 +53,6 @@ export function usePermissions(): Permission[] {
       missingPermissionsBeforeRequest,
     );
     setMissingPermissions(missingPermissionsAfterRequest);
-    const simNumberPermission = PermissionsAndroid.PERMISSIONS.READ_PHONE_NUMBERS;
-    await requestPermissionIfMissing(simNumberPermission);
     await ensureRemindersAreReady();
     await askToCatchTappedNumbers();
   }, []);

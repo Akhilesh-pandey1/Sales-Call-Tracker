@@ -29,9 +29,9 @@ export function useLeadLoading(
         const launchedCall = await launchTrackedCall(lead.phone_number);
         const launchedCallId = launchedCall === null ? null : launchedCall.callId;
         updateViewState({ kind: 'dialing', lead, callId: launchedCallId });
-      } catch (dialError) {
+      } catch {
         updateViewState({ kind: 'ready', lead });
-        showCallLaunchErrorToast(dialError);
+        showCallLaunchErrorToast();
       } finally {
         isDialLaunchLockedRef.current = false;
       }

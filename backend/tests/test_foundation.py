@@ -76,6 +76,106 @@ def test_startup_adds_call_outcome_columns_to_existing_database(
     assert stored_existing_call.notes is None
 
 
+def test_startup_drops_legacy_outcome_column_from_existing_database(
+    tmp_path: Path,
+) -> None:
+    database_path: Path = tmp_path / "legacy-outcome-database.sqlite"
+    database_url: str = f"sqlite:///{database_path.as_posix()}"
+
+    legacy_engine = create_engine(database_url)
+    create_legacy_calls_table_statement = text(
+        "CREATE TABLE calls ("
+        "call_id VARCHAR(64) PRIMARY KEY, "
+        "user_id INTEGER, "
+        "phone_number VARCHAR(30) NOT NULL, "
+        "dialed_at TIMESTAMP, "
+        "duration_seconds INTEGER NOT NULL DEFAULT 0, "
+        "outcome VARCHAR(30))"
+    )
+    insert_legacy_call_statement = text(
+        "INSERT INTO calls (call_id, user_id, phone_number, dialed_at, duration_seconds, outcome) "
+        "VALUES ('legacy-call', 1, '+919876543210', '2026-10-01 10:00:00.000000', 30, 'yes')"
+    )
+    with legacy_engine.begin() as connection:
+        connection.execute(create_legacy_calls_table_statement)
+        connection.execute(insert_legacy_call_statement)
+    legacy_engine.dispose()
+
+    class ExistingDatabaseConfig(BaseConfig):
+        TESTING: bool = True
+        SQLALCHEMY_DATABASE_URI: str = database_url
+
+    application: Flask = create_app(ExistingDatabaseConfig)
+    with application.app_context():
+        database_inspector = inspect(db.engine)
+        existing_column_names: list[str] = [
+            column["name"] for column in database_inspector.get_columns("calls")
+        ]
+        stored_legacy_call: Call | None = db.session.get(Call, "legacy-call")
+        db.session.remove()
+        db.engine.dispose()
+
+    assert "outcome" not in existing_column_names
+    assert "user_id" in existing_column_names
+    assert "phone_number" in existing_column_names
+    assert "dialed_at" in existing_column_names
+    assert "duration_seconds" in existing_column_names
+    assert "direction" in existing_column_names
+    assert "interested" in existing_column_names
+    assert "do_not_call" in existing_column_names
+    assert "notes" in existing_column_names
+    assert stored_legacy_call is not None
+    assert stored_legacy_call.user_id == 1
+    assert stored_legacy_call.interested is False
+
+
+def test_startup_skips_outcome_cleanup_when_column_missing(
+    tmp_path: Path,
+) -> None:
+    database_path: Path = tmp_path / "no-outcome-database.sqlite"
+    database_url: str = f"sqlite:///{database_path.as_posix()}"
+
+    legacy_engine = create_engine(database_url)
+    create_calls_table_statement = text(
+        "CREATE TABLE calls ("
+        "call_id VARCHAR(64) PRIMARY KEY, "
+        "user_id INTEGER, "
+        "phone_number VARCHAR(30) NOT NULL, "
+        "dialed_at TIMESTAMP, "
+        "duration_seconds INTEGER NOT NULL DEFAULT 0)"
+    )
+    insert_call_statement = text(
+        "INSERT INTO calls (call_id, user_id, phone_number, dialed_at, duration_seconds) "
+        "VALUES ('kept-call', 1, '+919876543210', '2026-10-01 10:00:00.000000', 30)"
+    )
+    with legacy_engine.begin() as connection:
+        connection.execute(create_calls_table_statement)
+        connection.execute(insert_call_statement)
+    legacy_engine.dispose()
+
+    class ExistingDatabaseConfig(BaseConfig):
+        TESTING: bool = True
+        SQLALCHEMY_DATABASE_URI: str = database_url
+
+    application: Flask = create_app(ExistingDatabaseConfig)
+    with application.app_context():
+        database_inspector = inspect(db.engine)
+        existing_column_names: list[str] = [
+            column["name"] for column in database_inspector.get_columns("calls")
+        ]
+        stored_call: Call | None = db.session.get(Call, "kept-call")
+        db.session.remove()
+        db.engine.dispose()
+
+    assert "outcome" not in existing_column_names
+    assert "user_id" in existing_column_names
+    assert "direction" in existing_column_names
+    assert "interested" in existing_column_names
+    assert stored_call is not None
+    assert stored_call.user_id == 1
+    assert stored_call.duration_seconds == 30
+
+
 def test_user_model(app: Flask) -> None:
     hashed_pwd: str = hash_password("ValidPass123")
     user: User = User(

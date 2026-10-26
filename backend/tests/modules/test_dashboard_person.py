@@ -821,6 +821,7 @@ def test_person_dashboard_carries_office_hours_window_and_label(
         assert response.status_code == 200
         assert data["office_hours"] == {"start_time": "10:00", "end_time": "19:00"}
         assert data["office_hours_label"] == "10 to 7"
+        assert data["office_hours_full_label"] == "10:00 to 7:00"
 
 
 def test_person_dashboard_label_follows_window_saved_earlier(
@@ -845,6 +846,7 @@ def test_person_dashboard_label_follows_window_saved_earlier(
         assert response.status_code == 200
         assert data["office_hours"] == {"start_time": "09:30", "end_time": "18:15"}
         assert data["office_hours_label"] == "9:30 to 6:15"
+        assert data["office_hours_full_label"] == "9:30 to 6:15"
 
 
 def test_person_dashboard_label_uses_twelve_hour_minutes_only(
@@ -868,6 +870,7 @@ def test_person_dashboard_label_uses_twelve_hour_minutes_only(
         )
         assert response.status_code == 200
         assert data["office_hours_label"] == "12:45 to 9:05"
+        assert data["office_hours_full_label"] == "12:45 to 9:05"
 
         midnight_window: dict[str, str] = {"start_time": "00:30", "end_time": "10:00"}
         midnight_response: Response = client.put(
@@ -880,6 +883,7 @@ def test_person_dashboard_label_uses_twelve_hour_minutes_only(
         )
         assert midnight_fetch.status_code == 200
         assert midnight_data["office_hours_label"] == "12:30 to 10"
+        assert midnight_data["office_hours_full_label"] == "12:30 to 10:00"
 
 
 def test_person_dashboard_fewer_than_five_numbers(

@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from typing import Any
 
 from backend.app.core.errors import AppException
@@ -63,12 +64,17 @@ def update_office_hours_window(start_time: str, end_time: str) -> None:
     db.session.commit()
 
 
-def format_short_clock_time(minute_of_day: int) -> str:
-    hour_of_day, minute_within_hour = split_minute_of_day(minute_of_day)
+def get_twelve_hour_clock_display_hour(hour_of_day: int) -> int:
     hours_on_twelve_hour_clock: int = 12
     display_hour: int = hour_of_day % hours_on_twelve_hour_clock
     if display_hour == 0:
         display_hour = hours_on_twelve_hour_clock
+    return display_hour
+
+
+def format_short_clock_time(minute_of_day: int) -> str:
+    hour_of_day, minute_within_hour = split_minute_of_day(minute_of_day)
+    display_hour: int = get_twelve_hour_clock_display_hour(hour_of_day)
     if minute_within_hour == 0:
         minute_text: str = ""
     else:
@@ -77,9 +83,20 @@ def format_short_clock_time(minute_of_day: int) -> str:
     return short_time
 
 
-def build_office_hours_label(start_minute: int, end_minute: int) -> str:
-    start_text: str = format_short_clock_time(start_minute)
-    end_text: str = format_short_clock_time(end_minute)
+def format_full_clock_time(minute_of_day: int) -> str:
+    hour_of_day, minute_within_hour = split_minute_of_day(minute_of_day)
+    display_hour: int = get_twelve_hour_clock_display_hour(hour_of_day)
+    full_time: str = f"{display_hour}:{minute_within_hour:02d}"
+    return full_time
+
+
+def build_office_hours_window_label(
+    start_minute: int,
+    end_minute: int,
+    format_clock_time: Callable[[int], str],
+) -> str:
+    start_text: str = format_clock_time(start_minute)
+    end_text: str = format_clock_time(end_minute)
     window_label: str = f"{start_text} to {end_text}"
     return window_label
 
@@ -87,12 +104,18 @@ def build_office_hours_label(start_minute: int, end_minute: int) -> str:
 def get_office_hours_view_with_label(
     office_hours_window: OfficeHours,
 ) -> dict[str, Any]:
+    start_minute: int = office_hours_window.start_minute
+    end_minute: int = office_hours_window.end_minute
     window_view: dict[str, str] = build_window_view(office_hours_window)
-    window_label: str = build_office_hours_label(
-        office_hours_window.start_minute, office_hours_window.end_minute
+    window_label: str = build_office_hours_window_label(
+        start_minute, end_minute, format_short_clock_time
+    )
+    window_full_label: str = build_office_hours_window_label(
+        start_minute, end_minute, format_full_clock_time
     )
     view_with_label: dict[str, Any] = {
         "office_hours": window_view,
         "office_hours_label": window_label,
+        "office_hours_full_label": window_full_label,
     }
     return view_with_label

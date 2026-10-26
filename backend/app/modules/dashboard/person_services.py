@@ -334,6 +334,9 @@ def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
         "name": target_user.name,
         "office_hours": office_hours_view_with_label["office_hours"],
         "office_hours_label": office_hours_view_with_label["office_hours_label"],
+        "office_hours_full_label": office_hours_view_with_label[
+            "office_hours_full_label"
+        ],
         "today": period_blocks["today"],
         "yesterday": period_blocks["yesterday"],
         "last_30_days": period_blocks["last_30_days"],

@@ -40,6 +40,7 @@ export type Last30DaysStats = PeriodStats & {
 export type PersonStats = {
   name: string;
   office_hours: OfficeHoursWindow;
+  office_hours_full_label: string;
   today: PeriodStats;
   yesterday: PeriodStats;
   last_30_days: Last30DaysStats;

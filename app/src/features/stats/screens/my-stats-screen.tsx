@@ -326,9 +326,10 @@ function KpiCard({ label, icon, isAccent, value, subLine }: KpiCardProps) {
 
 type Last30DaysCardsProps = {
   last30DaysStats: Last30DaysStats;
+  officeHoursFullLabel: string;
 };
 
-function Last30DaysCards({ last30DaysStats }: Last30DaysCardsProps) {
+function Last30DaysCards({ last30DaysStats, officeHoursFullLabel }: Last30DaysCardsProps) {
   const periodDayCount = 30;
   const averagePerActiveDay = last30DaysStats.avg_per_active_day;
   const activeDaysValue: string = `${last30DaysStats.active_days} / ${periodDayCount}`;
@@ -338,9 +339,13 @@ function Last30DaysCards({ last30DaysStats }: Last30DaysCardsProps) {
   const avgDialsValue: string = formatAverageOrNoDataLabel(averageDials);
   const avgConnectedValue: string = formatAverageOrNoDataLabel(averageConnected);
   const avgMinutesValue: string = formatAverageOrNoDataLabel(averageMinutes);
+  const officeHoursLabelText: string = `Office hours ${officeHoursFullLabel}`;
   return (
     <View>
-      <Text className="text-base font-bold tracking-tight">Last 30 days</Text>
+      <View className="flex-row items-center justify-between gap-2">
+        <Text className="text-base font-bold tracking-tight">Last 30 days</Text>
+        <Text className="text-xs font-medium text-muted-foreground">{officeHoursLabelText}</Text>
+      </View>
       <View className="mt-3 gap-3">
         <View className="flex-row gap-3">
           <KpiCard
@@ -682,7 +687,10 @@ function MyStatsContent({ myStats }: MyStatsContentProps) {
 
   return (
     <ScrollView className="flex-1" contentContainerClassName="gap-4 px-3 pb-6 pt-4">
-      <Last30DaysCards last30DaysStats={myStats.last_30_days} />
+      <Last30DaysCards
+        last30DaysStats={myStats.last_30_days}
+        officeHoursFullLabel={myStats.office_hours_full_label}
+      />
       <PerformanceTable periodStats={periodStats} />
       <CallsByHourChart periodCallsByHour={periodCallsByHour} />
       <CallSplitCard periodStats={periodStats} />

@@ -4,16 +4,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 
-- [ ] The `tel:` intent filter on MainActivity carries ACTION_VIEW and ACTION_DIAL, keeping DEFAULT and BROWSABLE (`specs/tapped-number-capture.md` — Catch tapped numbers through Android's chooser).
-- [ ] Nothing else in the capture flow changes — the chooser probe, keypad fill, and skip rules stay as they are.
+- [x] The `tel:` intent filter on MainActivity carries ACTION_VIEW and ACTION_DIAL, keeping DEFAULT and BROWSABLE (`specs/tapped-number-capture.md` — Catch tapped numbers through Android's chooser).
+- [x] Nothing else in the capture flow changes — the chooser probe, keypad fill, and skip rules stay as they are.
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 2: App — login-pass popups never overlap, so the tapped-number step shows on first login
 
@@ -21,17 +21,17 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 
-- [ ] No two login-pass popups can overlap — each step waits for the previous popup to be fully closed (`specs/tapped-number-capture.md` — Popups never overlap on first login).
-- [ ] On a first login whose reminders step showed its own popup, the tapped-number step still shows instead of being dropped (`specs/tapped-number-capture.md` — Popups never overlap on first login).
-- [ ] The skip rules stay exactly as they are — silent skip when already the handler, permanent refusal saved by "Don't show again" (`specs/tapped-number-capture.md` — Don't-show-again requirement).
+- [x] No two login-pass popups can overlap — each step waits for the previous popup to be fully closed (`specs/tapped-number-capture.md` — Popups never overlap on first login).
+- [x] On a first login whose reminders step showed its own popup, the tapped-number step still shows instead of being dropped (`specs/tapped-number-capture.md` — Popups never overlap on first login).
+- [x] The skip rules stay exactly as they are — silent skip when already the handler, permanent refusal saved by "Don't show again" (`specs/tapped-number-capture.md` — Don't-show-again requirement).
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 3: App — the Dialer Paste button fills only real phone numbers
 
@@ -43,13 +43,13 @@
 
 **Acceptance criteria:**
 
-- [ ] Pasting clipboard text fills the keypad with the first number found in it, in E.164 form (`decisions.md` — Decision 2).
-- [ ] A clipboard holding no number shows the toast "No number found in what you copied." and leaves the keypad exactly as it was (`decisions.md` — Decision 2).
-- [ ] An empty clipboard keeps its existing "Nothing copied." toast and changes nothing.
+- [x] Pasting clipboard text fills the keypad with the first number found in it, in E.164 form (`decisions.md` — Decision 2).
+- [x] A clipboard holding no number shows the toast "No number found in what you copied." and leaves the keypad exactly as it was (`decisions.md` — Decision 2).
+- [x] An empty clipboard keeps its existing "Nothing copied." toast and changes nothing.
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 4: App — the Calling SIM feature is removed
 

@@ -90,32 +90,33 @@ def ensure_table_column(table_name: str, column_name: str) -> None:
     db.session.commit()
 
 
-def drop_legacy_auth_token_column() -> None:
-    users_table_name: str = "users"
-    legacy_column_name: str = "auth_token"
-
+def drop_table_column_if_exists(table_name: str, column_name: str) -> None:
     is_postgres_database: bool = db.engine.dialect.name == "postgresql"
-    database_inspector = inspect(db.engine)
 
     if is_postgres_database:
         db.session.execute(
-            text("ALTER TABLE users DROP COLUMN IF EXISTS auth_token")
+            text(f"ALTER TABLE {table_name} DROP COLUMN IF EXISTS {column_name}")
         )
         db.session.commit()
         return
 
-    user_indexes: list[dict[str, Any]] = database_inspector.get_indexes(
-        users_table_name
-    )
-    for user_index in user_indexes:
-        if legacy_column_name not in user_index["column_names"]:
+    database_inspector = inspect(db.engine)
+    table_column_names: list[str] = [
+        column["name"] for column in database_inspector.get_columns(table_name)
+    ]
+    if column_name not in table_column_names:
+        return
+
+    table_indexes: list[dict[str, Any]] = database_inspector.get_indexes(table_name)
+    for table_index in table_indexes:
+        if column_name not in table_index["column_names"]:
             continue
-        blocking_index_name: str = user_index["name"]
+        blocking_index_name: str = table_index["name"]
         db.session.execute(
             text(f"DROP INDEX IF EXISTS {blocking_index_name}")
         )
     db.session.commit()
-    db.session.execute(text("ALTER TABLE users DROP COLUMN auth_token"))
+    db.session.execute(text(f"ALTER TABLE {table_name} DROP COLUMN {column_name}"))
     db.session.commit()
 
 
@@ -160,7 +161,7 @@ def migrate_legacy_auth_tokens_to_sessions() -> None:
         )
     db.session.commit()
 
-    drop_legacy_auth_token_column()
+    drop_table_column_if_exists("users", "auth_token")
 
 
 def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
@@ -192,6 +193,7 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
         ensure_table_column("leads", "do_not_call")
         ensure_table_column("leads", "notes")
         migrate_legacy_auth_tokens_to_sessions()
+        drop_table_column_if_exists("calls", "outcome")
         get_or_create_office_hours_window()
         create_initial_manager(app)
 

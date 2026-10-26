@@ -4,16 +4,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 
-- [ ] The `tel:` intent filter on MainActivity carries ACTION_VIEW and ACTION_DIAL, keeping DEFAULT and BROWSABLE (`specs/tapped-number-capture.md` — Catch tapped numbers through Android's chooser).
-- [ ] Nothing else in the capture flow changes — the chooser probe, keypad fill, and skip rules stay as they are.
+- [x] The `tel:` intent filter on MainActivity carries ACTION_VIEW and ACTION_DIAL, keeping DEFAULT and BROWSABLE (`specs/tapped-number-capture.md` — Catch tapped numbers through Android's chooser).
+- [x] Nothing else in the capture flow changes — the chooser probe, keypad fill, and skip rules stay as they are.
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 2: App — login-pass popups never overlap, so the tapped-number step shows on first login
 

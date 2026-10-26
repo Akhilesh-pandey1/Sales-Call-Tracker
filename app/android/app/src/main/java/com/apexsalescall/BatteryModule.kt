@@ -1,11 +1,13 @@
 package com.apexsalescall
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.PowerManager
 import android.provider.Settings
 import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.ActivityEventListener
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -46,6 +48,53 @@ class BatteryModule(reactContext: ReactApplicationContext) :
         promise.resolve(isOptimizationEnabled)
     }
 
+    private fun openExemptionRequestWithoutWaiting(promise: Promise) {
+        try {
+            reactApplicationContext.startActivity(buildExemptionRequestIntent())
+        } catch (startError: ActivityNotFoundException) {
+            promise.reject(dialogUnavailableCode, dialogUnavailableMessage, startError)
+            return
+        }
+        val requestWasOpened = true
+        promise.resolve(requestWasOpened)
+    }
+
+    private fun openExemptionRequestAndWaitForClose(promise: Promise) {
+        val currentActivity: Activity? = currentActivity
+        if (currentActivity == null) {
+            openExemptionRequestWithoutWaiting(promise)
+            return
+        }
+        val exemptionRequestCode = 52321
+        val exemptionRequestCloseListener = object : ActivityEventListener {
+            override fun onActivityResult(
+                hostingActivity: Activity,
+                requestCode: Int,
+                resultCode: Int,
+                resultData: Intent?,
+            ) {
+                if (requestCode != exemptionRequestCode) {
+                    return
+                }
+                reactApplicationContext.removeActivityEventListener(this)
+                val dialogFullyClosed = true
+                promise.resolve(dialogFullyClosed)
+            }
+
+            override fun onNewIntent(intent: Intent) {}
+        }
+        reactApplicationContext.addActivityEventListener(exemptionRequestCloseListener)
+        try {
+            currentActivity.startActivityForResult(
+                buildExemptionRequestIntent(),
+                exemptionRequestCode,
+            )
+        } catch (startError: ActivityNotFoundException) {
+            reactApplicationContext.removeActivityEventListener(exemptionRequestCloseListener)
+            promise.reject(dialogUnavailableCode, dialogUnavailableMessage, startError)
+        }
+    }
+
     @ReactMethod
     fun requestIgnoreBatteryOptimization(promise: Promise) {
         val isAlreadyExempt: Boolean = isAppIgnoringBatteryOptimization()
@@ -54,15 +103,7 @@ class BatteryModule(reactContext: ReactApplicationContext) :
             promise.resolve(alreadyExempt)
             return
         }
-        val exemptionRequestIntent: Intent = buildExemptionRequestIntent()
-        try {
-            reactApplicationContext.startActivity(exemptionRequestIntent)
-        } catch (startError: ActivityNotFoundException) {
-            promise.reject(dialogUnavailableCode, dialogUnavailableMessage, startError)
-            return
-        }
-        val requestWasOpened = true
-        promise.resolve(requestWasOpened)
+        openExemptionRequestAndWaitForClose(promise)
     }
 
     companion object {

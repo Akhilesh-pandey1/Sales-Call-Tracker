@@ -4,9 +4,11 @@ import { ToastAndroid } from 'react-native';
 import { readStoredCountry } from '@/features/auth';
 import { subscribeToReminderPress } from '@/features/tracking';
 import { isValidPhoneNumber } from '@/shared/utils/phone-formatter';
+import { extractFirstClipboardNumber } from '../lib/extract-clipboard-number';
 import { subscribeToTappedNumber } from '../lib/tapped-number-events';
 
 const emptyClipboardMessage = 'Nothing copied.';
+const noNumberInClipboardMessage = 'No number found in what you copied.';
 
 export type UseDialerResult = {
   dialedNumberInput: string;
@@ -81,7 +83,16 @@ export function useDialer(): UseDialerResult {
       ToastAndroid.show(emptyClipboardMessage, ToastAndroid.SHORT);
       return;
     }
-    setDialedNumberInput(trimmedClipboardText);
+    const storedCountry = await readStoredCountry();
+    const firstClipboardNumber = extractFirstClipboardNumber(
+      trimmedClipboardText,
+      storedCountry,
+    );
+    if (firstClipboardNumber === null) {
+      ToastAndroid.show(noNumberInClipboardMessage, ToastAndroid.SHORT);
+      return;
+    }
+    setDialedNumberInput(firstClipboardNumber);
   }, []);
 
   const isNumberValid =

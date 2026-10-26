@@ -43,13 +43,13 @@
 
 **Acceptance criteria:**
 
-- [ ] Pasting clipboard text fills the keypad with the first number found in it, in E.164 form (`decisions.md` — Decision 2).
-- [ ] A clipboard holding no number shows the toast "No number found in what you copied." and leaves the keypad exactly as it was (`decisions.md` — Decision 2).
-- [ ] An empty clipboard keeps its existing "Nothing copied." toast and changes nothing.
+- [x] Pasting clipboard text fills the keypad with the first number found in it, in E.164 form (`decisions.md` — Decision 2).
+- [x] A clipboard holding no number shows the toast "No number found in what you copied." and leaves the keypad exactly as it was (`decisions.md` — Decision 2).
+- [x] An empty clipboard keeps its existing "Nothing copied." toast and changes nothing.
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 4: App — the Calling SIM feature is removed
 

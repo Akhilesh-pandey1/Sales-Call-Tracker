@@ -13,8 +13,10 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
+import { RemoveNumberDialog } from '../components/remove-number-dialog';
 import { SettingsSubScreenHeader } from '../components/settings-sub-screen-header';
 import { useDoNotTrack } from '../hooks/use-do-not-track';
+import { useDoNotTrackRemove } from '../hooks/use-do-not-track-remove';
 
 type DoNotTrackScreenProps = {
   onBack: () => void;
@@ -178,11 +180,19 @@ export function DoNotTrackScreen({ onBack }: DoNotTrackScreenProps) {
     isSavingNumber,
     saveErrorMessage,
     listErrorMessage,
+    refreshDoNotTrackNumbers,
     openAddDialog,
     closeAddDialog,
     addDoNotTrackNumber,
-    removeDoNotTrackNumber,
   } = useDoNotTrack();
+  const {
+    removeTargetNumber,
+    isRemovingNumber,
+    removeErrorMessage,
+    openRemoveDialog,
+    closeRemoveDialog,
+    removeNumberWithPassword,
+  } = useDoNotTrackRemove(refreshDoNotTrackNumbers);
 
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
@@ -215,7 +225,7 @@ export function DoNotTrackScreen({ onBack }: DoNotTrackScreenProps) {
                 key={phoneNumber}
                 rowNumber={index + 1}
                 phoneNumber={phoneNumber}
-                onRemove={removeDoNotTrackNumber}
+                onRemove={openRemoveDialog}
               />
             ))
           )}
@@ -235,6 +245,13 @@ export function DoNotTrackScreen({ onBack }: DoNotTrackScreenProps) {
         errorMessage={saveErrorMessage}
         onAdd={addDoNotTrackNumber}
         onCancel={closeAddDialog}
+      />
+      <RemoveNumberDialog
+        targetNumber={removeTargetNumber}
+        isRemoving={isRemovingNumber}
+        errorMessage={removeErrorMessage}
+        onRemove={removeNumberWithPassword}
+        onCancel={closeRemoveDialog}
       />
     </View>
   );

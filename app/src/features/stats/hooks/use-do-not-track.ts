@@ -2,7 +2,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { readStoredCountry } from '@/features/auth';
 import {
-  deleteDoNotTrackNumber,
   insertDoNotTrackNumber,
   readDoNotTrackNumbers,
 } from '@/features/tracking';
@@ -12,7 +11,6 @@ import {
 } from '@/shared/utils/phone-formatter';
 
 const readListFailedMessage = 'Could not read your list. Try again.';
-const removeFailedMessage = 'Could not remove this number. Try again.';
 const saveFailedMessage = 'Could not save this number. Try again.';
 const invalidNumberMessage = 'Enter a valid phone number.';
 const duplicateNumberMessage = 'This number is already on the list.';
@@ -23,10 +21,10 @@ export type DoNotTrackState = {
   isSavingNumber: boolean;
   saveErrorMessage: string | null;
   listErrorMessage: string | null;
+  refreshDoNotTrackNumbers: () => Promise<void>;
   openAddDialog: () => void;
   closeAddDialog: () => void;
   addDoNotTrackNumber: (typedNumber: string) => Promise<void>;
-  removeDoNotTrackNumber: (phoneNumber: string) => Promise<void>;
 };
 
 export function useDoNotTrack(): DoNotTrackState {
@@ -97,27 +95,15 @@ export function useDoNotTrack(): DoNotTrackState {
     [refreshDoNotTrackNumbers],
   );
 
-  const removeDoNotTrackNumber = useCallback(
-    async (phoneNumber: string): Promise<void> => {
-      try {
-        await deleteDoNotTrackNumber(phoneNumber);
-        await refreshDoNotTrackNumbers();
-      } catch {
-        setListErrorMessage(removeFailedMessage);
-      }
-    },
-    [refreshDoNotTrackNumbers],
-  );
-
   return {
     doNotTrackNumbers,
     isAddDialogOpen,
     isSavingNumber,
     saveErrorMessage,
     listErrorMessage,
+    refreshDoNotTrackNumbers,
     openAddDialog,
     closeAddDialog,
     addDoNotTrackNumber,
-    removeDoNotTrackNumber,
   };
 }

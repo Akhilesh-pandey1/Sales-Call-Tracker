@@ -80,6 +80,11 @@ backend/
 │       │   ├── schemas.py           # Dashboard response schemas
 │       │   ├── services.py          # IST period aggregation, computed dashboard KPIs, and top numbers calculation
 │       │   └── __init__.py
+│       ├── do_not_track/
+│       │   ├── routes.py            # POST /api/do-not-track/verify-remove-password
+│       │   ├── schemas.py           # Remove-password request validation
+│       │   ├── services.py          # Constant-time check of the typed password against DO_NOT_TRACK_REMOVE_PASSWORD
+│       │   └── __init__.py
 │       ├── users/
 │       │   ├── routes.py            # User management endpoints (create, list, update, activate, deactivate, delete)
 │       │   ├── schemas.py           # User schemas and password rules
@@ -107,6 +112,7 @@ backend/
 │       ├── test_auth.py             # Login and lockout tests
 │       ├── test_calls.py            # Call sync, office-hours gate, and deduplication tests
 │       ├── test_dashboard.py        # Team and person metrics over IST boundaries
+│       ├── test_do_not_track.py     # Remove-password check: right, wrong, empty, unset-env fail-closed
 │       ├── test_users.py            # Account lifecycle and guard tests
 │       ├── test_leads.py            # CSV upload, serving order, claims, and resolution
 │       └── test_settings.py         # Office hours read, update, and permission tests
@@ -241,10 +247,13 @@ app/
     │   │   └── screens/scheduled-screen.tsx     # Scheduled tab: bookings Due first, Copy, WhatsApp, tap opens the booked lead's card
     │   ├── stats/
     │   │   ├── api/stats.api.ts
+    │   │   ├── api/do-not-track.api.ts     # POST /api/do-not-track/verify-remove-password — the Remove popup's password check
     │   │   ├── hooks/use-my-stats.ts
+    │   │   ├── hooks/use-do-not-track.ts   # Do-not-track list state: add stays free and offline; remove asks the server first
     │   │   └── screens/
-    │   │       ├── my-stats-screen.tsx   # Salesperson stats: last-30-days KPI cards, performance table, calls-by-hour chart
-    │   │       └── settings-screen.tsx   # Settings tab: WhatsApp app and First message rows above the Do-not-track, Clear local data, and Log out rows
+    │   │       ├── my-stats-screen.tsx     # Salesperson stats: last-30-days KPI cards, performance table, calls-by-hour chart
+    │   │       ├── do-not-track-screen.tsx # Do-not-track list: bare + to add, Remove opens the manager-password popup
+    │   │       └── settings-screen.tsx     # Settings tab: WhatsApp app and First message rows above the Do-not-track, Clear local data, and Log out rows
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
     │       ├── db/call-history-db.ts     # Local call history: one row per filled call, 1000-row FIFO, one-time call-log backfill

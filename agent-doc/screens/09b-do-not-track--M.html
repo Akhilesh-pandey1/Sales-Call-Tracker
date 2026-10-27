@@ -116,6 +116,23 @@
     </div>
   </div>
 
+  <!-- Remove number pop-up: the manager password is asked before a number can be removed -->
+  <div id="remove-dialog" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/50 p-5">
+    <div role="dialog" aria-modal="true" aria-labelledby="remove-dialog-title" class="w-full max-w-sm rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-xl">
+      <h2 id="remove-dialog-title" class="text-base font-bold tracking-tight">Remove number <span id="remove-number-text" class="tabular-nums">(+91 90045 67890)</span></h2>
+      <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">This number will be tracked again from now on.</p>
+      <form id="remove-form" class="mt-4" novalidate>
+        <label for="remove-password" class="block text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Manager password</label>
+        <input id="remove-password" type="password" autocomplete="off" placeholder="Enter manager password" class="mt-1.5 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2.5 text-sm placeholder:text-[var(--color-muted-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+        <p id="remove-error" class="mt-2 hidden text-xs font-medium text-[var(--color-destructive)]"></p>
+        <div class="mt-4 flex justify-end gap-2">
+          <button id="cancel-remove" type="button" class="cursor-pointer rounded-xl border border-[var(--color-border)] px-4 py-2.5 text-sm font-semibold text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">Cancel</button>
+          <button type="submit" class="cursor-pointer rounded-xl bg-[var(--color-destructive)] px-4 py-2.5 text-sm font-semibold text-[var(--color-on-destructive)] transition-colors duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">Remove</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     const addDialog = document.getElementById("add-dialog");
     const openAddButton = document.getElementById("open-add-dialog");
@@ -125,6 +142,13 @@
     const addError = document.getElementById("add-error");
     const rowsContainer = document.getElementById("dnt-rows");
     const emptyNote = document.getElementById("dnt-empty");
+    const removeDialog = document.getElementById("remove-dialog");
+    const cancelRemoveButton = document.getElementById("cancel-remove");
+    const removeForm = document.getElementById("remove-form");
+    const removePasswordInput = document.getElementById("remove-password");
+    const removeError = document.getElementById("remove-error");
+    const removeNumberText = document.getElementById("remove-number-text");
+    let rowToRemove = null;
 
     function showAddError(message) {
       addError.textContent = message;
@@ -152,9 +176,39 @@
       emptyNote.classList.toggle("hidden", rows.length > 0);
     }
 
-    function removeRow(event) {
-      event.currentTarget.closest(".dnt-row").remove();
+    function deleteRow(row) {
+      row.remove();
       refreshRowIndexes();
+    }
+
+    function removeRow(event) {
+      openRemoveDialog(event.currentTarget.closest(".dnt-row"));
+    }
+
+    function openRemoveDialog(row) {
+      rowToRemove = row;
+      removeNumberText.textContent = "(" + row.querySelector("span:nth-child(2)").textContent + ")";
+      removePasswordInput.value = "";
+      removeError.classList.add("hidden");
+      removeDialog.classList.remove("hidden");
+      removeDialog.classList.add("flex");
+      removePasswordInput.focus();
+    }
+
+    function closeRemoveDialog() {
+      removeDialog.classList.add("hidden");
+      removeDialog.classList.remove("flex");
+    }
+
+    function handleRemoveSubmit(event) {
+      event.preventDefault();
+      if (removePasswordInput.value.trim() === "") {
+        removeError.textContent = "Enter the password.";
+        removeError.classList.remove("hidden");
+        return;
+      }
+      deleteRow(rowToRemove);
+      closeRemoveDialog();
     }
 
     function buildRow(numberText) {
@@ -205,6 +259,8 @@
     rowsContainer.querySelectorAll(".remove-row").forEach(function (button) {
       button.addEventListener("click", removeRow);
     });
+    cancelRemoveButton.addEventListener("click", closeRemoveDialog);
+    removeForm.addEventListener("submit", handleRemoveSubmit);
   </script>
 
 </body>

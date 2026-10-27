@@ -296,14 +296,20 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 - Privacy line - "Calls to or from these numbers are never recorded. This list stays on your phone only."
 - Numbers table - one row per saved number: row number, the number in international format (+91...), a Remove button per row
 - Add number button - opens a pop-up dialog with one phone-number field (typing 10 digits is fine - it saves in +91 format) and Cancel / Add buttons
+- Remove button - opens the manager-password pop-up for that number; removing is never instant
+- Remove pop-up - title "Remove number" with the number in brackets, then one manager-password field (typing stays hidden), and Cancel / Remove buttons
+- Correct password - the row disappears at once; that number is tracked again from now on
 - Numbers only - no names are stored with the numbers
-- The list is local only - never sent to the server, works offline
+- The list is local only - never sent to the server; adding works offline, only removing asks the server
 
 **Edge cases:**
 - Number not valid for the country: "Enter a valid phone number." - nothing is added
 - Number already on the list: "This number is already on the list." - no duplicate row
 - List is empty: "No numbers yet. Use Add number to keep a personal number private."
-- Removing a number: the row disappears at once; that number is tracked again from now on
+- Remove with wrong password: "Wrong password. Ask your manager." - the number stays on the list
+- Remove with empty password: "Enter the password." - nothing is sent
+- Remove with no internet: "Removing a number needs the internet. Connect and try again." - the number stays
+- Remove before the manager set the password on the server: "Removing is not available yet. Contact support."
 
 → Next: Screen 9d WhatsApp
 

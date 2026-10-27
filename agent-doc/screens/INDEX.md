@@ -53,4 +53,6 @@ Open `index.html` to flip through the screens (arrow keys or the buttons; Mobile
 | Do not track numbers | `09b-do-not-track--M.html` | Back button + Add number, table of private numbers with Remove per row |
 | Do not track — add number dialog | `09b-do-not-track--add-dialog--M.html` | Pop-up to add a number (10 digits → +91) |
 | Do not track — number already added | `09b-do-not-track--add-error--M.html` | Duplicate refused inside the pop-up |
+| Do not track — remove password dialog | `09b-do-not-track--remove-dialog--M.html` | Manager password asked before a number can be removed |
+| Do not track — wrong password | `09b-do-not-track--remove-error--M.html` | "Wrong password. Ask your manager." — the number stays |
 | WhatsApp settings | `09d-whatsapp--M.html` | Pick WhatsApp or WhatsApp Business, and edit the first message chats open with |

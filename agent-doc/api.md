@@ -514,3 +514,30 @@ Updates the office hours window.
   - `400 Bad Request`: `{"message": "End time must be after start time."}`
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
   - `403 Forbidden`: `{"message": "This setting is for managers."}`
+
+---
+
+## 7. Do Not Track
+
+### `POST /api/do-not-track/verify-remove-password`
+Checks the manager password typed in the Do-not-track screen's Remove popup. The do-not-track list itself lives only on the phone — this endpoint removes nothing; the phone deletes the number locally after a 200.
+
+- **Auth**: Any active user token
+- **Request Body**:
+  ```json
+  { "password": "..." }
+  ```
+- `password` — string, required. The manager password typed into the Remove popup.
+- **Processing Logic**:
+  - Compares the typed password with the server's `DO_NOT_TRACK_REMOVE_PASSWORD` environment value using a constant-time compare.
+  - Nothing is saved and nothing is removed on the server — no log table, no admin view.
+- **Response 200**:
+  ```json
+  { "status": true }
+  ```
+- **Error Responses**:
+  - `400 Bad Request`: `{"message": "Password is required."}`
+  - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
+  - `403 Forbidden` (wrong password): `{"message": "Wrong password. Ask your manager."}`
+  - `403 Forbidden` (inactive account): `{"message": "Your account is not active. Please contact your manager."}`
+  - `503 Service Unavailable`: `{"message": "Removing is not available yet. Contact support."}` — the environment value is not set; the check fails closed.

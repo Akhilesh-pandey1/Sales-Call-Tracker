@@ -95,6 +95,14 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
   - `uploaded` counts leads by `created_at`; `tackled` counts distinct leads with a synced call — both for the today and yesterday IST windows.
   - Per-person lead call counts for today match recorded calls.
 
+### `tests/modules/test_do_not_track.py`
+- Correct password returns 200 `{"status": true}`.
+- Wrong password returns 403 `"Wrong password. Ask your manager."`.
+- Missing or empty password returns 400 `"Password is required."`.
+- A request with no token returns 401; a deactivated account's token returns 403 `"Your account is not active. Please contact your manager."`.
+- With `DO_NOT_TRACK_REMOVE_PASSWORD` unset, the check fails closed with 503 `"Removing is not available yet. Contact support."`.
+- The check uses the environment value present when the request arrives, so a changed password is picked up without an app update.
+
 ---
 
 ## 2. Mobile Android Spike Checklist
@@ -182,3 +190,9 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - My Stats shows the short office timing (like "10 to 7") beside the "Last 30 days" heading; after the manager edits the window, the next login or My Stats open shows the new timing and History filters by it.
 - With a 10-to-7 window, the calls-by-hour chart shows nine bars (10 through 6) on My Stats and the web dashboard, and a call starting exactly at 19:00 counts in the last bar.
 - History holds no calls from outside the office-hours window and never holds Do-not-track numbers; upload still accepts +91 numbers, bare 10-digit numbers, and 10-digit numbers with spaces.
+- Tapping Remove on a Do-not-track number opens the manager-password popup for that number; the row disappears only after the server accepts the password.
+- A wrong password keeps the row and shows "Wrong password. Ask your manager."
+- With airplane mode on, removing shows "Removing a number needs the internet. Connect and try again." and the row stays.
+- An empty password shows "Enter the password." and sends nothing.
+- Adding a Do-not-track number still works with airplane mode on.
+- After the manager changes the server's remove password, the new one works on the phone at the next removal with no app update.

@@ -1,106 +1,36 @@
-## Task 1: App — the tel: intent filter also answers the dial intent
+## Task 1: Server — removing a do-not-track number needs the manager password
 
-**Description:** The Android manifest's `tel:` intent filter answers ACTION_DIAL beside ACTION_VIEW, so phones whose select-a-number "Call" button fires the dial intent can offer the app in Android's chooser (`specs/tapped-number-capture.md` — catch requirement).
-
-**Blocked by:** None
-
-**Status:** Done
-
-**Acceptance criteria:**
-
-- [x] The `tel:` intent filter on MainActivity carries ACTION_VIEW and ACTION_DIAL, keeping DEFAULT and BROWSABLE (`specs/tapped-number-capture.md` — Catch tapped numbers through Android's chooser).
-- [x] Nothing else in the capture flow changes — the chooser probe, keypad fill, and skip rules stay as they are.
-
-**Verification:**
-
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-
-## Task 2: App — login-pass popups never overlap, so the tapped-number step shows on first login
-
-**Description:** Each login permission pass step waits until the previous popup is fully closed before its own popup shows, so the reminders popup can never swallow the tapped-number step and the step always appears on the first login (`specs/tapped-number-capture.md` — one-time setup requirement).
+**Description:** A new `do_not_track` backend module checks the manager password typed on the phone against the server's `DO_NOT_TRACK_REMOVE_PASSWORD` env value with a constant-time compare — nothing is stored, the endpoint only verifies (`api.md` — Do Not Track; `decisions.md` — Decisions 2, 3).
 
 **Blocked by:** None
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
 
-- [x] No two login-pass popups can overlap — each step waits for the previous popup to be fully closed (`specs/tapped-number-capture.md` — Popups never overlap on first login).
-- [x] On a first login whose reminders step showed its own popup, the tapped-number step still shows instead of being dropped (`specs/tapped-number-capture.md` — Popups never overlap on first login).
-- [x] The skip rules stay exactly as they are — silent skip when already the handler, permanent refusal saved by "Don't show again" (`specs/tapped-number-capture.md` — Don't-show-again requirement).
+- [ ] `POST /api/do-not-track/verify-remove-password` answers 200 `{"status": true}` on the correct password, 403 `"Wrong password. Ask your manager."` on a wrong one, and 400 `"Password is required."` on a missing or empty one (`api.md` — Do Not Track).
+- [ ] Any active token may call it — no token gets 401 and a deactivated account's token gets the not-active 403 (`api.md` — Do Not Track).
+- [ ] With `DO_NOT_TRACK_REMOVE_PASSWORD` unset the check fails closed with 503 `"Removing is not available yet. Contact support."`, the value is read when the request arrives, and `.env.example` carries the name with a placeholder (`decisions.md` — Decision 2, 3; `api.md` — Do Not Track).
 
 **Verification:**
 
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [ ] Tests pass: `python -m pytest tests/modules/test_do_not_track.py` in `backend/`
 
-## Task 3: App — the Dialer Paste button fills only real phone numbers
+## Task 2: App — a number leaves the do-not-track list only after the server accepts the manager password
 
-**Description:** The Dialer paste button extracts the first real phone number from the clipboard text with libphonenumber-js and fills the keypad with it in E.164; a clipboard with no number leaves the keypad untouched with a toast (`decisions.md` — Decision 2; `specs/my-list.md` — the same library the upload uses).
+**Description:** The Do-not-track screen's Remove button opens the manager-password popup — title "Remove number" with the number in brackets, one hidden password field, Cancel / Remove — and the number is deleted locally only when the server accepts the password (`screen.md` — Screen 9b; `decisions.md` — Decision 1, 3).
 
-**Blocked by:** None
+**Blocked by:** 1
 
-**Status:** Done
+**Status:** Not started
 
 **Acceptance criteria:**
 
-- [x] Pasting clipboard text fills the keypad with the first number found in it, in E.164 form (`decisions.md` — Decision 2).
-- [x] A clipboard holding no number shows the toast "No number found in what you copied." and leaves the keypad exactly as it was (`decisions.md` — Decision 2).
-- [x] An empty clipboard keeps its existing "Nothing copied." toast and changes nothing.
+- [ ] Tapping Remove opens the popup for that number, the typed password goes to the verify endpoint, and the row disappears only on a server OK (`decisions.md` — Decision 1; `screen.md` — Screen 9b).
+- [ ] Wrong password keeps the number and shows the server's `"Wrong password. Ask your manager."`; empty shows `"Enter the password."` and sends nothing; no internet shows `"Removing a number needs the internet. Connect and try again."` (`decisions.md` — Decision 3).
+- [ ] Adding numbers and call tracking stay exactly as today — local and offline (`decisions.md` — Decision 1).
 
 **Verification:**
 
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-
-## Task 4: App — the Calling SIM feature is removed
-
-**Description:** Every trace of the Calling SIM feature is deleted: the Settings row and picker screen, its hook, utility, bridge, native module and its registration, the SIM logic in the call launcher, and the READ_PHONE_NUMBERS ask — calls always place on the phone default (`decisions.md` — Decision 3; `specs/settings-tab.md` — four-row menu).
-
-**Blocked by:** 2
-
-**Status:** Done
-
-**Acceptance criteria:**
-
-- [x] Settings shows exactly the WhatsApp, Do not track numbers, Clear local data, and Log out rows, and the SIM screen, hook, utility, bridge, native module, and its registration are deleted (`specs/settings-tab.md` — Four-row menu with no section header).
-- [x] Every call places on the phone default through the direct call, and with CALL_PHONE off the number still hands to the phone's own dialer untracked.
-- [x] READ_PHONE_NUMBERS is asked nowhere — the login pass asks only CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE, then the reminders check, then the tapped-number step (`decisions.md` — Decision 3).
-
-**Verification:**
-
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-
-## Task 5: App — Download saves the My List CSV as a real file
-
-**Description:** The My List Download button writes the whole list as one real .csv file into the phone's Downloads folder, named by the save moment as date and full time, with no share sheet and a confirming toast (`decisions.md` — Decision 4; `specs/my-list.md` — Download saves the whole list as a file).
-
-**Blocked by:** None
-
-**Status:** Done
-
-**Acceptance criteria:**
-
-- [x] Download saves one .csv of the whole list into Downloads, named like `26-10-2026-18-03-26.csv`, and no share sheet opens (`specs/my-list.md` — Download saves a unique file).
-- [x] The columns stay Number, Status, Interested, Do not call, Notes, Called date, Called time, with each row's called date and called time kept (`specs/my-list.md` — Download requirement).
-- [x] A toast confirms the save with the file's name, and a failed save shows a short user-facing error without opening a share sheet (`decisions.md` — Decision 4).
-
-**Verification:**
-
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-## Task 6: App — the tapped-number capture is removed
-
-**Description:** Every trace of the tapped-number capture is deleted: the `tel:` intent filter on MainActivity, the native TappedNumber module and its registration, the login-pass tapped-number step, the tapped-number link listener, the keypad fill from a caught number, and the tapped-number-capture spec — Decision 1's real-phone test failed, so the feature goes as it promised (`decisions.md` — Decision 5).
-
-**Blocked by:** 2
-
-**Status:** Done
-
-**Acceptance criteria:**
-
-- [x] The `tel:` intent filter is gone from the manifest, and MainActivity carries only the launcher filter (`decisions.md` — Decision 5).
-- [x] The native TappedNumber module, its registration, the tapped-number handler, refusal store, link listener, and events are deleted; the login pass asks only the three tracking permissions and the reminders check (`decisions.md` — Decision 5).
-- [x] Tracking stays whole — calls started inside the app are recorded directly, and calls made outside in any dialer are still caught by the call-log sweep at every app open (`specs/call-tracking.md` — the sweep requirement).
-
-**Verification:**
-
-- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-- [x] Tests pass: `npx jest` in `app/`
+- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [ ] Tests pass: `npx jest` in `app/`

@@ -49,7 +49,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Top bar - clean page title "Team" (no date, no period switch)
 - Team table - one row per active salesperson: name, today dials / connected / minutes, yesterday dials / connected / minutes. Dials and connected count outgoing calls only; minutes is TOTAL talk time (outgoing + incoming)
 - Zeros included - a person with no calls still shows a row of zeros (seeing who is NOT calling is the point)
-- Sorted by today's dials, highest first
+- Sorted by today's minutes, highest first
 - Tap a row - opens that person's Screen 3 Person View
 - On mobile the table becomes one card per person with the same numbers
 

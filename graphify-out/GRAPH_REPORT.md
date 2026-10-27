@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4120 nodes · 8112 edges · 282 communities (243 shown, 39 thin omitted)
+- 4120 nodes · 8112 edges · 281 communities (242 shown, 39 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 51 edges (avg confidence: 0.58)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `77d5a722`
+- Built from commit: `eb741425`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,7 +21,7 @@
 - .agents/skills/grill-with-superpower/scripts/server.cjs
 - .claude/skills/grill-with-superpower/scripts/server.cjs
 - my-stats-screen.tsx
-- use-lead-upload.ts
+- lead-pool-stats.tsx
 - dashboard/services.py
 - call-history-db.ts
 - add-user-modal.tsx
@@ -91,7 +91,7 @@
 - _select_palette_for_mode
 - accounts-page.tsx
 - my-list-view.tsx
-- lead-pool-stats.tsx
+- axios
 - Requirements
 - tasks.md
 - Python / Flask Code Style & Standards
@@ -139,7 +139,7 @@
 - search
 - Process
 - Design Screens
-- tracking/index.ts
+- call-reminders.ts
 - Brainstorming Ideas Into Designs
 - .agents/skills/snap-screens/scripts/screenshot.py
 - Write Screens
@@ -169,11 +169,10 @@
 - _suggest_identities
 - graphify reference: query, path, explain
 - <module-id>
-- class-variance-authority
 - Requirement: Calls-by-hour chart
 - Implement with Pocock
 - Implement with Pocock
-- readStoredCountry
+- tracking/index.ts
 - Requirement: Row contents and empty state
 - Requirement: All dashboard math computed server-side
 - Requirement: Dashboard failure and empty states
@@ -217,10 +216,10 @@
 - formatCount
 - react-native-call-detection-android
 - call-history-backfill.ts
-- auth/services.py
+- extensions.py
 - @react-native-clipboard/clipboard
 - @react-native-community/datetimepicker
-- extensions.py
+- test_settings.py
 - call-submit.ts
 - @notifee/react-native
 - use-direct-call.ts
@@ -309,7 +308,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (282 total, 39 thin omitted)
+## Communities (281 total, 39 thin omitted)
 
 ### Community 0 - "lead-daily-stats.tsx"
 Cohesion: 0.23
@@ -335,9 +334,9 @@ Nodes (55): bootstrapPage(), brandMarkup(), broadcast(), browserLauncherForPlatf
 Cohesion: 0.06
 Nodes (24): CallsByHourChartProps, CallSplitCardProps, ChartPeriod, ChartPeriodInfo, chartPeriodsInfo, ChartPeriodSwitchProps, DirectionDotLegendEntry, DirectionDotLegendProps (+16 more)
 
-### Community 6 - "use-lead-upload.ts"
-Cohesion: 0.14
-Nodes (19): loginUser(), useAuthLogin(), UseAuthLoginResult, LoginApiResponse, LoginCredentials, uploadLeads(), LeadCountryOption, HandleUploadSuccess (+11 more)
+### Community 6 - "lead-pool-stats.tsx"
+Cohesion: 0.10
+Nodes (26): uploadLeads(), buildPoolStages(), getStageWidthPercent(), LeadPoolStage, LeadPoolStageCard(), LeadPoolStageCardProps, LeadPoolStats(), LeadPoolStatsProps (+18 more)
 
 ### Community 7 - "dashboard/services.py"
 Cohesion: 0.06
@@ -356,8 +355,8 @@ Cohesion: 0.09
 Nodes (35): activateUser(), createUser(), CreateUserApiRequest, deactivateUser(), deleteUser(), getAccounts(), updateUser(), DeleteDialog() (+27 more)
 
 ### Community 11 - "providers.tsx"
-Cohesion: 0.12
-Nodes (16): ManagerGuard(), DashboardLayout(), getHighlightedSectionPath(), NavItem, SidebarLink(), SidebarLogoutProps, AppProviders(), AuthContext (+8 more)
+Cohesion: 0.11
+Nodes (21): ManagerGuard(), DashboardLayout(), getHighlightedSectionPath(), NavItem, SidebarLink(), SidebarLogoutProps, AppProviders(), AuthContext (+13 more)
 
 ### Community 12 - "Humanizer: remove AI writing patterns"
 Cohesion: 0.05
@@ -589,7 +588,7 @@ Nodes (16): A. Find the Frontier, B. For Each Frontier Task — Create Worktree 
 
 ### Community 70 - "dependencies"
 Cohesion: 0.12
-Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, dependencies, axios, lucide-react (+9 more)
+Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, dependencies, class-variance-authority, lucide-react (+9 more)
 
 ### Community 71 - "Salesperson View (Android app "Apex Sales Call")"
 Cohesion: 0.10
@@ -610,10 +609,6 @@ Nodes (21): AccountsTable(), AccountsPage(), LoginPage(), DashboardPage(), getLe
 ### Community 75 - "my-list-view.tsx"
 Cohesion: 0.11
 Nodes (19): ClearListDialog(), MyListSummaryCards(), MyListSummaryCardsProps, SummaryCardProps, MyListActionButtonProps, MyListView(), MyListViewProps, useClearMyList() (+11 more)
-
-### Community 76 - "lead-pool-stats.tsx"
-Cohesion: 0.18
-Nodes (12): buildPoolStages(), getStageWidthPercent(), LeadPoolStage, LeadPoolStageCard(), LeadPoolStageCardProps, LeadPoolStats(), LeadPoolStatsProps, PoolCompositionBar() (+4 more)
 
 ### Community 77 - "Requirements"
 Cohesion: 0.05
@@ -799,9 +794,9 @@ Nodes (7): 1. Pin the fixed point, 2. Identify the spec source, 3. Identify the 
 Cohesion: 0.25
 Nodes (7): Checklist before reporting done, Design Screens, Guardrails, Screen file rules, Steps, The design brain, Thinking rules (apply while designing)
 
-### Community 125 - "tracking/index.ts"
-Cohesion: 0.10
-Nodes (39): useMyList(), UseMyListResult, ClearLocalDataState, useClearLocalData(), CallHistoryEntry, runQuery(), clearMyListNumbers(), insertFreshLeftRows() (+31 more)
+### Community 125 - "call-reminders.ts"
+Cohesion: 0.22
+Nodes (17): deleteScheduledRemindersByLeadIdList(), readAllScheduledReminders(), readReminderList(), saveScheduledReminder(), ScheduledReminder, ScheduledReminderTableRow, createReminderChannel(), readReminderTimeOrNull() (+9 more)
 
 ### Community 126 - "Brainstorming Ideas Into Designs"
 Cohesion: 0.25
@@ -931,9 +926,9 @@ Nodes (4): 1. Single Source of Truth (No Guessing / No Assumptions), 2. Implemen
 Cohesion: 0.40
 Nodes (4): 1. Single Source of Truth (No Guessing / No Assumptions), 2. Implementation Loop, 3. Review & Commit, Implement with Pocock
 
-### Community 160 - "readStoredCountry"
-Cohesion: 0.15
-Nodes (22): readStoredCountry(), useDialer(), UseDialerResult, useStoredCountry(), extractFirstClipboardNumber(), readBookedPhoneNumberSet(), toBookedPhoneNumberSet(), toMarkedHistoryItems() (+14 more)
+### Community 160 - "tracking/index.ts"
+Cohesion: 0.09
+Nodes (43): readStoredCountry(), useDialer(), UseDialerResult, useStoredCountry(), extractFirstClipboardNumber(), readBookedPhoneNumberSet(), toBookedPhoneNumberSet(), toMarkedHistoryItems() (+35 more)
 
 ### Community 161 - "Requirement: Row contents and empty state"
 Cohesion: 0.06
@@ -1055,17 +1050,17 @@ Nodes (7): buildDirectionSplitLabel(), CallSplitCard(), formatAverageOrNoDataLab
 Cohesion: 0.11
 Nodes (35): readCallHistoryRowKeys(), buildCallKey(), readLastSweptAt(), useHistoryOpen(), collectInsertableHistoryEntries(), readHistoryLastLoadedAt(), readStoredCallKeySet(), refreshCallHistoryFromCallLog() (+27 more)
 
-### Community 205 - "auth/services.py"
-Cohesion: 0.19
+### Community 205 - "extensions.py"
+Cohesion: 0.14
 Nodes (15): login(), post, Response, LoginRequest, LoginResponse, OfficeHoursWindow, BaseModel, field_validator (+7 more)
 
-### Community 208 - "extensions.py"
-Cohesion: 0.24
+### Community 208 - "test_settings.py"
+Cohesion: 0.42
 Nodes (10): create_session_record(), create_user_fixture(), Flask, FlaskClient, test_get_office_hours_fresh_database_returns_default_window(), test_office_hours_unauthenticated_rejected(), test_put_office_hours_end_not_after_start_refused(), test_put_office_hours_malformed_body_refused() (+2 more)
 
 ### Community 209 - "call-submit.ts"
-Cohesion: 0.13
-Nodes (30): SyncCall, syncCalls(), SyncCallsResponse, SweptCall, markMyListNumberCalled(), deleteSyncedPendingCallsBehindSweepLine(), getAllPendingCalls(), getPendingCallById() (+22 more)
+Cohesion: 0.12
+Nodes (31): SyncCall, syncCalls(), SyncCallsResponse, SweptCall, markMyListNumberCalled(), deleteSyncedPendingCallsBehindSweepLine(), getAllPendingCalls(), getPendingCallById() (+23 more)
 
 ### Community 212 - "use-direct-call.ts"
 Cohesion: 0.09
@@ -1227,11 +1222,11 @@ Nodes (4): Requirement: My Stats office-timing label, Scenario: Exact hours rend
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useAuth()` connect `app/src/features/auth/index.ts` to `use-lead-upload.ts`?**
+- **Why does `useAuth()` connect `app/src/features/auth/index.ts` to `providers.tsx`?**
   _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `loginUser()` connect `use-lead-upload.ts` to `app/src/features/auth/index.ts`?**
+- **Why does `loginUser()` connect `providers.tsx` to `app/src/features/auth/index.ts`?**
   _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `useAuthLogin()` connect `use-lead-upload.ts` to `add-user-modal.tsx`, `accounts-page.tsx`, `providers.tsx`?**
+- **Why does `useAuthLogin()` connect `providers.tsx` to `add-user-modal.tsx`, `accounts-page.tsx`, `lead-pool-stats.tsx`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
   _1511 weakly-connected nodes found - possible documentation gaps or missing edges._

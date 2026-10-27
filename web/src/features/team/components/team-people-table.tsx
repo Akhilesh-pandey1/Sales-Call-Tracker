@@ -204,7 +204,7 @@ function MobilePersonCards({ people, onOpen }: PeopleListProps) {
 
 export function TeamPeopleTable({ people, onOpenPerson }: TeamPeopleTableProps) {
   const personWord: string = people.length === 1 ? "person" : "people";
-  const countLabel: string = `${formatCount(people.length)} ${personWord} · sorted by today's dials`;
+  const countLabel: string = `${formatCount(people.length)} ${personWord} · sorted by today's minutes`;
 
   return (
     <section className="overflow-hidden rounded-2xl border bg-card shadow-sm">

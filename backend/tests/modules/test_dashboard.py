@@ -200,50 +200,50 @@ def test_team_people_period_blocks_carry_only_dials_connected_minutes(
         }
 
 
-def test_team_people_rows_sorted_by_today_dials_highest_first(
+def test_team_people_rows_sorted_by_today_minutes_highest_first(
     app: Flask, client: FlaskClient
 ) -> None:
     with app.app_context():
         create_user_fixture(
             name="people_mgr_sort", role="manager", token="mgr-sort-token"
         )
-        low_rep: User = create_user_fixture(
-            name="rep_sort_low", role="salesperson", token="rep-sort-low-token"
+        long_call_rep: User = create_user_fixture(
+            name="rep_sort_long_call", role="salesperson", token="rep-sort-long-call-token"
         )
-        high_rep: User = create_user_fixture(
-            name="rep_sort_high", role="salesperson", token="rep-sort-high-token"
+        short_calls_rep: User = create_user_fixture(
+            name="rep_sort_short_calls", role="salesperson", token="rep-sort-short-calls-token"
         )
-        mid_rep: User = create_user_fixture(
-            name="rep_sort_mid", role="salesperson", token="rep-sort-mid-token"
+        quiet_rep_one: User = create_user_fixture(
+            name="rep_sort_quiet_one", role="salesperson", token="rep-sort-quiet-one-token"
         )
-        silent_rep: User = create_user_fixture(
-            name="rep_sort_silent", role="salesperson", token="rep-sort-silent-token"
+        quiet_rep_two: User = create_user_fixture(
+            name="rep_sort_quiet_two", role="salesperson", token="rep-sort-quiet-two-token"
         )
 
         today_time: datetime = create_utc_call_time(0, 11)
-        create_call_record("ps-1", low_rep.id, "+919876543210", today_time, 30)
-        create_call_record("ps-2", high_rep.id, "+919876543211", today_time, 30)
-        create_call_record("ps-3", high_rep.id, "+919876543212", today_time, 30)
-        create_call_record("ps-4", high_rep.id, "+919876543213", today_time, 30)
-        create_call_record("ps-5", mid_rep.id, "+919876543214", today_time, 30)
-        create_call_record("ps-6", mid_rep.id, "+919876543215", today_time, 30)
+        create_call_record("ps-1", long_call_rep.id, "+919876543210", today_time, 900)
+        create_call_record("ps-2", short_calls_rep.id, "+919876543211", today_time, 30)
+        create_call_record("ps-3", short_calls_rep.id, "+919876543212", today_time, 30)
+        create_call_record("ps-4", short_calls_rep.id, "+919876543213", today_time, 30)
+        create_call_record("ps-5", short_calls_rep.id, "+919876543214", today_time, 30)
+        create_call_record("ps-6", short_calls_rep.id, "+919876543215", today_time, 30)
 
         response, data = fetch_team_people(client, "mgr-sort-token")
         expected_status: int = 200
         assert response.status_code == expected_status
 
-        expected_dials_order: list[int] = [3, 2, 1, 0]
-        returned_dials_order: list[int] = [row["today"]["dials"] for row in data]
-        assert returned_dials_order == expected_dials_order
-
         expected_user_order: list[int] = [
-            high_rep.id,
-            mid_rep.id,
-            low_rep.id,
-            silent_rep.id,
+            long_call_rep.id,
+            short_calls_rep.id,
+            quiet_rep_one.id,
+            quiet_rep_two.id,
         ]
         returned_user_order: list[int] = [row["user_id"] for row in data]
         assert returned_user_order == expected_user_order
+
+        expected_minutes_order: list[float] = [15.0, 2.5, 0, 0]
+        returned_minutes_order: list[float] = [row["today"]["minutes"] for row in data]
+        assert returned_minutes_order == expected_minutes_order
 
 
 def test_team_people_ist_day_boundary_respected(

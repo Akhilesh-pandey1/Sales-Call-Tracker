@@ -697,7 +697,7 @@ def build_team_people_rows(
         )
     sorted_people_rows: list[dict[str, Any]] = sorted(
         people_rows,
-        key=lambda row: (-row["today"]["dials"], row["user_id"]),
+        key=lambda row: (-row["today"]["minutes"], row["user_id"]),
     )
     return sorted_people_rows
 

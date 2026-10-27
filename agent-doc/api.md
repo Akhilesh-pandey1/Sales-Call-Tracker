@@ -175,7 +175,7 @@ Returns one row per active salesperson for the Team page table: today and yester
 - **Rules**:
   - One row per active salesperson; a person with no calls still lists with zeros. Deactivated salespeople never appear.
   - Each period block carries only `dials`, `connected`, and `minutes`; `dials` and `connected` count outgoing calls only, and `minutes` is TOTAL talk time (outgoing + incoming) as `round(seconds / 60, 2)` computed on the server. No `seconds` field is returned.
-  - Rows are sorted by today's dials, highest first.
+  - Rows are sorted by today's minutes, highest first.
   - Today and yesterday are IST calendar days over UTC call timestamps, same as the team endpoint.
 - **Error Responses**:
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`

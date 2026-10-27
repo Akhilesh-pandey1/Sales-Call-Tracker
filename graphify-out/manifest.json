@@ -685,8 +685,8 @@
     "semantic_hash": ""
   },
   "backend/app/modules/dashboard/services.py": {
-    "mtime": 1793017158.9355197,
-    "ast_hash": "20f85465e6938295b1cb58b746f6ac43",
+    "mtime": 1793104141.240396,
+    "ast_hash": "f168e69ff0aafa192f98077925cde44f",
     "semantic_hash": ""
   },
   "backend/app/modules/leads/__init__.py": {
@@ -790,8 +790,8 @@
     "semantic_hash": ""
   },
   "backend/tests/modules/test_dashboard.py": {
-    "mtime": 1793017159.0610635,
-    "ast_hash": "0a7535b484af2786b091535b5340f929",
+    "mtime": 1793104119.3000247,
+    "ast_hash": "e9a8d340a4fdbe63837bf67bd3b6b3e5",
     "semantic_hash": ""
   },
   "backend/tests/modules/test_dashboard_person.py": {
@@ -1160,8 +1160,8 @@
     "semantic_hash": ""
   },
   "web/src/features/team/components/team-people-table.tsx": {
-    "mtime": 1792502978.030575,
-    "ast_hash": "ed3902a9414d656560888cc80fdf8229",
+    "mtime": 1793104172.10155,
+    "ast_hash": "cd99ff9d7f0548ed887d9d3ef838e735",
     "semantic_hash": ""
   },
   "web/src/features/team/hooks/use-team-people.ts": {
@@ -1765,8 +1765,8 @@
     "semantic_hash": ""
   },
   "agent-doc/api.md": {
-    "mtime": 1793098705.789705,
-    "ast_hash": "2c952100894dda40d33f562f220bfd91",
+    "mtime": 1793104178.8505194,
+    "ast_hash": "d5fe348a04dbece7ae98d41045e374f9",
     "semantic_hash": ""
   },
   "agent-doc/database.md": {
@@ -1785,8 +1785,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screen.md": {
-    "mtime": 1793099270.403394,
-    "ast_hash": "e341d3795558d6b4482a1b2b888ae8b5",
+    "mtime": 1793104177.3837755,
+    "ast_hash": "b89debfc63bc2c102b7faa60339cfcc1",
     "semantic_hash": ""
   },
   "agent-doc/screens/01-login--P.html": {
@@ -1800,8 +1800,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/02-team--P.html": {
-    "mtime": 1792502977.616292,
-    "ast_hash": "ef99d97a4b4ff5726e36e027da1530e3",
+    "mtime": 1793104187.4787383,
+    "ast_hash": "24b8779a4178b87396d94934d1ac49ee",
     "semantic_hash": ""
   },
   "agent-doc/screens/02-team--empty--P.html": {
@@ -2025,8 +2025,8 @@
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
-    "mtime": 1793097120.1408615,
-    "ast_hash": "7e13b16b8cb1a601e2e13b814eeb6291",
+    "mtime": 1793104178.5502188,
+    "ast_hash": "674ec125649cdb8b1f0f672afc41eb5e",
     "semantic_hash": ""
   },
   "app/docs/build-apk.md": {

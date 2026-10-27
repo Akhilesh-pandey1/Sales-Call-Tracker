@@ -55,7 +55,7 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - `avg_per_active_day` is `null` when `active_days` is 0, otherwise the rounded per-active-day averages over total talk minutes.
 - Top 5 numbers return the highest TOTAL talk-time numbers (both directions) with `minutes` alongside `seconds`.
 - `GET /api/dashboard/team/people` returns one row per active salesperson with today and yesterday blocks holding only `dials`, `connected`, and `minutes` — dials and connected outgoing-only, minutes total talk, no `seconds` anywhere.
-- People rows include zero-call salespeople, exclude deactivated salespeople, and arrive sorted by today's dials highest first.
+- People rows include zero-call salespeople, exclude deactivated salespeople, and arrive sorted by today's minutes highest first.
 - A salesperson token gets 403 on `GET /api/dashboard/team/people`.
 
 ### `tests/modules/test_settings.py`

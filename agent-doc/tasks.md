@@ -4,17 +4,17 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 
-- [ ] `POST /api/do-not-track/verify-remove-password` answers 200 `{"status": true}` on the correct password, 403 `"Wrong password. Ask your manager."` on a wrong one, and 400 `"Password is required."` on a missing or empty one (`api.md` — Do Not Track).
-- [ ] Any active token may call it — no token gets 401 and a deactivated account's token gets the not-active 403 (`api.md` — Do Not Track).
-- [ ] With `DO_NOT_TRACK_REMOVE_PASSWORD` unset the check fails closed with 503 `"Removing is not available yet. Contact support."`, the value is read when the request arrives, and `.env.example` carries the name with a placeholder (`decisions.md` — Decision 2, 3; `api.md` — Do Not Track).
+- [x] `POST /api/do-not-track/verify-remove-password` answers 200 `{"status": true}` on the correct password, 403 `"Wrong password. Ask your manager."` on a wrong one, and 400 `"Password is required."` on a missing or empty one (`api.md` — Do Not Track).
+- [x] Any active token may call it — no token gets 401 and a deactivated account's token gets the not-active 403 (`api.md` — Do Not Track).
+- [x] With `DO_NOT_TRACK_REMOVE_PASSWORD` unset the check fails closed with 503 `"Removing is not available yet. Contact support."`, the value is read when the request arrives, and `.env.example` carries the name with a placeholder (`decisions.md` — Decision 2, 3; `api.md` — Do Not Track).
 
 **Verification:**
 
-- [ ] Tests pass: `python -m pytest tests/modules/test_do_not_track.py` in `backend/`
+- [x] Tests pass: `python -m pytest tests/modules/test_do_not_track.py` in `backend/`
 
 ## Task 2: App — a number leaves the do-not-track list only after the server accepts the manager password
 

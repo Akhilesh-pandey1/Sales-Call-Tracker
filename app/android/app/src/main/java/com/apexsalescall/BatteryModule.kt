@@ -60,8 +60,8 @@ class BatteryModule(reactContext: ReactApplicationContext) :
     }
 
     private fun openExemptionRequestAndWaitForClose(promise: Promise) {
-        val currentActivity: Activity? = currentActivity
-        if (currentActivity == null) {
+        val hostActivity: Activity? = reactApplicationContext.currentActivity
+        if (hostActivity == null) {
             openExemptionRequestWithoutWaiting(promise)
             return
         }
@@ -85,7 +85,7 @@ class BatteryModule(reactContext: ReactApplicationContext) :
         }
         reactApplicationContext.addActivityEventListener(exemptionRequestCloseListener)
         try {
-            currentActivity.startActivityForResult(
+            hostActivity.startActivityForResult(
                 buildExemptionRequestIntent(),
                 exemptionRequestCode,
             )

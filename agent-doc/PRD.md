@@ -2,6 +2,5 @@ TO FIX 
 
 - Remove the calling sim phone number feature, and all its related things. 
 -  Two problems are coming in the feature where we have done something like that automatic it should pick the Apex sales call if someone select phone number in mobile. So in this actually problem is that first of all when we first time login so it does not show that feature. I have to log I have to again come back in the application close and again open then it comes. And second thing even I am allowing it but when from another software I am selecting that phone number and opening it. So it does not get open. That is the issue. Okay.  Is it even possible or not? In all the phone it should be possible otherwise not needed. And yeah that is actually a thing there.  Is it even possible or not? If not possible then we will remove complete feature from it. Okay, if possible then tell me why it is not working, even after allowing.  My current phone is Redmi Note 7S but it is just for context I am telling it should work on all Android phone.
-- D:/company_projects/sales-call-tracker/not_to_be_pushed/Screenshot_2026-10-26-18-03-26-307_com.apexsalescall.jpg , this one glitch came one time, I do not know why ?
-- In the my list as well, like server, did not connect call at max 3 time call should be thier.
+
 - Download button in the my list is opening share and pasting text, but I want it should download CSV, actual csv, with name of "DD-MM-MM-SS.csv"

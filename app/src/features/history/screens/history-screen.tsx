@@ -313,6 +313,9 @@ export function HistoryScreen() {
   const postCallDialogPhoneNumber = historyTrackedCall === null
     ? ''
     : formatInternationalPhoneNumber(historyTrackedCall.phoneNumber);
+  const postCallDialogWhatsAppNumber = historyTrackedCall === null
+    ? null
+    : historyTrackedCall.phoneNumber;
 
   const handleReloadHistory = () => reloadHistory();
   const handleCallHistoryNumber = async (
@@ -359,6 +362,7 @@ export function HistoryScreen() {
         variant="keypad"
         isOpen={directCall.isPostCallDialogOpen}
         phoneNumber={postCallDialogPhoneNumber}
+        phoneNumberForWhatsApp={postCallDialogWhatsAppNumber}
         isSubmitting={directCall.isSubmittingPostCall}
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={handleSubmitHistoryPostCall}

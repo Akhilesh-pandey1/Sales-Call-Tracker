@@ -284,6 +284,9 @@ export function ScheduledScreen() {
   const postCallDialogPhoneNumber = trackedCall === null
     ? ''
     : formatInternationalPhoneNumber(trackedCall.phoneNumber);
+  const postCallDialogWhatsAppNumber = trackedCall === null
+    ? null
+    : trackedCall.phoneNumber;
 
   const handleReloadPress = () => reloadBookings();
   const handleOpenBooking = () => navigation.navigate('Dialer');
@@ -331,6 +334,7 @@ export function ScheduledScreen() {
         variant="keypad"
         isOpen={directCall.isPostCallDialogOpen}
         phoneNumber={postCallDialogPhoneNumber}
+        phoneNumberForWhatsApp={postCallDialogWhatsAppNumber}
         isSubmitting={directCall.isSubmittingPostCall}
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={directCall.submitDirectCall}

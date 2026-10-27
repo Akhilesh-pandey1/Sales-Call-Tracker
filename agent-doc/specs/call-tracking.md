@@ -159,7 +159,7 @@ The system SHALL provide a settings action that wipes only the local SQLite queu
 - **THEN** it displays the exact number of unsent calls that will be deleted — which can be zero
 
 ### Requirement: Shared post-call popup on every flow
-The system SHALL show one mergeable popup — the same Interested and Do not call again buttons, the same optional Notes box, and the same Schedule choice — on every flow, keypad, automated lead, and My List alike, with nothing preselected and Submit working with all of it empty. Interested and Do not call again SHALL be mutually exclusive: tapping one clears the other and tapping the chosen one again unchecks it, so the popup allows both off or exactly one on, never both on. The automated and My List popups SHALL carry the "Go to next call" checkbox and the keypad popup SHALL not carry it. The system SHALL save the two choices as yes/no flags and the note on the call record — the phone's pending row and the server's `calls` table both carry them — so they ride the normal batch sync while the call's time and duration still come only from the call log.
+The system SHALL show one mergeable popup — the same Interested and Do not call again buttons, the same optional Notes box, and the same Schedule choice — on every flow, keypad, automated lead, and My List alike, with nothing preselected and Submit working with all of it empty. Interested and Do not call again SHALL be mutually exclusive: tapping one clears the other and tapping the chosen one again unchecks it, so the popup allows both off or exactly one on, never both on. The automated and My List popups SHALL carry the "Go to next call" checkbox and the keypad popup SHALL not carry it. The system SHALL save the two choices as yes/no flags and the note on the call record — the phone's pending row and the server's `calls` table both carry them — so they ride the normal batch sync while the call's time and duration still come only from the call log. Every popup SHALL also carry a WhatsApp button beside the number that opens the chosen WhatsApp chat for the called number — honoring the WhatsApp settings (chosen app and first message) exactly as the Scheduled and History rows do — and tapping it leaves the popup untouched, so every choice stays as it was.
 
 #### Scenario: Popup choices identical on every flow
 - **GIVEN** a post-call popup from the keypad, the automated lead flow, or My List
@@ -205,6 +205,21 @@ The system SHALL show one mergeable popup — the same Interested and Do not cal
 - **GIVEN** a call recorded with any outcome choices
 - **WHEN** the call's time and duration are filled
 - **THEN** they come only from the call log — the popup never changes any number
+
+#### Scenario: WhatsApp button on every popup
+- **GIVEN** a post-call popup from the keypad, the automated lead flow, or My List — including a call started from the Scheduled or History tab
+- **WHEN** it renders
+- **THEN** it shows the WhatsApp button beside the number — next to the copy button in the flows that show one
+
+#### Scenario: WhatsApp opens the chosen chat
+- **GIVEN** a post-call popup showing for the number just called
+- **WHEN** the salesperson taps the WhatsApp button
+- **THEN** the chosen WhatsApp app opens the chat for that number, with the first message pre-filled when the WhatsApp settings have it on
+
+#### Scenario: WhatsApp tap leaves the popup unchanged
+- **GIVEN** the salesperson opened the WhatsApp chat and came back to the app
+- **WHEN** the popup is read again
+- **THEN** every choice — Interested, Do not call again, the note, the Schedule answer, and Go to next call — is exactly as it was left
 
 ### Requirement: Keypad clears after the post-call popup
 The system SHALL clear the typed number to blank when the keypad's post-call popup is submitted — "Do not schedule" and "Schedule" alike — leaving the display empty for the next number, while paste, backspace, and hold-to-clear keep working as they are.

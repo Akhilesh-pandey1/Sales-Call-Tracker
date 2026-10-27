@@ -117,6 +117,9 @@ function KeypadView({
   const postCallDialogPhoneNumber = trackedCall === null
     ? ''
     : formatInternationalPhoneNumber(trackedCall.phoneNumber);
+  const postCallDialogWhatsAppNumber = trackedCall === null
+    ? null
+    : trackedCall.phoneNumber;
 
   const handleBackspacePress = () => dialer.removeLastCharacter();
   const handleBackspaceLongPress = () => dialer.clearDialedNumber();
@@ -181,6 +184,7 @@ function KeypadView({
         variant="keypad"
         isOpen={directCall.isPostCallDialogOpen}
         phoneNumber={postCallDialogPhoneNumber}
+        phoneNumberForWhatsApp={postCallDialogWhatsAppNumber}
         isSubmitting={directCall.isSubmittingPostCall}
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={handleSubmitKeypadPostCall}
@@ -312,6 +316,7 @@ function AutomatedView({
           isOpen={automatedCalling.isPostCallDialogOpen}
           phoneNumber={finishedPhoneNumber}
           phoneNumberToCopy={viewState.lead.phone_number}
+          phoneNumberForWhatsApp={viewState.lead.phone_number}
           isSubmitting={automatedCalling.isSubmittingPostCall}
           errorMessage={automatedCalling.postCallErrorMessage}
           onSubmit={automatedCalling.submitPostCall}
@@ -336,6 +341,9 @@ function MyListCallingView({ myListCalling }: { myListCalling: UseMyListCallingR
   const postCallDialogPhoneNumber = trackedCall === null
     ? ''
     : formatInternationalPhoneNumber(trackedCall.phoneNumber);
+  const postCallDialogWhatsAppNumber = trackedCall === null
+    ? null
+    : trackedCall.phoneNumber;
 
   return (
     <View className="flex-1">
@@ -345,6 +353,7 @@ function MyListCallingView({ myListCalling }: { myListCalling: UseMyListCallingR
         variant="my-list"
         isOpen={myListCalling.isPostCallDialogOpen}
         phoneNumber={postCallDialogPhoneNumber}
+        phoneNumberForWhatsApp={postCallDialogWhatsAppNumber}
         isSubmitting={myListCalling.isSubmittingPostCall}
         errorMessage={myListCalling.postCallErrorMessage}
         onSubmit={myListCalling.submitMyListPostCall}

@@ -9,13 +9,14 @@ import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { maxScheduleAheadDays } from '@/config/app-config';
 import type { CallOutcome } from '@/features/tracking';
-import { Calendar, Check, Copy } from 'lucide-react-native';
+import { Calendar, Check, Copy, MessageCircle } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 import { cn } from '@/lib/utils';
 import { usePostCallSchedule } from '../hooks/use-post-call-schedule';
 import type { PostCallSubmitData } from '../types';
 import { CopyNumberButton } from './copy-number-button';
+import { WhatsAppNumberButton } from './whatsapp-number-button';
 
 type ScheduleChoiceRowProps = {
   label: string;
@@ -148,6 +149,7 @@ type PostCallDialogProps = {
   isOpen: boolean;
   phoneNumber: string;
   phoneNumberToCopy?: string | null;
+  phoneNumberForWhatsApp?: string | null;
   isSubmitting: boolean;
   errorMessage: string | null;
   onSubmit: (submitData: PostCallSubmitData) => void;
@@ -158,6 +160,7 @@ function PostCallDialog({
   isOpen,
   phoneNumber,
   phoneNumberToCopy = null,
+  phoneNumberForWhatsApp = null,
   isSubmitting,
   errorMessage,
   onSubmit,
@@ -224,6 +227,14 @@ function PostCallDialog({
                 >
                   <Icon as={Copy} size={14} className="text-muted-foreground" />
                 </CopyNumberButton>
+              ) : null}
+              {phoneNumberForWhatsApp !== null ? (
+                <WhatsAppNumberButton
+                  phoneNumber={phoneNumberForWhatsApp}
+                  className="h-5 w-5 items-center justify-center rounded-full active:bg-muted"
+                >
+                  <Icon as={MessageCircle} size={14} className="text-accent" />
+                </WhatsAppNumberButton>
               ) : null}
             </View>
           </View>

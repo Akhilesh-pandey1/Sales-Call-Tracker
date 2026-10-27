@@ -2,7 +2,7 @@ import {
   createBottomTabNavigator,
   type BottomTabNavigationOptions,
 } from '@react-navigation/bottom-tabs';
-import { DialerScreen, useTappedNumberLinks } from '@/features/dialer';
+import { DialerScreen } from '@/features/dialer';
 import { HistoryScreen } from '@/features/history';
 import { ScheduledScreen, useDueBookingCount } from '@/features/scheduled';
 import { MyStatsScreen, SettingsScreen } from '@/features/stats';
@@ -12,7 +12,6 @@ import { Calendar, ChartColumn, Clock, Phone, Settings } from 'lucide-react-nati
 import type { LucideIcon } from 'lucide-react-native';
 import type { MainTabsParamList } from './main-tabs-param-list';
 import { useReminderPressNavigation } from './use-reminder-press-navigation';
-import { useTappedNumberNavigation } from './use-tapped-number-navigation';
 
 const MainTabs = createBottomTabNavigator<MainTabsParamList>();
 
@@ -40,8 +39,6 @@ export function AppNavigator() {
   useSync();
   useReminderPress();
   useReminderPressNavigation();
-  useTappedNumberNavigation();
-  useTappedNumberLinks();
   const dueBookingCount = useDueBookingCount();
   const minimumCountForBadge = 1;
 

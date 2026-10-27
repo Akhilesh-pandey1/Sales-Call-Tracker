@@ -148,10 +148,6 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 ### Screen 6: Login
 Same as Screen 1 Login (shared design, same messages) - without the manager-only gate. A correct login runs the short step-by-step permission pass, then opens the app straight to the Dialer.
 
-- Tapped-number step - one short instruction line, then Android's chooser opens once over a probe number that is never dialed; picking our app (Always) sends every number tapped anywhere on the phone straight to the Dialer keypad from then on
-- Silent skip - when our app already handles tapped numbers, the step passes without showing anything
-- Skip vs Don't show again - a plain skip brings the step back at the next login; the "Don't show again" button (found only on this step) refuses for good and the step never shows again
-
 → Next: Screen 7 Dialer
 
 ### Screen 7: Dialer - home tab
@@ -161,7 +157,6 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
   - Number display - the phone number being typed
   - Keypad - 0–9, *, #, and backspace (tap deletes one character, holding it clears the whole number)
   - Paste button - fills the number field from clipboard
-  - Caught number fill - a number tapped anywhere on the phone (Contacts, WhatsApp, browser, SMS) lands here already typed - spaces and dashes stripped - Call button ready; backing out keeps the number and dials nothing
   - Call button - grey and unpressable until the number is valid for the country; green when valid; starts the call at once, no confirm step
   - Post-call popup - opens by itself when a keypad call ends; same popup as the lead call - the dialed number, the schedule choice (Do not schedule / Schedule) with the follow-up time field below, and one Submit button - no "Go to next call"
   - Submit clears the number - submitting the popup, either schedule choice, wipes the typed number to blank, ready for the next call
@@ -179,8 +174,6 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 **Edge cases:**
 - Paste with nothing copied: "Nothing copied." toast; typed number stays untouched
 - Number not valid yet: Call button stays grey
-- Tapped link with no readable number: the dialer opens with nothing filled
-- Caught number while the automated flow is on screen: ignored - the live flow keeps its number and state
 - Any of the three call permissions off: red banner shows; Fix opens Android settings; banner clears once all three are on
 - Call permission off: tapping Call hands the number to the phone's own dialer (one extra tap there) - that call is not recorded
 - Direct call fails to start: "Could not start the call. Please try again."

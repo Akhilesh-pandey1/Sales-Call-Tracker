@@ -86,3 +86,21 @@
 **Verification:**
 
 - [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+## Task 6: App — the tapped-number capture is removed
+
+**Description:** Every trace of the tapped-number capture is deleted: the `tel:` intent filter on MainActivity, the native TappedNumber module and its registration, the login-pass tapped-number step, the tapped-number link listener, the keypad fill from a caught number, and the tapped-number-capture spec — Decision 1's real-phone test failed, so the feature goes as it promised (`decisions.md` — Decision 5).
+
+**Blocked by:** 2
+
+**Status:** Done
+
+**Acceptance criteria:**
+
+- [x] The `tel:` intent filter is gone from the manifest, and MainActivity carries only the launcher filter (`decisions.md` — Decision 5).
+- [x] The native TappedNumber module, its registration, the tapped-number handler, refusal store, link listener, and events are deleted; the login pass asks only the three tracking permissions and the reminders check (`decisions.md` — Decision 5).
+- [x] Tracking stays whole — calls started inside the app are recorded directly, and calls made outside in any dialer are still caught by the call-log sweep at every app open (`specs/call-tracking.md` — the sweep requirement).
+
+**Verification:**
+
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Tests pass: `npx jest` in `app/`

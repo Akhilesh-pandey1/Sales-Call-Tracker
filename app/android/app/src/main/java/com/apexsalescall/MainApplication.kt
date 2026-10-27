@@ -15,7 +15,6 @@ class MainApplication : Application(), ReactApplication {
       packageList =
         PackageList(this).packages.apply {
           add(BatteryPackage())
-          add(TappedNumberPackage())
           add(WhatsAppPackage())
         },
     )

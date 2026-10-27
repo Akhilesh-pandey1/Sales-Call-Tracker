@@ -165,8 +165,8 @@
     "semantic_hash": ""
   },
   "app/android/app/src/main/java/com/apexsalescall/MainApplication.kt": {
-    "mtime": 1793024636.049425,
-    "ast_hash": "faed887d54f0615022b62288efcd7cbf",
+    "mtime": 1793096935.0901546,
+    "ast_hash": "7b01027abbe0f11e00e64d9c349f820e",
     "semantic_hash": ""
   },
   "app/android/build.gradle": {
@@ -225,8 +225,8 @@
     "semantic_hash": ""
   },
   "app/src/app/navigation/app-navigator.tsx": {
-    "mtime": 1793017158.7647731,
-    "ast_hash": "b9536790400605d476763a6bc6edff6c",
+    "mtime": 1793096858.2218266,
+    "ast_hash": "539819771fdd664dfd5787c48f62d234",
     "semantic_hash": ""
   },
   "app/src/app/navigation/main-tabs-param-list.ts": {
@@ -340,8 +340,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-dialer.ts": {
-    "mtime": 1793032144.3566751,
-    "ast_hash": "0038c593f34daa5acc5ded48ad487c87",
+    "mtime": 1793096883.2106917,
+    "ast_hash": "bc3c01907eec1581068921c09748abc6",
     "semantic_hash": ""
   },
   "app/src/features/dialer/hooks/use-dialog-visibility.ts": {
@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/index.ts": {
-    "mtime": 1793017158.800217,
-    "ast_hash": "ae84920afbc9e769cc64eb860779ef6a",
+    "mtime": 1793096873.4187934,
+    "ast_hash": "54477d58465e28e5793e83bfc9e75c66",
     "semantic_hash": ""
   },
   "app/src/features/dialer/lib/call-launcher.ts": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/screens/dialer-screen.tsx": {
-    "mtime": 1793080889.5883214,
-    "ast_hash": "2131b8677a4f52c34ef81a3ded7b03d2",
+    "mtime": 1793097514.8547206,
+    "ast_hash": "0d2c300ab2ec0f6bd336436cc7edc7c5",
     "semantic_hash": ""
   },
   "app/src/features/stats/api/stats.api.ts": {
@@ -455,8 +455,8 @@
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-permissions.ts": {
-    "mtime": 1793024636.0524194,
-    "ast_hash": "6436c5b769567c9cb59770b583ccfbac",
+    "mtime": 1793096876.4122038,
+    "ast_hash": "5f07bb6e842705daaf91cc58f935b712",
     "semantic_hash": ""
   },
   "app/src/features/tracking/hooks/use-sync.ts": {
@@ -1775,8 +1775,8 @@
     "semantic_hash": ""
   },
   "agent-doc/decisions.md": {
-    "mtime": 1793044875.367151,
-    "ast_hash": "3c87c1efea67abd0d93381411a20bbd4",
+    "mtime": 1793097140.1326556,
+    "ast_hash": "d009316d36c824e4e2df87631c638665",
     "semantic_hash": ""
   },
   "agent-doc/old-decisions.md": {
@@ -1785,8 +1785,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screen.md": {
-    "mtime": 1793020782.144136,
-    "ast_hash": "b4c24a7ffee28e496f70f4bf55f47dbb",
+    "mtime": 1793097107.912858,
+    "ast_hash": "e2a242e28ab8d4d207a02d44a2d06220",
     "semantic_hash": ""
   },
   "agent-doc/screens/01-login--P.html": {
@@ -1970,8 +1970,8 @@
     "semantic_hash": ""
   },
   "agent-doc/screens/INDEX.md": {
-    "mtime": 1793020803.9452357,
-    "ast_hash": "72dd02f61a8a3352a89bacdf43ae8a73",
+    "mtime": 1793097121.7013552,
+    "ast_hash": "6a3304da9b9356ecd98bc9f61e5dcfa8",
     "semantic_hash": ""
   },
   "agent-doc/screens/THEME.md": {
@@ -2015,18 +2015,18 @@
     "semantic_hash": ""
   },
   "agent-doc/structure.md": {
-    "mtime": 1793019741.3425777,
-    "ast_hash": "9f0c25279274c5caa6b91fe7af7a21b9",
+    "mtime": 1793097091.218569,
+    "ast_hash": "8445abc63ec35755ff21926e5f94579b",
     "semantic_hash": ""
   },
   "agent-doc/tasks.md": {
-    "mtime": 1793032144.352736,
-    "ast_hash": "8f8380e92e71f5388a147e28aa3287df",
+    "mtime": 1793097153.0409343,
+    "ast_hash": "366317cf5c91caf87b92340cd7c3c475",
     "semantic_hash": ""
   },
   "agent-doc/testing.md": {
-    "mtime": 1793017158.745128,
-    "ast_hash": "8f2642f8c1035f087634c783de36502c",
+    "mtime": 1793097120.1408615,
+    "ast_hash": "7e13b16b8cb1a601e2e13b814eeb6291",
     "semantic_hash": ""
   },
   "app/docs/build-apk.md": {
@@ -2517,56 +2517,6 @@
   "agent-doc/screens/09d-whatsapp--M.png": {
     "mtime": 1793017158.7089736,
     "ast_hash": "46f5692bb76be3a627c7626cea020968",
-    "semantic_hash": ""
-  },
-  "agent-doc/specs/tapped-number-capture.md": {
-    "mtime": 1793020520.8882823,
-    "ast_hash": "7624fa872263277b9bb467b47f5bf2c1",
-    "semantic_hash": ""
-  },
-  "app/android/app/src/main/java/com/apexsalescall/TappedNumberModule.kt": {
-    "mtime": 1793017158.7600398,
-    "ast_hash": "c75828f8a4db22433e4e3ecda45a6104",
-    "semantic_hash": ""
-  },
-  "app/src/app/navigation/use-tapped-number-navigation.ts": {
-    "mtime": 1793017158.765774,
-    "ast_hash": "ffaf994ba686a4a61c098cead1fe6452",
-    "semantic_hash": ""
-  },
-  "app/src/features/dialer/hooks/use-lead-call-flow-presence.ts": {
-    "mtime": 1793017158.7952294,
-    "ast_hash": "8b5d562a5ae9aef61b58913574e955df",
-    "semantic_hash": ""
-  },
-  "app/src/features/dialer/hooks/use-tapped-number-links.ts": {
-    "mtime": 1793017158.800217,
-    "ast_hash": "6b303e5f004ffbed6ff99d2a286c930e",
-    "semantic_hash": ""
-  },
-  "app/src/features/dialer/lib/lead-call-flow-presence.ts": {
-    "mtime": 1793017158.8024297,
-    "ast_hash": "c78aad714863f55405eb33b018813e1a",
-    "semantic_hash": ""
-  },
-  "app/src/features/dialer/lib/tapped-number-events.ts": {
-    "mtime": 1793017158.8024297,
-    "ast_hash": "fb8220e561d2c34e164e37804b057ff0",
-    "semantic_hash": ""
-  },
-  "app/src/features/dialer/lib/tel-link.ts": {
-    "mtime": 1793017158.8024297,
-    "ast_hash": "41ffc38fca488ee7f2ae38780475c9bf",
-    "semantic_hash": ""
-  },
-  "app/src/features/tracking/lib/tapped-number-handler.ts": {
-    "mtime": 1793023159.4973173,
-    "ast_hash": "47d266d68565d00d12d17442c43ebaca",
-    "semantic_hash": ""
-  },
-  "app/src/features/tracking/lib/tapped-number-refusal.ts": {
-    "mtime": 1793017158.8981726,
-    "ast_hash": "a9af9723707770499af8d94c695fd53d",
     "semantic_hash": ""
   },
   "app/src/shared/utils/app-event.ts": {

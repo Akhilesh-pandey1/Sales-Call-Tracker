@@ -25,7 +25,7 @@ Open `index.html` to flip through the screens (arrow keys or the buttons; Mobile
 | Login (app) | `06-login--M.html` | Salesperson signs in on the phone |
 | Login — wrong details | `06-login--error--M.html` | Wrong name or password |
 | Login — too many tries | `06-login--locked--M.html` | Lockout after 10 wrong tries |
-| Dialer — Keypad & Automated & My List | `07-dialer--M.html` | Home tab — three-item pill switch, keypad (a tapped number from any app lands here typed), and the lead-calling flow with booking reminders |
+| Dialer — Keypad & Automated & My List | `07-dialer--M.html` | Home tab — three-item pill switch, keypad, and the lead-calling flow with booking reminders |
 | Dialer — empty number | `07-dialer--empty--M.html` | Call button locked until the number is valid |
 | Dialer — permissions off | `07-dialer--permissions-off--M.html` | Red banner when any call permission is off |
 | Dialer — Keypad — post-call popup | `07-dialer--post-call-keypad--M.html` | Popup after a keypad call — Interested / Do not call again buttons, optional note, and the schedule question |

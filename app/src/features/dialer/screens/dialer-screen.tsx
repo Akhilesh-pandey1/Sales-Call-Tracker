@@ -1,5 +1,4 @@
-import { useIsFocused } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui/button';
@@ -20,7 +19,6 @@ import {
   type UseAutomatedCallingResult,
 } from '../hooks/use-automated-calling';
 import { useDialer, type UseDialerResult } from '../hooks/use-dialer';
-import { useLeadCallFlowPresence } from '../hooks/use-lead-call-flow-presence';
 import {
   useDirectCall,
   type UseDirectCallResult,
@@ -29,7 +27,6 @@ import {
   useMyListCalling,
   type UseMyListCallingResult,
 } from '../hooks/use-my-list-calling';
-import { subscribeToTappedNumber } from '../lib/tapped-number-events';
 import type { PostCallSubmitData } from '../types';
 
 type DialerSubTab = 'keypad' | 'automated' | 'my-list';
@@ -364,23 +361,12 @@ function MyListCallingView({ myListCalling }: { myListCalling: UseMyListCallingR
 
 export function DialerScreen() {
   const missingPermissions = usePermissions();
-  const isDialerTabFocused = useIsFocused();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
-
-  useEffect(() => {
-    const unsubscribe = subscribeToTappedNumber(() => {
-      setActiveSubTab('keypad');
-    });
-    return unsubscribe;
-  }, []);
 
   const dialer = useDialer();
   const directCall = useDirectCall();
   const automatedCalling = useAutomatedCalling();
   const myListCalling = useMyListCalling();
-  const isLeadFlowScreenShown =
-    isDialerTabFocused && activeSubTab === 'automated';
-  useLeadCallFlowPresence(isLeadFlowScreenShown, automatedCalling.viewState);
   const { top: topInset } = useSafeAreaInsets();
 
   return (

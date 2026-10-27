@@ -5,7 +5,6 @@ import { readStoredCountry } from '@/features/auth';
 import { subscribeToReminderPress } from '@/features/tracking';
 import { isValidPhoneNumber } from '@/shared/utils/phone-formatter';
 import { extractFirstClipboardNumber } from '../lib/extract-clipboard-number';
-import { subscribeToTappedNumber } from '../lib/tapped-number-events';
 
 const emptyClipboardMessage = 'Nothing copied.';
 const noNumberInClipboardMessage = 'No number found in what you copied.';
@@ -52,17 +51,6 @@ export function useDialer(): UseDialerResult {
     });
     return unsubscribe;
   }, []);
-
-  const handleTappedNumber = useCallback((tappedPhoneNumber: string): void => {
-    if (tappedPhoneNumber !== '') {
-      setDialedNumberInput(tappedPhoneNumber);
-    }
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribeToTappedNumber(handleTappedNumber);
-    return unsubscribe;
-  }, [handleTappedNumber]);
 
   const appendKeypadCharacter = useCallback((character: string): void => {
     setDialedNumberInput(currentInput => currentInput + character);

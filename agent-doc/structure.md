@@ -203,7 +203,7 @@ app/
 ├── global.css                       # NativeWind CSS theme and styles
 ├── App.tsx                          # Root container: Auth check → Tab navigation
 ├── index.js                         # React Native app registry entry point
-├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE, and the tel: intent filter, VIEW + DIAL, that catches numbers tapped outside the app)
+├── android/                         # Android native project (manifest includes CALL_PHONE, READ_CALL_LOG, READ_PHONE_STATE)
 │   └── app/src/main/
 │       ├── java/com/apexsalescall/WhatsAppModule.kt   # Kotlin bridge: opens WhatsApp or WhatsApp Business on a number's chat with optional prefilled text
 │       └── res/drawable-*dpi/ic_reminder_icon.png     # White notification glyph on transparent background, five densities
@@ -228,7 +228,7 @@ app/
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
     │   │   ├── hooks/use-post-call-submit.ts  # Submit click: read call log, send to server, delete or save the row
-    │   │   └── screens/dialer-screen.tsx # Hosts the Keypad, Automated, and My List sub-tabs; fills the keypad from a number tapped outside the app
+    │   │   └── screens/dialer-screen.tsx # Hosts the Keypad, Automated, and My List sub-tabs
     │   ├── my-list/
     │   │   ├── hooks/use-my-list.ts             # My List rows and count chips; Start Calling serves the oldest Left number
     │   │   ├── hooks/use-my-list-upload.ts      # Paste / CSV / Excel parsing, E.164 normalization, and the replace rule

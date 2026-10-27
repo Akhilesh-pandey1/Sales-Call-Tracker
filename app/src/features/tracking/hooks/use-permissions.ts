@@ -6,7 +6,6 @@ import {
   type Permission,
 } from 'react-native';
 import { requestPermissionIfMissing } from '@/shared/utils/phone-permissions';
-import { askToCatchTappedNumbers } from '../lib/tapped-number-handler';
 import { ensureRemindersAreReady } from '../lib/reminder-settings';
 
 export async function findMissingPermissions(): Promise<Permission[]> {
@@ -54,7 +53,6 @@ export function usePermissions(): Permission[] {
     );
     setMissingPermissions(missingPermissionsAfterRequest);
     await ensureRemindersAreReady();
-    await askToCatchTappedNumbers();
   }, []);
 
   useEffect(() => {

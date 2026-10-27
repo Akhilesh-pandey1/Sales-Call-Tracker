@@ -1,4 +1,4 @@
-import type { AxiosError } from 'axios';
+import { isAxiosError, type AxiosError } from 'axios';
 
 function readResponseErrorMessage(error: AxiosError): string | null {
   const responseData: unknown = error.response?.data;
@@ -9,6 +9,17 @@ function readResponseErrorMessage(error: AxiosError): string | null {
     }
   }
   return null;
+}
+
+export function readServerOrFallbackMessage(
+  requestError: unknown,
+  fallbackMessage: string,
+): string {
+  if (!isAxiosError(requestError) || !requestError.response) {
+    return fallbackMessage;
+  }
+  const serverMessage = readResponseErrorMessage(requestError);
+  return serverMessage ?? fallbackMessage;
 }
 
 export { readResponseErrorMessage };

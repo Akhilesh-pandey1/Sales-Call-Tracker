@@ -46,24 +46,16 @@ export type PersonStats = {
   last_30_days: Last30DaysStats;
 };
 
-type VerifyRemovePasswordResponse = {
-  status: boolean;
-};
-
 async function fetchMyStats(userId: number): Promise<PersonStats> {
   const response = await apiClient.get<PersonStats>(`/dashboard/person/${userId}`);
   const personStats: PersonStats = response.data;
   return personStats;
 }
 
-async function verifyRemovePassword(managerPassword: string): Promise<boolean> {
-  const response = await apiClient.post<VerifyRemovePasswordResponse>(
-    '/do-not-track/verify-remove-password',
-    { password: managerPassword },
-  );
-  const verifyResponse: VerifyRemovePasswordResponse = response.data;
-  const isPasswordAccepted: boolean = verifyResponse.status;
-  return isPasswordAccepted;
+async function verifyRemovePassword(managerPassword: string): Promise<void> {
+  await apiClient.post('/do-not-track/verify-remove-password', {
+    password: managerPassword,
+  });
 }
 
 export { fetchMyStats, verifyRemovePassword };

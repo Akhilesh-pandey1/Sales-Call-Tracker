@@ -6,22 +6,15 @@ import { resolveRemoveErrorMessage } from '../lib/resolve-remove-error-message';
 
 const removeFailedMessage = 'Could not remove this number. Try again.';
 
-type VerifyPasswordOutcome =
-  | { isAccepted: true }
-  | { isAccepted: false; errorMessage: string };
-
-async function verifyManagerApproval(
+async function readVerifyPasswordError(
   typedPassword: string,
-): Promise<VerifyPasswordOutcome> {
+): Promise<string | null> {
   try {
-    const isPasswordAccepted = await verifyRemovePassword(typedPassword);
-    if (isPasswordAccepted) {
-      return { isAccepted: true };
-    }
-    return { isAccepted: false, errorMessage: removeFailedMessage };
+    await verifyRemovePassword(typedPassword);
+    return null;
   } catch (verifyError) {
-    const verifyErrorMessage = resolveRemoveErrorMessage(verifyError);
-    return { isAccepted: false, errorMessage: verifyErrorMessage };
+    const verifyErrorMessage: string = resolveRemoveErrorMessage(verifyError);
+    return verifyErrorMessage;
   }
 }
 
@@ -55,8 +48,7 @@ export function useDoNotTrackRemove(
 
   const removeNumberWithPassword = useCallback(
     async (typedPassword: string): Promise<void> => {
-      const typedPasswordTrimmed = typedPassword.trim();
-      const passwordError = readRemovePasswordError(typedPasswordTrimmed);
+      const passwordError = readRemovePasswordError(typedPassword);
       if (passwordError !== null) {
         setRemoveErrorMessage(passwordError);
         return;
@@ -67,9 +59,9 @@ export function useDoNotTrackRemove(
       setIsRemovingNumber(true);
       setRemoveErrorMessage(null);
       try {
-        const verifyOutcome = await verifyManagerApproval(typedPasswordTrimmed);
-        if (!verifyOutcome.isAccepted) {
-          setRemoveErrorMessage(verifyOutcome.errorMessage);
+        const verifyPasswordError = await readVerifyPasswordError(typedPassword);
+        if (verifyPasswordError !== null) {
+          setRemoveErrorMessage(verifyPasswordError);
           return;
         }
         await deleteDoNotTrackNumber(removeTargetNumber);

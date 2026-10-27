@@ -1,65 +1,13 @@
 import Clipboard from '@react-native-clipboard/clipboard';
-import {
-  findPhoneNumbersInText,
-  type CountryCode,
-} from 'libphonenumber-js';
 import { ToastAndroid } from 'react-native';
 import { useCallback, useState } from 'react';
 import * as ExcelReader from 'xlsx';
 import { myListMaxNumbers } from '@/config/app-config';
 import { readStoredCountry } from '@/features/auth';
 import { replaceMyListNumbers } from '@/features/tracking';
+import { extractUploadNumbers } from '../lib/extract-upload-numbers';
 
 const uploadFailedMessage = 'Could not add your numbers. Try again.';
-
-interface UploadedNumbers {
-  uniqueE164Numbers: string[];
-  notValidCount: number;
-}
-
-function lineHasPhoneLikeDigitRun(line: string): boolean {
-  const lineSeparatorPattern = /[\s().+/-]/g;
-  const digitRunPattern = /\d+/g;
-  const minPhoneLikeDigitCount = 7;
-  const maxPhoneLikeDigitCount = 15;
-  const separatorFreeLine = line.replace(lineSeparatorPattern, '');
-  const digitRuns = separatorFreeLine.match(digitRunPattern) ?? [];
-  return digitRuns.some(
-    (digitRun) =>
-      digitRun.length >= minPhoneLikeDigitCount &&
-      digitRun.length <= maxPhoneLikeDigitCount,
-  );
-}
-
-function extractUploadNumbers(
-  rawText: string,
-  countryCode: string,
-): UploadedNumbers {
-  const uniqueE164Numbers = new Set<string>();
-  let notValidCount = 0;
-  const lines = rawText.split(/\r?\n/);
-  for (const line of lines) {
-    const trimmedLine = line.trim();
-    if (trimmedLine === '') {
-      continue;
-    }
-    const foundNumbers = findPhoneNumbersInText(trimmedLine, {
-      defaultCountry: countryCode as CountryCode,
-    });
-    for (const foundNumber of foundNumbers) {
-      uniqueE164Numbers.add(foundNumber.number.number);
-    }
-    const isLineWithoutAnyNumber = foundNumbers.length === 0;
-    if (isLineWithoutAnyNumber && lineHasPhoneLikeDigitRun(trimmedLine)) {
-      notValidCount += 1;
-    }
-  }
-  const uploadedNumbers: UploadedNumbers = {
-    uniqueE164Numbers: Array.from(uniqueE164Numbers),
-    notValidCount,
-  };
-  return uploadedNumbers;
-}
 
 function buildUploadToastMessage(
   addedCount: number,

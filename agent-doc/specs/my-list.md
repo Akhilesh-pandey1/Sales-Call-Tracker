@@ -87,7 +87,7 @@ The system SHALL normalize every number to E.164 with the login country before s
 - **THEN** the number is added once
 
 #### Scenario: Toast with counts
-- **GIVEN** an upload that added 20 numbers with 3 unparseable rows
+- **GIVEN** an upload that added 20 numbers with 3 unparseable pieces of text
 - **WHEN** it finishes
 - **THEN** the toast reads "Added 20 numbers. 3 not valid."
 

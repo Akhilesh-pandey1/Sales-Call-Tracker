@@ -170,6 +170,47 @@ def resolve_lead_for_call(
     target_lead.retry_locked_until = current_time + lock_duration
 
 
+def collect_csv_row_values(row: list[str]) -> list[str]:
+    row_values: list[str] = []
+    for cell in row:
+        for cell_value in cell.split(","):
+            stripped_value: str = cell_value.strip()
+            if stripped_value:
+                row_values.append(stripped_value)
+    return row_values
+
+
+def resolve_csv_value_outcome(
+    row_value: str,
+    country_code: str,
+    seen_in_batch: set[str],
+) -> str:
+    invalid_outcome: str = "invalid"
+    duplicate_outcome: str = "duplicate"
+    added_outcome: str = "added"
+
+    normalized_number: str | None = validate_and_format_e164(
+        row_value, country_code
+    )
+    if normalized_number is None:
+        return invalid_outcome
+
+    if normalized_number in seen_in_batch:
+        return duplicate_outcome
+    seen_in_batch.add(normalized_number)
+
+    lead_exists: bool = (
+        db.session.query(Lead.id).filter_by(phone_number=normalized_number).first()
+        is not None
+    )
+    if lead_exists:
+        return duplicate_outcome
+
+    new_lead: Lead = Lead(phone_number=normalized_number, status="waiting")
+    db.session.add(new_lead)
+    return added_outcome
+
+
 def import_leads_csv(file_content: bytes, country_code: str) -> dict[str, Any]:
     max_bytes_allowed: int = MAX_LEAD_UPLOAD_MB * 1024 * 1024
     bad_request_code: int = 400
@@ -188,41 +229,20 @@ def import_leads_csv(file_content: bytes, country_code: str) -> dict[str, Any]:
     duplicate_count: int = 0
     invalid_count: int = 0
     seen_in_batch: set[str] = set()
+    invalid_outcome: str = "invalid"
+    duplicate_outcome: str = "duplicate"
 
     for row in row_reader:
-        if not row:
-            continue
-
-        if len(row) > 1 and any(cell.strip() for cell in row[1:]):
-            raise AppException("Please select a valid CSV file.", bad_request_code)
-
-        first_column_value: str = row[0].strip()
-        if not first_column_value:
-            continue
-
-        normalized_number: str | None = validate_and_format_e164(
-            first_column_value, country_code
-        )
-        if normalized_number is None:
-            invalid_count += 1
-            continue
-
-        if normalized_number in seen_in_batch:
-            duplicate_count += 1
-            continue
-        seen_in_batch.add(normalized_number)
-
-        lead_exists: bool = (
-            db.session.query(Lead.id).filter_by(phone_number=normalized_number).first()
-            is not None
-        )
-        if lead_exists:
-            duplicate_count += 1
-            continue
-
-        new_lead: Lead = Lead(phone_number=normalized_number, status="waiting")
-        db.session.add(new_lead)
-        added_count += 1
+        for row_value in collect_csv_row_values(row):
+            value_outcome: str = resolve_csv_value_outcome(
+                row_value, country_code, seen_in_batch
+            )
+            if value_outcome == invalid_outcome:
+                invalid_count += 1
+            elif value_outcome == duplicate_outcome:
+                duplicate_count += 1
+            else:
+                added_count += 1
 
     db.session.commit()
 

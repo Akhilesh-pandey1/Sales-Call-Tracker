@@ -213,13 +213,13 @@ def test_upload_leads_unparseable_number_skipped(
     assert json_data["invalid"] == 2
 
 
-def test_upload_leads_multi_column_rejected(
+def test_upload_leads_comma_separated_values_become_separate_rows(
     app: Flask, client: FlaskClient
 ) -> None:
     manager_token: str = "manager-token-multi"
     create_user_fixture(name="ManagerMulti", role="manager", token=manager_token)
 
-    csv_data: bytes = b"9876543210,Alice\n9876543211,Bob\n"
+    csv_data: bytes = b"9876543210,9876543211\n9876543212,9876543213\n"
     data: dict[str, tuple[io.BytesIO, str] | str] = {
         "file": (io.BytesIO(csv_data), "leads.csv"),
         "country": "IN",
@@ -233,8 +233,38 @@ def test_upload_leads_multi_column_rejected(
         content_type="multipart/form-data",
     )
 
-    assert response.status_code == 400
-    assert response.get_json()["message"] == "Please select a valid CSV file."
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["added"] == 4
+    assert json_data["duplicates"] == 0
+    assert json_data["invalid"] == 0
+    assert Lead.query.count() == 4
+
+
+def test_upload_leads_non_number_value_counted_invalid(
+    app: Flask, client: FlaskClient
+) -> None:
+    manager_token: str = "manager-token-name"
+    create_user_fixture(name="ManagerName", role="manager", token=manager_token)
+
+    csv_data: bytes = b"9876543210,Alice\n"
+    data: dict[str, tuple[io.BytesIO, str] | str] = {
+        "file": (io.BytesIO(csv_data), "leads.csv"),
+        "country": "IN",
+    }
+    headers: dict[str, str] = {"Authorization": f"Bearer {manager_token}"}
+
+    response = client.post(
+        "/api/leads/upload",
+        data=data,
+        headers=headers,
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["added"] == 1
+    assert json_data["invalid"] == 1
 
 
 def test_upload_leads_missing_file_or_invalid_country(

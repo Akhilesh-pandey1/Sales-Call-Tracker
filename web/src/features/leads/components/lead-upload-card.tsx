@@ -111,7 +111,7 @@ function CsvFileDropzone({
           <>
             <p className="mt-2 text-xs font-medium">Click to browse or drag &amp; drop</p>
             <p className="text-[11px] text-muted-foreground">
-              One phone number per line · No header row · No extra columns
+              Phone numbers on their own lines or comma-separated · No header row
             </p>
           </>
         )}
@@ -222,7 +222,7 @@ export function LeadUploadCard() {
               Upload Leads
             </DialogTitle>
             <DialogDescription className="text-xs">
-              Single-column CSV file (max {maxLeadUploadMb} MB)
+              CSV file (max {maxLeadUploadMb} MB)
             </DialogDescription>
           </div>
         </div>

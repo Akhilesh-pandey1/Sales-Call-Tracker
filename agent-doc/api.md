@@ -370,7 +370,7 @@ Permanently deletes a user and cascades to delete all their call records.
 ## 5. Leads
 
 ### `POST /api/leads/upload`
-Uploads a single-column CSV of phone numbers into the lead pool.
+Uploads a CSV of phone numbers into the lead pool. Every comma-separated value in the file becomes its own lead row.
 
 - **Auth**: Manager token
 - **Content-Type**: `multipart/form-data`
@@ -378,7 +378,7 @@ Uploads a single-column CSV of phone numbers into the lead pool.
   - `country`: Country ISO code (`IN`, `AE`, `US`)
 - **Processing Logic**:
   - Normalizes numbers to E.164 using Python `phonenumbers`.
-  - Skips duplicates within the file, unparseable lines, and numbers already present in `leads`.
+  - Skips duplicates within the file, unparseable values, and numbers already present in `leads`.
 - **Response 200**:
   ```json
   {

@@ -87,7 +87,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 ### Screen 4: Leads
 - Sidebar item "Leads" opens this page
 - Top bar - clean page title "Leads" on the left; "Upload Leads" button on the right (no date or time in header)
-- Upload modal dialog - opens on clicking "Upload Leads": single-column CSV file picker (phone numbers only, max 2 MB), country dropdown (IN, AE, US), Cancel and Upload buttons
+- Upload modal dialog - opens on clicking "Upload Leads": CSV file picker (phone numbers on their own lines or comma-separated, max 2 MB), country dropdown (IN, AE, US), Cancel and Upload buttons
 - Floating Sonner toast notification on upload completion: "150 new leads added to the active calling queue."
 - Daily KPI cards (2) - Leads Uploaded (today vs yesterday) and Leads Tackled (today vs yesterday)
 - Active Lead Pool stage cards (5) - backlog in calling queue:
@@ -101,7 +101,7 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 
 **Edge cases:**
 - File over 2 MB: modal displays error "File size exceeds 2 MB limit (maximum file size is 2 MB)."
-- Invalid file format: modal displays error "Invalid CSV format: file must contain a single column of phone numbers."
+- Invalid file format: modal displays error "Please select a valid CSV file."
 - Pool is completely empty: all pool cards show 0, with a clean "No leads in calling pool" prompt and Upload Leads button
 - Backend does not load: "Could not load data." with a Retry button
 - Login ended: back to Screen 1 Login
@@ -201,7 +201,7 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 
 **Upload - two screens, switched the same way (Paste text | File):**
 - Paste text screen - a paste box that accepts any messy text and pulls out every phone-like number, plus the Copy AI prompt button
-- File screen - one file input: tap it and pick a CSV or Excel (.xlsx) file from the phone; the file is read right on the phone, numbers sit in one column of the sheet
+- File screen - one file input: tap it and pick a CSV or Excel (.xlsx) file from the phone; the file is read right on the phone, numbers on their own lines or comma-separated
 
 **Edge cases:**
 - Upload toast: "Added N numbers." - with "M not valid." appended when some text was not readable as a number

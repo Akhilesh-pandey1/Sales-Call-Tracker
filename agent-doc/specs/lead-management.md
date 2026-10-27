@@ -5,12 +5,17 @@ Gives the manager a shared pool of phone numbers to dial, and gives salespeople 
 ## Requirements
 
 ### Requirement: CSV upload into lead pool
-The system SHALL allow the manager to upload a single-column CSV of phone numbers, normalize each number to E.164 for the chosen country, and skip duplicates within the file, numbers already in the pool in any state, and unparseable numbers — each skipped row counted.
+The system SHALL allow the manager to upload a CSV of phone numbers, turn every comma-separated value in the file into its own lead row, normalize each number to E.164 for the chosen country, and skip duplicates within the file, numbers already in the pool in any state, and unparseable values — each skipped value counted.
 
 #### Scenario: Successful upload
 - **GIVEN** the manager picked a supported country and a valid CSV of new phone numbers
 - **WHEN** the upload completes
 - **THEN** valid numbers join the pool as waiting leads and the response carries the added, duplicates, and invalid counts
+
+#### Scenario: Comma-separated values become separate rows
+- **GIVEN** a CSV line or cell holding several phone numbers separated by commas
+- **WHEN** the upload is processed
+- **THEN** each number becomes its own lead row
 
 #### Scenario: File too large
 - **GIVEN** a CSV over 2 MB (`MAX_LEAD_UPLOAD_MB`)
@@ -28,9 +33,9 @@ The system SHALL allow the manager to upload a single-column CSV of phone number
 - **THEN** the number is skipped and counted as a duplicate
 
 #### Scenario: Unparseable number skipped
-- **GIVEN** a CSV row cannot be parsed as a valid phone number for the chosen country
+- **GIVEN** a CSV value cannot be parsed as a valid phone number for the chosen country
 - **WHEN** the upload is processed
-- **THEN** the row is skipped and counted as invalid; the rest of the upload continues
+- **THEN** the value is skipped and counted as invalid; the rest of the upload continues
 
 ### Requirement: Lead pool manager summary
 The system SHALL return the pool bucket counts — waiting split by attempt count (0, 1, and 2 calls so far), scheduled, connected (done), and stopped, with waiting equal to the split's sum — plus leads uploaded and leads tackled for today and yesterday, plus each active salesperson's today attempted, connected, and not-connected lead calls.

@@ -80,6 +80,7 @@ def test_missing_or_empty_password_refused(
         invalid_bodies: list[dict[str, Any]] = [
             {},
             {"password": ""},
+            {"password": "   "},
             {"password": None},
             {"password": 123},
         ]

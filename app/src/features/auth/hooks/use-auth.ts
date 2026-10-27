@@ -3,12 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { isAxiosError } from 'axios';
 import { isSupportedCountry, type CountryCode } from 'libphonenumber-js';
 import {
-  readResponseErrorMessage,
   readStoredToken,
   registerUnauthorizedHandler,
   writeStoredToken,
   writeStoredUserId,
 } from '@/shared/api/api-client';
+import { readResponseErrorMessage } from '@/shared/api/response-message';
 import { serverUnreachableMessage } from '@/shared/constants/messages';
 import { requestLogin, type LoginResponse } from '../api/auth.api';
 import { writeStoredOfficeHoursWindow } from '../office-hours-window';

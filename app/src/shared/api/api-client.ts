@@ -54,17 +54,6 @@ async function clearStoredSession(): Promise<void> {
   notifyUnauthorizedHandlers();
 }
 
-function readResponseErrorMessage(error: AxiosError): string | null {
-  const responseData: unknown = error.response?.data;
-  if (responseData && typeof responseData === 'object' && 'message' in responseData) {
-    const responseMessage = (responseData as { message: unknown }).message;
-    if (typeof responseMessage === 'string') {
-      return responseMessage;
-    }
-  }
-  return null;
-}
-
 function registerUnauthorizedHandler(handler: UnauthorizedHandler): () => void {
   unauthorizedHandlers.push(handler);
   return () => {
@@ -111,7 +100,6 @@ apiClient.interceptors.response.use(
 
 export {
   apiClient,
-  readResponseErrorMessage,
   readStoredToken,
   writeStoredToken,
   readStoredUserId,

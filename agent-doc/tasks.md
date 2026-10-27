@@ -22,15 +22,15 @@
 
 **Blocked by:** 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
 
-- [ ] Tapping Remove opens the popup for that number, the typed password goes to the verify endpoint, and the row disappears only on a server OK (`decisions.md` — Decision 1; `screen.md` — Screen 9b).
-- [ ] Wrong password keeps the number and shows the server's `"Wrong password. Ask your manager."`; empty shows `"Enter the password."` and sends nothing; no internet shows `"Removing a number needs the internet. Connect and try again."` (`decisions.md` — Decision 3).
-- [ ] Adding numbers and call tracking stay exactly as today — local and offline (`decisions.md` — Decision 1).
+- [x] Tapping Remove opens the popup for that number, the typed password goes to the verify endpoint, and the row disappears only on a server OK (`decisions.md` — Decision 1; `screen.md` — Screen 9b).
+- [x] Wrong password keeps the number and shows the server's `"Wrong password. Ask your manager."`; empty shows `"Enter the password."` and sends nothing; no internet shows `"Removing a number needs the internet. Connect and try again."` (`decisions.md` — Decision 3).
+- [x] Adding numbers and call tracking stay exactly as today — local and offline (`decisions.md` — Decision 1).
 
 **Verification:**
 
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
-- [ ] Tests pass: `npx jest` in `app/`
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Tests pass: `npx jest` in `app/`

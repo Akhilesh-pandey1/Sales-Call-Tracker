@@ -4,16 +4,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] A phone with nothing saved reads the switch as ON, and a saved OFF reads back OFF after leaving Settings, returning, or reopening the app (`specs/settings-tab.md` — "Default is on", "The choice survives leaving and restarting").
-- [ ] The Settings home shows exactly five rows — WhatsApp, Do not track numbers, Notes popup, Clear local data, Log out — with the Notes popup row holding a switch, and tapping the row flips it in place with no sub-page (`specs/settings-tab.md` — "Five-row menu", "Tapping the row flips it in place").
-- [ ] No backend, API, or database change exists — the choice lives on the phone only (decisions.md, Decision 14).
+- [x] A phone with nothing saved reads the switch as ON, and a saved OFF reads back OFF after leaving Settings, returning, or reopening the app (`specs/settings-tab.md` — "Default is on", "The choice survives leaving and restarting").
+- [x] The Settings home shows exactly five rows — WhatsApp, Do not track numbers, Notes popup, Clear local data, Log out — with the Notes popup row holding a switch, and tapping the row flips it in place with no sub-page (`specs/settings-tab.md` — "Five-row menu", "Tapping the row flips it in place").
+- [x] No backend, API, or database change exists — the choice lives on the phone only (decisions.md, Decision 14).
 
 **Verification:**
-- [ ] Tests pass: `npx jest notes-popup-settings` in `app/` (new test file: nothing saved → ON, save OFF → reads OFF, save ON → reads ON)
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Tests pass: `npx jest notes-popup-settings` in `app/` (new test file: nothing saved → ON, save OFF → reads OFF, save ON → reads ON)
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
 
 ## Task 2: The switch gates the pre-call notes popup — OFF dials straight through
 

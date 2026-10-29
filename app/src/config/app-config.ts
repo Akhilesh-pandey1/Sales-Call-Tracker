@@ -23,6 +23,7 @@ const officeHoursDefaultEndTime: string =
   appConfigJson.officeHoursDefaultEndTime;
 const whatsappDefaultFirstMessageOn: boolean =
   appConfigJson.whatsappDefaultFirstMessageOn;
+const notesPopupDefaultOn: boolean = appConfigJson.notesPopupDefaultOn;
 const whatsappDefaultFirstMessageText: string =
   appConfigJson.whatsappDefaultFirstMessageText;
 const istOffsetMinutes: number = appConfigJson.istOffsetMinutes;
@@ -42,6 +43,7 @@ export {
   istOffsetMinutes,
   myListMaxNumbers,
   matchWindowMs,
+  notesPopupDefaultOn,
   maxJanitorAttempts,
   maxLeadAttempts,
   maxScheduleAheadDays,

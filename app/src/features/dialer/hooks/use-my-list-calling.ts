@@ -60,14 +60,18 @@ export function useMyListCalling(): UseMyListCallingResult {
     async (submitData: PostCallSubmitData): Promise<void> => {
       const shouldContinueToNextCall = submitData.shouldContinueToNextLead;
       const scheduledAt = submitData.scheduledAt;
+      const noteFromCall = submitData.outcome.notes;
       const finishMyListCall = async (
         launchedCall: LaunchedCall | null,
         scheduleWasRefused: boolean,
       ): Promise<void> => {
+        const calledPhoneNumber =
+          launchedCall === null ? null : launchedCall.phoneNumber;
         await bookNumberWhenScheduled(
-          launchedCall,
+          calledPhoneNumber,
           scheduledAt,
           scheduleWasRefused,
+          noteFromCall,
         );
         closePostCallDialog();
         if (!shouldContinueToNextCall) {

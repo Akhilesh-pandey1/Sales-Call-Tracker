@@ -59,6 +59,7 @@ export function useLeadPostCall(
       scheduledAt: string | null,
       shouldContinueToNextLead: boolean,
       scheduleWasRefused: boolean,
+      noteFromCall: string | null,
     ): Promise<void> => {
       const currentState = viewStateRef.current;
       if (currentState.kind !== 'finished') {
@@ -72,6 +73,7 @@ export function useLeadPostCall(
           leadId: currentState.lead.id,
           phoneNumber: currentState.lead.phone_number,
           scheduledAt: scheduledAtToBook,
+          notes: noteFromCall,
         };
         await setBookedLeadReminder(bookedLeadReminder);
       }
@@ -105,7 +107,12 @@ export function useLeadPostCall(
       await submitTrackedPostCall(
         finishedCallId,
         (scheduleWasRefused: boolean) =>
-          continueAfterLeadSubmit(scheduledAt, shouldContinueToNextLead, scheduleWasRefused),
+          continueAfterLeadSubmit(
+            scheduledAt,
+            shouldContinueToNextLead,
+            scheduleWasRefused,
+            outcome.notes,
+          ),
         scheduledAt,
         outcome,
       );

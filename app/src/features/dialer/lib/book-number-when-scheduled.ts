@@ -1,15 +1,15 @@
 import { setBookedNumberReminder } from '@/features/tracking';
-import type { LaunchedCall } from './call-launcher';
 
 export async function bookNumberWhenScheduled(
-  launchedCall: LaunchedCall | null,
+  phoneNumber: string | null,
   scheduledAt: string | null,
   scheduleWasRefused: boolean,
+  notes: string | null,
 ): Promise<void> {
   const canBookReminder =
-    launchedCall !== null && scheduledAt !== null && !scheduleWasRefused;
+    phoneNumber !== null && scheduledAt !== null && !scheduleWasRefused;
   if (!canBookReminder) {
     return;
   }
-  await setBookedNumberReminder(launchedCall.phoneNumber, scheduledAt);
+  await setBookedNumberReminder(phoneNumber, scheduledAt, notes);
 }

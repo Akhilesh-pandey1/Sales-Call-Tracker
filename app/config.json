@@ -18,5 +18,6 @@
   "whatsappDefaultFirstMessageText": "Hello sir, Mai Apex Album AI se baat kar raha/rahi hu",
   "istOffsetMinutes": 330,
   "my_list_max_numbers": 10000,
+  "note_max_length": 200,
   "schedule_expire_hours": 24
 }

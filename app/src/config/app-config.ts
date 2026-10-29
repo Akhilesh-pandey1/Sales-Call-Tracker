@@ -27,6 +27,7 @@ const whatsappDefaultFirstMessageText: string =
   appConfigJson.whatsappDefaultFirstMessageText;
 const istOffsetMinutes: number = appConfigJson.istOffsetMinutes;
 const myListMaxNumbers: number = appConfigJson.my_list_max_numbers;
+const noteMaxLength: number = appConfigJson.note_max_length;
 const scheduleExpireHours: number = appConfigJson.schedule_expire_hours;
 const millisecondsPerHour: number = 60 * 60 * 1000;
 const scheduleExpireMs: number = scheduleExpireHours * millisecondsPerHour;
@@ -45,6 +46,7 @@ export {
   maxLeadAttempts,
   maxScheduleAheadDays,
   minMsBetweenJanitorSweeps,
+  noteMaxLength,
   officeHoursDefaultEndTime,
   officeHoursDefaultStartTime,
   scheduleExpireMs,

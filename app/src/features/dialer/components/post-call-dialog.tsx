@@ -7,13 +7,14 @@ import {
 } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { maxScheduleAheadDays } from '@/config/app-config';
+import { maxScheduleAheadDays, noteMaxLength } from '@/config/app-config';
 import type { CallOutcome } from '@/features/tracking';
 import { Calendar, Check, Copy, MessageCircle } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 import { cn } from '@/lib/utils';
 import { usePostCallSchedule } from '../hooks/use-post-call-schedule';
+import { buildNoteCounterText, capNoteText } from '../lib/note-cap';
 import type { PostCallSubmitData } from '../types';
 import { CopyNumberButton } from './copy-number-button';
 import { WhatsAppNumberButton } from './whatsapp-number-button';
@@ -125,13 +126,19 @@ type NotesFieldProps = {
 function NotesField({ noteText, onChangeNote }: NotesFieldProps) {
   return (
     <View className="rounded-xl border border-border p-3">
-      <Text className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-        Notes (optional)
-      </Text>
+      <View className="flex-row items-center justify-between">
+        <Text className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+          Notes (optional)
+        </Text>
+        <Text className="text-[10px] font-medium tabular-nums text-muted-foreground">
+          {buildNoteCounterText(noteText.length, noteMaxLength)}
+        </Text>
+      </View>
       <TextInput
         multiline
         numberOfLines={2}
         value={noteText}
+        maxLength={noteMaxLength}
         onChangeText={onChangeNote}
         placeholder="e.g. Asked to call back after 6 PM"
         className="mt-1 h-14 w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground"
@@ -181,7 +188,8 @@ function PostCallDialog({
     setChosenOutcome(chosenOutcome === 'interested' ? null : 'interested');
   const handleToggleDoNotCall = () =>
     setChosenOutcome(chosenOutcome === 'doNotCall' ? null : 'doNotCall');
-  const handleChangeNote = (changedNoteText: string) => setNoteText(changedNoteText);
+  const handleChangeNote = (changedNoteText: string) =>
+    setNoteText(capNoteText(changedNoteText, noteMaxLength));
   const handleSubmitPress = () => {
     const scheduledAt = isScheduleChosen ? scheduleDate.toISOString() : null;
     const trimmedNoteText = noteText.trim();

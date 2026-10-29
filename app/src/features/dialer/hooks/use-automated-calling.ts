@@ -24,6 +24,7 @@ export type UseAutomatedCallingResult = PostCallDialogState & {
   confirmNotedLeadCall: () => Promise<void>;
   cancelNotedLeadCall: () => void;
   submitPostCall: (submitData: PostCallSubmitData) => Promise<void>;
+  callAgainPostCall: (submitData: PostCallSubmitData) => Promise<void>;
 };
 
 export function useAutomatedCalling(): UseAutomatedCallingResult {

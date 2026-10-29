@@ -374,6 +374,7 @@ export function ScheduledScreen() {
         isSubmitting={directCall.isSubmittingPostCall}
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={directCall.submitDirectCall}
+        onCallAgain={directCall.callAgainDirectCall}
       />
       <PreCallNotesDialog
         pendingNotesCall={pendingNotesCall}

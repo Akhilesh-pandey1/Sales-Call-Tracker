@@ -1,7 +1,7 @@
 import { ToastAndroid } from 'react-native';
 import { useCallback, useRef } from 'react';
 import { pickNextListNumber } from '@/features/my-list';
-import { bookNumberWhenScheduled } from '../lib/book-number-when-scheduled';
+import { bookScheduleAnswerAndClosePostCallDialog } from '../lib/book-schedule-answer-and-close-post-call-dialog';
 import type { LaunchedCall } from '../lib/call-launcher';
 import { launchTrackedCall, showCallLaunchErrorToast } from '../lib/call-launcher';
 import {
@@ -21,6 +21,7 @@ export type UseMyListCallingResult = UseTrackedCallResult &
   UsePreCallNotesResult & {
     startCalling: () => Promise<void>;
     submitMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
+    callAgainMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
   };
 
 export function useMyListCalling(): UseMyListCallingResult {
@@ -33,7 +34,7 @@ export function useMyListCalling(): UseMyListCallingResult {
     submitTrackedCall,
   } = trackedCallFlow;
 
-  const dialPickedNumber = useCallback(
+  const dialPhoneNumber = useCallback(
     async (phoneNumber: string): Promise<void> => {
       let launchedCall: LaunchedCall | null = null;
       try {
@@ -47,7 +48,7 @@ export function useMyListCalling(): UseMyListCallingResult {
     [trackLaunchedCall],
   );
 
-  const preCallNotes = usePreCallNotes(dialPickedNumber);
+  const preCallNotes = usePreCallNotes(dialPhoneNumber);
   const { requestCallWithNotes } = preCallNotes;
 
   const startCalling = useCallback(async (): Promise<void> => {
@@ -74,31 +75,51 @@ export function useMyListCalling(): UseMyListCallingResult {
   const submitMyListPostCall = useCallback(
     async (submitData: PostCallSubmitData): Promise<void> => {
       const shouldContinueToNextCall = submitData.shouldContinueToNextLead;
-      const scheduledAt = submitData.scheduledAt;
-      const noteFromCall = submitData.outcome.notes;
-      const choseInterestedOnCall = submitData.outcome.interested;
-      const finishMyListCall = async (
+      const finishMyListSubmit = async (
         launchedCall: LaunchedCall | null,
         scheduleWasRefused: boolean,
       ): Promise<void> => {
-        const calledPhoneNumber =
-          launchedCall === null ? null : launchedCall.phoneNumber;
-        await bookNumberWhenScheduled(
-          calledPhoneNumber,
-          scheduledAt,
+        await bookScheduleAnswerAndClosePostCallDialog(
+          launchedCall,
+          submitData.scheduledAt,
           scheduleWasRefused,
-          noteFromCall,
-          choseInterestedOnCall,
+          submitData.outcome.notes,
+          submitData.outcome.interested,
+          closePostCallDialog,
         );
-        closePostCallDialog();
         if (!shouldContinueToNextCall) {
           return;
         }
         await startCalling();
       };
-      await submitTrackedCall(submitData, finishMyListCall);
+      await submitTrackedCall(submitData, finishMyListSubmit);
     },
     [closePostCallDialog, startCalling, submitTrackedCall],
+  );
+
+  const callAgainMyListPostCall = useCallback(
+    async (submitData: PostCallSubmitData): Promise<void> => {
+      const finishMyListCallAgain = async (
+        launchedCall: LaunchedCall | null,
+        scheduleWasRefused: boolean,
+      ): Promise<void> => {
+        const redialPhoneNumber =
+          await bookScheduleAnswerAndClosePostCallDialog(
+            launchedCall,
+            submitData.scheduledAt,
+            scheduleWasRefused,
+            submitData.outcome.notes,
+            submitData.outcome.interested,
+            closePostCallDialog,
+          );
+        if (redialPhoneNumber === null) {
+          return;
+        }
+        await dialPhoneNumber(redialPhoneNumber);
+      };
+      await submitTrackedCall(submitData, finishMyListCallAgain);
+    },
+    [closePostCallDialog, dialPhoneNumber, submitTrackedCall],
   );
 
   const myListCalling: UseMyListCallingResult = {
@@ -106,6 +127,7 @@ export function useMyListCalling(): UseMyListCallingResult {
     ...preCallNotes,
     startCalling,
     submitMyListPostCall,
+    callAgainMyListPostCall,
   };
   return myListCalling;
 }

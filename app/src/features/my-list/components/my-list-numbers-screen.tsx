@@ -188,6 +188,7 @@ export function MyListNumbersScreen({
         isSubmitting={directCall.isSubmittingPostCall}
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={directCall.submitDirectCall}
+        onCallAgain={directCall.callAgainDirectCall}
       />
       <PreCallNotesDialog
         pendingNotesCall={pendingNotesCall}

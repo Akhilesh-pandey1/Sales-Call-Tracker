@@ -143,6 +143,12 @@ function KeypadView({
     await directCall.submitDirectCall(submitData);
     dialer.clearDialedNumber();
   };
+  const handleCallAgainKeypadPostCall = async (
+    submitData: PostCallSubmitData,
+  ): Promise<void> => {
+    dialer.clearDialedNumber();
+    await directCall.callAgainDirectCall(submitData);
+  };
 
   return (
     <View className="flex-1 justify-center px-3 pb-4 pt-2">
@@ -207,6 +213,7 @@ function KeypadView({
         isSubmitting={directCall.isSubmittingPostCall}
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={handleSubmitKeypadPostCall}
+        onCallAgain={handleCallAgainKeypadPostCall}
       />
     </View>
   );
@@ -347,6 +354,7 @@ function AutomatedView({
           isSubmitting={automatedCalling.isSubmittingPostCall}
           errorMessage={automatedCalling.postCallErrorMessage}
           onSubmit={automatedCalling.submitPostCall}
+          onCallAgain={automatedCalling.callAgainPostCall}
         />
       </View>
     );
@@ -404,6 +412,7 @@ function MyListCallingView({
         isSubmitting={myListCalling.isSubmittingPostCall}
         errorMessage={myListCalling.postCallErrorMessage}
         onSubmit={myListCalling.submitMyListPostCall}
+        onCallAgain={myListCalling.callAgainMyListPostCall}
       />
       <PreCallNotesDialog
         pendingNotesCall={myListCalling.pendingNotesCall}

@@ -76,6 +76,7 @@ export function useMyListCalling(): UseMyListCallingResult {
           submitData.scheduledAt,
           scheduleWasRefused,
           submitData.outcome.notes,
+          submitData.outcome.interested,
           closePostCallDialog,
         );
         if (!shouldContinueToNextCall) {
@@ -100,6 +101,7 @@ export function useMyListCalling(): UseMyListCallingResult {
             submitData.scheduledAt,
             scheduleWasRefused,
             submitData.outcome.notes,
+            submitData.outcome.interested,
             closePostCallDialog,
           );
         if (redialPhoneNumber === null) {

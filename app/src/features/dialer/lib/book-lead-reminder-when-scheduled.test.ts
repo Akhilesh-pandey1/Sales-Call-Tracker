@@ -23,12 +23,32 @@ test('a scheduled save books the reminder for that lead with its time and note',
     scheduledAt,
     false,
     bookingNote,
+    true,
   );
   expect(setBookedLeadReminderMock).toHaveBeenCalledWith({
     leadId,
     phoneNumber: leadPhoneNumber,
     scheduledAt,
     notes: bookingNote,
+    interested: true,
+  });
+});
+
+test('the Interested choice rides onto the booking when chosen and off when not', async () => {
+  await bookLeadReminderWhenScheduled(
+    leadId,
+    leadPhoneNumber,
+    scheduledAt,
+    false,
+    bookingNote,
+    false,
+  );
+  expect(setBookedLeadReminderMock).toHaveBeenCalledWith({
+    leadId,
+    phoneNumber: leadPhoneNumber,
+    scheduledAt,
+    notes: bookingNote,
+    interested: false,
   });
 });
 
@@ -39,6 +59,7 @@ test('a refused schedule books nothing', async () => {
     scheduledAt,
     true,
     bookingNote,
+    true,
   );
   expect(setBookedLeadReminderMock).not.toHaveBeenCalled();
 });
@@ -50,6 +71,7 @@ test('a save without a schedule books nothing', async () => {
     null,
     false,
     bookingNote,
+    true,
   );
   expect(setBookedLeadReminderMock).not.toHaveBeenCalled();
 });

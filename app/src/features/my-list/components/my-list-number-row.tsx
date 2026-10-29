@@ -1,5 +1,5 @@
 import { MessageCircle, Phone } from 'lucide-react-native';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Text } from '@/components/ui/text';
 import type { MyListNumber } from '@/features/tracking';
 import { RowActionButton } from '@/shared/components/row-action-button';
@@ -8,9 +8,15 @@ import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 
 type MyListNumberRowProps = {
   listNumber: MyListNumber;
+  onCallNumber: (phoneNumber: string) => void;
+  onOpenWhatsAppChat: (phoneNumber: string) => void;
 };
 
-export function MyListNumberRow({ listNumber }: MyListNumberRowProps) {
+export function MyListNumberRow({
+  listNumber,
+  onCallNumber,
+  onOpenWhatsAppChat,
+}: MyListNumberRowProps) {
   const displayedPhoneNumber = formatInternationalPhoneNumber(
     listNumber.phoneNumber,
   );
@@ -18,8 +24,16 @@ export function MyListNumberRow({ listNumber }: MyListNumberRowProps) {
     ? null
     : formatCalledAtLabel(listNumber.calledAt);
 
+  const handleRowPress = () => onCallNumber(listNumber.phoneNumber);
+  const handleWhatsAppPress = () => onOpenWhatsAppChat(listNumber.phoneNumber);
+
   return (
-    <View className="mt-2 flex-row items-center gap-3 rounded-xl border border-border bg-card px-4 py-2 shadow-sm">
+    <Pressable
+      accessibilityLabel={`Call ${displayedPhoneNumber}`}
+      accessibilityRole="button"
+      onPress={handleRowPress}
+      className="mt-2 flex-row items-center gap-3 rounded-xl border border-border bg-card px-4 py-2 shadow-sm active:bg-muted"
+    >
       <View className="min-w-0 flex-1">
         <Text className="text-sm font-bold tabular-nums">
           {displayedPhoneNumber}
@@ -35,13 +49,15 @@ export function MyListNumberRow({ listNumber }: MyListNumberRowProps) {
           accessibilityLabel={`Call ${displayedPhoneNumber}`}
           icon={Phone}
           iconClassName="text-primary"
+          onPress={handleRowPress}
         />
         <RowActionButton
           accessibilityLabel={`WhatsApp ${displayedPhoneNumber}`}
           icon={MessageCircle}
           iconClassName="text-accent"
+          onPress={handleWhatsAppPress}
         />
       </View>
-    </View>
+    </Pressable>
   );
 }

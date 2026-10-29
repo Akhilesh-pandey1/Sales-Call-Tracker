@@ -9,6 +9,7 @@ const setBookedNumberReminderMock = jest.mocked(setBookedNumberReminder);
 
 beforeEach(() => {
   setBookedNumberReminderMock.mockClear();
+  closePostCallDialog.mockClear();
 });
 
 const calledPhoneNumber = '+919876543210';
@@ -17,22 +18,20 @@ const bookingNote = 'Wants the demo Tuesday';
 const launchedCall = { callId: 'call-1', phoneNumber: calledPhoneNumber };
 const closePostCallDialog = jest.fn();
 
-beforeEach(() => {
-  closePostCallDialog.mockClear();
-});
-
 test('a scheduled call again books the number, closes the popup, and returns the number to redial', async () => {
   const redialPhoneNumber = await bookScheduleAnswerAndClosePostCallDialog(
     launchedCall,
     scheduledAt,
     false,
     bookingNote,
+    true,
     closePostCallDialog,
   );
   expect(setBookedNumberReminderMock).toHaveBeenCalledWith(
     calledPhoneNumber,
     scheduledAt,
     bookingNote,
+    true,
   );
   expect(closePostCallDialog).toHaveBeenCalledTimes(1);
   expect(redialPhoneNumber).toBe(calledPhoneNumber);
@@ -44,6 +43,7 @@ test('a refused schedule still closes the popup and returns the number, booking 
     scheduledAt,
     true,
     bookingNote,
+    true,
     closePostCallDialog,
   );
   expect(setBookedNumberReminderMock).not.toHaveBeenCalled();
@@ -57,6 +57,7 @@ test('an untracked call closes the popup and offers no number to redial', async 
     scheduledAt,
     false,
     bookingNote,
+    false,
     closePostCallDialog,
   );
   expect(setBookedNumberReminderMock).not.toHaveBeenCalled();

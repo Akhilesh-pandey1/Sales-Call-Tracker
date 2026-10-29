@@ -78,6 +78,7 @@ export function useDirectCall(): UseDirectCallResult {
           submitData.scheduledAt,
           scheduleWasRefused,
           submitData.outcome.notes,
+          submitData.outcome.interested,
           closePostCallDialog,
         );
       };
@@ -98,6 +99,7 @@ export function useDirectCall(): UseDirectCallResult {
             submitData.scheduledAt,
             scheduleWasRefused,
             submitData.outcome.notes,
+            submitData.outcome.interested,
             closePostCallDialog,
           );
         if (redialPhoneNumber === null) {

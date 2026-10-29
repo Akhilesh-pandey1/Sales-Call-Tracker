@@ -5,11 +5,12 @@ export async function bookNumberWhenScheduled(
   scheduledAt: string | null,
   scheduleWasRefused: boolean,
   notes: string | null,
+  choseInterestedOnCall: boolean,
 ): Promise<void> {
   const canBookReminder =
     phoneNumber !== null && scheduledAt !== null && !scheduleWasRefused;
   if (!canBookReminder) {
     return;
   }
-  await setBookedNumberReminder(phoneNumber, scheduledAt, notes);
+  await setBookedNumberReminder(phoneNumber, scheduledAt, notes, choseInterestedOnCall);
 }

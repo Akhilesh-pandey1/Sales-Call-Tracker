@@ -6,6 +6,7 @@ async function bookScheduleAnswerAndClosePostCallDialog(
   scheduledAt: string | null,
   scheduleWasRefused: boolean,
   noteFromCall: string | null,
+  choseInterestedOnCall: boolean,
   closePostCallDialog: () => void,
 ): Promise<string | null> {
   const calledPhoneNumber =
@@ -15,6 +16,7 @@ async function bookScheduleAnswerAndClosePostCallDialog(
     scheduledAt,
     scheduleWasRefused,
     noteFromCall,
+    choseInterestedOnCall,
   );
   closePostCallDialog();
   return calledPhoneNumber;

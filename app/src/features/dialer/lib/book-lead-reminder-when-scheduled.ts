@@ -9,6 +9,7 @@ async function bookLeadReminderWhenScheduled(
   scheduledAt: string | null,
   scheduleWasRefused: boolean,
   noteFromCall: string | null,
+  choseInterestedOnCall: boolean,
 ): Promise<void> {
   const scheduledAtToBook = scheduleWasRefused ? null : scheduledAt;
   if (scheduledAtToBook === null) {
@@ -19,6 +20,7 @@ async function bookLeadReminderWhenScheduled(
     phoneNumber: leadPhoneNumber,
     scheduledAt: scheduledAtToBook,
     notes: noteFromCall,
+    interested: choseInterestedOnCall,
   };
   await setBookedLeadReminder(bookedLeadReminder);
 }

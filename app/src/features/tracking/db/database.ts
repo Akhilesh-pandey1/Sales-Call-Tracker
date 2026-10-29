@@ -61,11 +61,14 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
     lead_id INTEGER PRIMARY KEY,
     phone_number TEXT NOT NULL,
     scheduled_at TEXT NOT NULL,
-    notes TEXT
+    notes TEXT,
+    interested INTEGER NOT NULL DEFAULT 0
   )`;
   const tableInfoScheduledRemindersSql = 'PRAGMA TABLE_INFO (scheduled_reminders)';
   const addScheduledRemindersNotesColumnSql =
     'ALTER TABLE scheduled_reminders ADD COLUMN notes TEXT';
+  const addScheduledRemindersInterestedColumnSql =
+    'ALTER TABLE scheduled_reminders ADD COLUMN interested INTEGER NOT NULL DEFAULT 0';
   const createDoNotTrackTableSql = `CREATE TABLE IF NOT EXISTS do_not_track (
     phone_number TEXT PRIMARY KEY,
     created_at TEXT
@@ -100,6 +103,12 @@ async function prepareDatabase(database: SQLiteDatabase): Promise<SQLiteDatabase
     tableInfoScheduledRemindersSql,
     'notes',
     addScheduledRemindersNotesColumnSql,
+  );
+  await addColumnWhenMissing(
+    database,
+    tableInfoScheduledRemindersSql,
+    'interested',
+    addScheduledRemindersInterestedColumnSql,
   );
   await database.executeSql(createDoNotTrackTableSql);
   const addInterestedColumnSql =

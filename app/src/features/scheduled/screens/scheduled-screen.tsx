@@ -50,16 +50,44 @@ function formatBookedAtLabel(scheduledAt: string): string {
   return bookedAtLabel;
 }
 
+type BookingTagProps = {
+  label: string;
+  tagClassName: string;
+  labelClassName: string;
+};
+
+function BookingTag({ label, tagClassName, labelClassName }: BookingTagProps) {
+  return (
+    <View className={cn('shrink-0 rounded-full px-2 py-0.5', tagClassName)}>
+      <Text className={cn('text-[10px] font-semibold', labelClassName)}>
+        {label}
+      </Text>
+    </View>
+  );
+}
+
 function BookingStateBadge({ state }: { state: ScheduledBookingState }) {
   const isDue = state === 'Due';
   const badgeClasses = isDue ? 'bg-red-50' : 'bg-indigo-50';
   const badgeTextClasses = isDue ? 'text-destructive' : 'text-primary';
   return (
-    <View className={cn('shrink-0 rounded-full px-2 py-0.5', badgeClasses)}>
-      <Text className={cn('text-[10px] font-semibold', badgeTextClasses)}>
-        {state}
-      </Text>
-    </View>
+    <BookingTag
+      label={state}
+      tagClassName={badgeClasses}
+      labelClassName={badgeTextClasses}
+    />
+  );
+}
+
+function BookingInterestedTag() {
+  const interestedTagClasses = 'bg-emerald-50';
+  const interestedLabelClasses = 'text-accent';
+  return (
+    <BookingTag
+      label="Interested"
+      tagClassName={interestedTagClasses}
+      labelClassName={interestedLabelClasses}
+    />
   );
 }
 
@@ -126,6 +154,7 @@ function BookingRow({
             {displayedPhoneNumber}
           </Text>
           <BookingStateBadge state={booking.state} />
+          {booking.isInterested && <BookingInterestedTag />}
         </View>
         <Text className="mt-0.5 text-[11px] text-muted-foreground">
           {bookedAtLabel}

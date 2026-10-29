@@ -48,6 +48,10 @@ interface MyListNumberDbRow {
   called_at: string | null;
 }
 
+interface MyListFlagRow {
+  interested: number;
+}
+
 function toMyListNumber(dbRow: MyListNumberDbRow): MyListNumber {
   const status: MyListNumberStatus =
     dbRow.status === 'called' ? 'called' : 'left';
@@ -78,6 +82,18 @@ function toMyListNumbers(queryResult: ResultSet): MyListNumber[] {
   return listNumbers;
 }
 
+async function readNormalizedPhoneNumberOrNull(
+  phoneNumber: string,
+): Promise<string | null> {
+  const countryCode = await readStoredCountry();
+  if (countryCode === null) {
+    const noStoredCountry = null;
+    return noStoredCountry;
+  }
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode);
+  return normalizedPhoneNumber;
+}
+
 export async function readMyListNumbers(): Promise<MyListNumber[]> {
   const readListNumbersSql =
     'SELECT id, phone_number, status, interested, do_not_call, notes, called_at ' +
@@ -98,6 +114,26 @@ export async function readMyListNumbersByFlag(
   const queryResult = await runQuery(readListNumbersByFlagSql, []);
   const listNumbers = toMyListNumbers(queryResult);
   return listNumbers;
+}
+
+export async function readIsMyListNumberInterested(
+  phoneNumber: string,
+): Promise<boolean> {
+  const normalizedPhoneNumber = await readNormalizedPhoneNumberOrNull(phoneNumber);
+  if (normalizedPhoneNumber === null) {
+    const listNumberNotInterested = false;
+    return listNumberNotInterested;
+  }
+  const readInterestedFlagSql =
+    'SELECT interested FROM my_list_numbers WHERE phone_number = ?';
+  const queryResult = await runQuery(readInterestedFlagSql, [normalizedPhoneNumber]);
+  if (queryResult.rows.length === 0) {
+    const listNumberMissing = false;
+    return listNumberMissing;
+  }
+  const flagRow = queryResult.rows.item(0) as MyListFlagRow;
+  const isListNumberInterested = flagRow.interested === 1;
+  return isListNumberInterested;
 }
 
 export async function readMyListCounts(): Promise<MyListCounts> {
@@ -126,12 +162,11 @@ export async function markMyListNumberCalled(
   outcome: CallOutcome,
   calledAt: string,
 ): Promise<boolean> {
-  const countryCode = await readStoredCountry();
-  if (countryCode === null) {
+  const normalizedPhoneNumber = await readNormalizedPhoneNumberOrNull(phoneNumber);
+  if (normalizedPhoneNumber === null) {
     const listNumberNotMarked = false;
     return listNumberNotMarked;
   }
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode);
   const markNumberCalledSql = `UPDATE my_list_numbers
     SET status = 'called', interested = ?, do_not_call = ?, notes = ?, called_at = ?
     WHERE phone_number = ?`;

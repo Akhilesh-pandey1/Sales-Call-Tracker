@@ -47,6 +47,7 @@ async function bookLeadReminderAndClosePostCallDialog(
   scheduledAt: string | null,
   scheduleWasRefused: boolean,
   noteFromCall: string | null,
+  choseInterestedOnCall: boolean,
   closePostCallDialog: () => void,
 ): Promise<void> {
   await bookLeadReminderWhenScheduled(
@@ -55,6 +56,7 @@ async function bookLeadReminderAndClosePostCallDialog(
     scheduledAt,
     scheduleWasRefused,
     noteFromCall,
+    choseInterestedOnCall,
   );
   closePostCallDialog();
 }
@@ -75,6 +77,7 @@ export function useLeadPostCall(
       shouldContinueToNextLead: boolean,
       scheduleWasRefused: boolean,
       noteFromCall: string | null,
+      choseInterestedOnCall: boolean,
     ): Promise<void> => {
       const currentState = viewStateRef.current;
       if (currentState.kind !== 'finished') {
@@ -88,6 +91,7 @@ export function useLeadPostCall(
         scheduledAt,
         scheduleWasRefused,
         noteFromCall,
+        choseInterestedOnCall,
         closePostCallDialog,
       );
       if (!shouldContinueToNextLead) {
@@ -107,6 +111,7 @@ export function useLeadPostCall(
       scheduledAt: string | null,
       scheduleWasRefused: boolean,
       noteFromCall: string | null,
+      choseInterestedOnCall: boolean,
     ): Promise<void> => {
       const currentState = viewStateRef.current;
       if (currentState.kind !== 'finished') {
@@ -117,6 +122,7 @@ export function useLeadPostCall(
         scheduledAt,
         scheduleWasRefused,
         noteFromCall,
+        choseInterestedOnCall,
         closePostCallDialog,
       );
       await dialLead(currentState.lead);
@@ -145,6 +151,7 @@ export function useLeadPostCall(
             shouldContinueToNextLead,
             scheduleWasRefused,
             outcome.notes,
+            outcome.interested,
           ),
         scheduledAt,
         outcome,
@@ -161,7 +168,12 @@ export function useLeadPostCall(
       await submitTrackedPostCall(
         finishedCallId,
         (scheduleWasRefused: boolean) =>
-          continueAfterLeadCallAgain(scheduledAt, scheduleWasRefused, outcome.notes),
+          continueAfterLeadCallAgain(
+            scheduledAt,
+            scheduleWasRefused,
+            outcome.notes,
+            outcome.interested,
+          ),
         scheduledAt,
         outcome,
       );

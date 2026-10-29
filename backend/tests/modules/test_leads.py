@@ -52,6 +52,7 @@ def create_lead_fixture(
     scheduled_at: datetime | None = None,
     retry_locked_until: datetime | None = None,
     created_at: datetime | None = None,
+    notes: str | None = None,
 ) -> Lead:
     lead: Lead = Lead(
         phone_number=phone_number,
@@ -62,6 +63,7 @@ def create_lead_fixture(
         scheduled_by=scheduled_by,
         scheduled_at=scheduled_at,
         retry_locked_until=retry_locked_until,
+        notes=notes,
     )
     if created_at is not None:
         lead.created_at = created_at
@@ -609,6 +611,48 @@ def test_next_lead_newest_waiting_served(
     assert json_data["lead"]["id"] == newer_lead.id
     assert json_data["lead"]["phone_number"] == "+919876543231"
     assert json_data["lead"]["is_scheduled"] is False
+
+
+def test_next_lead_served_lead_carries_stored_note(
+    app: Flask, client: FlaskClient
+) -> None:
+    sales_token: str = "sales-token-note-1"
+    create_user_fixture(name="SalesNote1", role="salesperson", token=sales_token)
+
+    stored_note: str = "Asked to call after 6 pm"
+    noted_lead = create_lead_fixture(
+        phone_number="+919876543260",
+        status="waiting",
+        notes=stored_note,
+    )
+
+    headers: dict[str, str] = {"Authorization": f"Bearer {sales_token}"}
+    response = client.post("/api/leads/next", json={}, headers=headers)
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["lead"]["id"] == noted_lead.id
+    assert json_data["lead"]["notes"] == stored_note
+
+
+def test_next_lead_served_lead_note_is_null_when_none_stored(
+    app: Flask, client: FlaskClient
+) -> None:
+    sales_token: str = "sales-token-note-2"
+    create_user_fixture(name="SalesNote2", role="salesperson", token=sales_token)
+
+    unnoted_lead = create_lead_fixture(
+        phone_number="+919876543261",
+        status="waiting",
+    )
+
+    headers: dict[str, str] = {"Authorization": f"Bearer {sales_token}"}
+    response = client.post("/api/leads/next", json={}, headers=headers)
+
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["lead"]["id"] == unnoted_lead.id
+    assert json_data["lead"]["notes"] is None
 
 
 def test_next_lead_pool_empty(app: Flask, client: FlaskClient) -> None:

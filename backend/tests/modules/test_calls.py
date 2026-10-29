@@ -9,6 +9,7 @@ from backend.app.config.base import (
     MAX_CALL_AGE_DAYS,
     MAX_LEAD_ATTEMPTS,
     MAX_SCHEDULE_AHEAD_DAYS,
+    NOTE_MAX_LENGTH,
     RETRY_LOCK_HOURS,
 )
 from backend.app.core.security import hash_password
@@ -1395,6 +1396,88 @@ def test_lead_resolution_call_note_copied_onto_lead(
         assert refreshed_lead.notes == call_note
         assert refreshed_lead.interested is False
         assert refreshed_lead.do_not_call is False
+
+
+def test_sync_truncates_note_past_cap_on_call_row_and_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=0,
+        )
+
+        extra_characters: int = 50
+        long_note: str = "x" * (NOTE_MAX_LENGTH + extra_characters)
+        expected_truncated_note: str = "x" * NOTE_MAX_LENGTH
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-with-long-note",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 30,
+                    "notes": long_note,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        expected_code: int = 200
+        assert status_code == expected_code
+
+        saved_call: Call | None = db.session.get(Call, "call-with-long-note")
+        assert saved_call is not None
+        assert saved_call.notes == expected_truncated_note
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.notes == expected_truncated_note
+
+
+def test_sync_note_at_exact_cap_saves_unchanged_on_call_row_and_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=0,
+        )
+
+        full_note: str = "y" * NOTE_MAX_LENGTH
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-with-full-cap-note",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 30,
+                    "notes": full_note,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        expected_code: int = 200
+        assert status_code == expected_code
+
+        saved_call: Call | None = db.session.get(Call, "call-with-full-cap-note")
+        assert saved_call is not None
+        assert saved_call.notes == full_note
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.notes == full_note
 
 
 def test_lead_resolution_no_outcome_resolves_as_before_and_keeps_prior_label(

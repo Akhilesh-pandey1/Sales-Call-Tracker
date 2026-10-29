@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import logging
 from typing import Any
-from backend.app.config.base import MAX_CALL_AGE_DAYS
+from backend.app.config.base import MAX_CALL_AGE_DAYS, NOTE_MAX_LENGTH
 from backend.app.core.utils import (
     normalize_phone_number,
     now_utc,
@@ -69,11 +69,12 @@ def extract_call_outcome_choices(item: dict[str, Any]) -> tuple[bool, bool, str]
         return None
     empty_note: str = ""
     notes_text: str = raw_notes if raw_notes is not None else empty_note
+    truncated_note: str = notes_text[:NOTE_MAX_LENGTH]
 
     parsed_choices: tuple[bool, bool, str] = (
         interested_choice,
         do_not_call_choice,
-        notes_text,
+        truncated_note,
     )
     return parsed_choices
 

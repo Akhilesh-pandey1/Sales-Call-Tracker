@@ -16,6 +16,7 @@ export type ScheduledBooking = {
   leadId: number;
   phoneNumber: string;
   scheduledAt: string;
+  isInterested: boolean;
   state: ScheduledBookingState;
 };
 
@@ -38,6 +39,7 @@ function toScheduledBooking(
     leadId: reminder.leadId,
     phoneNumber: reminder.phoneNumber,
     scheduledAt: reminder.scheduledAt,
+    isInterested: reminder.interested,
     state: bookingState,
   };
   return scheduledBooking;

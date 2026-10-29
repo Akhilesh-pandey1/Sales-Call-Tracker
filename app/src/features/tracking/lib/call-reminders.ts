@@ -13,6 +13,7 @@ import { emitBookingsChanged } from './booking-change-events';
 import {
   deleteScheduledRemindersByLeadIdList,
   readAllScheduledReminders,
+  readIsMyListNumberInterested,
   saveScheduledReminder,
   type ScheduledReminder,
 } from '../db';
@@ -96,17 +97,36 @@ async function showReminderTriggerWhenFuture(
   await notifee.createTriggerNotification(reminderNotification, reminderTrigger);
 }
 
+async function resolveBookingInterest(
+  phoneNumber: string,
+  choseInterestedOnCall: boolean,
+): Promise<boolean> {
+  if (choseInterestedOnCall) {
+    return true;
+  }
+  const isListNumberInterested = await readIsMyListNumberInterested(phoneNumber);
+  return isListNumberInterested;
+}
+
 export async function setBookedLeadReminder(
   scheduledReminder: ScheduledReminder,
 ): Promise<void> {
-  await saveScheduledReminder(scheduledReminder);
+  const isInterestedBooking = await resolveBookingInterest(
+    scheduledReminder.phoneNumber,
+    scheduledReminder.interested,
+  );
+  const bookingWithInterestMark: ScheduledReminder = {
+    ...scheduledReminder,
+    interested: isInterestedBooking,
+  };
+  await saveScheduledReminder(bookingWithInterestMark);
   emitBookingsChanged();
   const areNotificationsEnabled = await readAreNotificationsEnabled();
   if (!areNotificationsEnabled) {
     return;
   }
   try {
-    await showReminderTriggerWhenFuture(scheduledReminder);
+    await showReminderTriggerWhenFuture(bookingWithInterestMark);
   } catch (reminderError: unknown) {
     console.warn(
       'The booking is saved. The reminder appears at the next app open.',
@@ -119,6 +139,7 @@ export async function setBookedNumberReminder(
   phoneNumber: string,
   scheduledAt: string,
   notes: string | null,
+  choseInterestedOnCall: boolean,
 ): Promise<void> {
   const numberReminderKey = toBookedNumberReminderKey(phoneNumber);
   const bookedNumberReminder: ScheduledReminder = {
@@ -126,6 +147,7 @@ export async function setBookedNumberReminder(
     phoneNumber,
     scheduledAt,
     notes,
+    interested: choseInterestedOnCall,
   };
   await setBookedLeadReminder(bookedNumberReminder);
 }

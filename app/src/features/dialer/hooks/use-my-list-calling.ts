@@ -61,6 +61,7 @@ export function useMyListCalling(): UseMyListCallingResult {
       const shouldContinueToNextCall = submitData.shouldContinueToNextLead;
       const scheduledAt = submitData.scheduledAt;
       const noteFromCall = submitData.outcome.notes;
+      const choseInterestedOnCall = submitData.outcome.interested;
       const finishMyListCall = async (
         launchedCall: LaunchedCall | null,
         scheduleWasRefused: boolean,
@@ -72,6 +73,7 @@ export function useMyListCalling(): UseMyListCallingResult {
           scheduledAt,
           scheduleWasRefused,
           noteFromCall,
+          choseInterestedOnCall,
         );
         closePostCallDialog();
         if (!shouldContinueToNextCall) {

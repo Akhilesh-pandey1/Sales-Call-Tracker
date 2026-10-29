@@ -39,6 +39,7 @@ export type { ScheduledReminder } from './scheduled-reminders-db';
 export {
   clearMyListNumbers,
   markMyListNumberCalled,
+  readIsMyListNumberInterested,
   readMyListCounts,
   readMyListNumbers,
   replaceMyListNumbers,

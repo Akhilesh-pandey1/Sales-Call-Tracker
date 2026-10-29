@@ -70,6 +70,7 @@ export function useDirectCall(): UseDirectCallResult {
     async (submitData: PostCallSubmitData): Promise<void> => {
       const scheduledAt = submitData.scheduledAt;
       const noteFromCall = submitData.outcome.notes;
+      const choseInterestedOnCall = submitData.outcome.interested;
       const finishDirectCall = async (
         launchedCall: LaunchedCall | null,
         scheduleWasRefused: boolean,
@@ -81,6 +82,7 @@ export function useDirectCall(): UseDirectCallResult {
           scheduledAt,
           scheduleWasRefused,
           noteFromCall,
+          choseInterestedOnCall,
         );
         closePostCallDialog();
       };

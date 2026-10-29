@@ -21,6 +21,7 @@ interface ReminderRowShape {
   phone_number: string;
   scheduled_at: string;
   notes: string | null;
+  interested: number;
 }
 
 function makeResultSet(rows: ReminderRowShape[]): ResultSet {
@@ -41,6 +42,7 @@ function makeScheduledReminder(
     phoneNumber: '+919876543210',
     scheduledAt: '2026-11-03T09:00:00.000Z',
     notes: null,
+    interested: false,
     ...reminderOverrides,
   };
 }
@@ -69,10 +71,31 @@ test('a booking saves with the note typed on its call', async () => {
     bookedPhoneNumber,
     bookedAt,
     bookingNote,
+    0,
   ]);
 });
 
-test('a rebooking replaces the row and holds only the new note', async () => {
+test('an interested booking saves its interested mark', async () => {
+  runQueryMock.mockResolvedValue(makeResultSet([]));
+  const booking = makeScheduledReminder({
+    leadId: bookedLeadId,
+    phoneNumber: bookedPhoneNumber,
+    scheduledAt: bookedAt,
+    interested: true,
+  });
+  await saveScheduledReminder(booking);
+  const [saveSql, saveParams] = runQueryMock.mock.calls[0];
+  expect(saveSql).toContain('interested');
+  expect(saveParams).toEqual([
+    bookedLeadId,
+    bookedPhoneNumber,
+    bookedAt,
+    null,
+    1,
+  ]);
+});
+
+test('a rebooking replaces the row and holds only the new marks', async () => {
   runQueryMock.mockResolvedValue(makeResultSet([]));
   await saveScheduledReminder(
     makeScheduledReminder({
@@ -80,6 +103,7 @@ test('a rebooking replaces the row and holds only the new note', async () => {
       phoneNumber: bookedPhoneNumber,
       scheduledAt: bookedAt,
       notes: bookingNote,
+      interested: true,
     }),
   );
   await saveScheduledReminder(
@@ -99,6 +123,7 @@ test('a rebooking replaces the row and holds only the new note', async () => {
     bookedPhoneNumber,
     rebookedAt,
     rebookingNote,
+    0,
   ]);
 });
 
@@ -125,10 +150,11 @@ test('a rebooking with no note leaves no note behind', async () => {
     bookedPhoneNumber,
     rebookedAt,
     null,
+    0,
   ]);
 });
 
-test('reads every booking with its note', async () => {
+test('reads every booking with its note and interested mark', async () => {
   runQueryMock.mockResolvedValue(
     makeResultSet([
       {
@@ -136,30 +162,35 @@ test('reads every booking with its note', async () => {
         phone_number: bookedPhoneNumber,
         scheduled_at: bookedAt,
         notes: bookingNote,
+        interested: 1,
       },
       {
         lead_id: keypadReminderKey,
         phone_number: '+919812345678',
         scheduled_at: rebookedAt,
         notes: null,
+        interested: 0,
       },
     ]),
   );
   const reminders = await readAllScheduledReminders();
   const [selectSql] = runQueryMock.mock.calls[0];
   expect(selectSql).toContain('notes');
+  expect(selectSql).toContain('interested');
   expect(reminders).toEqual([
     {
       leadId: bookedLeadId,
       phoneNumber: bookedPhoneNumber,
       scheduledAt: bookedAt,
       notes: bookingNote,
+      interested: true,
     },
     {
       leadId: keypadReminderKey,
       phoneNumber: '+919812345678',
       scheduledAt: rebookedAt,
       notes: null,
+      interested: false,
     },
   ]);
 });

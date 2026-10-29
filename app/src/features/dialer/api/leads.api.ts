@@ -5,6 +5,7 @@ export type ServedLead = {
   phone_number: string;
   attempt_count: number;
   is_scheduled: boolean;
+  notes?: string | null;
 };
 
 export type LeadScheduleRequest = {

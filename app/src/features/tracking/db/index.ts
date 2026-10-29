@@ -33,6 +33,7 @@ export type { SweptCall } from './call-sweep-db';
 export {
   deleteScheduledRemindersByLeadIdList,
   readAllScheduledReminders,
+  readBookingNoteByPhoneNumber,
   saveScheduledReminder,
 } from './scheduled-reminders-db';
 export type { ScheduledReminder } from './scheduled-reminders-db';
@@ -41,6 +42,7 @@ export {
   markMyListNumberCalled,
   readIsMyListNumberInterested,
   readMyListCounts,
+  readMyListNoteByPhoneNumber,
   readMyListNumbers,
   readMyListNumbersByFlag,
   replaceMyListNumbers,

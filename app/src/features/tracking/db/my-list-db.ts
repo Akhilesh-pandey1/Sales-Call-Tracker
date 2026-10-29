@@ -1,8 +1,7 @@
-import { readStoredCountry } from '@/features/auth';
-import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import type { CallOutcome } from '../types';
 import type { ResultSet, Transaction } from 'react-native-sqlite-storage';
 import { runInTransaction, runQuery } from './database';
+import { readNormalizedPhoneNumberOrNull } from './normalized-phone-number';
 
 export type MyListNumberStatus = 'left' | 'called';
 
@@ -52,6 +51,10 @@ interface MyListFlagRow {
   interested: number;
 }
 
+interface MyListNoteRow {
+  notes: string | null;
+}
+
 function toMyListNumber(dbRow: MyListNumberDbRow): MyListNumber {
   const status: MyListNumberStatus =
     dbRow.status === 'called' ? 'called' : 'left';
@@ -80,18 +83,6 @@ function toMyListNumbers(queryResult: ResultSet): MyListNumber[] {
     listNumbers.push(listNumber);
   }
   return listNumbers;
-}
-
-async function readNormalizedPhoneNumberOrNull(
-  phoneNumber: string,
-): Promise<string | null> {
-  const countryCode = await readStoredCountry();
-  if (countryCode === null) {
-    const noStoredCountry = null;
-    return noStoredCountry;
-  }
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode);
-  return normalizedPhoneNumber;
 }
 
 export async function readMyListNumbers(): Promise<MyListNumber[]> {
@@ -134,6 +125,25 @@ export async function readIsMyListNumberInterested(
   const flagRow = queryResult.rows.item(0) as MyListFlagRow;
   const isListNumberInterested = flagRow.interested === 1;
   return isListNumberInterested;
+}
+
+export async function readMyListNoteByPhoneNumber(
+  phoneNumber: string,
+): Promise<string | null> {
+  const normalizedPhoneNumber = await readNormalizedPhoneNumberOrNull(phoneNumber);
+  if (normalizedPhoneNumber === null) {
+    const listNumberNoteMissing = null;
+    return listNumberNoteMissing;
+  }
+  const readListNumberNoteSql =
+    'SELECT notes FROM my_list_numbers WHERE phone_number = ?';
+  const queryResult = await runQuery(readListNumberNoteSql, [normalizedPhoneNumber]);
+  if (queryResult.rows.length === 0) {
+    const listNumberMissing = null;
+    return listNumberMissing;
+  }
+  const noteRow = queryResult.rows.item(0) as MyListNoteRow;
+  return noteRow.notes;
 }
 
 export async function readMyListCounts(): Promise<MyListCounts> {

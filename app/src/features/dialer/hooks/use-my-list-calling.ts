@@ -5,6 +5,10 @@ import { bookScheduleAnswerAndClosePostCallDialog } from '../lib/book-schedule-a
 import type { LaunchedCall } from '../lib/call-launcher';
 import { launchTrackedCall, showCallLaunchErrorToast } from '../lib/call-launcher';
 import {
+  usePreCallNotes,
+  type UsePreCallNotesResult,
+} from './use-pre-call-notes';
+import {
   useTrackedCall,
   type UseTrackedCallResult,
 } from './use-tracked-call';
@@ -13,11 +17,12 @@ import type { PostCallSubmitData } from '../types';
 const noNumbersLeftMessage = 'No numbers left.';
 const nextCallStartFailedMessage = 'Could not start the next call. Try again.';
 
-export type UseMyListCallingResult = UseTrackedCallResult & {
-  startCalling: () => Promise<void>;
-  submitMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
-  callAgainMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
-};
+export type UseMyListCallingResult = UseTrackedCallResult &
+  UsePreCallNotesResult & {
+    startCalling: () => Promise<void>;
+    submitMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
+    callAgainMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
+  };
 
 export function useMyListCalling(): UseMyListCallingResult {
   const isDialInFlightRef = useRef(false);
@@ -43,6 +48,9 @@ export function useMyListCalling(): UseMyListCallingResult {
     [trackLaunchedCall],
   );
 
+  const preCallNotes = usePreCallNotes(dialPhoneNumber);
+  const { requestCallWithNotes } = preCallNotes;
+
   const startCalling = useCallback(async (): Promise<void> => {
     const isCallAlreadyRunning =
       isCallAwaitingHangUp() || isDialInFlightRef.current;
@@ -56,13 +64,13 @@ export function useMyListCalling(): UseMyListCallingResult {
         ToastAndroid.show(noNumbersLeftMessage, ToastAndroid.SHORT);
         return;
       }
-      await dialPhoneNumber(nextListPhoneNumber);
+      await requestCallWithNotes(nextListPhoneNumber);
     } catch {
       ToastAndroid.show(nextCallStartFailedMessage, ToastAndroid.SHORT);
     } finally {
       isDialInFlightRef.current = false;
     }
-  }, [dialPhoneNumber, isCallAwaitingHangUp]);
+  }, [isCallAwaitingHangUp, requestCallWithNotes]);
 
   const submitMyListPostCall = useCallback(
     async (submitData: PostCallSubmitData): Promise<void> => {
@@ -116,6 +124,7 @@ export function useMyListCalling(): UseMyListCallingResult {
 
   const myListCalling: UseMyListCallingResult = {
     ...trackedCallFlow,
+    ...preCallNotes,
     startCalling,
     submitMyListPostCall,
     callAgainMyListPostCall,

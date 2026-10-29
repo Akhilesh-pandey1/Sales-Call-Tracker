@@ -2,12 +2,17 @@ import { useCallback, useRef, useState } from 'react';
 import type { RefObject } from 'react';
 import { fetchNextLead, type ServedLead } from '../api/leads.api';
 import { launchTrackedCall, showCallLaunchErrorToast } from '../lib/call-launcher';
+import { readLeadPreCallNote } from '../lib/find-pre-call-note';
 import { readRequestErrorMessage } from '../lib/request-error';
 import type { AutomatedViewState } from './use-automated-calling';
 
 export type UseLeadLoadingResult = {
   startErrorMessage: string | null;
+  notedLead: ServedLead | null;
   dialLead: (lead: ServedLead) => Promise<void>;
+  requestDialLead: (lead: ServedLead) => Promise<void>;
+  confirmNotedLeadCall: () => Promise<void>;
+  cancelNotedLeadCall: () => void;
   startCalling: () => Promise<void>;
   dialCurrentLead: () => Promise<void>;
 };
@@ -17,6 +22,8 @@ export function useLeadLoading(
   updateViewState: (nextViewState: AutomatedViewState) => void,
 ): UseLeadLoadingResult {
   const [startErrorMessage, setStartErrorMessage] = useState<string | null>(null);
+  const [notedLead, setNotedLead] = useState<ServedLead | null>(null);
+  const notedLeadRef = useRef<ServedLead | null>(null);
   const isDialLaunchLockedRef = useRef(false);
 
   const dialLead = useCallback(
@@ -39,6 +46,45 @@ export function useLeadLoading(
     [updateViewState],
   );
 
+  const holdLeadForNotes = useCallback(
+    (lead: ServedLead): void => {
+      notedLeadRef.current = lead;
+      setNotedLead(lead);
+      updateViewState({ kind: 'ready', lead });
+    },
+    [updateViewState],
+  );
+
+  const requestDialLead = useCallback(
+    async (lead: ServedLead): Promise<void> => {
+      const leadPreCallNote = readLeadPreCallNote(lead.notes);
+      if (leadPreCallNote === null) {
+        await dialLead(lead);
+        return;
+      }
+      holdLeadForNotes(lead);
+    },
+    [dialLead, holdLeadForNotes],
+  );
+
+  const clearNotedLead = useCallback((): void => {
+    notedLeadRef.current = null;
+    setNotedLead(null);
+  }, []);
+
+  const confirmNotedLeadCall = useCallback(async (): Promise<void> => {
+    const notedLeadToDial = notedLeadRef.current;
+    if (notedLeadToDial === null) {
+      return;
+    }
+    clearNotedLead();
+    await dialLead(notedLeadToDial);
+  }, [clearNotedLead, dialLead]);
+
+  const cancelNotedLeadCall = useCallback((): void => {
+    clearNotedLead();
+  }, [clearNotedLead]);
+
   const startCalling = useCallback(async (): Promise<void> => {
     if (viewStateRef.current.kind === 'loading') {
       return;
@@ -53,24 +99,28 @@ export function useLeadLoading(
         updateViewState({ kind: 'empty' });
         return;
       }
-      await dialLead(servedLead);
+      await requestDialLead(servedLead);
     } catch (fetchError) {
       updateViewState({ kind: 'start' });
       setStartErrorMessage(readRequestErrorMessage(fetchError));
     }
-  }, [dialLead, updateViewState, viewStateRef]);
+  }, [requestDialLead, updateViewState, viewStateRef]);
 
   const dialCurrentLead = useCallback(async (): Promise<void> => {
     const currentState = viewStateRef.current;
     if (currentState.kind !== 'ready') {
       return;
     }
-    await dialLead(currentState.lead);
-  }, [dialLead, viewStateRef]);
+    await requestDialLead(currentState.lead);
+  }, [requestDialLead, viewStateRef]);
 
   const leadLoading: UseLeadLoadingResult = {
     startErrorMessage,
+    notedLead,
     dialLead,
+    requestDialLead,
+    confirmNotedLeadCall,
+    cancelNotedLeadCall,
     startCalling,
     dialCurrentLead,
   };

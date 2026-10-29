@@ -64,7 +64,8 @@ async function bookLeadReminderAndClosePostCallDialog(
 export function useLeadPostCall(
   viewStateRef: RefObject<AutomatedViewState>,
   updateViewState: (nextViewState: AutomatedViewState) => void,
-  dialLead: (nextLead: ServedLead) => Promise<void>,
+  requestDialLead: (nextLead: ServedLead) => Promise<void>,
+  dialLead: (redialLead: ServedLead) => Promise<void>,
 ): UseLeadPostCallResult {
   const { isPostCallDialogOpen, showDialog, closeDialog: closePostCallDialog } =
     useDialogVisibility();
@@ -102,9 +103,9 @@ export function useLeadPostCall(
         updateViewState({ kind: 'empty' });
         return;
       }
-      await dialLead(nextLead);
+      await requestDialLead(nextLead);
     },
-    [closePostCallDialog, dialLead, updateViewState, viewStateRef],
+    [closePostCallDialog, requestDialLead, updateViewState, viewStateRef],
   );
   const continueAfterLeadCallAgain = useCallback(
     async (
@@ -129,6 +130,7 @@ export function useLeadPostCall(
     },
     [closePostCallDialog, dialLead, viewStateRef],
   );
+
   const showPostCallDialog = useCallback((): void => {
     const finishedState = buildFinishedViewState(viewStateRef.current);
     if (finishedState === null) {

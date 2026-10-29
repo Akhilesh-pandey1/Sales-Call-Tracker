@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import type { ServedLead } from '../api/leads.api';
+
 import type { PostCallSubmitData } from '../types';
 import { useCallHangUpDetector } from './use-call-hang-up-detector';
 import { useLeadLoading } from './use-lead-loading';
@@ -17,8 +18,11 @@ export type AutomatedViewState =
 export type UseAutomatedCallingResult = PostCallDialogState & {
   viewState: AutomatedViewState;
   startErrorMessage: string | null;
+  notedLead: ServedLead | null;
   startCalling: () => Promise<void>;
   dialCurrentLead: () => Promise<void>;
+  confirmNotedLeadCall: () => Promise<void>;
+  cancelNotedLeadCall: () => void;
   submitPostCall: (submitData: PostCallSubmitData) => Promise<void>;
   callAgainPostCall: (submitData: PostCallSubmitData) => Promise<void>;
 };
@@ -32,12 +36,23 @@ export function useAutomatedCalling(): UseAutomatedCallingResult {
     setViewState(nextViewState);
   }, []);
 
-  const { startErrorMessage, dialLead, startCalling, dialCurrentLead } = useLeadLoading(
+  const {
+    startErrorMessage,
+    notedLead,
+    dialLead,
+    requestDialLead,
+    confirmNotedLeadCall,
+    cancelNotedLeadCall,
+    startCalling,
+    dialCurrentLead,
+  } = useLeadLoading(viewStateRef, updateViewState);
+
+  const leadPostCall = useLeadPostCall(
     viewStateRef,
     updateViewState,
+    requestDialLead,
+    dialLead,
   );
-
-  const leadPostCall = useLeadPostCall(viewStateRef, updateViewState, dialLead);
 
   useCallHangUpDetector(viewState.kind === 'dialing', leadPostCall.showPostCallDialog);
 
@@ -45,8 +60,11 @@ export function useAutomatedCalling(): UseAutomatedCallingResult {
     ...leadPostCall,
     viewState,
     startErrorMessage,
+    notedLead,
     startCalling,
     dialCurrentLead,
+    confirmNotedLeadCall,
+    cancelNotedLeadCall,
   };
   return automatedCalling;
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { ReactNode } from 'react';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui/button';
@@ -15,6 +16,8 @@ import { Keypad } from '../components/keypad';
 import { resolveKeypadCallRefusal } from '../lib/resolve-keypad-call-refusal';
 import { PermissionBanner } from '../components/permission-banner';
 import { PostCallDialog } from '../components/post-call-dialog';
+import { PreCallNotesDialog } from '../components/pre-call-notes-dialog';
+import { readLeadPreCallNote } from '../lib/find-pre-call-note';
 import {
   useAutomatedCalling,
   type UseAutomatedCallingResult,
@@ -308,29 +311,37 @@ function AutomatedView({
 }: {
   automatedCalling: UseAutomatedCallingResult;
 }) {
-  const { viewState } = automatedCalling;
+  const { viewState, notedLead } = automatedCalling;
+  const leadPendingNotesCall = notedLead === null
+    ? null
+    : {
+        phoneNumber: notedLead.phone_number,
+        note: readLeadPreCallNote(notedLead.notes) ?? '',
+      };
 
+  let automatedViewContent: ReactNode;
   if (viewState.kind === 'loading') {
-    return <AutomatedLoadingView loadingLabel={viewState.loadingLabel} />;
-  }
-  if (viewState.kind === 'empty') {
-    return <AutomatedEmptyView onTryAgain={automatedCalling.startCalling} />;
-  }
-  if (viewState.kind === 'start') {
-    return (
+    automatedViewContent = (
+      <AutomatedLoadingView loadingLabel={viewState.loadingLabel} />
+    );
+  } else if (viewState.kind === 'empty') {
+    automatedViewContent = (
+      <AutomatedEmptyView onTryAgain={automatedCalling.startCalling} />
+    );
+  } else if (viewState.kind === 'start') {
+    automatedViewContent = (
       <AutomatedStartView
         startErrorMessage={automatedCalling.startErrorMessage}
         onStartCalling={automatedCalling.startCalling}
       />
     );
-  }
-  if (viewState.kind === 'finished') {
+  } else if (viewState.kind === 'finished') {
     const postCallDialogKey = viewState.callId ?? 'idle-lead-post-call';
     const finishedPhoneNumber = formatInternationalPhoneNumber(
       viewState.lead.phone_number,
     );
 
-    return (
+    automatedViewContent = (
       <View className="flex-1">
         <AutomatedFinishedView phoneNumber={finishedPhoneNumber} />
         <PostCallDialog
@@ -347,15 +358,26 @@ function AutomatedView({
         />
       </View>
     );
+  } else {
+    automatedViewContent = (
+      <LeadCallCard
+        variant={viewState.kind}
+        phoneNumber={viewState.lead.phone_number}
+        attemptCount={viewState.lead.attempt_count}
+        onDialCurrentLead={automatedCalling.dialCurrentLead}
+      />
+    );
   }
 
   return (
-    <LeadCallCard
-      variant={viewState.kind}
-      phoneNumber={viewState.lead.phone_number}
-      attemptCount={viewState.lead.attempt_count}
-      onDialCurrentLead={automatedCalling.dialCurrentLead}
-    />
+    <View className="flex-1">
+      {automatedViewContent}
+      <PreCallNotesDialog
+        pendingNotesCall={leadPendingNotesCall}
+        onCall={automatedCalling.confirmNotedLeadCall}
+        onCancel={automatedCalling.cancelNotedLeadCall}
+      />
+    </View>
   );
 }
 
@@ -391,6 +413,11 @@ function MyListCallingView({
         errorMessage={myListCalling.postCallErrorMessage}
         onSubmit={myListCalling.submitMyListPostCall}
         onCallAgain={myListCalling.callAgainMyListPostCall}
+      />
+      <PreCallNotesDialog
+        pendingNotesCall={myListCalling.pendingNotesCall}
+        onCall={myListCalling.confirmNotesCall}
+        onCancel={myListCalling.cancelNotesCall}
       />
     </View>
   );

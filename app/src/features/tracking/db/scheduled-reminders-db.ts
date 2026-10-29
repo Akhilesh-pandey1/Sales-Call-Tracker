@@ -1,5 +1,6 @@
 import type { ResultSet } from 'react-native-sqlite-storage';
 import { runQuery } from './database';
+import { readNormalizedPhoneNumberOrNull } from './normalized-phone-number';
 
 export interface ScheduledReminder {
   leadId: number;
@@ -15,6 +16,10 @@ interface ScheduledReminderTableRow {
   scheduled_at: string;
   notes: string | null;
   interested: number;
+}
+
+interface BookingNoteTableRow {
+  notes: string | null;
 }
 
 function readReminderList(
@@ -55,6 +60,25 @@ export async function readAllScheduledReminders(): Promise<ScheduledReminder[]> 
   const result = await runQuery(selectAllScheduledRemindersSql, []);
   const reminders = readReminderList(result);
   return reminders;
+}
+
+export async function readBookingNoteByPhoneNumber(
+  phoneNumber: string,
+): Promise<string | null> {
+  const normalizedPhoneNumber = await readNormalizedPhoneNumberOrNull(phoneNumber);
+  if (normalizedPhoneNumber === null) {
+    const bookingNoteMissing = null;
+    return bookingNoteMissing;
+  }
+  const readBookingNoteSql =
+    'SELECT notes FROM scheduled_reminders WHERE phone_number = ?';
+  const result = await runQuery(readBookingNoteSql, [normalizedPhoneNumber]);
+  if (result.rows.length === 0) {
+    const bookingMissing = null;
+    return bookingMissing;
+  }
+  const noteRow = result.rows.item(0) as BookingNoteTableRow;
+  return noteRow.notes;
 }
 
 export async function deleteScheduledRemindersByLeadIdList(

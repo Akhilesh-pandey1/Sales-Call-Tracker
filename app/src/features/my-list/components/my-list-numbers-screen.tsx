@@ -3,7 +3,12 @@ import { FlatList, Pressable, View } from 'react-native';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { PostCallDialog, useDirectCall } from '@/features/dialer';
+import {
+  PostCallDialog,
+  PreCallNotesDialog,
+  useDirectCall,
+  usePreCallNotes,
+} from '@/features/dialer';
 import type { MyListFlag, MyListNumber } from '@/features/tracking';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
@@ -132,6 +137,7 @@ export function MyListNumbersScreen({
   const { listNumbers, errorMessage, reloadListNumbers } =
     useMyListNumbers(listFlag);
   const directCall = useDirectCall();
+  const preCallNotes = usePreCallNotes(directCall.startDirectCall);
   const download = useMyListDownload(listFlag);
   const flagLabel = getMyListFlagLabel(listFlag);
 
@@ -144,6 +150,7 @@ export function MyListNumbersScreen({
   const postCallDialogWhatsAppNumber = trackedCall === null
     ? null
     : trackedCall.phoneNumber;
+  const pendingNotesCall = preCallNotes.pendingNotesCall;
 
   const handleBackPress = () => onBackPress();
   const handleTryAgainPress = () => reloadListNumbers();
@@ -159,7 +166,7 @@ export function MyListNumbersScreen({
   ) : (
     <MyListNumbersList
       listNumbers={listNumbers}
-      onCallNumber={directCall.startDirectCall}
+      onCallNumber={preCallNotes.requestCallWithNotes}
       onOpenWhatsAppChat={openChosenWhatsAppChat}
     />
   );
@@ -182,6 +189,11 @@ export function MyListNumbersScreen({
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={directCall.submitDirectCall}
         onCallAgain={directCall.callAgainDirectCall}
+      />
+      <PreCallNotesDialog
+        pendingNotesCall={pendingNotesCall}
+        onCall={preCallNotes.confirmNotesCall}
+        onCancel={preCallNotes.cancelNotesCall}
       />
     </View>
   );

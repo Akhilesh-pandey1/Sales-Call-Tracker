@@ -9,7 +9,12 @@ import type { MainTabsParamList } from '@/app/navigation/main-tabs-param-list';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { PostCallDialog, useDirectCall } from '@/features/dialer';
+import {
+  PostCallDialog,
+  PreCallNotesDialog,
+  useDirectCall,
+  usePreCallNotes,
+} from '@/features/dialer';
 import { cn } from '@/lib/utils';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
@@ -304,6 +309,7 @@ export function ScheduledScreen() {
     removeBooking,
   } = useScheduledReminders();
   const directCall = useDirectCall();
+  const preCallNotes = usePreCallNotes(directCall.startDirectCall);
   const navigation =
     useNavigation<BottomTabNavigationProp<MainTabsParamList>>();
   const { top: topInset } = useSafeAreaInsets();
@@ -316,6 +322,7 @@ export function ScheduledScreen() {
   const postCallDialogWhatsAppNumber = trackedCall === null
     ? null
     : trackedCall.phoneNumber;
+  const pendingNotesCall = preCallNotes.pendingNotesCall;
 
   const handleReloadPress = () => reloadBookings();
   const handleOpenBooking = () => navigation.navigate('Dialer');
@@ -348,7 +355,7 @@ export function ScheduledScreen() {
       bookings={bookings}
       dueBookingCount={dueBookingCount}
       onOpenBooking={handleOpenBooking}
-      onCallPhoneNumber={directCall.startDirectCall}
+      onCallPhoneNumber={preCallNotes.requestCallWithNotes}
       onCopyPhoneNumber={handleCopyPhoneNumber}
       onOpenWhatsAppChat={handleOpenWhatsAppChat}
     />
@@ -368,6 +375,11 @@ export function ScheduledScreen() {
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={directCall.submitDirectCall}
         onCallAgain={directCall.callAgainDirectCall}
+      />
+      <PreCallNotesDialog
+        pendingNotesCall={pendingNotesCall}
+        onCall={preCallNotes.confirmNotesCall}
+        onCancel={preCallNotes.cancelNotesCall}
       />
     </View>
   );

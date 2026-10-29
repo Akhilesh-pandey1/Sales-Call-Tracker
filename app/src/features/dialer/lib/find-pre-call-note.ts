@@ -36,3 +36,12 @@ export function readLeadPreCallNote(
 ): string | null {
   return readStoredNoteOrNone(leadNotes ?? null);
 }
+
+export async function findPreCallNotes(
+  phoneNumbers: string[],
+): Promise<(string | null)[]> {
+  const preCallNotes = await Promise.all(
+    phoneNumbers.map(phoneNumber => findPreCallNote(phoneNumber)),
+  );
+  return preCallNotes;
+}

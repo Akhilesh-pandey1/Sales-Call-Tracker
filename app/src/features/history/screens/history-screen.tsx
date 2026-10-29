@@ -6,6 +6,7 @@ import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import {
   CopyNumberButton,
+  NoteDetailsDialog,
   PostCallDialog,
   PreCallNotesDialog,
   useDirectCall,
@@ -13,7 +14,9 @@ import {
   type PostCallSubmitData,
 } from '@/features/dialer';
 import { cn } from '@/lib/utils';
+import { NoteInfoButton } from '@/shared/components/note-info-button';
 import { RowActionButton } from '@/shared/components/row-action-button';
+import { useViewedNumberNote } from '@/shared/hooks/use-viewed-number-note';
 import { formatCalledAtLabel } from '@/shared/utils/format-called-at';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
@@ -67,12 +70,14 @@ type CallRowProps = {
   callItem: CallHistoryItem;
   onCallNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
+  onOpenNumberNote: (phoneNumber: string, note: string) => void;
 };
 
 function CallRow({
   callItem,
   onCallNumber,
   onOpenWhatsAppChat,
+  onOpenNumberNote,
 }: CallRowProps) {
   const displayedPhoneNumber = formatInternationalPhoneNumber(
     callItem.phoneNumber,
@@ -85,6 +90,13 @@ function CallRow({
   const callResultTextClasses = isCallConnected
     ? 'text-accent'
     : 'text-muted-foreground';
+  const callNote = callItem.note;
+  const noteInfoButton = callNote === null ? null : (
+    <NoteInfoButton
+      displayedPhoneNumber={displayedPhoneNumber}
+      onPress={() => onOpenNumberNote(callItem.phoneNumber, callNote)}
+    />
+  );
 
   const handleRowPress = () => onCallNumber(callItem.phoneNumber);
   const handleWhatsAppPress = () => onOpenWhatsAppChat(callItem.phoneNumber);
@@ -103,9 +115,12 @@ function CallRow({
           </Text>
           {callItem.hasActiveBooking ? <ScheduledBadge /> : null}
         </View>
-        <Text className="mt-0.5 text-[11px] text-muted-foreground">
-          {directionAndCalledAtLabel}
-        </Text>
+        <View className="mt-0.5 flex-row items-center gap-1.5">
+          <Text className="text-[11px] text-muted-foreground">
+            {directionAndCalledAtLabel}
+          </Text>
+          {noteInfoButton}
+        </View>
         <Text
           className={cn(
             'mt-0.5 text-[10px] font-semibold',
@@ -222,6 +237,7 @@ type CallsListProps = {
   onLoadMorePress: () => void;
   onCallNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
+  onOpenNumberNote: (phoneNumber: string, note: string) => void;
 };
 
 function CallsList({
@@ -230,6 +246,7 @@ function CallsList({
   onLoadMorePress,
   onCallNumber,
   onOpenWhatsAppChat,
+  onOpenNumberNote,
 }: CallsListProps) {
   const loadMoreFooter = canLoadMore ? (
     <LoadMoreFooter onLoadMorePress={onLoadMorePress} />
@@ -245,6 +262,7 @@ function CallsList({
           callItem={item}
           onCallNumber={onCallNumber}
           onOpenWhatsAppChat={onOpenWhatsAppChat}
+          onOpenNumberNote={onOpenNumberNote}
         />
       )}
     />
@@ -275,6 +293,7 @@ export function HistoryScreen() {
     ? null
     : historyTrackedCall.phoneNumber;
   const pendingNotesCall = preCallNotes.pendingNotesCall;
+  const numberNote = useViewedNumberNote();
 
   const handleReloadHistory = () => reloadHistory();
   const handleCallHistoryNumber = async (
@@ -309,6 +328,7 @@ export function HistoryScreen() {
       onLoadMorePress={loadMoreHistory}
       onCallNumber={handleCallHistoryNumber}
       onOpenWhatsAppChat={handleOpenWhatsAppChat}
+      onOpenNumberNote={numberNote.openNumberNote}
     />
   );
 
@@ -331,6 +351,10 @@ export function HistoryScreen() {
         pendingNotesCall={pendingNotesCall}
         onCall={preCallNotes.confirmNotesCall}
         onCancel={preCallNotes.cancelNotesCall}
+      />
+      <NoteDetailsDialog
+        viewedNumberNote={numberNote.viewedNumberNote}
+        onClose={numberNote.closeNumberNote}
       />
     </View>
   );

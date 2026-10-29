@@ -10,6 +10,7 @@ import {
   readBookingNoteByPhoneNumber,
   readMyListNoteByPhoneNumber,
 } from '@/features/tracking';
+import { findPreCallNotes } from './find-pre-call-note';
 
 const readMyListNoteMock = jest.mocked(readMyListNoteByPhoneNumber);
 const readBookingNoteMock = jest.mocked(readBookingNoteByPhoneNumber);
@@ -89,4 +90,38 @@ test('a served lead with no note reads no note', () => {
 test('a blank served-lead note reads no note', () => {
   const leadNote = readLeadPreCallNote(makeServedLead('  ').notes);
   expect(leadNote).toBe(null);
+});
+
+test('many numbers read their notes in the same order', async () => {
+  const firstPhoneNumber = '+919876543210';
+  const secondPhoneNumber = '+918123456789';
+  readMyListNoteMock.mockImplementation(phoneNumber => {
+    if (phoneNumber === firstPhoneNumber) {
+      return Promise.resolve(myListNote);
+    }
+    return Promise.resolve(null);
+  });
+  readBookingNoteMock.mockImplementation(phoneNumber => {
+    if (phoneNumber === secondPhoneNumber) {
+      return Promise.resolve(bookingNoteText);
+    }
+    return Promise.resolve(null);
+  });
+  const preCallNotes = await findPreCallNotes([
+    firstPhoneNumber,
+    secondPhoneNumber,
+  ]);
+  expect(preCallNotes).toEqual([myListNote, bookingNoteText]);
+});
+
+test('a number with no note reads null among found notes', async () => {
+  readMyListNoteMock.mockResolvedValue(null);
+  readBookingNoteMock.mockResolvedValue(null);
+  const preCallNotes = await findPreCallNotes([calledPhoneNumber]);
+  expect(preCallNotes).toEqual([null]);
+});
+
+test('no numbers read no notes', async () => {
+  const preCallNotes = await findPreCallNotes([]);
+  expect(preCallNotes).toEqual([]);
 });

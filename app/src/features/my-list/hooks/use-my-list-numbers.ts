@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { findPreCallNotes } from '@/features/dialer';
 import {
   readMyListNumbersByFlag,
   subscribeToMyListChanged,
@@ -7,14 +8,32 @@ import {
 } from '@/features/tracking';
 import { sortListNumbersNewestCalledFirst } from '../lib/sort-list-numbers-newest-called-first';
 
+export type MyListNumberWithNote = MyListNumber & {
+  note: string | null;
+};
+
 type UseMyListNumbersResult = {
-  listNumbers: MyListNumber[];
+  listNumbers: MyListNumberWithNote[];
   errorMessage: string | null;
   reloadListNumbers: () => Promise<void>;
 };
 
+function attachNotesToListNumbers(
+  listNumbers: MyListNumber[],
+  listNumberNotes: (string | null)[],
+): MyListNumberWithNote[] {
+  const listNumbersWithNotes = listNumbers.map((listNumber, listNumberIndex) => {
+    const listNumberWithNote: MyListNumberWithNote = {
+      ...listNumber,
+      note: listNumberNotes[listNumberIndex],
+    };
+    return listNumberWithNote;
+  });
+  return listNumbersWithNotes;
+}
+
 export function useMyListNumbers(listFlag: MyListFlag): UseMyListNumbersResult {
-  const [listNumbers, setListNumbers] = useState<MyListNumber[]>([]);
+  const [listNumbers, setListNumbers] = useState<MyListNumberWithNote[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const latestRequestIdRef = useRef(0);
 
@@ -25,12 +44,19 @@ export function useMyListNumbers(listFlag: MyListFlag): UseMyListNumbersResult {
 
     try {
       const flagListNumbers = await readMyListNumbersByFlag(listFlag);
-      const sortedListNumbers = sortListNumbersNewestCalledFirst(
-        flagListNumbers,
+      const listNumberNotes = await findPreCallNotes(
+        flagListNumbers.map(listNumber => listNumber.phoneNumber),
       );
       if (latestRequestIdRef.current !== requestId) {
         return;
       }
+      const listNumbersWithNotes = attachNotesToListNumbers(
+        flagListNumbers,
+        listNumberNotes,
+      );
+      const sortedListNumbers = sortListNumbersNewestCalledFirst(
+        listNumbersWithNotes,
+      );
       setListNumbers(sortedListNumbers);
     } catch {
       if (latestRequestIdRef.current !== requestId) {

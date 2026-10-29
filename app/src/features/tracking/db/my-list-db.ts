@@ -1,10 +1,12 @@
 import { readStoredCountry } from '@/features/auth';
 import { normalizePhoneNumber } from '@/shared/utils/phone-formatter';
 import type { CallOutcome } from '../types';
-import type { Transaction } from 'react-native-sqlite-storage';
+import type { ResultSet, Transaction } from 'react-native-sqlite-storage';
 import { runInTransaction, runQuery } from './database';
 
 export type MyListNumberStatus = 'left' | 'called';
+
+export type MyListFlag = 'interested' | 'do-not-call';
 
 export type MyListNumber = {
   id: number;
@@ -70,11 +72,7 @@ export async function clearMyListNumbers(): Promise<void> {
   await runQuery(clearListNumbersSql, []);
 }
 
-export async function readMyListNumbers(): Promise<MyListNumber[]> {
-  const readListNumbersSql =
-    'SELECT id, phone_number, status, interested, do_not_call, notes, called_at ' +
-    'FROM my_list_numbers ORDER BY id ASC';
-  const queryResult = await runQuery(readListNumbersSql, []);
+function toMyListNumbers(queryResult: ResultSet): MyListNumber[] {
   const listNumbers: MyListNumber[] = [];
   for (let rowIndex = 0; rowIndex < queryResult.rows.length; rowIndex += 1) {
     const dbRow = queryResult.rows.item(rowIndex) as MyListNumberDbRow;
@@ -94,6 +92,28 @@ async function readNormalizedPhoneNumberOrNull(
   }
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode);
   return normalizedPhoneNumber;
+}
+
+export async function readMyListNumbers(): Promise<MyListNumber[]> {
+  const readListNumbersSql =
+    'SELECT id, phone_number, status, interested, do_not_call, notes, called_at ' +
+    'FROM my_list_numbers ORDER BY id ASC';
+  const queryResult = await runQuery(readListNumbersSql, []);
+  const listNumbers = toMyListNumbers(queryResult);
+  return listNumbers;
+}
+
+export async function readMyListNumbersByFlag(
+  listFlag: MyListFlag,
+): Promise<MyListNumber[]> {
+  const flagColumnName =
+    listFlag === 'interested' ? 'interested' : 'do_not_call';
+  const readListNumbersByFlagSql =
+    'SELECT id, phone_number, status, interested, do_not_call, notes, called_at ' +
+    `FROM my_list_numbers WHERE ${flagColumnName} = 1 ORDER BY id ASC`;
+  const queryResult = await runQuery(readListNumbersByFlagSql, []);
+  const listNumbers = toMyListNumbers(queryResult);
+  return listNumbers;
 }
 
 export async function readIsMyListNumberInterested(

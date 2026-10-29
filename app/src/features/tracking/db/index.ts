@@ -42,6 +42,12 @@ export {
   readIsMyListNumberInterested,
   readMyListCounts,
   readMyListNumbers,
+  readMyListNumbersByFlag,
   replaceMyListNumbers,
 } from './my-list-db';
-export type { MyListCounts, MyListNumber, MyListNumberStatus } from './my-list-db';
+export type {
+  MyListCounts,
+  MyListFlag,
+  MyListNumber,
+  MyListNumberStatus,
+} from './my-list-db';

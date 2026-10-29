@@ -99,11 +99,7 @@ async function showReminderTriggerWhenFuture(
 export async function setBookedLeadReminder(
   scheduledReminder: ScheduledReminder,
 ): Promise<void> {
-  await saveScheduledReminder(
-    scheduledReminder.leadId,
-    scheduledReminder.phoneNumber,
-    scheduledReminder.scheduledAt,
-  );
+  await saveScheduledReminder(scheduledReminder);
   emitBookingsChanged();
   const areNotificationsEnabled = await readAreNotificationsEnabled();
   if (!areNotificationsEnabled) {
@@ -122,12 +118,14 @@ export async function setBookedLeadReminder(
 export async function setBookedNumberReminder(
   phoneNumber: string,
   scheduledAt: string,
+  notes: string | null,
 ): Promise<void> {
   const numberReminderKey = toBookedNumberReminderKey(phoneNumber);
   const bookedNumberReminder: ScheduledReminder = {
     leadId: numberReminderKey,
     phoneNumber,
     scheduledAt,
+    notes,
   };
   await setBookedLeadReminder(bookedNumberReminder);
 }

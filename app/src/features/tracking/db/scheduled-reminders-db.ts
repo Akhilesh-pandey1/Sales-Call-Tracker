@@ -5,12 +5,14 @@ export interface ScheduledReminder {
   leadId: number;
   phoneNumber: string;
   scheduledAt: string;
+  notes: string | null;
 }
 
 interface ScheduledReminderTableRow {
   lead_id: number;
   phone_number: string;
   scheduled_at: string;
+  notes: string | null;
 }
 
 function readReminderList(
@@ -23,6 +25,7 @@ function readReminderList(
       leadId: row.lead_id,
       phoneNumber: row.phone_number,
       scheduledAt: row.scheduled_at,
+      notes: row.notes,
     };
     reminders.push(reminder);
   }
@@ -30,18 +33,21 @@ function readReminderList(
 }
 
 export async function saveScheduledReminder(
-  leadId: number,
-  phoneNumber: string,
-  scheduledAt: string,
+  scheduledReminder: ScheduledReminder,
 ): Promise<void> {
   const saveScheduledReminderSql = `INSERT OR REPLACE INTO scheduled_reminders
-    (lead_id, phone_number, scheduled_at) VALUES (?, ?, ?)`;
-  await runQuery(saveScheduledReminderSql, [leadId, phoneNumber, scheduledAt]);
+    (lead_id, phone_number, scheduled_at, notes) VALUES (?, ?, ?, ?)`;
+  await runQuery(saveScheduledReminderSql, [
+    scheduledReminder.leadId,
+    scheduledReminder.phoneNumber,
+    scheduledReminder.scheduledAt,
+    scheduledReminder.notes,
+  ]);
 }
 
 export async function readAllScheduledReminders(): Promise<ScheduledReminder[]> {
   const selectAllScheduledRemindersSql =
-    'SELECT lead_id, phone_number, scheduled_at FROM scheduled_reminders';
+    'SELECT lead_id, phone_number, scheduled_at, notes FROM scheduled_reminders';
   const result = await runQuery(selectAllScheduledRemindersSql, []);
   const reminders = readReminderList(result);
   return reminders;

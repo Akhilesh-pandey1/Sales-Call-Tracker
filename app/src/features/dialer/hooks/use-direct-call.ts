@@ -69,11 +69,19 @@ export function useDirectCall(): UseDirectCallResult {
   const submitDirectCall = useCallback(
     async (submitData: PostCallSubmitData): Promise<void> => {
       const scheduledAt = submitData.scheduledAt;
+      const noteFromCall = submitData.outcome.notes;
       const finishDirectCall = async (
         launchedCall: LaunchedCall | null,
         scheduleWasRefused: boolean,
       ): Promise<void> => {
-        await bookNumberWhenScheduled(launchedCall, scheduledAt, scheduleWasRefused);
+        const calledPhoneNumber =
+          launchedCall === null ? null : launchedCall.phoneNumber;
+        await bookNumberWhenScheduled(
+          calledPhoneNumber,
+          scheduledAt,
+          scheduleWasRefused,
+          noteFromCall,
+        );
         closePostCallDialog();
       };
       await submitTrackedCall(submitData, finishDirectCall);

@@ -1,5 +1,4 @@
 import { Clock, Copy, MessageCircle, Phone, RotateCw } from 'lucide-react-native';
-import type { LucideIcon } from 'lucide-react-native';
 import { ActivityIndicator, FlatList, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui/button';
@@ -12,33 +11,14 @@ import {
   type PostCallSubmitData,
 } from '@/features/dialer';
 import { cn } from '@/lib/utils';
+import { RowActionButton } from '@/shared/components/row-action-button';
+import { formatCalledAtLabel } from '@/shared/utils/format-called-at';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
 import {
   useCallHistory,
   type CallHistoryItem,
 } from '../hooks/use-call-history';
-
-const callDayMonthFormatter = new Intl.DateTimeFormat('en-GB', {
-  day: 'numeric',
-  month: 'short',
-});
-const callTimeFormatter = new Intl.DateTimeFormat('en-US', {
-  hour: 'numeric',
-  minute: '2-digit',
-  hour12: true,
-});
-
-function formatCalledAtLabel(callAt: string): string {
-  const callDate = new Date(callAt);
-  if (Number.isNaN(callDate.getTime())) {
-    return callAt;
-  }
-  const dayMonthLabel: string = callDayMonthFormatter.format(callDate);
-  const timeLabel: string = callTimeFormatter.format(callDate);
-  const calledAtLabel = `${dayMonthLabel} · ${timeLabel}`;
-  return calledAtLabel;
-}
 
 function formatDirectionMark(direction: CallHistoryItem['direction']): string {
   const incomingDirectionMark = 'In';
@@ -78,31 +58,6 @@ function ScheduledBadge() {
     <View className="shrink-0 rounded-full bg-indigo-50 px-2 py-0.5">
       <Text className="text-[10px] font-semibold text-primary">Scheduled</Text>
     </View>
-  );
-}
-
-type CallHistoryActionButtonProps = {
-  accessibilityLabel: string;
-  icon: LucideIcon;
-  iconClassName: string;
-  onPress: () => void;
-};
-
-function CallHistoryActionButton({
-  accessibilityLabel,
-  icon,
-  iconClassName,
-  onPress,
-}: CallHistoryActionButtonProps) {
-  return (
-    <Pressable
-      accessibilityLabel={accessibilityLabel}
-      accessibilityRole="button"
-      onPress={onPress}
-      className="h-8 w-8 items-center justify-center rounded-lg border border-border bg-card active:bg-muted"
-    >
-      <Icon as={icon} size={16} className={iconClassName} />
-    </Pressable>
   );
 }
 
@@ -159,7 +114,7 @@ function CallRow({
         </Text>
       </View>
       <View className="shrink-0 flex-row items-center gap-1">
-        <CallHistoryActionButton
+        <RowActionButton
           accessibilityLabel={`Call ${displayedPhoneNumber}`}
           icon={Phone}
           iconClassName="text-primary"
@@ -171,7 +126,7 @@ function CallRow({
         >
           <Icon as={Copy} size={16} className="text-muted-foreground" />
         </CopyNumberButton>
-        <CallHistoryActionButton
+        <RowActionButton
           accessibilityLabel={`WhatsApp ${displayedPhoneNumber}`}
           icon={MessageCircle}
           iconClassName="text-accent"

@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { backspaceLongPressClearMs } from '@/config/app-config';
-import { MyListView } from '@/features/my-list';
-import { usePermissions } from '@/features/tracking';
+import { MyListView, MyListNumbersScreen } from '@/features/my-list';
+import { usePermissions, type MyListFlag } from '@/features/tracking';
 import { cn } from '@/lib/utils';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { ClipboardPaste, Delete, Inbox, Phone } from 'lucide-react-native';
@@ -332,7 +332,13 @@ function AutomatedView({
   );
 }
 
-function MyListCallingView({ myListCalling }: { myListCalling: UseMyListCallingResult }) {
+function MyListCallingView({
+  myListCalling,
+  onOpenListFlag,
+}: {
+  myListCalling: UseMyListCallingResult;
+  onOpenListFlag: (listFlag: MyListFlag) => void;
+}) {
   const trackedCall = myListCalling.trackedCall;
   const postCallDialogKey = trackedCall?.callId ?? 'idle-my-list-post-call';
   const postCallDialogPhoneNumber = trackedCall === null
@@ -344,7 +350,10 @@ function MyListCallingView({ myListCalling }: { myListCalling: UseMyListCallingR
 
   return (
     <View className="flex-1">
-      <MyListView onStartCalling={myListCalling.startCalling} />
+      <MyListView
+        onStartCalling={myListCalling.startCalling}
+        onOpenListFlag={onOpenListFlag}
+      />
       <PostCallDialog
         key={postCallDialogKey}
         variant="my-list"
@@ -362,6 +371,7 @@ function MyListCallingView({ myListCalling }: { myListCalling: UseMyListCallingR
 export function DialerScreen() {
   const missingPermissions = usePermissions();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
+  const [openListFlag, setOpenListFlag] = useState<MyListFlag | null>(null);
 
   const dialer = useDialer();
   const directCall = useDirectCall();
@@ -369,18 +379,32 @@ export function DialerScreen() {
   const myListCalling = useMyListCalling();
   const { top: topInset } = useSafeAreaInsets();
 
+  const handleCloseListScreen = () => setOpenListFlag(null);
+
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: topInset }}>
       <View className="px-3 pt-3">
         <PermissionBanner missingPermissions={missingPermissions} />
       </View>
-      <DialerSubTabs activeSubTab={activeSubTab} onSelectSubTab={setActiveSubTab} />
-      {activeSubTab === 'keypad' ? (
-        <KeypadView dialer={dialer} directCall={directCall} />
-      ) : activeSubTab === 'automated' ? (
-        <AutomatedView automatedCalling={automatedCalling} />
+      {openListFlag === null ? (
+        <>
+          <DialerSubTabs activeSubTab={activeSubTab} onSelectSubTab={setActiveSubTab} />
+          {activeSubTab === 'keypad' ? (
+            <KeypadView dialer={dialer} directCall={directCall} />
+          ) : activeSubTab === 'automated' ? (
+            <AutomatedView automatedCalling={automatedCalling} />
+          ) : (
+            <MyListCallingView
+              myListCalling={myListCalling}
+              onOpenListFlag={setOpenListFlag}
+            />
+          )}
+        </>
       ) : (
-        <MyListCallingView myListCalling={myListCalling} />
+        <MyListNumbersScreen
+          listFlag={openListFlag}
+          onBackPress={handleCloseListScreen}
+        />
       )}
     </View>
   );

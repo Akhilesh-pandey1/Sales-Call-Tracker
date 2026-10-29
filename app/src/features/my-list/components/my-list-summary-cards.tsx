@@ -2,8 +2,8 @@ import { Text } from '@/components/ui/text';
 import { Icon } from '@/components/ui/icon';
 import type { LucideIcon } from 'lucide-react-native';
 import { Ban, CircleCheck, List, Phone } from 'lucide-react-native';
-import { View } from 'react-native';
-import type { MyListCounts } from '@/features/tracking';
+import { Pressable, View } from 'react-native';
+import type { MyListCounts, MyListFlag } from '@/features/tracking';
 
 type SummaryCardProps = {
   label: string;
@@ -12,6 +12,7 @@ type SummaryCardProps = {
   count: number;
   countClass: string;
   subLine: string;
+  onPress?: () => void;
 };
 
 function SummaryCard({
@@ -21,25 +22,49 @@ function SummaryCard({
   count,
   countClass,
   subLine,
+  onPress,
 }: SummaryCardProps) {
   const countClassName: string = `mt-2 text-2xl font-bold tabular-nums tracking-tight ${countClass}`;
-  return (
-    <View className="flex-1 rounded-2xl border border-border bg-card p-4 shadow-sm shadow-black/5">
+  const cardClassName: string =
+    'flex-1 rounded-2xl border border-border bg-card p-4 shadow-sm shadow-black/5 active:bg-muted';
+  const cardContent = (
+    <>
       <View className="flex-row items-center justify-between gap-2">
         <Text className="text-sm font-medium text-muted-foreground">{label}</Text>
         <Icon as={icon} size={20} className={iconClass} />
       </View>
       <Text className={countClassName}>{count}</Text>
       <Text className="mt-1 text-xs text-muted-foreground">{subLine}</Text>
-    </View>
+    </>
+  );
+
+  if (onPress === undefined) {
+    return <View className={cardClassName}>{cardContent}</View>;
+  }
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={`Open ${label} list`}
+      onPress={onPress}
+      className={cardClassName}
+    >
+      {cardContent}
+    </Pressable>
   );
 }
 
 type MyListSummaryCardsProps = {
   counts: MyListCounts;
+  onOpenListFlag?: (listFlag: MyListFlag) => void;
 };
 
-export function MyListSummaryCards({ counts }: MyListSummaryCardsProps) {
+export function MyListSummaryCards({
+  counts,
+  onOpenListFlag,
+}: MyListSummaryCardsProps) {
+  const handleInterestedPress = () => onOpenListFlag?.('interested');
+  const handleDoNotCallPress = () => onOpenListFlag?.('do-not-call');
+
   return (
     <View>
       <Text className="text-base font-bold tracking-tight">List summary</Text>
@@ -70,6 +95,7 @@ export function MyListSummaryCards({ counts }: MyListSummaryCardsProps) {
             count={counts.interestedCount}
             countClass="text-accent"
             subLine="wants a call back"
+            onPress={onOpenListFlag === undefined ? undefined : handleInterestedPress}
           />
           <SummaryCard
             label="Do not call"
@@ -78,6 +104,7 @@ export function MyListSummaryCards({ counts }: MyListSummaryCardsProps) {
             count={counts.doNotCallCount}
             countClass="text-destructive"
             subLine="never call again"
+            onPress={onOpenListFlag === undefined ? undefined : handleDoNotCallPress}
           />
         </View>
       </View>

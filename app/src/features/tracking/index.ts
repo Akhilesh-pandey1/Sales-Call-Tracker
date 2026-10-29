@@ -29,7 +29,15 @@ export {
   readDoNotTrackNumbers,
   readMyListCounts,
   readMyListNumbers,
+  readMyListNumbersByFlag,
   replaceMyListNumbers,
 } from './db';
-export type { CallHistoryEntry, MyListCounts, MyListNumber, MyListNumberStatus, ScheduledReminder } from './db';
+export type {
+  CallHistoryEntry,
+  MyListCounts,
+  MyListFlag,
+  MyListNumber,
+  MyListNumberStatus,
+  ScheduledReminder,
+} from './db';
 export type { CallOutcome } from './types';

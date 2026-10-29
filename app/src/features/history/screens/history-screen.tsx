@@ -321,6 +321,7 @@ export function HistoryScreen() {
         isSubmitting={directCall.isSubmittingPostCall}
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={handleSubmitHistoryPostCall}
+        onCallAgain={directCall.callAgainDirectCall}
       />
     </View>
   );

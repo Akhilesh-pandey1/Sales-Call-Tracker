@@ -1,10 +1,7 @@
 import { useCallback } from 'react';
 import type { RefObject } from 'react';
-import {
-  setBookedLeadReminder,
-  type ScheduledReminder,
-} from '@/features/tracking';
 import { fetchNextLead, type LeadScheduleRequest, type ServedLead } from '../api/leads.api';
+import { bookLeadReminderWhenScheduled } from '../lib/book-lead-reminder-when-scheduled';
 import type { PostCallSubmitData } from '../types';
 import { useDialogVisibility } from './use-dialog-visibility';
 import type { AutomatedViewState } from './use-automated-calling';
@@ -16,6 +13,7 @@ import {
 export type UseLeadPostCallResult = PostCallDialogState & {
   showPostCallDialog: () => void;
   submitPostCall: (submitData: PostCallSubmitData) => Promise<void>;
+  callAgainPostCall: (submitData: PostCallSubmitData) => Promise<void>;
 };
 
 function buildLeadScheduleRequest(
@@ -44,6 +42,23 @@ function buildFinishedViewState(
   return finishedState;
 }
 
+async function bookLeadReminderAndClosePostCallDialog(
+  finishedLead: ServedLead,
+  scheduledAt: string | null,
+  scheduleWasRefused: boolean,
+  noteFromCall: string | null,
+  closePostCallDialog: () => void,
+): Promise<void> {
+  await bookLeadReminderWhenScheduled(
+    finishedLead.id,
+    finishedLead.phone_number,
+    scheduledAt,
+    scheduleWasRefused,
+    noteFromCall,
+  );
+  closePostCallDialog();
+}
+
 export function useLeadPostCall(
   viewStateRef: RefObject<AutomatedViewState>,
   updateViewState: (nextViewState: AutomatedViewState) => void,
@@ -68,16 +83,13 @@ export function useLeadPostCall(
       const scheduledAtToBook: string | null = scheduleWasRefused ? null : scheduledAt;
       const leadSchedule = buildLeadScheduleRequest(scheduledAtToBook, currentState.lead.id);
       const nextLead = await fetchNextLead(leadSchedule, shouldContinueToNextLead);
-      if (scheduledAtToBook !== null) {
-        const bookedLeadReminder: ScheduledReminder = {
-          leadId: currentState.lead.id,
-          phoneNumber: currentState.lead.phone_number,
-          scheduledAt: scheduledAtToBook,
-          notes: noteFromCall,
-        };
-        await setBookedLeadReminder(bookedLeadReminder);
-      }
-      closePostCallDialog();
+      await bookLeadReminderAndClosePostCallDialog(
+        currentState.lead,
+        scheduledAt,
+        scheduleWasRefused,
+        noteFromCall,
+        closePostCallDialog,
+      );
       if (!shouldContinueToNextLead) {
         updateViewState({ kind: 'start' });
         return;
@@ -89,6 +101,27 @@ export function useLeadPostCall(
       await dialLead(nextLead);
     },
     [closePostCallDialog, dialLead, updateViewState, viewStateRef],
+  );
+  const continueAfterLeadCallAgain = useCallback(
+    async (
+      scheduledAt: string | null,
+      scheduleWasRefused: boolean,
+      noteFromCall: string | null,
+    ): Promise<void> => {
+      const currentState = viewStateRef.current;
+      if (currentState.kind !== 'finished') {
+        return;
+      }
+      await bookLeadReminderAndClosePostCallDialog(
+        currentState.lead,
+        scheduledAt,
+        scheduleWasRefused,
+        noteFromCall,
+        closePostCallDialog,
+      );
+      await dialLead(currentState.lead);
+    },
+    [closePostCallDialog, dialLead, viewStateRef],
   );
   const showPostCallDialog = useCallback((): void => {
     const finishedState = buildFinishedViewState(viewStateRef.current);
@@ -119,6 +152,22 @@ export function useLeadPostCall(
     },
     [continueAfterLeadSubmit, submitTrackedPostCall, viewStateRef],
   );
+  const callAgainPostCall = useCallback(
+    async (submitData: PostCallSubmitData): Promise<void> => {
+      const { scheduledAt, outcome } = submitData;
+      const currentState = viewStateRef.current;
+      const finishedCallId =
+        currentState.kind === 'finished' ? currentState.callId : null;
+      await submitTrackedPostCall(
+        finishedCallId,
+        (scheduleWasRefused: boolean) =>
+          continueAfterLeadCallAgain(scheduledAt, scheduleWasRefused, outcome.notes),
+        scheduledAt,
+        outcome,
+      );
+    },
+    [continueAfterLeadCallAgain, submitTrackedPostCall, viewStateRef],
+  );
 
   const leadPostCall: UseLeadPostCallResult = {
     isPostCallDialogOpen,
@@ -126,6 +175,7 @@ export function useLeadPostCall(
     postCallErrorMessage: postCallSubmit.postCallErrorMessage,
     showPostCallDialog,
     submitPostCall,
+    callAgainPostCall,
   };
   return leadPostCall;
 }

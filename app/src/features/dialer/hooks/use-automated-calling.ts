@@ -20,6 +20,7 @@ export type UseAutomatedCallingResult = PostCallDialogState & {
   startCalling: () => Promise<void>;
   dialCurrentLead: () => Promise<void>;
   submitPostCall: (submitData: PostCallSubmitData) => Promise<void>;
+  callAgainPostCall: (submitData: PostCallSubmitData) => Promise<void>;
 };
 
 export function useAutomatedCalling(): UseAutomatedCallingResult {

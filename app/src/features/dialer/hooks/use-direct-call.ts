@@ -5,7 +5,7 @@ import {
   isValidPhoneNumber,
   normalizePhoneNumber,
 } from '@/shared/utils/phone-formatter';
-import { bookNumberWhenScheduled } from '../lib/book-number-when-scheduled';
+import { bookScheduleAnswerAndClosePostCallDialog } from '../lib/book-schedule-answer-and-close-post-call-dialog';
 import {
   launchTrackedCall,
   showCallLaunchErrorToast,
@@ -21,6 +21,7 @@ export type UseDirectCallResult = UseTrackedCallResult & {
   isDialing: boolean;
   startDirectCall: (phoneNumber: string) => Promise<void>;
   submitDirectCall: (submitData: PostCallSubmitData) => Promise<void>;
+  callAgainDirectCall: (submitData: PostCallSubmitData) => Promise<void>;
 };
 
 export function useDirectCall(): UseDirectCallResult {
@@ -68,25 +69,45 @@ export function useDirectCall(): UseDirectCallResult {
 
   const submitDirectCall = useCallback(
     async (submitData: PostCallSubmitData): Promise<void> => {
-      const scheduledAt = submitData.scheduledAt;
-      const noteFromCall = submitData.outcome.notes;
-      const finishDirectCall = async (
+      const finishDirectSubmit = async (
         launchedCall: LaunchedCall | null,
         scheduleWasRefused: boolean,
       ): Promise<void> => {
-        const calledPhoneNumber =
-          launchedCall === null ? null : launchedCall.phoneNumber;
-        await bookNumberWhenScheduled(
-          calledPhoneNumber,
-          scheduledAt,
+        await bookScheduleAnswerAndClosePostCallDialog(
+          launchedCall,
+          submitData.scheduledAt,
           scheduleWasRefused,
-          noteFromCall,
+          submitData.outcome.notes,
+          closePostCallDialog,
         );
-        closePostCallDialog();
       };
-      await submitTrackedCall(submitData, finishDirectCall);
+      await submitTrackedCall(submitData, finishDirectSubmit);
     },
     [closePostCallDialog, submitTrackedCall],
+  );
+
+  const callAgainDirectCall = useCallback(
+    async (submitData: PostCallSubmitData): Promise<void> => {
+      const finishDirectCallAgain = async (
+        launchedCall: LaunchedCall | null,
+        scheduleWasRefused: boolean,
+      ): Promise<void> => {
+        const redialPhoneNumber =
+          await bookScheduleAnswerAndClosePostCallDialog(
+            launchedCall,
+            submitData.scheduledAt,
+            scheduleWasRefused,
+            submitData.outcome.notes,
+            closePostCallDialog,
+          );
+        if (redialPhoneNumber === null) {
+          return;
+        }
+        await startDirectCall(redialPhoneNumber);
+      };
+      await submitTrackedCall(submitData, finishDirectCallAgain);
+    },
+    [closePostCallDialog, startDirectCall, submitTrackedCall],
   );
 
   const directCall: UseDirectCallResult = {
@@ -94,6 +115,7 @@ export function useDirectCall(): UseDirectCallResult {
     isDialing,
     startDirectCall,
     submitDirectCall,
+    callAgainDirectCall,
   };
   return directCall;
 }

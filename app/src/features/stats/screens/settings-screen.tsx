@@ -8,19 +8,22 @@ import {
 } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
 import {
   ChevronRight,
+  FileText,
   LogOut,
   MessageCircle,
   ShieldMinus,
   Trash2,
   type LucideIcon,
 } from 'lucide-react-native';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, type ReactNode } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useClearLocalData } from '../hooks/use-clear-local-data';
 import { useLogout } from '../hooks/use-logout';
+import { useNotesPopupSettings } from '../hooks/use-notes-popup-settings';
 import { DoNotTrackScreen } from './do-not-track-screen';
 import { WhatsAppScreen } from './whatsapp-screen';
 
@@ -42,6 +45,7 @@ type SettingsMenuRowProps = {
   subtitle: string;
   onPress: () => void;
   disabled?: boolean;
+  trailingElement?: ReactNode;
 };
 
 function SettingsMenuRow({
@@ -52,6 +56,7 @@ function SettingsMenuRow({
   subtitle,
   onPress,
   disabled,
+  trailingElement,
 }: SettingsMenuRowProps) {
   return (
     <Button
@@ -70,12 +75,31 @@ function SettingsMenuRow({
         <Text className="text-base font-bold">{title}</Text>
         <Text className="text-xs text-muted-foreground">{subtitle}</Text>
       </View>
-      <Icon
-        as={ChevronRight}
-        size={20}
-        className="shrink-0 text-muted-foreground"
-      />
+      {trailingElement ?? (
+        <Icon
+          as={ChevronRight}
+          size={20}
+          className="shrink-0 text-muted-foreground"
+        />
+      )}
     </Button>
+  );
+}
+
+function NotesPopupSwitch({ isOn }: { isOn: boolean }) {
+  return (
+    <View
+      role="switch"
+      aria-checked={isOn}
+      className={cn(
+        'h-6 w-11 shrink-0 items-center justify-start rounded-full px-0.5',
+        isOn ? 'bg-primary' : 'bg-gray-300',
+      )}
+    >
+      <View
+        className={cn('h-5 w-5 rounded-full bg-white shadow', isOn && 'ml-auto')}
+      />
+    </View>
   );
 }
 
@@ -167,6 +191,12 @@ export function SettingsScreen() {
     clearLocalData,
   } = useClearLocalData();
   const { isLoggingOut, logoutErrorMessage, logout } = useLogout();
+  const {
+    isLoading,
+    isNotesPopupOn,
+    saveErrorMessage,
+    flipIsNotesPopupOn,
+  } = useNotesPopupSettings();
 
   useFocusEffect(
     useCallback(() => {
@@ -206,6 +236,16 @@ export function SettingsScreen() {
             onPress={() => setOpenSubScreen('doNotTrack')}
           />
           <SettingsMenuRow
+            icon={FileText}
+            iconContainerClassName="bg-primary/10"
+            iconClassName="text-primary"
+            title="Notes popup"
+            subtitle="Show the note before calling. Off dials straight through."
+            onPress={flipIsNotesPopupOn}
+            disabled={isLoading}
+            trailingElement={<NotesPopupSwitch isOn={isNotesPopupOn} />}
+          />
+          <SettingsMenuRow
             icon={Trash2}
             iconContainerClassName="bg-destructive/10"
             iconClassName="text-destructive"
@@ -222,6 +262,14 @@ export function SettingsScreen() {
             onPress={logout}
             disabled={isLoggingOut}
           />
+          {saveErrorMessage ? (
+            <Text
+              role="alert"
+              className="px-1 text-xs font-semibold text-destructive"
+            >
+              {saveErrorMessage}
+            </Text>
+          ) : null}
           {clearErrorMessage && !isClearDialogOpen ? (
             <Text
               role="alert"

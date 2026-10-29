@@ -60,6 +60,7 @@ export function useLeadPostCall(
       shouldContinueToNextLead: boolean,
       scheduleWasRefused: boolean,
       noteFromCall: string | null,
+      choseInterestedOnCall: boolean,
     ): Promise<void> => {
       const currentState = viewStateRef.current;
       if (currentState.kind !== 'finished') {
@@ -74,6 +75,7 @@ export function useLeadPostCall(
           phoneNumber: currentState.lead.phone_number,
           scheduledAt: scheduledAtToBook,
           notes: noteFromCall,
+          interested: choseInterestedOnCall,
         };
         await setBookedLeadReminder(bookedLeadReminder);
       }
@@ -112,6 +114,7 @@ export function useLeadPostCall(
             shouldContinueToNextLead,
             scheduleWasRefused,
             outcome.notes,
+            outcome.interested,
           ),
         scheduledAt,
         outcome,

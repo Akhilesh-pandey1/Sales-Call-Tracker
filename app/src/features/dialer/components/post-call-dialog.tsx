@@ -8,12 +8,15 @@ import {
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { maxScheduleAheadDays, noteMaxLength } from '@/config/app-config';
-import type { CallOutcome } from '@/features/tracking';
-import { Calendar, Check, Copy, MessageCircle } from 'lucide-react-native';
+import { Calendar, Check, Copy, MessageCircle, Phone } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 import { cn } from '@/lib/utils';
 import { usePostCallSchedule } from '../hooks/use-post-call-schedule';
+import {
+  buildPostCallSubmitData,
+  type CallOutcomeChoice,
+} from '../lib/build-post-call-submit-data';
 import { buildNoteCounterText, capNoteText } from '../lib/note-cap';
 import type { PostCallSubmitData } from '../types';
 import { CopyNumberButton } from './copy-number-button';
@@ -147,9 +150,42 @@ function NotesField({ noteText, onChangeNote }: NotesFieldProps) {
   );
 }
 
-export type PostCallDialogVariant = 'keypad' | 'lead' | 'my-list';
+type CallAgainAndSubmitButtonsProps = {
+  submitButtonLabel: string;
+  isSubmitting: boolean;
+  onSubmitPress: () => void;
+  onCallAgainPress: () => void;
+};
 
-type CallOutcomeChoice = 'interested' | 'doNotCall';
+function CallAgainAndSubmitButtons({
+  submitButtonLabel,
+  isSubmitting,
+  onSubmitPress,
+  onCallAgainPress,
+}: CallAgainAndSubmitButtonsProps) {
+  return (
+    <View className="flex-row gap-2">
+      <Button
+        variant="outline"
+        onPress={onCallAgainPress}
+        disabled={isSubmitting}
+        className="h-12 flex-1 rounded-xl border-border bg-card"
+      >
+        <Icon as={Phone} size={16} className="text-primary" />
+        <Text className="text-xs font-bold text-foreground">Call Again</Text>
+      </Button>
+      <Button
+        onPress={onSubmitPress}
+        disabled={isSubmitting}
+        className="h-12 flex-1 rounded-xl"
+      >
+        <Text className="text-xs font-bold">{submitButtonLabel}</Text>
+      </Button>
+    </View>
+  );
+}
+
+export type PostCallDialogVariant = 'keypad' | 'lead' | 'my-list';
 
 type PostCallDialogProps = {
   variant: PostCallDialogVariant;
@@ -160,6 +196,7 @@ type PostCallDialogProps = {
   isSubmitting: boolean;
   errorMessage: string | null;
   onSubmit: (submitData: PostCallSubmitData) => void;
+  onCallAgain: (submitData: PostCallSubmitData) => void;
 };
 
 function PostCallDialog({
@@ -171,6 +208,7 @@ function PostCallDialog({
   isSubmitting,
   errorMessage,
   onSubmit,
+  onCallAgain,
 }: PostCallDialogProps) {
   const { scheduleDate, scheduleLabel, openSchedulePicker } = usePostCallSchedule();
   const [isScheduleChosen, setIsScheduleChosen] = useState(false);
@@ -190,20 +228,18 @@ function PostCallDialog({
     setChosenOutcome(chosenOutcome === 'doNotCall' ? null : 'doNotCall');
   const handleChangeNote = (changedNoteText: string) =>
     setNoteText(capNoteText(changedNoteText, noteMaxLength));
+  const submitData = buildPostCallSubmitData(
+    chosenOutcome,
+    noteText,
+    isScheduleChosen,
+    scheduleDate.toISOString(),
+    shouldContinueToNextLead,
+  );
   const handleSubmitPress = () => {
-    const scheduledAt = isScheduleChosen ? scheduleDate.toISOString() : null;
-    const trimmedNoteText = noteText.trim();
-    const callOutcome: CallOutcome = {
-      interested: isInterested,
-      doNotCall: isDoNotCall,
-      notes: trimmedNoteText === '' ? null : trimmedNoteText,
-    };
-    const submitData: PostCallSubmitData = {
-      scheduledAt,
-      shouldContinueToNextLead,
-      outcome: callOutcome,
-    };
     onSubmit(submitData);
+  };
+  const handleCallAgainPress = () => {
+    onCallAgain(submitData);
   };
 
   const isLeadFlow = variant === 'lead';
@@ -327,9 +363,12 @@ function PostCallDialog({
           </Text>
         ) : null}
 
-        <Button onPress={handleSubmitPress} disabled={isSubmitting} className="h-12 rounded-xl">
-          <Text className="text-xs font-bold">{submitButtonLabel}</Text>
-        </Button>
+        <CallAgainAndSubmitButtons
+          submitButtonLabel={submitButtonLabel}
+          isSubmitting={isSubmitting}
+          onSubmitPress={handleSubmitPress}
+          onCallAgainPress={handleCallAgainPress}
+        />
       </DialogContent>
     </Dialog>
   );

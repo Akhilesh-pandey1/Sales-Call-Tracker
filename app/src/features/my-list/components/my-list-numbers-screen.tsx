@@ -1,9 +1,10 @@
-import { ChevronLeft } from 'lucide-react-native';
+import { ChevronLeft, Download } from 'lucide-react-native';
 import { FlatList, Pressable, View } from 'react-native';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import type { MyListFlag } from '@/features/tracking';
+import { useMyListDownload } from '../hooks/use-my-list-download';
 import { useMyListNumbers } from '../hooks/use-my-list-numbers';
 import { getMyListFlagLabel } from '../lib/my-list-flag-labels';
 import { MyListNumberRow } from './my-list-number-row';
@@ -12,26 +13,43 @@ import { MyListNumbersEmptyState } from './my-list-numbers-empty-state';
 type MyListNumbersScreenHeaderProps = {
   title: string;
   onBackPress: () => void;
+  onDownloadPress: () => void;
 };
 
 function MyListNumbersScreenHeader({
   title,
   onBackPress,
+  onDownloadPress,
 }: MyListNumbersScreenHeaderProps) {
   const handleBackPress = () => onBackPress();
+  const handleDownloadPress = () => onDownloadPress();
 
   return (
     <View className="border-b border-border bg-card px-5 py-3">
-      <View className="flex-row items-center gap-2">
+      <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center gap-2">
+          <Pressable
+            accessibilityLabel="Back to My List"
+            accessibilityRole="button"
+            onPress={handleBackPress}
+            className="h-9 w-9 items-center justify-center rounded-lg active:bg-muted"
+          >
+            <Icon
+              as={ChevronLeft}
+              size={20}
+              className="text-muted-foreground"
+            />
+          </Pressable>
+          <Text className="text-lg font-bold tracking-tight">{title}</Text>
+        </View>
         <Pressable
-          accessibilityLabel="Back to My List"
+          accessibilityLabel="Download this list"
           accessibilityRole="button"
-          onPress={handleBackPress}
+          onPress={handleDownloadPress}
           className="h-9 w-9 items-center justify-center rounded-lg active:bg-muted"
         >
-          <Icon as={ChevronLeft} size={20} className="text-muted-foreground" />
+          <Icon as={Download} size={20} className="text-muted-foreground" />
         </Pressable>
-        <Text className="text-lg font-bold tracking-tight">{title}</Text>
       </View>
     </View>
   );
@@ -78,10 +96,12 @@ export function MyListNumbersScreen({
 }: MyListNumbersScreenProps) {
   const { listNumbers, errorMessage, reloadListNumbers } =
     useMyListNumbers(listFlag);
+  const download = useMyListDownload(listFlag);
   const flagLabel = getMyListFlagLabel(listFlag);
 
   const handleBackPress = () => onBackPress();
   const handleTryAgainPress = () => reloadListNumbers();
+  const handleDownloadPress = () => download.downloadListToCsv();
 
   const screenContent = errorMessage !== null ? (
     <MyListNumbersErrorView
@@ -109,6 +129,7 @@ export function MyListNumbersScreen({
       <MyListNumbersScreenHeader
         title={flagLabel.title}
         onBackPress={handleBackPress}
+        onDownloadPress={handleDownloadPress}
       />
       {screenContent}
     </View>

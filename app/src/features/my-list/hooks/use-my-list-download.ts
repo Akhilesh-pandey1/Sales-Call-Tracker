@@ -1,6 +1,10 @@
 import { ToastAndroid } from 'react-native';
 import { useCallback, useRef, useState } from 'react';
-import { readMyListNumbers } from '@/features/tracking';
+import {
+  readMyListNumbers,
+  readMyListNumbersByFlag,
+  type MyListFlag,
+} from '@/features/tracking';
 import { buildMyListCsv } from '../lib/build-my-list-csv';
 import { buildMyListCsvFileName } from '../lib/build-my-list-csv-file-name';
 import { saveMyListCsvToDownloads } from '../lib/save-my-list-csv-to-downloads';
@@ -10,7 +14,7 @@ export type UseMyListDownload = {
   downloadListToCsv: () => Promise<void>;
 };
 
-export function useMyListDownload(): UseMyListDownload {
+export function useMyListDownload(listFlag?: MyListFlag): UseMyListDownload {
   const [isDownloading, setIsDownloading] = useState(false);
   const isDownloadInProgressRef = useRef(false);
 
@@ -23,12 +27,14 @@ export function useMyListDownload(): UseMyListDownload {
     isDownloadInProgressRef.current = true;
     setIsDownloading(true);
     try {
-      const listNumbers = await readMyListNumbers();
-      if (listNumbers.length === 0) {
+      const downloadListNumbers = listFlag === undefined
+        ? await readMyListNumbers()
+        : await readMyListNumbersByFlag(listFlag);
+      if (downloadListNumbers.length === 0) {
         ToastAndroid.show(emptyListMessage, ToastAndroid.SHORT);
         return;
       }
-      const csvText = buildMyListCsv(listNumbers);
+      const csvText = buildMyListCsv(downloadListNumbers);
       const savedAt = new Date();
       const csvFileName = buildMyListCsvFileName(savedAt);
       await saveMyListCsvToDownloads(csvText, csvFileName);
@@ -39,7 +45,7 @@ export function useMyListDownload(): UseMyListDownload {
       isDownloadInProgressRef.current = false;
       setIsDownloading(false);
     }
-  }, []);
+  }, [listFlag]);
 
   const download: UseMyListDownload = {
     isDownloading,

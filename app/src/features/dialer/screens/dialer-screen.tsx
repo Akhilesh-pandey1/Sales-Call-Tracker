@@ -12,6 +12,7 @@ import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { ClipboardPaste, Delete, Inbox, Phone } from 'lucide-react-native';
 import { LeadCallCard } from '../components/lead-call-card';
 import { Keypad } from '../components/keypad';
+import { resolveKeypadCallRefusal } from '../lib/resolve-keypad-call-refusal';
 import { PermissionBanner } from '../components/permission-banner';
 import { PostCallDialog } from '../components/post-call-dialog';
 import {
@@ -95,7 +96,12 @@ function KeypadView({
   dialer: UseDialerResult;
   directCall: UseDirectCallResult;
 }) {
-  const isCallEnabled = dialer.isNumberValid && !directCall.isDialing;
+  const [refusedNumber, setRefusedNumber] = useState<string | null>(null);
+
+  const isCallPressable = dialer.dialedNumberInput !== '' && !directCall.isDialing;
+  const currentInputRefusalMessage = resolveKeypadCallRefusal(dialer.isNumberValid);
+  const callRefusalMessage =
+    dialer.dialedNumberInput === refusedNumber ? currentInputRefusalMessage : null;
   const callButtonClasses = cn(
     'h-14 rounded-2xl',
     dialer.isNumberValid
@@ -122,6 +128,10 @@ function KeypadView({
   const handleBackspaceLongPress = () => dialer.clearDialedNumber();
   const handlePastePress = () => dialer.pasteNumberFromClipboard();
   const handleCallPress = async (): Promise<void> => {
+    if (currentInputRefusalMessage !== null) {
+      setRefusedNumber(dialer.dialedNumberInput);
+      return;
+    }
     await directCall.startDirectCall(dialer.dialedNumberInput);
   };
   const handleSubmitKeypadPostCall = async (
@@ -167,13 +177,22 @@ function KeypadView({
       <Keypad onCharacterPress={dialer.appendKeypadCharacter} />
 
       <View className="mt-4">
-        <Button onPress={handleCallPress} disabled={!isCallEnabled} className={callButtonClasses}>
+        <Button onPress={handleCallPress} disabled={!isCallPressable} className={callButtonClasses}>
           <Icon as={Phone} size={24} className={callContentClasses} />
           <Text className={cn('text-lg font-bold', callContentClasses)}>Call</Text>
         </Button>
-        <Text className="mt-2 text-center text-[11px] text-muted-foreground">
-          {callHintMessage}
-        </Text>
+        {callRefusalMessage === null ? (
+          <Text className="mt-2 text-center text-[11px] text-muted-foreground">
+            {callHintMessage}
+          </Text>
+        ) : (
+          <Text
+            role="alert"
+            className="mt-2 text-center text-[11px] font-semibold text-destructive"
+          >
+            {callRefusalMessage}
+          </Text>
+        )}
       </View>
 
       <PostCallDialog

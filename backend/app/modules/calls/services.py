@@ -3,7 +3,6 @@ import logging
 from typing import Any
 from backend.app.config.base import MAX_CALL_AGE_DAYS
 from backend.app.core.utils import (
-    normalize_phone_number,
     now_utc,
     parse_utc_datetime,
     to_ist,
@@ -13,6 +12,7 @@ from backend.app.modules.calls.models import Call
 from backend.app.modules.leads import (
     resolve_lead_for_call,
     schedule_resolved_lead_for_call,
+    validate_and_format_e164,
 )
 from backend.app.modules.settings import get_or_create_office_hours_window
 
@@ -141,7 +141,15 @@ def extract_valid_call(
 
     interested_choice, do_not_call_choice, notes_text = outcome_choices
 
-    normalized_phone: str = normalize_phone_number(clean_phone, default_country)
+    normalized_phone: str | None = validate_and_format_e164(
+        clean_phone, default_country
+    )
+    if normalized_phone is None:
+        logger.warning(
+            "Discarding call %s whose number is not a valid phone number for the user's country",
+            call_id,
+        )
+        return None
 
     raw_scheduled_at: Any = item.get("scheduled_at")
     scheduled_at_raw: str | None = None

@@ -530,6 +530,7 @@ def serve_next_lead(
         "phone_number": candidate_lead.phone_number,
         "attempt_count": candidate_lead.attempt_count,
         "is_scheduled": is_scheduled_lead,
+        "notes": candidate_lead.notes,
     }
     served_result: dict[str, Any] = {"status": True, "lead": lead_payload}
     return served_result

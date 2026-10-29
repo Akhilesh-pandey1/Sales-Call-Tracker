@@ -5,6 +5,10 @@ import { bookNumberWhenScheduled } from '../lib/book-number-when-scheduled';
 import type { LaunchedCall } from '../lib/call-launcher';
 import { launchTrackedCall, showCallLaunchErrorToast } from '../lib/call-launcher';
 import {
+  usePreCallNotes,
+  type UsePreCallNotesResult,
+} from './use-pre-call-notes';
+import {
   useTrackedCall,
   type UseTrackedCallResult,
 } from './use-tracked-call';
@@ -13,10 +17,11 @@ import type { PostCallSubmitData } from '../types';
 const noNumbersLeftMessage = 'No numbers left.';
 const nextCallStartFailedMessage = 'Could not start the next call. Try again.';
 
-export type UseMyListCallingResult = UseTrackedCallResult & {
-  startCalling: () => Promise<void>;
-  submitMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
-};
+export type UseMyListCallingResult = UseTrackedCallResult &
+  UsePreCallNotesResult & {
+    startCalling: () => Promise<void>;
+    submitMyListPostCall: (submitData: PostCallSubmitData) => Promise<void>;
+  };
 
 export function useMyListCalling(): UseMyListCallingResult {
   const isDialInFlightRef = useRef(false);
@@ -27,6 +32,23 @@ export function useMyListCalling(): UseMyListCallingResult {
     closePostCallDialog,
     submitTrackedCall,
   } = trackedCallFlow;
+
+  const dialPickedNumber = useCallback(
+    async (phoneNumber: string): Promise<void> => {
+      let launchedCall: LaunchedCall | null = null;
+      try {
+        launchedCall = await launchTrackedCall(phoneNumber);
+      } catch {
+        showCallLaunchErrorToast();
+        return;
+      }
+      trackLaunchedCall(launchedCall);
+    },
+    [trackLaunchedCall],
+  );
+
+  const preCallNotes = usePreCallNotes(dialPickedNumber);
+  const { requestCallWithNotes } = preCallNotes;
 
   const startCalling = useCallback(async (): Promise<void> => {
     const isCallAlreadyRunning =
@@ -41,20 +63,13 @@ export function useMyListCalling(): UseMyListCallingResult {
         ToastAndroid.show(noNumbersLeftMessage, ToastAndroid.SHORT);
         return;
       }
-      let launchedCall: LaunchedCall | null = null;
-      try {
-        launchedCall = await launchTrackedCall(nextListPhoneNumber);
-      } catch {
-        showCallLaunchErrorToast();
-        return;
-      }
-      trackLaunchedCall(launchedCall);
+      await requestCallWithNotes(nextListPhoneNumber);
     } catch {
       ToastAndroid.show(nextCallStartFailedMessage, ToastAndroid.SHORT);
     } finally {
       isDialInFlightRef.current = false;
     }
-  }, [isCallAwaitingHangUp, trackLaunchedCall]);
+  }, [isCallAwaitingHangUp, requestCallWithNotes]);
 
   const submitMyListPostCall = useCallback(
     async (submitData: PostCallSubmitData): Promise<void> => {
@@ -88,6 +103,7 @@ export function useMyListCalling(): UseMyListCallingResult {
 
   const myListCalling: UseMyListCallingResult = {
     ...trackedCallFlow,
+    ...preCallNotes,
     startCalling,
     submitMyListPostCall,
   };

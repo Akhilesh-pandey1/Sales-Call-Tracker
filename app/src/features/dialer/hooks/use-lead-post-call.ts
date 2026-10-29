@@ -47,7 +47,7 @@ function buildFinishedViewState(
 export function useLeadPostCall(
   viewStateRef: RefObject<AutomatedViewState>,
   updateViewState: (nextViewState: AutomatedViewState) => void,
-  dialLead: (nextLead: ServedLead) => Promise<void>,
+  requestDialLead: (nextLead: ServedLead) => Promise<void>,
 ): UseLeadPostCallResult {
   const { isPostCallDialogOpen, showDialog, closeDialog: closePostCallDialog } =
     useDialogVisibility();
@@ -88,9 +88,9 @@ export function useLeadPostCall(
         updateViewState({ kind: 'empty' });
         return;
       }
-      await dialLead(nextLead);
+      await requestDialLead(nextLead);
     },
-    [closePostCallDialog, dialLead, updateViewState, viewStateRef],
+    [closePostCallDialog, requestDialLead, updateViewState, viewStateRef],
   );
   const showPostCallDialog = useCallback((): void => {
     const finishedState = buildFinishedViewState(viewStateRef.current);

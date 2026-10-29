@@ -4,6 +4,7 @@ import { readStoredCountry } from '@/features/auth';
 import {
   markMyListNumberCalled,
   readIsMyListNumberInterested,
+  readMyListNoteByPhoneNumber,
   readMyListNumbersByFlag,
 } from './my-list-db';
 import { runQuery } from './database';
@@ -27,6 +28,20 @@ beforeEach(() => {
 
 interface MyListFlagRowShape {
   interested: number;
+}
+
+interface MyListNoteRowShape {
+  notes: string | null;
+}
+
+function makeNoteResultSet(rows: MyListNoteRowShape[]): ResultSet {
+  const resultSetShape = {
+    rows: {
+      length: rows.length,
+      item: (rowIndex: number): MyListNoteRowShape => rows[rowIndex],
+    },
+  };
+  return resultSetShape as unknown as ResultSet;
 }
 
 function makeFlagResultSet(rows: MyListFlagRowShape[]): ResultSet {
@@ -209,4 +224,26 @@ test('a flag read with no stored country reads not interested', async () => {
   const isInterested = await readIsMyListNumberInterested(listedPhoneNumber);
   expect(runQueryMock).not.toHaveBeenCalled();
   expect(isInterested).toBe(false);
+});
+
+test('a listed number reads its one note', async () => {
+  runQueryMock.mockResolvedValue(makeNoteResultSet([{ notes: 'Asked to call after 6 PM' }]));
+  const listNumberNote = await readMyListNoteByPhoneNumber(listedPhoneNumber);
+  const [selectSql, selectParams] = runQueryMock.mock.calls[0];
+  expect(selectSql).toContain('SELECT notes FROM my_list_numbers');
+  expect(selectParams).toEqual([normalizedPhoneNumber]);
+  expect(listNumberNote).toBe('Asked to call after 6 PM');
+});
+
+test('a number missing from the list reads no note', async () => {
+  runQueryMock.mockResolvedValue(makeNoteResultSet([]));
+  const listNumberNote = await readMyListNoteByPhoneNumber(listedPhoneNumber);
+  expect(listNumberNote).toBe(null);
+});
+
+test('a note read with no stored country reads no note', async () => {
+  readStoredCountryMock.mockResolvedValue(null);
+  const listNumberNote = await readMyListNoteByPhoneNumber(listedPhoneNumber);
+  expect(runQueryMock).not.toHaveBeenCalled();
+  expect(listNumberNote).toBe(null);
 });

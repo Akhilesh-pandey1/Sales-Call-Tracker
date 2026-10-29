@@ -7,7 +7,9 @@ import { Text } from '@/components/ui/text';
 import {
   CopyNumberButton,
   PostCallDialog,
+  PreCallNotesDialog,
   useDirectCall,
+  usePreCallNotes,
   type PostCallSubmitData,
 } from '@/features/dialer';
 import { cn } from '@/lib/utils';
@@ -259,6 +261,7 @@ export function HistoryScreen() {
     loadMoreHistory,
   } = useCallHistory();
   const directCall = useDirectCall();
+  const preCallNotes = usePreCallNotes(directCall.startDirectCall);
   const { top: topInset } = useSafeAreaInsets();
 
   const idlePostCallDialogKey = 'idle-history-post-call';
@@ -271,12 +274,13 @@ export function HistoryScreen() {
   const postCallDialogWhatsAppNumber = historyTrackedCall === null
     ? null
     : historyTrackedCall.phoneNumber;
+  const pendingNotesCall = preCallNotes.pendingNotesCall;
 
   const handleReloadHistory = () => reloadHistory();
   const handleCallHistoryNumber = async (
     phoneNumber: string,
   ): Promise<void> => {
-    await directCall.startDirectCall(phoneNumber);
+    await preCallNotes.requestCallWithNotes(phoneNumber);
   };
   const handleOpenWhatsAppChat = async (phoneNumber: string): Promise<void> => {
     await openChosenWhatsAppChat(phoneNumber);
@@ -321,6 +325,11 @@ export function HistoryScreen() {
         isSubmitting={directCall.isSubmittingPostCall}
         errorMessage={directCall.postCallErrorMessage}
         onSubmit={handleSubmitHistoryPostCall}
+      />
+      <PreCallNotesDialog
+        pendingNotesCall={pendingNotesCall}
+        onCall={preCallNotes.confirmNotesCall}
+        onCancel={preCallNotes.cancelNotesCall}
       />
     </View>
   );

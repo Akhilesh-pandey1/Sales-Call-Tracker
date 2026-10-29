@@ -1,19 +1,27 @@
 import type { ResultSet } from 'react-native-sqlite-storage';
+import { readStoredCountry } from '@/features/auth';
 import {
   readAllScheduledReminders,
+  readBookingNoteByPhoneNumber,
   saveScheduledReminder,
   type ScheduledReminder,
 } from './scheduled-reminders-db';
 import { runQuery } from './database';
 
+jest.mock('@/features/auth', () => ({
+  readStoredCountry: jest.fn(),
+}));
 jest.mock('./database', () => ({
   runQuery: jest.fn(),
 }));
 
 const runQueryMock = jest.mocked(runQuery);
+const readStoredCountryMock = jest.mocked(readStoredCountry);
 
 beforeEach(() => {
   runQueryMock.mockClear();
+  readStoredCountryMock.mockReset();
+  readStoredCountryMock.mockResolvedValue('IN');
 });
 
 interface ReminderRowShape {
@@ -193,4 +201,29 @@ test('reads every booking with its note and interested mark', async () => {
       interested: false,
     },
   ]);
+});
+
+test('a booked number reads its booking note', async () => {
+  runQueryMock.mockResolvedValue(
+    makeResultSet([
+      {
+        lead_id: bookedLeadId,
+        phone_number: bookedPhoneNumber,
+        scheduled_at: bookedAt,
+        notes: bookingNote,
+        interested: 0,
+      },
+    ]),
+  );
+  const bookingNoteRead = await readBookingNoteByPhoneNumber(bookedPhoneNumber);
+  const [selectSql, selectParams] = runQueryMock.mock.calls[0];
+  expect(selectSql).toContain('SELECT notes FROM scheduled_reminders');
+  expect(selectParams).toEqual([bookedPhoneNumber]);
+  expect(bookingNoteRead).toBe(bookingNote);
+});
+
+test('a number with no booking reads no booking note', async () => {
+  runQueryMock.mockResolvedValue(makeResultSet([]));
+  const bookingNoteRead = await readBookingNoteByPhoneNumber(bookedPhoneNumber);
+  expect(bookingNoteRead).toBe(null);
 });

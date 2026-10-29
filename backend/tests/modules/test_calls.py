@@ -14,7 +14,6 @@ from backend.app.config.base import (
 from backend.app.core.security import hash_password
 from backend.app.core.utils import (
     get_ist_timezone,
-    normalize_phone_number,
     now_ist,
     now_utc,
     to_ist,
@@ -916,8 +915,8 @@ def test_phone_number_normalization_international_format(
         assert saved_call.phone_number == "+14155552671"
 
 
-def test_phone_number_normalization_unparseable_stored_raw(
-    app: Flask, client: FlaskClient
+def test_sync_invalid_number_row_discarded_while_valid_saved(
+    app: Flask, client: FlaskClient, caplog: pytest.LogCaptureFixture
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture(country="IN")
@@ -926,20 +925,45 @@ def test_phone_number_normalization_unparseable_stored_raw(
         payload: dict[str, Any] = {
             "calls": [
                 {
-                    "call_id": "call-raw",
+                    "call_id": "call-invalid-number",
                     "phone_number": "invalid-12345",
                     "dialed_at": build_ist_dialed_at(0, 12, 0),
-                    "duration_seconds": 5,
-                }
+                    "duration_seconds": 30,
+                },
+                {
+                    "call_id": "call-valid-number",
+                    "phone_number": "9876543212",
+                    "dialed_at": build_ist_dialed_at(0, 12, 5),
+                    "duration_seconds": 30,
+                },
             ]
         }
 
-        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
-        assert response.status_code == 200
+        services_logger_name: str = "backend.app.modules.calls.services"
+        with caplog.at_level(logging.WARNING, logger=services_logger_name):
+            response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
 
-        saved_call: Call | None = db.session.get(Call, "call-raw")
-        assert saved_call is not None
-        assert saved_call.phone_number == "12345"
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json == {"status": True, "schedule_refused_call_ids": []}
+
+        assert db.session.get(Call, "call-invalid-number") is None
+
+        saved_valid_call: Call | None = db.session.get(Call, "call-valid-number")
+        assert saved_valid_call is not None
+        assert saved_valid_call.phone_number == "+919876543212"
+
+        dropped_number_lead_count: int = Lead.query.filter_by(phone_number="12345").count()
+        expected_dropped_number_lead_count: int = 0
+        assert dropped_number_lead_count == expected_dropped_number_lead_count
+
+        total_lead_count: int = Lead.query.count()
+        expected_total_lead_count: int = 1
+        assert total_lead_count == expected_total_lead_count
+
+        assert "call-invalid-number" in caplog.text
 
 
 def test_lead_resolution_connected_call_finishes_lead(

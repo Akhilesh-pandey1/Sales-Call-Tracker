@@ -14,7 +14,6 @@ from backend.app.core.security import (
 )
 from backend.app.core.utils import (
     get_ist_timezone,
-    normalize_phone_number,
     now_ist,
     now_utc,
     to_ist,
@@ -236,7 +235,4 @@ def test_utils_helpers() -> None:
 
     converted = to_ist(current_utc)
     assert converted.tzinfo is not None
-
-    normalized_in = normalize_phone_number("9876543210", "IN")
-    assert normalized_in == "+919876543210"
 

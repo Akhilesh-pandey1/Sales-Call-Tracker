@@ -235,7 +235,7 @@ A small popup over the list - not a full page - shown before a call when the num
 - Note - one card with the number's single note, nothing else - a new note overrides the last one, local or server; in the automated flow the lead's note arrives from the server
 - Call button - green, dials through the same flow as before
 - Cancel - closes the popup with no call placed; an automated lead stays claimed for its 10 minutes
-- Never shows - on the keypad, and on a Call Again redial
+- Never shows - on the keypad, on a Call Again redial, and on every list when the Notes popup switch in Settings (Screen 9) is off
 - Works offline from the phone's own notes
 
 **Edge cases:**
@@ -310,11 +310,13 @@ A small popup over the list - not a full page - shown before a call when the num
 ### Screen 9: Settings - fifth tab
 - Plain "Settings" title - no back arrow; this is a top-level tab
 - Leaving and coming back always lands here - going to another tab and returning opens the Settings home, never a sub-page left open
-- Four-row menu, each row icon + title + short description + chevron:
+- Five-row menu - icon + title + short description on every row; chevrons on the rows that open a screen, a switch on the Notes popup row:
   1. WhatsApp - opens Screen 9d
   2. Do not track numbers - opens Screen 9b
-  3. Clear local data - deletes only the unsent calls on this phone; opens the confirm dialog
-  4. Log out - sends unsent calls first, then signs out
+  3. Notes popup - a switch, ON by default; tapping the row flips it in place - no sub-page
+  4. Clear local data - deletes only the unsent calls on this phone; opens the confirm dialog
+  5. Log out - sends unsent calls first, then signs out
+- Notes popup switch meaning - ON shows the notes popup (Screen 7a2) before a call when the number has a note; OFF dials those calls straight through with no popup; the info icon on list rows stays in both states; the choice stays saved on the phone
 - Confirmation dialog on Clear local data tap - "This deletes N calls not yet sent to the server. Cannot be undone." (N is the real count of unsent calls on the phone)
 - Confirm - wipes only the unsent calls on the phone; server numbers stay untouched
 - Cancel - closes dialog without changes
@@ -322,6 +324,7 @@ A small popup over the list - not a full page - shown before a call when the num
 
 **Edge cases:**
 - No unsent calls: N shows 0 in the same message
+- No saved switch choice on this phone: the Notes popup switch shows ON
 - Log out with unsent calls and no internet: refused - "You have N calls not sent yet. Connect to the internet and log out."
 
 → Next: Screen 9b Do Not Track Numbers

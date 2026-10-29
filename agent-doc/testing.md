@@ -127,6 +127,11 @@ Run with `npx jest` in `app/`.
 - A booking whose call chose Interested, or whose number is flagged Interested in My List, shows the Interested tag on the Scheduled row.
 - The keypad refuses a number that is not valid for the login country with "Enter a valid phone number.".
 
+### Notes popup switch
+- Reading the switch with nothing saved returns ON; saved ON and saved OFF both read back as saved.
+- With the switch off, a noted number dials straight through from a list row with no popup; with it on, the notes popup shows as before.
+- Flipping the switch on the Settings screen saves the choice on the phone.
+
 ---
 
 ## 3. Mobile Android Spike Checklist

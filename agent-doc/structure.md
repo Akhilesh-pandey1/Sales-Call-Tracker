@@ -220,6 +220,8 @@ app/
     │       └── root-navigator.tsx   # Login vs Main App screen switch
     ├── components/
     │   └── ui/                      # React Native Reusables (shadcn for mobile): button, input, card, dialog, text
+    ├── config/
+    │   └── app-config.ts           # App config values: the WhatsApp defaults and the Notes popup default (ON)
     ├── features/
     │   ├── auth/
     │   │   ├── api/auth.api.ts
@@ -231,6 +233,7 @@ app/
     │   │   ├── components/lead-call-card.tsx # Lead calling card with a Copy button for the lead's number
     │   │   ├── components/post-call-dialog.tsx  # Post-call popup: native date/time picker + schedule question + Go-to-next checkbox + optional Interested / Do-not-call-again outcome buttons + Notes box + Submit; locked so only Submit closes it; keypad variant shows the number with the same schedule question, and submitting it clears the typed number
     │   │   ├── lib/call-launcher.ts     # Starts the call: Android's direct-call intent; the phone's own dialer when CALL_PHONE is off
+    │   │   ├── lib/find-pre-call-note.ts # The shared pre-call note check: reads the Notes popup switch and decides popup or straight dial
     │   │   ├── hooks/use-dialer.ts
     │   │   ├── hooks/use-automated-calling.ts
     │   │   ├── hooks/use-post-call-submit.ts  # Submit click: read call log, send to server, delete or save the row
@@ -253,7 +256,7 @@ app/
     │   │   └── screens/
     │   │       ├── my-stats-screen.tsx     # Salesperson stats: last-30-days KPI cards, performance table, calls-by-hour chart
     │   │       ├── do-not-track-screen.tsx # Do-not-track list: bare + to add, Remove opens the manager-password popup
-    │   │       └── settings-screen.tsx     # Settings tab: WhatsApp app and First message rows above the Do-not-track, Clear local data, and Log out rows
+    │   │       └── settings-screen.tsx     # Settings tab: WhatsApp app and First message rows, the Notes popup switch row, then Do-not-track, Clear local data, and Log out rows
     │   └── tracking/
     │       ├── db/pending-calls-db.ts    # SQLite queue operations
     │       ├── db/call-history-db.ts     # Local call history: one row per filled call, 1000-row FIFO, one-time call-log backfill
@@ -270,5 +273,6 @@ app/
         └── utils/
             ├── phone-formatter.ts        # libphonenumber-js E.164 normalization
             ├── whatsapp-settings.ts      # The chosen WhatsApp app and the first-message switch and text on this phone (AsyncStorage)
+            ├── notes-popup-settings.ts   # The Notes popup on/off switch on this phone (AsyncStorage), read fresh at every call attempt
             └── whatsapp-chat.ts          # Opens the chosen WhatsApp app on a number's chat, with the first message when set
 ```

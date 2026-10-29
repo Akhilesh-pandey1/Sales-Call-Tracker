@@ -51,7 +51,7 @@ Open `index.html` to flip through the screens (arrow keys or the buttons; Mobile
 | My Stats | `08-my-stats--M.html` | Cards, stacked hour chart, direction donut, performance table |
 | My Stats — no incoming calls | `08-my-stats--no-incoming--M.html` | Donut full outgoing, "Incoming 0 calls · 0 min" |
 | My Stats — server unreachable | `08-my-stats--offline--M.html` | Offline state — no fake zeros |
-| Settings | `09-settings--M.html` | Four-row menu — WhatsApp, do-not-track numbers, clear data, log out |
+| Settings | `09-settings--M.html` | Five-row menu — WhatsApp, do-not-track numbers, the Notes popup switch, clear data, log out |
 | Settings — clear data dialog | `09-settings--confirm-dialog--M.html` | Confirmation before wiping unsent calls |
 | Do not track numbers | `09b-do-not-track--M.html` | Back button + Add number, table of private numbers with Remove per row |
 | Do not track — add number dialog | `09b-do-not-track--add-dialog--M.html` | Pop-up to add a number (10 digits → +91) |

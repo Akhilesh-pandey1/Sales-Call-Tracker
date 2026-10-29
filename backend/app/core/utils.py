@@ -1,7 +1,5 @@
 from datetime import datetime, timezone
-import re
 from zoneinfo import ZoneInfo
-import phonenumbers
 from backend.app.config.base import TIMEZONE_NAME
 
 
@@ -31,29 +29,6 @@ def to_ist(date_time_value: datetime) -> datetime:
         working_value = working_value.replace(tzinfo=utc_zone)
     converted_time: datetime = working_value.astimezone(current_timezone)
     return converted_time
-
-
-def normalize_phone_number(raw_number: str, default_country: str = "IN") -> str:
-    cleaned_number: str = raw_number.strip()
-    try:
-        parsed_number = phonenumbers.parse(cleaned_number, default_country)
-        if phonenumbers.is_valid_number(parsed_number):
-            formatted_number: str = phonenumbers.format_number(
-                parsed_number, phonenumbers.PhoneNumberFormat.E164
-            )
-            return formatted_number
-    except phonenumbers.NumberParseException:
-        pass
-
-    non_digit_pattern: str = r"\D"
-    replacement_character: str = ""
-    digits_only: str = re.sub(non_digit_pattern, replacement_character, cleaned_number)
-    if digits_only:
-        result_digits: str = digits_only
-        return result_digits
-
-    fallback_number: str = cleaned_number
-    return fallback_number
 
 
 def parse_utc_datetime(datetime_value: str | datetime) -> datetime:

@@ -2,6 +2,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { ToastAndroid } from 'react-native';
 import { useCallback, useRef, useState } from 'react';
 import { callHistoryPageSize } from '@/config/app-config';
+import { findPreCallNotes } from '@/features/dialer';
 import { readStoredCountry } from '@/features/auth';
 import {
   readAllScheduledReminders,
@@ -18,6 +19,7 @@ export type CallHistoryItem = {
   callAt: string;
   durationSeconds: number;
   hasActiveBooking: boolean;
+  note: string | null;
 };
 
 type UseCallHistoryResult = {
@@ -44,18 +46,29 @@ function toBookedPhoneNumberSet(
 function toMarkedHistoryItems(
   historyEntries: CallHistoryEntry[],
   bookedPhoneNumberSet: Set<string>,
+  entryNotes: (string | null)[],
 ): CallHistoryItem[] {
-  const historyItems = historyEntries.map(historyEntry => {
+  const historyItems = historyEntries.map((historyEntry, entryIndex) => {
     const historyItem: CallHistoryItem = {
       phoneNumber: historyEntry.phoneNumber,
       direction: historyEntry.direction,
       callAt: historyEntry.callAt,
       durationSeconds: historyEntry.durationSeconds,
       hasActiveBooking: bookedPhoneNumberSet.has(historyEntry.phoneNumber),
+      note: entryNotes[entryIndex],
     };
     return historyItem;
   });
   return historyItems;
+}
+
+async function readEntryNotes(
+  historyEntries: CallHistoryEntry[],
+): Promise<(string | null)[]> {
+  const entryNotes = await findPreCallNotes(
+    historyEntries.map(historyEntry => historyEntry.phoneNumber),
+  );
+  return entryNotes;
 }
 
 async function readBookedPhoneNumberSet(): Promise<Set<string>> {
@@ -96,8 +109,16 @@ export function useCallHistory(): UseCallHistoryResult {
       if (latestRequestIdRef.current !== requestId) {
         return;
       }
+      const entryNotes = await readEntryNotes(pageEntries);
+      if (latestRequestIdRef.current !== requestId) {
+        return;
+      }
       bookedPhoneNumberSetRef.current = bookedPhoneNumberSet;
-      const pageItems = toMarkedHistoryItems(pageEntries, bookedPhoneNumberSet);
+      const pageItems = toMarkedHistoryItems(
+        pageEntries,
+        bookedPhoneNumberSet,
+        entryNotes,
+      );
       loadedRowCountRef.current = pageItems.length;
       setHistoryItems(pageItems);
       setCanLoadMore(pageItems.length === callHistoryPageSize);
@@ -127,9 +148,14 @@ export function useCallHistory(): UseCallHistoryResult {
       if (latestRequestIdRef.current !== requestId) {
         return;
       }
+      const entryNotes = await readEntryNotes(pageEntries);
+      if (latestRequestIdRef.current !== requestId) {
+        return;
+      }
       const pageItems = toMarkedHistoryItems(
         pageEntries,
         bookedPhoneNumberSetRef.current,
+        entryNotes,
       );
       loadedRowCountRef.current = rowOffset + pageItems.length;
       setHistoryItems(currentItems => [...currentItems, ...pageItems]);

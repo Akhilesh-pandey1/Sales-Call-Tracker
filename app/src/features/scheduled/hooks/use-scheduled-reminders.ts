@@ -1,5 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { findPreCallNotes } from '@/features/dialer';
 import {
   readAllScheduledReminders,
   removeScheduledReminderForNumber,
@@ -18,6 +19,11 @@ export type ScheduledBooking = {
   scheduledAt: string;
   isInterested: boolean;
   state: ScheduledBookingState;
+  note: string | null;
+};
+
+type ScheduledReminderWithNote = ScheduledReminder & {
+  note: string | null;
 };
 
 type UseScheduledRemindersResult = {
@@ -29,8 +35,22 @@ type UseScheduledRemindersResult = {
   removeBooking: (phoneNumber: string) => Promise<void>;
 };
 
+function attachNotesToReminders(
+  reminders: ScheduledReminder[],
+  reminderNotes: (string | null)[],
+): ScheduledReminderWithNote[] {
+  const remindersWithNotes = reminders.map((reminder, reminderIndex) => {
+    const reminderWithNote: ScheduledReminderWithNote = {
+      ...reminder,
+      note: reminderNotes[reminderIndex],
+    };
+    return reminderWithNote;
+  });
+  return remindersWithNotes;
+}
+
 function toScheduledBooking(
-  reminder: ScheduledReminder,
+  reminder: ScheduledReminderWithNote,
   currentTimeMs: number,
 ): ScheduledBooking {
   const scheduledAtMs = readBookingTimeMs(reminder.scheduledAt);
@@ -41,6 +61,7 @@ function toScheduledBooking(
     scheduledAt: reminder.scheduledAt,
     isInterested: reminder.interested,
     state: bookingState,
+    note: reminder.note,
   };
   return scheduledBooking;
 }
@@ -55,7 +76,7 @@ function compareByBookedTimeAsc(
 }
 
 function sortBookingsDueFirst(
-  reminders: ScheduledReminder[],
+  reminders: ScheduledReminderWithNote[],
   currentTimeMs: number,
 ): ScheduledBooking[] {
   const bookings = reminders.map(reminder =>
@@ -87,7 +108,14 @@ export function useScheduledReminders(): UseScheduledRemindersResult {
       if (latestRequestIdRef.current !== requestId) {
         return;
       }
-      const sortedBookings = sortBookingsDueFirst(reminders, Date.now());
+      const reminderNotes = await findPreCallNotes(
+        reminders.map(reminder => reminder.phoneNumber),
+      );
+      if (latestRequestIdRef.current !== requestId) {
+        return;
+      }
+      const remindersWithNotes = attachNotesToReminders(reminders, reminderNotes);
+      const sortedBookings = sortBookingsDueFirst(remindersWithNotes, Date.now());
       setBookings(sortedBookings);
     } catch {
       if (latestRequestIdRef.current !== requestId) {

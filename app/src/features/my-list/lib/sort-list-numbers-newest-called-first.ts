@@ -19,9 +19,9 @@ function compareByCalledAtNewestFirst(
   return secondListNumber.calledAt.localeCompare(firstListNumber.calledAt);
 }
 
-export function sortListNumbersNewestCalledFirst(
-  listNumbers: MyListNumber[],
-): MyListNumber[] {
+export function sortListNumbersNewestCalledFirst<
+  ListNumber extends MyListNumber,
+>(listNumbers: ListNumber[]): ListNumber[] {
   const sortedListNumbers = [...listNumbers].sort(
     compareByCalledAtNewestFirst,
   );

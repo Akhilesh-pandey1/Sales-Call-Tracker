@@ -10,12 +10,15 @@ import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import {
+  NoteDetailsDialog,
   PostCallDialog,
   PreCallNotesDialog,
   useDirectCall,
   usePreCallNotes,
 } from '@/features/dialer';
 import { cn } from '@/lib/utils';
+import { NoteInfoButton } from '@/shared/components/note-info-button';
+import { useViewedNumberNote } from '@/shared/hooks/use-viewed-number-note';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
 import {
@@ -127,6 +130,7 @@ type BookingRowProps = {
   onCallPhoneNumber: (phoneNumber: string) => void;
   onCopyPhoneNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
+  onOpenNumberNote: (phoneNumber: string, note: string) => void;
 };
 
 function BookingRow({
@@ -135,6 +139,7 @@ function BookingRow({
   onCallPhoneNumber,
   onCopyPhoneNumber,
   onOpenWhatsAppChat,
+  onOpenNumberNote,
 }: BookingRowProps) {
   const isDue = booking.state === 'Due';
   const rowBorderClasses = isDue ? 'border-destructive' : 'border-border';
@@ -142,6 +147,13 @@ function BookingRow({
     booking.phoneNumber,
   );
   const bookedAtLabel = formatBookedAtLabel(booking.scheduledAt);
+  const bookingNote = booking.note;
+  const noteInfoButton = bookingNote === null ? null : (
+    <NoteInfoButton
+      displayedPhoneNumber={displayedPhoneNumber}
+      onPress={() => onOpenNumberNote(booking.phoneNumber, bookingNote)}
+    />
+  );
 
   return (
     <Pressable
@@ -161,9 +173,12 @@ function BookingRow({
           <BookingStateBadge state={booking.state} />
           {booking.isInterested && <BookingInterestedTag />}
         </View>
-        <Text className="mt-0.5 text-[11px] text-muted-foreground">
-          {bookedAtLabel}
-        </Text>
+        <View className="mt-0.5 flex-row items-center gap-1.5">
+          <Text className="text-[11px] text-muted-foreground">
+            {bookedAtLabel}
+          </Text>
+          {noteInfoButton}
+        </View>
       </View>
       <View className="shrink-0 flex-row items-center gap-1">
         <BookingActionButton
@@ -270,6 +285,7 @@ type BookingsListProps = {
   onCallPhoneNumber: (phoneNumber: string) => void;
   onCopyPhoneNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
+  onOpenNumberNote: (phoneNumber: string, note: string) => void;
 };
 
 function BookingsList({
@@ -279,6 +295,7 @@ function BookingsList({
   onCallPhoneNumber,
   onCopyPhoneNumber,
   onOpenWhatsAppChat,
+  onOpenNumberNote,
 }: BookingsListProps) {
   return (
     <FlatList
@@ -293,6 +310,7 @@ function BookingsList({
           onCallPhoneNumber={onCallPhoneNumber}
           onCopyPhoneNumber={onCopyPhoneNumber}
           onOpenWhatsAppChat={onOpenWhatsAppChat}
+          onOpenNumberNote={onOpenNumberNote}
         />
       )}
     />
@@ -323,6 +341,7 @@ export function ScheduledScreen() {
     ? null
     : trackedCall.phoneNumber;
   const pendingNotesCall = preCallNotes.pendingNotesCall;
+  const numberNote = useViewedNumberNote();
 
   const handleReloadPress = () => reloadBookings();
   const handleOpenBooking = () => navigation.navigate('Dialer');
@@ -358,6 +377,7 @@ export function ScheduledScreen() {
       onCallPhoneNumber={preCallNotes.requestCallWithNotes}
       onCopyPhoneNumber={handleCopyPhoneNumber}
       onOpenWhatsAppChat={handleOpenWhatsAppChat}
+      onOpenNumberNote={numberNote.openNumberNote}
     />
   );
 
@@ -380,6 +400,10 @@ export function ScheduledScreen() {
         pendingNotesCall={pendingNotesCall}
         onCall={preCallNotes.confirmNotesCall}
         onCancel={preCallNotes.cancelNotesCall}
+      />
+      <NoteDetailsDialog
+        viewedNumberNote={numberNote.viewedNumberNote}
+        onClose={numberNote.closeNumberNote}
       />
     </View>
   );

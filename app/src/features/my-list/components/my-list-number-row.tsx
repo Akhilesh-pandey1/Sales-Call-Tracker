@@ -1,21 +1,24 @@
 import { MessageCircle, Phone } from 'lucide-react-native';
 import { Pressable, View } from 'react-native';
 import { Text } from '@/components/ui/text';
-import type { MyListNumber } from '@/features/tracking';
 import { RowActionButton } from '@/shared/components/row-action-button';
+import { NoteInfoButton } from '@/shared/components/note-info-button';
 import { formatCalledAtLabel } from '@/shared/utils/format-called-at';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
+import type { MyListNumberWithNote } from '../hooks/use-my-list-numbers';
 
 type MyListNumberRowProps = {
-  listNumber: MyListNumber;
+  listNumber: MyListNumberWithNote;
   onCallNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
+  onOpenNumberNote: (phoneNumber: string, note: string) => void;
 };
 
 export function MyListNumberRow({
   listNumber,
   onCallNumber,
   onOpenWhatsAppChat,
+  onOpenNumberNote,
 }: MyListNumberRowProps) {
   const displayedPhoneNumber = formatInternationalPhoneNumber(
     listNumber.phoneNumber,
@@ -23,6 +26,18 @@ export function MyListNumberRow({
   const calledAtLabel = listNumber.calledAt === null
     ? null
     : formatCalledAtLabel(listNumber.calledAt);
+  const listNumberNote = listNumber.note;
+  const noteInfoButton = listNumberNote === null ? null : (
+    <NoteInfoButton
+      displayedPhoneNumber={displayedPhoneNumber}
+      onPress={() => onOpenNumberNote(listNumber.phoneNumber, listNumberNote)}
+    />
+  );
+  const calledAtLine = calledAtLabel === null ? null : (
+    <Text className="text-[11px] text-muted-foreground">
+      {`Called ${calledAtLabel}`}
+    </Text>
+  );
 
   const handleRowPress = () => onCallNumber(listNumber.phoneNumber);
   const handleWhatsAppPress = () => onOpenWhatsAppChat(listNumber.phoneNumber);
@@ -38,10 +53,11 @@ export function MyListNumberRow({
         <Text className="text-sm font-bold tabular-nums">
           {displayedPhoneNumber}
         </Text>
-        {calledAtLabel === null ? null : (
-          <Text className="mt-0.5 text-[11px] text-muted-foreground">
-            {`Called ${calledAtLabel}`}
-          </Text>
+        {calledAtLine === null && noteInfoButton === null ? null : (
+          <View className="mt-0.5 flex-row items-center gap-1.5">
+            {calledAtLine}
+            {noteInfoButton}
+          </View>
         )}
       </View>
       <View className="shrink-0 flex-row items-center gap-1">

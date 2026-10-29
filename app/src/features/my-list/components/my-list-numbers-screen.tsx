@@ -4,16 +4,21 @@ import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import {
+  NoteDetailsDialog,
   PostCallDialog,
   PreCallNotesDialog,
   useDirectCall,
   usePreCallNotes,
 } from '@/features/dialer';
-import type { MyListFlag, MyListNumber } from '@/features/tracking';
+import type { MyListFlag } from '@/features/tracking';
+import { useViewedNumberNote } from '@/shared/hooks/use-viewed-number-note';
 import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
 import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
 import { useMyListDownload } from '../hooks/use-my-list-download';
-import { useMyListNumbers } from '../hooks/use-my-list-numbers';
+import {
+  useMyListNumbers,
+  type MyListNumberWithNote,
+} from '../hooks/use-my-list-numbers';
 import { getMyListFlagLabel } from '../lib/my-list-flag-labels';
 import { MyListNumberRow } from './my-list-number-row';
 import { MyListNumbersEmptyState } from './my-list-numbers-empty-state';
@@ -94,15 +99,17 @@ function MyListNumbersErrorView({
 }
 
 type MyListNumbersListProps = {
-  listNumbers: MyListNumber[];
+  listNumbers: MyListNumberWithNote[];
   onCallNumber: (phoneNumber: string) => void;
   onOpenWhatsAppChat: (phoneNumber: string) => void;
+  onOpenNumberNote: (phoneNumber: string, note: string) => void;
 };
 
 function MyListNumbersList({
   listNumbers,
   onCallNumber,
   onOpenWhatsAppChat,
+  onOpenNumberNote,
 }: MyListNumbersListProps) {
   return (
     <FlatList
@@ -119,6 +126,7 @@ function MyListNumbersList({
           listNumber={item}
           onCallNumber={onCallNumber}
           onOpenWhatsAppChat={onOpenWhatsAppChat}
+          onOpenNumberNote={onOpenNumberNote}
         />
       )}
     />
@@ -151,6 +159,7 @@ export function MyListNumbersScreen({
     ? null
     : trackedCall.phoneNumber;
   const pendingNotesCall = preCallNotes.pendingNotesCall;
+  const numberNote = useViewedNumberNote();
 
   const handleBackPress = () => onBackPress();
   const handleTryAgainPress = () => reloadListNumbers();
@@ -168,6 +177,7 @@ export function MyListNumbersScreen({
       listNumbers={listNumbers}
       onCallNumber={preCallNotes.requestCallWithNotes}
       onOpenWhatsAppChat={openChosenWhatsAppChat}
+      onOpenNumberNote={numberNote.openNumberNote}
     />
   );
 
@@ -194,6 +204,10 @@ export function MyListNumbersScreen({
         pendingNotesCall={pendingNotesCall}
         onCall={preCallNotes.confirmNotesCall}
         onCancel={preCallNotes.cancelNotesCall}
+      />
+      <NoteDetailsDialog
+        viewedNumberNote={numberNote.viewedNumberNote}
+        onClose={numberNote.closeNumberNote}
       />
     </View>
   );

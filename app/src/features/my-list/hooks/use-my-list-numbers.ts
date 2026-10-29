@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { findPreCallNotes } from '@/features/dialer';
+import { readListRowNotes } from '@/features/dialer';
 import {
   readMyListNumbersByFlag,
   subscribeToMyListChanged,
@@ -44,7 +44,7 @@ export function useMyListNumbers(listFlag: MyListFlag): UseMyListNumbersResult {
 
     try {
       const flagListNumbers = await readMyListNumbersByFlag(listFlag);
-      const listNumberNotes = await findPreCallNotes(
+      const listNumberNotes = await readListRowNotes(
         flagListNumbers.map(listNumber => listNumber.phoneNumber),
       );
       if (latestRequestIdRef.current !== requestId) {

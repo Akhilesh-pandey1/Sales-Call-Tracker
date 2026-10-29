@@ -2,7 +2,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { ToastAndroid } from 'react-native';
 import { useCallback, useRef, useState } from 'react';
 import { callHistoryPageSize } from '@/config/app-config';
-import { findPreCallNotes } from '@/features/dialer';
+import { readListRowNotes } from '@/features/dialer';
 import { readStoredCountry } from '@/features/auth';
 import {
   readAllScheduledReminders,
@@ -65,7 +65,7 @@ function toMarkedHistoryItems(
 async function readEntryNotes(
   historyEntries: CallHistoryEntry[],
 ): Promise<(string | null)[]> {
-  const entryNotes = await findPreCallNotes(
+  const entryNotes = await readListRowNotes(
     historyEntries.map(historyEntry => historyEntry.phoneNumber),
   );
   return entryNotes;

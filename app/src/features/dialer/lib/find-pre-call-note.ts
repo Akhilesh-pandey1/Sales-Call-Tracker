@@ -2,6 +2,7 @@ import {
   readBookingNoteByPhoneNumber,
   readMyListNoteByPhoneNumber,
 } from '@/features/tracking';
+import { readIsNotesPopupOn } from '@/shared/utils/notes-popup-settings';
 
 function readStoredNoteOrNone(noteText: string | null): string | null {
   if (noteText === null) {
@@ -16,7 +17,7 @@ function readStoredNoteOrNone(noteText: string | null): string | null {
   return noteText;
 }
 
-export async function findPreCallNote(
+async function readStoredNoteForNumber(
   phoneNumber: string,
 ): Promise<string | null> {
   const [myListNote, bookingNote] = await Promise.all([
@@ -31,17 +32,43 @@ export async function findPreCallNote(
   return noteFromBooking;
 }
 
+export async function findPreCallNote(
+  phoneNumber: string,
+): Promise<string | null> {
+  const [isNotesPopupOn, storedNoteForNumber] = await Promise.all([
+    readIsNotesPopupOn(),
+    readStoredNoteForNumber(phoneNumber),
+  ]);
+  if (!isNotesPopupOn) {
+    const noGatedNote = null;
+    return noGatedNote;
+  }
+  return storedNoteForNumber;
+}
+
 export function readLeadPreCallNote(
   leadNotes: string | null | undefined,
 ): string | null {
   return readStoredNoteOrNone(leadNotes ?? null);
 }
 
-export async function findPreCallNotes(
+export async function findLeadPreCallNote(
+  leadNotes: string | null | undefined,
+): Promise<string | null> {
+  const isNotesPopupOn = await readIsNotesPopupOn();
+  if (!isNotesPopupOn) {
+    const noGatedLeadNote = null;
+    return noGatedLeadNote;
+  }
+  const leadPreCallNote = readLeadPreCallNote(leadNotes);
+  return leadPreCallNote;
+}
+
+export async function readListRowNotes(
   phoneNumbers: string[],
 ): Promise<(string | null)[]> {
-  const preCallNotes = await Promise.all(
-    phoneNumbers.map(phoneNumber => findPreCallNote(phoneNumber)),
+  const rowNotes = await Promise.all(
+    phoneNumbers.map(phoneNumber => readStoredNoteForNumber(phoneNumber)),
   );
-  return preCallNotes;
+  return rowNotes;
 }

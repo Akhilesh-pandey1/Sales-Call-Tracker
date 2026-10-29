@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { findPreCallNotes } from '@/features/dialer';
+import { readListRowNotes } from '@/features/dialer';
 import {
   readAllScheduledReminders,
   removeScheduledReminderForNumber,
@@ -108,7 +108,7 @@ export function useScheduledReminders(): UseScheduledRemindersResult {
       if (latestRequestIdRef.current !== requestId) {
         return;
       }
-      const reminderNotes = await findPreCallNotes(
+      const reminderNotes = await readListRowNotes(
         reminders.map(reminder => reminder.phoneNumber),
       );
       if (latestRequestIdRef.current !== requestId) {

@@ -21,13 +21,13 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] With the switch off, a noted number tapped on a list row, the automated lead card, or My List Start Calling dials at once with no notes screen (`specs/pre-call-notes.md` — "Switch off dials noted numbers straight", "Switch off dials the automated lead straight").
-- [ ] With the switch on, the popup shows exactly as before, and a flip applies from the very next call attempt (`specs/pre-call-notes.md` — "Notes popup appears with a note", "A flip applies from the next call").
-- [ ] With the switch off, the info icon still shows on noted rows and opens the note; the keypad and Call Again behave as before (`specs/pre-call-notes.md` — "Switch off keeps the info icon").
+- [x] With the switch off, a noted number tapped on a list row, the automated lead card, or My List Start Calling dials at once with no notes screen (`specs/pre-call-notes.md` — "Switch off dials noted numbers straight", "Switch off dials the automated lead straight").
+- [x] With the switch on, the popup shows exactly as before, and a flip applies from the very next call attempt (`specs/pre-call-notes.md` — "Notes popup appears with a note", "A flip applies from the next call").
+- [x] With the switch off, the info icon still shows on noted rows and opens the note; the keypad and Call Again behave as before (`specs/pre-call-notes.md` — "Switch off keeps the info icon").
 
 **Verification:**
-- [ ] Tests pass: `npx jest find-pre-call-note` in `app/` (switch off + note → no popup, switch on + note → popup, off + no note → straight dial)
-- [ ] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`
+- [x] Tests pass: `npx jest find-pre-call-note` in `app/` (switch off + note → no popup, switch on + note → popup, off + no note → straight dial)
+- [x] Lint and types pass: `npm run lint` and `npx tsc --noEmit` in `app/`

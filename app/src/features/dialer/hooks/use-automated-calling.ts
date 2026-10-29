@@ -39,6 +39,7 @@ export function useAutomatedCalling(): UseAutomatedCallingResult {
   const {
     startErrorMessage,
     notedLead,
+    dialLead,
     requestDialLead,
     confirmNotedLeadCall,
     cancelNotedLeadCall,
@@ -46,7 +47,12 @@ export function useAutomatedCalling(): UseAutomatedCallingResult {
     dialCurrentLead,
   } = useLeadLoading(viewStateRef, updateViewState);
 
-  const leadPostCall = useLeadPostCall(viewStateRef, updateViewState, requestDialLead);
+  const leadPostCall = useLeadPostCall(
+    viewStateRef,
+    updateViewState,
+    requestDialLead,
+    dialLead,
+  );
 
   useCallHangUpDetector(viewState.kind === 'dialing', leadPostCall.showPostCallDialog);
 

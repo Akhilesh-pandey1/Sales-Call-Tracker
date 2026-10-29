@@ -9,12 +9,12 @@ from backend.app.config.base import (
     MAX_CALL_AGE_DAYS,
     MAX_LEAD_ATTEMPTS,
     MAX_SCHEDULE_AHEAD_DAYS,
+    NOTE_MAX_LENGTH,
     RETRY_LOCK_HOURS,
 )
 from backend.app.core.security import hash_password
 from backend.app.core.utils import (
     get_ist_timezone,
-    normalize_phone_number,
     now_ist,
     now_utc,
     to_ist,
@@ -916,8 +916,8 @@ def test_phone_number_normalization_international_format(
         assert saved_call.phone_number == "+14155552671"
 
 
-def test_phone_number_normalization_unparseable_stored_raw(
-    app: Flask, client: FlaskClient
+def test_sync_invalid_number_row_discarded_while_valid_saved(
+    app: Flask, client: FlaskClient, caplog: pytest.LogCaptureFixture
 ) -> None:
     with app.app_context():
         user: User = create_user_fixture(country="IN")
@@ -926,20 +926,45 @@ def test_phone_number_normalization_unparseable_stored_raw(
         payload: dict[str, Any] = {
             "calls": [
                 {
-                    "call_id": "call-raw",
+                    "call_id": "call-invalid-number",
                     "phone_number": "invalid-12345",
                     "dialed_at": build_ist_dialed_at(0, 12, 0),
-                    "duration_seconds": 5,
-                }
+                    "duration_seconds": 30,
+                },
+                {
+                    "call_id": "call-valid-number",
+                    "phone_number": "9876543212",
+                    "dialed_at": build_ist_dialed_at(0, 12, 5),
+                    "duration_seconds": 30,
+                },
             ]
         }
 
-        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
-        assert response.status_code == 200
+        services_logger_name: str = "backend.app.modules.calls.services"
+        with caplog.at_level(logging.WARNING, logger=services_logger_name):
+            response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        response_json: dict[str, Any] = response.get_json()
 
-        saved_call: Call | None = db.session.get(Call, "call-raw")
-        assert saved_call is not None
-        assert saved_call.phone_number == "12345"
+        expected_code: int = 200
+        assert status_code == expected_code
+        assert response_json == {"status": True, "schedule_refused_call_ids": []}
+
+        assert db.session.get(Call, "call-invalid-number") is None
+
+        saved_valid_call: Call | None = db.session.get(Call, "call-valid-number")
+        assert saved_valid_call is not None
+        assert saved_valid_call.phone_number == "+919876543212"
+
+        dropped_number_lead_count: int = Lead.query.filter_by(phone_number="12345").count()
+        expected_dropped_number_lead_count: int = 0
+        assert dropped_number_lead_count == expected_dropped_number_lead_count
+
+        total_lead_count: int = Lead.query.count()
+        expected_total_lead_count: int = 1
+        assert total_lead_count == expected_total_lead_count
+
+        assert "call-invalid-number" in caplog.text
 
 
 def test_lead_resolution_connected_call_finishes_lead(
@@ -1395,6 +1420,88 @@ def test_lead_resolution_call_note_copied_onto_lead(
         assert refreshed_lead.notes == call_note
         assert refreshed_lead.interested is False
         assert refreshed_lead.do_not_call is False
+
+
+def test_sync_truncates_note_past_cap_on_call_row_and_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=0,
+        )
+
+        extra_characters: int = 50
+        long_note: str = "x" * (NOTE_MAX_LENGTH + extra_characters)
+        expected_truncated_note: str = "x" * NOTE_MAX_LENGTH
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-with-long-note",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 30,
+                    "notes": long_note,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        expected_code: int = 200
+        assert status_code == expected_code
+
+        saved_call: Call | None = db.session.get(Call, "call-with-long-note")
+        assert saved_call is not None
+        assert saved_call.notes == expected_truncated_note
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.notes == expected_truncated_note
+
+
+def test_sync_note_at_exact_cap_saves_unchanged_on_call_row_and_lead(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        user: User = create_user_fixture()
+        headers: dict[str, str] = {"Authorization": f"Bearer {fetch_user_session_token(user.id)}"}
+
+        lead: Lead = create_lead_fixture(
+            phone_number="+919876543210",
+            status="waiting",
+            attempt_count=0,
+        )
+
+        full_note: str = "y" * NOTE_MAX_LENGTH
+        payload: dict[str, Any] = {
+            "calls": [
+                {
+                    "call_id": "call-with-full-cap-note",
+                    "phone_number": "+919876543210",
+                    "dialed_at": build_ist_dialed_at(0, 12, 0),
+                    "duration_seconds": 30,
+                    "notes": full_note,
+                }
+            ]
+        }
+
+        response: Response = client.post("/api/calls/sync", json=payload, headers=headers)
+        status_code: int = response.status_code
+        expected_code: int = 200
+        assert status_code == expected_code
+
+        saved_call: Call | None = db.session.get(Call, "call-with-full-cap-note")
+        assert saved_call is not None
+        assert saved_call.notes == full_note
+
+        refreshed_lead: Lead | None = db.session.get(Lead, lead.id)
+        assert refreshed_lead is not None
+        assert refreshed_lead.notes == full_note
 
 
 def test_lead_resolution_no_outcome_resolves_as_before_and_keeps_prior_label(

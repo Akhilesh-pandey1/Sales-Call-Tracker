@@ -4,6 +4,7 @@ from backend.app.modules.leads.services import (
     release_expired_bookings,
     resolve_lead_for_call,
     schedule_resolved_lead_for_call,
+    validate_and_format_e164,
 )
 
 __all__: list[str] = [
@@ -12,4 +13,5 @@ __all__: list[str] = [
     "release_expired_bookings",
     "resolve_lead_for_call",
     "schedule_resolved_lead_for_call",
+    "validate_and_format_e164",
 ]

@@ -43,6 +43,7 @@ class ServedLead(BaseModel):
     phone_number: str
     attempt_count: int
     is_scheduled: bool
+    notes: str | None = None
 
 
 class NextLeadResponse(BaseModel):

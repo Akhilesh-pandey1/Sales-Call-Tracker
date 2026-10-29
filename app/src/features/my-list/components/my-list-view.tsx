@@ -5,6 +5,7 @@ import type { LucideIcon } from 'lucide-react-native';
 import { Download, Play, Trash2, Upload } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
+import type { MyListFlag } from '@/features/tracking';
 import { useClearMyList } from '../hooks/use-clear-my-list';
 import { useMyList } from '../hooks/use-my-list';
 import { useMyListDownload } from '../hooks/use-my-list-download';
@@ -48,9 +49,10 @@ function MyListActionButton({ label, icon, iconClass, onPress }: MyListActionBut
 
 type MyListViewProps = {
   onStartCalling: () => void;
+  onOpenListFlag: (listFlag: MyListFlag) => void;
 };
 
-export function MyListView({ onStartCalling }: MyListViewProps) {
+export function MyListView({ onStartCalling, onOpenListFlag }: MyListViewProps) {
   const { counts, hasNumbers, errorMessage, reloadListCounts } = useMyList();
   const upload = useMyListUpload();
   const download = useMyListDownload();
@@ -111,7 +113,7 @@ export function MyListView({ onStartCalling }: MyListViewProps) {
             </View>
           ) : null}
           <View className={hasNumbers ? 'mt-5' : ''}>
-            <MyListSummaryCards counts={counts} />
+            <MyListSummaryCards counts={counts} onOpenListFlag={onOpenListFlag} />
           </View>
         </View>
         {hasNumbers ? (

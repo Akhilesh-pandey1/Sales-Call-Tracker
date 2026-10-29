@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import type { RefObject } from 'react';
 import { fetchNextLead, type ServedLead } from '../api/leads.api';
 import { launchTrackedCall, showCallLaunchErrorToast } from '../lib/call-launcher';
-import { readLeadPreCallNote } from '../lib/find-pre-call-note';
+import { findLeadPreCallNote } from '../lib/find-pre-call-note';
 import { readRequestErrorMessage } from '../lib/request-error';
 import type { AutomatedViewState } from './use-automated-calling';
 
@@ -57,7 +57,7 @@ export function useLeadLoading(
 
   const requestDialLead = useCallback(
     async (lead: ServedLead): Promise<void> => {
-      const leadPreCallNote = readLeadPreCallNote(lead.notes);
+      const leadPreCallNote = await findLeadPreCallNote(lead.notes);
       if (leadPreCallNote === null) {
         await dialLead(lead);
         return;

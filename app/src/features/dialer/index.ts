@@ -5,7 +5,7 @@ export { PostCallDialog } from './components/post-call-dialog';
 export { PreCallNotesDialog } from './components/pre-call-notes-dialog';
 export {
   findPreCallNote,
-  findPreCallNotes,
+  readListRowNotes,
 } from './lib/find-pre-call-note';
 export { useDirectCall } from './hooks/use-direct-call';
 export type { UseDirectCallResult } from './hooks/use-direct-call';

@@ -159,21 +159,21 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
   - Paste button - fills the number field from clipboard
   - Call button - grey and unpressable until the number is valid for the country; green when valid; starts the call at once, no confirm step
   - Post-call popup - opens by itself when a keypad call ends; same popup as the lead call - the dialed number, the schedule choice (Do not schedule / Schedule) with the follow-up time field below, and one Submit button - no "Go to next call"
-  - Submit clears the number - submitting the popup, either schedule choice, wipes the typed number to blank, ready for the next call
+  - Submit clears the number - submitting the popup, either schedule choice or Call Again, wipes the typed number to blank, ready for the next call
 - **Automated view (lead calling)**:
-  - Start Calling button - dials the next lead at once, one tap, no lead card step; a due booked lead comes first when it is time
+  - Start Calling button - dials the next lead at once, one tap, no lead card step; a due booked lead comes first when it is time; a served lead with a note shows the notes popup (Screen 7a2) before its call
   - Lead number with Copy button - one tap copies the lead's number while ringing, during the call, and on the post-call popup; "Number copied." toast
   - Post-call popup - opens by itself when the call ends: two choices - "Do not schedule" pre-selected and "Schedule", which reveals the follow-up time field below in the same popup; a pre-checked "Go to next call" checkbox; one Submit button
   - Submit - saves the chosen schedule and sends the call; with the box checked the next lead's call starts at once; with the box unchecked the flow pauses until Start Calling again
   - Booking a lead sets a reminder - at the booked time the phone itself shows "Time to call" with the lead's number; tapping the notification opens this screen straight to the booked lead's card, ready to call, and clears that booking from the Scheduled tab; one notification per booking, never repeats
   - Follow-up time field (both popups) - tapping it opens the phone's date picker first, then the time picker; starts at tomorrow 9:00 AM; past dates and dates beyond 30 days cannot be picked
   - Locked popup (both popups) - tapping outside or pressing the back button does nothing; Submit is the only way through
-- Every post-call popup (all views) - carries the same two optional outcome buttons, Interested and Do not call again, plus an optional Notes box; the two buttons cannot both be on - tapping one clears the other, and tapping it again clears it too; nothing preselected, Submit works with it all empty
+- Every post-call popup (all views) - carries the same two optional outcome buttons, Interested and Do not call again, plus an optional Notes box; the two buttons cannot both be on - tapping one clears the other, and tapping it again clears it too; nothing preselected, Submit works with it all empty; the Notes box stops at 200 characters and shows an N/200 counter; a Call Again button sits beside Submit - it saves exactly like Submit and then dials the same number again at once, and a fresh popup follows; the "Go to next call" checkbox is ignored on a Call Again tap
 - Red banner (all views when any call permission is off) - "Calls are not being logged", with a Fix button that opens Android app settings
 
 **Edge cases:**
 - Paste with nothing copied: "Nothing copied." toast; typed number stays untouched
-- Number not valid yet: Call button stays grey
+- Number not valid for the country: the Call button stays grey and shows "Enter a valid phone number." - nothing dials
 - Any of the three call permissions off: red banner shows; Fix opens Android settings; banner clears once all three are on
 - Call permission off: tapping Call hands the number to the phone's own dialer (one extra tap there) - that call is not recorded
 - Direct call fails to start: "Could not start the call. Please try again."
@@ -189,11 +189,11 @@ Same as Screen 1 Login (shared design, same messages) - without the manager-only
 The Dialer pill switch's third item - Keypad | Automated | My List. The salesperson's personal calling list: it lives only on this phone, never on the server, and the manager never sees it. Everything works offline.
 
 - Action buttons at the top - a row of Upload, Download, Clear, with Start Calling right below them
-- KPI cards (4, My Stats style) - Left, Called, Interested, Do not call; one big count per card; Left means never dialed, Called counts the Connected + Not connected rows together
+- KPI cards (4, My Stats style) - Left, Called, Interested, Do not call; one big count per card; Left means never dialed, Called counts the Connected + Not connected rows together; the Interested and Do not call cards are tappable and open Screen 7a1 with that list - Left and Called stay plain count cards
 - Row leaves Left after any recorded call to its number - from Start Calling or a keypad dial alike; the call's outcome and note are saved on the row
 - Upload button - opens the upload dialog below
-- Start Calling button - dials the Left numbers one by one
-- Download button - exports the whole list as a CSV (number, status, interested, do-not-call, notes, called date) through Android's share sheet
+- Start Calling button - dials the Left numbers one by one; a number with a note shows the notes popup (Screen 7a2) before its call
+- Download button - saves the whole list as a CSV file in the phone's Downloads folder (number, status, interested, do-not-call, notes, called date, called time), named by the save moment; a toast confirms with the file name
 - Clear button - wipes the whole list after a confirmation that shows the counts: left and called; the server is never touched
 - Post-call popup - the same outcome buttons and Notes box every popup carries, plus the schedule choice and the pre-checked "Go to next call" checkbox (Screen 7); choosing Schedule books the number so it appears on the Scheduled tab with Call, Copy, and WhatsApp
 - Uploading replaces - a number already on the list in any state has its old row deleted and is added fresh as Left; the same number twice in one upload counts once
@@ -208,17 +208,51 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 - Start Calling reaches a Do-not-track number: it is skipped and never recorded
 - Empty list: only the count chips at zero, with Upload as the invite
 
+→ Next: Screen 7a1 Interested / Do-not-call list
+
+### Screen 7a1: Interested / Do-not-call list
+Opened by tapping the Interested or Do not call card on Screen 7a. One shared screen for both lists - the title says which. Lives on this phone only, works offline.
+
+- Back arrow - returns to Screen 7a My List
+- Title - "Interested" or "Do not call", matching the card tapped
+- Rows - one per number in that list: the number with a Call icon and a WhatsApp button, same look as the History rows; newest called at the top
+- Call icon per row - dials the number directly - the notes popup (Screen 7a2) shows first when the number has a note - and the post-call popup follows
+- WhatsApp button per row - opens the chosen WhatsApp app on that number's chat; the list stays untouched
+- Info icon per row - a small icon just right of the date, only when the number has a note; opens a small popup with its one note
+- Download button - saves only this list's rows as a CSV file in the phone's Downloads folder, same columns and naming as the whole-list download; a toast confirms with the file name
+- A later call marked with the other outcome moves the number to the other list
+
+**Edge cases:**
+- Empty list: "No numbers here yet."
+- WhatsApp app not installed: "WhatsApp is not installed." toast
+
+→ Next: Screen 7a2 Notes before a call
+
+### Screen 7a2: Notes before a call
+A small popup over the list - not a full page - shown before a call when the number has a note, from the Scheduled, History, Interested, and Do-not-call rows, the automated lead card, and My List Start Calling.
+
+- Title "Notes" with the number below - the same look as the info-icon popup
+- Note - one card with the number's single note, nothing else - a new note overrides the last one, local or server; in the automated flow the lead's note arrives from the server
+- Call button - green, dials through the same flow as before
+- Cancel - closes the popup with no call placed; an automated lead stays claimed for its 10 minutes
+- Never shows - on the keypad, and on a Call Again redial
+- Works offline from the phone's own notes
+
+**Edge cases:**
+- Number has no notes: this screen never appears - the call goes straight through
+
 → Next: Screen 7b Scheduled
 
 ### Screen 7b: Scheduled - second tab
 - Every callback booked on this phone - so a dismissed notification never means a lost call; saved on the phone, works offline
 - Due rows stand out - bookings past their time get a red border; the same count shows as a badge on the tab
 - Bookings list - Due first (most overdue at top), then Upcoming soonest first
-- Booking row - the number, the booked date and time, and a state badge: Upcoming (its time has not come) or Due (time passed, not handled)
+- Booking row - the number, the booked date and time, and a state badge: Upcoming (its time has not come) or Due (time passed, not handled); an Interested tag shows when the booking came from an Interested call or the number is flagged Interested in My List
 - Tap a row - opens the booked lead's card ready to call
-- Call icon per row - dials the number directly, and the same post-call popup as the keypad follows
+- Call icon per row - dials the number directly - the notes popup (Screen 7a2) shows first when the number has a note - and the same post-call popup as the keypad follows
 - Reload icon in the header - pulls in newer bookings without reopening the tab
 - Copy button per row - copies the number, "Number copied." toast
+- Info icon per row - a small icon just right of the date, only when the number has a note; opens a small popup with its one note
 - WhatsApp button per row - opens the chosen WhatsApp app on that number's chat
 - WhatsApp tap removes the row - the booking is handled without a call, so it leaves the list at once
 - Call overwrites the booking - the popup after the direct call decides: "Do not schedule" leaves the row removed; a new schedule replaces the old booking with the new date
@@ -234,10 +268,11 @@ The Dialer pill switch's third item - Keypad | Automated | My List. The salesper
 - Every call this phone recorded - dialed out and incoming, saved on the phone; works offline
 - Calls list - newest first, 50 rows at a time with a Load-more button at the bottom
 - Call row - the number, an out or in mark, the date-time, and the result: connected with talk time, or not connected
-- Call icon per row - dials the number directly, no keypad stop, and the same post-call popup as the keypad follows; rows look like the Scheduled tab rows; tapping the row dials too
+- Call icon per row - dials the number directly, no keypad stop - the notes popup (Screen 7a2) shows first when the number has a note - and the same post-call popup as the keypad follows; rows look like the Scheduled tab rows; tapping the row dials too
 - Reload icon in the header - pulls in newer calls without reopening the tab
 - Copy button per row - copies the number, "Number copied." toast
 - WhatsApp button per row - opens the chosen WhatsApp app on that number's chat
+- Info icon per row - a small icon just right of the date, only when it has a note (its My List row or its booked callback); opens a small popup with its one note
 - Scheduled badge - shows on rows whose number has a booked callback
 - First open after the update - the list fills once from the phone's own call log
 - Every tab open - pulls in the calls made since the last look, even ones made while the app was closed

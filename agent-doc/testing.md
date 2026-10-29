@@ -1,6 +1,6 @@
 # Testing Specifications
 
-Automated tests live in the backend API using `pytest`. Mobile testing is handled through the dedicated tracking spike checklist on physical Android devices.
+Automated tests live in the backend API using `pytest` and in the app using Jest. Mobile testing is handled through the dedicated tracking spike checklist on physical Android devices.
 
 ---
 
@@ -23,6 +23,8 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 - A call starting 18:59 and exactly 19:00 IST are saved; 19:01 is discarded (window end inclusive).
 - After the manager updates the office hours window, the gate uses the new window on the next sync.
 - Malformed call rows are skipped while valid rows in the same batch are saved.
+- A call whose number is not a valid phone number for the user's country is discarded with a server log line — no call row, no lead created — and the batch still returns success.
+- A `notes` value longer than 200 characters is saved truncated to 200.
 - A sync item with `interested: true` and a note saves both on the call row and on the matched lead; the lead's attempt rules run unchanged.
 - A sync item with `do_not_call: true` sets the matched lead's status to `stopped` even when the call was not connected; claims and schedules clear.
 - Items without the flags and `notes` save with both flags false and the note empty.
@@ -80,6 +82,7 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
   - Serves due scheduled leads reserved for the calling salesperson before new pool leads.
   - Serves newest available leads (`created_at DESC`) when no due schedules exist.
   - Claims the served lead for 10 minutes (`CLAIM_MINUTES`).
+  - The served lead carries its stored note; a lead with no note carries none.
   - Supports scheduling current lead and fetching next in a single request; a schedule books the lead whatever its state — `done` and `stopped` included, ending `waiting` with the retry lock and claim cleared — the scheduler owns the reservation, and a schedule clears a claim held by a different salesperson.
   - The hourly expiry job frees expired bookings: a lead still `waiting` booked more than 24 hours past its time (`SCHEDULE_EXPIRE_HOURS`) returns to the pool with attempts untouched; a booking inside the 24-hour window stays reserved.
   - Serving a lead never frees expired bookings — a lead whose booking just expired stays invisible in the pool until the job runs.
@@ -105,7 +108,28 @@ Automated tests live in the backend API using `pytest`. Mobile testing is handle
 
 ---
 
-## 2. Mobile Android Spike Checklist
+## 2. App Unit Tests (`app/`)
+
+Run with `npx jest` in `app/`.
+
+### My List lists
+- Tapping the Interested or Do-not-call card opens the shared list screen filtered to that flag, newest called first.
+- The per-list Download builds the CSV with only that list's rows and the whole-list columns.
+
+### Post-call popup
+- Call Again saves the choices like Submit and redials the same number.
+- The Notes box stops accepting input at the configured cap and reports N/200.
+
+### Notes
+- Submitting the popup with a schedule saves the note and the interested choice on the booking row.
+- Notes are one per number: a new note overrides the last on the My List row, and a rebooking overwrites the booking note.
+- The notes screen appears only when the number has a note — its My List row or its active booking; the info icon only on rows with a note.
+- A booking whose call chose Interested, or whose number is flagged Interested in My List, shows the Interested tag on the Scheduled row.
+- The keypad refuses a number that is not valid for the login country with "Enter a valid phone number.".
+
+---
+
+## 3. Mobile Android Spike Checklist
 
 The tracking spike verifies the complete dialer and call-log pipeline on the oldest target Android phone before UI construction:
 1. Normal answered call records actual talk time (not ring time).
@@ -119,7 +143,7 @@ The tracking spike verifies the complete dialer and call-log pipeline on the old
 
 ---
 
-## 3. App Calling & Navigation — Manual On-Device Pass
+## 4. App Calling & Navigation — Manual On-Device Pass
 
 The app has no automated UI tests; the calling and navigation fixes are verified by hand on a real phone:
 - Tapping Call starts the call at once in the Android calling screen — no other dialer app, no second confirm tap.
@@ -196,3 +220,10 @@ The app has no automated UI tests; the calling and navigation fixes are verified
 - An empty password shows "Enter the password." and sends nothing.
 - Adding a Do-not-track number still works with airplane mode on.
 - After the manager changes the server's remove password, the new one works on the phone at the next removal with no app update.
+- Tapping the Interested or Do-not-call card in My List opens that list — the number with Call and WhatsApp on each row, newest called first — and its Download saves only that list's rows as a CSV in Downloads with a toast naming the file.
+- Call Again on any post-call popup saves the choices like Submit and redials the same number; a fresh popup follows and the "Go to next call" checkbox is ignored.
+- The keypad refuses a number that is not valid for the login country with "Enter a valid phone number." and dials nothing.
+- A number with a note shows the notes popup before the call on list rows, the automated card, and Start Calling — read, then Call; a number without a note dials at once, and the keypad never shows the popup.
+- The info icon shows only on rows whose number has a note and opens the note popup with that one note; the row's actions stay untouched.
+- The popup's Notes box stops at 200 characters and shows the N/200 counter.
+- A booking made with Interested chosen — or for a number flagged Interested in My List — shows the Interested tag on its Scheduled row; a plain booking shows none, and rebooking sets the tag fresh.

@@ -175,11 +175,15 @@ One row per booked reminder — a booked lead, or a number booked from the keypa
 CREATE TABLE scheduled_reminders (
     lead_id INTEGER PRIMARY KEY,
     phone_number TEXT NOT NULL,
-    scheduled_at TEXT NOT NULL
+    scheduled_at TEXT NOT NULL,
+    notes TEXT,
+    interested INTEGER NOT NULL DEFAULT 0
 );
 ```
 
 - `lead_id` is the reminder's key: the lead's id for lead bookings, or a stable negative key derived from the phone number for keypad bookings — so a keypad key can never collide with a real lead id. Rebooking the same number replaces the row.
+- `notes` holds the booking's one note — the note from the call that booked the schedule, written at Submit and overwritten on rebooking; the row's info icon and the pre-call notes popup read it.
+- `interested` is set at booking time — 1 when the booking call's popup chose Interested or the number's My List row is flagged Interested; the Scheduled row shows the Interested tag only when it is 1.
 - Submitting a call to the booked number deletes the row, matched by normalized phone number.
 
 ### `call_history`
@@ -221,7 +225,9 @@ CREATE TABLE my_list_numbers (
 - `phone_number` is E.164. Upload replaces: an existing row in any state is deleted and a fresh `left` row is inserted — the same number twice in one upload inserts once.
 - `status` is `left` or `called`; `called_at` fills when any recorded call to the number is submitted — from Start Calling or the keypad.
 - `interested` and `do_not_call` are the popup's yes/no choices (0/1); the row badge shows Interested or Do not call when one is set.
+- `notes` holds the row's one note — each new call's note overwrites the last.
 - Download reads the whole table for the CSV export; Clear deletes all rows after a confirmation that shows the left and called counts.
+- The Interested and Do-not-call list screens read this table by their flag, newest `called_at` first; each list's Download exports only its own rows with the same columns as the whole-list CSV.
 - The upload size cap lives in the app's `config.json` as `my_list_max_numbers` (10000).
 
 ---

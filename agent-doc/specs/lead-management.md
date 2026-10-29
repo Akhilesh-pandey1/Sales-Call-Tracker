@@ -83,6 +83,19 @@ The system SHALL serve leads in the following priority: (1) the current unexpire
 - **WHEN** they request the next lead
 - **THEN** the server responds success with no lead
 
+### Requirement: Served lead carries its stored note
+The lead served by the next-lead response SHALL carry its stored note — the note from its last noted call — omitted when the lead has none, so the phone can show it before the call.
+
+#### Scenario: Note rides with the served lead
+- **GIVEN** a waiting lead whose last noted call left "Asked to call after 6 pm"
+- **WHEN** the lead is served
+- **THEN** the response's lead object carries that note
+
+#### Scenario: Lead with no note carries none
+- **GIVEN** a lead that never received a noted call
+- **WHEN** it is served
+- **THEN** the lead object carries no note
+
 ### Requirement: Lead claim window
 The system SHALL claim the served lead for the requesting salesperson for 10 minutes (`CLAIM_MINUTES`); an expired claim makes the lead available to any salesperson again.
 

@@ -27,6 +27,34 @@ The system SHALL read the local `scheduled_reminders` table — lead bookings an
 - **WHEN** the list renders
 - **THEN** Due rows come first with the most overdue at top, followed by Upcoming rows soonest first
 
+### Requirement: Booking carries its note and interested mark
+The moment a popup Submit books a schedule, the booking SHALL save the note typed on that call, and SHALL carry an interested flag set on when that call chose Interested or the number's My List row is flagged Interested. The Scheduled row SHALL show an Interested tag only while the flag is on, and rebooking SHALL replace the booking and set the note and flag fresh.
+
+#### Scenario: Booking saves the call's note
+- **GIVEN** a popup with the note "Wants the demo Tuesday" and Schedule chosen
+- **WHEN** Submit is tapped
+- **THEN** the booking carries that note and the pre-call notes popup shows it for the number
+
+#### Scenario: Tag shows for an interested booking
+- **GIVEN** a booking made from a call whose popup chose Interested
+- **WHEN** the Scheduled tab renders
+- **THEN** the row carries the Interested tag
+
+#### Scenario: Tag shows from the My List flag
+- **GIVEN** a booking for a number flagged Interested in My List, booked without choosing Interested
+- **WHEN** the Scheduled tab renders
+- **THEN** the row still carries the Interested tag
+
+#### Scenario: Plain booking shows no tag
+- **GIVEN** a booking with no interested mark anywhere local
+- **WHEN** the Scheduled tab renders
+- **THEN** the row shows no Interested tag
+
+#### Scenario: Rebooking sets the marks fresh
+- **GIVEN** a booking carrying the Interested tag
+- **WHEN** the number is rebooked from a call with no interested mark and no note
+- **THEN** the replaced booking shows no tag and no note
+
 ### Requirement: Row actions and tap-through
 Each row SHALL carry a Call button beside Copy and WhatsApp. Tapping the row SHALL open the booked lead's card ready to call — the same thing tapping the notification does. Tapping the Call button SHALL dial through the shared direct-call flow, and tapping WhatsApp SHALL open the chosen app on the number's chat and remove that booking from the list — the salesperson handled it.
 

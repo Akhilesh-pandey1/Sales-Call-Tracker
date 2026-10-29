@@ -1,6 +1,8 @@
-TO FIX 
+ My salesperson has pitched me some new features that I want to make. First feature they want is like where in the my list where they see the interested numbers. So if they click on it so they can see all the interested numbers. That is one feature they want. Another feature is like one bug is to be there that when they are uploading the CSV. In the CSV according to Indian numbers there are 10 numbers are available in the CSV but when they are calling from the my list only 9 numbers are visible and call is not going so that is one another problem in it. And third problem is in the admin side when admin is uploading the sheet of the leads it is showing no internet connection available. we have to fix that three bugs in our this box and add this feature in our application.
 
-- Remove the calling sim phone number feature, and all its related things. 
--  Two problems are coming in the feature where we have done something like that automatic it should pick the Apex sales call if someone select phone number in mobile. So in this actually problem is that first of all when we first time login so it does not show that feature. I have to log I have to again come back in the application close and again open then it comes. And second thing even I am allowing it but when from another software I am selecting that phone number and opening it. So it does not get open. That is the issue. Okay.  Is it even possible or not? In all the phone it should be possible otherwise not needed. And yeah that is actually a thing there.  Is it even possible or not? If not possible then we will remove complete feature from it. Okay, if possible then tell me why it is not working, even after allowing.  My current phone is Redmi Note 7S but it is just for context I am telling it should work on all Android phone.
+Calls (the hole): today a bad number falls back to raw digits and still becomes a lead. Change: bad number → server drops it, no call saved, no lead.
 
-- Download button in the my list is opening share and pasting text, but I want it should download CSV, actual csv, with name of "DD-MM-MM-SS.csv"
+At the call pop up their other than submit their should be one more feature like call again button we need to give. 
+
+Interested lead and do not call again from my list should we can see similar like schedule and history we can see the number list, call, WhatsApp and also download sheet button for this specific lists in csv. 
+

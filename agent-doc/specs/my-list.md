@@ -27,6 +27,47 @@ The system SHALL grow the Dialer's pill switch to three items — Keypad | Autom
 - **WHEN** the My List tab opens
 - **THEN** it reads "No numbers yet." with Upload as the invite
 
+### Requirement: Interested and Do-not-call cards open their lists
+The Interested and Do-not-call summary cards SHALL be tappable and SHALL open one shared list screen showing only that state's numbers — the Left and Called cards SHALL stay plain counts. The screen SHALL show the list's name as its title, one row per number with the number and Call and WhatsApp buttons in the same look as the History rows, newest called at the top, "No numbers here yet." when the list is empty, and a back arrow returning to the My List tab. Everything SHALL stay on the phone and work offline.
+
+#### Scenario: Interested card opens the interested list
+- **GIVEN** the list holds numbers flagged Interested
+- **WHEN** the Interested card is tapped
+- **THEN** the shared screen opens titled Interested showing only those numbers, newest called at the top
+
+#### Scenario: Do-not-call card opens its list
+- **GIVEN** the list holds numbers flagged Do not call
+- **WHEN** the Do not call card is tapped
+- **THEN** the shared screen opens titled Do not call showing only those numbers
+
+#### Scenario: Left and Called cards stay plain
+- **GIVEN** the My List tab renders
+- **WHEN** the Left or Called card is tapped
+- **THEN** nothing opens — they stay count cards
+
+#### Scenario: Empty list state
+- **GIVEN** no number carries the flag
+- **WHEN** the card is tapped
+- **THEN** the screen reads "No numbers here yet."
+
+### Requirement: List rows act like every list row
+Each row on the Interested and Do-not-call lists SHALL dial through the shared direct-call flow — the call places at once and the shared post-call popup follows — and its WhatsApp button SHALL open the chosen WhatsApp chat with the first-message setting applied and leave the list untouched. Each row SHALL also carry the info icon when the number has a note. The flags SHALL keep today's rules: a later call that marks the number with the other outcome moves it to the other list.
+
+#### Scenario: Call dials through the shared flow
+- **GIVEN** a row on the Interested list
+- **WHEN** its Call button is tapped
+- **THEN** the number dials at once through the shared direct-call flow and the shared post-call popup follows
+
+#### Scenario: WhatsApp opens the chat
+- **GIVEN** a row on either list
+- **WHEN** its WhatsApp button is tapped
+- **THEN** the chosen WhatsApp chat opens with the first message applied when the setting is on, and the list stays exactly as it was
+
+#### Scenario: The other outcome moves the number
+- **GIVEN** a number on the Interested list
+- **WHEN** a later call to it marks Do not call again
+- **THEN** the number leaves the Interested list and appears on the Do-not-call list
+
 ### Requirement: Phone-local only
 The list SHALL live only on the phone, in its own local SQLite table, never sent to the server; the manager never sees it, and everything on the tab works offline.
 
@@ -120,7 +161,7 @@ Start Calling SHALL never dial a Do-not-track number — a listed number is skip
 - **THEN** the row moves out of Left — any recorded call counts
 
 ### Requirement: First call attempt moves the row out of Left
-The system SHALL move a My List row out of Left on the first recorded call to its number — connected or not — saving the outcome and note on the row; Left SHALL count numbers never dialed.
+The system SHALL move a My List row out of Left on the first recorded call to its number — connected or not — saving the outcome and note on the row, a new note overriding the last; Left SHALL count numbers never dialed.
 
 #### Scenario: Unconnected call still moves the row
 - **GIVEN** a row in Left whose number was dialed and not connected
@@ -162,6 +203,19 @@ The system SHALL save the whole list as one real .csv file in the phone's Downlo
 - **GIVEN** rows called on different days
 - **WHEN** the CSV opens in a spreadsheet app
 - **THEN** each row keeps its own called date to filter on
+
+### Requirement: Each list downloads its own CSV
+The Interested and Do-not-call list screens SHALL each carry a Download button that saves only that list's rows as one .csv file in the phone's Downloads folder — the same columns and the same date-time file name as the whole-list download — with a toast confirming the save with the file's name.
+
+#### Scenario: Only that list's rows are saved
+- **GIVEN** the Interested list holds 5 of the list's 20 numbers
+- **WHEN** its Download button is tapped
+- **THEN** the saved CSV holds exactly those 5 rows with the whole-list columns, and the toast names the file
+
+#### Scenario: Same file naming as the whole list
+- **GIVEN** a per-list download runs
+- **WHEN** the file lands in Downloads
+- **THEN** its name carries the save moment as date and full time, like the whole-list download, so no download overwrites another
 
 ### Requirement: Clear wipes the whole list after confirmation
 The system SHALL wipe the whole list only after a confirmation that shows the counts — left and called — and SHALL touch nothing on the server.

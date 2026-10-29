@@ -74,6 +74,8 @@ Receives a batch of completed calls from the salesperson's mobile app.
   - Saves all valid call entries under the authenticated user's ID.
   - Saves the optional `interested`, `do_not_call`, and `notes` on the call row and copies the two yes/no flags and the note onto the lead matching the dialed number: `do_not_call: true` sets the lead's status to `stopped` — never served again — with claims and schedules cleared; `interested: true` is stored as a label and the normal attempt rules keep running. Connected is still derived from duration.
   - Silently ignores existing `call_id` values (idempotent unique key).
+  - Discards any call whose `phone_number` is not a valid phone number for the user's country, with a server log line — no call row is saved and no lead is created or changed. The batch still answers success.
+  - Truncates a `notes` value longer than 200 characters to 200 before saving.
   - Skips and logs any call older than 3 days (`MAX_CALL_AGE_DAYS`).
   - Skips and logs any call whose IST start minute falls outside the office hours window (`office_hours` table), both ends inclusive — a call started 19:00 is kept, 19:01 is skipped. The gate applies to both directions.
   - Lead creation and resolution run on OUTGOING calls only: a call whose normalized number has no lead in `leads` creates that lead as `waiting`, then resolves it like any uploaded lead. Incoming calls never create or resolve leads and never burn attempts.
@@ -464,10 +466,12 @@ Retrieves and claims the next lead for automated calling, with an optional lead 
       "id": 43,
       "phone_number": "+919876543210",
       "attempt_count": 0,
-      "is_scheduled": false
+      "is_scheduled": false,
+      "notes": "Asked to call after 6 pm"
     }
   }
   ```
+- `lead.notes` — string, optional. The lead's stored note from its last noted call, omitted when the lead has no note. The phone shows it as the newest note on the pre-call notes screen.
 - **Response 200** (pool empty, no lead available, or `continue_calling` was `false`):
   ```json
   {

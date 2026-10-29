@@ -97,8 +97,11 @@
             </label>
           </div>
           <label class="mt-2 block rounded-xl border border-[var(--color-border)] p-3 transition-colors duration-200 focus-within:border-[var(--color-primary)]">
-            <span class="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Notes (optional)</span>
-            <textarea rows="2" placeholder="e.g. Asked to call back after 6 PM" class="mt-1 w-full resize-none bg-transparent text-sm text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none"></textarea>
+            <span class="flex items-center justify-between">
+              <span class="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">Notes (optional)</span>
+              <span id="note-counter" class="text-[10px] font-medium tabular-nums text-[var(--color-muted-foreground)]">0/200</span>
+            </span>
+            <textarea id="note-box" rows="2" maxlength="200" placeholder="e.g. Asked to call back after 6 PM" class="mt-1 w-full resize-none bg-transparent text-sm text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none"></textarea>
           </label>
         </div>
 
@@ -138,8 +141,14 @@
           <p class="mt-1 pl-7 text-[10px] text-[var(--color-muted-foreground)]">Uncheck to stop automated calling after Submit.</p>
         </div>
 
-        <!-- One Submit button: reads the call record and sends the call -->
-        <div class="mt-5">
+        <!-- Submit sends the call; Call Again saves the same choices and dials the same number again -->
+        <div class="mt-5 grid grid-cols-2 gap-2">
+          <button type="button" class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] py-3 text-sm font-bold text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2">
+            <svg class="h-4 w-4 shrink-0 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            Call Again
+          </button>
           <button type="button" class="w-full cursor-pointer rounded-xl bg-[var(--color-primary)] py-3 text-sm font-bold text-[var(--color-on-primary)] shadow-xs transition-colors duration-200 hover:bg-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 text-center">Submit</button>
         </div>
 
@@ -176,6 +185,13 @@
     });
     scheduleOutcomeDoNotCall.addEventListener('change', () => {
       if (scheduleOutcomeDoNotCall.checked) scheduleOutcomeInterested.checked = false;
+    });
+
+    // The note counter follows the box, capped at 200 characters
+    const noteBox = document.getElementById('note-box');
+    const noteCounter = document.getElementById('note-counter');
+    noteBox.addEventListener('input', () => {
+      noteCounter.textContent = noteBox.value.length + '/200';
     });
   </script>
 

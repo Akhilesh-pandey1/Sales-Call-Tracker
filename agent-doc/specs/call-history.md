@@ -100,7 +100,7 @@ The system SHALL read the list newest first, 50 rows per page with a Load-more b
 - **THEN** the oldest row is deleted and the table still holds at most 1000
 
 ### Requirement: Row contents and empty state
-The system SHALL show each row with the number, an out or in mark, the date-time, and the result — connected with its talk time, or not connected — and SHALL carry a Call button beside Copy and WhatsApp, and a Scheduled badge when the number has an active booking in the local reminders table; tapping the row or its Call button dials the number directly through the shared direct-call flow instead of filling the keypad; with no calls yet the tab SHALL read "No calls yet."
+The system SHALL show each row with the number, an out or in mark, the date-time, and the result — connected with its talk time, or not connected — and SHALL carry a Call button beside Copy and WhatsApp, a Scheduled badge when the number has an active booking in the local reminders table, and an info icon when the number has notes; tapping the row or its Call button dials the number directly through the shared direct-call flow instead of filling the keypad; with no calls yet the tab SHALL read "No calls yet."
 
 #### Scenario: Connected row shows talk time
 - **GIVEN** a recorded call with duration above zero
@@ -126,6 +126,16 @@ The system SHALL show each row with the number, an out or in mark, the date-time
 - **GIVEN** any history row
 - **WHEN** the salesperson taps the row or its Call button
 - **THEN** the number dials directly through the shared direct-call flow — the keypad is never filled
+
+#### Scenario: Info icon only with notes
+- **GIVEN** a history row whose number has a note on its My List row or its active booking
+- **WHEN** the row renders
+- **THEN** it carries the info icon, and tapping it opens the notes popup newest first without touching the row's actions
+
+#### Scenario: No icon without notes
+- **GIVEN** a history row whose number has no note anywhere local
+- **WHEN** the row renders
+- **THEN** it carries no info icon
 
 #### Scenario: Empty state
 - **GIVEN** no call is recorded on the phone

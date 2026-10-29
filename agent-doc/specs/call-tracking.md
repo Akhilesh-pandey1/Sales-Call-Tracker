@@ -82,7 +82,7 @@ The system SHALL send all filled intent rows to the server in a single batch req
 - **THEN** the server skips it silently and still answers success
 
 ### Requirement: Server-side call ingestion
-The system SHALL accept batched calls, validate each row individually, save good rows under the token owner's ID, discard bad rows with a log line, skip calls older than `MAX_CALL_AGE_DAYS` days, drop calls whose IST start minute falls outside the manager's office-hours window, and still answer success so the app can clear its queue.
+The system SHALL accept batched calls, validate each row individually, save good rows under the token owner's ID, discard bad rows with a log line, drop rows whose phone number is not a valid phone number for the user's country, skip calls older than `MAX_CALL_AGE_DAYS` days, drop calls whose IST start minute falls outside the manager's office-hours window, truncate any note longer than the note cap (200 characters) to the cap, and still answer success so the app can clear its queue.
 
 #### Scenario: Valid batch saved
 - **GIVEN** a sync batch of valid call rows
@@ -105,7 +105,7 @@ The system SHALL accept batched calls, validate each row individually, save good
 - **THEN** that row is discarded, all other valid rows are saved, and success is still returned
 
 ### Requirement: Phone number normalization
-The system SHALL normalize all phone numbers to E.164 using the user's assigned country code before storing or matching; if normalization fails, the raw digits SHALL be stored so the call is never lost.
+The system SHALL normalize all phone numbers to E.164 using the user's assigned country code before storing or matching. A number that is not a valid phone number for the user's country SHALL never be saved: the server SHALL discard its synced row with a log line — no call saved, no lead created or changed — while the batch still answers success, and the keypad SHALL refuse to dial an invalid typed number with "Enter a valid phone number." and no call placed.
 
 #### Scenario: Local-format number normalized
 - **GIVEN** a salesperson entered a 10-digit local number for India
@@ -117,10 +117,15 @@ The system SHALL normalize all phone numbers to E.164 using the user's assigned 
 - **WHEN** the number is stored
 - **THEN** it is normalized with its international prefix into E.164
 
-#### Scenario: Unparseable number stored raw
-- **GIVEN** a number the phone library cannot parse for the user's country
-- **WHEN** the dial is recorded
-- **THEN** the raw digits are stored and the call still counts
+#### Scenario: Unparseable number dropped by the server
+- **GIVEN** a synced row whose number is not a valid phone number for the user's country
+- **WHEN** the batch is processed
+- **THEN** the row is discarded with a log line, no lead is created or changed, and the batch still answers success
+
+#### Scenario: Keypad refuses an invalid number
+- **GIVEN** a typed number that is not valid for the login country
+- **WHEN** Call is tapped
+- **THEN** the app shows "Enter a valid phone number." and no call is placed
 
 ### Requirement: Three Android permissions required
 The system SHALL request CALL_PHONE, READ_CALL_LOG, and READ_PHONE_STATE at runtime and SHALL show a visible red banner whenever any one of them is denied.
@@ -159,7 +164,7 @@ The system SHALL provide a settings action that wipes only the local SQLite queu
 - **THEN** it displays the exact number of unsent calls that will be deleted — which can be zero
 
 ### Requirement: Shared post-call popup on every flow
-The system SHALL show one mergeable popup — the same Interested and Do not call again buttons, the same optional Notes box, and the same Schedule choice — on every flow, keypad, automated lead, and My List alike, with nothing preselected and Submit working with all of it empty. Interested and Do not call again SHALL be mutually exclusive: tapping one clears the other and tapping the chosen one again unchecks it, so the popup allows both off or exactly one on, never both on. The automated and My List popups SHALL carry the "Go to next call" checkbox and the keypad popup SHALL not carry it. The system SHALL save the two choices as yes/no flags and the note on the call record — the phone's pending row and the server's `calls` table both carry them — so they ride the normal batch sync while the call's time and duration still come only from the call log. Every popup SHALL also carry a WhatsApp button beside the number that opens the chosen WhatsApp chat for the called number — honoring the WhatsApp settings (chosen app and first message) exactly as the Scheduled and History rows do — and tapping it leaves the popup untouched, so every choice stays as it was.
+The system SHALL show one mergeable popup — the same Interested and Do not call again buttons, the same optional Notes box, and the same Schedule choice — on every flow, keypad, automated lead, and My List alike, with nothing preselected and Submit working with all of it empty. Interested and Do not call again SHALL be mutually exclusive: tapping one clears the other and tapping the chosen one again unchecks it, so the popup allows both off or exactly one on, never both on. The automated and My List popups SHALL carry the "Go to next call" checkbox and the keypad popup SHALL not carry it. The system SHALL save the two choices as yes/no flags and the note on the call record — the phone's pending row and the server's `calls` table both carry them — so they ride the normal batch sync while the call's time and duration still come only from the call log. Every popup SHALL also carry a WhatsApp button beside the number that opens the chosen WhatsApp chat for the called number — honoring the WhatsApp settings (chosen app and first message) exactly as the Scheduled and History rows do — and tapping it leaves the popup untouched, so every choice stays as it was. Every popup SHALL also carry a Call Again button beside Submit: tapping it saves everything exactly like Submit — the outcome choices, the note, and the schedule answer — and then dials the same number again at once, after which a fresh popup shows with nothing preselected. The "Go to next call" checkbox is ignored on a Call Again tap, the keypad display clears as after any submit, and an automated lead stays claimed for its 10-minute window so the redial hits the same lead. The Notes box SHALL stop accepting input at the app's `note_max_length` config value (200), with an N/200 counter beside it.
 
 #### Scenario: Popup choices identical on every flow
 - **GIVEN** a post-call popup from the keypad, the automated lead flow, or My List
@@ -220,6 +225,31 @@ The system SHALL show one mergeable popup — the same Interested and Do not cal
 - **GIVEN** the salesperson opened the WhatsApp chat and came back to the app
 - **WHEN** the popup is read again
 - **THEN** every choice — Interested, Do not call again, the note, the Schedule answer, and Go to next call — is exactly as it was left
+
+#### Scenario: Call Again saves like Submit and redials
+- **GIVEN** a post-call popup with Interested chosen and a note typed
+- **WHEN** Call Again is tapped
+- **THEN** the choices, the note, and the schedule answer save exactly like Submit, and the same number dials again at once
+
+#### Scenario: A fresh popup follows the redial
+- **GIVEN** Call Again redialed the number and the second call ended
+- **WHEN** the next popup opens
+- **THEN** it shows with nothing preselected, and the "Go to next call" checkbox was ignored by the Call Again tap
+
+#### Scenario: The automated redial hits the same lead
+- **GIVEN** an automated-flow popup submitted through Call Again inside the claim window
+- **WHEN** the redial places
+- **THEN** it dials the same lead's number — the claim still holds it
+
+#### Scenario: The keypad clears after Call Again
+- **GIVEN** a keypad popup submitted through Call Again
+- **WHEN** the redial starts
+- **THEN** the keypad display is blank exactly as after any submit
+
+#### Scenario: Notes box stops at the cap
+- **GIVEN** the popup's Notes box already holds 200 characters
+- **WHEN** more text is typed
+- **THEN** nothing more enters the box and the counter reads 200/200
 
 ### Requirement: Keypad clears after the post-call popup
 The system SHALL clear the typed number to blank when the keypad's post-call popup is submitted — "Do not schedule" and "Schedule" alike — leaving the display empty for the next number, while paste, backspace, and hold-to-clear keep working as they are.

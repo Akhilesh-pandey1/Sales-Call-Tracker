@@ -110,28 +110,26 @@
             <div class="mt-2 text-2xl font-bold tabular-nums tracking-tight">12</div>
             <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">connected + not connected</p>
           </div>
-          <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm">
+          <button type="button" class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 text-left shadow-sm cursor-pointer transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
             <div class="flex items-center justify-between gap-2">
               <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Interested</span>
-              <svg class="h-5 w-5 shrink-0 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="20 6 9 17 4 12"/>
+              <svg class="h-5 w-5 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
               </svg>
             </div>
             <div class="mt-2 text-2xl font-bold tabular-nums tracking-tight text-[var(--color-accent)]">3</div>
-            <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">wants a call back</p>
-          </div>
-          <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-sm">
+            <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">wants a call back — tap to see them</p>
+          </button>
+          <button type="button" class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 text-left shadow-sm cursor-pointer transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
             <div class="flex items-center justify-between gap-2">
               <span class="text-sm font-medium text-[var(--color-muted-foreground)]">Do not call</span>
-              <svg class="h-5 w-5 shrink-0 text-[var(--color-destructive)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/>
+              <svg class="h-5 w-5 shrink-0 text-[var(--color-muted-foreground)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
               </svg>
             </div>
             <div class="mt-2 text-2xl font-bold tabular-nums tracking-tight text-[var(--color-destructive)]">1</div>
-            <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">never call again</p>
-          </div>
+            <p class="mt-1 text-xs text-[var(--color-muted-foreground)]">never call again — tap to see them</p>
+          </button>
         </div>
       </section>
 

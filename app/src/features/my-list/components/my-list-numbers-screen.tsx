@@ -3,7 +3,10 @@ import { FlatList, Pressable, View } from 'react-native';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import type { MyListFlag } from '@/features/tracking';
+import { PostCallDialog, useDirectCall } from '@/features/dialer';
+import type { MyListFlag, MyListNumber } from '@/features/tracking';
+import { formatInternationalPhoneNumber } from '@/shared/utils/phone-formatter';
+import { openChosenWhatsAppChat } from '@/shared/utils/whatsapp-chat';
 import { useMyListNumbers } from '../hooks/use-my-list-numbers';
 import { getMyListFlagLabel } from '../lib/my-list-flag-labels';
 import { MyListNumberRow } from './my-list-number-row';
@@ -67,6 +70,38 @@ function MyListNumbersErrorView({
   );
 }
 
+type MyListNumbersListProps = {
+  listNumbers: MyListNumber[];
+  onCallNumber: (phoneNumber: string) => void;
+  onOpenWhatsAppChat: (phoneNumber: string) => void;
+};
+
+function MyListNumbersList({
+  listNumbers,
+  onCallNumber,
+  onOpenWhatsAppChat,
+}: MyListNumbersListProps) {
+  return (
+    <FlatList
+      data={listNumbers}
+      keyExtractor={(listNumber) => listNumber.phoneNumber}
+      contentContainerClassName="px-5 pb-6 pt-4"
+      ListHeaderComponent={
+        <Text className="text-xs text-muted-foreground">
+          Newest called first · lives only on this phone
+        </Text>
+      }
+      renderItem={({ item }) => (
+        <MyListNumberRow
+          listNumber={item}
+          onCallNumber={onCallNumber}
+          onOpenWhatsAppChat={onOpenWhatsAppChat}
+        />
+      )}
+    />
+  );
+}
+
 type MyListNumbersScreenProps = {
   listFlag: MyListFlag;
   onBackPress: () => void;
@@ -78,7 +113,18 @@ export function MyListNumbersScreen({
 }: MyListNumbersScreenProps) {
   const { listNumbers, errorMessage, reloadListNumbers } =
     useMyListNumbers(listFlag);
+  const directCall = useDirectCall();
   const flagLabel = getMyListFlagLabel(listFlag);
+
+  const trackedCall = directCall.trackedCall;
+  const idlePostCallDialogKey = 'idle-my-list-numbers-post-call';
+  const postCallDialogKey = trackedCall?.callId ?? idlePostCallDialogKey;
+  const postCallDialogPhoneNumber = trackedCall === null
+    ? ''
+    : formatInternationalPhoneNumber(trackedCall.phoneNumber);
+  const postCallDialogWhatsAppNumber = trackedCall === null
+    ? null
+    : trackedCall.phoneNumber;
 
   const handleBackPress = () => onBackPress();
   const handleTryAgainPress = () => reloadListNumbers();
@@ -91,16 +137,10 @@ export function MyListNumbersScreen({
   ) : listNumbers.length === 0 ? (
     <MyListNumbersEmptyState emptyHint={flagLabel.emptyHint} />
   ) : (
-    <FlatList
-      data={listNumbers}
-      keyExtractor={(listNumber) => listNumber.phoneNumber}
-      contentContainerClassName="px-5 pb-6 pt-4"
-      ListHeaderComponent={
-        <Text className="text-xs text-muted-foreground">
-          Newest called first · lives only on this phone
-        </Text>
-      }
-      renderItem={({ item }) => <MyListNumberRow listNumber={item} />}
+    <MyListNumbersList
+      listNumbers={listNumbers}
+      onCallNumber={directCall.startDirectCall}
+      onOpenWhatsAppChat={openChosenWhatsAppChat}
     />
   );
 
@@ -111,6 +151,16 @@ export function MyListNumbersScreen({
         onBackPress={handleBackPress}
       />
       {screenContent}
+      <PostCallDialog
+        key={postCallDialogKey}
+        variant="keypad"
+        isOpen={directCall.isPostCallDialogOpen}
+        phoneNumber={postCallDialogPhoneNumber}
+        phoneNumberForWhatsApp={postCallDialogWhatsAppNumber}
+        isSubmitting={directCall.isSubmittingPostCall}
+        errorMessage={directCall.postCallErrorMessage}
+        onSubmit={directCall.submitDirectCall}
+      />
     </View>
   );
 }

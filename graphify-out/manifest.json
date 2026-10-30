@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "app/src/features/dialer/screens/dialer-screen.tsx": {
-    "mtime": 1793279690.9888062,
-    "ast_hash": "5687e8bd0b6add6b9c2bece9e5f8ffaf",
+    "mtime": 1793357078.6700807,
+    "ast_hash": "a78ce76b7a0df1bff645b070a1674705",
     "semantic_hash": ""
   },
   "app/src/features/stats/api/stats.api.ts": {

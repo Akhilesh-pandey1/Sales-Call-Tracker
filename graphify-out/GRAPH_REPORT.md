@@ -1,7 +1,7 @@
 # Graph Report - sales-call-tracker  (2026-10-30)
 
 ## Corpus Check
-- 506 files · ~890,109 words
+- 506 files · ~890,130 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4f9d70fe`
+- Built from commit: `4fa48d90`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -65,7 +65,7 @@
 - search
 - .claude/skills/grill-for-business/SKILL.md
 - Requirement: Name-and-password login
-- @tanstack/react-query
+- axios
 - app/src/features/auth/hooks/use-auth.ts
 - Requirement: Office-hours gate at call sync
 - scheduled-screen.tsx
@@ -239,7 +239,7 @@
 - generate_design_system
 - AGENTS.md
 - .agents/skills/design-screens/uiux/scripts/design_system.py
-- _row_identities
+- _suggest_identities
 - react-native-screens
 - @react-native-documents/picker
 - react-native-sqlite-storage
@@ -298,7 +298,7 @@
 - lead-call-card.tsx
 - use-my-list-upload.ts
 - calls/services.py
-- app/src/config/app-config.ts
+- my-list-numbers-screen.tsx
 - _select_palette_for_mode
 - _select_palette_for_mode
 - Requirement: Served lead carries its stored note
@@ -392,8 +392,8 @@ Cohesion: 0.05
 Nodes (39): 10. Hyphenated pairs everywhere, 11. Passive voice and missing subjects, 12. Overused AI words, 13. Inflated significance, 14. Vague connection or association, 15. Shallow -ing riders, 16. Sales language, 17. Borrowed authority (+31 more)
 
 ### Community 14 - "do-not-track-screen.tsx"
-Cohesion: 0.11
-Nodes (22): Dialog(), DialogContent(), DialogContentProps, DialogContext, DialogContextValue, DialogDescription(), DialogProps, DialogTextProps (+14 more)
+Cohesion: 0.10
+Nodes (23): Dialog(), DialogContent(), DialogContentProps, DialogContext, DialogContextValue, DialogDescription(), DialogProps, DialogTextProps (+15 more)
 
 ### Community 15 - "use-direct-call.ts"
 Cohesion: 0.18
@@ -465,11 +465,11 @@ Nodes (22): get_person_dashboard(), get_team_dashboard(), get_team_people(), Any
 
 ### Community 32 - "cn"
 Cohesion: 0.05
-Nodes (58): Button(), ButtonProps, buttonTextVariants, buttonVariants, Card(), CardContent(), CardDescription(), CardFooter() (+50 more)
+Nodes (55): Button(), ButtonProps, buttonTextVariants, buttonVariants, Card(), CardContent(), CardDescription(), CardFooter() (+47 more)
 
 ### Community 33 - "history-screen.tsx"
 Cohesion: 0.10
-Nodes (17): CallRow(), CallRowProps, CallsListProps, formatCallResultLabel(), formatDirectionMark(), formatTalkTimeLabel(), HistoryScreen(), LoadMoreFooterProps (+9 more)
+Nodes (16): CallRow(), CallRowProps, CallsListProps, formatCallResultLabel(), formatDirectionMark(), formatTalkTimeLabel(), HistoryScreen(), LoadMoreFooterProps (+8 more)
 
 ### Community 34 - "removeScheduledReminderForNumber"
 Cohesion: 0.16
@@ -613,7 +613,7 @@ Nodes (16): A. Find the Frontier, B. For Each Frontier Task — Create Worktree 
 
 ### Community 70 - "dependencies"
 Cohesion: 0.12
-Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, dependencies, axios, lucide-react (+9 more)
+Nodes (17): lucide-react, react-dom, react-router-dom, recharts, sonner, @tanstack/react-query, dependencies, lucide-react (+9 more)
 
 ### Community 71 - "Salesperson View (Android app "Apex Sales Call")"
 Cohesion: 0.09
@@ -656,8 +656,8 @@ Cohesion: 0.15
 Nodes (10): Designing for Mockability, When to Mock, Anti-patterns, Rules of the loop, Seams — where tests go, Test-Driven Development, What a good test is, Bad Tests (+2 more)
 
 ### Community 82 - "search"
-Cohesion: 0.11
-Nodes (25): _exact_match_diagnostic(), _exact_stack_identifier(), _legacy_successor_guidance(), _load_rows_or_empty(), _normalize(), _project_row(), Apply longest-first synonym substitution at token boundaries., Resolve an explicit style identity without opening generic variant ranking. (+17 more)
+Cohesion: 0.12
+Nodes (23): _exact_match_diagnostic(), _exact_stack_identifier(), _legacy_successor_guidance(), _normalize(), _project_row(), Apply longest-first synonym substitution at token boundaries., Resolve an explicit style identity without opening generic variant ranking., Resolve a deprecated in-domain alias, or expose a cross-domain redirect. (+15 more)
 
 ### Community 83 - "app/tsconfig.json"
 Cohesion: 0.14
@@ -721,11 +721,11 @@ Nodes (9): File & Component Structure, Folder Rules, Folder Structure, Language,
 
 ### Community 98 - "post-call-dialog.tsx"
 Cohesion: 0.12
-Nodes (18): CallAgainAndSubmitButtonsProps, NotesField(), NotesFieldProps, OutcomeChoiceChip(), OutcomeChoiceChipProps, OutcomeTone, PostCallDialog(), PostCallDialogProps (+10 more)
+Nodes (16): CallAgainAndSubmitButtonsProps, NotesField(), NotesFieldProps, OutcomeChoiceChip(), OutcomeChoiceChipProps, OutcomeTone, PostCallDialog(), PostCallDialogProps (+8 more)
 
 ### Community 99 - "dialer-screen.tsx"
-Cohesion: 0.10
-Nodes (24): Keypad(), keypadCharacters, KeypadProps, PreCallNotesDialog(), PreCallNotesDialogProps, UseDirectCallResult, useMyListCalling(), UseMyListCallingResult (+16 more)
+Cohesion: 0.13
+Nodes (10): Keypad(), keypadCharacters, KeypadProps, UseAutomatedCallingResult, UseDirectCallResult, resolveKeypadCallRefusal(), DialerSubTab, KeypadView() (+2 more)
 
 ### Community 100 - "root-navigator.tsx"
 Cohesion: 0.21
@@ -884,8 +884,8 @@ Cohesion: 0.43
 Nodes (4): command_has_server_id(), is_brainstorm_server(), mark_stopped(), stop-server.sh script
 
 ### Community 140 - "use-do-not-track-remove.ts"
-Cohesion: 0.29
-Nodes (7): verifyRemovePassword(), DoNotTrackRemoveState, readVerifyPasswordError(), useDoNotTrackRemove(), readRemovePasswordError(), resolveRemoveErrorMessage(), DoNotTrackScreen()
+Cohesion: 0.21
+Nodes (10): getLoginErrorMessage(), verifyRemovePassword(), DoNotTrackRemoveState, readVerifyPasswordError(), useDoNotTrackRemove(), readRemovePasswordError(), resolveRemoveErrorMessage(), DoNotTrackScreen() (+2 more)
 
 ### Community 141 - "How to Build the APK"
 Cohesion: 0.29
@@ -1096,8 +1096,8 @@ Cohesion: 0.11
 Nodes (34): ClearLocalDataState, useClearLocalData(), SyncCall, syncCalls(), SyncCallsResponse, CallHistoryRowKey, addPendingCallAttempt(), clearAllPendingCalls() (+26 more)
 
 ### Community 212 - "use-lead-post-call.ts"
-Cohesion: 0.09
-Nodes (35): getLoginErrorMessage(), buildNextLeadRequestBody(), fetchNextLead(), isServedLead(), LeadScheduleRequest, NextLeadRequestBody, NextLeadResponseBody, ServedLead (+27 more)
+Cohesion: 0.10
+Nodes (34): buildNextLeadRequestBody(), fetchNextLead(), isServedLead(), LeadScheduleRequest, NextLeadRequestBody, NextLeadResponseBody, ServedLead, AutomatedViewState (+26 more)
 
 ### Community 219 - "person-page.tsx"
 Cohesion: 0.06
@@ -1123,9 +1123,9 @@ Nodes (9): Env Files, Language, Private Folder, Rules, Search, Source of Truth (
 Cohesion: 0.09
 Nodes (33): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+25 more)
 
-### Community 239 - "_row_identities"
-Cohesion: 0.50
-Nodes (4): _exact_row_identity(), Return non-empty public identities from ordinary and alias fields., Return one row whose stable public identity exactly matches the query., _row_identities()
+### Community 239 - "_suggest_identities"
+Cohesion: 0.33
+Nodes (6): _exact_row_identity(), Suggest complete public identities so a retry can bypass score thresholds., Return non-empty public identities from ordinary and alias fields., Return one row whose stable public identity exactly matches the query., _row_identities(), _suggest_identities()
 
 ### Community 246 - "Requirement: WhatsApp settings rows saved on the phone"
 Cohesion: 0.12
@@ -1307,9 +1307,9 @@ Nodes (11): MyListView(), buildUploadToastMessage(), isCsvMimeType(), readCsvFil
 Cohesion: 0.20
 Nodes (17): parse_utc_datetime(), datetime, to_ist(), Response, sync_calls(), BaseModel, SyncCallsRequest, SyncCallsResponse (+9 more)
 
-### Community 299 - "app/src/config/app-config.ts"
-Cohesion: 0.38
-Nodes (6): NotesPopupSettingsState, useNotesPopupSettings(), useStoredIsNotesPopupOn(), readIsNotesPopupOn(), saveIsNotesPopupOn(), mockSavedValues
+### Community 299 - "my-list-numbers-screen.tsx"
+Cohesion: 0.10
+Nodes (23): PreCallNotesDialog(), PreCallNotesDialogProps, PendingNotesCall, usePreCallNotes(), UsePreCallNotesResult, findLeadPreCallNote(), findPreCallNote(), readLeadPreCallNote() (+15 more)
 
 ### Community 300 - "_select_palette_for_mode"
 Cohesion: 0.22
@@ -1344,7 +1344,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `$schema`, `autoMemoryEnabled`, `disableBundledSkills` to the rest of the system?**
   _1606 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `.agents/skills/design-screens/uiux/scripts/core.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.1006006006006006 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0990990990990991 - nodes in this community are weakly interconnected._
 - **Should `create_user_fixture` be split into smaller, more focused modules?**
   _Cohesion score 0.12950340798442064 - nodes in this community are weakly interconnected._
 - **Should `.agents/skills/grill-with-superpower/scripts/server.cjs` be split into smaller, more focused modules?**

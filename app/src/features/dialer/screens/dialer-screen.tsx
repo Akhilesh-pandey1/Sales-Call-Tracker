@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -427,6 +428,15 @@ export function DialerScreen() {
   const missingPermissions = usePermissions();
   const [activeSubTab, setActiveSubTab] = useState<DialerSubTab>('keypad');
   const [openListFlag, setOpenListFlag] = useState<MyListFlag | null>(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setActiveSubTab('keypad');
+        setOpenListFlag(null);
+      };
+    }, []),
+  );
 
   const dialer = useDialer();
   const directCall = useDirectCall();

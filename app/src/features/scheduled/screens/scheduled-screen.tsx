@@ -148,6 +148,7 @@ function BookingRow({
   );
   const bookedAtLabel = formatBookedAtLabel(booking.scheduledAt);
   const bookingNote = booking.note;
+  const interestedTag = booking.isInterested ? <BookingInterestedTag /> : null;
   const noteInfoButton = bookingNote === null ? null : (
     <NoteInfoButton
       displayedPhoneNumber={displayedPhoneNumber}
@@ -171,13 +172,13 @@ function BookingRow({
             {displayedPhoneNumber}
           </Text>
           <BookingStateBadge state={booking.state} />
-          {booking.isInterested && <BookingInterestedTag />}
         </View>
         <View className="mt-0.5 flex-row items-center gap-1.5">
-          <Text className="text-[11px] text-muted-foreground">
+          <Text numberOfLines={1} className="shrink text-[11px] text-muted-foreground">
             {bookedAtLabel}
           </Text>
           {noteInfoButton}
+          {interestedTag}
         </View>
       </View>
       <View className="shrink-0 flex-row items-center gap-1">

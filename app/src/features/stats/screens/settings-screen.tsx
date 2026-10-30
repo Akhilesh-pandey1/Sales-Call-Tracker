@@ -92,7 +92,7 @@ function NotesPopupSwitch({ isOn }: { isOn: boolean }) {
       role="switch"
       aria-checked={isOn}
       className={cn(
-        'h-6 w-11 shrink-0 items-center justify-start rounded-full px-0.5',
+        'h-6 w-11 shrink-0 flex-row items-center justify-start rounded-full px-0.5',
         isOn ? 'bg-primary' : 'bg-gray-300',
       )}
     >

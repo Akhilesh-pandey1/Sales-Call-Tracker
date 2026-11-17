@@ -6,8 +6,11 @@ import { ErrorState } from "@/shared/components/error-state";
 import { PageHeader } from "@/shared/components/page-header";
 import { PageLoader } from "@/shared/components/page-loader";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
+import { getPersonLogFile } from "../api/dashboard.api";
+import { DownloadLogsButton } from "../components/download-logs-button";
 import { PersonAvatar } from "../components/person-avatar";
 import { PersonLogsTable } from "../components/person-logs-table";
+import { useCallLogDownload } from "../hooks/use-call-log-download";
 import { usePersonLogs } from "../hooks/use-person-logs";
 import { isValidPersonId, usePersonStats } from "../hooks/use-person-stats";
 
@@ -26,6 +29,7 @@ export function PersonLogsPage() {
   const hasValidPersonId: boolean = isValidPersonId(personId);
   const { personLogRows, isLoading, hasError, refetch } = usePersonLogs(personId);
   const { personStats } = usePersonStats(personId);
+  const { downloadingTarget, downloadLogs } = useCallLogDownload(getPersonLogFile);
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
   const queryString: string = searchParams.toString();
   const personPagePath: string = buildPersonPagePath(personId, queryString);
@@ -38,11 +42,22 @@ export function PersonLogsPage() {
     refetch();
   };
 
+  const handleDownloadLogsClick = (): void => {
+    downloadLogs(personId);
+  };
+
   const fallbackPageTitle: string = "Person";
   const headerTitle: string = personStats?.name ?? fallbackPageTitle;
   const headerAvatar: ReactElement | undefined = personStats ? (
     <PersonAvatar name={personStats.name} />
   ) : undefined;
+  const isDownloadingLogs: boolean = downloadingTarget === personId;
+  const downloadLogsAction: ReactElement = (
+    <DownloadLogsButton
+      isDownloading={isDownloadingLogs}
+      onClick={handleDownloadLogsClick}
+    />
+  );
   const dateAction = (
     <span className="text-sm text-muted-foreground">{todaysDateLabel}</span>
   );
@@ -74,7 +89,9 @@ export function PersonLogsPage() {
       </div>
 
       {isLoading && <PageLoader />}
-      {!isLoading && <PersonLogsTable rows={personLogRows} />}
+      {!isLoading && (
+        <PersonLogsTable rows={personLogRows} action={downloadLogsAction} />
+      )}
     </PageHeader>
   );
 }

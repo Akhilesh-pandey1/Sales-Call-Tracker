@@ -626,3 +626,346 @@ def test_person_logs_empty_window_returns_empty_list(
         expected_status: int = 200
         assert response.status_code == expected_status
         assert response.get_json() == []
+
+
+def fetch_person_log_download(
+    client: FlaskClient, token: str | None, user_id: int
+) -> Response:
+    headers: dict[str, str] = {}
+    if token is not None:
+        headers["Authorization"] = f"Bearer {token}"
+    response: Response = client.get(
+        f"/api/logs/person/{user_id}/download", headers=headers
+    )
+    return response
+
+
+def build_today_person_filename(person_name_slug: str) -> str:
+    today_date: str = now_ist().date().isoformat()
+    filename: str = f"call-logs-{person_name_slug}-{today_date}.csv"
+    return filename
+
+
+def test_person_log_download_unauthenticated_rejected(
+    client: FlaskClient,
+) -> None:
+    response: Response = fetch_person_log_download(client, None, 1)
+    expected_status: int = 401
+    assert response.status_code == expected_status
+    response_json: dict[str, Any] = response.get_json()
+    assert response_json.get("message") == "Invalid or expired token."
+
+
+def test_person_log_download_invalid_token_rejected(client: FlaskClient) -> None:
+    response: Response = fetch_person_log_download(client, "bad-token", 1)
+    expected_status: int = 401
+    assert response.status_code == expected_status
+
+
+def test_person_log_download_salesperson_rejected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        salesperson: User = create_user_fixture(
+            name="person_download_sales", role="salesperson", token="download-sales"
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-sales", salesperson.id
+        )
+        expected_status: int = 403
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "This dashboard is for managers."
+
+
+def test_person_log_download_unknown_person_rejected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_missing",
+            role="manager",
+            token="download-mgr-miss",
+        )
+        unknown_user_id: int = 99999
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-miss", unknown_user_id
+        )
+        expected_status: int = 404
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "User not found."
+
+
+def test_person_log_download_filename_and_csv_content_type(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_file", role="manager", token="download-mgr-file"
+        )
+        rep: User = create_user_fixture(
+            name="Ramesh", role="salesperson", token="download-ramesh"
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-file", rep.id
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        assert response.mimetype == "text/csv"
+        expected_filename: str = build_today_person_filename("ramesh")
+        content_disposition: str = response.headers["Content-Disposition"]
+        assert content_disposition == f'attachment; filename="{expected_filename}"'
+
+
+def test_person_log_download_lowercases_name_and_replaces_spaces(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_slug", role="manager", token="download-mgr-slug"
+        )
+        rep: User = create_user_fixture(
+            name="Ramesh Kumar", role="salesperson", token="download-ramesh-kumar"
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-slug", rep.id
+        )
+        expected_filename: str = build_today_person_filename("ramesh-kumar")
+        content_disposition: str = response.headers["Content-Disposition"]
+        assert content_disposition == f'attachment; filename="{expected_filename}"'
+
+
+def test_person_log_download_ten_columns_in_order_with_bom(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_cols", role="manager", token="download-mgr-cols"
+        )
+        rep: User = create_user_fixture(
+            name="Priya", role="salesperson", token="download-priya"
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-cols", rep.id
+        )
+        assert response.data.startswith(BOM_BYTES)
+        csv_rows: list[list[str]] = parse_csv_rows(response)
+        assert csv_rows[0] == TEN_COLUMN_HEADERS
+
+
+def test_person_log_download_one_call_row_values(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_row", role="manager", token="download-mgr-row"
+        )
+        rep: User = create_user_fixture(
+            name="Ramesh", role="salesperson", token="download-row-ramesh"
+        )
+        create_log_call(
+            call_id="person-download-row-1",
+            user_id=rep.id,
+            phone_number="+919876543210",
+            dialed_at=create_utc_time_at_ist(0, 11, 24, 5),
+            duration_seconds=210,
+            direction="outgoing",
+            interested=True,
+            do_not_call=False,
+            notes="wants a demo on Tuesday",
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-row", rep.id
+        )
+        data_rows: list[list[str]] = get_data_rows(response)
+        assert len(data_rows) == 1
+        today_date: str = now_ist().date().isoformat()
+        assert data_rows[0] == [
+            "Ramesh",
+            "+919876543210",
+            today_date,
+            "11:24:05",
+            "Outgoing",
+            "Yes",
+            "3.50",
+            "Yes",
+            "No",
+            "wants a demo on Tuesday",
+        ]
+
+
+def test_person_log_download_covers_the_last_thirty_ist_days(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_window",
+            role="manager",
+            token="download-mgr-window",
+        )
+        rep: User = create_user_fixture(
+            name="Ananya", role="salesperson", token="download-ananya"
+        )
+        create_log_call(
+            "person-download-window-today",
+            rep.id,
+            "+919876543701",
+            create_utc_time_at_ist(0, 10, 0),
+        )
+        create_log_call(
+            "person-download-window-start",
+            rep.id,
+            "+919876543702",
+            create_utc_time_at_ist(29, 0, 0),
+        )
+        create_log_call(
+            "person-download-window-before-start",
+            rep.id,
+            "+919876543703",
+            create_utc_time_at_ist(30, 23, 59, 59),
+        )
+        create_log_call(
+            "person-download-window-tomorrow",
+            rep.id,
+            "+919876543704",
+            create_utc_time_at_ist(-1, 10, 0),
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-window", rep.id
+        )
+        listed_numbers: list[str] = [
+            row[1] for row in get_data_rows(response)
+        ]
+        assert listed_numbers == ["+919876543702", "+919876543701"]
+
+
+def test_person_log_download_sorts_oldest_call_first_both_directions(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_order", role="manager", token="download-mgr-order"
+        )
+        rep: User = create_user_fixture(
+            name="Suresh", role="salesperson", token="download-suresh"
+        )
+        create_log_call(
+            "person-download-order-new-incoming",
+            rep.id,
+            "+919876543801",
+            create_utc_time_at_ist(0, 16, 3, 22),
+            direction="incoming",
+        )
+        create_log_call(
+            "person-download-order-old-outgoing",
+            rep.id,
+            "+919876543802",
+            create_utc_time_at_ist(1, 9, 15),
+            duration_seconds=120,
+        )
+        create_log_call(
+            "person-download-order-middle-outgoing",
+            rep.id,
+            "+919876543803",
+            create_utc_time_at_ist(0, 10, 0),
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-order", rep.id
+        )
+        data_rows: list[list[str]] = get_data_rows(response)
+        listed_numbers: list[str] = [row[1] for row in data_rows]
+        listed_directions: list[str] = [row[4] for row in data_rows]
+        assert listed_numbers == [
+            "+919876543802",
+            "+919876543803",
+            "+919876543801",
+        ]
+        assert listed_directions == ["Outgoing", "Outgoing", "Incoming"]
+
+
+def test_person_log_download_escapes_notes_with_comma_quote_and_line_break(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_escape",
+            role="manager",
+            token="download-mgr-escape",
+        )
+        rep: User = create_user_fixture(
+            name="Zara", role="salesperson", token="download-zara"
+        )
+        tricky_note: str = 'wants a demo, "Tuesday"\nand a callback'
+        create_log_call(
+            "person-download-escape-1",
+            rep.id,
+            "+919876543901",
+            create_utc_time_at_ist(0, 13, 0),
+            notes=tricky_note,
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-escape", rep.id
+        )
+        data_rows: list[list[str]] = get_data_rows(response)
+        assert len(data_rows) == 1
+        assert len(data_rows[0]) == 10
+        assert data_rows[0][9] == tricky_note
+
+
+def test_person_log_download_empty_window_returns_header_row_only(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_empty",
+            role="manager",
+            token="download-mgr-empty",
+        )
+        rep: User = create_user_fixture(
+            name="Vikram", role="salesperson", token="download-vikram"
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-empty", rep.id
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        assert response.data.startswith(BOM_BYTES)
+        csv_rows: list[list[str]] = parse_csv_rows(response)
+        assert csv_rows == [TEN_COLUMN_HEADERS]
+
+
+def test_person_log_download_holds_only_that_persons_calls(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_owner",
+            role="manager",
+            token="download-mgr-owner",
+        )
+        rep: User = create_user_fixture(
+            name="Amit", role="salesperson", token="download-amit"
+        )
+        other_rep: User = create_user_fixture(
+            name="Bhavna", role="salesperson", token="download-bhavna"
+        )
+        create_log_call(
+            "person-download-owner-1",
+            rep.id,
+            "+919876544001",
+            create_utc_time_at_ist(0, 10, 0),
+        )
+        create_log_call(
+            "person-download-owner-other",
+            other_rep.id,
+            "+919876544002",
+            create_utc_time_at_ist(0, 11, 0),
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-owner", rep.id
+        )
+        data_rows: list[list[str]] = get_data_rows(response)
+        assert len(data_rows) == 1
+        assert data_rows[0][0] == "Amit"
+        assert data_rows[0][1] == "+919876544001"

@@ -1,5 +1,12 @@
 export type DashboardPeriod = "today" | "yesterday" | "last_30_days";
 
+export type TeamLogDay = "today" | "yesterday";
+
+export interface TeamLogFile {
+  blob: Blob;
+  filename: string;
+}
+
 export interface CallsByHourBlock {
   hours: number[];
   outgoing: number[];

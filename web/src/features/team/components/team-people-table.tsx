@@ -1,5 +1,5 @@
 import type { KeyboardEvent } from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Download } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { TeamLogDay } from "@/features/dashboard";
 import { cn } from "@/shared/utils/cn";
 import { handleRowActivationKeyDown } from "@/shared/utils/row-activation";
 import { formatCount } from "@/shared/utils/format-count";
@@ -16,11 +17,38 @@ import type { TeamPersonPeriodStats, TeamPersonRow } from "../types";
 interface TeamPeopleTableProps {
   people: TeamPersonRow[];
   onOpenPerson: (userId: number) => void;
+  onDownloadDay: (day: TeamLogDay) => void;
+  downloadingDay: TeamLogDay | null;
 }
 
 interface PeopleListProps {
   people: TeamPersonRow[];
   onOpen: (userId: number) => void;
+}
+
+interface DownloadHeadingButtonProps {
+  label: string;
+  isDisabled: boolean;
+  onClick: () => void;
+}
+
+function DownloadHeadingButton({
+  label,
+  isDisabled,
+  onClick,
+}: DownloadHeadingButtonProps) {
+  return (
+    <button
+      type="button"
+      title={label}
+      aria-label={label}
+      disabled={isDisabled}
+      onClick={onClick}
+      className="absolute right-0 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <Download className="h-4 w-4" aria-hidden="true" />
+    </button>
+  );
 }
 
 function formatPeriodNumbers(periodStats: TeamPersonPeriodStats): string {
@@ -74,6 +102,7 @@ function DesktopPersonRow({ person, onOpen }: DesktopPersonRowProps) {
       <TableCell className={todayMinutesClassName}>
         {formatCount(person.today.minutes)}
       </TableCell>
+      <TableCell className="w-8" aria-hidden="true" />
       <TableCell className="border-l p-4 text-left tabular-nums text-muted-foreground">
         {formatCount(person.yesterday.dials)}
       </TableCell>
@@ -83,11 +112,34 @@ function DesktopPersonRow({ person, onOpen }: DesktopPersonRowProps) {
       <TableCell className="p-4 text-right tabular-nums text-muted-foreground">
         {formatCount(person.yesterday.minutes)}
       </TableCell>
+      <TableCell className="w-8" aria-hidden="true" />
     </TableRow>
   );
 }
 
-function DesktopPeopleTable({ people, onOpen }: PeopleListProps) {
+interface DesktopPeopleTableProps {
+  people: TeamPersonRow[];
+  onOpen: (userId: number) => void;
+  onDownloadDay: (day: TeamLogDay) => void;
+  downloadingDay: TeamLogDay | null;
+}
+
+function DesktopPeopleTable({
+  people,
+  onOpen,
+  onDownloadDay,
+  downloadingDay,
+}: DesktopPeopleTableProps) {
+  const isDownloading: boolean = downloadingDay !== null;
+
+  const handleTodayDownloadClick = (): void => {
+    onDownloadDay("today");
+  };
+
+  const handleYesterdayDownloadClick = (): void => {
+    onDownloadDay("yesterday");
+  };
+
   return (
     <div className="hidden px-5 pb-4 sm:px-6 md:block">
       <Table>
@@ -95,16 +147,26 @@ function DesktopPeopleTable({ people, onOpen }: PeopleListProps) {
           <TableRow className="hover:bg-transparent">
             <TableHead>Salesperson</TableHead>
             <TableHead
-              colSpan={3}
-              className="border-l text-center text-sm font-bold normal-case tracking-tight text-foreground"
+              colSpan={4}
+              className="relative border-l text-center text-sm font-bold normal-case tracking-tight text-foreground"
             >
               Today
+              <DownloadHeadingButton
+                label="Download all salespeople's logs - today"
+                isDisabled={isDownloading}
+                onClick={handleTodayDownloadClick}
+              />
             </TableHead>
             <TableHead
-              colSpan={3}
-              className="border-l text-center text-sm font-bold normal-case tracking-tight text-muted-foreground"
+              colSpan={4}
+              className="relative border-l text-center text-sm font-bold normal-case tracking-tight text-muted-foreground"
             >
               Yesterday
+              <DownloadHeadingButton
+                label="Download all salespeople's logs - yesterday"
+                isDisabled={isDownloading}
+                onClick={handleYesterdayDownloadClick}
+              />
             </TableHead>
           </TableRow>
           <TableRow className="hover:bg-transparent">
@@ -112,9 +174,11 @@ function DesktopPeopleTable({ people, onOpen }: PeopleListProps) {
             <TableHead className="border-l text-left">Dials</TableHead>
             <TableHead className="text-center">Connected</TableHead>
             <TableHead className="text-right">Min</TableHead>
+            <TableHead className="w-8" aria-hidden="true" />
             <TableHead className="border-l text-left">Dials</TableHead>
             <TableHead className="text-center">Connected</TableHead>
             <TableHead className="text-right">Min</TableHead>
+            <TableHead className="w-8" aria-hidden="true" />
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -202,7 +266,12 @@ function MobilePersonCards({ people, onOpen }: PeopleListProps) {
   );
 }
 
-export function TeamPeopleTable({ people, onOpenPerson }: TeamPeopleTableProps) {
+export function TeamPeopleTable({
+  people,
+  onOpenPerson,
+  onDownloadDay,
+  downloadingDay,
+}: TeamPeopleTableProps) {
   const personWord: string = people.length === 1 ? "person" : "people";
   const countLabel: string = `${formatCount(people.length)} ${personWord} · sorted by today's minutes`;
 
@@ -213,7 +282,12 @@ export function TeamPeopleTable({ people, onOpenPerson }: TeamPeopleTableProps) 
         <span className="text-sm text-muted-foreground">{countLabel}</span>
       </div>
 
-      <DesktopPeopleTable people={people} onOpen={onOpenPerson} />
+      <DesktopPeopleTable
+        people={people}
+        onOpen={onOpenPerson}
+        onDownloadDay={onDownloadDay}
+        downloadingDay={downloadingDay}
+      />
       <MobilePersonCards people={people} onOpen={onOpenPerson} />
     </section>
   );

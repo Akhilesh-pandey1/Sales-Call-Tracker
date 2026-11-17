@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useCallLogDownload } from "@/features/dashboard";
 import { ErrorState } from "@/shared/components/error-state";
 import { PageHeader } from "@/shared/components/page-header";
 import { PageLoader } from "@/shared/components/page-loader";
@@ -9,6 +10,7 @@ import { useTeamPeople } from "../hooks/use-team-people";
 
 export function TeamPage() {
   const { teamPeople, isLoading, hasError, refetch } = useTeamPeople();
+  const { downloadingDay, downloadLogs } = useCallLogDownload();
   const navigate = useNavigate();
 
   const handleOpenPerson = (userId: number): void => {
@@ -34,7 +36,12 @@ export function TeamPage() {
       {isLoading && <PageLoader />}
       {!isLoading && hasNoSalespeople && <TeamEmptyState />}
       {!isLoading && !hasNoSalespeople && (
-        <TeamPeopleTable people={teamPeople} onOpenPerson={handleOpenPerson} />
+        <TeamPeopleTable
+          people={teamPeople}
+          onOpenPerson={handleOpenPerson}
+          onDownloadDay={downloadLogs}
+          downloadingDay={downloadingDay}
+        />
       )}
     </PageHeader>
   );

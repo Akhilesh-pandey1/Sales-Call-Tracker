@@ -1255,27 +1255,37 @@ def test_team_daily_returns_thirty_days_oldest_first_with_zero_days(
         returned_dates: list[str] = [row["date"] for row in data]
         assert returned_dates == expected_dates
 
-        expected_row_keys: set[str] = {"date", "dials", "connected", "minutes"}
+        expected_row_keys: set[str] = {
+            "date",
+            "dials",
+            "connected",
+            "not_connected",
+            "minutes",
+        }
         assert set(data[0].keys()) == expected_row_keys
 
         oldest_day_row: dict[str, Any] = data[0]
         assert oldest_day_row["dials"] == 1
         assert oldest_day_row["connected"] == 1
+        assert oldest_day_row["not_connected"] == 0
         assert oldest_day_row["minutes"] == 0.5
 
         zero_day_row: dict[str, Any] = data[1]
         assert zero_day_row["dials"] == 0
         assert zero_day_row["connected"] == 0
+        assert zero_day_row["not_connected"] == 0
         assert zero_day_row["minutes"] == 0
 
         ten_days_ago_row: dict[str, Any] = data[19]
         assert ten_days_ago_row["dials"] == 1
         assert ten_days_ago_row["connected"] == 1
+        assert ten_days_ago_row["not_connected"] == 0
         assert ten_days_ago_row["minutes"] == 1
 
         today_row: dict[str, Any] = data[-1]
         assert today_row["dials"] == 1
         assert today_row["connected"] == 1
+        assert today_row["not_connected"] == 0
         assert today_row["minutes"] == 2
 
 
@@ -1338,6 +1348,7 @@ def test_team_daily_ist_day_boundary_and_direction_counting(
         today_row: dict[str, Any] = data[-1]
         assert today_row["dials"] == 2
         assert today_row["connected"] == 1
+        assert today_row["not_connected"] == 1
         assert today_row["minutes"] == 2.83
 
 
@@ -1496,27 +1507,37 @@ def test_person_daily_returns_thirty_days_oldest_first_with_zero_days(
         returned_dates: list[str] = [row["date"] for row in data]
         assert returned_dates == expected_dates
 
-        expected_row_keys: set[str] = {"date", "dials", "connected", "minutes"}
+        expected_row_keys: set[str] = {
+            "date",
+            "dials",
+            "connected",
+            "not_connected",
+            "minutes",
+        }
         assert set(data[0].keys()) == expected_row_keys
 
         oldest_day_row: dict[str, Any] = data[0]
         assert oldest_day_row["dials"] == 1
         assert oldest_day_row["connected"] == 1
+        assert oldest_day_row["not_connected"] == 0
         assert oldest_day_row["minutes"] == 0.5
 
         zero_day_row: dict[str, Any] = data[1]
         assert zero_day_row["dials"] == 0
         assert zero_day_row["connected"] == 0
+        assert zero_day_row["not_connected"] == 0
         assert zero_day_row["minutes"] == 0
 
         ten_days_ago_row: dict[str, Any] = data[19]
         assert ten_days_ago_row["dials"] == 1
         assert ten_days_ago_row["connected"] == 1
+        assert ten_days_ago_row["not_connected"] == 0
         assert ten_days_ago_row["minutes"] == 1
 
         today_row: dict[str, Any] = data[-1]
         assert today_row["dials"] == 1
         assert today_row["connected"] == 1
+        assert today_row["not_connected"] == 0
         assert today_row["minutes"] == 2
 
 
@@ -1575,9 +1596,11 @@ def test_person_daily_counts_outgoing_only_dials_and_incoming_minutes(
         today_row: dict[str, Any] = data[-1]
         assert today_row["dials"] == 2
         assert today_row["connected"] == 1
+        assert today_row["not_connected"] == 1
         assert today_row["minutes"] == 3
 
         incoming_only_row: dict[str, Any] = data[26]
         assert incoming_only_row["dials"] == 0
         assert incoming_only_row["connected"] == 0
+        assert incoming_only_row["not_connected"] == 0
         assert incoming_only_row["minutes"] == 1.5

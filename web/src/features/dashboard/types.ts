@@ -68,6 +68,7 @@ export interface DailyRow {
   date: string;
   dials: number;
   connected: number;
+  not_connected: number;
   minutes: number;
 }
 

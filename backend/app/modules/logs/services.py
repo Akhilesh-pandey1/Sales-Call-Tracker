@@ -1,9 +1,9 @@
 import csv
 import io
+import re
 from datetime import date, datetime
 from typing import Any
 
-from backend.app.core.errors import AppException
 from backend.app.core.utils import (
     IstDayWindow,
     build_ist_day_windows,
@@ -12,13 +12,6 @@ from backend.app.core.utils import (
 )
 from backend.app.modules.calls import OUTGOING_DIRECTION, Call
 from backend.app.modules.users import User, get_user_or_raise_not_found
-
-
-def ensure_manager_role(user: User) -> None:
-    manager_role: str = "manager"
-    forbidden_status: int = 403
-    if user.role != manager_role:
-        raise AppException("This dashboard is for managers.", forbidden_status)
 
 
 def resolve_day_window(day: str) -> IstDayWindow:
@@ -40,7 +33,7 @@ def fetch_day_call_records(day_window: IstDayWindow) -> list[Any]:
             Call.dialed_at < day_window.end_utc,
         )
         .with_entities(
-            User.name,
+            User.name.label("person_name"),
             Call.phone_number,
             Call.dialed_at,
             Call.duration_seconds,
@@ -58,8 +51,8 @@ def sort_team_call_records(call_records: list[Any]) -> list[Any]:
     sorted_records: list[Any] = sorted(
         call_records,
         key=lambda record: (
-            record[0].casefold(),
-            parse_utc_datetime(record[2]),
+            record.person_name.casefold(),
+            parse_utc_datetime(record.dialed_at),
         ),
     )
     return sorted_records
@@ -144,7 +137,8 @@ def build_team_log_filename(day_window: IstDayWindow) -> str:
 
 
 def build_person_log_filename(person_name: str, file_date: date) -> str:
-    name_slug: str = person_name.lower().replace(" ", "-")
+    lowercase_name: str = person_name.lower()
+    name_slug: str = re.sub(r"[^a-z0-9]+", "-", lowercase_name).strip("-")
     date_label: str = file_date.isoformat()
     filename: str = f"call-logs-{name_slug}-{date_label}.csv"
     return filename

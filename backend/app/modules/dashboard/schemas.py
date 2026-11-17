@@ -86,6 +86,7 @@ class DailyRow(BaseModel):
     date: str
     dials: int
     connected: int
+    not_connected: int
     minutes: float
 
 

@@ -1,5 +1,12 @@
 import type { ReactElement } from "react";
-import { Bar, BarChart, LabelList, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  LabelList,
+  Rectangle,
+  XAxis,
+  type BarShapeProps,
+} from "recharts";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard } from "./dashboard-card";
@@ -40,10 +47,24 @@ function buildDailyBars(rows: DailyRow[]): DailyBarData[] {
   const dailyBars: DailyBarData[] = rows.map((row: DailyRow) => ({
     dayLabel: buildDayOfMonthLabel(row.date),
     connected: row.connected,
-    notConnected: row.dials - row.connected,
+    notConnected: row.not_connected,
     dialsLabel: formatCount(row.dials),
   }));
   return dailyBars;
+}
+
+function renderNotConnectedSegment(segmentProps: BarShapeProps): ReactElement {
+  const segmentRectangle: ReactElement = (
+    <Rectangle
+      x={segmentProps.x}
+      y={segmentProps.y}
+      width={segmentProps.width}
+      height={segmentProps.height}
+      radius={segmentProps.radius}
+      fill={segmentProps.fill}
+    />
+  );
+  return segmentRectangle;
 }
 
 function renderDialsTopLabel(labelProps: DailyLabelProps): ReactElement | null {
@@ -104,7 +125,6 @@ export function DailyTable({ rows, className }: DailyTableProps) {
   const connectedSegmentFill: string = INCOMING_COLOR;
   const barCornerRadius: [number, number, number, number] = [4, 4, 0, 0];
   const maximumBarWidth: number = 20;
-  const minimumBarHeight: number = 1;
   const chartTopMargin: number = 20;
   const xAxisTickMargin: number = 8;
   const axisLabelFontSize: number = 9;
@@ -145,7 +165,7 @@ export function DailyTable({ rows, className }: DailyTableProps) {
             fill={notConnectedSegmentFill}
             radius={barCornerRadius}
             maxBarSize={maximumBarWidth}
-            minPointSize={minimumBarHeight}
+            shape={renderNotConnectedSegment}
           >
             <LabelList
               dataKey="dialsLabel"

@@ -1,6 +1,6 @@
 import csv
 import io
-from datetime import datetime
+from datetime import date, datetime
 from typing import Any
 
 from backend.app.core.errors import AppException
@@ -143,6 +143,13 @@ def build_team_log_filename(day_window: IstDayWindow) -> str:
     return filename
 
 
+def build_person_log_filename(person_name: str, file_date: date) -> str:
+    name_slug: str = person_name.lower().replace(" ", "-")
+    date_label: str = file_date.isoformat()
+    filename: str = f"call-logs-{name_slug}-{date_label}.csv"
+    return filename
+
+
 def get_team_day_log_download(day: str) -> tuple[str, str]:
     day_window: IstDayWindow = resolve_day_window(day)
     call_records: list[Any] = fetch_day_call_records(day_window)
@@ -206,3 +213,44 @@ def get_person_log_rows(user_id: int) -> list[dict[str, Any]]:
         build_person_log_row(record) for record in call_records
     ]
     return log_rows
+
+
+def fetch_person_csv_call_records(
+    user_id: int, window_start_utc: datetime, window_end_utc: datetime
+) -> list[Any]:
+    person_csv_records: list[Any] = (
+        Call.query.filter(
+            Call.user_id == user_id,
+            Call.dialed_at >= window_start_utc,
+            Call.dialed_at < window_end_utc,
+        )
+        .with_entities(
+            Call.phone_number,
+            Call.dialed_at,
+            Call.duration_seconds,
+            Call.direction,
+            Call.interested,
+            Call.do_not_call,
+            Call.notes,
+        )
+        .order_by(Call.dialed_at.asc())
+        .all()
+    )
+    return person_csv_records
+
+
+def get_person_thirty_day_log_download(user_id: int) -> tuple[str, str]:
+    thirty_day_count: int = 30
+    person: User = get_user_or_raise_not_found(user_id)
+
+    day_windows: list[IstDayWindow] = build_ist_day_windows(thirty_day_count)
+    call_records: list[Any] = fetch_person_csv_call_records(
+        user_id, day_windows[0].start_utc, day_windows[-1].end_utc
+    )
+    call_rows: list[list[str]] = [
+        build_call_log_row((person.name, *call_record)) for call_record in call_records
+    ]
+    csv_text: str = build_call_log_csv(call_rows)
+    filename: str = build_person_log_filename(person.name, day_windows[-1].day_date)
+    download_result: tuple[str, str] = (csv_text, filename)
+    return download_result

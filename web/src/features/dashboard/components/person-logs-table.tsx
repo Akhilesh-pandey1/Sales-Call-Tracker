@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { cn } from "@/shared/utils/cn";
 import { formatLogDate, formatLogMinutes, formatLogTime } from "../utils/format";
 import type { PersonLogRow } from "../types";
@@ -78,22 +79,27 @@ function LogRow({ logRow, isLastRow }: LogRowProps) {
 
 interface PersonLogsTableProps {
   rows: PersonLogRow[];
+  action?: ReactNode;
 }
 
-export function PersonLogsTable({ rows }: PersonLogsTableProps) {
+export function PersonLogsTable({ rows, action }: PersonLogsTableProps) {
   const hasRows: boolean = rows.length > 0;
   const emptyWindowMessage: string = "No calls in the last 30 days.";
   const bodyClassName: string = hasRows
     ? "px-4 pb-4 sm:px-6"
     : "px-4 pb-8 sm:px-6";
+  const hasAction: boolean = action !== undefined;
 
   return (
     <section className="overflow-hidden rounded-2xl border bg-card shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-5 pt-5 sm:px-6">
         <h3 className="text-base font-bold tracking-tight">Logs</h3>
-        <span className="text-sm text-muted-foreground">
-          Last 30 days · every call on record
-        </span>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="text-sm text-muted-foreground">
+            Last 30 days · every call on record
+          </span>
+          {hasAction ? action : null}
+        </div>
       </div>
 
       <div className={bodyClassName}>

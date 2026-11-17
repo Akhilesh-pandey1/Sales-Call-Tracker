@@ -1,3 +1,4 @@
+export * from "./api/dashboard.api";
 export * from "./components/kpi-card";
 export * from "./hooks/use-call-log-download";
 export * from "./pages/dashboard-page";

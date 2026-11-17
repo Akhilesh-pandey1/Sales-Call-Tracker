@@ -1,11 +1,12 @@
+import type { AxiosResponse } from "axios";
 import { apiClient } from "@/shared/api/api-client";
 import type {
+  CallLogFile,
   DailyRow,
   PersonDashboard,
   PersonLogRow,
   TeamDashboard,
   TeamLogDay,
-  TeamLogFile,
 } from "../types";
 
 function readDownloadFilename(contentDisposition: string | undefined): string {
@@ -20,6 +21,14 @@ function readDownloadFilename(contentDisposition: string | undefined): string {
   }
   const filename: string = filenameMatch[1];
   return filename;
+}
+
+function buildCallLogFile(response: AxiosResponse<Blob>): CallLogFile {
+  const contentDisposition: string | undefined =
+    response.headers["content-disposition"];
+  const filename: string = readDownloadFilename(contentDisposition);
+  const callLogFile: CallLogFile = { blob: response.data, filename };
+  return callLogFile;
 }
 
 export async function getTeamDashboard(): Promise<TeamDashboard> {
@@ -40,16 +49,21 @@ export async function getPersonDaily(personId: number): Promise<DailyRow[]> {
   return personDailyRows;
 }
 
-export async function getTeamLogFile(day: TeamLogDay): Promise<TeamLogFile> {
+export async function getTeamLogFile(day: TeamLogDay): Promise<CallLogFile> {
   const response = await apiClient.get<Blob>("/logs/team", {
     params: { day },
     responseType: "blob",
   });
-  const contentDisposition: string | undefined =
-    response.headers["content-disposition"];
-  const filename: string = readDownloadFilename(contentDisposition);
-  const teamLogFile: TeamLogFile = { blob: response.data, filename };
+  const teamLogFile: CallLogFile = buildCallLogFile(response);
   return teamLogFile;
+}
+
+export async function getPersonLogFile(personId: number): Promise<CallLogFile> {
+  const response = await apiClient.get<Blob>(`/logs/person/${personId}/download`, {
+    responseType: "blob",
+  });
+  const personLogFile: CallLogFile = buildCallLogFile(response);
+  return personLogFile;
 }
 
 export async function getPersonDashboard(personId: number): Promise<PersonDashboard> {

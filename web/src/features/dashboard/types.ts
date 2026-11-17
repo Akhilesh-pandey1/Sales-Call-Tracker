@@ -2,7 +2,7 @@ export type DashboardPeriod = "today" | "yesterday" | "last_30_days";
 
 export type TeamLogDay = "today" | "yesterday";
 
-export interface TeamLogFile {
+export interface CallLogFile {
   blob: Blob;
   filename: string;
 }

@@ -57,6 +57,13 @@ export interface TeamDashboard {
   last_30_days: TeamPeriodBlock;
 }
 
+export interface TeamDailyRow {
+  date: string;
+  dials: number;
+  connected: number;
+  minutes: number;
+}
+
 export interface PersonAveragePerActiveDay {
   dials: number;
   connected: number;

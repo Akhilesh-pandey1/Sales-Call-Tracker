@@ -81,6 +81,14 @@ class TeamPeopleRow(BaseModel):
     yesterday: PeoplePeriodBlock
 
 
+class TeamDailyRow(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    date: str
+    dials: int
+    connected: int
+    minutes: float
+
+
 class AvgPerActiveDay(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     dials: int

@@ -2,11 +2,15 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from typing import Any
 from backend.app.core.errors import AppException
-from backend.app.core.utils import parse_utc_datetime, to_ist
+from backend.app.core.utils import (
+    IstDayWindows,
+    calculate_ist_day_windows,
+    parse_utc_datetime,
+    to_ist,
+)
 from backend.app.extensions import db
 from backend.app.modules.calls import Call, OUTGOING_DIRECTION
 from backend.app.modules.dashboard.services import (
-    DashboardTimeWindows,
     OfficeHoursWindowInputs,
     PeriodHourlyInputs,
     apply_direction_call_to_hourly_bucket,
@@ -15,7 +19,6 @@ from backend.app.modules.dashboard.services import (
     build_office_hours_window_inputs,
     build_talk_totals_block,
     calculate_connected_percentage,
-    calculate_dashboard_time_windows,
     calculate_decimal_average,
     calculate_not_connected,
     calculate_rounded_average,
@@ -91,7 +94,7 @@ def build_top_numbers_list(
 
 
 def fetch_person_call_records(
-    user_id: int, windows: DashboardTimeWindows
+    user_id: int, windows: IstDayWindows
 ) -> list[Any]:
     person_call_records: list[Any] = (
         Call.query.filter(
@@ -147,7 +150,7 @@ def apply_person_call_to_period(
 
 def accumulate_person_call_records(
     call_records: list[Any],
-    windows: DashboardTimeWindows,
+    windows: IstDayWindows,
     window_inputs: OfficeHoursWindowInputs,
 ) -> PersonCallAggregates:
     aggregates: PersonCallAggregates = create_empty_person_aggregates(
@@ -316,7 +319,7 @@ def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
     window_inputs: OfficeHoursWindowInputs = build_office_hours_window_inputs(
         office_hours_window
     )
-    windows: DashboardTimeWindows = calculate_dashboard_time_windows()
+    windows: IstDayWindows = calculate_ist_day_windows()
     call_records: list[Any] = fetch_person_call_records(user_id, windows)
     aggregates: PersonCallAggregates = accumulate_person_call_records(
         call_records, windows, window_inputs

@@ -1,5 +1,25 @@
 import { apiClient } from "@/shared/api/api-client";
-import type { DailyRow, PersonDashboard, TeamDashboard } from "../types";
+import type {
+  DailyRow,
+  PersonDashboard,
+  TeamDashboard,
+  TeamLogDay,
+  TeamLogFile,
+} from "../types";
+
+function readDownloadFilename(contentDisposition: string | undefined): string {
+  const fallbackFilename: string = "call-logs.csv";
+  if (!contentDisposition) {
+    return fallbackFilename;
+  }
+  const filenameMatch: RegExpMatchArray | null =
+    contentDisposition.match(/filename="?([^";]+)"?/);
+  if (!filenameMatch) {
+    return fallbackFilename;
+  }
+  const filename: string = filenameMatch[1];
+  return filename;
+}
 
 export async function getTeamDashboard(): Promise<TeamDashboard> {
   const response = await apiClient.get<TeamDashboard>("/dashboard/team");
@@ -17,6 +37,18 @@ export async function getPersonDaily(personId: number): Promise<DailyRow[]> {
   const response = await apiClient.get<DailyRow[]>(`/dashboard/person/${personId}/daily`);
   const personDailyRows: DailyRow[] = response.data;
   return personDailyRows;
+}
+
+export async function getTeamLogFile(day: TeamLogDay): Promise<TeamLogFile> {
+  const response = await apiClient.get<Blob>("/logs/team", {
+    params: { day },
+    responseType: "blob",
+  });
+  const contentDisposition: string | undefined =
+    response.headers["content-disposition"];
+  const filename: string = readDownloadFilename(contentDisposition);
+  const teamLogFile: TeamLogFile = { blob: response.data, filename };
+  return teamLogFile;
 }
 
 export async function getPersonDashboard(personId: number): Promise<PersonDashboard> {

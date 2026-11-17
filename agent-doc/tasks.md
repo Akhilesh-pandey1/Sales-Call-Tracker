@@ -55,16 +55,16 @@
 
 **Blocked by:** Task 3
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The endpoint (manager-only) returns JSON rows newest call first, both directions, with `phone_number`, `date`, `time`, `direction`, `connected`, `minutes`; 401, 403, and 404 `"User not found."` per `api.md`.
-- [ ] The Person Logs screen lists one row per call — number, date, time, direction, connected, minutes — and shows `"No calls in the last 30 days."` when the window is empty (`specs/call-log-downloads.md` — "View logs on the person page").
-- [ ] The person page header keeps only the date, with the "View logs" button beside the Back link above the KPI cards.
+- [x] The endpoint (manager-only) returns JSON rows newest call first, both directions, with `phone_number`, `date`, `time`, `direction`, `connected`, `minutes`; 401, 403, and 404 `"User not found."` per `api.md`.
+- [x] The Person Logs screen lists one row per call — number, date, time, direction, connected, minutes — and shows `"No calls in the last 30 days."` when the window is empty (`specs/call-log-downloads.md` — "View logs on the person page").
+- [x] The person page header keeps only the date, with the "View logs" button beside the Back link above the KPI cards.
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_logs.py -q` in `backend/`
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Tests pass: `python -m pytest tests/modules/test_logs.py -q` in `backend/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 5: The 30-day log download inside Person Logs
 

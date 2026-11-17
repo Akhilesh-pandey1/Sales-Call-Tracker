@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from datetime import date, datetime
 from typing import Any
-from backend.app.core.errors import AppException
 from backend.app.core.utils import (
     IstDayWindow,
     IstDayWindows,
@@ -10,7 +9,6 @@ from backend.app.core.utils import (
     parse_utc_datetime,
     to_ist,
 )
-from backend.app.extensions import db
 from backend.app.modules.calls import Call, OUTGOING_DIRECTION
 from backend.app.modules.dashboard.services import (
     OfficeHoursWindowInputs,
@@ -35,7 +33,7 @@ from backend.app.modules.settings import (
     get_office_hours_view_with_label,
     get_or_create_office_hours_window,
 )
-from backend.app.modules.users import User
+from backend.app.modules.users import User, get_user_or_raise_not_found
 
 
 @dataclass(frozen=True)
@@ -313,16 +311,8 @@ def build_person_period_blocks(
     return period_blocks
 
 
-def get_person_or_raise_not_found(user_id: int) -> User:
-    target_user: User | None = db.session.get(User, user_id)
-    if target_user is None:
-        not_found_code: int = 404
-        raise AppException("User not found.", not_found_code)
-    return target_user
-
-
 def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
-    target_user: User = get_person_or_raise_not_found(user_id)
+    target_user: User = get_user_or_raise_not_found(user_id)
 
     office_hours_window: OfficeHours = get_or_create_office_hours_window()
     window_inputs: OfficeHoursWindowInputs = build_office_hours_window_inputs(
@@ -374,7 +364,7 @@ def fetch_person_daily_call_records(
 
 def get_person_daily_data(user_id: int) -> list[dict[str, Any]]:
     thirty_day_count: int = 30
-    get_person_or_raise_not_found(user_id)
+    get_user_or_raise_not_found(user_id)
 
     day_windows: list[IstDayWindow] = build_ist_day_windows(thirty_day_count)
     call_records: list[Any] = fetch_person_daily_call_records(

@@ -655,11 +655,15 @@ def build_daily_rows(
     daily_rows: list[dict[str, Any]] = []
     for day_window in day_windows:
         day_metrics: dict[str, int] = metrics_by_day[day_window.day_date]
+        not_connected_total: int = calculate_not_connected(
+            day_metrics["dials"], day_metrics["connected"]
+        )
         daily_rows.append(
             {
                 "date": day_window.day_date.isoformat(),
                 "dials": day_metrics["dials"],
                 "connected": day_metrics["connected"],
+                "not_connected": not_connected_total,
                 "minutes": calculate_talk_minutes(day_metrics["seconds"]),
             }
         )

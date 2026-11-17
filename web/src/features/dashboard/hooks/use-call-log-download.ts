@@ -16,7 +16,7 @@ function saveLogFile(logFile: CallLogFile): void {
   document.body.appendChild(downloadLink);
   downloadLink.click();
   document.body.removeChild(downloadLink);
-  const revokeDelayMs: number = 0;
+  const revokeDelayMs: number = 1000;
   window.setTimeout(() => URL.revokeObjectURL(objectUrl), revokeDelayMs);
 }
 

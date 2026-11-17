@@ -1,23 +1,20 @@
 from typing import Any
 
-from flask import Blueprint, Response, g, jsonify, request
+from flask import Blueprint, Response, jsonify, request
 from pydantic import ValidationError
 
 from backend.app.core.errors import AppException
-from backend.app.core.permissions import require_auth
+from backend.app.core.permissions import require_dashboard_manager
 from backend.app.modules.logs.schemas import (
-    DAY_ERROR_MESSAGE,
     PersonLogDownloadQuery,
     PersonLogRow,
     TeamLogDownloadQuery,
 )
 from backend.app.modules.logs.services import (
-    ensure_manager_role,
     get_person_log_download,
     get_person_log_rows,
     get_team_day_log_download,
 )
-from backend.app.modules.users import User
 
 logs_blueprint: Blueprint = Blueprint("logs", __name__, url_prefix="/logs")
 
@@ -32,12 +29,9 @@ def build_csv_download_response(csv_text: str, filename: str) -> tuple[Response,
 
 
 @logs_blueprint.get("/team")
-@require_auth
+@require_dashboard_manager
 def download_team_logs() -> tuple[Response, int]:
     bad_request_status: int = 400
-
-    current_user: User = g.user
-    ensure_manager_role(current_user)
 
     raw_query: dict[str, str | None] = {"day": request.args.get("day")}
     try:
@@ -45,7 +39,7 @@ def download_team_logs() -> tuple[Response, int]:
             raw_query
         )
     except ValidationError:
-        raise AppException(DAY_ERROR_MESSAGE, bad_request_status)
+        raise AppException("day must be today or yesterday.", bad_request_status)
 
     csv_text, filename = get_team_day_log_download(validated_query.day)
     result_tuple: tuple[Response, int] = build_csv_download_response(
@@ -55,12 +49,9 @@ def download_team_logs() -> tuple[Response, int]:
 
 
 @logs_blueprint.get("/person/<int:user_id>")
-@require_auth
+@require_dashboard_manager
 def get_person_logs(user_id: int) -> tuple[Response, int]:
     ok_status: int = 200
-
-    current_user: User = g.user
-    ensure_manager_role(current_user)
 
     log_rows: list[dict[str, Any]] = get_person_log_rows(user_id)
     validated_rows: list[PersonLogRow] = [
@@ -75,12 +66,9 @@ def get_person_logs(user_id: int) -> tuple[Response, int]:
 
 
 @logs_blueprint.get("/person/<int:user_id>/download")
-@require_auth
+@require_dashboard_manager
 def download_person_logs(user_id: int) -> tuple[Response, int]:
     bad_request_status: int = 400
-
-    current_user: User = g.user
-    ensure_manager_role(current_user)
 
     raw_query: dict[str, str | None] = {"day": request.args.get("day")}
     try:
@@ -88,7 +76,7 @@ def download_person_logs(user_id: int) -> tuple[Response, int]:
             PersonLogDownloadQuery.model_validate(raw_query)
         )
     except ValidationError:
-        raise AppException(DAY_ERROR_MESSAGE, bad_request_status)
+        raise AppException("day must be today or yesterday.", bad_request_status)
 
     csv_text, filename = get_person_log_download(user_id, validated_query.day)
     result_tuple: tuple[Response, int] = build_csv_download_response(

@@ -1,13 +1,11 @@
 from pydantic import BaseModel, field_validator
 
-DAY_ERROR_MESSAGE: str = "day must be today or yesterday."
-
 
 def ensure_known_day_name(value: str) -> str:
     today_option: str = "today"
     yesterday_option: str = "yesterday"
     if value not in (today_option, yesterday_option):
-        raise ValueError(DAY_ERROR_MESSAGE)
+        raise ValueError("day must be today or yesterday.")
     return value
 
 

@@ -744,6 +744,30 @@ def test_person_log_download_lowercases_name_and_replaces_spaces(
         assert content_disposition == f'attachment; filename="{expected_filename}"'
 
 
+def test_person_log_download_sanitizes_awkward_name_into_valid_filename(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_download_mgr_awkward_slug",
+            role="manager",
+            token="download-mgr-awkward-slug",
+        )
+        rep: User = create_user_fixture(
+            name='Ra/ma "esh"',
+            role="salesperson",
+            token="download-awkward-slug",
+        )
+        response: Response = fetch_person_log_download(
+            client, "download-mgr-awkward-slug", rep.id
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        expected_filename: str = build_today_person_filename("ra-ma-esh")
+        content_disposition: str = response.headers["Content-Disposition"]
+        assert content_disposition == f'attachment; filename="{expected_filename}"'
+
+
 def test_person_log_download_ten_columns_in_order_with_bom(
     app: Flask, client: FlaskClient
 ) -> None:

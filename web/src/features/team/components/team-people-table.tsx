@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from "react";
+import type { KeyboardEvent, MouseEvent } from "react";
 import { ChevronRight, Download } from "lucide-react";
 import {
   Table,
@@ -12,18 +12,26 @@ import type { TeamLogDay } from "@/features/dashboard";
 import { cn } from "@/shared/utils/cn";
 import { handleRowActivationKeyDown } from "@/shared/utils/row-activation";
 import { formatCount } from "@/shared/utils/format-count";
-import type { TeamPersonPeriodStats, TeamPersonRow } from "../types";
+import type {
+  PersonDayDownloadTarget,
+  TeamPersonPeriodStats,
+  TeamPersonRow,
+} from "../types";
 
 interface TeamPeopleTableProps {
   people: TeamPersonRow[];
   onOpenPerson: (userId: number) => void;
   onDownloadDay: (day: TeamLogDay) => void;
   downloadingDay: TeamLogDay | null;
+  onDownloadPersonDay: (target: PersonDayDownloadTarget) => void;
+  downloadingPersonDayTarget: PersonDayDownloadTarget | null;
 }
 
 interface PeopleListProps {
   people: TeamPersonRow[];
   onOpen: (userId: number) => void;
+  onDownloadPersonDay: (target: PersonDayDownloadTarget) => void;
+  downloadingPersonDayTarget: PersonDayDownloadTarget | null;
 }
 
 interface DownloadHeadingButtonProps {
@@ -51,6 +59,60 @@ function DownloadHeadingButton({
   );
 }
 
+interface PersonDayDownloadControlProps {
+  personName: string;
+  day: TeamLogDay;
+  appearance: "icon" | "chip";
+  label?: string;
+  isDisabled: boolean;
+  onClick: () => void;
+}
+
+function PersonDayDownloadControl({
+  personName,
+  day,
+  appearance,
+  label,
+  isDisabled,
+  onClick,
+}: PersonDayDownloadControlProps) {
+  const buttonLabel: string = `Download ${personName}'s logs - ${day}`;
+  const isChip: boolean = appearance === "chip";
+  const iconButtonClassName: string =
+    "h-7 w-7 text-muted-foreground hover:text-foreground";
+  const chipButtonClassName: string =
+    "gap-1 border border-border px-2 py-1 text-xs font-medium text-foreground";
+  const buttonClassName: string = cn(
+    "inline-flex cursor-pointer items-center justify-center rounded-lg transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+    isChip ? chipButtonClassName : iconButtonClassName
+  );
+  const iconClassName: string = isChip ? "h-3.5 w-3.5" : "h-4 w-4";
+
+  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
+    event.stopPropagation();
+    onClick();
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>): void => {
+    event.stopPropagation();
+  };
+
+  return (
+    <button
+      type="button"
+      title={buttonLabel}
+      aria-label={buttonLabel}
+      disabled={isDisabled}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      className={buttonClassName}
+    >
+      <Download className={iconClassName} aria-hidden="true" />
+      {label}
+    </button>
+  );
+}
+
 function formatPeriodNumbers(periodStats: TeamPersonPeriodStats): string {
   const numbersLabel: string = `${formatCount(periodStats.dials)} / ${formatCount(periodStats.connected)} / ${formatCount(periodStats.minutes)}`;
   return numbersLabel;
@@ -59,15 +121,30 @@ function formatPeriodNumbers(periodStats: TeamPersonPeriodStats): string {
 interface DesktopPersonRowProps {
   person: TeamPersonRow;
   onOpen: (userId: number) => void;
+  onDownloadPersonDay: (target: PersonDayDownloadTarget) => void;
+  downloadingPersonDayTarget: PersonDayDownloadTarget | null;
 }
 
-function DesktopPersonRow({ person, onOpen }: DesktopPersonRowProps) {
+function DesktopPersonRow({
+  person,
+  onOpen,
+  onDownloadPersonDay,
+  downloadingPersonDayTarget,
+}: DesktopPersonRowProps) {
   const handleRowClick = (): void => {
     onOpen(person.user_id);
   };
 
   const handleRowKeyDown = (event: KeyboardEvent<HTMLTableRowElement>): void => {
     handleRowActivationKeyDown(event, handleRowClick);
+  };
+
+  const handleTodayDownloadClick = (): void => {
+    onDownloadPersonDay({ userId: person.user_id, day: "today" });
+  };
+
+  const handleYesterdayDownloadClick = (): void => {
+    onDownloadPersonDay({ userId: person.user_id, day: "yesterday" });
   };
 
   const hasNoDialsToday: boolean = person.today.dials === 0;
@@ -102,7 +179,17 @@ function DesktopPersonRow({ person, onOpen }: DesktopPersonRowProps) {
       <TableCell className={todayMinutesClassName}>
         {formatCount(person.today.minutes)}
       </TableCell>
-      <TableCell className="w-8" aria-hidden="true" />
+      <TableCell className="w-8 px-0 py-4">
+        <span className="flex items-center justify-end">
+          <PersonDayDownloadControl
+            personName={person.name}
+            day="today"
+            appearance="icon"
+            isDisabled={downloadingPersonDayTarget !== null}
+            onClick={handleTodayDownloadClick}
+          />
+        </span>
+      </TableCell>
       <TableCell className="border-l p-4 text-left tabular-nums text-muted-foreground">
         {formatCount(person.yesterday.dials)}
       </TableCell>
@@ -112,7 +199,17 @@ function DesktopPersonRow({ person, onOpen }: DesktopPersonRowProps) {
       <TableCell className="p-4 text-right tabular-nums text-muted-foreground">
         {formatCount(person.yesterday.minutes)}
       </TableCell>
-      <TableCell className="w-8" aria-hidden="true" />
+      <TableCell className="w-8 px-0 py-4">
+        <span className="flex items-center justify-end">
+          <PersonDayDownloadControl
+            personName={person.name}
+            day="yesterday"
+            appearance="icon"
+            isDisabled={downloadingPersonDayTarget !== null}
+            onClick={handleYesterdayDownloadClick}
+          />
+        </span>
+      </TableCell>
     </TableRow>
   );
 }
@@ -122,6 +219,8 @@ interface DesktopPeopleTableProps {
   onOpen: (userId: number) => void;
   onDownloadDay: (day: TeamLogDay) => void;
   downloadingDay: TeamLogDay | null;
+  onDownloadPersonDay: (target: PersonDayDownloadTarget) => void;
+  downloadingPersonDayTarget: PersonDayDownloadTarget | null;
 }
 
 function DesktopPeopleTable({
@@ -129,6 +228,8 @@ function DesktopPeopleTable({
   onOpen,
   onDownloadDay,
   downloadingDay,
+  onDownloadPersonDay,
+  downloadingPersonDayTarget,
 }: DesktopPeopleTableProps) {
   const isDownloading: boolean = downloadingDay !== null;
 
@@ -183,7 +284,13 @@ function DesktopPeopleTable({
         </TableHeader>
         <TableBody>
           {people.map((person: TeamPersonRow) => (
-            <DesktopPersonRow key={person.user_id} person={person} onOpen={onOpen} />
+            <DesktopPersonRow
+              key={person.user_id}
+              person={person}
+              onOpen={onOpen}
+              onDownloadPersonDay={onDownloadPersonDay}
+              downloadingPersonDayTarget={downloadingPersonDayTarget}
+            />
           ))}
         </TableBody>
       </Table>
@@ -217,9 +324,16 @@ function TodayNumbers({ todayStats }: TodayNumbersProps) {
 interface PersonCardProps {
   person: TeamPersonRow;
   onOpen: (userId: number) => void;
+  onDownloadPersonDay: (target: PersonDayDownloadTarget) => void;
+  downloadingPersonDayTarget: PersonDayDownloadTarget | null;
 }
 
-function PersonCard({ person, onOpen }: PersonCardProps) {
+function PersonCard({
+  person,
+  onOpen,
+  onDownloadPersonDay,
+  downloadingPersonDayTarget,
+}: PersonCardProps) {
   const handleCardClick = (): void => {
     onOpen(person.user_id);
   };
@@ -227,6 +341,16 @@ function PersonCard({ person, onOpen }: PersonCardProps) {
   const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
     handleRowActivationKeyDown(event, handleCardClick);
   };
+
+  const handleTodayDownloadClick = (): void => {
+    onDownloadPersonDay({ userId: person.user_id, day: "today" });
+  };
+
+  const handleYesterdayDownloadClick = (): void => {
+    onDownloadPersonDay({ userId: person.user_id, day: "yesterday" });
+  };
+
+  const isDownloadingAnyPersonDay: boolean = downloadingPersonDayTarget !== null;
 
   return (
     <div
@@ -249,17 +373,47 @@ function PersonCard({ person, onOpen }: PersonCardProps) {
           {formatPeriodNumbers(person.yesterday)}
         </span>
       </span>
+      <span className="mt-2 flex items-center gap-2 border-t border-border pt-2">
+        <span className="text-xs text-muted-foreground">Download</span>
+        <PersonDayDownloadControl
+          personName={person.name}
+          day="today"
+          appearance="chip"
+          label="Today"
+          isDisabled={isDownloadingAnyPersonDay}
+          onClick={handleTodayDownloadClick}
+        />
+        <PersonDayDownloadControl
+          personName={person.name}
+          day="yesterday"
+          appearance="chip"
+          label="Yesterday"
+          isDisabled={isDownloadingAnyPersonDay}
+          onClick={handleYesterdayDownloadClick}
+        />
+      </span>
     </div>
   );
 }
 
-function MobilePersonCards({ people, onOpen }: PeopleListProps) {
+function MobilePersonCards({
+  people,
+  onOpen,
+  onDownloadPersonDay,
+  downloadingPersonDayTarget,
+}: PeopleListProps) {
   return (
     <div className="px-4 pb-4 sm:px-6 md:hidden">
       <p className="mt-3 text-xs text-muted-foreground">dials / connected / minutes</p>
       <div className="mt-2 space-y-2">
         {people.map((person: TeamPersonRow) => (
-          <PersonCard key={person.user_id} person={person} onOpen={onOpen} />
+          <PersonCard
+            key={person.user_id}
+            person={person}
+            onOpen={onOpen}
+            onDownloadPersonDay={onDownloadPersonDay}
+            downloadingPersonDayTarget={downloadingPersonDayTarget}
+          />
         ))}
       </div>
     </div>
@@ -271,6 +425,8 @@ export function TeamPeopleTable({
   onOpenPerson,
   onDownloadDay,
   downloadingDay,
+  onDownloadPersonDay,
+  downloadingPersonDayTarget,
 }: TeamPeopleTableProps) {
   const personWord: string = people.length === 1 ? "person" : "people";
   const countLabel: string = `${formatCount(people.length)} ${personWord} · sorted by today's minutes`;
@@ -287,8 +443,15 @@ export function TeamPeopleTable({
         onOpen={onOpenPerson}
         onDownloadDay={onDownloadDay}
         downloadingDay={downloadingDay}
+        onDownloadPersonDay={onDownloadPersonDay}
+        downloadingPersonDayTarget={downloadingPersonDayTarget}
       />
-      <MobilePersonCards people={people} onOpen={onOpenPerson} />
+      <MobilePersonCards
+        people={people}
+        onOpen={onOpenPerson}
+        onDownloadPersonDay={onDownloadPersonDay}
+        downloadingPersonDayTarget={downloadingPersonDayTarget}
+      />
     </section>
   );
 }

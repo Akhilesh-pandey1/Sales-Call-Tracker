@@ -239,18 +239,33 @@ def fetch_person_csv_call_records(
     return person_csv_records
 
 
-def get_person_thirty_day_log_download(user_id: int) -> tuple[str, str]:
+def resolve_person_log_window(day: str | None) -> IstDayWindow:
     thirty_day_count: int = 30
+    if day is not None:
+        day_window: IstDayWindow = resolve_day_window(day)
+        return day_window
+    day_windows: list[IstDayWindow] = build_ist_day_windows(thirty_day_count)
+    first_day_window: IstDayWindow = day_windows[0]
+    last_day_window: IstDayWindow = day_windows[-1]
+    combined_window: IstDayWindow = IstDayWindow(
+        day_date=last_day_window.day_date,
+        start_utc=first_day_window.start_utc,
+        end_utc=last_day_window.end_utc,
+    )
+    return combined_window
+
+
+def get_person_log_download(user_id: int, day: str | None) -> tuple[str, str]:
     person: User = get_user_or_raise_not_found(user_id)
 
-    day_windows: list[IstDayWindow] = build_ist_day_windows(thirty_day_count)
+    log_window: IstDayWindow = resolve_person_log_window(day)
     call_records: list[Any] = fetch_person_csv_call_records(
-        user_id, day_windows[0].start_utc, day_windows[-1].end_utc
+        user_id, log_window.start_utc, log_window.end_utc
     )
     call_rows: list[list[str]] = [
         build_call_log_row((person.name, *call_record)) for call_record in call_records
     ]
     csv_text: str = build_call_log_csv(call_rows)
-    filename: str = build_person_log_filename(person.name, day_windows[-1].day_date)
+    filename: str = build_person_log_filename(person.name, log_window.day_date)
     download_result: tuple[str, str] = (csv_text, filename)
     return download_result

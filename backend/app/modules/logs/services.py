@@ -1,5 +1,6 @@
 import csv
 import io
+from datetime import datetime
 from typing import Any
 
 from backend.app.core.errors import AppException
@@ -10,7 +11,7 @@ from backend.app.core.utils import (
     to_ist,
 )
 from backend.app.modules.calls import OUTGOING_DIRECTION, Call
-from backend.app.modules.users import User
+from backend.app.modules.users import User, get_user_or_raise_not_found
 
 
 def ensure_manager_role(user: User) -> None:
@@ -153,3 +154,55 @@ def get_team_day_log_download(day: str) -> tuple[str, str]:
     filename: str = build_team_log_filename(day_window)
     download_result: tuple[str, str] = (csv_text, filename)
     return download_result
+
+
+def fetch_person_window_call_records(
+    user_id: int, window_start_utc: datetime, window_end_utc: datetime
+) -> list[Any]:
+    person_call_records: list[Any] = (
+        Call.query.filter(
+            Call.user_id == user_id,
+            Call.dialed_at >= window_start_utc,
+            Call.dialed_at < window_end_utc,
+        )
+        .with_entities(
+            Call.phone_number,
+            Call.dialed_at,
+            Call.duration_seconds,
+            Call.direction,
+        )
+        .order_by(Call.dialed_at.desc())
+        .all()
+    )
+    return person_call_records
+
+
+def build_person_log_row(call_record: Any) -> dict[str, Any]:
+    phone_number, raw_dialed_at, duration_seconds, direction = call_record
+    ist_dialed_at = to_ist(parse_utc_datetime(raw_dialed_at))
+    seconds_per_minute: int = 60
+    decimal_places: int = 2
+    call_minutes: float = round(duration_seconds / seconds_per_minute, decimal_places)
+    log_row: dict[str, Any] = {
+        "phone_number": phone_number,
+        "date": ist_dialed_at.strftime("%Y-%m-%d"),
+        "time": ist_dialed_at.strftime("%H:%M:%S"),
+        "direction": direction,
+        "connected": duration_seconds > 0,
+        "minutes": call_minutes,
+    }
+    return log_row
+
+
+def get_person_log_rows(user_id: int) -> list[dict[str, Any]]:
+    thirty_day_count: int = 30
+    get_user_or_raise_not_found(user_id)
+
+    day_windows: list[IstDayWindow] = build_ist_day_windows(thirty_day_count)
+    call_records: list[Any] = fetch_person_window_call_records(
+        user_id, day_windows[0].start_utc, day_windows[-1].end_utc
+    )
+    log_rows: list[dict[str, Any]] = [
+        build_person_log_row(record) for record in call_records
+    ]
+    return log_rows

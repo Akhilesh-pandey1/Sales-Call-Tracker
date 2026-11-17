@@ -67,6 +67,16 @@ def create_utc_time_at_ist(
     return utc_call_time
 
 
+def fetch_person_logs(
+    client: FlaskClient, token: str | None, user_id: int
+) -> Response:
+    headers: dict[str, str] = {}
+    if token is not None:
+        headers["Authorization"] = f"Bearer {token}"
+    response: Response = client.get(f"/api/logs/person/{user_id}", headers=headers)
+    return response
+
+
 def fetch_team_log_download(
     client: FlaskClient, token: str | None, day: str | None = None
 ) -> Response:
@@ -397,3 +407,222 @@ def test_team_log_download_uses_ist_day_boundary(
         yesterday_date: str = (now_ist().date() - timedelta(days=1)).isoformat()
         assert get_data_rows(today_response)[0][2] == today_date
         assert get_data_rows(yesterday_response)[0][2] == yesterday_date
+
+
+PERSON_LOG_ROW_FIELDS: set[str] = {
+    "phone_number",
+    "date",
+    "time",
+    "direction",
+    "connected",
+    "minutes",
+}
+
+
+def test_person_logs_unauthenticated_rejected(client: FlaskClient) -> None:
+    response: Response = fetch_person_logs(client, None, 1)
+    expected_status: int = 401
+    assert response.status_code == expected_status
+    response_json: dict[str, Any] = response.get_json()
+    assert response_json.get("message") == "Invalid or expired token."
+
+
+def test_person_logs_invalid_token_rejected(client: FlaskClient) -> None:
+    response: Response = fetch_person_logs(client, "bad-token", 1)
+    expected_status: int = 401
+    assert response.status_code == expected_status
+
+
+def test_person_logs_salesperson_rejected(app: Flask, client: FlaskClient) -> None:
+    with app.app_context():
+        salesperson: User = create_user_fixture(
+            name="person_logs_sales", role="salesperson", token="person-logs-sales"
+        )
+        response: Response = fetch_person_logs(
+            client, "person-logs-sales", salesperson.id
+        )
+        expected_status: int = 403
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "This dashboard is for managers."
+
+
+def test_person_logs_unknown_person_rejected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_logs_mgr_missing", role="manager", token="person-logs-mgr-miss"
+        )
+        unknown_user_id: int = 99999
+        response: Response = fetch_person_logs(
+            client, "person-logs-mgr-miss", unknown_user_id
+        )
+        expected_status: int = 404
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "User not found."
+
+
+def test_person_logs_returns_every_call_newest_first(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_logs_mgr_rows", role="manager", token="person-logs-mgr-rows"
+        )
+        rep: User = create_user_fixture(
+            name="Ramesh", role="salesperson", token="person-logs-ramesh"
+        )
+        create_log_call(
+            "person-old-outgoing",
+            rep.id,
+            "+919876543201",
+            create_utc_time_at_ist(1, 9, 15, 0),
+            duration_seconds=210,
+        )
+        create_log_call(
+            "person-new-incoming",
+            rep.id,
+            "+919876543202",
+            create_utc_time_at_ist(0, 16, 3, 22),
+            duration_seconds=0,
+            direction="incoming",
+        )
+        response: Response = fetch_person_logs(
+            client, "person-logs-mgr-rows", rep.id
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        response_json: list[dict[str, Any]] = response.get_json()
+        assert len(response_json) == 2
+        assert set(response_json[0].keys()) == PERSON_LOG_ROW_FIELDS
+        assert response_json[0]["phone_number"] == "+919876543202"
+        assert response_json[0]["direction"] == "incoming"
+        assert response_json[0]["connected"] is False
+        assert response_json[0]["minutes"] == 0
+        assert response_json[1]["phone_number"] == "+919876543201"
+        assert response_json[1]["direction"] == "outgoing"
+        assert response_json[1]["connected"] is True
+        assert response_json[1]["minutes"] == 3.5
+
+
+def test_person_logs_row_uses_ist_date_and_time(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_logs_mgr_ist", role="manager", token="person-logs-mgr-ist"
+        )
+        rep: User = create_user_fixture(
+            name="Priya", role="salesperson", token="person-logs-priya"
+        )
+        create_log_call(
+            "person-ist-1",
+            rep.id,
+            "+919876543203",
+            create_utc_time_at_ist(0, 11, 24, 5),
+            duration_seconds=20,
+        )
+        response: Response = fetch_person_logs(
+            client, "person-logs-mgr-ist", rep.id
+        )
+        response_json: list[dict[str, Any]] = response.get_json()
+        today_date: str = now_ist().date().isoformat()
+        assert response_json[0]["date"] == today_date
+        assert response_json[0]["time"] == "11:24:05"
+        assert response_json[0]["minutes"] == 0.33
+        assert response_json[0]["connected"] is True
+
+
+def test_person_logs_window_holds_the_last_thirty_ist_days(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_logs_mgr_window",
+            role="manager",
+            token="person-logs-mgr-window",
+        )
+        rep: User = create_user_fixture(
+            name="Ananya", role="salesperson", token="person-logs-ananya"
+        )
+        create_log_call(
+            "person-window-today",
+            rep.id,
+            "+919876543401",
+            create_utc_time_at_ist(0, 10, 0),
+        )
+        create_log_call(
+            "person-window-day-29",
+            rep.id,
+            "+919876543402",
+            create_utc_time_at_ist(29, 0, 5),
+        )
+        create_log_call(
+            "person-window-day-30",
+            rep.id,
+            "+919876543403",
+            create_utc_time_at_ist(30, 23, 55),
+        )
+        response: Response = fetch_person_logs(
+            client, "person-logs-mgr-window", rep.id
+        )
+        response_json: list[dict[str, Any]] = response.get_json()
+        listed_numbers: list[str] = [
+            row["phone_number"] for row in response_json
+        ]
+        assert listed_numbers == ["+919876543401", "+919876543402"]
+
+
+def test_person_logs_holds_only_that_persons_calls(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_logs_mgr_owner",
+            role="manager",
+            token="person-logs-mgr-owner",
+        )
+        rep: User = create_user_fixture(
+            name="Suresh", role="salesperson", token="person-logs-suresh"
+        )
+        other_rep: User = create_user_fixture(
+            name="Zara", role="salesperson", token="person-logs-zara"
+        )
+        create_log_call(
+            "person-owner-1",
+            rep.id,
+            "+919876543501",
+            create_utc_time_at_ist(0, 10, 0),
+        )
+        create_log_call(
+            "person-owner-other",
+            other_rep.id,
+            "+919876543502",
+            create_utc_time_at_ist(0, 11, 0),
+        )
+        response: Response = fetch_person_logs(
+            client, "person-logs-mgr-owner", rep.id
+        )
+        response_json: list[dict[str, Any]] = response.get_json()
+        assert len(response_json) == 1
+        assert response_json[0]["phone_number"] == "+919876543501"
+
+
+def test_person_logs_empty_window_returns_empty_list(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_logs_mgr_empty", role="manager", token="person-logs-mgr-empty"
+        )
+        rep: User = create_user_fixture(
+            name="Vikram", role="salesperson", token="person-logs-vikram"
+        )
+        response: Response = fetch_person_logs(
+            client, "person-logs-mgr-empty", rep.id
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        assert response.get_json() == []

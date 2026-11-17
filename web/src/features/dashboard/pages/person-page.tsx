@@ -1,6 +1,6 @@
 import { useMemo, useState, type ComponentType, type ReactElement } from "react";
 import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, Megaphone, PhoneIncoming } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, List, Megaphone, PhoneIncoming } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -20,6 +20,7 @@ import { CallsByHourChart } from "../components/calls-by-hour-chart";
 import { DailyTable } from "../components/daily-table";
 import { KpiCard } from "../components/kpi-card";
 import { PeriodSwitch } from "../components/period-switch";
+import { PersonAvatar } from "../components/person-avatar";
 import { TalkSplitCard } from "../components/talk-split-card";
 import { TopNumbersTable } from "../components/top-numbers-table";
 import { usePersonDaily } from "../hooks/use-person-daily";
@@ -31,11 +32,7 @@ import type {
   PersonLast30DaysStats,
   PersonPeriodStats,
 } from "../types";
-import {
-  formatActiveDaysOutOfPeriod,
-  formatConnectedPercent,
-  getPersonInitials,
-} from "../utils/format";
+import { formatActiveDaysOutOfPeriod, formatConnectedPercent } from "../utils/format";
 
 interface PeriodView {
   label: string;
@@ -212,20 +209,6 @@ function PerformanceSection({ personStats }: PerformanceSectionProps) {
         </div>
       </div>
     </section>
-  );
-}
-
-interface PersonAvatarProps {
-  name: string;
-}
-
-function PersonAvatar({ name }: PersonAvatarProps) {
-  const initials: string = getPersonInitials(name);
-
-  return (
-    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-      {initials}
-    </div>
   );
 }
 
@@ -412,9 +395,17 @@ export function PersonPage() {
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
   const fromSectionPath: string | null = searchParams.get("from");
   const backTargetPath: string = getPersonPageBackTarget(fromSectionPath);
+  const personLogsQuery: string = searchParams.toString();
+  const personLogsPath: string = personLogsQuery
+    ? `/person/${personId}/logs?${personLogsQuery}`
+    : `/person/${personId}/logs`;
 
   const handleBackClick = (): void => {
     navigate(backTargetPath);
+  };
+
+  const handleViewLogsClick = (): void => {
+    navigate(personLogsPath);
   };
 
   const handleRetryClick = (): void => {
@@ -448,7 +439,7 @@ export function PersonPage() {
 
   return (
     <PageHeader title={headerTitle} icon={headerAvatar} action={dateAction}>
-      <div>
+      <div className="flex items-center justify-between gap-3">
         <Button
           variant="ghost"
           size="sm"
@@ -457,6 +448,15 @@ export function PersonPage() {
         >
           <ArrowLeft className="h-4 w-4" />
           Back
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleViewLogsClick}
+          className="rounded-xl"
+        >
+          <List className="h-4 w-4 text-muted-foreground" />
+          View logs
         </Button>
       </div>
 

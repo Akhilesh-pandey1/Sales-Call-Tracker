@@ -2,6 +2,7 @@ import { apiClient } from "@/shared/api/api-client";
 import type {
   DailyRow,
   PersonDashboard,
+  PersonLogRow,
   TeamDashboard,
   TeamLogDay,
   TeamLogFile,
@@ -55,4 +56,10 @@ export async function getPersonDashboard(personId: number): Promise<PersonDashbo
   const response = await apiClient.get<PersonDashboard>(`/dashboard/person/${personId}`);
   const personDashboard: PersonDashboard = response.data;
   return personDashboard;
+}
+
+export async function getPersonLogs(personId: number): Promise<PersonLogRow[]> {
+  const response = await apiClient.get<PersonLogRow[]>(`/logs/person/${personId}`);
+  const personLogRows: PersonLogRow[] = response.data;
+  return personLogRows;
 }

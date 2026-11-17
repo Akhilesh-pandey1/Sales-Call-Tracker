@@ -21,16 +21,16 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The endpoint (manager-only) returns the same 30 rows for the person; an unknown id gets 404 `"User not found."` (`specs/dashboard.md` — "Person day-by-day graph", `api.md` — person daily).
-- [ ] The Person View shows the graph below the Call Split donut; an incoming-only day renders an empty bar at zero, and no period switch touches it (`specs/dashboard.md` — "Person day-by-day graph" scenarios).
-- [ ] A salesperson token gets `"This dashboard is for managers."` from the endpoint.
+- [x] The endpoint (manager-only) returns the same 30 rows for the person; an unknown id gets 404 `"User not found."` (`specs/dashboard.md` — "Person day-by-day graph", `api.md` — person daily).
+- [x] The Person View shows the graph below the Call Split donut; an incoming-only day renders an empty bar at zero, and no period switch touches it (`specs/dashboard.md` — "Person day-by-day graph" scenarios).
+- [x] A salesperson token gets `"This dashboard is for managers."` from the endpoint.
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py -q` in `backend/`
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py -q` in `backend/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 3: Team-wide log downloads from the day heading icons
 
@@ -38,16 +38,16 @@
 
 **Blocked by:** Task 1
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] The CSV carries the ten columns in order, both directions, UTF-8 BOM, escaped notes, salespersons name A to Z with each person's calls oldest first, headers-only when the day is empty, filename `call-logs-<date>.csv` (`specs/call-log-downloads.md` — "The log downloads", "Every file carries the same ten columns", "Excel-safe files").
-- [ ] The two heading icons save the file directly; a failure keeps the manager on the page with `"Could not download the logs."` and saves no partial file (`specs/call-log-downloads.md` — "Download failure handling").
-- [ ] A wrong `day` value returns 400 `"day must be today or yesterday."` and a salesperson token gets 403 `"This dashboard is for managers."`.
+- [x] The CSV carries the ten columns in order, both directions, UTF-8 BOM, escaped notes, salespersons name A to Z with each person's calls oldest first, headers-only when the day is empty, filename `call-logs-<date>.csv` (`specs/call-log-downloads.md` — "The log downloads", "Every file carries the same ten columns", "Excel-safe files").
+- [x] The two heading icons save the file directly; a failure keeps the manager on the page with `"Could not download the logs."` and saves no partial file (`specs/call-log-downloads.md` — "Download failure handling").
+- [x] A wrong `day` value returns 400 `"day must be today or yesterday."` and a salesperson token gets 403 `"This dashboard is for managers."`.
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_logs.py -q` in `backend/`
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Tests pass: `python -m pytest tests/modules/test_logs.py -q` in `backend/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 4: The Person Logs screen opened by View logs
 

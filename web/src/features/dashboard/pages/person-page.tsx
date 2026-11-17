@@ -17,10 +17,12 @@ import { PageLoader } from "@/shared/components/page-loader";
 import { formatCount } from "@/shared/utils/format-count";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { CallsByHourChart } from "../components/calls-by-hour-chart";
+import { DailyTable } from "../components/daily-table";
 import { KpiCard } from "../components/kpi-card";
 import { PeriodSwitch } from "../components/period-switch";
 import { TalkSplitCard } from "../components/talk-split-card";
 import { TopNumbersTable } from "../components/top-numbers-table";
+import { usePersonDaily } from "../hooks/use-person-daily";
 import { isValidPersonId, usePersonStats } from "../hooks/use-person-stats";
 import type {
   DashboardPeriod,
@@ -401,6 +403,12 @@ export function PersonPage() {
   const personId: number = Number(id);
   const hasValidPersonId: boolean = isValidPersonId(personId);
   const { personStats, isLoading, hasError, refetch } = usePersonStats(personId);
+  const {
+    personDailyRows,
+    isLoading: isDailyLoading,
+    hasError: hasDailyError,
+    refetch: refetchDaily,
+  } = usePersonDaily(personId);
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
   const fromSectionPath: string | null = searchParams.get("from");
   const backTargetPath: string = getPersonPageBackTarget(fromSectionPath);
@@ -411,7 +419,11 @@ export function PersonPage() {
 
   const handleRetryClick = (): void => {
     refetch();
+    refetchDaily();
   };
+
+  const showsError: boolean = hasError || hasDailyError;
+  const showsLoading: boolean = isLoading || isDailyLoading;
 
   const fallbackPageTitle: string = "Person";
   const headerTitle: string = personStats?.name ?? fallbackPageTitle;
@@ -426,7 +438,7 @@ export function PersonPage() {
     return <Navigate to="/" replace />;
   }
 
-  if (hasError) {
+  if (showsError) {
     return (
       <PageHeader title={headerTitle} icon={headerAvatar} action={dateAction}>
         <ErrorState onRetry={handleRetryClick} />
@@ -448,13 +460,14 @@ export function PersonPage() {
         </Button>
       </div>
 
-      {isLoading && <PageLoader />}
-      {personStats && (
+      {showsLoading && <PageLoader />}
+      {!showsLoading && personStats && (
         <>
           <Last30DaysKpiSection last30DaysStats={personStats.last_30_days} />
           <PerformanceSection personStats={personStats} />
           <CallsByHourSection personStats={personStats} />
           <TalkSplitSection personStats={personStats} />
+          {personDailyRows && <DailyTable rows={personDailyRows} />}
           <TopNumbersTable numbers={personStats.top_numbers} />
         </>
       )}

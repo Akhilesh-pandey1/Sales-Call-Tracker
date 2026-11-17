@@ -1,21 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTeamDaily } from "../api/dashboard.api";
-import type { TeamDailyRow } from "../types";
+import type { DailyRow } from "../types";
 
 interface UseTeamDailyResult {
-  teamDailyRows: TeamDailyRow[] | null;
+  teamDailyRows: DailyRow[] | null;
   isLoading: boolean;
   hasError: boolean;
   refetch: () => void;
 }
 
 export function useTeamDaily(): UseTeamDailyResult {
-  const teamDailyQuery = useQuery<TeamDailyRow[]>({
+  const teamDailyQuery = useQuery<DailyRow[]>({
     queryKey: ["team-daily"],
     queryFn: getTeamDaily,
   });
 
-  const teamDailyRows: TeamDailyRow[] | null = teamDailyQuery.data ?? null;
+  const teamDailyRows: DailyRow[] | null = teamDailyQuery.data ?? null;
 
   const result: UseTeamDailyResult = {
     teamDailyRows,

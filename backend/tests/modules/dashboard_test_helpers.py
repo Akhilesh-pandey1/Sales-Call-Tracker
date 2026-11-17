@@ -128,3 +128,14 @@ def fetch_person_dashboard(
     )
     response_json: dict[str, Any] = response.get_json()
     return response, response_json
+
+
+def fetch_person_daily(
+    client: FlaskClient, auth_token: str, user_id: int
+) -> tuple[Response, list[dict[str, Any]]]:
+    headers: dict[str, str] = {"Authorization": f"Bearer {auth_token}"}
+    response: Response = client.get(
+        f"/api/dashboard/person/{user_id}/daily", headers=headers
+    )
+    response_json: list[dict[str, Any]] = response.get_json()
+    return response, response_json

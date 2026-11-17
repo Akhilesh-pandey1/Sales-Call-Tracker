@@ -81,7 +81,7 @@ class TeamPeopleRow(BaseModel):
     yesterday: PeoplePeriodBlock
 
 
-class TeamDailyRow(BaseModel):
+class DailyRow(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     date: str
     dials: int

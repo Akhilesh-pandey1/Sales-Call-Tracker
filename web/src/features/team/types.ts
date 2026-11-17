@@ -1,3 +1,5 @@
+import type { TeamLogDay } from "@/features/dashboard";
+
 export interface TeamPersonPeriodStats {
   dials: number;
   connected: number;
@@ -9,4 +11,9 @@ export interface TeamPersonRow {
   name: string;
   today: TeamPersonPeriodStats;
   yesterday: TeamPersonPeriodStats;
+}
+
+export interface PersonDayDownloadTarget {
+  userId: number;
+  day: TeamLogDay;
 }

@@ -58,8 +58,12 @@ export async function getTeamLogFile(day: TeamLogDay): Promise<CallLogFile> {
   return teamLogFile;
 }
 
-export async function getPersonLogFile(personId: number): Promise<CallLogFile> {
+export async function getPersonLogFile(
+  personId: number,
+  day?: TeamLogDay
+): Promise<CallLogFile> {
   const response = await apiClient.get<Blob>(`/logs/person/${personId}/download`, {
+    params: day === undefined ? undefined : { day },
     responseType: "blob",
   });
   const personLogFile: CallLogFile = buildCallLogFile(response);

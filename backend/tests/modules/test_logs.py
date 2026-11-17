@@ -629,13 +629,21 @@ def test_person_logs_empty_window_returns_empty_list(
 
 
 def fetch_person_log_download(
-    client: FlaskClient, token: str | None, user_id: int
+    client: FlaskClient,
+    token: str | None,
+    user_id: int,
+    day: str | None = None,
 ) -> Response:
     headers: dict[str, str] = {}
     if token is not None:
         headers["Authorization"] = f"Bearer {token}"
+    query_params: dict[str, str] = {}
+    if day is not None:
+        query_params["day"] = day
     response: Response = client.get(
-        f"/api/logs/person/{user_id}/download", headers=headers
+        f"/api/logs/person/{user_id}/download",
+        query_string=query_params,
+        headers=headers,
     )
     return response
 
@@ -969,3 +977,283 @@ def test_person_log_download_holds_only_that_persons_calls(
         assert len(data_rows) == 1
         assert data_rows[0][0] == "Amit"
         assert data_rows[0][1] == "+919876544001"
+
+
+def test_person_log_download_today_holds_only_that_ist_day(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_day_mgr_today",
+            role="manager",
+            token="day-mgr-today",
+        )
+        rep: User = create_user_fixture(
+            name="Ramesh", role="salesperson", token="day-ramesh"
+        )
+        create_log_call(
+            "person-day-today",
+            rep.id,
+            "+919876545001",
+            create_utc_time_at_ist(0, 10, 0),
+        )
+        create_log_call(
+            "person-day-yesterday",
+            rep.id,
+            "+919876545002",
+            create_utc_time_at_ist(1, 10, 0),
+        )
+        create_log_call(
+            "person-day-two-days-ago",
+            rep.id,
+            "+919876545003",
+            create_utc_time_at_ist(2, 10, 0),
+        )
+        response: Response = fetch_person_log_download(
+            client, "day-mgr-today", rep.id, "today"
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        listed_numbers: list[str] = [row[1] for row in get_data_rows(response)]
+        assert listed_numbers == ["+919876545001"]
+        today_date: str = now_ist().date().isoformat()
+        expected_filename: str = f"call-logs-ramesh-{today_date}.csv"
+        content_disposition: str = response.headers["Content-Disposition"]
+        assert content_disposition == f'attachment; filename="{expected_filename}"'
+
+
+def test_person_log_download_yesterday_holds_only_that_ist_day_and_names_its_date(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_day_mgr_yesterday",
+            role="manager",
+            token="day-mgr-yesterday",
+        )
+        rep: User = create_user_fixture(
+            name="Ramesh Kumar", role="salesperson", token="day-ramesh-kumar"
+        )
+        create_log_call(
+            "person-day-yesterday-early",
+            rep.id,
+            "+919876545101",
+            create_utc_time_at_ist(1, 0, 10),
+        )
+        create_log_call(
+            "person-day-yesterday-late",
+            rep.id,
+            "+919876545102",
+            create_utc_time_at_ist(1, 23, 50),
+        )
+        create_log_call(
+            "person-day-today-early",
+            rep.id,
+            "+919876545103",
+            create_utc_time_at_ist(0, 0, 10),
+        )
+        response: Response = fetch_person_log_download(
+            client, "day-mgr-yesterday", rep.id, "yesterday"
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        data_rows: list[list[str]] = get_data_rows(response)
+        listed_numbers: list[str] = [row[1] for row in data_rows]
+        assert listed_numbers == ["+919876545101", "+919876545102"]
+        yesterday_date: str = (now_ist().date() - timedelta(days=1)).isoformat()
+        assert [row[2] for row in data_rows] == [yesterday_date, yesterday_date]
+        expected_filename: str = f"call-logs-ramesh-kumar-{yesterday_date}.csv"
+        content_disposition: str = response.headers["Content-Disposition"]
+        assert content_disposition == f'attachment; filename="{expected_filename}"'
+
+
+def test_person_log_download_unknown_day_rejected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_day_mgr_invalid",
+            role="manager",
+            token="day-mgr-invalid",
+        )
+        rep: User = create_user_fixture(
+            name="Ramesh", role="salesperson", token="day-invalid-ramesh"
+        )
+        response: Response = fetch_person_log_download(
+            client, "day-mgr-invalid", rep.id, "tomorrow"
+        )
+        expected_status: int = 400
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "day must be today or yesterday."
+
+
+def test_person_log_download_empty_day_rejected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_day_mgr_empty_day",
+            role="manager",
+            token="day-mgr-empty-day",
+        )
+        rep: User = create_user_fixture(
+            name="Ramesh", role="salesperson", token="day-empty-ramesh"
+        )
+        response: Response = fetch_person_log_download(
+            client, "day-mgr-empty-day", rep.id, ""
+        )
+        expected_status: int = 400
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "day must be today or yesterday."
+
+
+def test_person_log_download_day_salesperson_rejected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        salesperson: User = create_user_fixture(
+            name="person_day_sales", role="salesperson", token="day-sales"
+        )
+        response: Response = fetch_person_log_download(
+            client, "day-sales", salesperson.id, "today"
+        )
+        expected_status: int = 403
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "This dashboard is for managers."
+
+
+def test_person_log_download_day_unknown_person_rejected(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_day_mgr_missing",
+            role="manager",
+            token="day-mgr-missing",
+        )
+        unknown_user_id: int = 99999
+        response: Response = fetch_person_log_download(
+            client, "day-mgr-missing", unknown_user_id, "yesterday"
+        )
+        expected_status: int = 404
+        assert response.status_code == expected_status
+        response_json: dict[str, Any] = response.get_json()
+        assert response_json.get("message") == "User not found."
+
+
+def test_person_log_download_day_sorts_oldest_first_both_directions(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_day_mgr_order",
+            role="manager",
+            token="day-mgr-order",
+        )
+        rep: User = create_user_fixture(
+            name="Suresh", role="salesperson", token="day-order-suresh"
+        )
+        create_log_call(
+            "person-day-order-new-incoming",
+            rep.id,
+            "+919876545201",
+            create_utc_time_at_ist(0, 16, 3, 22),
+            direction="incoming",
+        )
+        create_log_call(
+            "person-day-order-old-outgoing",
+            rep.id,
+            "+919876545202",
+            create_utc_time_at_ist(0, 10, 0),
+            duration_seconds=120,
+        )
+        create_log_call(
+            "person-day-order-middle-outgoing",
+            rep.id,
+            "+919876545203",
+            create_utc_time_at_ist(0, 12, 30),
+        )
+        response: Response = fetch_person_log_download(
+            client, "day-mgr-order", rep.id, "today"
+        )
+        data_rows: list[list[str]] = get_data_rows(response)
+        listed_numbers: list[str] = [row[1] for row in data_rows]
+        listed_directions: list[str] = [row[4] for row in data_rows]
+        assert listed_numbers == [
+            "+919876545202",
+            "+919876545203",
+            "+919876545201",
+        ]
+        assert listed_directions == ["Outgoing", "Outgoing", "Incoming"]
+        assert all(len(row) == 10 for row in data_rows)
+
+
+def test_person_log_download_day_holds_only_that_persons_calls(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_day_mgr_owner",
+            role="manager",
+            token="day-mgr-owner",
+        )
+        rep: User = create_user_fixture(
+            name="Amit", role="salesperson", token="day-owner-amit"
+        )
+        other_rep: User = create_user_fixture(
+            name="Bhavna", role="salesperson", token="day-owner-bhavna"
+        )
+        create_log_call(
+            "person-day-owner",
+            rep.id,
+            "+919876545301",
+            create_utc_time_at_ist(0, 10, 0),
+        )
+        create_log_call(
+            "person-day-owner-other",
+            other_rep.id,
+            "+919876545302",
+            create_utc_time_at_ist(0, 11, 0),
+        )
+        response: Response = fetch_person_log_download(
+            client, "day-mgr-owner", rep.id, "today"
+        )
+        data_rows: list[list[str]] = get_data_rows(response)
+        assert len(data_rows) == 1
+        assert data_rows[0][0] == "Amit"
+        assert data_rows[0][1] == "+919876545301"
+
+
+def test_person_log_download_empty_day_returns_header_row_only(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_day_mgr_empty_file",
+            role="manager",
+            token="day-mgr-empty-file",
+        )
+        rep: User = create_user_fixture(
+            name="Vikram", role="salesperson", token="day-empty-file-vikram"
+        )
+        create_log_call(
+            "person-day-empty-yesterday",
+            rep.id,
+            "+919876545401",
+            create_utc_time_at_ist(1, 12, 0),
+        )
+        response: Response = fetch_person_log_download(
+            client, "day-mgr-empty-file", rep.id, "today"
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+        assert response.data.startswith(BOM_BYTES)
+        csv_rows: list[list[str]] = parse_csv_rows(response)
+        assert csv_rows == [TEN_COLUMN_HEADERS]
+        today_date: str = now_ist().date().isoformat()
+        expected_filename: str = f"call-logs-vikram-{today_date}.csv"
+        content_disposition: str = response.headers["Content-Disposition"]
+        assert content_disposition == f'attachment; filename="{expected_filename}"'

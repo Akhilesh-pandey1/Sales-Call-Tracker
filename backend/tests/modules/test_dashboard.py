@@ -10,6 +10,7 @@ from backend.tests.modules.dashboard_test_helpers import (
     create_utc_call_time,
     create_utc_call_time_at_minute,
     create_user_fixture,
+    fetch_person_daily,
     fetch_team_daily,
     fetch_team_dashboard,
     fetch_team_people,
@@ -1388,3 +1389,195 @@ def test_team_daily_counts_deactivated_salespeople_and_skips_managers(
 
         total_dials: int = sum(row["dials"] for row in data)
         assert total_dials == 2
+
+
+def test_person_daily_unauthenticated_rejected(client: FlaskClient) -> None:
+    response: Response = client.get("/api/dashboard/person/1/daily")
+    expected_status: int = 401
+    assert response.status_code == expected_status
+    response_json: dict[str, Any] = response.get_json()
+    assert response_json.get("message") == "Invalid or expired token."
+
+
+def test_person_daily_salesperson_rejected(app: Flask, client: FlaskClient) -> None:
+    with app.app_context():
+        salesperson: User = create_user_fixture(
+            name="person_daily_salesperson",
+            role="salesperson",
+            token="person-daily-sales-token",
+        )
+        response, data = fetch_person_daily(
+            client, "person-daily-sales-token", salesperson.id
+        )
+        expected_status: int = 403
+        assert response.status_code == expected_status
+        assert data.get("message") == "This dashboard is for managers."
+
+
+def test_person_daily_unknown_user_not_found(app: Flask, client: FlaskClient) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_daily_mgr_unknown",
+            role="manager",
+            token="person-daily-mgr-unknown-token",
+        )
+        unknown_user_id: int = 99999
+        response, data = fetch_person_daily(
+            client, "person-daily-mgr-unknown-token", unknown_user_id
+        )
+        expected_status: int = 404
+        assert response.status_code == expected_status
+        assert data.get("message") == "User not found."
+
+
+def test_person_daily_returns_thirty_days_oldest_first_with_zero_days(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_daily_mgr_days",
+            role="manager",
+            token="person-daily-mgr-days-token",
+        )
+        rep: User = create_user_fixture(
+            name="person_daily_rep_days",
+            role="salesperson",
+            token="person-daily-rep-days-token",
+        )
+        other_rep: User = create_user_fixture(
+            name="person_daily_other_rep",
+            role="salesperson",
+            token="person-daily-other-rep-token",
+        )
+
+        create_call_record(
+            "person-daily-today",
+            rep.id,
+            "+919876543310",
+            create_utc_call_time(0, 11),
+            120,
+        )
+        create_call_record(
+            "person-daily-ten",
+            rep.id,
+            "+919876543311",
+            create_utc_call_time(10, 11),
+            60,
+        )
+        create_call_record(
+            "person-daily-oldest",
+            rep.id,
+            "+919876543312",
+            create_utc_call_time(29, 11),
+            30,
+        )
+        create_call_record(
+            "person-daily-other",
+            other_rep.id,
+            "+919876543313",
+            create_utc_call_time(0, 11),
+            600,
+        )
+
+        response, data = fetch_person_daily(
+            client, "person-daily-mgr-days-token", rep.id
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+
+        thirty_day_count: int = 30
+        assert len(data) == thirty_day_count
+
+        today_date: date = now_ist().date()
+        expected_dates: list[str] = [
+            (today_date - timedelta(days=29 - day_index)).isoformat()
+            for day_index in range(thirty_day_count)
+        ]
+        returned_dates: list[str] = [row["date"] for row in data]
+        assert returned_dates == expected_dates
+
+        expected_row_keys: set[str] = {"date", "dials", "connected", "minutes"}
+        assert set(data[0].keys()) == expected_row_keys
+
+        oldest_day_row: dict[str, Any] = data[0]
+        assert oldest_day_row["dials"] == 1
+        assert oldest_day_row["connected"] == 1
+        assert oldest_day_row["minutes"] == 0.5
+
+        zero_day_row: dict[str, Any] = data[1]
+        assert zero_day_row["dials"] == 0
+        assert zero_day_row["connected"] == 0
+        assert zero_day_row["minutes"] == 0
+
+        ten_days_ago_row: dict[str, Any] = data[19]
+        assert ten_days_ago_row["dials"] == 1
+        assert ten_days_ago_row["connected"] == 1
+        assert ten_days_ago_row["minutes"] == 1
+
+        today_row: dict[str, Any] = data[-1]
+        assert today_row["dials"] == 1
+        assert today_row["connected"] == 1
+        assert today_row["minutes"] == 2
+
+
+def test_person_daily_counts_outgoing_only_dials_and_incoming_minutes(
+    app: Flask, client: FlaskClient
+) -> None:
+    with app.app_context():
+        create_user_fixture(
+            name="person_daily_mgr_direction",
+            role="manager",
+            token="person-daily-mgr-direction-token",
+        )
+        rep: User = create_user_fixture(
+            name="person_daily_rep_direction",
+            role="salesperson",
+            token="person-daily-rep-direction-token",
+        )
+
+        create_call_record(
+            "person-daily-outgoing",
+            rep.id,
+            "+919876543320",
+            create_utc_call_time(0, 11),
+            120,
+        )
+        create_call_record(
+            "person-daily-not-connected",
+            rep.id,
+            "+919876543321",
+            create_utc_call_time(0, 12),
+            0,
+        )
+        create_call_record(
+            "person-daily-incoming",
+            rep.id,
+            "+919876543322",
+            create_utc_call_time(0, 13),
+            60,
+            "incoming",
+        )
+        create_call_record(
+            "person-daily-incoming-only-day",
+            rep.id,
+            "+919876543323",
+            create_utc_call_time(3, 11),
+            90,
+            "incoming",
+        )
+
+        response, data = fetch_person_daily(
+            client, "person-daily-mgr-direction-token", rep.id
+        )
+        expected_status: int = 200
+        assert response.status_code == expected_status
+
+        today_row: dict[str, Any] = data[-1]
+        assert today_row["dials"] == 2
+        assert today_row["connected"] == 1
+        assert today_row["minutes"] == 3
+
+        incoming_only_row: dict[str, Any] = data[26]
+        assert incoming_only_row["dials"] == 0
+        assert incoming_only_row["connected"] == 0
+        assert incoming_only_row["minutes"] == 1.5

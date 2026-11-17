@@ -220,6 +220,23 @@ def fetch_team_call_records(
     return team_call_records
 
 
+def fetch_team_daily_call_records(
+    window_start_utc: datetime, window_end_utc: datetime
+) -> list[Any]:
+    salesperson_role: str = "salesperson"
+    daily_call_records: list[Any] = (
+        Call.query.join(User, Call.user_id == User.id)
+        .filter(
+            User.role == salesperson_role,
+            Call.dialed_at >= window_start_utc,
+            Call.dialed_at < window_end_utc,
+        )
+        .with_entities(Call.dialed_at, Call.duration_seconds, Call.direction)
+        .all()
+    )
+    return daily_call_records
+
+
 def fetch_active_salespeople() -> list[Any]:
     salesperson_role: str = "salesperson"
     active_salespeople: list[Any] = (
@@ -614,14 +631,14 @@ def get_team_dashboard_data() -> dict[str, Any]:
     return period_blocks
 
 
-def accumulate_team_daily_call_records(
+def accumulate_daily_call_records(
     call_records: list[Any], day_windows: list[IstDayWindow]
 ) -> dict[date, dict[str, int]]:
     metrics_by_day: dict[date, dict[str, int]] = {
         day_window.day_date: create_empty_period_metrics()
         for day_window in day_windows
     }
-    for _, raw_dialed_at, duration_seconds, direction in call_records:
+    for raw_dialed_at, duration_seconds, direction in call_records:
         dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
         day_date: date = to_ist(dialed_at).date()
         day_metrics: dict[str, int] | None = metrics_by_day.get(day_date)
@@ -631,7 +648,7 @@ def accumulate_team_daily_call_records(
     return metrics_by_day
 
 
-def build_team_daily_rows(
+def build_daily_rows(
     day_windows: list[IstDayWindow],
     metrics_by_day: dict[date, dict[str, int]],
 ) -> list[dict[str, Any]]:
@@ -652,13 +669,13 @@ def build_team_daily_rows(
 def get_team_daily_data() -> list[dict[str, Any]]:
     thirty_day_count: int = 30
     day_windows: list[IstDayWindow] = build_ist_day_windows(thirty_day_count)
-    call_records: list[Any] = fetch_team_call_records(
+    call_records: list[Any] = fetch_team_daily_call_records(
         day_windows[0].start_utc, day_windows[-1].end_utc
     )
-    metrics_by_day: dict[date, dict[str, int]] = accumulate_team_daily_call_records(
+    metrics_by_day: dict[date, dict[str, int]] = accumulate_daily_call_records(
         call_records, day_windows
     )
-    daily_rows: list[dict[str, Any]] = build_team_daily_rows(
+    daily_rows: list[dict[str, Any]] = build_daily_rows(
         day_windows, metrics_by_day
     )
     return daily_rows

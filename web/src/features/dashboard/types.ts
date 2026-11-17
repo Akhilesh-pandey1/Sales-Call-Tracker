@@ -57,7 +57,7 @@ export interface TeamDashboard {
   last_30_days: TeamPeriodBlock;
 }
 
-export interface TeamDailyRow {
+export interface DailyRow {
   date: string;
   dials: number;
   connected: number;

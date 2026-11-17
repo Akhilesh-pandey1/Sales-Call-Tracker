@@ -4,7 +4,7 @@ import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { formatCount } from "@/shared/utils/format-count";
 import { DashboardCard } from "./dashboard-card";
 import { INCOMING_COLOR } from "./chart-colors";
-import type { TeamDailyRow } from "../types";
+import type { DailyRow } from "../types";
 
 interface DailyLabelProps {
   x?: number | string;
@@ -26,7 +26,7 @@ interface DailyLegendEntry {
 }
 
 interface DailyTableProps {
-  rows: TeamDailyRow[];
+  rows: DailyRow[];
   className?: string;
 }
 
@@ -36,8 +36,8 @@ function buildDayOfMonthLabel(dayDate: string): string {
   return dayOfMonthLabel;
 }
 
-function buildDailyBars(rows: TeamDailyRow[]): DailyBarData[] {
-  const dailyBars: DailyBarData[] = rows.map((row: TeamDailyRow) => ({
+function buildDailyBars(rows: DailyRow[]): DailyBarData[] {
+  const dailyBars: DailyBarData[] = rows.map((row: DailyRow) => ({
     dayLabel: buildDayOfMonthLabel(row.date),
     connected: row.connected,
     notConnected: row.dials - row.connected,

@@ -14,3 +14,12 @@ class TeamLogDownloadQuery(BaseModel):
         if value not in (today_option, yesterday_option):
             raise ValueError(DAY_ERROR_MESSAGE)
         return value
+
+
+class PersonLogRow(BaseModel):
+    phone_number: str
+    date: str
+    time: str
+    direction: str
+    connected: bool
+    minutes: float

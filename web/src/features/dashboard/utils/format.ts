@@ -43,3 +43,41 @@ export function getPersonInitials(name: string): string {
     .toUpperCase();
   return initials;
 }
+
+export function formatLogDate(isoDate: string): string {
+  const [yearText, monthText, dayText] = isoDate.split("-");
+  const firstMonthNumber: number = 1;
+  const logDate: Date = new Date(
+    Number(yearText),
+    Number(monthText) - firstMonthNumber,
+    Number(dayText)
+  );
+  const dateFormatOptions: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "numeric",
+  };
+  const dateLabel: string = new Intl.DateTimeFormat(
+    "en-US",
+    dateFormatOptions
+  ).format(logDate);
+  return dateLabel;
+}
+
+export function formatLogTime(isoTime: string): string {
+  const [hourText, minuteText] = isoTime.split(":");
+  const afternoonStartHour: number = 12;
+  const hoursOnClock: number = 12;
+  const rawHour: number = Number(hourText);
+  const isAfternoon: boolean = rawHour >= afternoonStartHour;
+  const displayHour: number =
+    rawHour % hoursOnClock === 0 ? hoursOnClock : rawHour % hoursOnClock;
+  const periodLabel: string = isAfternoon ? "PM" : "AM";
+  const timeLabel: string = `${displayHour}:${minuteText} ${periodLabel}`;
+  return timeLabel;
+}
+
+export function formatLogMinutes(minutes: number): string {
+  const decimalPlaces: number = 1;
+  const minutesLabel: string = minutes.toFixed(decimalPlaces);
+  return minutesLabel;
+}

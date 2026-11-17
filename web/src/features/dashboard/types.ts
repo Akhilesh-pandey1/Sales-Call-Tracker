@@ -71,6 +71,15 @@ export interface DailyRow {
   minutes: number;
 }
 
+export interface PersonLogRow {
+  phone_number: string;
+  date: string;
+  time: string;
+  direction: "outgoing" | "incoming";
+  connected: boolean;
+  minutes: number;
+}
+
 export interface PersonAveragePerActiveDay {
   dials: number;
   connected: number;

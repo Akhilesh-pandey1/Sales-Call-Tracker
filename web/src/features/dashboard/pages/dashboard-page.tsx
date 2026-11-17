@@ -5,10 +5,12 @@ import { PageLoader } from "@/shared/components/page-loader";
 import { formatCount } from "@/shared/utils/format-count";
 import { getTodaysDateLabel } from "@/shared/utils/todays-date";
 import { CallsByHourChart } from "../components/calls-by-hour-chart";
+import { DailyTable } from "../components/daily-table";
 import { ErrorState } from "@/shared/components/error-state";
 import { KpiCard } from "../components/kpi-card";
 import { PeriodSwitch } from "../components/period-switch";
 import { TopPeopleList } from "../components/top-people-list";
+import { useTeamDaily } from "../hooks/use-team-daily";
 import { useTeamDashboard } from "../hooks/use-team-dashboard";
 import {
   formatAveragePerPersonPerDayLabel,
@@ -200,6 +202,12 @@ function TeamPerformanceSection({
 
 export function DashboardPage() {
   const { teamDashboard, isLoading, hasError, refetch } = useTeamDashboard();
+  const {
+    teamDailyRows,
+    isLoading: isDailyLoading,
+    hasError: hasDailyError,
+    refetch: refetchDaily,
+  } = useTeamDaily();
   const [selectedPeriod, setSelectedPeriod] = useState<DashboardPeriod>("today");
   const todaysDateLabel: string = useMemo(() => getTodaysDateLabel(), []);
 
@@ -207,27 +215,38 @@ export function DashboardPage() {
     setSelectedPeriod(period);
   };
 
+  const handleRetry = (): void => {
+    refetch();
+    refetchDaily();
+  };
+
+  const showsError: boolean = hasError || hasDailyError;
+  const showsLoading: boolean = isLoading || isDailyLoading;
+
   const dateAction = (
     <span className="text-sm text-muted-foreground">{todaysDateLabel}</span>
   );
 
-  if (hasError) {
+  if (showsError) {
     return (
       <PageHeader title="Team Dashboard" action={dateAction}>
-        <ErrorState onRetry={refetch} />
+        <ErrorState onRetry={handleRetry} />
       </PageHeader>
     );
   }
 
   return (
     <PageHeader title="Team Dashboard" action={dateAction}>
-      {isLoading && <PageLoader />}
-      {teamDashboard && (
+      {showsLoading && <PageLoader />}
+      {!showsLoading && teamDashboard && (
         <TeamPerformanceSection
           periodBlock={teamDashboard[selectedPeriod]}
           selectedPeriod={selectedPeriod}
           onSelectPeriod={handleSelectPeriod}
         />
+      )}
+      {!showsLoading && teamDailyRows && (
+        <DailyTable rows={teamDailyRows} className="mt-3 sm:mt-4" />
       )}
     </PageHeader>
   );

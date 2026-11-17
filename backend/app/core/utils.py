@@ -1,6 +1,22 @@
-from datetime import datetime, timezone
+from dataclasses import dataclass
+from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from backend.app.config.base import TIMEZONE_NAME
+
+
+@dataclass(frozen=True)
+class IstDayWindows:
+    today_start_utc: datetime
+    tomorrow_start_utc: datetime
+    yesterday_start_utc: datetime
+    thirty_days_start_utc: datetime
+
+
+@dataclass(frozen=True)
+class IstDayWindow:
+    day_date: date
+    start_utc: datetime
+    end_utc: datetime
 
 
 def get_ist_timezone() -> ZoneInfo:
@@ -48,3 +64,46 @@ def parse_utc_datetime(datetime_value: str | datetime) -> datetime:
 
     converted_datetime = parsed_datetime.astimezone(utc_zone)
     return converted_datetime
+
+
+def get_ist_today_start() -> datetime:
+    current_ist: datetime = now_ist()
+    today_start_ist: datetime = current_ist.replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
+    return today_start_ist
+
+
+def build_ist_day_windows(day_count: int) -> list[IstDayWindow]:
+    utc_zone: timezone = timezone.utc
+    one_day: timedelta = timedelta(days=1)
+    today_start_ist: datetime = get_ist_today_start()
+    day_windows: list[IstDayWindow] = []
+    for days_ago in range(day_count - 1, -1, -1):
+        day_start_ist: datetime = today_start_ist - one_day * days_ago
+        day_end_ist: datetime = day_start_ist + one_day
+        day_windows.append(
+            IstDayWindow(
+                day_date=day_start_ist.date(),
+                start_utc=day_start_ist.astimezone(utc_zone),
+                end_utc=day_end_ist.astimezone(utc_zone),
+            )
+        )
+    return day_windows
+
+
+def calculate_ist_day_windows() -> IstDayWindows:
+    utc_zone: timezone = timezone.utc
+    one_day: timedelta = timedelta(days=1)
+    twenty_nine_days: timedelta = timedelta(days=29)
+    today_start_ist: datetime = get_ist_today_start()
+    tomorrow_start_ist: datetime = today_start_ist + one_day
+    yesterday_start_ist: datetime = today_start_ist - one_day
+    thirty_days_start_ist: datetime = today_start_ist - twenty_nine_days
+    time_windows: IstDayWindows = IstDayWindows(
+        today_start_utc=today_start_ist.astimezone(utc_zone),
+        tomorrow_start_utc=tomorrow_start_ist.astimezone(utc_zone),
+        yesterday_start_utc=yesterday_start_ist.astimezone(utc_zone),
+        thirty_days_start_utc=thirty_days_start_ist.astimezone(utc_zone),
+    )
+    return time_windows

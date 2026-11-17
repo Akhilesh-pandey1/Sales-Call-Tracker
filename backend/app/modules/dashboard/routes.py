@@ -6,11 +6,13 @@ from backend.app.core.errors import AppException
 from backend.app.core.permissions import require_auth
 from backend.app.modules.dashboard.schemas import (
     PersonDashboardResponse,
+    TeamDailyRow,
     TeamDashboardResponse,
     TeamPeopleRow,
 )
 from backend.app.modules.dashboard.person_services import get_person_dashboard_data
 from backend.app.modules.dashboard.services import (
+    get_team_daily_data,
     get_team_dashboard_data,
     get_team_people_data,
 )
@@ -57,6 +59,22 @@ def get_team_people() -> tuple[Response, int]:
     people_rows: list[dict[str, Any]] = get_team_people_data()
     validated_rows: list[TeamPeopleRow] = [
         TeamPeopleRow.model_validate(row) for row in people_rows
+    ]
+    response_payload: list[dict[str, Any]] = [
+        validated_row.model_dump() for validated_row in validated_rows
+    ]
+    response: Response = jsonify(response_payload)
+    result_tuple: tuple[Response, int] = (response, ok_status)
+    return result_tuple
+
+
+@dashboard_blueprint.get("/team/daily")
+@require_dashboard_manager
+def get_team_daily() -> tuple[Response, int]:
+    ok_status: int = 200
+    daily_rows: list[dict[str, Any]] = get_team_daily_data()
+    validated_rows: list[TeamDailyRow] = [
+        TeamDailyRow.model_validate(row) for row in daily_rows
     ]
     response_payload: list[dict[str, Any]] = [
         validated_row.model_dump() for validated_row in validated_rows

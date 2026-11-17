@@ -1,4 +1,6 @@
-# API Specifications
+# API contracts
+
+Every API's answer carries an HTTP status code — a number that travels back with every network call, like a delivery slip. `200` means delivered — the API worked. Any other number means it failed, and the answer then carries one thing only: a `message` field with the reason in plain words.
 
 All endpoints use JSON bodies unless specified otherwise. All endpoints except `POST /api/login` require an `Authorization: Bearer <token>` header from an active user session.
 
@@ -256,6 +258,85 @@ Returns call performance stats, calls-by-hour, and top 5 numbers for a specific 
   - `401 Unauthorized`: `{"message": "Invalid or expired token."}`
   - `403 Forbidden`: `{"message": "Access denied: you can only view your own statistics."}`
   - `404 Not Found`: `{"message": "User not found."}`
+
+### `GET /api/dashboard/team/daily`
+Reads the team's day-by-day numbers for the last 30 days — one row per IST calendar day — for the Team page's "Day by day" table under the calls-by-hour chart. Needs a manager login (Bearer token).
+
+**Input**
+
+None.
+
+**What happens**
+
+1. The token is checked first — a salesperson token gets the manager message back and nothing is read.
+2. Every stored call is bucketed into the 30 most recent IST calendar days, ending with today, over the UTC-stored call times.
+3. Each day counts dials and connected from outgoing calls only, and sums minutes over outgoing and incoming talk time together as `round(seconds / 60, 2)`.
+4. Calls made by currently deactivated salespeople count in their day's row.
+5. The 30 rows go back newest day first — a day with no calls holds zeros.
+
+**Output — code 200**
+
+```json
+[
+  { "date": "2025-11-06", "dials": 120, "connected": 64, "minutes": 310.5 },
+  { "date": "2025-11-05", "dials": 98, "connected": 51, "minutes": 260.25 }
+]
+```
+
+- `date` — string. The IST calendar day as `YYYY-MM-DD`. Example: `2025-11-06`
+- `dials` — integer. That day's outgoing calls. Example: `120`
+- `connected` — integer. That day's outgoing calls with duration above 0. Example: `64`
+- `minutes` — number. That day's total talk minutes, outgoing and incoming together, 2 decimals. Example: `310.5`
+- The array always holds exactly 30 rows, newest day first.
+
+**Error format — any code other than 200**
+
+```json
+{ "message": "the reason in plain words" }
+```
+
+**Error cases**
+
+- `401` — token missing or expired: "Invalid or expired token."
+- `403` — a salesperson token: "This dashboard is for managers."
+
+### `GET /api/dashboard/person/<id>/daily`
+Reads one salesperson's day-by-day numbers for the last 30 days — one row per IST calendar day — for the person page's "Day by day" table under the calls-by-hour chart. Needs a manager login (Bearer token).
+
+**Input**
+
+- `id` — integer, in the path, required. The salesperson's user id. Example: `3`
+
+**What happens**
+
+1. The token is checked first — a salesperson token gets the manager message back and nothing is read.
+2. The user id is looked up — an unknown id gets "User not found." and nothing is read.
+3. This person's stored calls are bucketed into the 30 most recent IST calendar days, ending with today, over the UTC-stored call times.
+4. Each day counts dials and connected from outgoing calls only, and sums minutes over outgoing and incoming talk time together as `round(seconds / 60, 2)`.
+5. The 30 rows go back newest day first — a day with no calls holds zeros.
+
+**Output — code 200**
+
+```json
+[
+  { "date": "2025-11-06", "dials": 45, "connected": 24, "minutes": 180.4 },
+  { "date": "2025-11-05", "dials": 38, "connected": 19, "minutes": 150.75 }
+]
+```
+
+- The rows carry the same four fields as the team daily read — `date`, `dials`, `connected`, `minutes` — and always hold exactly 30 rows, newest day first.
+
+**Error format — any code other than 200**
+
+```json
+{ "message": "the reason in plain words" }
+```
+
+**Error cases**
+
+- `401` — token missing or expired: "Invalid or expired token."
+- `403` — a salesperson token: "This dashboard is for managers."
+- `404` — unknown user id: "User not found."
 
 ---
 
@@ -545,3 +626,144 @@ Checks the manager password typed in the Do-not-track screen's Remove popup. The
   - `403 Forbidden` (wrong password): `{"message": "Wrong password. Ask your manager."}`
   - `403 Forbidden` (inactive account): `{"message": "Your account is not active. Please contact your manager."}`
   - `503 Service Unavailable`: `{"message": "Removing is not available yet. Contact support."}` — the environment value is not set; the check fails closed.
+
+---
+
+## 8. Call Log Downloads (Manager Only)
+
+Every download returns a CSV file, not JSON — `text/csv` with a UTF-8 BOM, sent as an attachment. Both directions are included: every stored call appears. Every file uses the same ten columns, in this order:
+
+| Column | Format | Content |
+|---|---|---|
+| Salesperson | text | The call owner's user name |
+| Phone Number | text | The stored phone number as-is |
+| Date | `YYYY-MM-DD` | The call's IST calendar day |
+| Time | `HH:MM:SS` | The call's IST wall-clock time |
+| Direction | `Outgoing` / `Incoming` | The stored direction |
+| Connected | `Yes` / `No` | Yes when the duration is above 0 |
+| Duration (minutes) | number, 2 decimals | The call's talk minutes |
+| Interested | `Yes` / `No` | The stored flag |
+| Do Not Call | `Yes` / `No` | The stored flag |
+| Notes | text | The stored note, or empty |
+
+A note holding a comma, a quote, or a line break is escaped per CSV rules. Team files sort by salesperson name A to Z, each person's calls oldest first; the person file sorts oldest call first. A window with no calls still downloads a file holding only the header row.
+
+### `GET /api/logs/team`
+Downloads every stored call of every salesperson for one IST day — today or yesterday — as one CSV file, for the Team page's two download buttons. Needs a manager login (Bearer token).
+
+**Input**
+
+- `day` — string, in the query, required. `today` or `yesterday`. Example: `today`
+
+**What happens**
+
+1. The token is checked first — a salesperson token gets the manager message back and no file is built.
+2. The `day` value is checked — anything but `today` or `yesterday` gets "day must be today or yesterday." back and no file is built.
+3. That day's IST window is computed over the UTC-stored call times, and every stored call inside it is read — both directions, deactivated salespeople included.
+4. The CSV is built with the ten columns, the UTF-8 BOM is prepended, and the file goes back as an attachment named `call-logs-<YYYY-MM-DD>.csv` after that day's IST date.
+
+**Output — code 200**
+
+A CSV file attachment:
+
+```
+Salesperson,Phone Number,Date,Time,Direction,Connected,Duration (minutes),Interested,Do Not Call,Notes
+Ramesh,+919876543210,2025-11-06,11:24:05,Outgoing,Yes,3.50,Yes,No,wants a demo on Tuesday
+Suresh,+919812345678,2025-11-06,11:40:15,Incoming,No,0.00,No,No,
+```
+
+- Filename — `call-logs-2025-11-06.csv` for the 6 November 2025 day file.
+
+**Error format — any code other than 200**
+
+```json
+{ "message": "the reason in plain words" }
+```
+
+**Error cases**
+
+- `400` — `day` is missing or not `today` or `yesterday`: "day must be today or yesterday."
+- `401` — token missing or expired: "Invalid or expired token."
+- `403` — a salesperson token: "This dashboard is for managers."
+
+### `GET /api/logs/person/<id>`
+Reads every stored call of one salesperson for the last 30 days, including today — one row per call, both directions, newest call first — for the Person Logs screen opened by "View logs" on the person page. Needs a manager login (Bearer token).
+
+**Input**
+
+- `id` — integer, in the path, required. The salesperson's user id. Example: `3`
+
+**What happens**
+
+1. The token is checked first — a salesperson token gets the manager message back and nothing is read.
+2. The user id is looked up — an unknown id gets "User not found." and nothing is read.
+3. The last 30 IST days including today form the window over the UTC-stored call times, and every stored call of this person inside it is read — both directions, newest call first.
+
+**Output — code 200**
+
+```json
+[
+  { "phone_number": "+919876543210", "date": "2025-11-06", "time": "11:24:05", "direction": "outgoing", "connected": true, "minutes": 3.5 },
+  { "phone_number": "+919812345678", "date": "2025-11-05", "time": "16:03:22", "direction": "incoming", "connected": false, "minutes": 0 }
+]
+```
+
+- `phone_number` — string. The stored number as-is. Example: `+919876543210`
+- `date` / `time` — strings. The call's IST calendar day and wall-clock time. Example: `2025-11-06` / `11:24:05`
+- `direction` — string. `outgoing` or `incoming`.
+- `connected` — boolean. True when the call's duration is above 0.
+- `minutes` — number. The call's talk minutes, 2 decimals. Example: `3.5`
+- The array is sorted newest call first.
+
+**Error format — any code other than 200**
+
+```json
+{ "message": "the reason in plain words" }
+```
+
+**Error cases**
+
+- `401` — token missing or expired: "Invalid or expired token."
+- `403` — a salesperson token: "This dashboard is for managers."
+- `404` — unknown user id: "User not found."
+
+### `GET /api/logs/person/<id>/download`
+Downloads every stored call of one salesperson for the last 30 days, including today, as one CSV file, for the "Download logs" button inside the Person Logs screen. Needs a manager login (Bearer token).
+
+**Input**
+
+- `id` — integer, in the path, required. The salesperson's user id. Example: `3`
+- `day` — string, in the query, optional. `today` or `yesterday`; without it the last 30 days download. Example: `today`
+
+**What happens**
+
+1. The token is checked first — a salesperson token gets the manager message back and no file is built.
+2. The `day` value is checked — anything but `today` or `yesterday` gets "day must be today or yesterday." back and no file is built.
+3. The user id is looked up — an unknown id gets "User not found." and no file is built.
+4. Without `day`, the last 30 IST days including today form the window over the UTC-stored call times; with `day=today` or `day=yesterday`, that single IST day is the window. Every stored call of this person inside the window is read — both directions, oldest call first.
+5. The CSV is built with the ten columns, the UTF-8 BOM is prepended, and the file goes back as an attachment named `call-logs-<name>-<YYYY-MM-DD>.csv` — the name in lowercase with spaces as hyphens; the date is that day's IST date for a `day` download, today's IST date for the 30-day download.
+
+**Output — code 200**
+
+A CSV file attachment:
+
+```
+Salesperson,Phone Number,Date,Time,Direction,Connected,Duration (minutes),Interested,Do Not Call,Notes
+Ramesh,+919876543210,2025-11-06,11:24:05,Outgoing,Yes,3.50,Yes,No,wants a demo on Tuesday
+Ramesh,+919898765432,2025-10-15,16:03:22,Outgoing,No,0.00,No,No,
+```
+
+- Filename — `call-logs-ramesh-2025-11-06.csv` — the date is that day's IST date for a `day` download, today's IST date for the 30-day download.
+
+**Error format — any code other than 200**
+
+```json
+{ "message": "the reason in plain words" }
+```
+
+**Error cases**
+
+- `400` — `day` is given but not `today` or `yesterday`: "day must be today or yesterday."
+- `401` — token missing or expired: "Invalid or expired token."
+- `403` — a salesperson token: "This dashboard is for managers."
+- `404` — unknown user id: "User not found."

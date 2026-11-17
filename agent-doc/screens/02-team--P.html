@@ -124,12 +124,28 @@
 
         <!-- Desktop / tablet table -->
         <div class="hidden px-5 pb-4 sm:px-6 md:block">
-          <div class="mt-4 grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] pb-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">
+          <div class="mt-4 grid grid-cols-[2fr_repeat(6,minmax(0,1fr))_2rem_2rem] items-center gap-x-3 border-b border-[var(--color-border)] pb-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-muted-foreground)]">
             <div>Salesperson</div>
-            <div class="col-span-3 border-l border-[var(--color-border)] text-center text-sm font-bold normal-case tracking-tight text-[var(--color-foreground)]">Today</div>
-            <div class="col-span-3 border-l border-[var(--color-border)] text-center text-sm font-bold normal-case tracking-tight text-[var(--color-muted-foreground)]">Yesterday</div>
+            <div class="relative col-span-4 border-l border-[var(--color-border)] text-center text-sm font-bold normal-case tracking-tight text-[var(--color-foreground)]">Today
+              <button type="button" title="Download all salespeople's logs — today" class="absolute right-0 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
+            <div class="relative col-span-4 border-l border-[var(--color-border)] text-center text-sm font-bold normal-case tracking-tight text-[var(--color-muted-foreground)]">Yesterday
+              <button type="button" title="Download all salespeople's logs — yesterday" class="absolute right-0 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
           </div>
-          <div class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] py-2 text-xs text-[var(--color-muted-foreground)]">
+          <div class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))_2rem_2rem] items-center gap-x-3 border-b border-[var(--color-border)] py-2 text-xs text-[var(--color-muted-foreground)]">
             <div></div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right">Dials</div>
             <div class="text-right">Connected</div>
@@ -137,61 +153,171 @@
             <div class="border-l border-[var(--color-border)] pl-3 text-right">Dials</div>
             <div class="text-right">Connected</div>
             <div class="text-right">Min</div>
+            <div></div>
+            <div></div>
           </div>
 
-          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))_2rem_2rem] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
             <div class="font-medium">Priya Sharma</div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right font-semibold tabular-nums">58</div>
             <div class="text-right font-semibold tabular-nums text-[var(--color-accent)]">21</div>
             <div class="text-right font-semibold tabular-nums">96</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Priya Sharma's logs — today" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right tabular-nums text-[var(--color-muted-foreground)]">47</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">15</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">74</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Priya Sharma's logs — yesterday" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
           </a>
-          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))_2rem_2rem] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
             <div class="font-medium">Arjun Mehta</div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right font-semibold tabular-nums">52</div>
             <div class="text-right font-semibold tabular-nums text-[var(--color-accent)]">18</div>
             <div class="text-right font-semibold tabular-nums">88</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Arjun Mehta's logs — today" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right tabular-nums text-[var(--color-muted-foreground)]">55</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">20</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">102</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Arjun Mehta's logs — yesterday" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
           </a>
-          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))_2rem_2rem] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
             <div class="font-medium">Sneha Iyer</div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right font-semibold tabular-nums">41</div>
             <div class="text-right font-semibold tabular-nums text-[var(--color-accent)]">12</div>
             <div class="text-right font-semibold tabular-nums">55</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Sneha Iyer's logs — today" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right tabular-nums text-[var(--color-muted-foreground)]">38</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">11</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">49</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Sneha Iyer's logs — yesterday" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
           </a>
-          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))_2rem_2rem] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
             <div class="font-medium">Rahul Verma</div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right font-semibold tabular-nums">33</div>
             <div class="text-right font-semibold tabular-nums text-[var(--color-accent)]">9</div>
             <div class="text-right font-semibold tabular-nums">41</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Rahul Verma's logs — today" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right tabular-nums text-[var(--color-muted-foreground)]">40</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">14</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">66</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Rahul Verma's logs — yesterday" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
           </a>
-          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))_2rem_2rem] items-center gap-x-3 border-b border-[var(--color-border)] px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
             <div class="font-medium">Ananya Gupta</div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right font-semibold tabular-nums">18</div>
             <div class="text-right font-semibold tabular-nums text-[var(--color-accent)]">4</div>
             <div class="text-right font-semibold tabular-nums">17</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Ananya Gupta's logs — today" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right tabular-nums text-[var(--color-muted-foreground)]">22</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">6</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">28</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Ananya Gupta's logs — yesterday" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
           </a>
-          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))] items-center gap-x-3 px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+          <a href="#" class="grid grid-cols-[2fr_repeat(6,minmax(0,1fr))_2rem_2rem] items-center gap-x-3 px-2 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
             <div class="font-medium">Vikram Singh</div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right tabular-nums text-[var(--color-muted-foreground)]">0</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">0</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">0</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Vikram Singh's logs — today" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
             <div class="border-l border-[var(--color-border)] pl-3 text-right tabular-nums text-[var(--color-muted-foreground)]">12</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">3</div>
             <div class="text-right tabular-nums text-[var(--color-muted-foreground)]">15</div>
+            <div class="flex items-center justify-end">
+              <button type="button" title="Download Vikram Singh's logs — yesterday" class="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-[var(--color-muted-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
           </a>
         </div>
 
@@ -212,6 +338,25 @@
                 <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
                 <span class="tabular-nums text-[var(--color-muted-foreground)]">47 / 15 / 74</span>
               </div>
+              <div class="mt-2 flex items-center gap-2 border-t border-[var(--color-border)] pt-2">
+                <span class="text-xs text-[var(--color-muted-foreground)]">Download</span>
+                <button type="button" title="Download Priya Sharma's logs — today" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Today
+                </button>
+                <button type="button" title="Download Priya Sharma's logs — yesterday" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Yesterday
+                </button>
+              </div>
             </a>
             <a href="#" class="block cursor-pointer rounded-xl border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
               <div class="flex items-center justify-between gap-2">
@@ -225,6 +370,25 @@
                 <span class="font-semibold tabular-nums">52 / <span class="text-[var(--color-accent)]">18</span> / 88</span>
                 <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
                 <span class="tabular-nums text-[var(--color-muted-foreground)]">55 / 20 / 102</span>
+              </div>
+              <div class="mt-2 flex items-center gap-2 border-t border-[var(--color-border)] pt-2">
+                <span class="text-xs text-[var(--color-muted-foreground)]">Download</span>
+                <button type="button" title="Download Arjun Mehta's logs — today" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Today
+                </button>
+                <button type="button" title="Download Arjun Mehta's logs — yesterday" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Yesterday
+                </button>
               </div>
             </a>
             <a href="#" class="block cursor-pointer rounded-xl border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
@@ -240,6 +404,25 @@
                 <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
                 <span class="tabular-nums text-[var(--color-muted-foreground)]">38 / 11 / 49</span>
               </div>
+              <div class="mt-2 flex items-center gap-2 border-t border-[var(--color-border)] pt-2">
+                <span class="text-xs text-[var(--color-muted-foreground)]">Download</span>
+                <button type="button" title="Download Sneha Iyer's logs — today" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Today
+                </button>
+                <button type="button" title="Download Sneha Iyer's logs — yesterday" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Yesterday
+                </button>
+              </div>
             </a>
             <a href="#" class="block cursor-pointer rounded-xl border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
               <div class="flex items-center justify-between gap-2">
@@ -253,6 +436,25 @@
                 <span class="font-semibold tabular-nums">33 / <span class="text-[var(--color-accent)]">9</span> / 41</span>
                 <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
                 <span class="tabular-nums text-[var(--color-muted-foreground)]">40 / 14 / 66</span>
+              </div>
+              <div class="mt-2 flex items-center gap-2 border-t border-[var(--color-border)] pt-2">
+                <span class="text-xs text-[var(--color-muted-foreground)]">Download</span>
+                <button type="button" title="Download Rahul Verma's logs — today" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Today
+                </button>
+                <button type="button" title="Download Rahul Verma's logs — yesterday" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Yesterday
+                </button>
               </div>
             </a>
             <a href="#" class="block cursor-pointer rounded-xl border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
@@ -268,6 +470,25 @@
                 <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
                 <span class="tabular-nums text-[var(--color-muted-foreground)]">22 / 6 / 28</span>
               </div>
+              <div class="mt-2 flex items-center gap-2 border-t border-[var(--color-border)] pt-2">
+                <span class="text-xs text-[var(--color-muted-foreground)]">Download</span>
+                <button type="button" title="Download Ananya Gupta's logs — today" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Today
+                </button>
+                <button type="button" title="Download Ananya Gupta's logs — yesterday" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Yesterday
+                </button>
+              </div>
             </a>
             <a href="#" class="block cursor-pointer rounded-xl border border-[var(--color-border)] px-4 py-3.5 transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
               <div class="flex items-center justify-between gap-2">
@@ -281,6 +502,25 @@
                 <span class="tabular-nums text-[var(--color-muted-foreground)]">0 / 0 / 0</span>
                 <span class="text-[var(--color-muted-foreground)]">Yesterday</span>
                 <span class="tabular-nums text-[var(--color-muted-foreground)]">3 / 12 / 15</span>
+              </div>
+              <div class="mt-2 flex items-center gap-2 border-t border-[var(--color-border)] pt-2">
+                <span class="text-xs text-[var(--color-muted-foreground)]">Download</span>
+                <button type="button" title="Download Vikram Singh's logs — today" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Today
+                </button>
+                <button type="button" title="Download Vikram Singh's logs — yesterday" class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-foreground)] transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Yesterday
+                </button>
               </div>
             </a>
           </div>

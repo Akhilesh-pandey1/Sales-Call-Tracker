@@ -60,6 +60,18 @@ Automated tests live in the backend API using `pytest` and in the app using Jest
 - People rows include zero-call salespeople, exclude deactivated salespeople, and arrive sorted by today's minutes highest first.
 - A salesperson token gets 403 on `GET /api/dashboard/team/people`.
 
+- `GET /api/dashboard/team/daily` returns exactly 30 rows, one per IST calendar day over the last 30 days ending today, oldest day first, with a day that has no calls at zeros.
+- In the daily rows a UTC-stored call lands in the right IST day; dials and connected count outgoing calls only, minutes counts both directions, and calls by deactivated salespeople stay counted in team day rows.
+- `GET /api/dashboard/person/<id>/daily` returns the same 30-day shape for one person; a salesperson token gets 403 on both daily endpoints and an unknown id gets 404 `"User not found."`.
+
+### `tests/modules/test_logs.py`
+- `GET /api/logs/team?day=today` and `?day=yesterday` download every stored call of that IST day as one CSV — both directions, deactivated salespeople included — named `call-logs-<that day's IST date>.csv`.
+- Team files sort by salesperson name A to Z with each person's calls oldest first; a day with no calls downloads only the header row.
+- The CSV carries the ten columns in order, starts with a UTF-8 BOM, and escapes notes holding commas, quotes, or line breaks.
+- `GET /api/logs/person/<id>` returns the person's last-30-days calls as JSON rows, newest call first, both directions; a salesperson token gets 403 and an unknown id gets 404 `"User not found."`.
+- `GET /api/logs/person/<id>/download` without `day` downloads the last 30 days, and with `day=today` or `day=yesterday` that single day; the filename carries the window's IST end date.
+- A `day` value other than today or yesterday returns 400 `"day must be today or yesterday."`, and a salesperson token gets 403 on every download and on the logs view.
+
 ### `tests/modules/test_settings.py`
 - GET returns the stored window as `start_time` / `end_time` `HH:MM` strings.
 - PUT updates the window, and the next call sync and chart immediately use the new window.

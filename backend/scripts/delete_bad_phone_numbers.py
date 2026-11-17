@@ -1,8 +1,10 @@
 """Delete every lead whose phone number is not a valid 10-digit Indian number.
 
-Finds the same bad numbers as find_bad_phone_numbers.py: not +91 followed by
-exactly 10 digits. Shows the list, asks one yes or no question, and deletes
-the leads plus their call logs only after a yes. A no deletes nothing.
+A number is valid with or without the +91 country code: +91 followed by
+exactly 10 digits, or just 10 digits on its own. Anything else (9 digits,
+11 digits, letters, spaces) is bad. Shows the list, asks one yes or no
+question, and deletes the leads plus their call logs only after a yes.
+A no deletes nothing.
 
 Run from the project root:
     backend/venv/Scripts/python.exe backend/scripts/delete_bad_phone_numbers.py
@@ -23,10 +25,30 @@ from backend.app import create_app
 from backend.app.extensions import db
 from backend.app.modules.calls.models import Call
 from backend.app.modules.leads.models import Lead
-from find_bad_phone_numbers import describe_number_problem
 
 SUCCESS_EXIT_CODE: int = 0
 FAILURE_EXIT_CODE: int = 1
+
+
+def describe_number_problem(phone_number: str) -> str | None:
+    cleaned_number: str = phone_number.strip()
+    digits_only: str = cleaned_number.lstrip("+")
+
+    if not digits_only:
+        return "Is empty"
+
+    if not digits_only.isdigit():
+        return "Has characters other than digits"
+
+    digit_count: int = len(digits_only)
+    has_country_code: bool = digit_count == 12 and digits_only.startswith("91")
+    local_number: str = digits_only[2:] if has_country_code else digits_only
+    local_digit_count: int = len(local_number)
+
+    if local_digit_count == 10:
+        return None
+
+    return f"Has {local_digit_count} digits instead of 10"
 
 
 def find_bad_leads_with_problems() -> list[tuple[Lead, str]]:

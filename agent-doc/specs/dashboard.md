@@ -254,6 +254,75 @@ The system SHALL compute every dashboard number on the server in IST over UTC-st
 - **WHEN** it renders returned values
 - **THEN** it adds only separators, percent signs, hour labels, and wording — no percentages, averages, deltas, or any other arithmetic
 
+### Requirement: Team day-by-day graph
+The system SHALL show a "Day by day" graph on the Team page below the calls-by-hour chart — exactly 30 bars, one per IST calendar day over the last 30 days ending today, oldest day first, each bar's height showing the day's dials with the day's connected calls highlighted as the green segment inside it and the day's dials count on top — and SHALL render a day with no calls as an empty bar at zero.
+
+#### Scenario: Thirty bars oldest first
+- **GIVEN** the manager is on the Team page
+- **WHEN** the day-by-day graph renders
+- **THEN** exactly 30 bars show, the oldest IST day on the left and today on the right
+
+#### Scenario: A day with no calls shows an empty bar
+- **GIVEN** a day in the last 30 days with no stored calls
+- **WHEN** its bar renders
+- **THEN** the bar is empty with a 0 count — the day is never skipped
+
+#### Scenario: UTC-stored call lands on its IST day
+- **GIVEN** a call stored in UTC that falls inside yesterday's IST calendar day
+- **WHEN** the day rows are computed
+- **THEN** the call counts in yesterday's row, not today's
+
+#### Scenario: Deactivated person's calls count
+- **GIVEN** a salesperson made calls this week and was deactivated afterwards
+- **WHEN** the team day rows are computed
+- **THEN** those calls count in their day's rows
+
+#### Scenario: Day bars use the period counting
+- **GIVEN** any day in the graph
+- **WHEN** its bar is computed
+- **THEN** dials and connected count outgoing calls only, the same counting the period totals use
+
+#### Scenario: No date picking
+- **GIVEN** the manager is on the Team page or a person view
+- **WHEN** they look for a way to pick a specific date
+- **THEN** none exists — the table always shows the last 30 days ending today
+
+### Requirement: Person day-by-day graph
+The system SHALL show the same 30-day "Day by day" graph on a person's view below the Call Split section, built only from that person's calls, with the same bar shape, order, and zero-day rendering.
+
+#### Scenario: Person page renders their bars
+- **GIVEN** the manager opens a salesperson's person view
+- **WHEN** the day-by-day graph renders
+- **THEN** it shows that person's 30 day bars, oldest day on the left
+
+#### Scenario: Person with no calls in 30 days
+- **GIVEN** a salesperson with no stored calls in the last 30 days
+- **WHEN** their graph renders
+- **THEN** all 30 bars show empty at zero
+
+#### Scenario: Incoming-only day
+- **GIVEN** a day where the person only answered incoming calls
+- **WHEN** that day's bar renders
+- **THEN** the bar is empty at 0 dials — incoming talk time counts in the period minutes, not in the day bar
+
+### Requirement: Day-by-day tables manager-only
+The system SHALL serve both day-by-day tables to manager tokens only.
+
+#### Scenario: Manager access granted
+- **GIVEN** a valid manager token
+- **WHEN** the day-by-day rows are requested
+- **THEN** the rows return for the table
+
+#### Scenario: Salesperson token refused
+- **GIVEN** a valid salesperson token
+- **WHEN** the day-by-day rows are requested
+- **THEN** the server refuses with "This dashboard is for managers."
+
+#### Scenario: Unknown person refused
+- **GIVEN** a manager requests the person day-by-day rows of a user id that does not exist
+- **WHEN** the request is processed
+- **THEN** the server responds "User not found."
+
 ### Requirement: Dashboard failure and empty states
 The system SHALL show "Could not load data." with a Retry button when any dashboard request fails, return to the login screen when the session has ended, and show the returned zero-value period when no calls exist at all.
 

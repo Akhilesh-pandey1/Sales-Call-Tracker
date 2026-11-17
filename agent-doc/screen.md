@@ -30,13 +30,16 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Bar counts - each segment's count sits in the vertical middle of its own color, the bar's total on top; a segment under one eighth of the tallest bar shows no count
 - Color legend - one row under the chart: blue dot = outgoing, green dot = incoming
 - Split line under the legend - reads like "142 outgoing · 37 incoming" for the selected period
+- Day by day graph - the last 30 days as one bar per day: bar height = dials, connected calls as the green segment inside, dials count on top; oldest day left, newest right; always the last 30 days - the period switch does not touch it
+- Day bars are not tappable - no day detail page exists; the 30-bar graph is the whole view
 - Top 5 by minutes - the 5 people with the most TOTAL talk time (outgoing and incoming together) in the selected period
 - No person rows here - per-salesperson rows live on Screen 2b Team
-- Totals count every call on record - including deactivated people's past calls
+- Totals and Day by day rows count every call on record - including deactivated people's past calls
 - Numbers update on open and page refresh - no live updates
 
 **Edge cases:**
 - No calls yet at all: totals show 0 and the chart shows the "No calls in this period." note
+- A day with no calls: its Day by day bar is empty with a 0 count - the day is never skipped
 - Backend does not load: "Could not load data." with a Retry button
 - Login ended (password changed, or the account deactivated or deleted): back to Screen 1 Login
 
@@ -50,12 +53,16 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - Team table - one row per active salesperson: name, today dials / connected / minutes, yesterday dials / connected / minutes. Dials and connected count outgoing calls only; minutes is TOTAL talk time (outgoing + incoming)
 - Zeros included - a person with no calls still shows a row of zeros (seeing who is NOT calling is the point)
 - Sorted by today's minutes, highest first
+- Complete downloads - a small download icon at the right side of the Today and Yesterday column headings: each saves every salesperson's calls of that one day - outgoing and incoming - as one file that opens in Excel, with each person's name as a column
+- Individual downloads - a small download icon at the right edge of each day group in every row: saves that person's calls for that day; tapping the row itself still opens Screen 3 Person View
 - Tap a row - opens that person's Screen 3 Person View
-- On mobile the table becomes one card per person with the same numbers
+- On mobile the table becomes one card per person with the same numbers and the same download icons
 
 **Edge cases:**
 - No calls yet at all: every active person still lists with zeros
 - No salespeople created yet: an empty state prompts the manager to add people in Accounts
+- A day with no calls: the file still saves, with only the column headers
+- Download fails: "Could not download the logs." - no file saves
 - Backend does not load: "Could not load data." with a Retry button
 - Login ended: back to Screen 1 Login
 
@@ -64,10 +71,13 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 ### Screen 3: Person View
 - Person's name as the heading
 - Back link - returns to the section the person was opened from (Team for an active person, Accounts for a deactivated one)
+- "View logs" button - beside the Back link, above the KPI cards; opens Screen 3b Person Logs - the download lives inside it, not on this page
 - KPI cards (4, last 30 days) - Active days (of 30), Avg dials, Avg connected, Avg minutes; averages per active day; Avg minutes is TOTAL talk (outgoing + incoming); Active days counts only days with an outgoing call
 - Stats block - three rows (Today, Yesterday, Last 30 days), each with: Dials, Connected, Minutes, Connected %. Minutes is TOTAL talk; Dials / Connected count outgoing only
 - Calls by hour - ONE stacked two-color bar per hour, same as the Dashboard - centered counts, color legend included - for this person only; its own small period switch (Today | Yesterday | Last 30 days) drives only this chart
 - Donut chart - incoming vs outgoing share of TOTAL talk minutes for the period; its own small period switch (Today | Yesterday | Last 30 days); one line under it reads the exact numbers: "Outgoing 142 calls · 310 min — Incoming 37 calls · 52 min"
+- Day by day graph - the person's last 30 days as one bar per day, below the Call Split donut: bar height = dials, connected calls as the green segment inside, dials count on top; oldest day left, newest right; always 30 days - no period switch touches it
+- Day bars are not tappable - no day detail page exists
 - Connected % - connected ÷ dials for that period; "—" means the period has no dials yet, not 0%
 - Most contacted numbers table (last 30 days) - number, minutes, calls; sorted by TOTAL talk time (outgoing and incoming together)
 - Red flags - one number with huge minutes, or the same number contacted daily - are read by eye from the Most contacted table
@@ -80,9 +90,24 @@ The web is manager-only. A salesperson who opens it gets one message, no data.
 - No incoming calls in a period: the donut shows the full circle as outgoing; the line reads "Incoming 0 calls · 0 min"
 - Backend does not load: "Could not load data." with a Retry button
 
-**Graph - what it means:** The donut shows how this person's talk time splits between calls they made and calls they received. The manager uses it to see whether the person drives conversations or mostly answers them. The stacked hour chart shows when both kinds happen.
+### Screen 3b: Person Logs
+Opened by "View logs" on Screen 3 - every call this person made or received in the last 30 days, one row per call, outgoing and incoming together, newest call first.
+
+- Back link - returns to Screen 3 Person View
+- Download logs button - at the table heading; saves this person's calls of the last 30 days, today included, as one file that opens in Excel
+- Logs table - one row per call: phone number, date, time, direction (Outgoing / Incoming), connected (Yes / No), minutes
+- Both directions listed - answered incoming calls sit between the outgoing ones in time order
+
+**Edge cases:**
+- No calls in the last 30 days: "No calls in the last 30 days." instead of the table
+- Download fails: "Could not download the logs." - no file saves
+- Login ended: back to Screen 1 Login
 
 → Next: Screen 4 Leads
+
+**Graph - what it means:** The donut shows how this person's talk time splits between calls they made and calls they received. The manager uses it to see whether the person drives conversations or mostly answers them. The stacked hour chart shows when both kinds happen.
+
+→ Next: Screen 3b Person Logs
 
 ### Screen 4: Leads
 - Sidebar item "Leads" opens this page

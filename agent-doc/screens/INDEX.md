@@ -5,13 +5,16 @@ Open `index.html` to flip through the screens (arrow keys or the buttons; Mobile
 | Screen | File | What it is for |
 |---|---|---|
 | Login | `01-login--P.html` | Manager signs in to the web dashboard |
-| Dashboard | `02-dashboard--P.html` | Team numbers at a glance — KPI cards, calls-by-hour with outgoing/incoming split, Top 5 |
+| Dashboard | `02-dashboard--P.html` | Team numbers at a glance — KPI cards, calls-by-hour with outgoing/incoming split, Top 5, and the fixed day-by-day 30-bar graph |
 | Team — no salespeople yet | `02-team--empty--P.html` | Empty Team page pointing the manager to Accounts |
-| Team | `02-team--P.html` | One row per active salesperson — today and yesterday numbers |
-| Person View | `04-person-view--P.html` | One person's full record — cards, table, stacked hour chart, direction donut, top numbers |
+| Team | `02-team--P.html` | One row per active salesperson — today and yesterday numbers, with download icons for the whole team's day and for each person's day |
+| Team — download failed | `02-team--download-error--P.html` | "Could not download the logs." toast — the manager stays on the page |
+| Person View | `04-person-view--P.html` | One person's full record — cards, performance table, stacked hour chart, day-by-day 30-bar graph, direction donut, top numbers, and the View logs button |
 | Person View — no incoming calls | `04-person-view--no-incoming--P.html` | Donut with zero incoming — full outgoing circle, "Incoming 0 calls · 0 min" |
 | Person View — no calls | `04-person-view--no-calls--P.html` | Person with nothing in the last 30 days |
 | Person View — load failed | `04-person-view--error--P.html` | Backend unreachable state |
+| Person Logs | `04-person-logs--P.html` | Every call of the person's last 30 days as rows — opened by View logs, Download logs sits inside |
+| Person Logs — no calls | `04-person-logs--empty--P.html` | "No calls in the last 30 days." instead of the table |
 | Leads | `04-leads--P.html` | Upload CSV, pool stage cards, per-person table |
 | Leads — upload dialog | `04-leads--upload-dialog--P.html` | CSV picker with country choice |
 | Leads — upload error | `04-leads--upload-error--P.html` | File rejected (too large / wrong format) |

@@ -59,7 +59,7 @@ backend/
 │   ├── core/
 │   │   ├── errors.py                # AppException and global error handler
 │   │   ├── security.py              # Password hashing and token generation
-│   │   └── utils.py                 # Timezone and phone normalization utilities
+│   │   └── utils.py                 # Timezone utilities (shared IST day windows) and phone normalization
 │   ├── api/
 │   │   └── __init__.py              # Blueprint registration for all /api endpoints
 │   ├── modules/
@@ -76,9 +76,14 @@ backend/
 │       │   ├── models.py            # Call SQLAlchemy database model
 │       │   └── __init__.py
 │       ├── dashboard/
-│       │   ├── routes.py            # GET /api/dashboard/team, GET /api/dashboard/team/people, GET /api/dashboard/person/<id>
+│       │   ├── routes.py            # GET /api/dashboard/team, GET /api/dashboard/team/people, GET /api/dashboard/team/daily, GET /api/dashboard/person/<id>, GET /api/dashboard/person/<id>/daily
 │       │   ├── schemas.py           # Dashboard response schemas
-│       │   ├── services.py          # IST period aggregation, computed dashboard KPIs, and top numbers calculation
+│       │   ├── services.py          # IST period and per-day aggregation, computed dashboard KPIs, and top numbers calculation
+│       │   └── __init__.py
+│       ├── logs/
+│       │   ├── routes.py            # GET /api/logs/team?day=today|yesterday, GET /api/logs/person/<id>
+│       │   ├── schemas.py           # Download day validation
+│       │   ├── services.py          # IST window reads, CSV building, and download filenames
 │       │   └── __init__.py
 │       ├── do_not_track/
 │       │   ├── routes.py            # POST /api/do-not-track/verify-remove-password
@@ -111,7 +116,8 @@ backend/
 │   └── modules/
 │       ├── test_auth.py             # Login and lockout tests
 │       ├── test_calls.py            # Call sync, office-hours gate, and deduplication tests
-│       ├── test_dashboard.py        # Team and person metrics over IST boundaries
+│       ├── test_dashboard.py        # Team and person metrics and day-by-day rows over IST boundaries
+│       ├── test_logs.py             # Call log downloads: columns, order, escaping, empty windows, permissions
 │       ├── test_do_not_track.py     # Remove-password check: right, wrong, empty, unset-env fail-closed
 │       ├── test_users.py            # Account lifecycle and guard tests
 │       ├── test_leads.py            # CSV upload, serving order, claims, and resolution
@@ -146,16 +152,20 @@ web/
     │   │   ├── api/dashboard.api.ts
     │   │   ├── hooks/use-team-dashboard.ts
     │   │   ├── hooks/use-person-stats.ts
+    │   │   ├── hooks/use-team-daily.ts          # Team page day-by-day rows
+    │   │   ├── hooks/use-person-daily.ts        # Person page day-by-day rows
+    │   │   ├── hooks/use-call-log-download.ts   # CSV log downloads: blob save and failure message
     │   │   ├── components/kpi-card.tsx
     │   │   ├── components/period-switch.tsx
     │   │   ├── components/dashboard-card.tsx
     │   │   ├── components/calls-by-hour-chart.tsx
+    │   │   ├── components/daily-table.tsx       # Day by day table: 30 IST days of Date, Dials, Connected, Minutes
     │   │   ├── components/top-people-list.tsx
     │   │   ├── components/top-numbers-table.tsx
     │   │   ├── components/team-table.tsx  # Team page rows: today and yesterday per salesperson
     │   │   ├── utils/format.ts          # Display-only formatting (no calculations)
     │   │   ├── pages/dashboard-page.tsx # Dashboard: KPI cards, calls-by-hour chart, Top 5
-    │   │   ├── pages/team-page.tsx      # Team: one row per active salesperson, opens person page
+    │   │   ├── pages/team-page.tsx      # Team: per-salesperson rows, two log download buttons, opens person page
     │   │   └── pages/person-page.tsx
     │   ├── accounts/
     │   │   ├── api/accounts.api.ts

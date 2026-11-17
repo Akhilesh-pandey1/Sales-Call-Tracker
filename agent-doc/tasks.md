@@ -4,16 +4,16 @@
 
 **Blocked by:** None
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `GET /api/dashboard/team/daily` (manager-only, Bearer) returns exactly 30 rows, oldest day first, a day with no calls at zeros — dials and connected count outgoing calls only, minutes counts outgoing and incoming together, and calls by deactivated salespeople stay counted (`specs/dashboard.md` — "Team day-by-day graph", `api.md` — team daily).
-- [ ] The Dashboard shows the Day by day graph below the Calls by hour block: 30 bars, oldest day left, connected calls as the green segment, dials count on top, an empty bar at zero, and no date picking anywhere (`specs/dashboard.md` — "Team day-by-day graph" scenarios).
-- [ ] A salesperson token gets `"This dashboard is for managers."` from the endpoint.
+- [x] `GET /api/dashboard/team/daily` (manager-only, Bearer) returns exactly 30 rows, oldest day first, a day with no calls at zeros — dials and connected count outgoing calls only, minutes counts outgoing and incoming together, and calls by deactivated salespeople stay counted (`specs/dashboard.md` — "Team day-by-day graph", `api.md` — team daily).
+- [x] The Dashboard shows the Day by day graph below the Calls by hour block: 30 bars, oldest day left, connected calls as the green segment, dials count on top, an empty bar at zero, and no date picking anywhere (`specs/dashboard.md` — "Team day-by-day graph" scenarios).
+- [x] A salesperson token gets `"This dashboard is for managers."` from the endpoint.
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_dashboard.py -q` in `backend/`
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Tests pass: `python -m pytest tests/modules/test_dashboard.py -q` in `backend/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 2: The person's Day by day graph on the Person View
 

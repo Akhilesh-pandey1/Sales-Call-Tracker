@@ -194,7 +194,7 @@ def create_app(config_class: type[BaseConfig] | None = None) -> Flask:
     app.config.from_object(active_config)
 
     db.init_app(app)
-    CORS(app)
+    CORS(app, expose_headers=["Content-Disposition"])
     register_error_handlers(app)
     app.register_blueprint(api_blueprint)
     register_static_routes(app)

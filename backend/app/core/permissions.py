@@ -49,6 +49,25 @@ def require_auth(endpoint_handler: Callable[..., Any]) -> Callable[..., Any]:
     return result_function
 
 
+def require_dashboard_manager(
+    endpoint_handler: Callable[..., Any],
+) -> Callable[..., Any]:
+    @wraps(endpoint_handler)
+    @require_auth
+    def decorated_function(*args: Any, **kwargs: Any) -> Any:
+        forbidden_code: int = 403
+        manager_role: str = "manager"
+        current_user: User = g.user
+        if current_user.role != manager_role:
+            raise AppException("This dashboard is for managers.", forbidden_code)
+
+        handler_result: Any = endpoint_handler(*args, **kwargs)
+        return handler_result
+
+    result_function: Callable[..., Any] = decorated_function
+    return result_function
+
+
 def require_manager(endpoint_handler: Callable[..., Any]) -> Callable[..., Any]:
     @wraps(endpoint_handler)
     @require_auth

@@ -110,6 +110,15 @@ def fetch_team_people(
     return response, response_json
 
 
+def fetch_team_daily(
+    client: FlaskClient, manager_token: str
+) -> tuple[Response, list[dict[str, Any]]]:
+    headers: dict[str, str] = {"Authorization": f"Bearer {manager_token}"}
+    response: Response = client.get("/api/dashboard/team/daily", headers=headers)
+    response_json: list[dict[str, Any]] = response.get_json()
+    return response, response_json
+
+
 def fetch_person_dashboard(
     client: FlaskClient, auth_token: str, user_id: int
 ) -> tuple[Response, dict[str, Any]]:
@@ -118,4 +127,15 @@ def fetch_person_dashboard(
         f"/api/dashboard/person/{user_id}", headers=headers
     )
     response_json: dict[str, Any] = response.get_json()
+    return response, response_json
+
+
+def fetch_person_daily(
+    client: FlaskClient, auth_token: str, user_id: int
+) -> tuple[Response, list[dict[str, Any]]]:
+    headers: dict[str, str] = {"Authorization": f"Bearer {auth_token}"}
+    response: Response = client.get(
+        f"/api/dashboard/person/{user_id}/daily", headers=headers
+    )
+    response_json: list[dict[str, Any]] = response.get_json()
     return response, response_json

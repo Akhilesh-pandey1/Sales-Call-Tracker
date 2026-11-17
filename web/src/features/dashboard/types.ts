@@ -1,5 +1,12 @@
 export type DashboardPeriod = "today" | "yesterday" | "last_30_days";
 
+export type TeamLogDay = "today" | "yesterday";
+
+export interface CallLogFile {
+  blob: Blob;
+  filename: string;
+}
+
 export interface CallsByHourBlock {
   hours: number[];
   outgoing: number[];
@@ -55,6 +62,23 @@ export interface TeamDashboard {
   today: TeamPeriodBlock;
   yesterday: TeamPeriodBlock;
   last_30_days: TeamPeriodBlock;
+}
+
+export interface DailyRow {
+  date: string;
+  dials: number;
+  connected: number;
+  not_connected: number;
+  minutes: number;
+}
+
+export interface PersonLogRow {
+  phone_number: string;
+  date: string;
+  time: string;
+  direction: "outgoing" | "incoming";
+  connected: boolean;
+  minutes: number;
 }
 
 export interface PersonAveragePerActiveDay {

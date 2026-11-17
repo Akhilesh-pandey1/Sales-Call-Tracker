@@ -1,18 +1,17 @@
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime
 from typing import Any
-from backend.app.core.utils import now_ist, parse_utc_datetime, to_ist
+from backend.app.core.utils import (
+    IstDayWindow,
+    IstDayWindows,
+    build_ist_day_windows,
+    calculate_ist_day_windows,
+    parse_utc_datetime,
+    to_ist,
+)
 from backend.app.modules.calls import Call, OUTGOING_DIRECTION
 from backend.app.modules.settings import OfficeHours, get_or_create_office_hours_window
 from backend.app.modules.users import User
-
-
-@dataclass(frozen=True)
-class DashboardTimeWindows:
-    today_start_utc: datetime
-    tomorrow_start_utc: datetime
-    yesterday_start_utc: datetime
-    thirty_days_start_utc: datetime
 
 
 @dataclass(frozen=True)
@@ -50,28 +49,6 @@ class OfficeHoursWindowInputs:
     window_start_minute: int
     window_end_minute: int
     office_hours: list[int]
-
-
-def calculate_dashboard_time_windows() -> DashboardTimeWindows:
-    current_ist: datetime = now_ist()
-    midnight_today_ist: datetime = current_ist.replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
-    one_day: timedelta = timedelta(days=1)
-    twenty_nine_days: timedelta = timedelta(days=29)
-
-    midnight_tomorrow_ist: datetime = midnight_today_ist + one_day
-    midnight_yesterday_ist: datetime = midnight_today_ist - one_day
-    start_thirty_days_ist: datetime = midnight_today_ist - twenty_nine_days
-
-    utc_zone: timezone = timezone.utc
-    time_windows: DashboardTimeWindows = DashboardTimeWindows(
-        today_start_utc=midnight_today_ist.astimezone(utc_zone),
-        tomorrow_start_utc=midnight_tomorrow_ist.astimezone(utc_zone),
-        yesterday_start_utc=midnight_yesterday_ist.astimezone(utc_zone),
-        thirty_days_start_utc=start_thirty_days_ist.astimezone(utc_zone),
-    )
-    return time_windows
 
 
 def calculate_connected_percentage(dials: int, connected: int) -> int | None:
@@ -227,7 +204,7 @@ def add_user_talk_seconds(
 
 
 def fetch_team_call_records(
-    windows: DashboardTimeWindows, window_start_utc: datetime
+    window_start_utc: datetime, window_end_utc: datetime
 ) -> list[Any]:
     salesperson_role: str = "salesperson"
     team_call_records: list[Any] = (
@@ -235,12 +212,29 @@ def fetch_team_call_records(
         .filter(
             User.role == salesperson_role,
             Call.dialed_at >= window_start_utc,
-            Call.dialed_at < windows.tomorrow_start_utc,
+            Call.dialed_at < window_end_utc,
         )
         .with_entities(Call.user_id, Call.dialed_at, Call.duration_seconds, Call.direction)
         .all()
     )
     return team_call_records
+
+
+def fetch_team_daily_call_records(
+    window_start_utc: datetime, window_end_utc: datetime
+) -> list[Any]:
+    salesperson_role: str = "salesperson"
+    daily_call_records: list[Any] = (
+        Call.query.join(User, Call.user_id == User.id)
+        .filter(
+            User.role == salesperson_role,
+            Call.dialed_at >= window_start_utc,
+            Call.dialed_at < window_end_utc,
+        )
+        .with_entities(Call.dialed_at, Call.duration_seconds, Call.direction)
+        .all()
+    )
+    return daily_call_records
 
 
 def fetch_active_salespeople() -> list[Any]:
@@ -301,7 +295,7 @@ def apply_team_call_to_period_aggregates(
 
 def accumulate_team_call_records(
     call_records: list[Any],
-    windows: DashboardTimeWindows,
+    windows: IstDayWindows,
     window_inputs: OfficeHoursWindowInputs,
 ) -> TeamCallAggregates:
     aggregates: TeamCallAggregates = create_empty_team_aggregates(
@@ -529,9 +523,9 @@ def build_team_period_block(
 def fetch_team_dashboard_aggregates(
     window_inputs: OfficeHoursWindowInputs,
 ) -> tuple[TeamCallAggregates, list[Any], int]:
-    windows: DashboardTimeWindows = calculate_dashboard_time_windows()
+    windows: IstDayWindows = calculate_ist_day_windows()
     call_records: list[Any] = fetch_team_call_records(
-        windows, windows.thirty_days_start_utc
+        windows.thirty_days_start_utc, windows.tomorrow_start_utc
     )
     aggregates: TeamCallAggregates = accumulate_team_call_records(
         call_records, windows, window_inputs
@@ -637,6 +631,60 @@ def get_team_dashboard_data() -> dict[str, Any]:
     return period_blocks
 
 
+def accumulate_daily_call_records(
+    call_records: list[Any], day_windows: list[IstDayWindow]
+) -> dict[date, dict[str, int]]:
+    metrics_by_day: dict[date, dict[str, int]] = {
+        day_window.day_date: create_empty_period_metrics()
+        for day_window in day_windows
+    }
+    for raw_dialed_at, duration_seconds, direction in call_records:
+        dialed_at: datetime = parse_utc_datetime(raw_dialed_at)
+        day_date: date = to_ist(dialed_at).date()
+        day_metrics: dict[str, int] | None = metrics_by_day.get(day_date)
+        if day_metrics is None:
+            continue
+        apply_direction_call_to_metrics(day_metrics, direction, duration_seconds)
+    return metrics_by_day
+
+
+def build_daily_rows(
+    day_windows: list[IstDayWindow],
+    metrics_by_day: dict[date, dict[str, int]],
+) -> list[dict[str, Any]]:
+    daily_rows: list[dict[str, Any]] = []
+    for day_window in day_windows:
+        day_metrics: dict[str, int] = metrics_by_day[day_window.day_date]
+        not_connected_total: int = calculate_not_connected(
+            day_metrics["dials"], day_metrics["connected"]
+        )
+        daily_rows.append(
+            {
+                "date": day_window.day_date.isoformat(),
+                "dials": day_metrics["dials"],
+                "connected": day_metrics["connected"],
+                "not_connected": not_connected_total,
+                "minutes": calculate_talk_minutes(day_metrics["seconds"]),
+            }
+        )
+    return daily_rows
+
+
+def get_team_daily_data() -> list[dict[str, Any]]:
+    thirty_day_count: int = 30
+    day_windows: list[IstDayWindow] = build_ist_day_windows(thirty_day_count)
+    call_records: list[Any] = fetch_team_daily_call_records(
+        day_windows[0].start_utc, day_windows[-1].end_utc
+    )
+    metrics_by_day: dict[date, dict[str, int]] = accumulate_daily_call_records(
+        call_records, day_windows
+    )
+    daily_rows: list[dict[str, Any]] = build_daily_rows(
+        day_windows, metrics_by_day
+    )
+    return daily_rows
+
+
 def create_empty_people_metrics() -> PeopleCallMetrics:
     empty_metrics: PeopleCallMetrics = PeopleCallMetrics(
         today=create_empty_period_metrics(),
@@ -647,7 +695,7 @@ def create_empty_people_metrics() -> PeopleCallMetrics:
 
 def accumulate_people_call_records(
     call_records: list[Any],
-    windows: DashboardTimeWindows,
+    windows: IstDayWindows,
 ) -> dict[int, PeopleCallMetrics]:
     metrics_by_user: dict[int, PeopleCallMetrics] = {}
     for user_id, raw_dialed_at, duration_seconds, direction in call_records:
@@ -703,9 +751,9 @@ def build_team_people_rows(
 
 
 def get_team_people_data() -> list[dict[str, Any]]:
-    windows: DashboardTimeWindows = calculate_dashboard_time_windows()
+    windows: IstDayWindows = calculate_ist_day_windows()
     call_records: list[Any] = fetch_team_call_records(
-        windows, windows.yesterday_start_utc
+        windows.yesterday_start_utc, windows.tomorrow_start_utc
     )
     metrics_by_user: dict[int, PeopleCallMetrics] = accumulate_people_call_records(
         call_records, windows

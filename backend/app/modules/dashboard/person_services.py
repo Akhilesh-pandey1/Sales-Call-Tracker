@@ -1,21 +1,26 @@
 from dataclasses import dataclass
 from datetime import date, datetime
 from typing import Any
-from backend.app.core.errors import AppException
-from backend.app.core.utils import parse_utc_datetime, to_ist
-from backend.app.extensions import db
+from backend.app.core.utils import (
+    IstDayWindow,
+    IstDayWindows,
+    build_ist_day_windows,
+    calculate_ist_day_windows,
+    parse_utc_datetime,
+    to_ist,
+)
 from backend.app.modules.calls import Call, OUTGOING_DIRECTION
 from backend.app.modules.dashboard.services import (
-    DashboardTimeWindows,
     OfficeHoursWindowInputs,
     PeriodHourlyInputs,
+    accumulate_daily_call_records,
     apply_direction_call_to_hourly_bucket,
     apply_direction_call_to_metrics,
     build_calls_by_hour_block,
+    build_daily_rows,
     build_office_hours_window_inputs,
     build_talk_totals_block,
     calculate_connected_percentage,
-    calculate_dashboard_time_windows,
     calculate_decimal_average,
     calculate_not_connected,
     calculate_rounded_average,
@@ -28,7 +33,7 @@ from backend.app.modules.settings import (
     get_office_hours_view_with_label,
     get_or_create_office_hours_window,
 )
-from backend.app.modules.users import User
+from backend.app.modules.users import User, get_user_or_raise_not_found
 
 
 @dataclass(frozen=True)
@@ -91,7 +96,7 @@ def build_top_numbers_list(
 
 
 def fetch_person_call_records(
-    user_id: int, windows: DashboardTimeWindows
+    user_id: int, windows: IstDayWindows
 ) -> list[Any]:
     person_call_records: list[Any] = (
         Call.query.filter(
@@ -147,7 +152,7 @@ def apply_person_call_to_period(
 
 def accumulate_person_call_records(
     call_records: list[Any],
-    windows: DashboardTimeWindows,
+    windows: IstDayWindows,
     window_inputs: OfficeHoursWindowInputs,
 ) -> PersonCallAggregates:
     aggregates: PersonCallAggregates = create_empty_person_aggregates(
@@ -307,16 +312,13 @@ def build_person_period_blocks(
 
 
 def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
-    target_user: User | None = db.session.get(User, user_id)
-    if target_user is None:
-        not_found_code: int = 404
-        raise AppException("User not found.", not_found_code)
+    target_user: User = get_user_or_raise_not_found(user_id)
 
     office_hours_window: OfficeHours = get_or_create_office_hours_window()
     window_inputs: OfficeHoursWindowInputs = build_office_hours_window_inputs(
         office_hours_window
     )
-    windows: DashboardTimeWindows = calculate_dashboard_time_windows()
+    windows: IstDayWindows = calculate_ist_day_windows()
     call_records: list[Any] = fetch_person_call_records(user_id, windows)
     aggregates: PersonCallAggregates = accumulate_person_call_records(
         call_records, windows, window_inputs
@@ -343,3 +345,33 @@ def get_person_dashboard_data(user_id: int) -> dict[str, Any]:
         "top_numbers": sorted_top_numbers,
     }
     return response_payload
+
+
+def fetch_person_daily_call_records(
+    user_id: int, window_start_utc: datetime, window_end_utc: datetime
+) -> list[Any]:
+    person_daily_call_records: list[Any] = (
+        Call.query.filter(
+            Call.user_id == user_id,
+            Call.dialed_at >= window_start_utc,
+            Call.dialed_at < window_end_utc,
+        )
+        .with_entities(Call.dialed_at, Call.duration_seconds, Call.direction)
+        .all()
+    )
+    return person_daily_call_records
+
+
+def get_person_daily_data(user_id: int) -> list[dict[str, Any]]:
+    thirty_day_count: int = 30
+    get_user_or_raise_not_found(user_id)
+
+    day_windows: list[IstDayWindow] = build_ist_day_windows(thirty_day_count)
+    call_records: list[Any] = fetch_person_daily_call_records(
+        user_id, day_windows[0].start_utc, day_windows[-1].end_utc
+    )
+    metrics_by_day: dict[date, dict[str, int]] = accumulate_daily_call_records(
+        call_records, day_windows
+    )
+    daily_rows: list[dict[str, Any]] = build_daily_rows(day_windows, metrics_by_day)
+    return daily_rows

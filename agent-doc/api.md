@@ -272,22 +272,23 @@ None.
 2. Every stored call is bucketed into the 30 most recent IST calendar days, ending with today, over the UTC-stored call times.
 3. Each day counts dials and connected from outgoing calls only, and sums minutes over outgoing and incoming talk time together as `round(seconds / 60, 2)`.
 4. Calls made by currently deactivated salespeople count in their day's row.
-5. The 30 rows go back newest day first — a day with no calls holds zeros.
+5. The 30 rows go back oldest day first — a day with no calls holds zeros.
 
 **Output — code 200**
 
 ```json
 [
-  { "date": "2025-11-06", "dials": 120, "connected": 64, "minutes": 310.5 },
-  { "date": "2025-11-05", "dials": 98, "connected": 51, "minutes": 260.25 }
+  { "date": "2025-11-05", "dials": 98, "connected": 51, "not_connected": 47, "minutes": 260.25 },
+  { "date": "2025-11-06", "dials": 120, "connected": 64, "not_connected": 56, "minutes": 310.5 }
 ]
 ```
 
 - `date` — string. The IST calendar day as `YYYY-MM-DD`. Example: `2025-11-06`
 - `dials` — integer. That day's outgoing calls. Example: `120`
 - `connected` — integer. That day's outgoing calls with duration above 0. Example: `64`
+- `not_connected` — integer. That day's outgoing calls with duration 0, sent as `dials - connected`. Example: `56`
 - `minutes` — number. That day's total talk minutes, outgoing and incoming together, 2 decimals. Example: `310.5`
-- The array always holds exactly 30 rows, newest day first.
+- The array always holds exactly 30 rows, oldest day first.
 
 **Error format — any code other than 200**
 
@@ -313,18 +314,18 @@ Reads one salesperson's day-by-day numbers for the last 30 days — one row per 
 2. The user id is looked up — an unknown id gets "User not found." and nothing is read.
 3. This person's stored calls are bucketed into the 30 most recent IST calendar days, ending with today, over the UTC-stored call times.
 4. Each day counts dials and connected from outgoing calls only, and sums minutes over outgoing and incoming talk time together as `round(seconds / 60, 2)`.
-5. The 30 rows go back newest day first — a day with no calls holds zeros.
+5. The 30 rows go back oldest day first — a day with no calls holds zeros.
 
 **Output — code 200**
 
 ```json
 [
-  { "date": "2025-11-06", "dials": 45, "connected": 24, "minutes": 180.4 },
-  { "date": "2025-11-05", "dials": 38, "connected": 19, "minutes": 150.75 }
+  { "date": "2025-11-05", "dials": 38, "connected": 19, "not_connected": 19, "minutes": 150.75 },
+  { "date": "2025-11-06", "dials": 45, "connected": 24, "not_connected": 21, "minutes": 180.4 }
 ]
 ```
 
-- The rows carry the same four fields as the team daily read — `date`, `dials`, `connected`, `minutes` — and always hold exactly 30 rows, newest day first.
+- The rows carry the same five fields as the team daily read — `date`, `dials`, `connected`, `not_connected`, `minutes` — and always hold exactly 30 rows, oldest day first.
 
 **Error format — any code other than 200**
 

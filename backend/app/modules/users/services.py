@@ -12,6 +12,14 @@ from backend.app.modules.users.schemas import (
 )
 
 
+def get_user_or_raise_not_found(user_id: int) -> User:
+    not_found_status: int = 404
+    existing_user: User | None = db.session.get(User, user_id)
+    if existing_user is None:
+        raise AppException("User not found.", not_found_status)
+    return existing_user
+
+
 def list_all_users() -> list[UserResponse]:
     query_result = User.query.with_entities(
         User.id, User.name, User.role, User.country, User.is_active

@@ -89,13 +89,13 @@
 
 **Blocked by:** Task 5
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] `?day=today` or `?day=yesterday` narrows the file to that single IST day with the filename carrying that day's date; any other value returns 400 `"day must be today or yesterday."` (`api.md` — person download, `specs/call-log-downloads.md` — "One person's day file saves").
-- [ ] One click on a row icon saves that person's that-day file; tapping the row itself still opens the Person View.
-- [ ] The mobile cards expose the same two downloads, and a failure keeps the manager on the page with `"Could not download the logs."`.
+- [x] `?day=today` or `?day=yesterday` narrows the file to that single IST day with the filename carrying that day's date; any other value returns 400 `"day must be today or yesterday."` (`api.md` — person download, `specs/call-log-downloads.md` — "One person's day file saves").
+- [x] One click on a row icon saves that person's that-day file; tapping the row itself still opens the Person View.
+- [x] The mobile cards expose the same two downloads, and a failure keeps the manager on the page with `"Could not download the logs."`.
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_logs.py -q` in `backend/`
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Tests pass: `python -m pytest tests/modules/test_logs.py -q` in `backend/`
+- [x] Build succeeds: `npm run build` in `web/`

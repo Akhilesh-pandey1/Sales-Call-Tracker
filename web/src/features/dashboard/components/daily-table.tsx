@@ -137,7 +137,7 @@ export function DailyTable({ rows, className }: DailyTableProps) {
   return (
     <DashboardCard
       title="Day by day"
-      headingLabel="Dials per day · last 30 days (IST) — fixed"
+      headingLabel="Dials per day · last 30 days (IST)"
       className={className}
     >
       <ChartContainer config={chartConfig} className="mt-4 aspect-auto h-44">

@@ -72,16 +72,16 @@
 
 **Blocked by:** Task 4
 
-**Status:** Not started
+**Status:** Done
 
 **Acceptance criteria:**
-- [ ] Without `day` the file covers the last 30 days including today — oldest call first, ten columns, UTF-8 BOM, escaped notes, filename `call-logs-<name>-<today's IST date>.csv` (`api.md` — person download, `specs/call-log-downloads.md` — "Person file saves").
-- [ ] The button click saves the file; a failure keeps the manager on the Person Logs screen with `"Could not download the logs."` and saves no partial file.
-- [ ] A salesperson token gets 403 and an unknown id gets 404 `"User not found."`.
+- [x] Without `day` the file covers the last 30 days including today — oldest call first, ten columns, UTF-8 BOM, escaped notes, filename `call-logs-<name>-<today's IST date>.csv` (`api.md` — person download, `specs/call-log-downloads.md` — "Person file saves").
+- [x] The button click saves the file; a failure keeps the manager on the Person Logs screen with `"Could not download the logs."` and saves no partial file.
+- [x] A salesperson token gets 403 and an unknown id gets 404 `"User not found."`.
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest tests/modules/test_logs.py -q` in `backend/`
-- [ ] Build succeeds: `npm run build` in `web/`
+- [x] Tests pass: `python -m pytest tests/modules/test_logs.py -q` in `backend/`
+- [x] Build succeeds: `npm run build` in `web/`
 
 ## Task 6: Per-person day downloads from the Team rows
 
